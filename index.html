@@ -112,7 +112,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://weijutu.github.io/2017/03/04/r-xy-scatter-diagram/" data-id="cizu2ob7x0002x8gdti4lh9ho" class="article-share-link">Share</a>
+      <a data-url="https://weijutu.github.io/2017/03/04/r-xy-scatter-diagram/" data-id="cj0192a170006megdsepkmt95" class="article-share-link">Share</a>
       
         <a href="https://weijutu.github.io/2017/03/04/r-xy-scatter-diagram/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -141,7 +141,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/03/r-intro/">R 語言 - 基本介紹與運算操作方式</a>
+      <a class="article-title" href="/2017/03/03/r-intro/">R 語言 - 基本介紹與套件工具函數</a>
     </h1>
   
 
@@ -159,14 +159,21 @@
 <li>繪圖功能：看是要 2D 還是 3D 或是直向圖都可以做到，而且就幾行的程式就能得到想要的結果。</li>
 <li>變數型態：有很多其他程式語言沒有的，包含 list, factor, ordered factor, data frame, ts，也可以自建資料型態</li>
 </ol>
-<h2 id="軟體操作"><a href="#軟體操作" class="headerlink" title="軟體操作"></a>軟體操作</h2><ul>
-<li>安裝套件</li>
+<h2 id="套件有關的工具函數"><a href="#套件有關的工具函數" class="headerlink" title="套件有關的工具函數"></a>套件有關的工具函數</h2><ul>
+<li>在 console 輸入指令安裝 package</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; install.packages(&quot;car&quot;)</div></pre></td></tr></table></figure>
 <ul>
-<li>使用套件的函數，先載入套件</li>
+<li>使用套件的函數，先載入套件方法有二：library, require</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; libaray(&quot;套件名稱&quot;)</div></pre></td></tr></table></figure>
+<p>library 和 require 都是載入 package，但是最大的差別在於 library 如果是載入的 package 不存在，是會發生 error 程式停止，但是 require 卻不會，而且 require 會回傳 true or false</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; libaray(套件名稱)</div><div class="line">&gt; require(套件名稱)</div></pre></td></tr></table></figure>
+<p>範例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt; libaray(quantmod)</div><div class="line">&gt; require(quantmod)</div><div class="line">&gt; x&lt;-require(quantmod)</div><div class="line">&gt; x</div><div class="line">[1] TRUE</div></pre></td></tr></table></figure>
+<ul>
+<li>避免記憶體吃緊或避免不同套件的同名函數彼此衝突，簡單來說就是「卸載」</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; detach(套件名稱)</div></pre></td></tr></table></figure>
 <ul>
 <li>想知道怎麼查詢函數的定義</li>
 </ul>
@@ -184,7 +191,12 @@
 </ul>
 <p>若你有一支自訂函數的檔案為 test.R，那麼你就可以透過以下指令來呼叫使用</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; source(&quot;/user/code/test.R&quot;)</div></pre></td></tr></table></figure>
-<h2 id="運算方式"><a href="#運算方式" class="headerlink" title="運算方式"></a>運算方式</h2><ul>
+<h2 id="工具函數"><a href="#工具函數" class="headerlink" title="工具函數"></a>工具函數</h2><h4 id="is-系列函數"><a href="#is-系列函數" class="headerlink" title="is 系列函數"></a>is 系列函數</h4><p>用來檢查某一個物件是否具有查詢的屬性，回傳會是 true or false<br>包含：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">is.numeric</div><div class="line">is.list</div><div class="line">is.function</div><div class="line">is.character</div></pre></td></tr></table></figure>
+<h4 id="as-系列函數"><a href="#as-系列函數" class="headerlink" title="as 系列函數"></a>as 系列函數</h4><p>用來將變數強迫轉換<br>包含：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">as.vector</div><div class="line">as factor</div><div class="line">as.matrix</div><div class="line">as.numeric</div><div class="line">as.double</div><div class="line">as.data.frame</div><div class="line">as.list</div></pre></td></tr></table></figure>
+<h2 id="運算方式"><a href="#運算方式" class="headerlink" title="運算方式"></a>運算方式</h2><p>運算次序：括號 &gt; 指數 &gt; 乘法 &gt; 除法 &gt; 加減法</p>
+<ul>
 <li>基礎運算</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; 1 + 2   # 加法</div><div class="line">&gt; 1 / 2   # 除法</div><div class="line">&gt; 1 %/% 2 # 整除</div><div class="line">&gt; 9 %% 2  # 取餘數</div><div class="line">&gt; 2 ^ 0.5  # 冪次運算</div><div class="line">&gt; cos(1.0) # 三角函數運算</div></pre></td></tr></table></figure>
@@ -199,11 +211,11 @@
 <ul>
 <li>(…) 把運算式用括弧刮起來，可以強制的顯示執行結果</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; (a = 2 + 3)</div><div class="line"></div><div class="line">結果：[1] 5</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; (a &lt;- 2 + 3)</div><div class="line"></div><div class="line">結果：[1] 5</div></pre></td></tr></table></figure>
 <ul>
 <li>物件的自動循環，也就是說在運算的時候會對長度較短的數字或向量做重複循環</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt; x = c(4, 3, 7, 8)</div><div class="line">&gt; x + 4</div><div class="line"></div><div class="line">結果：[1] 8  7  11  12</div><div class="line">說明：相當於 c(4, 3, 7, 8) + c(4, 4, 4, 4)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt; x &lt;- c(4, 3, 7, 8)</div><div class="line">&gt; x + 4</div><div class="line"></div><div class="line">結果：[1] 8  7  11  12</div><div class="line">說明：相當於 c(4, 3, 7, 8) + c(4, 4, 4, 4)</div></pre></td></tr></table></figure>
 <h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
 <li>R Studio <a href="https://www.rstudio.com/" target="_blank" rel="external">https://www.rstudio.com/</a></li>
 <li>R Project <a href="https://www.r-project.org/" target="_blank" rel="external">https://www.r-project.org/</a></li>
@@ -212,7 +224,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://weijutu.github.io/2017/03/03/r-intro/" data-id="cizu2ob830004x8gd6sygxh7e" class="article-share-link">Share</a>
+      <a data-url="https://weijutu.github.io/2017/03/03/r-intro/" data-id="cj0192a0j0003megdszakjzyz" class="article-share-link">Share</a>
       
         <a href="https://weijutu.github.io/2017/03/03/r-intro/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -274,7 +286,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://weijutu.github.io/2017/03/02/metero-intro/" data-id="cizu2ob7s0000x8gdkcml6m4t" class="article-share-link">Share</a>
+      <a data-url="https://weijutu.github.io/2017/03/02/metero-intro/" data-id="cj0192a1c0008megdw4y4om66" class="article-share-link">Share</a>
       
         <a href="https://weijutu.github.io/2017/03/02/metero-intro/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -337,7 +349,7 @@
           </li>
         
           <li>
-            <a href="/2017/03/03/r-intro/">R 語言 - 基本介紹與運算操作方式</a>
+            <a href="/2017/03/03/r-intro/">R 語言 - 基本介紹與套件工具函數</a>
           </li>
         
           <li>
