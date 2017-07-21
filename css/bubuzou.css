@@ -284,7 +284,7 @@ table tbody td {
 }
 
 header {
-    background: #41b883;
+    background: #ab3730;
     position: fixed;
     width: 100%;
     top: 0;
@@ -383,7 +383,7 @@ header .nav-list-item .active { opacity: 0.7; }
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    color: #41b883;
+    color: #ab3730;
 }
 
 .archive .post-title-link:hover { color: #168d58; }
@@ -406,12 +406,12 @@ header .nav-list-item .active { opacity: 0.7; }
 
 .post .post-block .post-title {
     font-size: 20px;
-    color: #41b883;
+    color: #ab3730;
 }
 
 .post-block .post-title a { color: #333; }
 
-.post-block .post-title a:hover { color: #41b883; }
+.post-block .post-title a:hover { color: #ab3730; }
 
 .post-block .post-info {
     margin: 1.2em 0;
@@ -446,7 +446,7 @@ header .nav-list-item .active { opacity: 0.7; }
 
 .post-block .post-info .post-from { background-color: #E36B6B; }
 
-.post-block .post-info .post-demo { background-color: #41b883; }
+.post-block .post-info .post-demo { background-color: #ab3730; }
 
 .post-content h2,
 .post-content h3,
@@ -799,7 +799,7 @@ footer .copyright a:hover { color: #666; }
 }
 
 .tags a:hover {
-    background: #41b883;
+    background: #ab3730;
     color: #fff;
 }
 
@@ -903,7 +903,7 @@ footer .copyright a:hover { color: #666; }
 
 .search-result-list a {
     position: relative;
-    color: #41b883;
+    color: #ab3730;
 }
 
 .search-result li a:before {
@@ -915,7 +915,7 @@ footer .copyright a:hover { color: #666; }
     width: 6px;
     height: 6px;
     border-radius: 6px;
-    background: #41b883;
+    background: #ab3730;
 }
 
 .search-result-list .search-keyword { background-color: #81C784; }
@@ -962,14 +962,14 @@ footer .copyright a:hover { color: #666; }
 .widget { margin-bottom: 30px; }
 
 .widget h4 {
-    color: #41b883;
+    color: #ab3730;
     margin: 10px 0;
     font-family: '微软雅黑';
 }
 
 .widget a { color: #333; }
 
-.widget a:hover { color: #41b883; }
+.widget a:hover { color: #ab3730; }
 
 .widget .category-list-count {
     padding-left: 3px;
@@ -1074,7 +1074,7 @@ footer .copyright a:hover { color: #666; }
     text-overflow: ellipsis;
 }
 
-.arCatalog-list dd.on a { color: #41b883; }
+.arCatalog-list dd.on a { color: #ab3730; }
 
 .arCatalog-list .arCatalog-tack1 .arCatalog-index {
     position: absolute;
@@ -1206,7 +1206,7 @@ footer .copyright a:hover { color: #666; }
         text-align: center;
     }
 
-    header .nav-list-item a { color: #41b883; }
+    header .nav-list-item a { color: #ab3730; }
 
     .footer-con {
         width: 100%;
