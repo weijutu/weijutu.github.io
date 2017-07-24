@@ -2,9 +2,72 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs-06-style-guide/</loc>
+    
+    <lastmod>2017-07-24T16:32:31.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs-05-bower/</loc>
+    
+    <lastmod>2017-07-24T16:32:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs-04-nvm/</loc>
+    
+    <lastmod>2017-07-24T16:32:12.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs-03-npm/</loc>
+    
+    <lastmod>2017-07-24T16:32:05.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs-02-install/</loc>
+    
+    <lastmod>2017-07-24T16:31:53.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs-01-start/</loc>
+    
+    <lastmod>2017-07-24T16:31:11.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2017/03/02/metero-intro/</loc>
+    
+    <lastmod>2017-07-24T01:04:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/categories/index.html</loc>
+    
+    <lastmod>2017-07-24T01:04:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://weijutu.github.io/2017/03/04/r-xy-scatter-diagram/</loc>
     
-    <lastmod>2017-07-21T02:18:02.000Z</lastmod>
+    <lastmod>2017-07-24T01:04:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/tags/index.html</loc>
+    
+    <lastmod>2017-07-24T01:04:20.000Z</lastmod>
     
   </url>
   
@@ -12,20 +75,6 @@
     <loc>https://weijutu.github.io/2017/03/03/r-intro/</loc>
     
     <lastmod>2017-07-21T02:17:31.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://weijutu.github.io/2017/03/02/metero-intro/</loc>
-    
-    <lastmod>2017-07-21T02:17:15.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://weijutu.github.io/tags/index.html</loc>
-    
-    <lastmod>2017-03-02T15:16:47.000Z</lastmod>
     
   </url>
   

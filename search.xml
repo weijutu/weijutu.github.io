@@ -3,6 +3,373 @@
   
     
     <entry>
+      <title><![CDATA[Node.js 系列學習日誌#6 - 撰寫程式的風格指南 (Style Guide)]]></title>
+      <url>/2017/07/24/nodejs-06-style-guide/</url>
+      <content type="html"><![CDATA[<p>由於 node.js 是 javascript 作為開發的語言，開發的過程遵照程式碼規範撰寫讓整個程式風格達到一致。不過當然許多的 js 寫法都會有不同的風格存在，若您找不到要照什麼規則編寫程式，那麼可以參考這篇簡易的風格指南作為開發上的基本基礎。</p>
+<p>本章節將介紹  node.js 幾個常用的撰寫手法來做介紹：</p>
+<ul>
+<li>字串引號</li>
+<li>區塊括號</li>
+<li>變數宣告</li>
+<li>變數命名</li>
+<li>函數命名</li>
+<li>物件與陣列</li>
+<li>相等的運算符號</li>
+<li>條件判斷</li>
+<li>嵌套閉包</li>
+</ul>
+<h1 id="字串引號"><a href="#字串引號" class="headerlink" title="字串引號"></a>字串引號</h1><p>使用單引號，若物件是 json 格式，那麼就使用雙引號來定義 key, value</p>
+<h3 id="錯誤示範"><a href="#錯誤示範" class="headerlink" title="錯誤示範"></a>錯誤示範</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name =“test01”;</div></pre></td></tr></table></figure>
+<h3 id="正確寫法"><a href="#正確寫法" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name = ’test01’;</div></pre></td></tr></table></figure>
+<h1 id="區塊括號"><a href="#區塊括號" class="headerlink" title="區塊括號"></a>區塊括號</h1><h3 id="錯誤示範-1"><a href="#錯誤示範-1" class="headerlink" title="錯誤示範"></a>錯誤示範</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (<span class="literal">true</span>)</div><div class="line">&#123;</div><div class="line">     <span class="built_in">console</span>.log(“<span class="keyword">this</span> is a book.”);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="正確寫法-1"><a href="#正確寫法-1" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</div><div class="line">    <span class="built_in">console</span>.log(“<span class="keyword">this</span> is a book.”);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="變數宣告"><a href="#變數宣告" class="headerlink" title="變數宣告"></a>變數宣告</h1><p>使用一種對每一個變數做一個 var 宣告。</p>
+<h3 id="錯誤示範-2"><a href="#錯誤示範-2" class="headerlink" title="錯誤示範"></a>錯誤示範</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> ary = [<span class="string">"apple"</span>, <span class="string">"orange"</span>],</div><div class="line">     price = [<span class="number">150</span>, <span class="number">125</span>],</div><div class="line">     obj = &#123;&#125;;</div></pre></td></tr></table></figure>
+<h3 id="正確寫法-2"><a href="#正確寫法-2" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> ary = [<span class="string">"apple"</span>, <span class="string">"orange"</span>];</div><div class="line"><span class="keyword">var</span> price = [<span class="number">150</span>, <span class="number">125</span>];</div><div class="line"><span class="keyword">var</span> obj = &#123;&#125;;</div></pre></td></tr></table></figure>
+<h1 id="變數命名"><a href="#變數命名" class="headerlink" title="變數命名"></a>變數命名</h1><h3 id="錯誤示範-3"><a href="#錯誤示範-3" class="headerlink" title="錯誤示範"></a>錯誤示範</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> str_user = <span class="string">"test01"</span>;</div></pre></td></tr></table></figure>
+<h3 id="正確寫法-3"><a href="#正確寫法-3" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> strUser = <span class="string">"test01"</span>;</div></pre></td></tr></table></figure>
+<h1 id="函數命名"><a href="#函數命名" class="headerlink" title="函數命名"></a>函數命名</h1><h3 id="錯誤示範-4"><a href="#錯誤示範-4" class="headerlink" title="錯誤示範"></a>錯誤示範</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_Users</span>(<span class="params"></span>) </span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="正確寫法-4"><a href="#正確寫法-4" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">GetUser</span>(<span class="params"></span>)</span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="物件與陣列"><a href="#物件與陣列" class="headerlink" title="物件與陣列"></a>物件與陣列</h1><p>如果只有很小的資料為陣列的話，請將它寫在同一行，而當您的物件是包含 key, value 的形式時，則排列整齊讓閱讀起來更加容易</p>
+<h3 id="錯誤寫法"><a href="#錯誤寫法" class="headerlink" title="錯誤寫法"></a>錯誤寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> ary = [</div><div class="line">     <span class="string">"apple"</span>, <span class="string">"orange"</span></div><div class="line">];</div><div class="line"></div><div class="line"><span class="keyword">var</span> person = &#123; <span class="string">"name"</span>, <span class="string">"test01"</span></div><div class="line">               , <span class="string">"id"</span>: <span class="string">"abcd1234"</span> &#125;;</div></pre></td></tr></table></figure>
+<h3 id="正確寫法-5"><a href="#正確寫法-5" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> ary = [ <span class="string">"apple"</span>, <span class="string">"orange"</span> ];</div><div class="line"><span class="keyword">var</span> person = &#123;</div><div class="line">     <span class="string">"name"</span>, <span class="string">"test01"</span>,</div><div class="line">     <span class="string">"id"</span>: <span class="string">"abcd1234"</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h1 id="相等的運算符號"><a href="#相等的運算符號" class="headerlink" title="相等的運算符號"></a>相等的運算符號</h1><h3 id="錯誤寫法-1"><a href="#錯誤寫法-1" class="headerlink" title="錯誤寫法"></a>錯誤寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> index = <span class="number">0</span>;</div><div class="line"><span class="keyword">if</span> (index == <span class="string">''</span>) &#123;</div><div class="line">     <span class="built_in">console</span>.log(<span class="string">"nothing"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="正確寫法-6"><a href="#正確寫法-6" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> index = <span class="number">0</span></div><div class="line"><span class="keyword">if</span> (index === <span class="string">''</span>) &#123;</div><div class="line">     <span class="built_in">console</span>.log(<span class="string">"nothing"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="條件判斷"><a href="#條件判斷" class="headerlink" title="條件判斷"></a>條件判斷</h1><p>儘量不要將過多的判斷都塞在 if 裡面，請先將判斷部分在前面以變數方式先驗證，再將結果的 true, false 的答案擺在 if 裡面</p>
+<h3 id="錯誤寫法-2"><a href="#錯誤寫法-2" class="headerlink" title="錯誤寫法"></a>錯誤寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (task.isPrivate() || task.isEnabled()) &#123;</div><div class="line">     <span class="built_in">console</span>.log(<span class="string">"the task are private and enabled type"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="正確寫法-7"><a href="#正確寫法-7" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> isValid = (task.isPrivate() || task.isEnabled());</div><div class="line"><span class="keyword">if</span> (isValid) &#123;</div><div class="line">     <span class="built_in">console</span>.log(<span class="string">"the task are private and enabled type"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="嵌套閉包"><a href="#嵌套閉包" class="headerlink" title="嵌套閉包"></a>嵌套閉包</h1><p>在使用閉包的做法是，不要一直無限嵌套，因為這樣會使得程式過度雜亂</p>
+<h3 id="錯誤寫法-3"><a href="#錯誤寫法-3" class="headerlink" title="錯誤寫法"></a>錯誤寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">      obj.click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">           <span class="built_in">console</span>.log(<span class="string">"click..."</span>);</div><div class="line">      &#125;)</div><div class="line">&#125;, <span class="number">3000</span>);</div></pre></td></tr></table></figure>
+<h3 id="正確寫法-8"><a href="#正確寫法-8" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">     obj.click(fnObjClick);</div><div class="line">&#125;,<span class="number">3000</span>);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fnObjClick</span>(<span class="params"></span>) </span>&#123;</div><div class="line">     <span class="built_in">console</span>.log(<span class="string">"click..."</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><ul>
+<li><a href="https://github.com/felixge/node-style-guide" target="_blank" rel="external">https://github.com/felixge/node-style-guide</a></li>
+<li><a href="http://nodeguide.com/style.html" target="_blank" rel="external">http://nodeguide.com/style.html</a></li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> Node.js </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Node.js </tag>
+            
+            <tag> 鐵人賽 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Node.js 系列學習日誌#5 - bower 管理相依套件工具]]></title>
+      <url>/2017/07/24/nodejs-05-bower/</url>
+      <content type="html"><![CDATA[<p><img src="/images/nodejs/23.png" alt=""></p>
+<p>『A package manager for the web』瀏覽器套件管理工具</p>
+<p>一般在寫網頁時，多半會引入套件來使用，而 bower 就是用來管理相依套件工具，bower 是 twitter 研發，透過這樣的管理工具下載安裝 css, js 套件，讓開發者跟隨著這樣的工具，讓 web 套件 (例如： bootstrap, jquery… etc) 方面更好管理，更簡單的方式更新最新版本的套件。</p>
+<p>當沒有管理的時候，你也許是…</p>
+<ol>
+<li>直接去官方網站抓檔案，還需要記得要下載 dev 版跟 min  壓縮過的版本 (例如：<a href="https://code.jquery.com/jquery/" target="_blank" rel="external">https://code.jquery.com/jquery/</a>)</li>
+<li>找 cdn 檔案 (例如：<a href="https://developers.google.com/speed/libraries/devguide?hl=zh-tw" target="_blank" rel="external">https://developers.google.com/speed/libraries/devguide?hl=zh-tw</a>)</li>
+<li>乾脆用現有的 (舊版本繼續沿用)</li>
+</ol>
+<p>以上的行為，多半會花一些時間一直找，而這套工具就是解決這樣的問題，只要用指令操作，效率高多囉！</p>
+<p>本章節將學習到：</p>
+<ul>
+<li>安裝 bower</li>
+<li>使用方法</li>
+<li>使用 express, bower 建立 bootstrap 套件的前端頁面</li>
+</ul>
+<a id="more"></a>
+<h1 id="安裝-bower"><a href="#安裝-bower" class="headerlink" title="安裝 bower"></a>安裝 bower</h1><p>(安裝之前務必要有 node.js, npm, 建議儲存在 global)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$npm</span> install bower -g</div></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/24.png" alt=""></p>
+<p>可以利用 Search Bower packages 頁面搜尋需要的套件：<a href="http://bower.io/search/" target="_blank" rel="external">http://bower.io/search/</a> ，或者用指令搜尋</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$bower</span> search bootstrap</div></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/25.png" alt=""></p>
+<p>使用方法：</p>
+<p>請先安裝 express 作為網頁框架，然後安裝套件的方式，在這邊安裝一下 bootstrap</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$bower</span> install bootstrap</div></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/26.png" alt=""></p>
+<p>指令安裝之後就會看到 bootstrap 出現在 bower_components/bootstrap/<em>.</em> , bower_components/jquery/<em>.</em></p>
+<p>透過 bower init 指令，安裝 bower.json，您可以在 dependencies 的部分輸入套件名稱與版本號</p>
+<p><img src="/images/nodejs/27.png" alt=""></p>
+<p>我們在建立好的 express 框架下的  app.js ，把剛才建立好的  bower_components  資料夾，綁進去基本靜態套件的路徑</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">app.use(express.static(path.join(__dirname, <span class="string">'bower_components/bootstrap/dist/'</span>)));</div></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/28.png" alt=""></p>
+<p>接著用引入檔案的方法，請打開 ./views/layout.jade ，在 head 的子節點的地方新增</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">link(rel='stylesheet', href='/css/bootstrap.min.css')</div><div class="line">script(src='/js/bootstrap.min.js')</div></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/29.png" alt=""></p>
+<p>引入成功之後，就可以建立一個 bootstrap 的頁面，下圖是用透過 bower 匯入 bootstrap 套件建立一個簡單前端頁面：</p>
+<p><img src="/images/nodejs/30.png" alt=""></p>
+<h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><ul>
+<li><a href="http://bower.io/" target="_blank" rel="external">http://bower.io/</a></li>
+<li><a href="http://jade-lang.com/tutorial/" target="_blank" rel="external">http://jade-lang.com/tutorial/</a></li>
+<li><a href="http://getbootstrap.com/" target="_blank" rel="external">http://getbootstrap.com/</a></li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> Node.js </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Node.js </tag>
+            
+            <tag> 鐵人賽 </tag>
+            
+            <tag> npm </tag>
+            
+            <tag> bower </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Node.js 系列學習日誌#4 - nvm (Node Version Manager) 管理多個版本]]></title>
+      <url>/2017/07/24/nodejs-04-nvm/</url>
+      <content type="html"><![CDATA[<p>nvm 是一種在管理多個 Node.js 版本的套件，當你預計採用不同版本執行Node.js 的時候，可以採用這個套件，那麼我們可以先進到這個網址裡面找到安裝指令</p>
+<p><a href="https://github.com/creationix/nvm" target="_blank" rel="external">https://github.com/creationix/nvm</a></p>
+<a id="more"></a>
+<p>安裝指令請在下方找到：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl https://raw.githubusercontent.com/creationix/nvm/v0.17.2/install.sh | bash</div></pre></td></tr></table></figure>
+<p>或者用 wget 方式下載</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.17.2/install.sh | bash</div></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/16.png" alt=""></p>
+<p>將這個指令貼到命令提示字元</p>
+<p>安裝完之後，請先將命令提示字元關閉，再重新開啟以使用 nvm 指令<br>接著重啟之後，輸入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$nvm</span></div></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/17.png" alt=""></p>
+<p>確定有  nvm 之後，可以輸入 $nvm ls-remote 指令看有哪些版本可以安裝，在命令提示字元會看到落落長的版本號</p>
+<p><img src="/images/nodejs/18.png" alt=""></p>
+<h1 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h1><p>依照 nvm help 指令的說明上，請使用  $nvm install 安裝 node.js  版本，這些版本會實際放在 /usr/local/n/資料夾，例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$nvm</span> install v0.10.32</div></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/19.png" alt=""></p>
+<p>再裝一個不同版本的 node，那麼就安裝 v0.11.14 (版本前面的 v 可以不用寫)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$nvm</span> install v0.11.14</div></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/20.png" alt=""></p>
+<p>這時候下一個  $nvm ls 指令，這時候安裝最後的版本，將會當做是當前的版本，可以下 $nvm current ，此時，綠色箭頭就是目前的版本號 v0.11.14</p>
+<p><img src="/images/nodejs/21.png" alt=""></p>
+<p>接下來我們可以用簡單的指令切換 Node.js 版本，這時候綠色箭頭就換成 v0.10.32</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$nvm</span> use 0.10.32</div></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/22.png" alt=""></p>
+<h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><ul>
+<li><a href="http://nodejs.org/" target="_blank" rel="external">http://nodejs.org/</a></li>
+<li><a href="https://github.com/creationix/nvm" target="_blank" rel="external">https://github.com/creationix/nvm</a></li>
+<li><a href="https://github.com/Gizra/KnowledgeBase/wiki/How-to-install-nvm-(Node-Version-Manager" target="_blank" rel="external">https://github.com/Gizra/KnowledgeBase/wiki/How-to-install-nvm-(Node-Version-Manager)</a>)</li>
+<li><a href="https://www.npmjs.org/package/nvm" target="_blank" rel="external">https://www.npmjs.org/package/nvm</a></li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> Node.js </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Node.js </tag>
+            
+            <tag> 鐵人賽 </tag>
+            
+            <tag> npm </tag>
+            
+            <tag> nvm </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Node.js 系列學習日誌#3 - npm 包管理器]]></title>
+      <url>/2017/07/24/nodejs-03-npm/</url>
+      <content type="html"><![CDATA[<p><img src="/images/nodejs/14.png" alt=""></p>
+<p>npm，主要是 node.js 應用程式的建立、共享、重覆使用模組。在上一篇 Node.js 安裝並且建立簡單的 Hello World 程式 是來自於使用 node.js.org 的安裝軟體安裝，那麼其實 npm 就已經裝好哩。</p>
+<a id="more"></a>
+<h2 id="查看-npm-是否有安裝"><a href="#查看-npm-是否有安裝" class="headerlink" title="查看 npm 是否有安裝"></a>查看 npm 是否有安裝</h2><p>我們從命令提示字元看一下 npm 是否有安裝成功呢？有出現以下呈現就代表有 npm 了</p>
+<p><img src="/images/nodejs/15.png" alt=""></p>
+<h2 id="安裝模組"><a href="#安裝模組" class="headerlink" title="安裝模組"></a>安裝模組</h2><p>安裝模組的時候，可以在命令提示字元輸入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install [module_name]</div></pre></td></tr></table></figure>
+<h2 id="試著使用看看"><a href="#試著使用看看" class="headerlink" title="試著使用看看"></a>試著使用看看</h2><p>現在我們來使用一款 underscore 的這個模組來介紹如何安裝模組，如何使用模組，首先先來看這個模組可以使用哪些 function，詳情可以查閱官方網站</p>
+<blockquote>
+<p>Underscore is a JavaScript library that provides a whole mess of useful functional<br>programming helpers without extending any built-in objects. <a href="http://underscorejs.org/" target="_blank" rel="external">http://underscorejs.org/</a></p>
+</blockquote>
+<p>裡頭有很多種物件可以使用，像是</p>
+<ul>
+<li>Collections</li>
+<li>Arrays</li>
+<li>Functions</li>
+<li>Objects</li>
+<li>Utility</li>
+</ul>
+<p>之後文章再介紹常用的方法或屬性，敬請期待。</p>
+<h2 id="參考網址"><a href="#參考網址" class="headerlink" title="參考網址:"></a>參考網址:</h2><ul>
+<li>npm 官方網站</li>
+<li>node包管理器 @維基百科</li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> Node.js </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Node.js </tag>
+            
+            <tag> 鐵人賽 </tag>
+            
+            <tag> npm </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Node.js 系列學習日誌#2 - Node.js 安裝配置]]></title>
+      <url>/2017/07/24/nodejs-02-install/</url>
+      <content type="html"><![CDATA[<p>Node.js 是一套使用了 Google V8 虛擬機來解釋 Javascript 語法，允許在後端運行 Javascript 的語法，發生在把頁面發送給 browser 之前的服務器上，所以要實現後台運行的 Javascript 語法，那麼語法要先被編譯後才可以正確執行。</p>
+<p>本章節會學習到</p>
+<ul>
+<li>安裝 Node.js</li>
+<li>驗證  Node.js 是否正確安裝</li>
+<li>建立基本 Node.js 程式</li>
+<li>啟動基本 Node.js 程式</li>
+<li>安全警示</li>
+<li>查看 npm 是否有安裝</li>
+</ul>
+<a id="more"></a>
+<h2 id="安裝系統："><a href="#安裝系統：" class="headerlink" title="安裝系統："></a>安裝系統：</h2><p>首先，簡單的來安裝一下 Node.js ，在這裡示範的系統環境是 Windows XP 32bit，可以到 <a href="http://nodejs.org/" target="_blank" rel="external">http://nodejs.org/</a> 的首頁上下載安裝軟體</p>
+<ul>
+<li>進入 node.js 官方網站 <a href="http://nodejs.org/" target="_blank" rel="external">http://nodejs.org/</a> 點選 install 後, 會下載一個 node-v0.10.25-x86.msi 安裝檔案</li>
+</ul>
+<p><img src="/images/nodejs/2.png" alt=""></p>
+<ul>
+<li>點選安裝檔案後, 開始進行安裝</li>
+</ul>
+<p><img src="/images/nodejs/3.png" alt=""></p>
+<ul>
+<li>End-User License Agreement 的頁面, 勾選 “I accept the terms in the License Agreement” 核選方塊後, 點選 Next 進行下一步</li>
+</ul>
+<p><img src="/images/nodejs/4.png" alt=""></p>
+<ul>
+<li>可指定安裝路徑, 這裡就保持預設就行了, 確認後點選 Next (當然，要改變存放位置也是可以)</li>
+</ul>
+<p><img src="/images/nodejs/5.png" alt=""></p>
+<ul>
+<li>自訂安裝 Select the way you want features to be installed</li>
+</ul>
+<p><img src="/images/nodejs/6.png" alt=""></p>
+<ul>
+<li>安裝前的提醒</li>
+</ul>
+<p><img src="/images/nodejs/7.png" alt=""></p>
+<ul>
+<li>開始進行安裝 Node.js</li>
+</ul>
+<p><img src="/images/nodejs/8.png" alt=""></p>
+<ul>
+<li>完成安裝</li>
+</ul>
+<p><img src="/images/nodejs/9.png" alt=""></p>
+<h2 id="驗證-Node-js-正確安裝"><a href="#驗證-Node-js-正確安裝" class="headerlink" title="驗證 Node.js 正確安裝"></a>驗證 Node.js 正確安裝</h2><p>學習新的一套語言，就是要先學會將程式呈現一個簡單的文字顯示，因此不免俗的還是來一個萬年測試，先來看看安裝是否有成功。</p>
+<ul>
+<li>開啟命令提示字元，輸入 node</li>
+<li>輸入 12 + 34 ，檢查是否有回應 46 的答案，若有就代表成功囉。</li>
+</ul>
+<p><img src="/images/nodejs/10.png" alt=""></p>
+<h2 id="建立-Hello-world-的-Node-js-程式"><a href="#建立-Hello-world-的-Node-js-程式" class="headerlink" title="建立 Hello world 的 Node.js 程式"></a>建立 Hello world 的 Node.js 程式</h2><p>不管利用記事本或是會善用 IDE 做為開發的工具，建立一個 <code>my.js</code> 的檔案，輸入以下的語法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</div><div class="line">http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>)</span>&#123;</div><div class="line">  res.writeHead(<span class="number">200</span>, &#123; <span class="string">'Content-Type'</span>: <span class="string">'text/html'</span> &#125;);</div><div class="line">  res.write(<span class="string">'&lt;h1&gt; Hello Helen, this is Node.js &lt;/h1&gt;'</span>);</div><div class="line">  res.end(<span class="string">'Hello world'</span>);</div><div class="line">&#125;).listen(<span class="number">3232</span>);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(<span class="string">"HTTP Server is listening at port 3232"</span>);</div><div class="line"><span class="string">`</span></div></pre></td></tr></table></figure>
+<h3 id="開始執行啟動"><a href="#開始執行啟動" class="headerlink" title="開始執行啟動"></a>開始執行啟動</h3><p>接著打開命令提示字元，輸入 <code>node my.js</code><br>之後就會看到 <code>Http Server is listening at port 3232</code>，這就代表有成功啟動</p>
+<p><img src="/images/nodejs/11.png" alt=""></p>
+<h2 id="安全警示"><a href="#安全警示" class="headerlink" title="安全警示"></a>安全警示</h2><p>由於 node.js 是利用 google chrome v8 引擎執行, 會出現以下安全性警示，按下解除封鎖按鈕</p>
+<p><img src="/images/nodejs/12.png" alt=""></p>
+<p>馬上開起 browser，有出現以下的呈現結果，就是正常運行服務端的 javascript 喔！</p>
+<p><img src="/images/nodejs/13.png" alt=""></p>
+<p>如果想停止這個服務的話，在命令提示字元按下 CTRL + C 就將這個 port 停止服務就好了。</p>
+<p>Good，這樣就完成簡單的示範，接下來就可以慢慢建立比較複雜的應用程序囉。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Node.js </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Node.js </tag>
+            
+            <tag> 鐵人賽 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Node.js 系列學習日誌#1 - 開始的開始，Node.js 簡介]]></title>
+      <url>/2017/07/24/nodejs-01-start/</url>
+      <content type="html"><![CDATA[<p>最近看了些書籍、電子書、網路爬文，一直都想寫個文章做個記錄，以免忘記，彙整一下所看、所聞、所實作的 Node.js 技術，如果有寫不好的地方也請多多指教囉</p>
+<p>這些年，Node.js 的議題越來越熱門了，而且快速的開發中，版本的升級也相當快，Node.js 是一個使用當前速度較快的 Javascript 引擎， 運行在服務端的開發平台。它使用了 Google 的 V8 虛擬機（Google Chrome 瀏覽器使用的 Javascript 執行環境），解析與執行 Javascript 語法，你可以想像是在運行 PHP, Puby, Python 一樣的服務端模式，只是根據 Node.js 的做法它不用像 PHP, Python, Ruby on rails 一樣安裝 Apache, Nginx 的 Http 服務器，因為它本身內建就有 Web server 支援。</p>
+<a id="more"></a>
+<p>Node.js 它可以實現 Javascript 沒有完善的功能，比如說實現 Javascript 沒有的模組觀念、操作系統 API、網路通訊的功能。</p>
+<p>到底，Node.js 技術現在趨勢如何？我們可以看以下用 Google Trend 網頁分析 Node.js, ruby on rails, angular.js  的熱門搜尋變化，由這張圖看起來，大概是在 2013 年的時候，出現了交叉變化，Node.js 漸漸得越來越多人去了解它。由此圖看得出來，ruby on rails 有著驚人的表現，到這幾年趨於平緩，但我覺得每個語言都有它表現不凡的技術與能力，其他語言也互相學習技術上優點避掉缺點。本系列將學習  Node.js 的應用，一起來探討探討。</p>
+<p><img src="/images/nodejs/1.PNG" alt="趨勢圖"></p>
+<p>網址在此：</p>
+<p><a href="https://www.google.com.tw/trends/explore#q=node.js%2C%20ruby%20on%20rails%2C%20angular.js&amp;cmpt=q" target="_blank" rel="external">https://www.google.com.tw/trends/explore#q=node.js%2C%20ruby%20on%20rails%2C%20angular.js&amp;cmpt=q</a></p>
+<h3 id="Node-js-它不是"><a href="#Node-js-它不是" class="headerlink" title="Node.js 它不是"></a>Node.js 它不是</h3><p>我們都知道學習一套語言會需要知道是什麼樣的一套語言，或是能達到什麼樣的處理，但是更需要反向思考瞭解的是，它不是哪些領域的，或者它不能做到的範圍</p>
+<ul>
+<li>Node.js 不是一種獨立語言</li>
+<li>Node.js 不是一個 Javascript 框架 (eg. Rails, Django, CakePHP)</li>
+<li>Node.js 不是 Client-Side (eg. jQuery, YUI, Extjs)</li>
+<li>Node.js 不是多執行緒</li>
+</ul>
+<h3 id="Node-js-能做些什麼"><a href="#Node-js-能做些什麼" class="headerlink" title="Node.js 能做些什麼"></a>Node.js 能做些什麼</h3><h4 id="Node-js-不只是能做一個網站，它可以開發一些："><a href="#Node-js-不只是能做一個網站，它可以開發一些：" class="headerlink" title="Node.js 不只是能做一個網站，它可以開發一些："></a>Node.js 不只是能做一個網站，它可以開發一些：</h4><ul>
+<li>檔案上傳工具</li>
+<li>社群網路的大規模網站</li>
+<li>Websocket 服務器 (例如：聊天室)</li>
+<li>可以處理複雜邏輯的網站</li>
+<li>命令行工具</li>
+<li>交互式終端程式</li>
+<li>JSON 的 API</li>
+<li>Javascript 編輯器</li>
+<li>單元測試工具</li>
+</ul>
+<p>今天就介紹到這裡，待續…</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Node.js </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Node.js </tag>
+            
+            <tag> 鐵人賽 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[R 語言 - 模擬身高體重並繪製 X-Y 散佈圖]]></title>
       <url>/2017/03/04/r-xy-scatter-diagram/</url>
       <content type="html"><![CDATA[<p>試做：使用 N(172, 5)模擬 100人身高、使用 N(58, 5)模擬 100 人，繪製  X-Y 散佈圖</p>
@@ -16,7 +383,7 @@
 <p>接著畫出身高體重的 XY 散佈圖</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; plot(weight, height, xlab=&quot;Weight&quot;, ylab=&quot;Height&quot;)</div></pre></td></tr></table></figure>
 <p>結果</p>
-<p><img src="/img/r/r-xy-scatter-diagram.png" alt=""></p>
+<p><img src="/images/r/r-xy-scatter-diagram.png" alt=""></p>
 <h2 id="線性迴歸分析"><a href="#線性迴歸分析" class="headerlink" title="線性迴歸分析"></a>線性迴歸分析</h2><p>height 為「被解釋變數」<br>weight 為「解釋變數」</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; summary(lm(height ~ weight))</div></pre></td></tr></table></figure>
 <p>結果</p>
@@ -140,7 +507,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ cd meteor_demo</div><div class="line">$ meteor npm install</div><div class="line">$ meteor</div></pre></td></tr></table></figure>
 <p>在輸入第三行的 <code>meteor</code> 時，是否有發現先前我們在一開始介紹時已經有輸入過了，而這次的執行 <code>meteor</code> 確實是有專案，現在就馬上打開瀏覽器，檢視 <code>http://localhost:3000/</code> 或是 ( <code>http://0.0.0.0:3000/</code> )</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ meteor</div><div class="line">[[[[[ ~/Projects/demo/meteor_demo ]]]]]</div><div class="line"></div><div class="line">=&gt; Started proxy.</div><div class="line">=&gt; Started MongoDB.</div><div class="line">=&gt; Started your app.</div><div class="line"></div><div class="line">=&gt; App running at: http://localhost:3000/</div></pre></td></tr></table></figure>
-<h3 id="執行成功畫面"><a href="#執行成功畫面" class="headerlink" title="執行成功畫面"></a>執行成功畫面</h3><p><img src="/img/meteor/meteor_1.png" alt="執行成功畫面"></p>
+<h3 id="執行成功畫面"><a href="#執行成功畫面" class="headerlink" title="執行成功畫面"></a>執行成功畫面</h3><p><img src="/images/meteor/meteor_1.png" alt="執行成功畫面"></p>
 <p>這樣子順利運行，若想停止運行應用程式的話只要在執行的 terminal 按下 <code>ctrl+c</code> 就可以了喔！</p>
 <h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><p><a href="https://www.meteor.com/" target="_blank" rel="external">Meteor: Build Apps with JavaScript</a></p>
 ]]></content>
