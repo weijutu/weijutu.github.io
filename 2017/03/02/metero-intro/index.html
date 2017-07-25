@@ -360,11 +360,11 @@
 <h2 id="安裝-Meteor"><a href="#安裝-Meteor" class="headerlink" title="安裝 Meteor"></a>安裝 Meteor</h2><p>安裝 Meteor 的方式在 terminal 輸入以下命令：</p>
 <p><code>curl https://install.meteor.com | sh</code></p>
 <p>安裝完之後你可以再次輸入 <code>meteor</code> 後，執行會說明目前不是在 meteor 專案下，所以目前還只能確認 Meteor 安裝成功並且還會指引你建立 Meteor 專案的指令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> meteor</div><div class="line">  run: You\'re not in a Meteor project directory.</div><div class="line"></div><div class="line">  To create a new Meteor project:</div><div class="line">    meteor create &lt;project name&gt;</div><div class="line">  For example:</div><div class="line">    meteor create myapp</div><div class="line"></div><div class="line">  For more help, see 'meteor --help'.</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> meteor</span></div><div class="line">  run: You\'re not in a Meteor project directory.</div><div class="line"></div><div class="line">  To create a new Meteor project:</div><div class="line">    meteor create &lt;project name&gt;</div><div class="line">  For example:</div><div class="line">    meteor create myapp</div><div class="line"></div><div class="line">  For more help, see 'meteor --help'.</div></pre></td></tr></table></figure>
 <h2 id="建立新的專案"><a href="#建立新的專案" class="headerlink" title="建立新的專案"></a>建立新的專案</h2><p>裝好 meteor 後，我們建立一個新的專案，建立時使用 meteor 的工具</p>
 <p><code>meteor create meteor_demo</code></p>
 <p>按照命令就會把 meteor 建立基礎的檔案結構，建立完成後就會有一個 <code>meteor_demo</code> 的資料夾，並且說明如何執行應用程式</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> meteor create meteor_demo</div><div class="line">  Created a new Meteor app in 'meteor_demo'.</div><div class="line"></div><div class="line">  To run your new app:</div><div class="line">    cd meteor_demo</div><div class="line">    meteor npm install</div><div class="line">    meteor</div><div class="line"></div><div class="line">  If you are new to Meteor, try some of the learning resources here:</div><div class="line">    https://www.meteor.com/learn</div><div class="line"></div><div class="line">  meteor create --bare to create an empty app.</div><div class="line">  meteor create --full to create a scaffolded app.</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> meteor create meteor_demo</span></div><div class="line">  Created a new Meteor app in 'meteor_demo'.</div><div class="line"></div><div class="line">  To run your new app:</div><div class="line">    cd meteor_demo</div><div class="line">    meteor npm install</div><div class="line">    meteor</div><div class="line"></div><div class="line">  If you are new to Meteor, try some of the learning resources here:</div><div class="line">    https://www.meteor.com/learn</div><div class="line"></div><div class="line">  meteor create --bare to create an empty app.</div><div class="line">  meteor create --full to create a scaffolded app.</div></pre></td></tr></table></figure>
 <p>也包含以下的檔案與資料夾</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">drwxr-xr-x   7 User  staff   238 Feb 12 08:40 .</div><div class="line">drwxr-xr-x  49 User  staff  1666 Feb 12 08:40 ..</div><div class="line">drwxr-xr-x  10 User  staff   340 Feb 12 08:40 .meteor</div><div class="line">drwxr-xr-x   5 User  staff   170 Feb 12 08:40 client</div><div class="line">-rw-r--r--   1 User  staff   183 Feb 12 08:40 package.json</div><div class="line">drwxr-xr-x   3 User  staff   102 Feb 12 08:40 server</div></pre></td></tr></table></figure>
 <p>接著，我們就依照他的指引安裝一些套件</p>
@@ -504,7 +504,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
@@ -526,7 +526,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">標籤</span>
               </a>
             </div>

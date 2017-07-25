@@ -274,6 +274,634 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/07/24/nodejs-10-mysql-crud-read/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Helen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="噗噗。故我在">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/24/nodejs-10-mysql-crud-read/" itemprop="url">Node.js 系列學習日誌#10 - MySQL 操作: 查詢</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-07-24T00:10:00+08:00">
+                2017-07-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Node-js/" itemprop="url" rel="index">
+                    <span itemprop="name">Node.js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/07/24/nodejs-10-mysql-crud-read/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/07/24/nodejs-10-mysql-crud-read/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>上一篇介紹了資料庫連線的方式，接著我們就來實作從資料庫讀取資料出來的做法。資料庫的部分，假定先建立一個 demo_nodejs 的資料庫，並且建立 users 的資料表，其資料表有  id, name, description 欄位</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/07/24/nodejs-10-mysql-crud-read/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/07/24/nodejs-09-mysql-crud-delete/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Helen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="噗噗。故我在">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/24/nodejs-09-mysql-crud-delete/" itemprop="url">Node.js 系列學習日誌#9 - MySQL 操作: 刪除</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-07-24T00:09:00+08:00">
+                2017-07-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Node-js/" itemprop="url" rel="index">
+                    <span itemprop="name">Node.js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/07/24/nodejs-09-mysql-crud-delete/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/07/24/nodejs-09-mysql-crud-delete/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>前幾篇完成了 Create, Read, Update, 本篇將介紹 Delete 的操作，一樣的我們在使用者列表上面，每筆資料的功能加入『刪除』按鈕，在頁面上表格列出的語法是：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">mixin users(users)</div><div class="line">  h1= title</div><div class="line">  fieldset</div><div class="line">   legend 以下是從 mysql 取出的使用者列表</div><div class="line">   a(href='/create', class='btn btn-primary') 新增使用者</div><div class="line">   table.mytable.table</div><div class="line">    th 編輯</div><div class="line">    th 名稱</div><div class="line">    th 描述</div><div class="line">    th 功能</div><div class="line">     each user in users</div><div class="line">      tr</div><div class="line">       td= user.id</div><div class="line">       td #&#123;user.name&#125;</div><div class="line">       td #&#123;user.description&#125;</div><div class="line">       td</div><div class="line">         a(href='/update/#&#123;user.id&#125;', class='btn btn-warning') 更新</div><div class="line">         a(href='/delete/#&#123;user.id&#125;', class='btn btn-danger') 刪除</div><div class="line"></div><div class="line"> - users = user</div><div class="line"> .container</div><div class="line">      mixin users(users)</div></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/07/24/nodejs-09-mysql-crud-delete/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/07/24/nodejs-08-mysql-crud-create/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Helen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="噗噗。故我在">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/24/nodejs-08-mysql-crud-create/" itemprop="url">Node.js 系列學習日誌#8 - MySQL 操作 -建立</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-07-24T00:08:00+08:00">
+                2017-07-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Node-js/" itemprop="url" rel="index">
+                    <span itemprop="name">Node.js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/07/24/nodejs-08-mysql-crud-create/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/07/24/nodejs-08-mysql-crud-create/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>延續上一篇的連接 mysql  實現 crud 的操作，本篇將介紹新增資料的操作。之後的兩篇文，將會介紹更新、刪除的操作。首先我們在上一篇已經有將資料列出來，在此做一些畫面的調整，使用 bootstrap 的前端框架套件去使用。</p>
+<p>本章節主要使用的套件有：</p>
+<ul>
+<li>express web framework</li>
+<li>mysql</li>
+<li>jade</li>
+</ul>
+<p>首先我們先建立一個資料夾  nodejs-demo-mysql ，然後要安裝一下相依的套件使用：express, mysql</p>
+<p>建立 package.json，請輸入以下的指令按照提示問題回答</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$npm</span> init</div></pre></td></tr></table></figure>
+<p>安裝 express web framework 到這 nodejs-demo-mysql 應用程式專案裡面，並寫入到  package.json</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$npm</span> install express —save</div></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/31.png" alt=""></p>
+<p>完成 express 之後，再安裝 mysql 套件，在這邊安裝  mysql</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$npm</span> install mysql@2.0.0-alpha9</div></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/32.png" alt=""></p>
+<p>首先可以看到 express 套件,  node-mysql 就新增到 node_modules 裡了</p>
+<p><img src="/images/nodejs/33.png" alt=""></p>
+<p>資料庫的部分，假定先建立一個 demo_nodejs 的資料庫</p>
+<p><img src="/images/nodejs/34.png" alt=""></p>
+<p>然後新增  index.js 作為網頁開頭的起始點，宣告 mysql 後，先使用 createConnection 方法將資料庫的參數初始化</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> mysql = <span class="built_in">require</span>(<span class="string">'mysql'</span>);</div><div class="line"><span class="keyword">var</span> conn = mysql.createConnection(&#123;</div><div class="line">    <span class="attr">host</span>: <span class="string">'localhost'</span>,</div><div class="line">    <span class="attr">user</span>: <span class="string">'nodejs'</span>,</div><div class="line">    <span class="attr">password</span>: <span class="string">'nodejs'</span>,</div><div class="line">    <span class="attr">database</span>:<span class="string">'demo_nodejs'</span>,</div><div class="line">    <span class="attr">port</span>: <span class="number">3306</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>將資料庫做個連線的動作</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">conn.connect();</div></pre></td></tr></table></figure>
+<p>先測試一下，透過以下的 query  執行，如果有將 12 + 34 有算出來，那麼就代表有連線成功</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">conn.query(<span class="string">'SELECT 12 + 34 AS result'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, rows, fields</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (err) <span class="keyword">throw</span> err;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'The result is: '</span>, rows[<span class="number">0</span>].result);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>連線成功後，查詢之後務必要將它關閉。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">conn.end();</div></pre></td></tr></table></figure>
+<p>完整程式如下：</p>
+<p><img src="/images/nodejs/35.png" alt=""></p>
+<p>執行結果 有將 12 + 34 = 46 算出來囉</p>
+<p><img src="/images/nodejs/36.png" alt=""></p>
+<h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><ul>
+<li><a href="http://expressjs.com/" target="_blank" rel="external">http://expressjs.com/</a></li>
+<li><a href="https://github.com/redblaze/node-mysql" target="_blank" rel="external">https://github.com/redblaze/node-mysql</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/07/24/nodejs-07-mysql-start/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Helen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="噗噗。故我在">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/24/nodejs-07-mysql-start/" itemprop="url">Node.js 系列學習日誌#7 - 連接 MySQL 並實現 CRUD 操作存取前的準備</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-07-24T00:07:00+08:00">
+                2017-07-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Node-js/" itemprop="url" rel="index">
+                    <span itemprop="name">Node.js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/07/24/nodejs-07-mysql-start/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/07/24/nodejs-07-mysql-start/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>今天就來寫一個跟資料庫有關的功能，本章節介紹用 <code>node.js ＋ mysql</code>  的存取，實作新增、修改、刪除、查詢的功能，以下都是以  mac osx 來當作開發環境，因此以下步驟之前請務必安裝  <code>node.js</code> , npm，另外還有 <code>mysql</code> ，您可以透過 <a href="http://dev.mysql.com/downloads/mysql/" target="_blank" rel="external">http://dev.mysql.com/downloads/mysql/</a> 來安裝，mysql 安裝的步驟在此就不做介紹，專注在  node.js 與 mysql 存取的方法。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/07/24/nodejs-07-mysql-start/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/07/24/nodejs-06-style-guide/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -374,8 +1002,7 @@
 
       
         
-          
-            <p>由於 node.js 是 javascript 作為開發的語言，開發的過程遵照程式碼規範撰寫讓整個程式風格達到一致。不過當然許多的 js 寫法都會有不同的風格存在，若您找不到要照什麼規則編寫程式，那麼可以參考這篇簡易的風格指南作為開發上的基本基礎。</p>
+          <p>由於 node.js 是 javascript 作為開發的語言，開發的過程遵照程式碼規範撰寫讓整個程式風格達到一致。不過當然許多的 js 寫法都會有不同的風格存在，若您找不到要照什麼規則編寫程式，那麼可以參考這篇簡易的風格指南作為開發上的基本基礎。</p>
 <p>本章節將介紹  node.js 幾個常用的撰寫手法來做介紹：</p>
 <ul>
 <li>字串引號</li>
@@ -388,35 +1015,13 @@
 <li>條件判斷</li>
 <li>嵌套閉包</li>
 </ul>
-<h1 id="字串引號"><a href="#字串引號" class="headerlink" title="字串引號"></a>字串引號</h1><p>使用單引號，若物件是 json 格式，那麼就使用雙引號來定義 key, value</p>
-<h3 id="錯誤示範"><a href="#錯誤示範" class="headerlink" title="錯誤示範"></a>錯誤示範</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name =“test01”;</div></pre></td></tr></table></figure>
-<h3 id="正確寫法"><a href="#正確寫法" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name = ’test01’;</div></pre></td></tr></table></figure>
-<h1 id="區塊括號"><a href="#區塊括號" class="headerlink" title="區塊括號"></a>區塊括號</h1><h3 id="錯誤示範-1"><a href="#錯誤示範-1" class="headerlink" title="錯誤示範"></a>錯誤示範</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (<span class="literal">true</span>)</div><div class="line">&#123;</div><div class="line">     <span class="built_in">console</span>.log(“<span class="keyword">this</span> is a book.”);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="正確寫法-1"><a href="#正確寫法-1" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</div><div class="line">    <span class="built_in">console</span>.log(“<span class="keyword">this</span> is a book.”);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="變數宣告"><a href="#變數宣告" class="headerlink" title="變數宣告"></a>變數宣告</h1><p>使用一種對每一個變數做一個 var 宣告。</p>
-<h3 id="錯誤示範-2"><a href="#錯誤示範-2" class="headerlink" title="錯誤示範"></a>錯誤示範</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> ary = [<span class="string">"apple"</span>, <span class="string">"orange"</span>],</div><div class="line">     price = [<span class="number">150</span>, <span class="number">125</span>],</div><div class="line">     obj = &#123;&#125;;</div></pre></td></tr></table></figure>
-<h3 id="正確寫法-2"><a href="#正確寫法-2" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> ary = [<span class="string">"apple"</span>, <span class="string">"orange"</span>];</div><div class="line"><span class="keyword">var</span> price = [<span class="number">150</span>, <span class="number">125</span>];</div><div class="line"><span class="keyword">var</span> obj = &#123;&#125;;</div></pre></td></tr></table></figure>
-<h1 id="變數命名"><a href="#變數命名" class="headerlink" title="變數命名"></a>變數命名</h1><h3 id="錯誤示範-3"><a href="#錯誤示範-3" class="headerlink" title="錯誤示範"></a>錯誤示範</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> str_user = <span class="string">"test01"</span>;</div></pre></td></tr></table></figure>
-<h3 id="正確寫法-3"><a href="#正確寫法-3" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> strUser = <span class="string">"test01"</span>;</div></pre></td></tr></table></figure>
-<h1 id="函數命名"><a href="#函數命名" class="headerlink" title="函數命名"></a>函數命名</h1><h3 id="錯誤示範-4"><a href="#錯誤示範-4" class="headerlink" title="錯誤示範"></a>錯誤示範</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_Users</span>(<span class="params"></span>) </span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="正確寫法-4"><a href="#正確寫法-4" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">GetUser</span>(<span class="params"></span>)</span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="物件與陣列"><a href="#物件與陣列" class="headerlink" title="物件與陣列"></a>物件與陣列</h1><p>如果只有很小的資料為陣列的話，請將它寫在同一行，而當您的物件是包含 key, value 的形式時，則排列整齊讓閱讀起來更加容易</p>
-<h3 id="錯誤寫法"><a href="#錯誤寫法" class="headerlink" title="錯誤寫法"></a>錯誤寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> ary = [</div><div class="line">     <span class="string">"apple"</span>, <span class="string">"orange"</span></div><div class="line">];</div><div class="line"></div><div class="line"><span class="keyword">var</span> person = &#123; <span class="string">"name"</span>, <span class="string">"test01"</span></div><div class="line">               , <span class="string">"id"</span>: <span class="string">"abcd1234"</span> &#125;;</div></pre></td></tr></table></figure>
-<h3 id="正確寫法-5"><a href="#正確寫法-5" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> ary = [ <span class="string">"apple"</span>, <span class="string">"orange"</span> ];</div><div class="line"><span class="keyword">var</span> person = &#123;</div><div class="line">     <span class="string">"name"</span>, <span class="string">"test01"</span>,</div><div class="line">     <span class="string">"id"</span>: <span class="string">"abcd1234"</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h1 id="相等的運算符號"><a href="#相等的運算符號" class="headerlink" title="相等的運算符號"></a>相等的運算符號</h1><h3 id="錯誤寫法-1"><a href="#錯誤寫法-1" class="headerlink" title="錯誤寫法"></a>錯誤寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> index = <span class="number">0</span>;</div><div class="line"><span class="keyword">if</span> (index == <span class="string">''</span>) &#123;</div><div class="line">     <span class="built_in">console</span>.log(<span class="string">"nothing"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="正確寫法-6"><a href="#正確寫法-6" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> index = <span class="number">0</span></div><div class="line"><span class="keyword">if</span> (index === <span class="string">''</span>) &#123;</div><div class="line">     <span class="built_in">console</span>.log(<span class="string">"nothing"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="條件判斷"><a href="#條件判斷" class="headerlink" title="條件判斷"></a>條件判斷</h1><p>儘量不要將過多的判斷都塞在 if 裡面，請先將判斷部分在前面以變數方式先驗證，再將結果的 true, false 的答案擺在 if 裡面</p>
-<h3 id="錯誤寫法-2"><a href="#錯誤寫法-2" class="headerlink" title="錯誤寫法"></a>錯誤寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (task.isPrivate() || task.isEnabled()) &#123;</div><div class="line">     <span class="built_in">console</span>.log(<span class="string">"the task are private and enabled type"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="正確寫法-7"><a href="#正確寫法-7" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> isValid = (task.isPrivate() || task.isEnabled());</div><div class="line"><span class="keyword">if</span> (isValid) &#123;</div><div class="line">     <span class="built_in">console</span>.log(<span class="string">"the task are private and enabled type"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="嵌套閉包"><a href="#嵌套閉包" class="headerlink" title="嵌套閉包"></a>嵌套閉包</h1><p>在使用閉包的做法是，不要一直無限嵌套，因為這樣會使得程式過度雜亂</p>
-<h3 id="錯誤寫法-3"><a href="#錯誤寫法-3" class="headerlink" title="錯誤寫法"></a>錯誤寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">      obj.click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">           <span class="built_in">console</span>.log(<span class="string">"click..."</span>);</div><div class="line">      &#125;)</div><div class="line">&#125;, <span class="number">3000</span>);</div></pre></td></tr></table></figure>
-<h3 id="正確寫法-8"><a href="#正確寫法-8" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">     obj.click(fnObjClick);</div><div class="line">&#125;,<span class="number">3000</span>);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fnObjClick</span>(<span class="params"></span>) </span>&#123;</div><div class="line">     <span class="built_in">console</span>.log(<span class="string">"click..."</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><ul>
-<li><a href="https://github.com/felixge/node-style-guide" target="_blank" rel="external">https://github.com/felixge/node-style-guide</a></li>
-<li><a href="http://nodeguide.com/style.html" target="_blank" rel="external">http://nodeguide.com/style.html</a></li>
-</ul>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/07/24/nodejs-06-style-guide/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1221,394 +1826,13 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/03/04/r-xy-scatter-diagram/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Helen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="噗噗。故我在">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/03/04/r-xy-scatter-diagram/" itemprop="url">R 語言 - 模擬身高體重並繪製 X-Y 散佈圖</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-03-04T00:28:51+08:00">
-                2017-03-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/03/04/r-xy-scatter-diagram/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/03/04/r-xy-scatter-diagram/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>試做：使用 N(172, 5)模擬 100人身高、使用 N(58, 5)模擬 100 人，繪製  X-Y 散佈圖</p>
-<p>XY 散佈圖是指：</p>
-<blockquote>
-<p>XY 圖的基本形式是以一個資料數列為基礎，而這個資料數列包含名稱、X 軸值清單以及 Y 軸值清單。每個值配對 (x|y) 在座標系統中都會顯示為一點。</p>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/03/04/r-xy-scatter-diagram/#more" rel="contents">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/03/03/r-intro/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Helen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="噗噗。故我在">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/03/03/r-intro/" itemprop="url">R 語言 - 基本介紹與套件工具函數</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-03-03T23:07:57+08:00">
-                2017-03-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/03/03/r-intro/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/03/03/r-intro/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>R 語言可以用來處理資料、統計分析、模擬、科學運算以及圖形功能，你可以直接安裝 R Studio 軟體 (<a href="https://www.r-project.org/" target="_blank" rel="external">R軟體官方網站</a>)，就可以很輕易的在 GUI 上透過許多的套件模組並搭配 R 程式來畫出許多圖形，要能夠善用這些套件之前我們要先學習基本的資料型態以及語法運用。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/03/03/r-intro/#more" rel="contents">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/03/02/metero-intro/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Helen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="噗噗。故我在">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/03/02/metero-intro/" itemprop="url">Meteor - 開始第一個 Meteor 應用程式專案</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-03-02T19:49:42+08:00">
-                2017-03-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/03/02/metero-intro/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/03/02/metero-intro/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Meteor 是架構在 Node.js 上的平台，用來開發 real-time 的網頁程式。Client/Server 都是 Javascript 開發，Meteor 程式都能夠在前後端共用。而且這套框架非常容易學習，短時間內就能夠開發出應用程式出來的唷</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/03/02/metero-intro/#more" rel="contents">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -1652,7 +1876,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
@@ -1674,7 +1898,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">標籤</span>
               </a>
             </div>

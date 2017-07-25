@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://weijutu.github.io/"/>
-  <updated>2017-07-24T16:32:31.000Z</updated>
+  <updated>2017-07-25T11:02:32.000Z</updated>
   <id>https://weijutu.github.io/</id>
   
   <author>
@@ -16,11 +16,222 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Node.js 系列學習日誌#10 - MySQL 操作: 查詢</title>
+    <link href="https://weijutu.github.io/2017/07/24/nodejs-10-mysql-crud-read/"/>
+    <id>https://weijutu.github.io/2017/07/24/nodejs-10-mysql-crud-read/</id>
+    <published>2017-07-23T16:10:00.000Z</published>
+    <updated>2017-07-25T11:02:32.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>上一篇介紹了資料庫連線的方式，接著我們就來實作從資料庫讀取資料出來的做法。資料庫的部分，假定先建立一個 demo_nodejs 的資料庫，並且建立 users 的資料表，其資料表有  id, name, description 欄位</p>
+<a id="more"></a>
+<p>我們用了 express web framework ＋ jade 來當作網站的框架，安裝 express 方式可以依照這篇 『使用 Express 實作網頁開發框架』 <a href="http://ithelp.ithome.com.tw/ironman7/app/article/all/recent/10158306" target="_blank" rel="external">http://ithelp.ithome.com.tw/ironman7/app/article/all/recent/10158306</a> ，不過在這篇範例當中，不使用 els 引擎，建立的時候直接下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$express</span> [專案名稱]</div></pre></td></tr></table></figure>
+<p>主要我們要安裝的是  mysql ，因此就下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$npm</span> install mysql</div></pre></td></tr></table></figure>
+<p>接著請開啟  routes/index.js 檔案，在這邊我們需要修改一下，讓這個 index 首頁，直接顯示資料庫的列表清單，首先是將剛裝好的 mysql 引用進來，並且用 db_option 物件來設定一下連線 mysql  參數，包含 host, user, password, database, port</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> mysql = <span class="built_in">require</span>(<span class="string">'mysql'</span>);</div><div class="line"><span class="keyword">var</span> db_option = &#123;</div><div class="line">    <span class="attr">host</span>: <span class="string">'localhost'</span>,</div><div class="line">    <span class="attr">user</span>: <span class="string">'nodejs'</span>,</div><div class="line">    <span class="attr">password</span>: <span class="string">'nodejs'</span>,</div><div class="line">    <span class="attr">database</span>:<span class="string">'demo_nodejs'</span>,</div><div class="line">    <span class="attr">port</span>: <span class="number">3306</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>之後，在放一個 exports.index 函式來取得資料庫的資料</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">exports.index = <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>)</span>&#123;</div><div class="line">     <span class="keyword">var</span> connection = mysql.createConnection(db_option);</div><div class="line">     <span class="keyword">var</span> query =<span class="string">'SELECT * FROM users'</span>;</div><div class="line">    connection.query(query, <span class="function"><span class="keyword">function</span>(<span class="params">err, rows, fields</span>)</span>&#123;</div><div class="line">        <span class="keyword">if</span>(err) <span class="keyword">throw</span> err;</div><div class="line">        res.render(<span class="string">'index'</span>, &#123; <span class="attr">title</span>: <span class="string">'這是 mysql + node.js 示範版本'</span>, <span class="string">'items'</span>: rows &#125;);   </div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以看到從 connection.query 方法取出來的結果，利用 callback function 的方式將查詢結果物件放在 rows，最後在 render index 的畫面時，把傳遞的物件放在自訂  json  格式的  items 裡</p>
+<p><img src="/images/nodejs/44.png" alt=""></p>
+<p>我們可以知道我們要傳遞的 view 位置是在  index ，因此進到  /views/index.jade 將畫面做一個簡單的呈現，在這邊是用了 bootstrap 的前端畫面。我預想著上面要有個  header，然後簡單的標頭文字，中間在擺放重要的表格資料，因此佈局上要有  navbar, 中間的  container，下圖為標頭部分</p>
+<p><img src="/images/nodejs/45.png" alt=""></p>
+<p>接這最重要的就是內文，在這邊用個  table 來佈局</p>
+<p><img src="/images/nodejs/46.png" alt=""></p>
+<p>接資料的部分，就是剛剛從 routes/index.js 傳過來的 json 物件，其中有  items ，請使用 each 的方式跑迴圈</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-each user in items</div><div class="line">    tr</div><div class="line">        td(style="padding:20px")=user.id</div><div class="line">        td(style="padding:20px")=user.name</div><div class="line">        td(style="padding:20px")=user.description</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;上一篇介紹了資料庫連線的方式，接著我們就來實作從資料庫讀取資料出來的做法。資料庫的部分，假定先建立一個 demo_nodejs 的資料庫，並且建立 users 的資料表，其資料表有  id, name, description 欄位&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Node.js" scheme="https://weijutu.github.io/categories/Node-js/"/>
+    
+    
+      <category term="Node.js" scheme="https://weijutu.github.io/tags/Node-js/"/>
+    
+      <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
+    
+      <category term="MySQL" scheme="https://weijutu.github.io/tags/MySQL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Node.js 系列學習日誌#9 - MySQL 操作: 刪除</title>
+    <link href="https://weijutu.github.io/2017/07/24/nodejs-09-mysql-crud-delete/"/>
+    <id>https://weijutu.github.io/2017/07/24/nodejs-09-mysql-crud-delete/</id>
+    <published>2017-07-23T16:09:00.000Z</published>
+    <updated>2017-07-25T11:01:53.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>前幾篇完成了 Create, Read, Update, 本篇將介紹 Delete 的操作，一樣的我們在使用者列表上面，每筆資料的功能加入『刪除』按鈕，在頁面上表格列出的語法是：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">mixin users(users)</div><div class="line">  h1= title</div><div class="line">  fieldset</div><div class="line">   legend 以下是從 mysql 取出的使用者列表</div><div class="line">   a(href='/create', class='btn btn-primary') 新增使用者</div><div class="line">   table.mytable.table</div><div class="line">    th 編輯</div><div class="line">    th 名稱</div><div class="line">    th 描述</div><div class="line">    th 功能</div><div class="line">     each user in users</div><div class="line">      tr</div><div class="line">       td= user.id</div><div class="line">       td #&#123;user.name&#125;</div><div class="line">       td #&#123;user.description&#125;</div><div class="line">       td</div><div class="line">         a(href='/update/#&#123;user.id&#125;', class='btn btn-warning') 更新</div><div class="line">         a(href='/delete/#&#123;user.id&#125;', class='btn btn-danger') 刪除</div><div class="line"></div><div class="line"> - users = user</div><div class="line"> .container</div><div class="line">      mixin users(users)</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>刪除部分的語法就是在按鈕點選的時候，連到 /delete ，後面我們指定資料使用者的編號作為參數  /#{user.id}</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">a(href='/delete/#&#123;user.id&#125;', class='btn btn-danger') 刪除</div></pre></td></tr></table></figure>
+<p>佈局如下：</p>
+<p><img src="/images/nodejs/41.png" alt=""></p>
+<p>開啓 app.js 補上 delete 的操作</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">app.get(<span class="string">'/delete/:id'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</div><div class="line">    pool.getConnection(<span class="function"><span class="keyword">function</span>(<span class="params">err, connection</span>) </span>&#123;</div><div class="line">        connection.query(<span class="string">'delete from users  where id = ?'</span>, [req.params.id], <span class="function"><span class="keyword">function</span>(<span class="params">err, fields</span>) </span>&#123;</div><div class="line">            <span class="keyword">if</span> (err)</div><div class="line">                <span class="keyword">throw</span> err;</div><div class="line">        &#125;);</div><div class="line">        connection.query(<span class="string">'SELECT * from users'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, rows, fields</span>) </span>&#123;</div><div class="line">            <span class="keyword">if</span> (err)</div><div class="line">                <span class="keyword">throw</span> err;</div><div class="line">            res.render(<span class="string">'user'</span>, &#123;</div><div class="line">                <span class="attr">title</span> : <span class="string">'使用者列表'</span>,</div><div class="line">                <span class="attr">user</span> : rows</div><div class="line">            &#125;);</div><div class="line">        &#125;);</div><div class="line">        connection.release();</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>其中在程式的部分，在點選按鈕 /delete 的時候，後面接 :id 也就是預定在網址列上面取得使用者編號的參數，然後再此刪除的部分以以下語法呈現：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">connection.query(<span class="string">'delete from users  where id = ?'</span>, [req.params.id], <span class="function"><span class="keyword">function</span>(<span class="params">err, fields</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (err)</div><div class="line">        <span class="keyword">throw</span> err;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>在 connection.query 方法裡的第二參數  [req.params.id]帶入網址列的參數，最後刪除完成後，再度顯示取得最新的使用者列表</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">connection.query(<span class="string">'SELECT * from users'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, rows, fields</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (err)</div><div class="line">        <span class="keyword">throw</span> err;</div><div class="line">    res.render(<span class="string">'user'</span>, &#123;</div><div class="line">        <span class="attr">title</span> : <span class="string">'使用者列表'</span>,</div><div class="line">        <span class="attr">user</span> : rows</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>在這邊我們刪掉第四筆資料</p>
+<p><img src="/images/nodejs/42.png" alt=""></p>
+<p>結果如下：</p>
+<p><img src="/images/nodejs/43.png" alt=""></p>
+<p>我們終於完成了 Create, Read, Update ,Delete 的 mysql 存取操作 ，完整的程式歡迎到這裡 fork 囉</p>
+<p><a href="https://github.com/weijutu/nodejs-mysql-crud" target="_blank" rel="external">https://github.com/weijutu/nodejs-mysql-crud</a></p>
+<p>那麼資料庫存取就先到這裡，接下來還有更多應用，敬請期待  ：）</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;前幾篇完成了 Create, Read, Update, 本篇將介紹 Delete 的操作，一樣的我們在使用者列表上面，每筆資料的功能加入『刪除』按鈕，在頁面上表格列出的語法是：&lt;/p&gt;
+&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;19&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;20&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;21&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;22&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;mixin users(users)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  h1= title&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  fieldset&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;   legend 以下是從 mysql 取出的使用者列表&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;   a(href=&#39;/create&#39;, class=&#39;btn btn-primary&#39;) 新增使用者&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;   table.mytable.table&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    th 編輯&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    th 名稱&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    th 描述&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    th 功能&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;     each user in users&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      tr&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;       td= user.id&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;       td #&amp;#123;user.name&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;       td #&amp;#123;user.description&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;       td&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;         a(href=&#39;/update/#&amp;#123;user.id&amp;#125;&#39;, class=&#39;btn btn-warning&#39;) 更新&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;         a(href=&#39;/delete/#&amp;#123;user.id&amp;#125;&#39;, class=&#39;btn btn-danger&#39;) 刪除&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt; - users = user&lt;/div&gt;&lt;div class=&quot;line&quot;&gt; .container&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      mixin users(users)&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="Node.js" scheme="https://weijutu.github.io/categories/Node-js/"/>
+    
+    
+      <category term="Node.js" scheme="https://weijutu.github.io/tags/Node-js/"/>
+    
+      <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
+    
+      <category term="MySQL" scheme="https://weijutu.github.io/tags/MySQL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Node.js 系列學習日誌#8 - MySQL 操作 -建立</title>
+    <link href="https://weijutu.github.io/2017/07/24/nodejs-08-mysql-crud-create/"/>
+    <id>https://weijutu.github.io/2017/07/24/nodejs-08-mysql-crud-create/</id>
+    <published>2017-07-23T16:08:00.000Z</published>
+    <updated>2017-07-25T11:01:35.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>延續上一篇的連接 mysql  實現 crud 的操作，本篇將介紹新增資料的操作。之後的兩篇文，將會介紹更新、刪除的操作。首先我們在上一篇已經有將資料列出來，在此做一些畫面的調整，使用 bootstrap 的前端框架套件去使用。</p>
+<p>本章節主要使用的套件有：</p>
+<ul>
+<li>express web framework</li>
+<li>mysql</li>
+<li>jade</li>
+</ul>
+<p>首先我們先建立一個資料夾  nodejs-demo-mysql ，然後要安裝一下相依的套件使用：express, mysql</p>
+<p>建立 package.json，請輸入以下的指令按照提示問題回答</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$npm</span> init</div></pre></td></tr></table></figure>
+<p>安裝 express web framework 到這 nodejs-demo-mysql 應用程式專案裡面，並寫入到  package.json</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$npm</span> install express —save</div></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/31.png" alt=""></p>
+<p>完成 express 之後，再安裝 mysql 套件，在這邊安裝  mysql</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$npm</span> install mysql@2.0.0-alpha9</div></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/32.png" alt=""></p>
+<p>首先可以看到 express 套件,  node-mysql 就新增到 node_modules 裡了</p>
+<p><img src="/images/nodejs/33.png" alt=""></p>
+<p>資料庫的部分，假定先建立一個 demo_nodejs 的資料庫</p>
+<p><img src="/images/nodejs/34.png" alt=""></p>
+<p>然後新增  index.js 作為網頁開頭的起始點，宣告 mysql 後，先使用 createConnection 方法將資料庫的參數初始化</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> mysql = <span class="built_in">require</span>(<span class="string">'mysql'</span>);</div><div class="line"><span class="keyword">var</span> conn = mysql.createConnection(&#123;</div><div class="line">    <span class="attr">host</span>: <span class="string">'localhost'</span>,</div><div class="line">    <span class="attr">user</span>: <span class="string">'nodejs'</span>,</div><div class="line">    <span class="attr">password</span>: <span class="string">'nodejs'</span>,</div><div class="line">    <span class="attr">database</span>:<span class="string">'demo_nodejs'</span>,</div><div class="line">    <span class="attr">port</span>: <span class="number">3306</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>將資料庫做個連線的動作</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">conn.connect();</div></pre></td></tr></table></figure>
+<p>先測試一下，透過以下的 query  執行，如果有將 12 + 34 有算出來，那麼就代表有連線成功</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">conn.query(<span class="string">'SELECT 12 + 34 AS result'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, rows, fields</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (err) <span class="keyword">throw</span> err;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'The result is: '</span>, rows[<span class="number">0</span>].result);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>連線成功後，查詢之後務必要將它關閉。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">conn.end();</div></pre></td></tr></table></figure>
+<p>完整程式如下：</p>
+<p><img src="/images/nodejs/35.png" alt=""></p>
+<p>執行結果 有將 12 + 34 = 46 算出來囉</p>
+<p><img src="/images/nodejs/36.png" alt=""></p>
+<h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><ul>
+<li><a href="http://expressjs.com/" target="_blank" rel="external">http://expressjs.com/</a></li>
+<li><a href="https://github.com/redblaze/node-mysql" target="_blank" rel="external">https://github.com/redblaze/node-mysql</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;延續上一篇的連接 mysql  實現 crud 的操作，本篇將介紹新增資料的操作。之後的兩篇文，將會介紹更新、刪除的操作。首先我們在上一篇已經有將資料列出來，在此做一些畫面的調整，使用 bootstrap 的前端框架套件去使用。&lt;/p&gt;
+&lt;p&gt;本章節主要使用的套件有：&lt;/p
+    
+    </summary>
+    
+      <category term="Node.js" scheme="https://weijutu.github.io/categories/Node-js/"/>
+    
+    
+      <category term="Node.js" scheme="https://weijutu.github.io/tags/Node-js/"/>
+    
+      <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
+    
+      <category term="MySQL" scheme="https://weijutu.github.io/tags/MySQL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Node.js 系列學習日誌#7 - 連接 MySQL 並實現 CRUD 操作存取前的準備</title>
+    <link href="https://weijutu.github.io/2017/07/24/nodejs-07-mysql-start/"/>
+    <id>https://weijutu.github.io/2017/07/24/nodejs-07-mysql-start/</id>
+    <published>2017-07-23T16:07:00.000Z</published>
+    <updated>2017-07-25T10:43:09.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天就來寫一個跟資料庫有關的功能，本章節介紹用 <code>node.js ＋ mysql</code>  的存取，實作新增、修改、刪除、查詢的功能，以下都是以  mac osx 來當作開發環境，因此以下步驟之前請務必安裝  <code>node.js</code> , npm，另外還有 <code>mysql</code> ，您可以透過 <a href="http://dev.mysql.com/downloads/mysql/" target="_blank" rel="external">http://dev.mysql.com/downloads/mysql/</a> 來安裝，mysql 安裝的步驟在此就不做介紹，專注在  node.js 與 mysql 存取的方法。</p>
+<a id="more"></a>
+<p>首先我們先建立一個資料夾  nodejs-demo-mysql ，然後要安裝一下相依的套件使用：express, mysql</p>
+<p>建立 package.json，請輸入以下的指令按照提示問題回答</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$npm</span> init</div></pre></td></tr></table></figure>
+<p>安裝 express web framework 到這 nodejs-demo-mysql 應用程式專案裡面，並寫入到  package.json</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$npm</span> install express —save</div></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/31.png" alt=""></p>
+<p>完成 express 之後，再安裝 mysql 套件，在這邊安裝  mysql</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$npm</span> install mysql@2.0.0-alpha9</div></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/32.png" alt=""></p>
+<p>首先可以看到 express 套件,  node-mysql 就新增到 node_modules 裡了</p>
+<p><img src="/images/nodejs/33.png" alt=""></p>
+<p>資料庫的部分，假定先建立一個 demo_nodejs 的資料庫</p>
+<p><img src="/images/nodejs/34.png" alt=""></p>
+<p>然後新增  index.js 作為網頁開頭的起始點，宣告 mysql 後，先使用 createConnection 方法將資料庫的參數初始化</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> mysql = <span class="built_in">require</span>(<span class="string">'mysql'</span>);</div><div class="line"><span class="keyword">var</span> conn = mysql.createConnection(&#123;</div><div class="line">    <span class="attr">host</span>: <span class="string">'localhost'</span>,</div><div class="line">    <span class="attr">user</span>: <span class="string">'nodejs'</span>,</div><div class="line">    <span class="attr">password</span>: <span class="string">'nodejs'</span>,</div><div class="line">    <span class="attr">database</span>:<span class="string">'demo_nodejs'</span>,</div><div class="line">    <span class="attr">port</span>: <span class="number">3306</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>將資料庫做個連線的動作</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">conn.connect();</div></pre></td></tr></table></figure>
+<p>先測試一下，透過以下的 query  執行，如果有將 12 + 34 有算出來，那麼就代表有連線成功</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">conn.query(<span class="string">'SELECT 12 + 34 AS result'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, rows, fields</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (err) <span class="keyword">throw</span> err;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'The result is: '</span>, rows[<span class="number">0</span>].result);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>連線成功後，查詢之後務必要將它關閉。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">conn.end();</div></pre></td></tr></table></figure>
+<p>完整程式如下：</p>
+<p><img src="/images/nodejs/35.png" alt=""></p>
+<p>執行結果 有將 12 + 34 = 46 算出來囉</p>
+<p><img src="/images/nodejs/36.png" alt=""></p>
+<h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><ul>
+<li><a href="http://expressjs.com/" target="_blank" rel="external">http://expressjs.com/</a></li>
+<li><a href="https://github.com/redblaze/node-mysql" target="_blank" rel="external">https://github.com/redblaze/node-mysql</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天就來寫一個跟資料庫有關的功能，本章節介紹用 &lt;code&gt;node.js ＋ mysql&lt;/code&gt;  的存取，實作新增、修改、刪除、查詢的功能，以下都是以  mac osx 來當作開發環境，因此以下步驟之前請務必安裝  &lt;code&gt;node.js&lt;/code&gt; , npm，另外還有 &lt;code&gt;mysql&lt;/code&gt; ，您可以透過 &lt;a href=&quot;http://dev.mysql.com/downloads/mysql/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://dev.mysql.com/downloads/mysql/&lt;/a&gt; 來安裝，mysql 安裝的步驟在此就不做介紹，專注在  node.js 與 mysql 存取的方法。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Node.js" scheme="https://weijutu.github.io/categories/Node-js/"/>
+    
+    
+      <category term="Node.js" scheme="https://weijutu.github.io/tags/Node-js/"/>
+    
+      <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
+    
+      <category term="MySQL" scheme="https://weijutu.github.io/tags/MySQL/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Node.js 系列學習日誌#6 - 撰寫程式的風格指南 (Style Guide)</title>
     <link href="https://weijutu.github.io/2017/07/24/nodejs-06-style-guide/"/>
     <id>https://weijutu.github.io/2017/07/24/nodejs-06-style-guide/</id>
     <published>2017-07-23T16:06:00.000Z</published>
-    <updated>2017-07-24T16:32:31.000Z</updated>
+    <updated>2017-07-24T16:37:15.000Z</updated>
     
     <content type="html"><![CDATA[<p>由於 node.js 是 javascript 作為開發的語言，開發的過程遵照程式碼規範撰寫讓整個程式風格達到一致。不過當然許多的 js 寫法都會有不同的風格存在，若您找不到要照什麼規則編寫程式，那麼可以參考這篇簡易的風格指南作為開發上的基本基礎。</p>
 <p>本章節將介紹  node.js 幾個常用的撰寫手法來做介紹：</p>
@@ -35,6 +246,7 @@
 <li>條件判斷</li>
 <li>嵌套閉包</li>
 </ul>
+<a id="more"></a>
 <h1 id="字串引號"><a href="#字串引號" class="headerlink" title="字串引號"></a>字串引號</h1><p>使用單引號，若物件是 json 格式，那麼就使用雙引號來定義 key, value</p>
 <h3 id="錯誤示範"><a href="#錯誤示範" class="headerlink" title="錯誤示範"></a>錯誤示範</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name =“test01”;</div></pre></td></tr></table></figure>
 <h3 id="正確寫法"><a href="#正確寫法" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name = ’test01’;</div></pre></td></tr></table></figure>
@@ -67,7 +279,18 @@
     <summary type="html">
     
       &lt;p&gt;由於 node.js 是 javascript 作為開發的語言，開發的過程遵照程式碼規範撰寫讓整個程式風格達到一致。不過當然許多的 js 寫法都會有不同的風格存在，若您找不到要照什麼規則編寫程式，那麼可以參考這篇簡易的風格指南作為開發上的基本基礎。&lt;/p&gt;
-&lt;p&gt;本章節將介
+&lt;p&gt;本章節將介紹  node.js 幾個常用的撰寫手法來做介紹：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;字串引號&lt;/li&gt;
+&lt;li&gt;區塊括號&lt;/li&gt;
+&lt;li&gt;變數宣告&lt;/li&gt;
+&lt;li&gt;變數命名&lt;/li&gt;
+&lt;li&gt;函數命名&lt;/li&gt;
+&lt;li&gt;物件與陣列&lt;/li&gt;
+&lt;li&gt;相等的運算符號&lt;/li&gt;
+&lt;li&gt;條件判斷&lt;/li&gt;
+&lt;li&gt;嵌套閉包&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
@@ -85,7 +308,7 @@
     <link href="https://weijutu.github.io/2017/07/24/nodejs-05-bower/"/>
     <id>https://weijutu.github.io/2017/07/24/nodejs-05-bower/</id>
     <published>2017-07-23T16:05:00.000Z</published>
-    <updated>2017-07-24T16:32:20.000Z</updated>
+    <updated>2017-07-25T10:10:59.000Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/images/nodejs/23.png" alt=""></p>
 <p>『A package manager for the web』瀏覽器套件管理工具</p>
@@ -375,7 +598,7 @@
     <link href="https://weijutu.github.io/2017/07/24/nodejs-01-start/"/>
     <id>https://weijutu.github.io/2017/07/24/nodejs-01-start/</id>
     <published>2017-07-23T16:01:00.000Z</published>
-    <updated>2017-07-24T16:31:11.000Z</updated>
+    <updated>2017-07-25T10:12:22.000Z</updated>
     
     <content type="html"><![CDATA[<p>最近看了些書籍、電子書、網路爬文，一直都想寫個文章做個記錄，以免忘記，彙整一下所看、所聞、所實作的 Node.js 技術，如果有寫不好的地方也請多多指教囉</p>
 <p>這些年，Node.js 的議題越來越熱門了，而且快速的開發中，版本的升級也相當快，Node.js 是一個使用當前速度較快的 Javascript 引擎， 運行在服務端的開發平台。它使用了 Google 的 V8 虛擬機（Google Chrome 瀏覽器使用的 Javascript 執行環境），解析與執行 Javascript 語法，你可以想像是在運行 PHP, Puby, Python 一樣的服務端模式，只是根據 Node.js 的做法它不用像 PHP, Python, Ruby on rails 一樣安裝 Apache, Nginx 的 Http 服務器，因為它本身內建就有 Web server 支援。</p>
@@ -569,11 +792,11 @@
 <h2 id="安裝-Meteor"><a href="#安裝-Meteor" class="headerlink" title="安裝 Meteor"></a>安裝 Meteor</h2><p>安裝 Meteor 的方式在 terminal 輸入以下命令：</p>
 <p><code>curl https://install.meteor.com | sh</code></p>
 <p>安裝完之後你可以再次輸入 <code>meteor</code> 後，執行會說明目前不是在 meteor 專案下，所以目前還只能確認 Meteor 安裝成功並且還會指引你建立 Meteor 專案的指令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> meteor</div><div class="line">  run: You\'re not in a Meteor project directory.</div><div class="line"></div><div class="line">  To create a new Meteor project:</div><div class="line">    meteor create &lt;project name&gt;</div><div class="line">  For example:</div><div class="line">    meteor create myapp</div><div class="line"></div><div class="line">  For more help, see 'meteor --help'.</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> meteor</span></div><div class="line">  run: You\'re not in a Meteor project directory.</div><div class="line"></div><div class="line">  To create a new Meteor project:</div><div class="line">    meteor create &lt;project name&gt;</div><div class="line">  For example:</div><div class="line">    meteor create myapp</div><div class="line"></div><div class="line">  For more help, see 'meteor --help'.</div></pre></td></tr></table></figure>
 <h2 id="建立新的專案"><a href="#建立新的專案" class="headerlink" title="建立新的專案"></a>建立新的專案</h2><p>裝好 meteor 後，我們建立一個新的專案，建立時使用 meteor 的工具</p>
 <p><code>meteor create meteor_demo</code></p>
 <p>按照命令就會把 meteor 建立基礎的檔案結構，建立完成後就會有一個 <code>meteor_demo</code> 的資料夾，並且說明如何執行應用程式</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> meteor create meteor_demo</div><div class="line">  Created a new Meteor app in 'meteor_demo'.</div><div class="line"></div><div class="line">  To run your new app:</div><div class="line">    cd meteor_demo</div><div class="line">    meteor npm install</div><div class="line">    meteor</div><div class="line"></div><div class="line">  If you are new to Meteor, try some of the learning resources here:</div><div class="line">    https://www.meteor.com/learn</div><div class="line"></div><div class="line">  meteor create --bare to create an empty app.</div><div class="line">  meteor create --full to create a scaffolded app.</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> meteor create meteor_demo</span></div><div class="line">  Created a new Meteor app in 'meteor_demo'.</div><div class="line"></div><div class="line">  To run your new app:</div><div class="line">    cd meteor_demo</div><div class="line">    meteor npm install</div><div class="line">    meteor</div><div class="line"></div><div class="line">  If you are new to Meteor, try some of the learning resources here:</div><div class="line">    https://www.meteor.com/learn</div><div class="line"></div><div class="line">  meteor create --bare to create an empty app.</div><div class="line">  meteor create --full to create a scaffolded app.</div></pre></td></tr></table></figure>
 <p>也包含以下的檔案與資料夾</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">drwxr-xr-x   7 User  staff   238 Feb 12 08:40 .</div><div class="line">drwxr-xr-x  49 User  staff  1666 Feb 12 08:40 ..</div><div class="line">drwxr-xr-x  10 User  staff   340 Feb 12 08:40 .meteor</div><div class="line">drwxr-xr-x   5 User  staff   170 Feb 12 08:40 client</div><div class="line">-rw-r--r--   1 User  staff   183 Feb 12 08:40 package.json</div><div class="line">drwxr-xr-x   3 User  staff   102 Feb 12 08:40 server</div></pre></td></tr></table></figure>
 <p>接著，我們就依照他的指引安裝一些套件</p>
