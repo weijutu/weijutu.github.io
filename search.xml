@@ -3,6 +3,277 @@
   
     
     <entry>
+      <title><![CDATA[Node.js 系列學習日誌#16 - 基礎工具核心模組 util.inherits 實現原型繼承]]></title>
+      <url>/2017/07/24/nodejs-16-util-inherits/</url>
+      <content type="html"><![CDATA[<p>在 js 的內建功能裡面如果有些不適合或無法滿足需求的時候，多半都要動手刻程式然後做到自己要的模組來呼叫方法。而 Node.js 提供了一個函數的集合，能夠比 js 更多的一些基本的處理，我們可以看到以下官方網站所提供 util 可用的方法。在本章節將介紹比較重要關注的方法</p>
+<p><img src="/images/nodejs/64.png" alt=""></p>
+<h1 id="util-inherits-實現原型繼承"><a href="#util-inherits-實現原型繼承" class="headerlink" title="util.inherits 實現原型繼承"></a>util.inherits 實現原型繼承</h1><p>引用內建基礎工具  util，請在程式第一行寫 var util = require(‘util’);  方可使用工具的方法。在這邊我們介紹繼承的功能，也就是  util.inherits(constructor, superConstructor)，在參數的第一個作為建構子，而第二參數為父建構子，直接來看程式的部分</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fnBase</span>(<span class="params"></span>) </span>&#123;</div><div class="line">     <span class="keyword">this</span>.name = <span class="string">'java'</span>;</div><div class="line">     <span class="keyword">this</span>.price = <span class="number">250</span>;</div><div class="line"></div><div class="line">     <span class="keyword">this</span>.getBookName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">          <span class="built_in">console</span>.log(<span class="string">"getBookName: the book name is "</span> + <span class="keyword">this</span>.name);</div><div class="line">     &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">fnBase.prototype.showName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">     <span class="built_in">console</span>.log(<span class="string">"showName: "</span> + <span class="keyword">this</span>.name);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">fnBase.prototype.showPrice = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">     <span class="built_in">console</span>.log(<span class="string">"showPrice: "</span> + <span class="keyword">this</span>.price);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>在這邊開始先建立了一個 fnBase 的物件，包含 name, price 屬性並且給予初始化值以及 getBookName 方法，而這個取得 book 的名稱。另外再多兩個 prototype 的原型方法，一個是 showName 以及 showPrice 方法，接著我們在建立一個物件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Book</span>(<span class="params"></span>) </span>&#123;</div><div class="line">     <span class="keyword">this</span>.name = <span class="string">"nodejs"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我們定義好基礎對象為 fnBase 之後，以及繼承 fnBook  的 Book 建構子的屬性 name 為 nodejs，我們在透過以下方法來塑造繼承關係</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">util.inherits(Book, fnBase);</div></pre></td></tr></table></figure>
+<p>接下來呼叫一下看看會有什麼變化，首先我們先建立 fnBase  的物件，在呼叫內部包含的方法，showName 及 getBookName</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> fnBase();</div><div class="line">obj.showName();</div><div class="line">obj.getBookName();</div><div class="line"><span class="built_in">console</span>.log(obj);</div></pre></td></tr></table></figure>
+<p>其結果如下，可以看到呼叫的兩個方法皆有顯示答案</p>
+<p><img src="/images/nodejs/65.png" alt=""></p>
+<p>最後將 new fnBase() 換成  new Book() 看看，程式如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> book = <span class="keyword">new</span> Book();</div><div class="line">book.showName();</div><div class="line">book.getBookName();</div><div class="line"><span class="built_in">console</span>.log(book);</div></pre></td></tr></table></figure>
+<p>Oops! 為什麼會出錯？結果居然只呼叫得到 showName, 卻無法取得  getBookName.</p>
+<p><img src="/images/nodejs/66.png" alt=""></p>
+<p>原因是因為 Book  只會繼承 fnBase 在原型 prototype 的函數，其建立的屬性與 getBookName 並不會被 Book 繼承。因此在繼承上的觀念則要特別注意了</p>
+<p>參考資料：<br><a href="http://nodejs.org/api/util.html" target="_blank" rel="external">http://nodejs.org/api/util.html</a><br><a href="http://www.w3schools.com/js/js_object_prototypes.asp" target="_blank" rel="external">http://www.w3schools.com/js/js_object_prototypes.asp</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> Node.js </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Node.js </tag>
+            
+            <tag> 鐵人賽 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Node.js 系列學習日誌#15 - 讀取 markdown 檔案內容顯示在頁面上]]></title>
+      <url>/2017/07/24/nodejs-15-markdown/</url>
+      <content type="html"><![CDATA[<p>繼上一篇完成讀取檔案的操作之後，本篇將介紹讀取  markdown 檔案內容顯示在頁面上面。</p>
+<h1 id="話說前頭，什麼是-markdown"><a href="#話說前頭，什麼是-markdown" class="headerlink" title="話說前頭，什麼是 markdown?"></a>話說前頭，什麼是 markdown?</h1><p>從 wiki 網站所說的，它是一種輕量級的標記語言，允許使用容易讀也容易寫的純文字的格式，最後轉換 xhtml, html 檔案，就有點像是一般電子郵件純文本的特性。可以從這個網址來 <a href="http://markdown.tw/" target="_blank" rel="external">http://markdown.tw/</a> 學習每個元素的寫法。</p>
+<a id="more"></a>
+<h1 id="node-markdown-實作"><a href="#node-markdown-實作" class="headerlink" title="node-markdown 實作"></a>node-markdown 實作</h1><p>首先我們建立一個 express web framework 的專案，在這邊的樣板引擎是用 ejs ，因此下的指令是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$express -e nodejs-fs-markdown</div></pre></td></tr></table></figure>
+<p>在根目錄底下建立一個 markdown 檔案，名為 book.md 的檔案，開啓 book.md 檔案後，我們任意打一些 markdown 的格式預備要來轉換  html 格式</p>
+<p><img src="/images/nodejs/61.png" alt=""></p>
+<p>接著重要我們要採用  node-markdown 的套件來安裝，詳見 <a href="https://www.npmjs.org/package/node-markdown" target="_blank" rel="external">https://www.npmjs.org/package/node-markdown</a> ，安裝方式可使用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$npm</span> install node-markdown</div></pre></td></tr></table></figure>
+<p>其檔案結構會是：</p>
+<p><img src="/images/nodejs/62.png" alt=""></p>
+<p>請打開 app.js 檔案，我們要將 node-markdown 引入，因此宣告方式為：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> md = <span class="built_in">require</span>(<span class="string">"node-markdown"</span>).Markdown;</div></pre></td></tr></table></figure>
+<p>並且在 app.js 檔案裡面安插以下這段</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">app.get(<span class="string">'/markdown'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>)</span>&#123;</div><div class="line">    fs.readFile(<span class="string">"./book.md"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, data</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (err) &#123;</div><div class="line">            <span class="keyword">throw</span> err;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">       <span class="comment">//使用  md 方法將檔案內容轉行為 html 格式</span></div><div class="line">        str = md(data.toString());</div><div class="line">        <span class="built_in">console</span>.log(str);</div><div class="line"></div><div class="line">        <span class="comment">//回應結果顯示在頁面上</span></div><div class="line">        res.send(str)</div><div class="line">        res.end();</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>在這邊使用了 /markdown 作為進入的網址，而這個網址主要是去解析 markdown 的檔案，在這個 function 下，我們還需要利用  fs 核心模組來讀取 book.md 檔案，請務必在宣告的地方加入  var fs = require(“fs”);</p>
+<p>讀取的方式就使用  fs.readFile 方法，接著更重要的是再使用 md 方法將檔案內容轉換成  html 格式，最後，看一下結果如下，將會依照 markdown 的格式轉換</p>
+<p><img src="/images/nodejs/63.png" alt=""></p>
+<p>學習了這個工具，之後再撰寫 html 的檔案時，可以利用 markdown 的格式來寫，寫起來又輕鬆又好懂喔！<br>下集待續…</p>
+<h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><ul>
+<li><a href="http://markdown.tw/" target="_blank" rel="external">http://markdown.tw/</a></li>
+<li><a href="http://www.wikiwand.com/zh-tw/Markdown" target="_blank" rel="external">http://www.wikiwand.com/zh-tw/Markdown </a></li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> Node.js </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Node.js </tag>
+            
+            <tag> 鐵人賽 </tag>
+            
+            <tag> Markdown </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Node.js 系列學習日誌#14 - middleware 應用與開發]]></title>
+      <url>/2017/07/24/nodejs-14-middleware/</url>
+      <content type="html"><![CDATA[<p>從我們前幾篇用到 express web framework 框架的時候，express 就已經內建啟用 middleware 的概念，可以利用中間層的這個部分做一些效果，接下來本章節就來介紹  middleware 。首先我們先建立好一個 express web framework 框架</p>
+<p>建立 express 的指令是：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$express</span> -e nodejs-middleware</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>並且打開 app.js 檔案</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</div><div class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</div><div class="line"><span class="keyword">var</span> favicon = <span class="built_in">require</span>(<span class="string">'static-favicon'</span>);</div><div class="line"><span class="keyword">var</span> logger = <span class="built_in">require</span>(<span class="string">'morgan'</span>);</div><div class="line"><span class="keyword">var</span> cookieParser = <span class="built_in">require</span>(<span class="string">'cookie-parser'</span>);</div><div class="line"><span class="keyword">var</span> bodyParser = <span class="built_in">require</span>(<span class="string">'body-parser'</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> routes = <span class="built_in">require</span>(<span class="string">'./routes/index'</span>);</div><div class="line"><span class="keyword">var</span> users = <span class="built_in">require</span>(<span class="string">'./routes/users'</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> app = express();</div><div class="line"></div><div class="line"><span class="comment">// view engine setup</span></div><div class="line">app.set(<span class="string">'views'</span>, path.join(__dirname, <span class="string">'views'</span>));</div><div class="line">app.set(<span class="string">'view engine'</span>, <span class="string">'ejs'</span>);</div><div class="line"></div><div class="line">app.use(favicon());</div><div class="line">app.use(logger(<span class="string">'dev'</span>));</div><div class="line">app.use(bodyParser.json());</div><div class="line">app.use(bodyParser.urlencoded());</div><div class="line">app.use(cookieParser());</div><div class="line">app.use(express.static(path.join(__dirname, <span class="string">'public'</span>)));</div><div class="line"></div><div class="line">app.use(<span class="string">'/'</span>, routes);</div><div class="line">app.use(<span class="string">'/users'</span>, users);</div><div class="line"></div><div class="line"><span class="comment">/// catch 404 and forward to error handler</span></div><div class="line">app.use(<span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> err = <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Not Found'</span>);</div><div class="line">    err.status = <span class="number">404</span>;</div><div class="line">    next(err);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">/// error handlers</span></div><div class="line"></div><div class="line"><span class="comment">// development error handler</span></div><div class="line"><span class="comment">// will print stacktrace</span></div><div class="line"><span class="keyword">if</span> (app.get(<span class="string">'env'</span>) === <span class="string">'development'</span>) &#123;</div><div class="line">    app.use(<span class="function"><span class="keyword">function</span>(<span class="params">err, req, res, next</span>) </span>&#123;</div><div class="line">        res.status(err.status || <span class="number">500</span>);</div><div class="line">        res.render(<span class="string">'error'</span>, &#123;</div><div class="line">            <span class="attr">message</span>: err.message,</div><div class="line">            <span class="attr">error</span>: err</div><div class="line">        &#125;);</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// production error handler</span></div><div class="line"><span class="comment">// no stacktraces leaked to user</span></div><div class="line">app.use(<span class="function"><span class="keyword">function</span>(<span class="params">err, req, res, next</span>) </span>&#123;</div><div class="line">    res.status(err.status || <span class="number">500</span>);</div><div class="line">    res.render(<span class="string">'error'</span>, &#123;</div><div class="line">        <span class="attr">message</span>: err.message,</div><div class="line">        <span class="attr">error</span>: &#123;&#125;</div><div class="line">    &#125;);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = app;</div></pre></td></tr></table></figure>
+<p>從上面建立的  express 框架可以看到這裡用了許多的 app.use 的方法，包含靜態檔案、body 解析器、路由機制。當預設 middleware 之後，每當瀏覽器收到連線要求的時候，middleware 就會被呼叫啟用。簡單來講 middleware 就像一個薄薄的一層過濾網</p>
+<h1 id="建立-middleware"><a href="#建立-middleware" class="headerlink" title="建立 middleware"></a>建立 middleware</h1><p>由於基本設定接已經有提供高效能的套件，其 express  所建立好的 middleware 設定之外，也可以自定撰寫 middleware 安排到基本設定流程當中，我們建立一個簡單的 middleware 功能，請在 app.js 安插以下程式：</p>
+<p><img src="/images/nodejs/58.png" alt=""></p>
+<p>一開始先建立一個 middleHandler ，其基本參數有  request, response, next，而  next方法 是代表交給下一個 middleware 繼續作處理，接著在建立 app.get ，我們預期要從瀏覽器  /test ㄙㄟ來做請求，第二個參數為 middleHandler function ，以及第三個 callback 函式</p>
+<p><img src="/images/nodejs/59.png" alt=""></p>
+<p>一開始從瀏覽器 localhost:3000/test 發送出去之後，會先進到 middleHandler ，所以會先顯示 <strong>start</strong> :: middle handler function ，然後遇到  next(); 之後再回到 app.get  繼續作處理，因此再將 <strong>end</strong> :: middle handler function 顯示，最後用了一個 res.send 方法將一個小字串文字直接輸出到瀏覽器上面。</p>
+<h1 id="下圖可看結果："><a href="#下圖可看結果：" class="headerlink" title="下圖可看結果："></a>下圖可看結果：</h1><p><img src="/images/nodejs/60.png" alt=""></p>
+<p>更多應用，下回待續…</p>
+<p>參考資料：<br><a href="http://stephensugden.com/middleware_guide/" target="_blank" rel="external">http://stephensugden.com/middleware_guide/</a><br><a href="http://www.hacksparrow.com/how-to-write-midddleware-for-connect-express-js.html" target="_blank" rel="external">http://www.hacksparrow.com/how-to-write-midddleware-for-connect-express-js.html</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> Node.js </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Node.js </tag>
+            
+            <tag> 鐵人賽 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Node.js 系列學習日誌#13 - 核心模組檔案系統 fs]]></title>
+      <url>/2017/07/24/nodejs-13-fs/</url>
+      <content type="html"><![CDATA[<p>node.js  提供了檔案操作的模組，包含讀取、刪除、寫入、更名等等的檔案操作。其中 fs 模組他還提供了同步與非同步的方法來使用。他的方法名稱也相當好懂，如果是非同步那麼就 fs.readFile() ，同步的話就是 fs.readFileSync()，相當好區別。本章節將會介紹檔案系統的基本操作，如：</p>
+<ul>
+<li>讀取檔案 fs.readFile</li>
+<li>寫入檔案 fs.writeFile</li>
+<li>附加檔案內容 fs.appendFile</li>
+<li>更名檔案 fs.rename</li>
+<li>刪除檔案 fs.unlink</li>
+</ul>
+<a id="more"></a>
+<p>首先我們先建立一個 nodejs-fs 目錄夾，預設檔案結構如下：</p>
+<p><img src="/images/nodejs/57.png" alt=""></p>
+<p>content.txt , test.txt 簡單預設寫一些內文，就可以進行以下的檔案系統相關操作：</p>
+<p>在操作的宣告裡面，在 index.js 檔案，首先務必要檔案檔案系統模組</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div></pre></td></tr></table></figure>
+<p>接著我們就可以使用 fs 所提供的方法，方法可參考 <a href="http://nodejs.org/api/fs.html" target="_blank" rel="external">http://nodejs.org/api/fs.html</a>：</p>
+<h1 id="讀取檔案-fs-readFile"><a href="#讀取檔案-fs-readFile" class="headerlink" title="讀取檔案 fs.readFile"></a>讀取檔案 fs.readFile</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>); <span class="comment">//載入檔案系統模組</span></div><div class="line"><span class="comment">//讀取  content.txt 檔案內容</span></div><div class="line">fs.readFile(<span class="string">'content.txt'</span>, <span class="string">'utf-8'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, data</span>)</span>&#123;</div><div class="line">     <span class="comment">//若有錯誤就列印訊息</span></div><div class="line">     <span class="keyword">if</span> (err) &#123;</div><div class="line">          <span class="built_in">console</span>.error(err);</div><div class="line">     &#125; <span class="keyword">else</span> &#123;</div><div class="line"></div><div class="line">          <span class="comment">//將檔案內容輸入</span></div><div class="line">          <span class="built_in">console</span>.log(data);</div><div class="line">     &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h1 id="寫入檔案-fs-writeFile"><a href="#寫入檔案-fs-writeFile" class="headerlink" title="寫入檔案 fs.writeFile"></a>寫入檔案 fs.writeFile</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> data1 = <span class="string">"hello, ithome 鐵人賽"</span>;</div><div class="line">fs.writeFile(__dirname + <span class="string">'/content.txt'</span>, data1, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</div><div class="line">     <span class="keyword">if</span> (err) &#123;</div><div class="line">          <span class="built_in">console</span>.error(err)</div><div class="line">     &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h1 id="附加檔案內容-fs-appendFile"><a href="#附加檔案內容-fs-appendFile" class="headerlink" title="附加檔案內容 fs.appendFile"></a>附加檔案內容 fs.appendFile</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> data2 = <span class="string">"的主計林車修該自是"</span>;</div><div class="line">fs.appendFile(__dirname + <span class="string">'/content.txt'</span>, data2, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</div><div class="line">     <span class="keyword">if</span> (err) &#123;</div><div class="line">          <span class="built_in">console</span>.error(err)</div><div class="line">     &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h1 id="更名檔案-fs-rename"><a href="#更名檔案-fs-rename" class="headerlink" title="更名檔案 fs.rename"></a>更名檔案 fs.rename</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> oldpath = <span class="string">"content2.txt"</span>;</div><div class="line"><span class="keyword">var</span> newpath = <span class="string">"content.txt"</span>;</div><div class="line">fs.rename(oldpath, newpath, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</div><div class="line">     <span class="keyword">if</span> (err)</div><div class="line">          <span class="keyword">throw</span> err;</div><div class="line"></div><div class="line">       fs.stat(<span class="string">'content.txt'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, stats</span>) </span>&#123;</div><div class="line">         <span class="keyword">if</span> (err)</div><div class="line">              <span class="keyword">throw</span> err;</div><div class="line"></div><div class="line">         <span class="comment">//將檔案的狀態顯示出來</span></div><div class="line">          <span class="comment">// stats: &#123;"dev":16777218,</span></div><div class="line">         <span class="comment">//      "mode":33204,</span></div><div class="line">         <span class="comment">//      "nlink":1,</span></div><div class="line">         <span class="comment">//      "uid":501,</span></div><div class="line">         <span class="comment">//      "gid":20,</span></div><div class="line">         <span class="comment">//      "rdev":0,"blksize":4096,</span></div><div class="line">         <span class="comment">//      "ino":33307834,</span></div><div class="line">         <span class="comment">//      "size":1254,</span></div><div class="line">         <span class="comment">//      "blocks":8,</span></div><div class="line">         <span class="comment">//      "atime":"2014-10-21T14:25:18.000Z",</span></div><div class="line">         <span class="comment">//      "mtime":"2014-10-21T14:24:56.000Z",</span></div><div class="line">         <span class="comment">//      "ctime":"2014-10-21T14:24:56.000Z"</span></div><div class="line">         <span class="comment">// &#125;</span></div><div class="line"></div><div class="line">         <span class="built_in">console</span>.log(<span class="string">'stats: '</span> + <span class="built_in">JSON</span>.stringify(stats));</div><div class="line">       &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h1 id="刪除檔案-fs-unlink"><a href="#刪除檔案-fs-unlink" class="headerlink" title="刪除檔案 fs.unlink"></a>刪除檔案 fs.unlink</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">fs.unlink(<span class="string">'test.txt'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (err) <span class="keyword">throw</span> err;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'successfully deleted test.txt'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>事實上檔案系統操作還有很多方法可以使用，可以看到我們</p>
+<h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><ul>
+<li><a href="http://nodejs.org/api/fs.html" target="_blank" rel="external">http://nodejs.org/api/fs.html</a></li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> Node.js </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Node.js </tag>
+            
+            <tag> 鐵人賽 </tag>
+            
+            <tag> fs </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Node.js 系列學習日誌#12 - 使用 nodemailer 套件透過 gmail 發送電子信箱]]></title>
+      <url>/2017/07/24/nodejs-12-nodemailer/</url>
+      <content type="html"><![CDATA[<p>在上幾篇完成了 mysql  的 CRUD 的四大操作，本篇就來個輕鬆一點的應用，在這篇介紹使用 nodemailer 套件透過  gmail 來發送電子信箱，在安裝跟實作上也相當容易，我們透過 <a href="https://github.com/andris9/Nodemailer" target="_blank" rel="external">https://github.com/andris9/Nodemailer</a> 來講解，在運用上也無需再重新打造輪子，學習如何使用即可。</p>
+<a id="more"></a>
+<p>在這邊先建立一個目錄夾 nodejs-nodemailer ，接著再指令將 package.json 建立起來 （本篇不著重在如何建立 package.json ，如需安裝操作請見 <a href="http://ithelp.ithome.com.tw/ironman7/app/article/all/recent/10158140" target="_blank" rel="external">http://ithelp.ithome.com.tw/ironman7/app/article/all/recent/10158140</a> ）。由於我們要安裝 nodemailer 套件，因此下指令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$npm</span> install —save node mailer</div></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/52.png" alt=""></p>
+<p>其中 —save 會將 nodemailer 相依套件新增到 package.json 檔案裡的 dependencies 項目裡， 如下圖所示：</p>
+<p><img src="/images/nodejs/53.png" alt=""></p>
+<p>安裝完成之後，我們就可以來寫程式的部分了，可以看到上圖寫的 “start”: “node email” ，在這邊我預定起始點是用 email.js ，因此請在根目錄下建立 email.js 檔案。我們初步的思考是這樣：</p>
+<ul>
+<li>引入 nodemailer 套件</li>
+<li>宣告發信的物件 （服務採用 gmail）</li>
+<li>基本參數設定 (包含內文)</li>
+<li>送出發信事件</li>
+</ul>
+<p>我們直接看一下程式的部分：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">//引用 nodemailer</div><div class="line">var nodemailer = require('nodemailer');</div><div class="line"></div><div class="line">//宣告發信物件</div><div class="line">var transporter = nodemailer.createTransport(&#123;</div><div class="line">    service: 'Gmail',</div><div class="line">    auth: &#123;</div><div class="line">        user: ‘account@gmail.com',</div><div class="line">        pass: ‘yourpassword'</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">var options = &#123;</div><div class="line">    //寄件者</div><div class="line">    from: 'account1@gmail.com ',</div><div class="line">    //收件者</div><div class="line">    to: 'account2@gmail.com',</div><div class="line">    //副本</div><div class="line">    cc: 'account3@gmail.com',</div><div class="line">    //密件副本</div><div class="line">    bcc: 'account4@gmail.com',</div><div class="line">    //主旨</div><div class="line">    subject: '這是 node.js 發送的測試信件', // Subject line</div><div class="line">    //純文字</div><div class="line">    text: 'Hello world2', // plaintext body</div><div class="line">    //嵌入 html 的內文</div><div class="line">    html: '&lt;h2&gt;Why and How&lt;/h2&gt; &lt;p&gt;The &lt;a href="http://en.wikipedia.org/wiki/Lorem_ipsum" title="Lorem ipsum - Wikipedia, the free encyclopedia"&gt;Lorem ipsum&lt;/a&gt; text is typically composed of pseudo-Latin words. It is commonly used as placeholder text to examine or demonstrate the visual effects of various graphic design. Since the text itself is meaningless, the viewers are therefore able to focus on the overall layout without being attracted to the text.&lt;/p&gt;',</div><div class="line">    //附件檔案</div><div class="line">    attachments: [ &#123;</div><div class="line">        filename: 'text01.txt',</div><div class="line">        content: '聯候家上去工的調她者壓工，我笑它外有現，血有到同，民由快的重觀在保導然安作但。護見中城備長結現給都看面家銷先然非會生東一無中；內他的下來最書的從人聲觀說的用去生我，生節他活古視心放十壓心急我我們朋吃，毒素一要溫市歷很爾的房用聽調就層樹院少了紀苦客查標地主務所轉，職計急印形。團著先參那害沒造下至算活現興質美是為使！色社影；得良灣……克卻人過朋天點招？不族落過空出著樣家男，去細大如心發有出離問歡馬找事'</div><div class="line">    &#125;, &#123;</div><div class="line">        filename: 'unnamed.jpg',</div><div class="line">        path: '/Users/Weiju/Pictures/unnamed.jpg'</div><div class="line">    &#125;]</div><div class="line">&#125;;</div><div class="line"></div><div class="line">//發送信件方法</div><div class="line">transporter.sendMail(options, function(error, info)&#123;</div><div class="line">    if(error)&#123;</div><div class="line">        console.log(error);</div><div class="line">    &#125;else&#123;</div><div class="line">        console.log('訊息發送: ' + info.response);</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>可以看到引入的 nodemailer 的是使用 nodemailer.createTransport 物件先建立好發信的服務 service 為 Gmail，並且透過 auth 建立 gmail 登入的帳號密碼，接著宣告一下收件者 （to）、副本（cc）、密件副本（bcc）、寄件者（from），當然還有主旨 (Subject)、內文(text, html)、附件檔案（attachments）</p>
+<p>最後發信結果，就如   package.json 上的 scripts.start 指令，下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$node email</div></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/54.png" alt=""></p>
+<p>此時，發送結果會如訊息所說，我們再看看信件收到的樣子，由於附件傳送了兩筆，可以看到  unnamed.jpg  及 text01.txt  已經接收到了</p>
+<p><img src="/images/nodejs/55.png" alt=""></p>
+<p>其中 text01.txt  是直接在程式上面輸入純文字，我們來看看是否有真的寫入：</p>
+<p><img src="/images/nodejs/56.png" alt=""></p>
+<p>更多應用，稍等回來～</p>
+<h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><p><a href="http://www.richyli.com/tool/loremipsum/" target="_blank" rel="external">http://www.richyli.com/tool/loremipsum/</a><br><a href="https://github.com/andris9/Nodemailer" target="_blank" rel="external">https://github.com/andris9/Nodemailer</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> Node.js </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Node.js </tag>
+            
+            <tag> 鐵人賽 </tag>
+            
+            <tag> nodemailer </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Node.js 系列學習日誌#11 - MySQL 操作: 更新]]></title>
+      <url>/2017/07/24/nodejs-11-mysql-crud-update/</url>
+      <content type="html"><![CDATA[<p>上一篇完成了建立資料，本篇就來介紹更新的部分，我們在上一篇的使用者列表頁面上，每一筆資料的功能建立了一個『更新』的按鈕，如下：</p>
+<p>在這使用者列表的部分，表格列出的語法是：</p>
+<p><img src="/images/nodejs/67.png" alt=""></p>
+<a id="more"></a>
+<p>其中也就是在跑 each 時，每筆資料塞入按鈕語法，在這邊我們設定點選的時候連結 /update 而後面再接一個編號參數 /#{user.id}：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">a(href='/update/#&#123;user.id&#125;', class='btn btn-warning') 更新</div></pre></td></tr></table></figure>
+<p>我們簡單看一下表格佈局如下：</p>
+<p><img src="/images/nodejs/47.png" alt=""></p>
+<p>並且繼續打開 app.js 檔案，放上 update 的操作</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">app.get(<span class="string">'/update/:id'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</div><div class="line">    pool.getConnection(<span class="function"><span class="keyword">function</span>(<span class="params">err, connection</span>) </span>&#123;</div><div class="line">        connection.query(<span class="string">'SELECT * from users where id=?'</span>,[req.params.id],<span class="function"><span class="keyword">function</span>(<span class="params">err, rows, fields</span>) </span>&#123;</div><div class="line">            <span class="keyword">if</span> (err)</div><div class="line">                <span class="keyword">throw</span> err;</div><div class="line">            <span class="built_in">console</span>.log(<span class="string">'search is success.'</span>);</div><div class="line">            res.render(<span class="string">'create'</span>, &#123;</div><div class="line">                <span class="attr">title</span> : <span class="string">'Update user'</span>,</div><div class="line">                <span class="attr">user</span> : rows[<span class="number">0</span>]</div><div class="line">            &#125;);</div><div class="line">        &#125;);</div><div class="line">        connection.release();</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>在這邊先進入到 /update 頁面，預定在打開 update 時，會列出某一筆資料，因此在這邊會先用 sql 語法來查詢某一筆資料，而 id 的部分由網址列的參數取得，也就是 connection.query 的方法的第二參數，是取得網址的參數 [req.params.id] ，完成取得動作之後，顯示在 create 的頁面 （由於上一篇新增的頁面跟本篇的更新頁面欄位相同，所以用的是一樣的頁面）</p>
+<p>另外在 render 的參數多了一個 user: rows[0], 主要是用來判別是不是更新的資料，若有資料則是更新、若沒資料就是新增</p>
+<p><img src="/images/nodejs/48.png" alt=""></p>
+<p>每項  input 就用 user.[欄位] 將值帶入，顯示部分是：</p>
+<p><img src="/images/nodejs/49.png" alt=""></p>
+<p>我們按下儲存之後，將表單送到 /update，因此這邊要做  update 的操作，再度打開 app.js 新增</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">app.post(<span class="string">'/update'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</div><div class="line">    pool.getConnection(<span class="function"><span class="keyword">function</span>(<span class="params">err, connection</span>) </span>&#123;</div><div class="line">        connection.query(<span class="string">'update users set ? where id = ?'</span>, [&#123;</div><div class="line">            <span class="attr">id</span> : req.body.user.id,</div><div class="line">            <span class="attr">name</span> : req.body.user.name,</div><div class="line">            <span class="attr">description</span> : req.body.user.description</div><div class="line">        &#125;,req.body.user.id], <span class="function"><span class="keyword">function</span>(<span class="params">err, fields</span>) </span>&#123;</div><div class="line">            <span class="keyword">if</span> (err)</div><div class="line">                <span class="keyword">throw</span> err;</div><div class="line">        &#125;);</div><div class="line">        connection.query(<span class="string">'SELECT * from users'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, rows, fields</span>) </span>&#123;</div><div class="line">            <span class="keyword">if</span> (err)</div><div class="line">                <span class="keyword">throw</span> err;</div><div class="line">            res.render(<span class="string">'user'</span>, &#123;</div><div class="line">                <span class="attr">title</span> : <span class="string">'使用者列表'</span>,</div><div class="line">                <span class="attr">user</span> : rows</div><div class="line">            &#125;);</div><div class="line">        &#125;);</div><div class="line">        connection.release();</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>其中以</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">connection.query(<span class="string">'update users set ? where id = ?'</span>, [&#123;</div><div class="line">    <span class="attr">id</span> : req.body.user.id,</div><div class="line">    <span class="attr">name</span> : req.body.user.name,</div><div class="line">    <span class="attr">description</span> : req.body.user.description</div><div class="line">&#125;,req.body.user.id], <span class="function"><span class="keyword">function</span>(<span class="params">err, fields</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (err)</div><div class="line">        <span class="keyword">throw</span> err;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>作為 update 的操作，在第二參數時，就是從表單傳送過來的資料，以陣列來表示，裏面每個欄位再以 key/value 呈現，然後最後再</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">connection.query(<span class="string">'SELECT * from users'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, rows, fields</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (err)</div><div class="line">        <span class="keyword">throw</span> err;</div><div class="line">    res.render(<span class="string">'user'</span>, &#123;</div><div class="line">        <span class="attr">title</span> : <span class="string">'使用者列表'</span>,</div><div class="line">        <span class="attr">user</span> : rows</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>新增完成後顯示最後的結果列到使用者列表</p>
+<p><img src="/images/nodejs/50.png" alt=""></p>
+<p>結果退到使用者列表：</p>
+<p><img src="/images/nodejs/51.png" alt=""></p>
+]]></content>
+      
+        <categories>
+            
+            <category> Node.js </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Node.js </tag>
+            
+            <tag> 鐵人賽 </tag>
+            
+            <tag> MySQL </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Node.js 系列學習日誌#10 - MySQL 操作: 查詢]]></title>
       <url>/2017/07/24/nodejs-10-mysql-crud-read/</url>
       <content type="html"><![CDATA[<p>上一篇介紹了資料庫連線的方式，接著我們就來實作從資料庫讀取資料出來的做法。資料庫的部分，假定先建立一個 demo_nodejs 的資料庫，並且建立 users 的資料表，其資料表有  id, name, description 欄位</p>
@@ -698,11 +969,11 @@
 <h2 id="安裝-Meteor"><a href="#安裝-Meteor" class="headerlink" title="安裝 Meteor"></a>安裝 Meteor</h2><p>安裝 Meteor 的方式在 terminal 輸入以下命令：</p>
 <p><code>curl https://install.meteor.com | sh</code></p>
 <p>安裝完之後你可以再次輸入 <code>meteor</code> 後，執行會說明目前不是在 meteor 專案下，所以目前還只能確認 Meteor 安裝成功並且還會指引你建立 Meteor 專案的指令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> meteor</span></div><div class="line">  run: You\'re not in a Meteor project directory.</div><div class="line"></div><div class="line">  To create a new Meteor project:</div><div class="line">    meteor create &lt;project name&gt;</div><div class="line">  For example:</div><div class="line">    meteor create myapp</div><div class="line"></div><div class="line">  For more help, see 'meteor --help'.</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> meteor</div><div class="line">  run: You\'re not in a Meteor project directory.</div><div class="line"></div><div class="line">  To create a new Meteor project:</div><div class="line">    meteor create &lt;project name&gt;</div><div class="line">  For example:</div><div class="line">    meteor create myapp</div><div class="line"></div><div class="line">  For more help, see 'meteor --help'.</div></pre></td></tr></table></figure>
 <h2 id="建立新的專案"><a href="#建立新的專案" class="headerlink" title="建立新的專案"></a>建立新的專案</h2><p>裝好 meteor 後，我們建立一個新的專案，建立時使用 meteor 的工具</p>
 <p><code>meteor create meteor_demo</code></p>
 <p>按照命令就會把 meteor 建立基礎的檔案結構，建立完成後就會有一個 <code>meteor_demo</code> 的資料夾，並且說明如何執行應用程式</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> meteor create meteor_demo</span></div><div class="line">  Created a new Meteor app in 'meteor_demo'.</div><div class="line"></div><div class="line">  To run your new app:</div><div class="line">    cd meteor_demo</div><div class="line">    meteor npm install</div><div class="line">    meteor</div><div class="line"></div><div class="line">  If you are new to Meteor, try some of the learning resources here:</div><div class="line">    https://www.meteor.com/learn</div><div class="line"></div><div class="line">  meteor create --bare to create an empty app.</div><div class="line">  meteor create --full to create a scaffolded app.</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> meteor create meteor_demo</div><div class="line">  Created a new Meteor app in 'meteor_demo'.</div><div class="line"></div><div class="line">  To run your new app:</div><div class="line">    cd meteor_demo</div><div class="line">    meteor npm install</div><div class="line">    meteor</div><div class="line"></div><div class="line">  If you are new to Meteor, try some of the learning resources here:</div><div class="line">    https://www.meteor.com/learn</div><div class="line"></div><div class="line">  meteor create --bare to create an empty app.</div><div class="line">  meteor create --full to create a scaffolded app.</div></pre></td></tr></table></figure>
 <p>也包含以下的檔案與資料夾</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">drwxr-xr-x   7 User  staff   238 Feb 12 08:40 .</div><div class="line">drwxr-xr-x  49 User  staff  1666 Feb 12 08:40 ..</div><div class="line">drwxr-xr-x  10 User  staff   340 Feb 12 08:40 .meteor</div><div class="line">drwxr-xr-x   5 User  staff   170 Feb 12 08:40 client</div><div class="line">-rw-r--r--   1 User  staff   183 Feb 12 08:40 package.json</div><div class="line">drwxr-xr-x   3 User  staff   102 Feb 12 08:40 server</div></pre></td></tr></table></figure>
 <p>接著，我們就依照他的指引安裝一些套件</p>

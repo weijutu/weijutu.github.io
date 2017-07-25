@@ -2,6 +2,48 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs-16-util-inherits/</loc>
+    
+    <lastmod>2017-07-25T11:52:28.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs-15-markdown/</loc>
+    
+    <lastmod>2017-07-25T11:52:00.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs-14-middleware/</loc>
+    
+    <lastmod>2017-07-25T11:51:45.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs-13-fs/</loc>
+    
+    <lastmod>2017-07-25T11:51:27.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs-12-nodemailer/</loc>
+    
+    <lastmod>2017-07-25T11:51:09.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs-11-mysql-crud-update/</loc>
+    
+    <lastmod>2017-07-25T11:50:32.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://weijutu.github.io/2017/07/24/nodejs-10-mysql-crud-read/</loc>
     
     <lastmod>2017-07-25T11:02:32.000Z</lastmod>
@@ -72,7 +114,7 @@
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/categories/index.html</loc>
+    <loc>https://weijutu.github.io/2017/03/02/metero-intro/</loc>
     
     <lastmod>2017-07-24T01:04:20.000Z</lastmod>
     
@@ -86,7 +128,7 @@
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/03/02/metero-intro/</loc>
+    <loc>https://weijutu.github.io/categories/index.html</loc>
     
     <lastmod>2017-07-24T01:04:20.000Z</lastmod>
     
