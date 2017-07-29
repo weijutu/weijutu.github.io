@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://weijutu.github.io/"/>
-  <updated>2017-07-25T11:52:28.000Z</updated>
+  <updated>2017-07-29T10:07:57.000Z</updated>
   <id>https://weijutu.github.io/</id>
   
   <author>
@@ -16,14 +16,113 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Node.js 系列學習日誌#18 - 使用 Express 實作網頁開發框架</title>
+    <link href="https://weijutu.github.io/2017/07/24/nodejs-18-express/"/>
+    <id>https://weijutu.github.io/2017/07/24/nodejs-18-express/</id>
+    <published>2017-07-23T16:18:00.000Z</published>
+    <updated>2017-07-29T10:07:57.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Node.js 有許多網頁的框架，其中以 Express 的框架最為流行，也是滿多人才討論使用。在本篇將介紹這個工具具有快速建立網站框架的方法。</p>
+<p><img src="/images/nodejs/69.png" alt=""></p>
+<p>我們用全域模式安裝  express （ <code>$npm install -g express</code> ）之後就看一下 help 怎麼寫。</p>
+<p><img src="/images/nodejs/70.png" alt=""></p>
+<p>在下圖的地方，可以大概可以看到 express 的預設樣板引擎是 jade，若需要安裝為 ejs 的樣板時，那麼建立 express 的命令下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$express -e demo-express2</div></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/71.png" alt=""></p>
+<p>在這邊將自動的安裝相依套件 express, ejs ，接著我們打開 sublime 編輯器，看到 package.json ，你可以看到 dependencies 的物件裡面自動安裝了許多相依項目。</p>
+<p><img src="/images/nodejs/72.png" alt=""></p>
+<p>我們透過 express 指令建立好網站之後呢，可以看到他的提示指示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd demo-express2 &amp;&amp; npm install</div></pre></td></tr></table></figure>
+<p>將相依套件安裝起來，此時才會自動有 node_module 資料夾放置套件的位置，依照指令安裝好之後，我們就執行一下網站，請輸入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$npm start</div></pre></td></tr></table></figure>
+<h3 id="結果"><a href="#結果" class="headerlink" title="結果"></a>結果</h3><p><img src="/images/nodejs/73.png" alt=""></p>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="http://expressjs.com/" target="_blank" rel="external">http://expressjs.com/</a><br><a href="http://expressjs.com/4x/api.html#application" target="_blank" rel="external">http://expressjs.com/4x/api.html#application</a><br><a href="http://nodeframework.com/index.html" target="_blank" rel="external">http://nodeframework.com/index.html</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Node.js 有許多網頁的框架，其中以 Express 的框架最為流行，也是滿多人才討論使用。在本篇將介紹這個工具具有快速建立網站框架的方法。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/nodejs/69.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;我們用全域模式安裝
+    
+    </summary>
+    
+      <category term="Node.js" scheme="https://weijutu.github.io/categories/Node-js/"/>
+    
+    
+      <category term="Node.js" scheme="https://weijutu.github.io/tags/Node-js/"/>
+    
+      <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
+    
+      <category term="express" scheme="https://weijutu.github.io/tags/express/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Node.js 系列學習日誌#17 - 使用 express, ejs 實作讀取靜態 JSON 格式資料</title>
+    <link href="https://weijutu.github.io/2017/07/24/nodejs-17-ejs-json/"/>
+    <id>https://weijutu.github.io/2017/07/24/nodejs-17-ejs-json/</id>
+    <published>2017-07-23T16:17:00.000Z</published>
+    <updated>2017-07-29T09:55:48.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天來介紹 express, ejs 實作讀取靜態 JSON 格式資料程式</p>
+<p>本章節將會學習到：</p>
+<ul>
+<li>使用 ejs 樣板引擎建立檢視頁面</li>
+<li>建立 Json 檔案及資料，並採取 /api/posts 列出所有 json 資料</li>
+<li>採取 /post/:id 取得某一筆資料<br>首先我們先建立一個目錄叫 demo-express-json 的資料夾，然後使用指令進入到 demo-express-json 資料夾裡面，接著安裝 express 框架以及 ejs 的樣板引擎</li>
+</ul>
+<a id="more"></a>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$npm</span> install —save express ejs</div></pre></td></tr></table></figure>
+<h3 id="建立-josn-檔案"><a href="#建立-josn-檔案" class="headerlink" title="建立 josn 檔案"></a>建立 josn 檔案</h3><p>建立完成之後，我們在 demo-express-json 會出現 node_module 資料夾，裡面則是有 express, ejs 套件相關檔案，接下來在根目錄下建立一個  posts.json 格式檔案，資料先假定設定為：</p>
+<p>（文字是用亂數假文產生器弄的，因此無需認真讀囉）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">[</div><div class="line">     &#123;</div><div class="line">       &quot;title&quot;: &quot;會濟報好大必者政下二&quot;,</div><div class="line">       &quot;id&quot;: &quot;fdb61c16-4bba-11e4-9e35-164230d1df67&quot;,</div><div class="line">       &quot;content&quot;: &quot;容有那一氣持地來於結主了友如頭……院還地入。出乎機富事的著度同禮、時在科種力事再數總源式孩？&quot;</div><div class="line">     &#125;,</div><div class="line">     &#123;</div><div class="line">       &quot;title&quot;: &quot;主覺問我的食什期和&quot;,</div><div class="line">       &quot;id&quot;: &quot;0bc365ac-4bbb-11e4-9e35-164230d1df67&quot;,</div><div class="line">       &quot;content&quot;: &quot;生老了險實去供考權是車子氣長不別相且員高麼也工家看&quot;</div><div class="line">     &#125;,</div><div class="line">     &#123;</div><div class="line">       &quot;title&quot;: &quot;是實裡在園時傳&quot;,</div><div class="line">       &quot;id&quot;: &quot;0ff44786-4bbb-11e4-9e35-164230d1df67&quot;,</div><div class="line">       &quot;content&quot;: &quot;不半過何：為濟是在制們。裡得一方出，處師取是你賣而陽&quot;</div><div class="line">     &#125;</div><div class="line">]</div></pre></td></tr></table></figure>
+<p>這個 json 檔每一筆資料以 title, id, content 參數為主</p>
+<h3 id="建立-app-js"><a href="#建立-app-js" class="headerlink" title="建立 app.js"></a>建立 app.js</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">// express web framework</div><div class="line">var express = require(&apos;express&apos;);</div><div class="line">//讀取 posts.json</div><div class="line">var fs = require(&apos;fs&apos;);</div><div class="line">var app = express();</div><div class="line"></div><div class="line">//放置靜態網頁</div><div class="line">app.use(&apos;/public&apos;, express.static(__dirname + &apos;/public&apos;));</div><div class="line"></div><div class="line">//定義網站標題</div><div class="line">app.locals.title=&quot;Get json data using express web framework&quot;;</div><div class="line"></div><div class="line">app.all(&apos;*&apos;, function(req, res, next)&#123;</div><div class="line">  fs.readFile(&apos;posts.json&apos;, function(err, data)&#123;</div><div class="line">    res.locals.posts = JSON.parse(data);</div><div class="line">    next();</div><div class="line">  &#125;);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">//網頁主進入點</div><div class="line">app.get(&apos;/&apos;, function(req, res)&#123;</div><div class="line">  //指定 /views/idex.ejs</div><div class="line">  res.render(&apos;index.ejs&apos;);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">//顯示 posts.json 資料</div><div class="line">app.get(&apos;/api/posts&apos;, function(req, res)&#123;</div><div class="line">  res.json(res.locals.posts);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">//當 url 是 /post/:id 時, 取得某一筆資料</div><div class="line">app.get(&apos;/post/:id&apos;, function(req, res, next)&#123;</div><div class="line">  //取得 post.json 資料夾</div><div class="line">  res.locals.posts.forEach(function(post)&#123;</div><div class="line">    //從 url 取得 id 參數與 posts.json 裡的 id</div><div class="line">    if (req.params.id === post.id)&#123;</div><div class="line">      //顯示參數為  url 中 id 的 post.id, 那麼顯示部分資料</div><div class="line">      res.render(&apos;post.ejs&apos;, &#123; post: post &#125;);</div><div class="line">    &#125;</div><div class="line">  &#125;)</div><div class="line">&#125;);</div><div class="line"></div><div class="line">app.listen(3000);</div><div class="line">console.log(&apos;app is listening at localhost:3000...’);</div></pre></td></tr></table></figure>
+<p>再來是建立檢視資料夾 views，因為我們在 app.js 裡面設定樣板引擎是用 ejs，所以在 views 資料夾裡面新增三個檔案，分別是 header.ejs, index.ejs, footer.ejs</p>
+<p>header.ejs</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">&lt;!doctype html&gt;</div><div class="line">&lt;html lang=&quot;en&quot;&gt;</div><div class="line">&lt;head&gt;</div><div class="line">  &lt;meta charset=&quot;utf-8&quot;&gt;</div><div class="line">  &lt;title&gt;&lt;%= title %&gt;&lt;/title&gt;</div><div class="line">  &lt;link rel=&quot;stylesheet&quot; href=&quot;/public/styles.css&quot;&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line"></div><div class="line">&lt;header&gt;</div><div class="line">  &lt;div class=&quot;container&quot;&gt;</div><div class="line">    &lt;h1&gt;&lt;a href=&quot;/&quot;&gt;&lt;%= title %&gt;&lt;/a&gt;&lt;/h1&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">&lt;/header&gt;</div><div class="line"></div><div class="line">footer.ejs</div><div class="line"></div><div class="line">&lt;footer&gt;</div><div class="line">  &lt;div class=&quot;container&quot;&gt;</div><div class="line">    This is footer side.</div><div class="line">  &lt;/div&gt;</div><div class="line">&lt;/footer&gt;</div><div class="line"></div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div><div class="line"></div><div class="line">index.ejs</div><div class="line"></div><div class="line">&lt;% include header %&gt;</div><div class="line"></div><div class="line">&lt;main role=&quot;main&quot;&gt;</div><div class="line">  &lt;div class=&quot;container&quot;&gt;</div><div class="line">    &lt;h3&gt;&lt;a href=&quot;/api/posts&quot;&gt;/api/posts&lt;/a&gt;&lt;/h3&gt;</div><div class="line">    &lt;% posts.forEach(function(post)&#123; %&gt;</div><div class="line">      &lt;h3&gt;</div><div class="line">        &lt;a href=&quot;/post/&lt;%= post.id %&gt;&quot;&gt;</div><div class="line">          &lt;%= post.title %&gt;</div><div class="line">        &lt;/a&gt;</div><div class="line">      &lt;/h3&gt;</div><div class="line">      &lt;div&gt;&lt;%= post.content %&gt;&lt;/div&gt;</div><div class="line">    &lt;% &#125;); %&gt;</div><div class="line">  &lt;/main&gt;</div><div class="line">&lt;/div&gt;</div><div class="line"></div><div class="line">&lt;% include footer %&gt;</div></pre></td></tr></table></figure>
+<h3 id="建立靜態資料"><a href="#建立靜態資料" class="headerlink" title="建立靜態資料"></a>建立靜態資料</h3><p>在 app.js 檔案裡有一行是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">app.use(&apos;/public&apos;, express.static(__dirname + &apos;/public&apos;));</div></pre></td></tr></table></figure>
+<p>在做網站的過程，我們會建立 css,js 檔案，在根目錄下建立一個 public，並且在這個檔案增加一個 style.css，去定義一些樣式的方式，我這邊就不太多做 css 的解釋囉。</p>
+<h3 id="執行"><a href="#執行" class="headerlink" title="執行"></a>執行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$node index.js</div></pre></td></tr></table></figure>
+<h3 id="結果"><a href="#結果" class="headerlink" title="結果"></a>結果</h3><p><img src="/images/nodejs/68.png" alt=""></p>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="http://expressjs.com/" target="_blank" rel="external">http://expressjs.com/</a><br><a href="http://expressjs.com/4x/api.html#app.locals" target="_blank" rel="external">http://expressjs.com/4x/api.html#app.locals</a><br><a href="http://www.richyli.com/tool/loremipsum/" target="_blank" rel="external">http://www.richyli.com/tool/loremipsum/</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天來介紹 express, ejs 實作讀取靜態 JSON 格式資料程式&lt;/p&gt;
+&lt;p&gt;本章節將會學習到：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用 ejs 樣板引擎建立檢視頁面&lt;/li&gt;
+&lt;li&gt;建立 Json 檔案及資料，並採取 /api/posts 列出所有 json 資料&lt;/li&gt;
+&lt;li&gt;採取 /post/:id 取得某一筆資料&lt;br&gt;首先我們先建立一個目錄叫 demo-express-json 的資料夾，然後使用指令進入到 demo-express-json 資料夾裡面，接著安裝 express 框架以及 ejs 的樣板引擎&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="Node.js" scheme="https://weijutu.github.io/categories/Node-js/"/>
+    
+    
+      <category term="Node.js" scheme="https://weijutu.github.io/tags/Node-js/"/>
+    
+      <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
+    
+      <category term="json" scheme="https://weijutu.github.io/tags/json/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Node.js 系列學習日誌#16 - 基礎工具核心模組 util.inherits 實現原型繼承</title>
     <link href="https://weijutu.github.io/2017/07/24/nodejs-16-util-inherits/"/>
     <id>https://weijutu.github.io/2017/07/24/nodejs-16-util-inherits/</id>
     <published>2017-07-23T16:16:00.000Z</published>
-    <updated>2017-07-25T11:52:28.000Z</updated>
+    <updated>2017-07-25T15:05:40.000Z</updated>
     
     <content type="html"><![CDATA[<p>在 js 的內建功能裡面如果有些不適合或無法滿足需求的時候，多半都要動手刻程式然後做到自己要的模組來呼叫方法。而 Node.js 提供了一個函數的集合，能夠比 js 更多的一些基本的處理，我們可以看到以下官方網站所提供 util 可用的方法。在本章節將介紹比較重要關注的方法</p>
 <p><img src="/images/nodejs/64.png" alt=""></p>
+<a id="more"></a>
 <h1 id="util-inherits-實現原型繼承"><a href="#util-inherits-實現原型繼承" class="headerlink" title="util.inherits 實現原型繼承"></a>util.inherits 實現原型繼承</h1><p>引用內建基礎工具  util，請在程式第一行寫 var util = require(‘util’);  方可使用工具的方法。在這邊我們介紹繼承的功能，也就是  util.inherits(constructor, superConstructor)，在參數的第一個作為建構子，而第二參數為父建構子，直接來看程式的部分</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fnBase</span>(<span class="params"></span>) </span>&#123;</div><div class="line">     <span class="keyword">this</span>.name = <span class="string">'java'</span>;</div><div class="line">     <span class="keyword">this</span>.price = <span class="number">250</span>;</div><div class="line"></div><div class="line">     <span class="keyword">this</span>.getBookName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">          <span class="built_in">console</span>.log(<span class="string">"getBookName: the book name is "</span> + <span class="keyword">this</span>.name);</div><div class="line">     &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">fnBase.prototype.showName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">     <span class="built_in">console</span>.log(<span class="string">"showName: "</span> + <span class="keyword">this</span>.name);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">fnBase.prototype.showPrice = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">     <span class="built_in">console</span>.log(<span class="string">"showPrice: "</span> + <span class="keyword">this</span>.price);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <p>在這邊開始先建立了一個 fnBase 的物件，包含 name, price 屬性並且給予初始化值以及 getBookName 方法，而這個取得 book 的名稱。另外再多兩個 prototype 的原型方法，一個是 showName 以及 showPrice 方法，接著我們在建立一個物件</p>
@@ -44,7 +143,8 @@
     
     <summary type="html">
     
-      &lt;p&gt;在 js 的內建功能裡面如果有些不適合或無法滿足需求的時候，多半都要動手刻程式然後做到自己要的模組來呼叫方法。而 Node.js 提供了一個函數的集合，能夠比 js 更多的一些基本的處理，我們可以看到以下官方網站所提供 util 可用的方法。在本章節將介紹比較重要關注的方法
+      &lt;p&gt;在 js 的內建功能裡面如果有些不適合或無法滿足需求的時候，多半都要動手刻程式然後做到自己要的模組來呼叫方法。而 Node.js 提供了一個函數的集合，能夠比 js 更多的一些基本的處理，我們可以看到以下官方網站所提供 util 可用的方法。在本章節將介紹比較重要關注的方法&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/nodejs/64.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
     
     </summary>
     
@@ -1071,46 +1171,6 @@
     
     
       <category term="R" scheme="https://weijutu.github.io/tags/R/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Meteor - 開始第一個 Meteor 應用程式專案</title>
-    <link href="https://weijutu.github.io/2017/03/02/metero-intro/"/>
-    <id>https://weijutu.github.io/2017/03/02/metero-intro/</id>
-    <published>2017-03-02T11:49:42.000Z</published>
-    <updated>2017-07-24T01:04:20.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>Meteor 是架構在 Node.js 上的平台，用來開發 real-time 的網頁程式。Client/Server 都是 Javascript 開發，Meteor 程式都能夠在前後端共用。而且這套框架非常容易學習，短時間內就能夠開發出應用程式出來的唷</p>
-<a id="more"></a>
-<h2 id="學習目標"><a href="#學習目標" class="headerlink" title="學習目標"></a>學習目標</h2><p>逐一步驟介紹建置 Meteor 初始化應用程式專案。</p>
-<h2 id="安裝-Meteor"><a href="#安裝-Meteor" class="headerlink" title="安裝 Meteor"></a>安裝 Meteor</h2><p>安裝 Meteor 的方式在 terminal 輸入以下命令：</p>
-<p><code>curl https://install.meteor.com | sh</code></p>
-<p>安裝完之後你可以再次輸入 <code>meteor</code> 後，執行會說明目前不是在 meteor 專案下，所以目前還只能確認 Meteor 安裝成功並且還會指引你建立 Meteor 專案的指令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> meteor</div><div class="line">  run: You\'re not in a Meteor project directory.</div><div class="line"></div><div class="line">  To create a new Meteor project:</div><div class="line">    meteor create &lt;project name&gt;</div><div class="line">  For example:</div><div class="line">    meteor create myapp</div><div class="line"></div><div class="line">  For more help, see 'meteor --help'.</div></pre></td></tr></table></figure>
-<h2 id="建立新的專案"><a href="#建立新的專案" class="headerlink" title="建立新的專案"></a>建立新的專案</h2><p>裝好 meteor 後，我們建立一個新的專案，建立時使用 meteor 的工具</p>
-<p><code>meteor create meteor_demo</code></p>
-<p>按照命令就會把 meteor 建立基礎的檔案結構，建立完成後就會有一個 <code>meteor_demo</code> 的資料夾，並且說明如何執行應用程式</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> meteor create meteor_demo</div><div class="line">  Created a new Meteor app in 'meteor_demo'.</div><div class="line"></div><div class="line">  To run your new app:</div><div class="line">    cd meteor_demo</div><div class="line">    meteor npm install</div><div class="line">    meteor</div><div class="line"></div><div class="line">  If you are new to Meteor, try some of the learning resources here:</div><div class="line">    https://www.meteor.com/learn</div><div class="line"></div><div class="line">  meteor create --bare to create an empty app.</div><div class="line">  meteor create --full to create a scaffolded app.</div></pre></td></tr></table></figure>
-<p>也包含以下的檔案與資料夾</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">drwxr-xr-x   7 User  staff   238 Feb 12 08:40 .</div><div class="line">drwxr-xr-x  49 User  staff  1666 Feb 12 08:40 ..</div><div class="line">drwxr-xr-x  10 User  staff   340 Feb 12 08:40 .meteor</div><div class="line">drwxr-xr-x   5 User  staff   170 Feb 12 08:40 client</div><div class="line">-rw-r--r--   1 User  staff   183 Feb 12 08:40 package.json</div><div class="line">drwxr-xr-x   3 User  staff   102 Feb 12 08:40 server</div></pre></td></tr></table></figure>
-<p>接著，我們就依照他的指引安裝一些套件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ cd meteor_demo</div><div class="line">$ meteor npm install</div><div class="line">$ meteor</div></pre></td></tr></table></figure>
-<p>在輸入第三行的 <code>meteor</code> 時，是否有發現先前我們在一開始介紹時已經有輸入過了，而這次的執行 <code>meteor</code> 確實是有專案，現在就馬上打開瀏覽器，檢視 <code>http://localhost:3000/</code> 或是 ( <code>http://0.0.0.0:3000/</code> )</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ meteor</div><div class="line">[[[[[ ~/Projects/demo/meteor_demo ]]]]]</div><div class="line"></div><div class="line">=&gt; Started proxy.</div><div class="line">=&gt; Started MongoDB.</div><div class="line">=&gt; Started your app.</div><div class="line"></div><div class="line">=&gt; App running at: http://localhost:3000/</div></pre></td></tr></table></figure>
-<h3 id="執行成功畫面"><a href="#執行成功畫面" class="headerlink" title="執行成功畫面"></a>執行成功畫面</h3><p><img src="/images/meteor/meteor_1.png" alt="執行成功畫面"></p>
-<p>這樣子順利運行，若想停止運行應用程式的話只要在執行的 terminal 按下 <code>ctrl+c</code> 就可以了喔！</p>
-<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><p><a href="https://www.meteor.com/" target="_blank" rel="external">Meteor: Build Apps with JavaScript</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Meteor 是架構在 Node.js 上的平台，用來開發 real-time 的網頁程式。Client/Server 都是 Javascript 開發，Meteor 程式都能夠在前後端共用。而且這套框架非常容易學習，短時間內就能夠開發出應用程式出來的唷&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="meteor" scheme="https://weijutu.github.io/tags/meteor/"/>
     
   </entry>
   
