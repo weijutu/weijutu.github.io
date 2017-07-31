@@ -2,6 +2,55 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://weijutu.github.io/2017/07/26/nodejs-26-jade-2/</loc>
+    
+    <lastmod>2017-07-31T08:03:44.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2017/07/25/nodejs-25-jade-1/</loc>
+    
+    <lastmod>2017-07-31T07:59:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs-24-npm-version/</loc>
+    
+    <lastmod>2017-07-31T07:51:25.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs-23-heroku/</loc>
+    
+    <lastmod>2017-07-31T07:46:08.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs-22-express-login/</loc>
+    
+    <lastmod>2017-07-31T07:38:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs-21-express-register/</loc>
+    
+    <lastmod>2017-07-31T07:35:57.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs-20-node-inspector/</loc>
+    
+    <lastmod>2017-07-31T07:30:52.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://weijutu.github.io/2017/07/24/nodejs-19-chatroom/</loc>
     
     <lastmod>2017-07-29T10:15:52.000Z</lastmod>
@@ -135,14 +184,14 @@
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/03/04/r-xy-scatter-diagram/</loc>
+    <loc>https://weijutu.github.io/2017/03/02/metero-intro/</loc>
     
     <lastmod>2017-07-24T01:04:20.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/03/02/metero-intro/</loc>
+    <loc>https://weijutu.github.io/2017/03/04/r-xy-scatter-diagram/</loc>
     
     <lastmod>2017-07-24T01:04:20.000Z</lastmod>
     
