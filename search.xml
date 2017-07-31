@@ -3,6 +3,200 @@
   
     
     <entry>
+      <title><![CDATA[Node.js 系列學習日誌#29 - 取得野生柯P相簿 API範例]]></title>
+      <url>/2017/07/26/nodejs-30-kp-api/</url>
+      <content type="html"><![CDATA[<p>本篇將介紹用野生柯P API來製作 api 的呼叫，但是api 網站已經失效，僅能提供概念說明。這是透過 node-rest-client 的套件製作</p>
+<a id="more"></a>
+<p>首先先建立一個 express web framework 框架，請在 terminal  上輸入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$express -e nodejs-kp-albums-sample</div></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/130.png" alt=""></p>
+<p>接著按照只是安裝相依套件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$cd nodejs-kp-albums-sample &amp;&amp; npm install</div></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/131.png" alt=""></p>
+<p>接著由於我們要使用到柯 p 官網提供的相簿 api ，在開發前我們需要安裝一個可以支援 restful api 的套件 node-rest-client，接著請在 terminal 輸入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$npm install node-rest-client —save</div></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/132.png" alt=""></p>
+<p>一切安裝完成之後，就開始來撰寫程式的部分，請先打開 app.js 檔案，在這邊我們要引用裝好的 node-rest-client 套件，將以下語法填入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var Client = require(&apos;node-rest-client&apos;).Client;</div><div class="line">client = new Client();</div></pre></td></tr></table></figure>
+<p>先宣告 node-rest-client 之後，我們預計將相簿列表印在主首頁 (index)，可以在 app.js 裡面找到var routes = require(‘./routes/index’); 與 app.use(‘/‘, routes); 這一段，也就是說根目錄的位置會指引到 /routes/index.js 檔案裡面，接著就打開  /routes/index.js ，由於我們在 app.js  完成了宣告，在 index.js 撰寫如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">var express = require(&apos;express&apos;);</div><div class="line">var router = express.Router();</div><div class="line"></div><div class="line">/* GET home page. */</div><div class="line">router.get(&apos;/&apos;, function(req, resp) &#123;</div><div class="line"></div><div class="line">    //取得 KP albums 相簿清單列表</div><div class="line">     client.get(&quot;http://api.kptaipei.tw/v1/albums&quot;, &#123; author: ‘xxx&apos; &#125;, function(data, res)&#123;</div><div class="line">        var config = JSON.parse(data.toString());</div><div class="line">        console.log(config.data);</div><div class="line"></div><div class="line">        //將資料寫在 locals</div><div class="line">        resp.locals.posts = config.data;</div><div class="line"></div><div class="line">        var renderData = &#123;</div><div class="line">             title: &apos;柯 p 野生 API&apos;,</div><div class="line">             data: config.data</div><div class="line">        &#125;;</div><div class="line"></div><div class="line">        // 將取得到的 json 格式渲染到畫面上</div><div class="line">        resp.render(&apos;index&apos;, renderData);</div><div class="line">    &#125;);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">module.exports = router;</div></pre></td></tr></table></figure>
+<p>可以看到用了 client.get 方法，其有三個參數，第一個參數請到 <a href="http://unlimited.kptaipei.tw/docs/#api-ch3" target="_blank" rel="external">http://unlimited.kptaipei.tw/docs/#api-ch3</a> 得到相簿清單的 api ：<a href="http://api.kptaipei.tw/v1/albums/" target="_blank" rel="external">http://api.kptaipei.tw/v1/albums/</a>  ，預期會知道 api 結果會是如下</p>
+<p><img src="/images/nodejs/133.png" alt=""></p>
+<p><img src="/images/nodejs/134.png" alt=""></p>
+<p>第二參數由於本篇只做列表，就保持為空 {}，第三個參數就 function callback 操作，在取得  json 格式的資料之後，經過 json.parse 由字串轉換 json  ，並且我們已知要抓  data 的陣列，透過物件 renderData 將資料存放，最後就將得到的資料渲染到畫面上 ，也就是 resp.render(‘index’, renderData);</p>
+<p>接著到了 views 的部分，就請開啓  /views/index.ejs 檔案</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">  &lt;head&gt;</div><div class="line">    &lt;title&gt;&lt;%= title %&gt;&lt;/title&gt;</div><div class="line">    &lt;link rel=&apos;stylesheet&apos; href=&apos;/stylesheets/style.css&apos; /&gt;</div><div class="line">  &lt;/head&gt;</div><div class="line">  &lt;body&gt;</div><div class="line">    &lt;%</div><div class="line">         posts.forEach(function(post) &#123;</div><div class="line">              var thumb = post.thumbnails;</div><div class="line">              var t_small = thumb.small_square;</div><div class="line">    %&gt;</div><div class="line">          &lt;img src=&apos;&lt;%= t_small %&gt;&apos; alt=&apos;&lt;%=post.title %&gt;&apos; /&gt;</div><div class="line">    &lt;% &#125;);%&gt;</div><div class="line">  &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<p>在這邊我只需要顯示柯p相簿的小張圖，也就是 thumbnails.small_square ，由於已經轉成  json  格式，那麼就當做物件找到 thumbnails.small_square  位置，將取得到的圖片網址塞到 img tag 裡的 src 屬性。那麼，一切的一切準備好之後，就請執行應用程式吧！輸入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$npm start</div></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/135.png" alt=""></p>
+<p>網站預設為 3000 port ，請開啓 localhost:3000，結果如下圖顯示</p>
+<p><img src="/images/nodejs/136.png" alt=""></p>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="https://www.npmjs.org/package/node-rest-client" target="_blank" rel="external">https://www.npmjs.org/package/node-rest-client</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> Node.js </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Node.js </tag>
+            
+            <tag> 鐵人賽 </tag>
+            
+            <tag> api </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Node.js 系列學習日誌#29 - 使用 package.json 安裝、管理模組]]></title>
+      <url>/2017/07/26/nodejs-29-package/</url>
+      <content type="html"><![CDATA[<p>npm 包管理器是 Node.js 的模組管理工具，npm 的包就像 java 的類別庫，將功能獨立封裝起來，目前已經有相當多的工具可以運用，因此首先我們看一下 npm 的指令有哪些，而 npm 的命令會與  package.json 這個檔案息息相關，是接下來會說明到的。</p>
+<p>package.json</p>
+<p>它是一種 CommonJS 規定用來描述包的文件，是一個包含 json 格式的說明文件，裡面可以定義相依的相關套件以及應用程式的資訊，我們從 <a href="http://wiki.commonjs.org/wiki/Packages/1.1" target="_blank" rel="external">http://wiki.commonjs.org/wiki/Packages/1.1</a> Wiki 網頁了解到，他基本可以定義 應用程式名稱、版本、描述、關鍵字、授權、貢獻者、維護者、腳本等其他，還有更令 Node.js 最重要的就相依套件將是會在開發過程中會經常遇到的，它是以套件名稱和版本號組成的。</p>
+<a id="more"></a>
+<p>你可能心想說這邊該不會要用手刻吧…答案是不全然！可以透過指令的指引可以將它完成基本操作。一開始請先建立一個資料夾 demo-nodejs ，然後在目錄裡面執行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$npm init</div></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/125.png" alt=""></p>
+<p>輸入完他所指示的資料之後，在資料夾裡面他就會自動產生 package.json 檔案，是不是很簡單方便呢？（對了，用 npm init 指令，當他指示到 version 的時候，務必要三階的版本號，也就是 x.x.x，否則會出錯呢！) 接著我們定義我們需要用到的相依套件，假定我們要安裝一個 socket.io 及 express 框架，這時候在 package.json 補上 dependencies 物件，像下圖的紅框處</p>
+<p><img src="/images/nodejs/126.png" alt=""></p>
+<p>然後，你可能又發出一個疑問，我如何知道個別的套件版本要寫哪一個版本？你可以採用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$npm info &#123;套件名稱&#125; version</div></pre></td></tr></table></figure>
+<p>來取得最新版本號</p>
+<p><img src="/images/nodejs/127.png" alt=""></p>
+<p>輸入完成之後存檔，這時候我們只是定義相依套件，但還沒有安裝，因此在 demo-nodejs 這個目錄下，輸入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$npm install</div></pre></td></tr></table></figure>
+<p>指令來安裝這兩個套件，結果將會在這個目錄夾底下多了一個 node_module 資料夾，如下：</p>
+<p><img src="/images/nodejs/128.png" alt=""></p>
+<p>若需要移除套件的話，也相當容易</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$npm uninstall socket.io</div></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/129.png" alt=""></p>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ol>
+<li><a href="https://www.npmjs.org/" target="_blank" rel="external">https://www.npmjs.org/</a></li>
+<li><a href="http://wiki.commonjs.org/wiki/Packages/1.1" target="_blank" rel="external">http://wiki.commonjs.org/wiki/Packages/1.1</a></li>
+<li><a href="http://semver.org/lang/zh-TW/" target="_blank" rel="external">http://semver.org/lang/zh-TW/</a></li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> Node.js </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Node.js </tag>
+            
+            <tag> 鐵人賽 </tag>
+            
+            <tag> package </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Node.js 系列學習日誌#28 - REST 路由規則]]></title>
+      <url>/2017/07/26/nodejs-28-rest/</url>
+      <content type="html"><![CDATA[<p>今天我們使用 express 框架介紹一下 REST  路由規則，REST 是一種  http 協定的網路應用，http 提供了八種方法使用：</p>
+<a id="more"></a>
+<ul>
+<li><p>OPTIONS：這個方法可使伺服器傳回該資源所支援的所有HTTP請求方法。用<code>*</code>來代替資源名稱，向Web伺服器傳送OPTIONS請求，可以測試伺服器功能是否正常運作。</p>
+</li>
+<li><p>HEAD：與GET方法一樣，都是向伺服器發出指定資源的請求。只不過伺服器將不傳回資源的本文部份。它的好處在於，使用這個方法可以在不必傳輸全部內容的情況下，就可以獲取其中「關於該資源的資訊」（元資訊或稱元資料）。</p>
+</li>
+<li><p>GET：向指定的資源發出「顯示」請求。使用GET方法應該只用在讀取資料，而不應當被用於產生「副作用」的操作中，例如在Web Application中。其中一個原因是GET可能會被網路蜘蛛等隨意存取。參見安全方法</p>
+</li>
+<li><p>POST：向指定資源提交資料，請求伺服器進行處理（例如提交表單或者上傳檔案）。資料被包含在請求本文中。這個請求可能會建立新的資源或修改現有資源，或二者皆有。</p>
+</li>
+<li><p>PUT：向指定資源位置上傳其最新內容。</p>
+</li>
+<li><p>DELETE：請求伺服器刪除Request-URI所標識的資源。</p>
+</li>
+<li><p>TRACE：回顯伺服器收到的請求，主要用於測試或診斷。</p>
+</li>
+<li><p>CONNECT：HTTP/1.1協定中預留給能夠將連線改為管道方式的代理伺服器。通常用於SSL加密伺服器的連結（經由非加密的HTTP代理伺服器）</p>
+</li>
+</ul>
+<p>而 express 網頁框架也針對 http 請求方法設計路由的函數：</p>
+<p><img src="/images/nodejs/124.png" alt=""></p>
+<p>通常在設計 rest 時，常用的是 get (取得), post (新增), put (更新), delete (刪除)</p>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE" target="_blank" rel="external">http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> Node.js </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Node.js </tag>
+            
+            <tag> 鐵人賽 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Node.js 系列學習日誌#27 - forever 讓程式保持執行狀態]]></title>
+      <url>/2017/07/26/nodejs-27-forever/</url>
+      <content type="html"><![CDATA[<p>程式準備要部署上線時，就會面臨到執行程式的方式，伺服器的管理，是不是能有一個運行 Node.js 程式，並且有個工具處理這件事情。<br>forever 可以作為保持運行的狀態，管理 Node.js 程式服務，在 forever 進程之下，建立子進程，執行啟動與停止的命令相當簡單。<br>更特別的是，經常我們在寫 Node.js 的時候，每次更動的檔案時都需要再重新執行啟動服務的指令 (例如：node app.js)，而這個工具是當每次更新程式的時候，它會自動重新啟動服務，更方便許多了呢！</p>
+<p>這是官方的描述：（<a href="https://github.com/nodejitsu/forever）" target="_blank" rel="external">https://github.com/nodejitsu/forever）</a></p>
+<p>A simple CLI tool for ensuring that a given script runs continuously (i.e. forever).</p>
+<a id="more"></a>
+<h3 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 一般建議加上 -g 將 forever 全域安裝</div><div class="line">$[sudo] npm install forever -g</div></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/118.png" alt=""></p>
+<p>當然若你要在某個特定目錄下安裝也是可以</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$cd /path/projects/abc</div><div class="line">$[sudo] npm install forever</div></pre></td></tr></table></figure>
+<h3 id="指令的幫助"><a href="#指令的幫助" class="headerlink" title="指令的幫助"></a>指令的幫助</h3><p>可以透過以下指令列出說明</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$forever —help</div></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/119.png" alt=""></p>
+<h3 id="顯示所有運行的服務"><a href="#顯示所有運行的服務" class="headerlink" title="顯示所有運行的服務"></a>顯示所有運行的服務</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$forever list</div></pre></td></tr></table></figure>
+<h3 id="啟動"><a href="#啟動" class="headerlink" title="啟動"></a>啟動</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$forever start app.js</div></pre></td></tr></table></figure>
+<h3 id="停止操作"><a href="#停止操作" class="headerlink" title="停止操作"></a>停止操作</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$forever stopall</div></pre></td></tr></table></figure>
+<h3 id="停止某一個程式專案"><a href="#停止某一個程式專案" class="headerlink" title="停止某一個程式專案"></a>停止某一個程式專案</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$forever stop app.js</div></pre></td></tr></table></figure>
+<h3 id="實作一個簡單運用"><a href="#實作一個簡單運用" class="headerlink" title="實作一個簡單運用"></a>實作一個簡單運用</h3><p>我們先用 express 這個框架建一個簡單的網站</p>
+<p><img src="/images/nodejs/120.png" alt=""></p>
+<h3 id="啟動程式"><a href="#啟動程式" class="headerlink" title="啟動程式"></a>啟動程式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$forever start app.js</div></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/121.png" alt=""></p>
+<h3 id="forever-列表清單"><a href="#forever-列表清單" class="headerlink" title="forever  列表清單"></a>forever  列表清單</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$forever list</div></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/122.png" alt=""></p>
+<p>可以看到紫色部分，就是在放 log file 的路徑</p>
+<h3 id="關閉進程"><a href="#關閉進程" class="headerlink" title="關閉進程"></a>關閉進程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$forever stop app.js</div></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/123.png" alt=""></p>
+]]></content>
+      
+        <categories>
+            
+            <category> Node.js </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Node.js </tag>
+            
+            <tag> 鐵人賽 </tag>
+            
+            <tag> forever </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Node.js 系列學習日誌#26 - 介紹 Jade  Template Engine 模板引擎 (下)]]></title>
       <url>/2017/07/26/nodejs-26-jade-2/</url>
       <content type="html"><![CDATA[<p>繼上一篇 （<a href="http://ithelp.ithome.com.tw/ironman7/app/article/dev/recent/10157760）上集介紹了" target="_blank" rel="external">http://ithelp.ithome.com.tw/ironman7/app/article/dev/recent/10157760）上集介紹了</a> 標籤、條件、迴圈、語法，本章節繼續介紹 Jade 的用法<br>分別是</p>
