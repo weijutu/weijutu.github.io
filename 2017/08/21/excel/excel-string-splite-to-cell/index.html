@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-tw">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="excel," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="噗噗。故我在" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="今天要介紹的是，如何將字串分割到不同的儲存格，也就是說當你今天遇到一個字串，但是字串裡面有兩個資訊想要各別放 比如以下字串： 1common.delete=Delete 結果預計要像這樣  如果你有很多個像這樣的要把字串切割的話，這時候你還會用 Copy &amp;amp; Paste 的做法去貼到不同的欄位嗎？">
+<meta name="keywords" content="excel">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Excel - 字串分割到不同的儲存格">
+<meta property="og:url" content="https://weijutu.github.io/2017/08/21/excel/excel-string-splite-to-cell/index.html">
+<meta property="og:site_name" content="噗噗。故我在">
+<meta property="og:description" content="今天要介紹的是，如何將字串分割到不同的儲存格，也就是說當你今天遇到一個字串，但是字串裡面有兩個資訊想要各別放 比如以下字串： 1common.delete=Delete 結果預計要像這樣  如果你有很多個像這樣的要把字串切割的話，這時候你還會用 Copy &amp;amp; Paste 的做法去貼到不同的欄位嗎？">
+<meta property="og:image" content="https://weijutu.github.io/images/excel/20140523-1.png">
+<meta property="og:image" content="https://weijutu.github.io/images/excel/20140523-2.png">
+<meta property="og:image" content="https://weijutu.github.io/images/excel/20140523-3.png">
+<meta property="og:image" content="https://weijutu.github.io/images/excel/20140523-4.png">
+<meta property="og:image" content="https://weijutu.github.io/images/excel/20140523-5.png">
+<meta property="og:image" content="https://weijutu.github.io/images/excel/20140523-6.png">
+<meta property="og:updated_time" content="2017-08-21T01:56:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Excel - 字串分割到不同的儲存格">
+<meta name="twitter:description" content="今天要介紹的是，如何將字串分割到不同的儲存格，也就是說當你今天遇到一個字串，但是字串裡面有兩個資訊想要各別放 比如以下字串： 1common.delete=Delete 結果預計要像這樣  如果你有很多個像這樣的要把字串切割的話，這時候你還會用 Copy &amp;amp; Paste 的做法去貼到不同的欄位嗎？">
+<meta name="twitter:image" content="https://weijutu.github.io/images/excel/20140523-1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://weijutu.github.io/2017/08/21/excel/excel-string-splite-to-cell/"/>
+
+
+
+
+
+  <title>Excel - 字串分割到不同的儲存格 | 噗噗。故我在</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-72890173-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">噗噗。故我在</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">a > 1, a ^ n = ∞</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分類
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            關於
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/08/21/excel/excel-string-splite-to-cell/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Helen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="噗噗。故我在">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Excel - 字串分割到不同的儲存格</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-21T09:50:05+08:00">
+                2017-08-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/08/21/excel/excel-string-splite-to-cell/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/08/21/excel/excel-string-splite-to-cell/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>今天要介紹的是，如何將字串分割到不同的儲存格，也就是說當你今天遇到一個字串，但是字串裡面有兩個資訊想要各別放</p>
+<p>比如以下字串：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">common.delete=Delete</div></pre></td></tr></table></figure>
+<p>結果預計要像這樣</p>
+<p><img src="/images/excel/20140523-1.png" alt=""></p>
+<p>如果你有很多個像這樣的要把字串切割的話，這時候你還會用 Copy &amp; Paste 的做法去貼到不同的欄位嗎？</p>
+<a id="more"></a>
+<p>以下用個簡單的資料當作例子，我想要將等於的左右兩邊，各別的放到不同的儲存格</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">common.delete=Delete</div><div class="line">common.add=Create</div><div class="line">common.modify=Edit</div><div class="line">common.name=Name</div><div class="line">common.change=Change</div><div class="line">common.manage=Management</div><div class="line">common.search=Search</div><div class="line">btn.cancel=Cancel</div><div class="line">btn.Submit=Submit</div></pre></td></tr></table></figure>
+<h3 id="快速實作方法"><a href="#快速實作方法" class="headerlink" title="快速實作方法"></a>快速實作方法</h3><h4 id="第一步-先將欄位選取起來"><a href="#第一步-先將欄位選取起來" class="headerlink" title="第一步: 先將欄位選取起來"></a>第一步: 先將欄位選取起來</h4><p>請先將資料擺在 A 欄位那邊，然後滑鼠將資料選取起來，如下圖所示：</p>
+<p><img src="/images/excel/20140523-2.png" alt=""></p>
+<h4 id="第二步-按下-資料-gt-資料剖析-啟動-資料剖析精靈"><a href="#第二步-按下-資料-gt-資料剖析-啟動-資料剖析精靈" class="headerlink" title="第二步: 按下 [資料] &gt; [資料剖析] 啟動 [資料剖析精靈]"></a>第二步: 按下 [資料] &gt; [資料剖析] 啟動 [資料剖析精靈]</h4><p>接著他就會開資料剖析精靈，超簡單，三個小步驟而已<br>(步驟 3 之 1)：我們的目標是要分隔，所以選第一個，如果直接按完成的話，事實上跟我們需求不符，因為他會利用預設的 tab 區分隔，所以請繼續按下一步</p>
+<p><img src="/images/excel/20140523-3.png" alt=""></p>
+<p>(步驟 3 之 2) ：這邊我們要確定資料分隔的符號是什麼</p>
+<p><img src="/images/excel/20140523-4.png" alt=""></p>
+<p>(步驟 3 之 3)：最後可以看看預覽分割的結果，確定之後就按完成按鈕</p>
+<p><img src="/images/excel/20140523-5.png" alt=""></p>
+<p>結果: 一秒完成 !</p>
+<p><img src="/images/excel/20140523-6.png" alt=""></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/excel/" rel="tag"># excel</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/26/nodejs/nodejs-30-kp-api/" rel="next" title="Node.js 系列學習日誌#30 - 取得野生柯P相簿 API範例">
+                <i class="fa fa-chevron-left"></i> Node.js 系列學習日誌#30 - 取得野生柯P相簿 API範例
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/21/excel/excel-get-value-by-fn/" rel="prev" title="Excel - 使用函數取得不重複值並計算總計">
+                Excel - 使用函數取得不重複值並計算總計 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="Helen" />
+          <p class="site-author-name" itemprop="name">Helen</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">文章</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分類</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">標籤</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/weijutu" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/weiju516" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#快速實作方法"><span class="nav-number">1.</span> <span class="nav-text">快速實作方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一步-先將欄位選取起來"><span class="nav-number">1.1.</span> <span class="nav-text">第一步: 先將欄位選取起來</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第二步-按下-資料-gt-資料剖析-啟動-資料剖析精靈"><span class="nav-number">1.2.</span> <span class="nav-text">第二步: 按下 [資料] > [資料剖析] 啟動 [資料剖析精靈]</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Helen</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://weijutugithubio.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://weijutu.github.io/2017/08/21/excel/excel-string-splite-to-cell/';
+          this.page.identifier = '2017/08/21/excel/excel-string-splite-to-cell/';
+          this.page.title = 'Excel - 字串分割到不同的儲存格';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://weijutugithubio.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

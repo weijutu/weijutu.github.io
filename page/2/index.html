@@ -226,6 +226,16 @@
         </li>
       
         
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            關於
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
@@ -274,7 +284,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/07/25/nodejs-25-jade-1/">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/07/26/nodejs/nodejs-27-forever/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Helen">
@@ -293,7 +303,315 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/07/25/nodejs-25-jade-1/" itemprop="url">Node.js 系列學習日誌#25 - 介紹 Jade  Template Engine 模板引擎 (上)</a></h1>
+                <a class="post-title-link" href="/2017/07/26/nodejs/nodejs-27-forever/" itemprop="url">Node.js 系列學習日誌#27 - forever 讓程式保持執行狀態</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-07-26T00:27:00+08:00">
+                2017-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Node-js/" itemprop="url" rel="index">
+                    <span itemprop="name">Node.js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/07/26/nodejs/nodejs-27-forever/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/07/26/nodejs/nodejs-27-forever/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>程式準備要部署上線時，就會面臨到執行程式的方式，伺服器的管理，是不是能有一個運行 Node.js 程式，並且有個工具處理這件事情。<br>forever 可以作為保持運行的狀態，管理 Node.js 程式服務，在 forever 進程之下，建立子進程，執行啟動與停止的命令相當簡單。<br>更特別的是，經常我們在寫 Node.js 的時候，每次更動的檔案時都需要再重新執行啟動服務的指令 (例如：node app.js)，而這個工具是當每次更新程式的時候，它會自動重新啟動服務，更方便許多了呢！</p>
+<p>這是官方的描述：（<a href="https://github.com/nodejitsu/forever）" target="_blank" rel="external">https://github.com/nodejitsu/forever）</a></p>
+<p>A simple CLI tool for ensuring that a given script runs continuously (i.e. forever).</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/07/26/nodejs/nodejs-27-forever/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/07/26/nodejs/nodejs-26-jade-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Helen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="噗噗。故我在">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/26/nodejs/nodejs-26-jade-2/" itemprop="url">Node.js 系列學習日誌#26 - 介紹 Jade  Template Engine 模板引擎 (下)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-07-26T00:26:00+08:00">
+                2017-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Node-js/" itemprop="url" rel="index">
+                    <span itemprop="name">Node.js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/07/26/nodejs/nodejs-26-jade-2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/07/26/nodejs/nodejs-26-jade-2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>繼上一篇 （<a href="http://ithelp.ithome.com.tw/ironman7/app/article/dev/recent/10157760）上集介紹了" target="_blank" rel="external">http://ithelp.ithome.com.tw/ironman7/app/article/dev/recent/10157760）上集介紹了</a> 標籤、條件、迴圈、語法，本章節繼續介紹 Jade 的用法<br>分別是</p>
+<ul>
+<li>comments</li>
+<li>mixins</li>
+<li>case</li>
+<li>使用 Jade 撰寫註冊表單</li>
+</ul>
+<p>繼續使用 <a href="http://codepen.io/" target="_blank" rel="external">http://codepen.io/</a> 作為線上編輯做以下實作的測試編輯器</p>
+<p><img src="/images/nodejs/113.png" alt=""></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/07/26/nodejs/nodejs-26-jade-2/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/07/25/nodejs/nodejs-25-jade-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Helen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="噗噗。故我在">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/25/nodejs/nodejs-25-jade-1/" itemprop="url">Node.js 系列學習日誌#25 - 介紹 Jade  Template Engine 模板引擎 (上)</a></h1>
         
 
         <div class="post-meta">
@@ -346,9 +664,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/07/25/nodejs-25-jade-1/#comments" itemprop="discussionUrl">
+                <a href="/2017/07/25/nodejs/nodejs-25-jade-1/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/07/25/nodejs-25-jade-1/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/07/25/nodejs/nodejs-25-jade-1/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -392,7 +710,7 @@
 </ul>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/07/25/nodejs-25-jade-1/#more" rel="contents">
+            <a class="btn" href="/2017/07/25/nodejs/nodejs-25-jade-1/#more" rel="contents">
               閱讀全文 &raquo;
             </a>
           </div>
@@ -438,7 +756,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/07/24/nodejs-24-npm-version/">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-24-npm-version/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Helen">
@@ -457,7 +775,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/07/24/nodejs-24-npm-version/" itemprop="url">Node.js 系列學習日誌#24 - npm 相依套件指定版本與自動更新 package.json</a></h1>
+                <a class="post-title-link" href="/2017/07/24/nodejs/nodejs-24-npm-version/" itemprop="url">Node.js 系列學習日誌#24 - npm 相依套件指定版本與自動更新 package.json</a></h1>
         
 
         <div class="post-meta">
@@ -510,9 +828,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/07/24/nodejs-24-npm-version/#comments" itemprop="discussionUrl">
+                <a href="/2017/07/24/nodejs/nodejs-24-npm-version/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/07/24/nodejs-24-npm-version/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/07/24/nodejs/nodejs-24-npm-version/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -542,7 +860,7 @@
 <p>在管理套件工具的版本時，在 package.json  檔案裡面有一個 dependencies 的部分，裡面包含著套件的名稱與版本號，今天要談的是版本號的指定。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/07/24/nodejs-24-npm-version/#more" rel="contents">
+            <a class="btn" href="/2017/07/24/nodejs/nodejs-24-npm-version/#more" rel="contents">
               閱讀全文 &raquo;
             </a>
           </div>
@@ -588,7 +906,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/07/24/nodejs-23-heroku/">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-23-heroku/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Helen">
@@ -607,7 +925,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/07/24/nodejs-23-heroku/" itemprop="url">Node.js 系列學習日誌#23 - 部署上線至 Heroku 雲端平台環境</a></h1>
+                <a class="post-title-link" href="/2017/07/24/nodejs/nodejs-23-heroku/" itemprop="url">Node.js 系列學習日誌#23 - 部署上線至 Heroku 雲端平台環境</a></h1>
         
 
         <div class="post-meta">
@@ -660,9 +978,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/07/24/nodejs-23-heroku/#comments" itemprop="discussionUrl">
+                <a href="/2017/07/24/nodejs/nodejs-23-heroku/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/07/24/nodejs-23-heroku/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/07/24/nodejs/nodejs-23-heroku/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -692,307 +1010,7 @@
 <p>Heroku 是雲端運算的平台，您可以將您的應用程式放到雲端空間上面</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/07/24/nodejs-23-heroku/#more" rel="contents">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/07/24/nodejs-22-express-login/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Helen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="噗噗。故我在">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/24/nodejs-22-express-login/" itemprop="url">Node.js 系列學習日誌#22 - 使用 express, mysql, ejs 實作登入/登出功能</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-07-24T00:22:00+08:00">
-                2017-07-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Node-js/" itemprop="url" rel="index">
-                    <span itemprop="name">Node.js</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/07/24/nodejs-22-express-login/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/07/24/nodejs-22-express-login/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>上篇介紹了註冊，相對的就一定要來介紹登入的功能。在資料庫上定義了 username, userpass 的欄位，登入的時候就在頁面上擺上兩個輸入框，以及登入的按鈕。</p>
-<p><img src="/images/nodejs/86.png" alt=""></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/07/24/nodejs-22-express-login/#more" rel="contents">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/07/24/nodejs-21-express-register/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Helen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="噗噗。故我在">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/24/nodejs-21-express-register/" itemprop="url">Node.js 系列學習日誌#21 - 使用 express, mysql, ejs 實作註冊功能</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-07-24T00:21:00+08:00">
-                2017-07-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Node-js/" itemprop="url" rel="index">
-                    <span itemprop="name">Node.js</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/07/24/nodejs-21-express-register/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/07/24/nodejs-21-express-register/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><img src="/images/nodejs/83.png" alt=""></p>
-<p>本篇將介紹 node.js 系列學習日誌以來的一些整合應用，預計來做註冊、登入、登出這類的動態程式，在這裏首先介紹註冊的部分，本著  node.js express web framework 的 mvc 架構，實際的應用，我們會預想著註冊時會用到哪些、資料庫要有哪些規劃安排。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/07/24/nodejs-21-express-register/#more" rel="contents">
+            <a class="btn" href="/2017/07/24/nodejs/nodejs-23-heroku/#more" rel="contents">
               閱讀全文 &raquo;
             </a>
           </div>
@@ -1079,7 +1097,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">35</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
@@ -1101,7 +1119,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">標籤</span>
               </a>
             </div>

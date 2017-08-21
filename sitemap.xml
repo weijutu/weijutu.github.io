@@ -2,231 +2,245 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://weijutu.github.io/2017/07/26/nodejs-30-kp-api/</loc>
+    <loc>https://weijutu.github.io/2017/08/21/excel/excel-get-value-by-fn/</loc>
+    
+    <lastmod>2017-08-21T02:19:44.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2017/08/21/excel/excel-string-splite-to-cell/</loc>
+    
+    <lastmod>2017-08-21T01:56:40.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/about/index.html</loc>
+    
+    <lastmod>2017-08-01T06:19:27.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs/nodejs-01-start/</loc>
+    
+    <lastmod>2017-08-01T05:47:27.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2017/07/26/nodejs/nodejs-30-kp-api/</loc>
     
     <lastmod>2017-07-31T10:47:52.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/07/26/nodejs-29-package/</loc>
+    <loc>https://weijutu.github.io/2017/07/26/nodejs/nodejs-29-package/</loc>
     
     <lastmod>2017-07-31T10:33:56.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/07/26/nodejs-28-rest/</loc>
+    <loc>https://weijutu.github.io/2017/07/26/nodejs/nodejs-28-rest/</loc>
     
     <lastmod>2017-07-31T10:27:16.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/07/26/nodejs-27-forever/</loc>
+    <loc>https://weijutu.github.io/2017/07/26/nodejs/nodejs-27-forever/</loc>
     
     <lastmod>2017-07-31T10:26:00.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/07/26/nodejs-26-jade-2/</loc>
+    <loc>https://weijutu.github.io/2017/07/26/nodejs/nodejs-26-jade-2/</loc>
     
     <lastmod>2017-07-31T08:03:44.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/07/25/nodejs-25-jade-1/</loc>
+    <loc>https://weijutu.github.io/2017/07/25/nodejs/nodejs-25-jade-1/</loc>
     
     <lastmod>2017-07-31T07:59:23.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/07/24/nodejs-24-npm-version/</loc>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs/nodejs-24-npm-version/</loc>
     
     <lastmod>2017-07-31T07:51:25.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/07/24/nodejs-23-heroku/</loc>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs/nodejs-23-heroku/</loc>
     
     <lastmod>2017-07-31T07:46:08.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/07/24/nodejs-22-express-login/</loc>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs/nodejs-22-express-login/</loc>
     
     <lastmod>2017-07-31T07:38:14.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/07/24/nodejs-21-express-register/</loc>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs/nodejs-21-express-register/</loc>
     
     <lastmod>2017-07-31T07:35:57.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/07/24/nodejs-20-node-inspector/</loc>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs/nodejs-20-node-inspector/</loc>
     
     <lastmod>2017-07-31T07:30:52.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/07/24/nodejs-19-chatroom/</loc>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs/nodejs-19-chatroom/</loc>
     
     <lastmod>2017-07-29T10:15:52.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/07/24/nodejs-18-express/</loc>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs/nodejs-18-express/</loc>
     
     <lastmod>2017-07-29T10:07:57.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/07/24/nodejs-17-ejs-json/</loc>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs/nodejs-17-ejs-json/</loc>
     
     <lastmod>2017-07-29T09:55:48.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/07/24/nodejs-16-util-inherits/</loc>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs/nodejs-16-util-inherits/</loc>
     
     <lastmod>2017-07-25T15:05:40.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/07/24/nodejs-15-markdown/</loc>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs/nodejs-15-markdown/</loc>
     
     <lastmod>2017-07-25T11:52:00.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/07/24/nodejs-14-middleware/</loc>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs/nodejs-14-middleware/</loc>
     
     <lastmod>2017-07-25T11:51:45.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/07/24/nodejs-13-fs/</loc>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs/nodejs-13-fs/</loc>
     
     <lastmod>2017-07-25T11:51:27.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/07/24/nodejs-12-nodemailer/</loc>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs/nodejs-12-nodemailer/</loc>
     
     <lastmod>2017-07-25T11:51:09.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/07/24/nodejs-11-mysql-crud-update/</loc>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs/nodejs-11-mysql-crud-update/</loc>
     
     <lastmod>2017-07-25T11:50:32.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/07/24/nodejs-10-mysql-crud-read/</loc>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs/nodejs-10-mysql-crud-read/</loc>
     
     <lastmod>2017-07-25T11:02:32.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/07/24/nodejs-09-mysql-crud-delete/</loc>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs/nodejs-09-mysql-crud-delete/</loc>
     
     <lastmod>2017-07-25T11:01:53.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/07/24/nodejs-08-mysql-crud-create/</loc>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs/nodejs-08-mysql-crud-create/</loc>
     
     <lastmod>2017-07-25T11:01:35.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/07/24/nodejs-07-mysql-start/</loc>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs/nodejs-07-mysql-start/</loc>
     
     <lastmod>2017-07-25T10:43:09.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/07/24/nodejs-01-start/</loc>
-    
-    <lastmod>2017-07-25T10:12:22.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://weijutu.github.io/2017/07/24/nodejs-05-bower/</loc>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs/nodejs-05-bower/</loc>
     
     <lastmod>2017-07-25T10:10:59.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/07/24/nodejs-06-style-guide/</loc>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs/nodejs-06-style-guide/</loc>
     
     <lastmod>2017-07-24T16:37:15.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/07/24/nodejs-04-nvm/</loc>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs/nodejs-04-nvm/</loc>
     
     <lastmod>2017-07-24T16:32:12.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/07/24/nodejs-03-npm/</loc>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs/nodejs-03-npm/</loc>
     
     <lastmod>2017-07-24T16:32:05.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/07/24/nodejs-02-install/</loc>
+    <loc>https://weijutu.github.io/2017/07/24/nodejs/nodejs-02-install/</loc>
     
     <lastmod>2017-07-24T16:31:53.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/categories/index.html</loc>
+    <loc>https://weijutu.github.io/2017/03/02/metero/metero-intro/</loc>
     
     <lastmod>2017-07-24T01:04:20.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/03/02/metero-intro/</loc>
-    
-    <lastmod>2017-07-24T01:04:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://weijutu.github.io/2017/03/04/r-xy-scatter-diagram/</loc>
+    <loc>https://weijutu.github.io/2017/03/04/r/r-xy-scatter-diagram/</loc>
     
     <lastmod>2017-07-24T01:04:20.000Z</lastmod>
     
@@ -240,7 +254,14 @@
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/03/03/r-intro/</loc>
+    <loc>https://weijutu.github.io/categories/index.html</loc>
+    
+    <lastmod>2017-07-24T01:04:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2017/03/03/r/r-intro/</loc>
     
     <lastmod>2017-07-21T02:17:31.000Z</lastmod>
     

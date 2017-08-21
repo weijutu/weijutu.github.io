@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-tw">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Node.js,鐵人賽,Markdown," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="噗噗。故我在" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="繼上一篇完成讀取檔案的操作之後，本篇將介紹讀取  markdown 檔案內容顯示在頁面上面。 話說前頭，什麼是 markdown?從 wiki 網站所說的，它是一種輕量級的標記語言，允許使用容易讀也容易寫的純文字的格式，最後轉換 xhtml, html 檔案，就有點像是一般電子郵件純文本的特性。可以從這個網址來 http://markdown.tw/ 學習每個元素的寫法。">
+<meta name="keywords" content="Node.js,鐵人賽,Markdown">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Node.js 系列學習日誌#15 - 讀取 markdown 檔案內容顯示在頁面上">
+<meta property="og:url" content="https://weijutu.github.io/2017/07/24/nodejs/nodejs-15-markdown/index.html">
+<meta property="og:site_name" content="噗噗。故我在">
+<meta property="og:description" content="繼上一篇完成讀取檔案的操作之後，本篇將介紹讀取  markdown 檔案內容顯示在頁面上面。 話說前頭，什麼是 markdown?從 wiki 網站所說的，它是一種輕量級的標記語言，允許使用容易讀也容易寫的純文字的格式，最後轉換 xhtml, html 檔案，就有點像是一般電子郵件純文本的特性。可以從這個網址來 http://markdown.tw/ 學習每個元素的寫法。">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/61.png">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/62.png">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/63.png">
+<meta property="og:updated_time" content="2017-07-25T11:52:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Node.js 系列學習日誌#15 - 讀取 markdown 檔案內容顯示在頁面上">
+<meta name="twitter:description" content="繼上一篇完成讀取檔案的操作之後，本篇將介紹讀取  markdown 檔案內容顯示在頁面上面。 話說前頭，什麼是 markdown?從 wiki 網站所說的，它是一種輕量級的標記語言，允許使用容易讀也容易寫的純文字的格式，最後轉換 xhtml, html 檔案，就有點像是一般電子郵件純文本的特性。可以從這個網址來 http://markdown.tw/ 學習每個元素的寫法。">
+<meta name="twitter:image" content="https://weijutu.github.io/images/nodejs/61.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-15-markdown/"/>
+
+
+
+
+
+  <title>Node.js 系列學習日誌#15 - 讀取 markdown 檔案內容顯示在頁面上 | 噗噗。故我在</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-72890173-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">噗噗。故我在</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">a > 1, a ^ n = ∞</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分類
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            關於
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-15-markdown/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Helen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="噗噗。故我在">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Node.js 系列學習日誌#15 - 讀取 markdown 檔案內容顯示在頁面上</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-07-24T00:15:00+08:00">
+                2017-07-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Node-js/" itemprop="url" rel="index">
+                    <span itemprop="name">Node.js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/07/24/nodejs/nodejs-15-markdown/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/07/24/nodejs/nodejs-15-markdown/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>繼上一篇完成讀取檔案的操作之後，本篇將介紹讀取  markdown 檔案內容顯示在頁面上面。</p>
+<h1 id="話說前頭，什麼是-markdown"><a href="#話說前頭，什麼是-markdown" class="headerlink" title="話說前頭，什麼是 markdown?"></a>話說前頭，什麼是 markdown?</h1><p>從 wiki 網站所說的，它是一種輕量級的標記語言，允許使用容易讀也容易寫的純文字的格式，最後轉換 xhtml, html 檔案，就有點像是一般電子郵件純文本的特性。可以從這個網址來 <a href="http://markdown.tw/" target="_blank" rel="external">http://markdown.tw/</a> 學習每個元素的寫法。</p>
+<a id="more"></a>
+<h1 id="node-markdown-實作"><a href="#node-markdown-實作" class="headerlink" title="node-markdown 實作"></a>node-markdown 實作</h1><p>首先我們建立一個 express web framework 的專案，在這邊的樣板引擎是用 ejs ，因此下的指令是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$express -e nodejs-fs-markdown</div></pre></td></tr></table></figure>
+<p>在根目錄底下建立一個 markdown 檔案，名為 book.md 的檔案，開啓 book.md 檔案後，我們任意打一些 markdown 的格式預備要來轉換  html 格式</p>
+<p><img src="/images/nodejs/61.png" alt=""></p>
+<p>接著重要我們要採用  node-markdown 的套件來安裝，詳見 <a href="https://www.npmjs.org/package/node-markdown" target="_blank" rel="external">https://www.npmjs.org/package/node-markdown</a> ，安裝方式可使用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$npm</span> install node-markdown</div></pre></td></tr></table></figure>
+<p>其檔案結構會是：</p>
+<p><img src="/images/nodejs/62.png" alt=""></p>
+<p>請打開 app.js 檔案，我們要將 node-markdown 引入，因此宣告方式為：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> md = <span class="built_in">require</span>(<span class="string">"node-markdown"</span>).Markdown;</div></pre></td></tr></table></figure>
+<p>並且在 app.js 檔案裡面安插以下這段</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">app.get(<span class="string">'/markdown'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>)</span>&#123;</div><div class="line">    fs.readFile(<span class="string">"./book.md"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, data</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (err) &#123;</div><div class="line">            <span class="keyword">throw</span> err;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">       <span class="comment">//使用  md 方法將檔案內容轉行為 html 格式</span></div><div class="line">        str = md(data.toString());</div><div class="line">        <span class="built_in">console</span>.log(str);</div><div class="line"></div><div class="line">        <span class="comment">//回應結果顯示在頁面上</span></div><div class="line">        res.send(str)</div><div class="line">        res.end();</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>在這邊使用了 /markdown 作為進入的網址，而這個網址主要是去解析 markdown 的檔案，在這個 function 下，我們還需要利用  fs 核心模組來讀取 book.md 檔案，請務必在宣告的地方加入  var fs = require(“fs”);</p>
+<p>讀取的方式就使用  fs.readFile 方法，接著更重要的是再使用 md 方法將檔案內容轉換成  html 格式，最後，看一下結果如下，將會依照 markdown 的格式轉換</p>
+<p><img src="/images/nodejs/63.png" alt=""></p>
+<p>學習了這個工具，之後再撰寫 html 的檔案時，可以利用 markdown 的格式來寫，寫起來又輕鬆又好懂喔！<br>下集待續…</p>
+<h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><ul>
+<li><a href="http://markdown.tw/" target="_blank" rel="external">http://markdown.tw/</a></li>
+<li><a href="http://www.wikiwand.com/zh-tw/Markdown" target="_blank" rel="external">http://www.wikiwand.com/zh-tw/Markdown </a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Node-js/" rel="tag"># Node.js</a>
+          
+            <a href="/tags/鐵人賽/" rel="tag"># 鐵人賽</a>
+          
+            <a href="/tags/Markdown/" rel="tag"># Markdown</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/24/nodejs/nodejs-14-middleware/" rel="next" title="Node.js 系列學習日誌#14 - middleware 應用與開發">
+                <i class="fa fa-chevron-left"></i> Node.js 系列學習日誌#14 - middleware 應用與開發
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/24/nodejs/nodejs-16-util-inherits/" rel="prev" title="Node.js 系列學習日誌#16 - 基礎工具核心模組 util.inherits 實現原型繼承">
+                Node.js 系列學習日誌#16 - 基礎工具核心模組 util.inherits 實現原型繼承 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="Helen" />
+          <p class="site-author-name" itemprop="name">Helen</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">文章</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分類</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">標籤</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/weijutu" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/weiju516" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#話說前頭，什麼是-markdown"><span class="nav-number">1.</span> <span class="nav-text">話說前頭，什麼是 markdown?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#node-markdown-實作"><span class="nav-number">2.</span> <span class="nav-text">node-markdown 實作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#參考資料："><span class="nav-number">3.</span> <span class="nav-text">參考資料：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Helen</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://weijutugithubio.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://weijutu.github.io/2017/07/24/nodejs/nodejs-15-markdown/';
+          this.page.identifier = '2017/07/24/nodejs/nodejs-15-markdown/';
+          this.page.title = 'Node.js 系列學習日誌#15 - 讀取 markdown 檔案內容顯示在頁面上';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://weijutugithubio.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

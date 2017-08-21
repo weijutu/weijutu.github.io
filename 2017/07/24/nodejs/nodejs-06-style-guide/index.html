@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-tw">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Node.js,鐵人賽," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="噗噗。故我在" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="由於 node.js 是 javascript 作為開發的語言，開發的過程遵照程式碼規範撰寫讓整個程式風格達到一致。不過當然許多的 js 寫法都會有不同的風格存在，若您找不到要照什麼規則編寫程式，那麼可以參考這篇簡易的風格指南作為開發上的基本基礎。 本章節將介紹  node.js 幾個常用的撰寫手法來做介紹：  字串引號 區塊括號 變數宣告 變數命名 函數命名 物件與陣列 相等的運算符號 條件判斷">
+<meta name="keywords" content="Node.js,鐵人賽">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Node.js 系列學習日誌#6 - 撰寫程式的風格指南 (Style Guide)">
+<meta property="og:url" content="https://weijutu.github.io/2017/07/24/nodejs/nodejs-06-style-guide/index.html">
+<meta property="og:site_name" content="噗噗。故我在">
+<meta property="og:description" content="由於 node.js 是 javascript 作為開發的語言，開發的過程遵照程式碼規範撰寫讓整個程式風格達到一致。不過當然許多的 js 寫法都會有不同的風格存在，若您找不到要照什麼規則編寫程式，那麼可以參考這篇簡易的風格指南作為開發上的基本基礎。 本章節將介紹  node.js 幾個常用的撰寫手法來做介紹：  字串引號 區塊括號 變數宣告 變數命名 函數命名 物件與陣列 相等的運算符號 條件判斷">
+<meta property="og:updated_time" content="2017-07-24T16:37:15.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Node.js 系列學習日誌#6 - 撰寫程式的風格指南 (Style Guide)">
+<meta name="twitter:description" content="由於 node.js 是 javascript 作為開發的語言，開發的過程遵照程式碼規範撰寫讓整個程式風格達到一致。不過當然許多的 js 寫法都會有不同的風格存在，若您找不到要照什麼規則編寫程式，那麼可以參考這篇簡易的風格指南作為開發上的基本基礎。 本章節將介紹  node.js 幾個常用的撰寫手法來做介紹：  字串引號 區塊括號 變數宣告 變數命名 函數命名 物件與陣列 相等的運算符號 條件判斷">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-06-style-guide/"/>
+
+
+
+
+
+  <title>Node.js 系列學習日誌#6 - 撰寫程式的風格指南 (Style Guide) | 噗噗。故我在</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-72890173-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">噗噗。故我在</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">a > 1, a ^ n = ∞</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分類
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            關於
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-06-style-guide/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Helen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="噗噗。故我在">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Node.js 系列學習日誌#6 - 撰寫程式的風格指南 (Style Guide)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-07-24T00:06:00+08:00">
+                2017-07-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Node-js/" itemprop="url" rel="index">
+                    <span itemprop="name">Node.js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/07/24/nodejs/nodejs-06-style-guide/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/07/24/nodejs/nodejs-06-style-guide/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>由於 node.js 是 javascript 作為開發的語言，開發的過程遵照程式碼規範撰寫讓整個程式風格達到一致。不過當然許多的 js 寫法都會有不同的風格存在，若您找不到要照什麼規則編寫程式，那麼可以參考這篇簡易的風格指南作為開發上的基本基礎。</p>
+<p>本章節將介紹  node.js 幾個常用的撰寫手法來做介紹：</p>
+<ul>
+<li>字串引號</li>
+<li>區塊括號</li>
+<li>變數宣告</li>
+<li>變數命名</li>
+<li>函數命名</li>
+<li>物件與陣列</li>
+<li>相等的運算符號</li>
+<li>條件判斷</li>
+<li>嵌套閉包</li>
+</ul>
+<a id="more"></a>
+<h1 id="字串引號"><a href="#字串引號" class="headerlink" title="字串引號"></a>字串引號</h1><p>使用單引號，若物件是 json 格式，那麼就使用雙引號來定義 key, value</p>
+<h3 id="錯誤示範"><a href="#錯誤示範" class="headerlink" title="錯誤示範"></a>錯誤示範</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name =“test01”;</div></pre></td></tr></table></figure>
+<h3 id="正確寫法"><a href="#正確寫法" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name = ’test01’;</div></pre></td></tr></table></figure>
+<h1 id="區塊括號"><a href="#區塊括號" class="headerlink" title="區塊括號"></a>區塊括號</h1><h3 id="錯誤示範-1"><a href="#錯誤示範-1" class="headerlink" title="錯誤示範"></a>錯誤示範</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (<span class="literal">true</span>)</div><div class="line">&#123;</div><div class="line">     <span class="built_in">console</span>.log(“<span class="keyword">this</span> is a book.”);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="正確寫法-1"><a href="#正確寫法-1" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</div><div class="line">    <span class="built_in">console</span>.log(“<span class="keyword">this</span> is a book.”);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="變數宣告"><a href="#變數宣告" class="headerlink" title="變數宣告"></a>變數宣告</h1><p>使用一種對每一個變數做一個 var 宣告。</p>
+<h3 id="錯誤示範-2"><a href="#錯誤示範-2" class="headerlink" title="錯誤示範"></a>錯誤示範</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> ary = [<span class="string">"apple"</span>, <span class="string">"orange"</span>],</div><div class="line">     price = [<span class="number">150</span>, <span class="number">125</span>],</div><div class="line">     obj = &#123;&#125;;</div></pre></td></tr></table></figure>
+<h3 id="正確寫法-2"><a href="#正確寫法-2" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> ary = [<span class="string">"apple"</span>, <span class="string">"orange"</span>];</div><div class="line"><span class="keyword">var</span> price = [<span class="number">150</span>, <span class="number">125</span>];</div><div class="line"><span class="keyword">var</span> obj = &#123;&#125;;</div></pre></td></tr></table></figure>
+<h1 id="變數命名"><a href="#變數命名" class="headerlink" title="變數命名"></a>變數命名</h1><h3 id="錯誤示範-3"><a href="#錯誤示範-3" class="headerlink" title="錯誤示範"></a>錯誤示範</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> str_user = <span class="string">"test01"</span>;</div></pre></td></tr></table></figure>
+<h3 id="正確寫法-3"><a href="#正確寫法-3" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> strUser = <span class="string">"test01"</span>;</div></pre></td></tr></table></figure>
+<h1 id="函數命名"><a href="#函數命名" class="headerlink" title="函數命名"></a>函數命名</h1><h3 id="錯誤示範-4"><a href="#錯誤示範-4" class="headerlink" title="錯誤示範"></a>錯誤示範</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_Users</span>(<span class="params"></span>) </span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="正確寫法-4"><a href="#正確寫法-4" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">GetUser</span>(<span class="params"></span>)</span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="物件與陣列"><a href="#物件與陣列" class="headerlink" title="物件與陣列"></a>物件與陣列</h1><p>如果只有很小的資料為陣列的話，請將它寫在同一行，而當您的物件是包含 key, value 的形式時，則排列整齊讓閱讀起來更加容易</p>
+<h3 id="錯誤寫法"><a href="#錯誤寫法" class="headerlink" title="錯誤寫法"></a>錯誤寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> ary = [</div><div class="line">     <span class="string">"apple"</span>, <span class="string">"orange"</span></div><div class="line">];</div><div class="line"></div><div class="line"><span class="keyword">var</span> person = &#123; <span class="string">"name"</span>, <span class="string">"test01"</span></div><div class="line">               , <span class="string">"id"</span>: <span class="string">"abcd1234"</span> &#125;;</div></pre></td></tr></table></figure>
+<h3 id="正確寫法-5"><a href="#正確寫法-5" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> ary = [ <span class="string">"apple"</span>, <span class="string">"orange"</span> ];</div><div class="line"><span class="keyword">var</span> person = &#123;</div><div class="line">     <span class="string">"name"</span>, <span class="string">"test01"</span>,</div><div class="line">     <span class="string">"id"</span>: <span class="string">"abcd1234"</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h1 id="相等的運算符號"><a href="#相等的運算符號" class="headerlink" title="相等的運算符號"></a>相等的運算符號</h1><h3 id="錯誤寫法-1"><a href="#錯誤寫法-1" class="headerlink" title="錯誤寫法"></a>錯誤寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> index = <span class="number">0</span>;</div><div class="line"><span class="keyword">if</span> (index == <span class="string">''</span>) &#123;</div><div class="line">     <span class="built_in">console</span>.log(<span class="string">"nothing"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="正確寫法-6"><a href="#正確寫法-6" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> index = <span class="number">0</span></div><div class="line"><span class="keyword">if</span> (index === <span class="string">''</span>) &#123;</div><div class="line">     <span class="built_in">console</span>.log(<span class="string">"nothing"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="條件判斷"><a href="#條件判斷" class="headerlink" title="條件判斷"></a>條件判斷</h1><p>儘量不要將過多的判斷都塞在 if 裡面，請先將判斷部分在前面以變數方式先驗證，再將結果的 true, false 的答案擺在 if 裡面</p>
+<h3 id="錯誤寫法-2"><a href="#錯誤寫法-2" class="headerlink" title="錯誤寫法"></a>錯誤寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (task.isPrivate() || task.isEnabled()) &#123;</div><div class="line">     <span class="built_in">console</span>.log(<span class="string">"the task are private and enabled type"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="正確寫法-7"><a href="#正確寫法-7" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> isValid = (task.isPrivate() || task.isEnabled());</div><div class="line"><span class="keyword">if</span> (isValid) &#123;</div><div class="line">     <span class="built_in">console</span>.log(<span class="string">"the task are private and enabled type"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="嵌套閉包"><a href="#嵌套閉包" class="headerlink" title="嵌套閉包"></a>嵌套閉包</h1><p>在使用閉包的做法是，不要一直無限嵌套，因為這樣會使得程式過度雜亂</p>
+<h3 id="錯誤寫法-3"><a href="#錯誤寫法-3" class="headerlink" title="錯誤寫法"></a>錯誤寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">      obj.click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">           <span class="built_in">console</span>.log(<span class="string">"click..."</span>);</div><div class="line">      &#125;)</div><div class="line">&#125;, <span class="number">3000</span>);</div></pre></td></tr></table></figure>
+<h3 id="正確寫法-8"><a href="#正確寫法-8" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">     obj.click(fnObjClick);</div><div class="line">&#125;,<span class="number">3000</span>);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fnObjClick</span>(<span class="params"></span>) </span>&#123;</div><div class="line">     <span class="built_in">console</span>.log(<span class="string">"click..."</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><ul>
+<li><a href="https://github.com/felixge/node-style-guide" target="_blank" rel="external">https://github.com/felixge/node-style-guide</a></li>
+<li><a href="http://nodeguide.com/style.html" target="_blank" rel="external">http://nodeguide.com/style.html</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Node-js/" rel="tag"># Node.js</a>
+          
+            <a href="/tags/鐵人賽/" rel="tag"># 鐵人賽</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/24/nodejs/nodejs-05-bower/" rel="next" title="Node.js 系列學習日誌#5 - bower 管理相依套件工具">
+                <i class="fa fa-chevron-left"></i> Node.js 系列學習日誌#5 - bower 管理相依套件工具
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/24/nodejs/nodejs-07-mysql-start/" rel="prev" title="Node.js 系列學習日誌#7 - 連接 MySQL 並實現 CRUD 操作存取前的準備">
+                Node.js 系列學習日誌#7 - 連接 MySQL 並實現 CRUD 操作存取前的準備 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="Helen" />
+          <p class="site-author-name" itemprop="name">Helen</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">文章</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分類</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">標籤</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/weijutu" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/weiju516" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#字串引號"><span class="nav-number">1.</span> <span class="nav-text">字串引號</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#錯誤示範"><span class="nav-number">1.0.1.</span> <span class="nav-text">錯誤示範</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正確寫法"><span class="nav-number">1.0.2.</span> <span class="nav-text">正確寫法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#區塊括號"><span class="nav-number">2.</span> <span class="nav-text">區塊括號</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#錯誤示範-1"><span class="nav-number">2.0.1.</span> <span class="nav-text">錯誤示範</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正確寫法-1"><span class="nav-number">2.0.2.</span> <span class="nav-text">正確寫法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#變數宣告"><span class="nav-number">3.</span> <span class="nav-text">變數宣告</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#錯誤示範-2"><span class="nav-number">3.0.1.</span> <span class="nav-text">錯誤示範</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正確寫法-2"><span class="nav-number">3.0.2.</span> <span class="nav-text">正確寫法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#變數命名"><span class="nav-number">4.</span> <span class="nav-text">變數命名</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#錯誤示範-3"><span class="nav-number">4.0.1.</span> <span class="nav-text">錯誤示範</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正確寫法-3"><span class="nav-number">4.0.2.</span> <span class="nav-text">正確寫法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#函數命名"><span class="nav-number">5.</span> <span class="nav-text">函數命名</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#錯誤示範-4"><span class="nav-number">5.0.1.</span> <span class="nav-text">錯誤示範</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正確寫法-4"><span class="nav-number">5.0.2.</span> <span class="nav-text">正確寫法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#物件與陣列"><span class="nav-number">6.</span> <span class="nav-text">物件與陣列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#錯誤寫法"><span class="nav-number">6.0.1.</span> <span class="nav-text">錯誤寫法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正確寫法-5"><span class="nav-number">6.0.2.</span> <span class="nav-text">正確寫法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#相等的運算符號"><span class="nav-number">7.</span> <span class="nav-text">相等的運算符號</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#錯誤寫法-1"><span class="nav-number">7.0.1.</span> <span class="nav-text">錯誤寫法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正確寫法-6"><span class="nav-number">7.0.2.</span> <span class="nav-text">正確寫法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#條件判斷"><span class="nav-number">8.</span> <span class="nav-text">條件判斷</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#錯誤寫法-2"><span class="nav-number">8.0.1.</span> <span class="nav-text">錯誤寫法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正確寫法-7"><span class="nav-number">8.0.2.</span> <span class="nav-text">正確寫法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#嵌套閉包"><span class="nav-number">9.</span> <span class="nav-text">嵌套閉包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#錯誤寫法-3"><span class="nav-number">9.0.1.</span> <span class="nav-text">錯誤寫法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正確寫法-8"><span class="nav-number">9.0.2.</span> <span class="nav-text">正確寫法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#參考資料："><span class="nav-number">10.</span> <span class="nav-text">參考資料：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Helen</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://weijutugithubio.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://weijutu.github.io/2017/07/24/nodejs/nodejs-06-style-guide/';
+          this.page.identifier = '2017/07/24/nodejs/nodejs-06-style-guide/';
+          this.page.title = 'Node.js 系列學習日誌#6 - 撰寫程式的風格指南 (Style Guide)';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://weijutugithubio.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

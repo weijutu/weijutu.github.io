@@ -3,8 +3,90 @@
   
     
     <entry>
+      <title><![CDATA[Excel - 使用函數取得不重複值並計算總計]]></title>
+      <url>/2017/08/21/excel/excel-get-value-by-fn/</url>
+      <content type="html"><![CDATA[<p>有沒有使用 Excel 輸入資料後，想要把某一列的資料做不重複的篩選？若您剛好有這個疑問，來到這裡算是走對地方了～ 我們有很簡單的例子一步一步的說明</p>
+<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>不採取樞扭分析表，請利用函數實作</p>
+<h3 id="說明"><a href="#說明" class="headerlink" title="說明"></a>說明</h3><p>今天有一個資料表欄位有「類型」、「數量」、「名稱」，需要做一些統計，並且在一般資料區塊下方，當有輸入時，必須同時同步計算以下兩項區域</p>
+<ol>
+<li>依照類型將名稱分類，表格呈現上方列為「類型」、左方為「名稱」</li>
+<li>取得不重複的「名稱」，計算各類型的名稱的總數</li>
+</ol>
+<a id="more"></a>
+<h3 id="先定義實作目標"><a href="#先定義實作目標" class="headerlink" title="先定義實作目標"></a>先定義實作目標</h3><p>看到這邊，我們先將把所需要的欄位先定義清楚，主要分為三個部分，分別是資料區（Ａ）、分類區（Ｂ）、統計數量區（Ｃ）</p>
+<h3 id="資料區"><a href="#資料區" class="headerlink" title="資料區"></a>資料區</h3><p>首先是資料區，這裡是一般的資料，也就是會一直在輸入的地方，也預備要讓其他Ｂ、Ｃ區做自動計算，欄位這麼放</p>
+<ul>
+<li>Ａ：輸入「名稱」</li>
+<li>Ｂ：輸入「數量」</li>
+<li>Ｃ：輸入「類型」</li>
+</ul>
+<p>就像這樣子。</p>
+<p><img src="/images/excel/20140521-1.png" alt=""></p>
+<h3 id="分類區"><a href="#分類區" class="headerlink" title="分類區"></a>分類區</h3><p>接下來是分類區，欄位這麼放</p>
+<p><img src="/images/excel/20140521-2.png" alt=""></p>
+<h4 id="E：「名稱」"><a href="#E：「名稱」" class="headerlink" title="Ｅ：「名稱」"></a>Ｅ：「名稱」</h4><p>特別注意的是名稱雖然都來自資料區，可是並不能利用一般複製貼上就貼過去，我們可以利用函數，讓他自動把值帶過來，請輸入以下函數：</p>
+<p><code>=IF(A1&gt;0,A1,&quot;&quot;)</code></p>
+<p>Ｆ、Ｇ、H：「類型」，函數分別是</p>
+<h4 id="F-欄"><a href="#F-欄" class="headerlink" title="F 欄"></a>F 欄</h4><p><code>=IF(C1=&quot;A&quot;,B1,&quot;&quot;)</code></p>
+<h4 id="G-欄"><a href="#G-欄" class="headerlink" title="G 欄"></a>G 欄</h4><p><code>=IF(C1=&quot;B&quot;,B1,&quot;&quot;)</code></p>
+<h4 id="H-欄"><a href="#H-欄" class="headerlink" title="H 欄"></a>H 欄</h4><p><code>=IF(C1=&quot;C&quot;,B1,&quot;&quot;)</code></p>
+<h3 id="統計數量區"><a href="#統計數量區" class="headerlink" title="統計數量區"></a>統計數量區</h3><p>然後，統計數量區，就是計算各種不同分類的不重複水果數量有多少，以下就是各欄位輸入的函數</p>
+<p><img src="/images/excel/20140521-3.png" alt=""></p>
+<h4 id="J-欄"><a href="#J-欄" class="headerlink" title="J 欄"></a>J 欄</h4><p>重點就是在這一段，我們要將資料區的資料，採取不重複的做法呈現，換句話說，當使用者輸入資料區的時候，有出現重複時也只能算是一筆</p>
+<p><code>=INDEX(A:A,SMALL(IF(MATCH($A$1:$A$5000&amp;&quot;&quot;,$A$1:$A$5000&amp;&quot;&quot;,0)=ROW($A$1:$A$5000),ROW($A$1:$A$5000),4^8),ROW(A1)))&amp;&quot;&quot;</code></p>
+<h4 id="K-欄"><a href="#K-欄" class="headerlink" title="K 欄"></a>K 欄</h4><p>這一欄就是要將A類的水果總計起來，我們還需要借用分類區的地方把資料提取出來</p>
+<p><code>=IF($J1&gt;0,SUMIF($E$1:$E$5000,$J1,$F$1:F$5000),&quot;&quot;)</code></p>
+<h4 id="L-欄"><a href="#L-欄" class="headerlink" title="L 欄"></a>L 欄</h4><p>這一欄就是要將B類的水果總計起來，我們還需要借用分類區的地方把資料提取出來</p>
+<p><code>=IF($J1&gt;0,SUMIF($E$1:$E$5000,$J1,$G$1:$H$5000),&quot;&quot;)</code></p>
+<h4 id="M-欄"><a href="#M-欄" class="headerlink" title="M 欄"></a>M 欄</h4><p>這一欄就是要將C類的水果總計起來，我們還需要借用分類區的地方把資料提取出來</p>
+<p><code>=IF($J1&gt;0,SUMIF($E$1:$E$5000,$J1,$H$1:$H$5000),&quot;&quot;)</code></p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> excel </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Excel - 字串分割到不同的儲存格]]></title>
+      <url>/2017/08/21/excel/excel-string-splite-to-cell/</url>
+      <content type="html"><![CDATA[<p>今天要介紹的是，如何將字串分割到不同的儲存格，也就是說當你今天遇到一個字串，但是字串裡面有兩個資訊想要各別放</p>
+<p>比如以下字串：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">common.delete=Delete</div></pre></td></tr></table></figure>
+<p>結果預計要像這樣</p>
+<p><img src="/images/excel/20140523-1.png" alt=""></p>
+<p>如果你有很多個像這樣的要把字串切割的話，這時候你還會用 Copy &amp; Paste 的做法去貼到不同的欄位嗎？</p>
+<a id="more"></a>
+<p>以下用個簡單的資料當作例子，我想要將等於的左右兩邊，各別的放到不同的儲存格</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">common.delete=Delete</div><div class="line">common.add=Create</div><div class="line">common.modify=Edit</div><div class="line">common.name=Name</div><div class="line">common.change=Change</div><div class="line">common.manage=Management</div><div class="line">common.search=Search</div><div class="line">btn.cancel=Cancel</div><div class="line">btn.Submit=Submit</div></pre></td></tr></table></figure>
+<h3 id="快速實作方法"><a href="#快速實作方法" class="headerlink" title="快速實作方法"></a>快速實作方法</h3><h4 id="第一步-先將欄位選取起來"><a href="#第一步-先將欄位選取起來" class="headerlink" title="第一步: 先將欄位選取起來"></a>第一步: 先將欄位選取起來</h4><p>請先將資料擺在 A 欄位那邊，然後滑鼠將資料選取起來，如下圖所示：</p>
+<p><img src="/images/excel/20140523-2.png" alt=""></p>
+<h4 id="第二步-按下-資料-gt-資料剖析-啟動-資料剖析精靈"><a href="#第二步-按下-資料-gt-資料剖析-啟動-資料剖析精靈" class="headerlink" title="第二步: 按下 [資料] &gt; [資料剖析] 啟動 [資料剖析精靈]"></a>第二步: 按下 [資料] &gt; [資料剖析] 啟動 [資料剖析精靈]</h4><p>接著他就會開資料剖析精靈，超簡單，三個小步驟而已<br>(步驟 3 之 1)：我們的目標是要分隔，所以選第一個，如果直接按完成的話，事實上跟我們需求不符，因為他會利用預設的 tab 區分隔，所以請繼續按下一步</p>
+<p><img src="/images/excel/20140523-3.png" alt=""></p>
+<p>(步驟 3 之 2) ：這邊我們要確定資料分隔的符號是什麼</p>
+<p><img src="/images/excel/20140523-4.png" alt=""></p>
+<p>(步驟 3 之 3)：最後可以看看預覽分割的結果，確定之後就按完成按鈕</p>
+<p><img src="/images/excel/20140523-5.png" alt=""></p>
+<p>結果: 一秒完成 !</p>
+<p><img src="/images/excel/20140523-6.png" alt=""></p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> excel </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Node.js 系列學習日誌#30 - 取得野生柯P相簿 API範例]]></title>
-      <url>/2017/07/26/nodejs-30-kp-api/</url>
+      <url>/2017/07/26/nodejs/nodejs-30-kp-api/</url>
       <content type="html"><![CDATA[<p>本篇將介紹用野生柯P API來製作 api 的呼叫，但是api 網站已經失效，僅能提供概念說明。這是透過 node-rest-client 的套件製作</p>
 <a id="more"></a>
 <p>首先先建立一個 express web framework 框架，請在 terminal  上輸入：</p>
@@ -55,7 +137,7 @@
     
     <entry>
       <title><![CDATA[Node.js 系列學習日誌#29 - 使用 package.json 安裝、管理模組]]></title>
-      <url>/2017/07/26/nodejs-29-package/</url>
+      <url>/2017/07/26/nodejs/nodejs-29-package/</url>
       <content type="html"><![CDATA[<p>npm 包管理器是 Node.js 的模組管理工具，npm 的包就像 java 的類別庫，將功能獨立封裝起來，目前已經有相當多的工具可以運用，因此首先我們看一下 npm 的指令有哪些，而 npm 的命令會與  package.json 這個檔案息息相關，是接下來會說明到的。</p>
 <p>package.json</p>
 <p>它是一種 CommonJS 規定用來描述包的文件，是一個包含 json 格式的說明文件，裡面可以定義相依的相關套件以及應用程式的資訊，我們從 <a href="http://wiki.commonjs.org/wiki/Packages/1.1" target="_blank" rel="external">http://wiki.commonjs.org/wiki/Packages/1.1</a> Wiki 網頁了解到，他基本可以定義 應用程式名稱、版本、描述、關鍵字、授權、貢獻者、維護者、腳本等其他，還有更令 Node.js 最重要的就相依套件將是會在開發過程中會經常遇到的，它是以套件名稱和版本號組成的。</p>
@@ -103,8 +185,54 @@
     </entry>
     
     <entry>
+      <title><![CDATA[Node.js 系列學習日誌#28 - REST 路由規則]]></title>
+      <url>/2017/07/26/nodejs/nodejs-28-rest/</url>
+      <content type="html"><![CDATA[<p>今天我們使用 express 框架介紹一下 REST  路由規則，REST 是一種  http 協定的網路應用，http 提供了八種方法使用：</p>
+<a id="more"></a>
+<ul>
+<li><p>OPTIONS：這個方法可使伺服器傳回該資源所支援的所有HTTP請求方法。用<code>*</code>來代替資源名稱，向Web伺服器傳送OPTIONS請求，可以測試伺服器功能是否正常運作。</p>
+</li>
+<li><p>HEAD：與GET方法一樣，都是向伺服器發出指定資源的請求。只不過伺服器將不傳回資源的本文部份。它的好處在於，使用這個方法可以在不必傳輸全部內容的情況下，就可以獲取其中「關於該資源的資訊」（元資訊或稱元資料）。</p>
+</li>
+<li><p>GET：向指定的資源發出「顯示」請求。使用GET方法應該只用在讀取資料，而不應當被用於產生「副作用」的操作中，例如在Web Application中。其中一個原因是GET可能會被網路蜘蛛等隨意存取。參見安全方法</p>
+</li>
+<li><p>POST：向指定資源提交資料，請求伺服器進行處理（例如提交表單或者上傳檔案）。資料被包含在請求本文中。這個請求可能會建立新的資源或修改現有資源，或二者皆有。</p>
+</li>
+<li><p>PUT：向指定資源位置上傳其最新內容。</p>
+</li>
+<li><p>DELETE：請求伺服器刪除Request-URI所標識的資源。</p>
+</li>
+<li><p>TRACE：回顯伺服器收到的請求，主要用於測試或診斷。</p>
+</li>
+<li><p>CONNECT：HTTP/1.1協定中預留給能夠將連線改為管道方式的代理伺服器。通常用於SSL加密伺服器的連結（經由非加密的HTTP代理伺服器）</p>
+</li>
+</ul>
+<p>而 express 網頁框架也針對 http 請求方法設計路由的函數：</p>
+<p><img src="/images/nodejs/124.png" alt=""></p>
+<p>通常在設計 rest 時，常用的是 get (取得), post (新增), put (更新), delete (刪除)</p>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE" target="_blank" rel="external">http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> Node.js </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Node.js </tag>
+            
+            <tag> 鐵人賽 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Node.js 系列學習日誌#27 - forever 讓程式保持執行狀態]]></title>
-      <url>/2017/07/26/nodejs-27-forever/</url>
+      <url>/2017/07/26/nodejs/nodejs-27-forever/</url>
       <content type="html"><![CDATA[<p>程式準備要部署上線時，就會面臨到執行程式的方式，伺服器的管理，是不是能有一個運行 Node.js 程式，並且有個工具處理這件事情。<br>forever 可以作為保持運行的狀態，管理 Node.js 程式服務，在 forever 進程之下，建立子進程，執行啟動與停止的命令相當簡單。<br>更特別的是，經常我們在寫 Node.js 的時候，每次更動的檔案時都需要再重新執行啟動服務的指令 (例如：node app.js)，而這個工具是當每次更新程式的時候，它會自動重新啟動服務，更方便許多了呢！</p>
 <p>這是官方的描述：（<a href="https://github.com/nodejitsu/forever）" target="_blank" rel="external">https://github.com/nodejitsu/forever）</a></p>
 <p>A simple CLI tool for ensuring that a given script runs continuously (i.e. forever).</p>
@@ -151,54 +279,8 @@
     </entry>
     
     <entry>
-      <title><![CDATA[Node.js 系列學習日誌#28 - REST 路由規則]]></title>
-      <url>/2017/07/26/nodejs-28-rest/</url>
-      <content type="html"><![CDATA[<p>今天我們使用 express 框架介紹一下 REST  路由規則，REST 是一種  http 協定的網路應用，http 提供了八種方法使用：</p>
-<a id="more"></a>
-<ul>
-<li><p>OPTIONS：這個方法可使伺服器傳回該資源所支援的所有HTTP請求方法。用<code>*</code>來代替資源名稱，向Web伺服器傳送OPTIONS請求，可以測試伺服器功能是否正常運作。</p>
-</li>
-<li><p>HEAD：與GET方法一樣，都是向伺服器發出指定資源的請求。只不過伺服器將不傳回資源的本文部份。它的好處在於，使用這個方法可以在不必傳輸全部內容的情況下，就可以獲取其中「關於該資源的資訊」（元資訊或稱元資料）。</p>
-</li>
-<li><p>GET：向指定的資源發出「顯示」請求。使用GET方法應該只用在讀取資料，而不應當被用於產生「副作用」的操作中，例如在Web Application中。其中一個原因是GET可能會被網路蜘蛛等隨意存取。參見安全方法</p>
-</li>
-<li><p>POST：向指定資源提交資料，請求伺服器進行處理（例如提交表單或者上傳檔案）。資料被包含在請求本文中。這個請求可能會建立新的資源或修改現有資源，或二者皆有。</p>
-</li>
-<li><p>PUT：向指定資源位置上傳其最新內容。</p>
-</li>
-<li><p>DELETE：請求伺服器刪除Request-URI所標識的資源。</p>
-</li>
-<li><p>TRACE：回顯伺服器收到的請求，主要用於測試或診斷。</p>
-</li>
-<li><p>CONNECT：HTTP/1.1協定中預留給能夠將連線改為管道方式的代理伺服器。通常用於SSL加密伺服器的連結（經由非加密的HTTP代理伺服器）</p>
-</li>
-</ul>
-<p>而 express 網頁框架也針對 http 請求方法設計路由的函數：</p>
-<p><img src="/images/nodejs/124.png" alt=""></p>
-<p>通常在設計 rest 時，常用的是 get (取得), post (新增), put (更新), delete (刪除)</p>
-<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE" target="_blank" rel="external">http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE</a></p>
-]]></content>
-      
-        <categories>
-            
-            <category> Node.js </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Node.js </tag>
-            
-            <tag> 鐵人賽 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[Node.js 系列學習日誌#26 - 介紹 Jade  Template Engine 模板引擎 (下)]]></title>
-      <url>/2017/07/26/nodejs-26-jade-2/</url>
+      <url>/2017/07/26/nodejs/nodejs-26-jade-2/</url>
       <content type="html"><![CDATA[<p>繼上一篇 （<a href="http://ithelp.ithome.com.tw/ironman7/app/article/dev/recent/10157760）上集介紹了" target="_blank" rel="external">http://ithelp.ithome.com.tw/ironman7/app/article/dev/recent/10157760）上集介紹了</a> 標籤、條件、迴圈、語法，本章節繼續介紹 Jade 的用法<br>分別是</p>
 <ul>
 <li>comments</li>
@@ -250,7 +332,7 @@
     
     <entry>
       <title><![CDATA[Node.js 系列學習日誌#25 - 介紹 Jade  Template Engine 模板引擎 (上)]]></title>
-      <url>/2017/07/25/nodejs-25-jade-1/</url>
+      <url>/2017/07/25/nodejs/nodejs-25-jade-1/</url>
       <content type="html"><![CDATA[<p><img src="/images/nodejs/107.png" alt=""></p>
 <p>Node.js 開發網頁它有許多的樣板引擎可以使用，例如常見的 Jade, EJS。樣板引擎也可以稱為樣板處理器 （Template Processor）或者叫過濾器 （Filter）。其他的語言也有個別使用的樣板引擎，像是 PHP 的 Smarty、 Ruby 的 ERB，本章節會以 jade 作為基礎的介紹如何透過樣板引擎實作 Node.js 網頁。</p>
 <p>官方網站：<a href="http://jade-lang.com/" target="_blank" rel="external">http://jade-lang.com/</a></p>
@@ -352,7 +434,7 @@
     
     <entry>
       <title><![CDATA[Node.js 系列學習日誌#24 - npm 相依套件指定版本與自動更新 package.json]]></title>
-      <url>/2017/07/24/nodejs-24-npm-version/</url>
+      <url>/2017/07/24/nodejs/nodejs-24-npm-version/</url>
       <content type="html"><![CDATA[<p><img src="/images/nodejs/101.png" alt=""></p>
 <p>在管理套件工具的版本時，在 package.json  檔案裡面有一個 dependencies 的部分，裡面包含著套件的名稱與版本號，今天要談的是版本號的指定。</p>
 <a id="more"></a>
@@ -428,7 +510,7 @@
     
     <entry>
       <title><![CDATA[Node.js 系列學習日誌#23 - 部署上線至 Heroku 雲端平台環境]]></title>
-      <url>/2017/07/24/nodejs-23-heroku/</url>
+      <url>/2017/07/24/nodejs/nodejs-23-heroku/</url>
       <content type="html"><![CDATA[<p><img src="/images/nodejs/88.png" alt=""></p>
 <p>Heroku 是雲端運算的平台，您可以將您的應用程式放到雲端空間上面</p>
 <a id="more"></a>
@@ -482,7 +564,7 @@
     
     <entry>
       <title><![CDATA[Node.js 系列學習日誌#22 - 使用 express, mysql, ejs 實作登入/登出功能]]></title>
-      <url>/2017/07/24/nodejs-22-express-login/</url>
+      <url>/2017/07/24/nodejs/nodejs-22-express-login/</url>
       <content type="html"><![CDATA[<p>上篇介紹了註冊，相對的就一定要來介紹登入的功能。在資料庫上定義了 username, userpass 的欄位，登入的時候就在頁面上擺上兩個輸入框，以及登入的按鈕。</p>
 <p><img src="/images/nodejs/86.png" alt=""></p>
 <a id="more"></a>
@@ -523,7 +605,7 @@
     
     <entry>
       <title><![CDATA[Node.js 系列學習日誌#21 - 使用 express, mysql, ejs 實作註冊功能]]></title>
-      <url>/2017/07/24/nodejs-21-express-register/</url>
+      <url>/2017/07/24/nodejs/nodejs-21-express-register/</url>
       <content type="html"><![CDATA[<p><img src="/images/nodejs/83.png" alt=""></p>
 <p>本篇將介紹 node.js 系列學習日誌以來的一些整合應用，預計來做註冊、登入、登出這類的動態程式，在這裏首先介紹註冊的部分，本著  node.js express web framework 的 mvc 架構，實際的應用，我們會預想著註冊時會用到哪些、資料庫要有哪些規劃安排。</p>
 <a id="more"></a>
@@ -573,7 +655,7 @@
     
     <entry>
       <title><![CDATA[Node.js 系列學習日誌#20 - 調校 Debug 工具 node-inspector]]></title>
-      <url>/2017/07/24/nodejs-20-node-inspector/</url>
+      <url>/2017/07/24/nodejs/nodejs-20-node-inspector/</url>
       <content type="html"><![CDATA[<p>開發過程所撰寫的程式，總是要跟 bugs 打交道，本篇文章介紹一套官方推薦的 Node.js Debug 調校工具 node-inspector，而Node.js 是可以透過  command 命令列方式除錯，不過 node-inspector 則是透過 Web 網頁的方式來操作，讓開發者在調校更美觀方便一些。在這 node-inspector 安裝之前，我們必須要有一個 webkit 的瀏覽器，比如許多人使用的 chrome。接著我們就可以進行安裝 node-inspector</p>
 <a id="more"></a>
 <h3 id="安裝指令"><a href="#安裝指令" class="headerlink" title="安裝指令"></a>安裝指令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$npm install -g node-inspector</div></pre></td></tr></table></figure>
@@ -614,7 +696,7 @@
     
     <entry>
       <title><![CDATA[Node.js 系列學習日誌#19 - 運用 express, socket.io, boostrap 建立一個簡單的聊天室功能]]></title>
-      <url>/2017/07/24/nodejs-19-chatroom/</url>
+      <url>/2017/07/24/nodejs/nodejs-19-chatroom/</url>
       <content type="html"><![CDATA[<p>寫過網頁的大家們，大致上都了解 http 是一種無狀態的形式，假設頁面登進來的使用者，為了保存它的登入資訊，通常會使用 session 的觀念作為存放的物件，否則 server 端就不知道 client 端登進來的人是誰，不過今天不講session  的部分，而是我們要透過 socket.io 做雙向溝通，只要一旦建立了連線之後，就可以立即傳訊息出去，Client 的部分也立即接收到，相互取得訊息。</p>
 <p>今天要來透過介紹的是簡單的聊天室功能，讓大家了解 node.js 在 socket.io 運作的方式，以下是本章節會學習到的部分：</p>
 <ul>
@@ -668,7 +750,7 @@
     
     <entry>
       <title><![CDATA[Node.js 系列學習日誌#18 - 使用 Express 實作網頁開發框架]]></title>
-      <url>/2017/07/24/nodejs-18-express/</url>
+      <url>/2017/07/24/nodejs/nodejs-18-express/</url>
       <content type="html"><![CDATA[<p>Node.js 有許多網頁的框架，其中以 Express 的框架最為流行，也是滿多人才討論使用。在本篇將介紹這個工具具有快速建立網站框架的方法。</p>
 <p><img src="/images/nodejs/69.png" alt=""></p>
 <p>我們用全域模式安裝  express （ <code>$npm install -g express</code> ）之後就看一下 help 怎麼寫。</p>
@@ -707,7 +789,7 @@
     
     <entry>
       <title><![CDATA[Node.js 系列學習日誌#17 - 使用 express, ejs 實作讀取靜態 JSON 格式資料]]></title>
-      <url>/2017/07/24/nodejs-17-ejs-json/</url>
+      <url>/2017/07/24/nodejs/nodejs-17-ejs-json/</url>
       <content type="html"><![CDATA[<p>今天來介紹 express, ejs 實作讀取靜態 JSON 格式資料程式</p>
 <p>本章節將會學習到：</p>
 <ul>
@@ -754,7 +836,7 @@
     
     <entry>
       <title><![CDATA[Node.js 系列學習日誌#16 - 基礎工具核心模組 util.inherits 實現原型繼承]]></title>
-      <url>/2017/07/24/nodejs-16-util-inherits/</url>
+      <url>/2017/07/24/nodejs/nodejs-16-util-inherits/</url>
       <content type="html"><![CDATA[<p>在 js 的內建功能裡面如果有些不適合或無法滿足需求的時候，多半都要動手刻程式然後做到自己要的模組來呼叫方法。而 Node.js 提供了一個函數的集合，能夠比 js 更多的一些基本的處理，我們可以看到以下官方網站所提供 util 可用的方法。在本章節將介紹比較重要關注的方法</p>
 <p><img src="/images/nodejs/64.png" alt=""></p>
 <a id="more"></a>
@@ -795,7 +877,7 @@
     
     <entry>
       <title><![CDATA[Node.js 系列學習日誌#15 - 讀取 markdown 檔案內容顯示在頁面上]]></title>
-      <url>/2017/07/24/nodejs-15-markdown/</url>
+      <url>/2017/07/24/nodejs/nodejs-15-markdown/</url>
       <content type="html"><![CDATA[<p>繼上一篇完成讀取檔案的操作之後，本篇將介紹讀取  markdown 檔案內容顯示在頁面上面。</p>
 <h1 id="話說前頭，什麼是-markdown"><a href="#話說前頭，什麼是-markdown" class="headerlink" title="話說前頭，什麼是 markdown?"></a>話說前頭，什麼是 markdown?</h1><p>從 wiki 網站所說的，它是一種輕量級的標記語言，允許使用容易讀也容易寫的純文字的格式，最後轉換 xhtml, html 檔案，就有點像是一般電子郵件純文本的特性。可以從這個網址來 <a href="http://markdown.tw/" target="_blank" rel="external">http://markdown.tw/</a> 學習每個元素的寫法。</p>
 <a id="more"></a>
@@ -842,7 +924,7 @@
     
     <entry>
       <title><![CDATA[Node.js 系列學習日誌#14 - middleware 應用與開發]]></title>
-      <url>/2017/07/24/nodejs-14-middleware/</url>
+      <url>/2017/07/24/nodejs/nodejs-14-middleware/</url>
       <content type="html"><![CDATA[<p>從我們前幾篇用到 express web framework 框架的時候，express 就已經內建啟用 middleware 的概念，可以利用中間層的這個部分做一些效果，接下來本章節就來介紹  middleware 。首先我們先建立好一個 express web framework 框架</p>
 <p>建立 express 的指令是：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$express</span> -e nodejs-middleware</div></pre></td></tr></table></figure>
@@ -879,7 +961,7 @@
     
     <entry>
       <title><![CDATA[Node.js 系列學習日誌#13 - 核心模組檔案系統 fs]]></title>
-      <url>/2017/07/24/nodejs-13-fs/</url>
+      <url>/2017/07/24/nodejs/nodejs-13-fs/</url>
       <content type="html"><![CDATA[<p>node.js  提供了檔案操作的模組，包含讀取、刪除、寫入、更名等等的檔案操作。其中 fs 模組他還提供了同步與非同步的方法來使用。他的方法名稱也相當好懂，如果是非同步那麼就 fs.readFile() ，同步的話就是 fs.readFileSync()，相當好區別。本章節將會介紹檔案系統的基本操作，如：</p>
 <ul>
 <li>讀取檔案 fs.readFile</li>
@@ -927,7 +1009,7 @@
     
     <entry>
       <title><![CDATA[Node.js 系列學習日誌#12 - 使用 nodemailer 套件透過 gmail 發送電子信箱]]></title>
-      <url>/2017/07/24/nodejs-12-nodemailer/</url>
+      <url>/2017/07/24/nodejs/nodejs-12-nodemailer/</url>
       <content type="html"><![CDATA[<p>在上幾篇完成了 mysql  的 CRUD 的四大操作，本篇就來個輕鬆一點的應用，在這篇介紹使用 nodemailer 套件透過  gmail 來發送電子信箱，在安裝跟實作上也相當容易，我們透過 <a href="https://github.com/andris9/Nodemailer" target="_blank" rel="external">https://github.com/andris9/Nodemailer</a> 來講解，在運用上也無需再重新打造輪子，學習如何使用即可。</p>
 <a id="more"></a>
 <p>在這邊先建立一個目錄夾 nodejs-nodemailer ，接著再指令將 package.json 建立起來 （本篇不著重在如何建立 package.json ，如需安裝操作請見 <a href="http://ithelp.ithome.com.tw/ironman7/app/article/all/recent/10158140" target="_blank" rel="external">http://ithelp.ithome.com.tw/ironman7/app/article/all/recent/10158140</a> ）。由於我們要安裝 nodemailer 套件，因此下指令</p>
@@ -977,7 +1059,7 @@
     
     <entry>
       <title><![CDATA[Node.js 系列學習日誌#11 - MySQL 操作: 更新]]></title>
-      <url>/2017/07/24/nodejs-11-mysql-crud-update/</url>
+      <url>/2017/07/24/nodejs/nodejs-11-mysql-crud-update/</url>
       <content type="html"><![CDATA[<p>上一篇完成了建立資料，本篇就來介紹更新的部分，我們在上一篇的使用者列表頁面上，每一筆資料的功能建立了一個『更新』的按鈕，如下：</p>
 <p>在這使用者列表的部分，表格列出的語法是：</p>
 <p><img src="/images/nodejs/67.png" alt=""></p>
@@ -1026,7 +1108,7 @@
     
     <entry>
       <title><![CDATA[Node.js 系列學習日誌#10 - MySQL 操作: 查詢]]></title>
-      <url>/2017/07/24/nodejs-10-mysql-crud-read/</url>
+      <url>/2017/07/24/nodejs/nodejs-10-mysql-crud-read/</url>
       <content type="html"><![CDATA[<p>上一篇介紹了資料庫連線的方式，接著我們就來實作從資料庫讀取資料出來的做法。資料庫的部分，假定先建立一個 demo_nodejs 的資料庫，並且建立 users 的資料表，其資料表有  id, name, description 欄位</p>
 <a id="more"></a>
 <p>我們用了 express web framework ＋ jade 來當作網站的框架，安裝 express 方式可以依照這篇 『使用 Express 實作網頁開發框架』 <a href="http://ithelp.ithome.com.tw/ironman7/app/article/all/recent/10158306" target="_blank" rel="external">http://ithelp.ithome.com.tw/ironman7/app/article/all/recent/10158306</a> ，不過在這篇範例當中，不使用 els 引擎，建立的時候直接下</p>
@@ -1068,7 +1150,7 @@
     
     <entry>
       <title><![CDATA[Node.js 系列學習日誌#9 - MySQL 操作: 刪除]]></title>
-      <url>/2017/07/24/nodejs-09-mysql-crud-delete/</url>
+      <url>/2017/07/24/nodejs/nodejs-09-mysql-crud-delete/</url>
       <content type="html"><![CDATA[<p>前幾篇完成了 Create, Read, Update, 本篇將介紹 Delete 的操作，一樣的我們在使用者列表上面，每筆資料的功能加入『刪除』按鈕，在頁面上表格列出的語法是：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">mixin users(users)</div><div class="line">  h1= title</div><div class="line">  fieldset</div><div class="line">   legend 以下是從 mysql 取出的使用者列表</div><div class="line">   a(href='/create', class='btn btn-primary') 新增使用者</div><div class="line">   table.mytable.table</div><div class="line">    th 編輯</div><div class="line">    th 名稱</div><div class="line">    th 描述</div><div class="line">    th 功能</div><div class="line">     each user in users</div><div class="line">      tr</div><div class="line">       td= user.id</div><div class="line">       td #&#123;user.name&#125;</div><div class="line">       td #&#123;user.description&#125;</div><div class="line">       td</div><div class="line">         a(href='/update/#&#123;user.id&#125;', class='btn btn-warning') 更新</div><div class="line">         a(href='/delete/#&#123;user.id&#125;', class='btn btn-danger') 刪除</div><div class="line"></div><div class="line"> - users = user</div><div class="line"> .container</div><div class="line">      mixin users(users)</div></pre></td></tr></table></figure>
 <a id="more"></a>
@@ -1112,7 +1194,7 @@
     
     <entry>
       <title><![CDATA[Node.js 系列學習日誌#8 - MySQL 操作 -建立]]></title>
-      <url>/2017/07/24/nodejs-08-mysql-crud-create/</url>
+      <url>/2017/07/24/nodejs/nodejs-08-mysql-crud-create/</url>
       <content type="html"><![CDATA[<p>延續上一篇的連接 mysql  實現 crud 的操作，本篇將介紹新增資料的操作。之後的兩篇文，將會介紹更新、刪除的操作。首先我們在上一篇已經有將資料列出來，在此做一些畫面的調整，使用 bootstrap 的前端框架套件去使用。</p>
 <p>本章節主要使用的套件有：</p>
 <ul>
@@ -1172,7 +1254,7 @@
     
     <entry>
       <title><![CDATA[Node.js 系列學習日誌#7 - 連接 MySQL 並實現 CRUD 操作存取前的準備]]></title>
-      <url>/2017/07/24/nodejs-07-mysql-start/</url>
+      <url>/2017/07/24/nodejs/nodejs-07-mysql-start/</url>
       <content type="html"><![CDATA[<p>今天就來寫一個跟資料庫有關的功能，本章節介紹用 <code>node.js ＋ mysql</code>  的存取，實作新增、修改、刪除、查詢的功能，以下都是以  mac osx 來當作開發環境，因此以下步驟之前請務必安裝  <code>node.js</code> , npm，另外還有 <code>mysql</code> ，您可以透過 <a href="http://dev.mysql.com/downloads/mysql/" target="_blank" rel="external">http://dev.mysql.com/downloads/mysql/</a> 來安裝，mysql 安裝的步驟在此就不做介紹，專注在  node.js 與 mysql 存取的方法。</p>
 <a id="more"></a>
 <p>首先我們先建立一個資料夾  nodejs-demo-mysql ，然後要安裝一下相依的套件使用：express, mysql</p>
@@ -1227,7 +1309,7 @@
     
     <entry>
       <title><![CDATA[Node.js 系列學習日誌#6 - 撰寫程式的風格指南 (Style Guide)]]></title>
-      <url>/2017/07/24/nodejs-06-style-guide/</url>
+      <url>/2017/07/24/nodejs/nodejs-06-style-guide/</url>
       <content type="html"><![CDATA[<p>由於 node.js 是 javascript 作為開發的語言，開發的過程遵照程式碼規範撰寫讓整個程式風格達到一致。不過當然許多的 js 寫法都會有不同的風格存在，若您找不到要照什麼規則編寫程式，那麼可以參考這篇簡易的風格指南作為開發上的基本基礎。</p>
 <p>本章節將介紹  node.js 幾個常用的撰寫手法來做介紹：</p>
 <ul>
@@ -1290,7 +1372,7 @@
     
     <entry>
       <title><![CDATA[Node.js 系列學習日誌#5 - bower 管理相依套件工具]]></title>
-      <url>/2017/07/24/nodejs-05-bower/</url>
+      <url>/2017/07/24/nodejs/nodejs-05-bower/</url>
       <content type="html"><![CDATA[<p><img src="/images/nodejs/23.png" alt=""></p>
 <p>『A package manager for the web』瀏覽器套件管理工具</p>
 <p>一般在寫網頁時，多半會引入套件來使用，而 bower 就是用來管理相依套件工具，bower 是 twitter 研發，透過這樣的管理工具下載安裝 css, js 套件，讓開發者跟隨著這樣的工具，讓 web 套件 (例如： bootstrap, jquery… etc) 方面更好管理，更簡單的方式更新最新版本的套件。</p>
@@ -1359,7 +1441,7 @@
     
     <entry>
       <title><![CDATA[Node.js 系列學習日誌#4 - nvm (Node Version Manager) 管理多個版本]]></title>
-      <url>/2017/07/24/nodejs-04-nvm/</url>
+      <url>/2017/07/24/nodejs/nodejs-04-nvm/</url>
       <content type="html"><![CDATA[<p>nvm 是一種在管理多個 Node.js 版本的套件，當你預計採用不同版本執行Node.js 的時候，可以採用這個套件，那麼我們可以先進到這個網址裡面找到安裝指令</p>
 <p><a href="https://github.com/creationix/nvm" target="_blank" rel="external">https://github.com/creationix/nvm</a></p>
 <a id="more"></a>
@@ -1416,7 +1498,7 @@
     
     <entry>
       <title><![CDATA[Node.js 系列學習日誌#3 - npm 包管理器]]></title>
-      <url>/2017/07/24/nodejs-03-npm/</url>
+      <url>/2017/07/24/nodejs/nodejs-03-npm/</url>
       <content type="html"><![CDATA[<p><img src="/images/nodejs/14.png" alt=""></p>
 <p>npm，主要是 node.js 應用程式的建立、共享、重覆使用模組。在上一篇 Node.js 安裝並且建立簡單的 Hello World 程式 是來自於使用 node.js.org 的安裝軟體安裝，那麼其實 npm 就已經裝好哩。</p>
 <a id="more"></a>
@@ -1464,7 +1546,7 @@
     
     <entry>
       <title><![CDATA[Node.js 系列學習日誌#2 - Node.js 安裝配置]]></title>
-      <url>/2017/07/24/nodejs-02-install/</url>
+      <url>/2017/07/24/nodejs/nodejs-02-install/</url>
       <content type="html"><![CDATA[<p>Node.js 是一套使用了 Google V8 虛擬機來解釋 Javascript 語法，允許在後端運行 Javascript 的語法，發生在把頁面發送給 browser 之前的服務器上，所以要實現後台運行的 Javascript 語法，那麼語法要先被編譯後才可以正確執行。</p>
 <p>本章節會學習到</p>
 <ul>
@@ -1546,7 +1628,7 @@
     
     <entry>
       <title><![CDATA[Node.js 系列學習日誌#1 - 開始的開始，Node.js 簡介]]></title>
-      <url>/2017/07/24/nodejs-01-start/</url>
+      <url>/2017/07/24/nodejs/nodejs-01-start/</url>
       <content type="html"><![CDATA[<p>最近看了些書籍、電子書、網路爬文，一直都想寫個文章做個記錄，以免忘記，彙整一下所看、所聞、所實作的 Node.js 技術，如果有寫不好的地方也請多多指教囉</p>
 <p>這些年，Node.js 的議題越來越熱門了，而且快速的開發中，版本的升級也相當快，Node.js 是一個使用當前速度較快的 Javascript 引擎， 運行在服務端的開發平台。它使用了 Google 的 V8 虛擬機（Google Chrome 瀏覽器使用的 Javascript 執行環境），解析與執行 Javascript 語法，你可以想像是在運行 PHP, Puby, Python 一樣的服務端模式，只是根據 Node.js 的做法它不用像 PHP, Python, Ruby on rails 一樣安裝 Apache, Nginx 的 Http 服務器，因為它本身內建就有 Web server 支援。</p>
 <a id="more"></a>
@@ -1595,7 +1677,7 @@
     
     <entry>
       <title><![CDATA[R 語言 - 模擬身高體重並繪製 X-Y 散佈圖]]></title>
-      <url>/2017/03/04/r-xy-scatter-diagram/</url>
+      <url>/2017/03/04/r/r-xy-scatter-diagram/</url>
       <content type="html"><![CDATA[<p>試做：使用 N(172, 5)模擬 100人身高、使用 N(58, 5)模擬 100 人，繪製  X-Y 散佈圖</p>
 <p>XY 散佈圖是指：</p>
 <blockquote>
@@ -1629,7 +1711,7 @@
     
     <entry>
       <title><![CDATA[R 語言 - 基本介紹與套件工具函數]]></title>
-      <url>/2017/03/03/r-intro/</url>
+      <url>/2017/03/03/r/r-intro/</url>
       <content type="html"><![CDATA[<p>R 語言可以用來處理資料、統計分析、模擬、科學運算以及圖形功能，你可以直接安裝 R Studio 軟體 (<a href="https://www.r-project.org/" target="_blank" rel="external">R軟體官方網站</a>)，就可以很輕易的在 GUI 上透過許多的套件模組並搭配 R 程式來畫出許多圖形，要能夠善用這些套件之前我們要先學習基本的資料型態以及語法運用。</p>
 <a id="more"></a>
 <h2 id="學習目標"><a href="#學習目標" class="headerlink" title="學習目標"></a>學習目標</h2><p>R 語言的基本介紹以及語法上的寫法。</p>
@@ -1713,18 +1795,18 @@
     
     <entry>
       <title><![CDATA[Meteor - 開始第一個 Meteor 應用程式專案]]></title>
-      <url>/2017/03/02/metero-intro/</url>
+      <url>/2017/03/02/metero/metero-intro/</url>
       <content type="html"><![CDATA[<p>Meteor 是架構在 Node.js 上的平台，用來開發 real-time 的網頁程式。Client/Server 都是 Javascript 開發，Meteor 程式都能夠在前後端共用。而且這套框架非常容易學習，短時間內就能夠開發出應用程式出來的唷</p>
 <a id="more"></a>
 <h2 id="學習目標"><a href="#學習目標" class="headerlink" title="學習目標"></a>學習目標</h2><p>逐一步驟介紹建置 Meteor 初始化應用程式專案。</p>
 <h2 id="安裝-Meteor"><a href="#安裝-Meteor" class="headerlink" title="安裝 Meteor"></a>安裝 Meteor</h2><p>安裝 Meteor 的方式在 terminal 輸入以下命令：</p>
 <p><code>curl https://install.meteor.com | sh</code></p>
 <p>安裝完之後你可以再次輸入 <code>meteor</code> 後，執行會說明目前不是在 meteor 專案下，所以目前還只能確認 Meteor 安裝成功並且還會指引你建立 Meteor 專案的指令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> meteor</div><div class="line">  run: You\'re not in a Meteor project directory.</div><div class="line"></div><div class="line">  To create a new Meteor project:</div><div class="line">    meteor create &lt;project name&gt;</div><div class="line">  For example:</div><div class="line">    meteor create myapp</div><div class="line"></div><div class="line">  For more help, see 'meteor --help'.</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> meteor</span></div><div class="line">  run: You\'re not in a Meteor project directory.</div><div class="line"></div><div class="line">  To create a new Meteor project:</div><div class="line">    meteor create &lt;project name&gt;</div><div class="line">  For example:</div><div class="line">    meteor create myapp</div><div class="line"></div><div class="line">  For more help, see 'meteor --help'.</div></pre></td></tr></table></figure>
 <h2 id="建立新的專案"><a href="#建立新的專案" class="headerlink" title="建立新的專案"></a>建立新的專案</h2><p>裝好 meteor 後，我們建立一個新的專案，建立時使用 meteor 的工具</p>
 <p><code>meteor create meteor_demo</code></p>
 <p>按照命令就會把 meteor 建立基礎的檔案結構，建立完成後就會有一個 <code>meteor_demo</code> 的資料夾，並且說明如何執行應用程式</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> meteor create meteor_demo</div><div class="line">  Created a new Meteor app in 'meteor_demo'.</div><div class="line"></div><div class="line">  To run your new app:</div><div class="line">    cd meteor_demo</div><div class="line">    meteor npm install</div><div class="line">    meteor</div><div class="line"></div><div class="line">  If you are new to Meteor, try some of the learning resources here:</div><div class="line">    https://www.meteor.com/learn</div><div class="line"></div><div class="line">  meteor create --bare to create an empty app.</div><div class="line">  meteor create --full to create a scaffolded app.</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> meteor create meteor_demo</span></div><div class="line">  Created a new Meteor app in 'meteor_demo'.</div><div class="line"></div><div class="line">  To run your new app:</div><div class="line">    cd meteor_demo</div><div class="line">    meteor npm install</div><div class="line">    meteor</div><div class="line"></div><div class="line">  If you are new to Meteor, try some of the learning resources here:</div><div class="line">    https://www.meteor.com/learn</div><div class="line"></div><div class="line">  meteor create --bare to create an empty app.</div><div class="line">  meteor create --full to create a scaffolded app.</div></pre></td></tr></table></figure>
 <p>也包含以下的檔案與資料夾</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">drwxr-xr-x   7 User  staff   238 Feb 12 08:40 .</div><div class="line">drwxr-xr-x  49 User  staff  1666 Feb 12 08:40 ..</div><div class="line">drwxr-xr-x  10 User  staff   340 Feb 12 08:40 .meteor</div><div class="line">drwxr-xr-x   5 User  staff   170 Feb 12 08:40 client</div><div class="line">-rw-r--r--   1 User  staff   183 Feb 12 08:40 package.json</div><div class="line">drwxr-xr-x   3 User  staff   102 Feb 12 08:40 server</div></pre></td></tr></table></figure>
 <p>接著，我們就依照他的指引安裝一些套件</p>

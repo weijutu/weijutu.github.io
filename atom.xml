@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://weijutu.github.io/"/>
-  <updated>2017-07-31T10:47:52.000Z</updated>
+  <updated>2017-08-21T02:19:44.000Z</updated>
   <id>https://weijutu.github.io/</id>
   
   <author>
@@ -16,9 +16,114 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Excel - 使用函數取得不重複值並計算總計</title>
+    <link href="https://weijutu.github.io/2017/08/21/excel/excel-get-value-by-fn/"/>
+    <id>https://weijutu.github.io/2017/08/21/excel/excel-get-value-by-fn/</id>
+    <published>2017-08-21T01:58:00.000Z</published>
+    <updated>2017-08-21T02:19:44.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>有沒有使用 Excel 輸入資料後，想要把某一列的資料做不重複的篩選？若您剛好有這個疑問，來到這裡算是走對地方了～ 我們有很簡單的例子一步一步的說明</p>
+<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>不採取樞扭分析表，請利用函數實作</p>
+<h3 id="說明"><a href="#說明" class="headerlink" title="說明"></a>說明</h3><p>今天有一個資料表欄位有「類型」、「數量」、「名稱」，需要做一些統計，並且在一般資料區塊下方，當有輸入時，必須同時同步計算以下兩項區域</p>
+<ol>
+<li>依照類型將名稱分類，表格呈現上方列為「類型」、左方為「名稱」</li>
+<li>取得不重複的「名稱」，計算各類型的名稱的總數</li>
+</ol>
+<a id="more"></a>
+<h3 id="先定義實作目標"><a href="#先定義實作目標" class="headerlink" title="先定義實作目標"></a>先定義實作目標</h3><p>看到這邊，我們先將把所需要的欄位先定義清楚，主要分為三個部分，分別是資料區（Ａ）、分類區（Ｂ）、統計數量區（Ｃ）</p>
+<h3 id="資料區"><a href="#資料區" class="headerlink" title="資料區"></a>資料區</h3><p>首先是資料區，這裡是一般的資料，也就是會一直在輸入的地方，也預備要讓其他Ｂ、Ｃ區做自動計算，欄位這麼放</p>
+<ul>
+<li>Ａ：輸入「名稱」</li>
+<li>Ｂ：輸入「數量」</li>
+<li>Ｃ：輸入「類型」</li>
+</ul>
+<p>就像這樣子。</p>
+<p><img src="/images/excel/20140521-1.png" alt=""></p>
+<h3 id="分類區"><a href="#分類區" class="headerlink" title="分類區"></a>分類區</h3><p>接下來是分類區，欄位這麼放</p>
+<p><img src="/images/excel/20140521-2.png" alt=""></p>
+<h4 id="E：「名稱」"><a href="#E：「名稱」" class="headerlink" title="Ｅ：「名稱」"></a>Ｅ：「名稱」</h4><p>特別注意的是名稱雖然都來自資料區，可是並不能利用一般複製貼上就貼過去，我們可以利用函數，讓他自動把值帶過來，請輸入以下函數：</p>
+<p><code>=IF(A1&gt;0,A1,&quot;&quot;)</code></p>
+<p>Ｆ、Ｇ、H：「類型」，函數分別是</p>
+<h4 id="F-欄"><a href="#F-欄" class="headerlink" title="F 欄"></a>F 欄</h4><p><code>=IF(C1=&quot;A&quot;,B1,&quot;&quot;)</code></p>
+<h4 id="G-欄"><a href="#G-欄" class="headerlink" title="G 欄"></a>G 欄</h4><p><code>=IF(C1=&quot;B&quot;,B1,&quot;&quot;)</code></p>
+<h4 id="H-欄"><a href="#H-欄" class="headerlink" title="H 欄"></a>H 欄</h4><p><code>=IF(C1=&quot;C&quot;,B1,&quot;&quot;)</code></p>
+<h3 id="統計數量區"><a href="#統計數量區" class="headerlink" title="統計數量區"></a>統計數量區</h3><p>然後，統計數量區，就是計算各種不同分類的不重複水果數量有多少，以下就是各欄位輸入的函數</p>
+<p><img src="/images/excel/20140521-3.png" alt=""></p>
+<h4 id="J-欄"><a href="#J-欄" class="headerlink" title="J 欄"></a>J 欄</h4><p>重點就是在這一段，我們要將資料區的資料，採取不重複的做法呈現，換句話說，當使用者輸入資料區的時候，有出現重複時也只能算是一筆</p>
+<p><code>=INDEX(A:A,SMALL(IF(MATCH($A$1:$A$5000&amp;&quot;&quot;,$A$1:$A$5000&amp;&quot;&quot;,0)=ROW($A$1:$A$5000),ROW($A$1:$A$5000),4^8),ROW(A1)))&amp;&quot;&quot;</code></p>
+<h4 id="K-欄"><a href="#K-欄" class="headerlink" title="K 欄"></a>K 欄</h4><p>這一欄就是要將A類的水果總計起來，我們還需要借用分類區的地方把資料提取出來</p>
+<p><code>=IF($J1&gt;0,SUMIF($E$1:$E$5000,$J1,$F$1:F$5000),&quot;&quot;)</code></p>
+<h4 id="L-欄"><a href="#L-欄" class="headerlink" title="L 欄"></a>L 欄</h4><p>這一欄就是要將B類的水果總計起來，我們還需要借用分類區的地方把資料提取出來</p>
+<p><code>=IF($J1&gt;0,SUMIF($E$1:$E$5000,$J1,$G$1:$H$5000),&quot;&quot;)</code></p>
+<h4 id="M-欄"><a href="#M-欄" class="headerlink" title="M 欄"></a>M 欄</h4><p>這一欄就是要將C類的水果總計起來，我們還需要借用分類區的地方把資料提取出來</p>
+<p><code>=IF($J1&gt;0,SUMIF($E$1:$E$5000,$J1,$H$1:$H$5000),&quot;&quot;)</code></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;有沒有使用 Excel 輸入資料後，想要把某一列的資料做不重複的篩選？若您剛好有這個疑問，來到這裡算是走對地方了～ 我們有很簡單的例子一步一步的說明&lt;/p&gt;
+&lt;h3 id=&quot;前提&quot;&gt;&lt;a href=&quot;#前提&quot; class=&quot;headerlink&quot; title=&quot;前提&quot;&gt;&lt;/a&gt;前提&lt;/h3&gt;&lt;p&gt;不採取樞扭分析表，請利用函數實作&lt;/p&gt;
+&lt;h3 id=&quot;說明&quot;&gt;&lt;a href=&quot;#說明&quot; class=&quot;headerlink&quot; title=&quot;說明&quot;&gt;&lt;/a&gt;說明&lt;/h3&gt;&lt;p&gt;今天有一個資料表欄位有「類型」、「數量」、「名稱」，需要做一些統計，並且在一般資料區塊下方，當有輸入時，必須同時同步計算以下兩項區域&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;依照類型將名稱分類，表格呈現上方列為「類型」、左方為「名稱」&lt;/li&gt;
+&lt;li&gt;取得不重複的「名稱」，計算各類型的名稱的總數&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+    
+      <category term="excel" scheme="https://weijutu.github.io/tags/excel/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Excel - 字串分割到不同的儲存格</title>
+    <link href="https://weijutu.github.io/2017/08/21/excel/excel-string-splite-to-cell/"/>
+    <id>https://weijutu.github.io/2017/08/21/excel/excel-string-splite-to-cell/</id>
+    <published>2017-08-21T01:50:05.000Z</published>
+    <updated>2017-08-21T01:56:40.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天要介紹的是，如何將字串分割到不同的儲存格，也就是說當你今天遇到一個字串，但是字串裡面有兩個資訊想要各別放</p>
+<p>比如以下字串：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">common.delete=Delete</div></pre></td></tr></table></figure>
+<p>結果預計要像這樣</p>
+<p><img src="/images/excel/20140523-1.png" alt=""></p>
+<p>如果你有很多個像這樣的要把字串切割的話，這時候你還會用 Copy &amp; Paste 的做法去貼到不同的欄位嗎？</p>
+<a id="more"></a>
+<p>以下用個簡單的資料當作例子，我想要將等於的左右兩邊，各別的放到不同的儲存格</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">common.delete=Delete</div><div class="line">common.add=Create</div><div class="line">common.modify=Edit</div><div class="line">common.name=Name</div><div class="line">common.change=Change</div><div class="line">common.manage=Management</div><div class="line">common.search=Search</div><div class="line">btn.cancel=Cancel</div><div class="line">btn.Submit=Submit</div></pre></td></tr></table></figure>
+<h3 id="快速實作方法"><a href="#快速實作方法" class="headerlink" title="快速實作方法"></a>快速實作方法</h3><h4 id="第一步-先將欄位選取起來"><a href="#第一步-先將欄位選取起來" class="headerlink" title="第一步: 先將欄位選取起來"></a>第一步: 先將欄位選取起來</h4><p>請先將資料擺在 A 欄位那邊，然後滑鼠將資料選取起來，如下圖所示：</p>
+<p><img src="/images/excel/20140523-2.png" alt=""></p>
+<h4 id="第二步-按下-資料-gt-資料剖析-啟動-資料剖析精靈"><a href="#第二步-按下-資料-gt-資料剖析-啟動-資料剖析精靈" class="headerlink" title="第二步: 按下 [資料] &gt; [資料剖析] 啟動 [資料剖析精靈]"></a>第二步: 按下 [資料] &gt; [資料剖析] 啟動 [資料剖析精靈]</h4><p>接著他就會開資料剖析精靈，超簡單，三個小步驟而已<br>(步驟 3 之 1)：我們的目標是要分隔，所以選第一個，如果直接按完成的話，事實上跟我們需求不符，因為他會利用預設的 tab 區分隔，所以請繼續按下一步</p>
+<p><img src="/images/excel/20140523-3.png" alt=""></p>
+<p>(步驟 3 之 2) ：這邊我們要確定資料分隔的符號是什麼</p>
+<p><img src="/images/excel/20140523-4.png" alt=""></p>
+<p>(步驟 3 之 3)：最後可以看看預覽分割的結果，確定之後就按完成按鈕</p>
+<p><img src="/images/excel/20140523-5.png" alt=""></p>
+<p>結果: 一秒完成 !</p>
+<p><img src="/images/excel/20140523-6.png" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天要介紹的是，如何將字串分割到不同的儲存格，也就是說當你今天遇到一個字串，但是字串裡面有兩個資訊想要各別放&lt;/p&gt;
+&lt;p&gt;比如以下字串：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;common.delete=Delete&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;結果預計要像這樣&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/excel/20140523-1.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;如果你有很多個像這樣的要把字串切割的話，這時候你還會用 Copy &amp;amp; Paste 的做法去貼到不同的欄位嗎？&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="excel" scheme="https://weijutu.github.io/tags/excel/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Node.js 系列學習日誌#30 - 取得野生柯P相簿 API範例</title>
-    <link href="https://weijutu.github.io/2017/07/26/nodejs-30-kp-api/"/>
-    <id>https://weijutu.github.io/2017/07/26/nodejs-30-kp-api/</id>
+    <link href="https://weijutu.github.io/2017/07/26/nodejs/nodejs-30-kp-api/"/>
+    <id>https://weijutu.github.io/2017/07/26/nodejs/nodejs-30-kp-api/</id>
     <published>2017-07-25T16:30:00.000Z</published>
     <updated>2017-07-31T10:47:52.000Z</updated>
     
@@ -70,8 +175,8 @@
   
   <entry>
     <title>Node.js 系列學習日誌#29 - 使用 package.json 安裝、管理模組</title>
-    <link href="https://weijutu.github.io/2017/07/26/nodejs-29-package/"/>
-    <id>https://weijutu.github.io/2017/07/26/nodejs-29-package/</id>
+    <link href="https://weijutu.github.io/2017/07/26/nodejs/nodejs-29-package/"/>
+    <id>https://weijutu.github.io/2017/07/26/nodejs/nodejs-29-package/</id>
     <published>2017-07-25T16:29:00.000Z</published>
     <updated>2017-07-31T10:33:56.000Z</updated>
     
@@ -122,9 +227,57 @@
   </entry>
   
   <entry>
+    <title>Node.js 系列學習日誌#28 - REST 路由規則</title>
+    <link href="https://weijutu.github.io/2017/07/26/nodejs/nodejs-28-rest/"/>
+    <id>https://weijutu.github.io/2017/07/26/nodejs/nodejs-28-rest/</id>
+    <published>2017-07-25T16:27:00.000Z</published>
+    <updated>2017-07-31T10:27:16.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天我們使用 express 框架介紹一下 REST  路由規則，REST 是一種  http 協定的網路應用，http 提供了八種方法使用：</p>
+<a id="more"></a>
+<ul>
+<li><p>OPTIONS：這個方法可使伺服器傳回該資源所支援的所有HTTP請求方法。用<code>*</code>來代替資源名稱，向Web伺服器傳送OPTIONS請求，可以測試伺服器功能是否正常運作。</p>
+</li>
+<li><p>HEAD：與GET方法一樣，都是向伺服器發出指定資源的請求。只不過伺服器將不傳回資源的本文部份。它的好處在於，使用這個方法可以在不必傳輸全部內容的情況下，就可以獲取其中「關於該資源的資訊」（元資訊或稱元資料）。</p>
+</li>
+<li><p>GET：向指定的資源發出「顯示」請求。使用GET方法應該只用在讀取資料，而不應當被用於產生「副作用」的操作中，例如在Web Application中。其中一個原因是GET可能會被網路蜘蛛等隨意存取。參見安全方法</p>
+</li>
+<li><p>POST：向指定資源提交資料，請求伺服器進行處理（例如提交表單或者上傳檔案）。資料被包含在請求本文中。這個請求可能會建立新的資源或修改現有資源，或二者皆有。</p>
+</li>
+<li><p>PUT：向指定資源位置上傳其最新內容。</p>
+</li>
+<li><p>DELETE：請求伺服器刪除Request-URI所標識的資源。</p>
+</li>
+<li><p>TRACE：回顯伺服器收到的請求，主要用於測試或診斷。</p>
+</li>
+<li><p>CONNECT：HTTP/1.1協定中預留給能夠將連線改為管道方式的代理伺服器。通常用於SSL加密伺服器的連結（經由非加密的HTTP代理伺服器）</p>
+</li>
+</ul>
+<p>而 express 網頁框架也針對 http 請求方法設計路由的函數：</p>
+<p><img src="/images/nodejs/124.png" alt=""></p>
+<p>通常在設計 rest 時，常用的是 get (取得), post (新增), put (更新), delete (刪除)</p>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE" target="_blank" rel="external">http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天我們使用 express 框架介紹一下 REST  路由規則，REST 是一種  http 協定的網路應用，http 提供了八種方法使用：&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Node.js" scheme="https://weijutu.github.io/categories/Node-js/"/>
+    
+    
+      <category term="Node.js" scheme="https://weijutu.github.io/tags/Node-js/"/>
+    
+      <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Node.js 系列學習日誌#27 - forever 讓程式保持執行狀態</title>
-    <link href="https://weijutu.github.io/2017/07/26/nodejs-27-forever/"/>
-    <id>https://weijutu.github.io/2017/07/26/nodejs-27-forever/</id>
+    <link href="https://weijutu.github.io/2017/07/26/nodejs/nodejs-27-forever/"/>
+    <id>https://weijutu.github.io/2017/07/26/nodejs/nodejs-27-forever/</id>
     <published>2017-07-25T16:27:00.000Z</published>
     <updated>2017-07-31T10:26:00.000Z</updated>
     
@@ -174,57 +327,9 @@
   </entry>
   
   <entry>
-    <title>Node.js 系列學習日誌#28 - REST 路由規則</title>
-    <link href="https://weijutu.github.io/2017/07/26/nodejs-28-rest/"/>
-    <id>https://weijutu.github.io/2017/07/26/nodejs-28-rest/</id>
-    <published>2017-07-25T16:27:00.000Z</published>
-    <updated>2017-07-31T10:27:16.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>今天我們使用 express 框架介紹一下 REST  路由規則，REST 是一種  http 協定的網路應用，http 提供了八種方法使用：</p>
-<a id="more"></a>
-<ul>
-<li><p>OPTIONS：這個方法可使伺服器傳回該資源所支援的所有HTTP請求方法。用<code>*</code>來代替資源名稱，向Web伺服器傳送OPTIONS請求，可以測試伺服器功能是否正常運作。</p>
-</li>
-<li><p>HEAD：與GET方法一樣，都是向伺服器發出指定資源的請求。只不過伺服器將不傳回資源的本文部份。它的好處在於，使用這個方法可以在不必傳輸全部內容的情況下，就可以獲取其中「關於該資源的資訊」（元資訊或稱元資料）。</p>
-</li>
-<li><p>GET：向指定的資源發出「顯示」請求。使用GET方法應該只用在讀取資料，而不應當被用於產生「副作用」的操作中，例如在Web Application中。其中一個原因是GET可能會被網路蜘蛛等隨意存取。參見安全方法</p>
-</li>
-<li><p>POST：向指定資源提交資料，請求伺服器進行處理（例如提交表單或者上傳檔案）。資料被包含在請求本文中。這個請求可能會建立新的資源或修改現有資源，或二者皆有。</p>
-</li>
-<li><p>PUT：向指定資源位置上傳其最新內容。</p>
-</li>
-<li><p>DELETE：請求伺服器刪除Request-URI所標識的資源。</p>
-</li>
-<li><p>TRACE：回顯伺服器收到的請求，主要用於測試或診斷。</p>
-</li>
-<li><p>CONNECT：HTTP/1.1協定中預留給能夠將連線改為管道方式的代理伺服器。通常用於SSL加密伺服器的連結（經由非加密的HTTP代理伺服器）</p>
-</li>
-</ul>
-<p>而 express 網頁框架也針對 http 請求方法設計路由的函數：</p>
-<p><img src="/images/nodejs/124.png" alt=""></p>
-<p>通常在設計 rest 時，常用的是 get (取得), post (新增), put (更新), delete (刪除)</p>
-<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE" target="_blank" rel="external">http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;今天我們使用 express 框架介紹一下 REST  路由規則，REST 是一種  http 協定的網路應用，http 提供了八種方法使用：&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/categories/Node-js/"/>
-    
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/tags/Node-js/"/>
-    
-      <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Node.js 系列學習日誌#26 - 介紹 Jade  Template Engine 模板引擎 (下)</title>
-    <link href="https://weijutu.github.io/2017/07/26/nodejs-26-jade-2/"/>
-    <id>https://weijutu.github.io/2017/07/26/nodejs-26-jade-2/</id>
+    <link href="https://weijutu.github.io/2017/07/26/nodejs/nodejs-26-jade-2/"/>
+    <id>https://weijutu.github.io/2017/07/26/nodejs/nodejs-26-jade-2/</id>
     <published>2017-07-25T16:26:00.000Z</published>
     <updated>2017-07-31T08:03:44.000Z</updated>
     
@@ -285,8 +390,8 @@
   
   <entry>
     <title>Node.js 系列學習日誌#25 - 介紹 Jade  Template Engine 模板引擎 (上)</title>
-    <link href="https://weijutu.github.io/2017/07/25/nodejs-25-jade-1/"/>
-    <id>https://weijutu.github.io/2017/07/25/nodejs-25-jade-1/</id>
+    <link href="https://weijutu.github.io/2017/07/25/nodejs/nodejs-25-jade-1/"/>
+    <id>https://weijutu.github.io/2017/07/25/nodejs/nodejs-25-jade-1/</id>
     <published>2017-07-24T16:25:00.000Z</published>
     <updated>2017-07-31T07:59:23.000Z</updated>
     
@@ -404,8 +509,8 @@
   
   <entry>
     <title>Node.js 系列學習日誌#24 - npm 相依套件指定版本與自動更新 package.json</title>
-    <link href="https://weijutu.github.io/2017/07/24/nodejs-24-npm-version/"/>
-    <id>https://weijutu.github.io/2017/07/24/nodejs-24-npm-version/</id>
+    <link href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-24-npm-version/"/>
+    <id>https://weijutu.github.io/2017/07/24/nodejs/nodejs-24-npm-version/</id>
     <published>2017-07-23T16:24:00.000Z</published>
     <updated>2017-07-31T07:51:25.000Z</updated>
     
@@ -483,8 +588,8 @@
   
   <entry>
     <title>Node.js 系列學習日誌#23 - 部署上線至 Heroku 雲端平台環境</title>
-    <link href="https://weijutu.github.io/2017/07/24/nodejs-23-heroku/"/>
-    <id>https://weijutu.github.io/2017/07/24/nodejs-23-heroku/</id>
+    <link href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-23-heroku/"/>
+    <id>https://weijutu.github.io/2017/07/24/nodejs/nodejs-23-heroku/</id>
     <published>2017-07-23T16:23:00.000Z</published>
     <updated>2017-07-31T07:46:08.000Z</updated>
     
@@ -540,8 +645,8 @@
   
   <entry>
     <title>Node.js 系列學習日誌#22 - 使用 express, mysql, ejs 實作登入/登出功能</title>
-    <link href="https://weijutu.github.io/2017/07/24/nodejs-22-express-login/"/>
-    <id>https://weijutu.github.io/2017/07/24/nodejs-22-express-login/</id>
+    <link href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-22-express-login/"/>
+    <id>https://weijutu.github.io/2017/07/24/nodejs/nodejs-22-express-login/</id>
     <published>2017-07-23T16:22:00.000Z</published>
     <updated>2017-07-31T07:38:14.000Z</updated>
     
@@ -584,8 +689,8 @@
   
   <entry>
     <title>Node.js 系列學習日誌#21 - 使用 express, mysql, ejs 實作註冊功能</title>
-    <link href="https://weijutu.github.io/2017/07/24/nodejs-21-express-register/"/>
-    <id>https://weijutu.github.io/2017/07/24/nodejs-21-express-register/</id>
+    <link href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-21-express-register/"/>
+    <id>https://weijutu.github.io/2017/07/24/nodejs/nodejs-21-express-register/</id>
     <published>2017-07-23T16:21:00.000Z</published>
     <updated>2017-07-31T07:35:57.000Z</updated>
     
@@ -637,8 +742,8 @@
   
   <entry>
     <title>Node.js 系列學習日誌#20 - 調校 Debug 工具 node-inspector</title>
-    <link href="https://weijutu.github.io/2017/07/24/nodejs-20-node-inspector/"/>
-    <id>https://weijutu.github.io/2017/07/24/nodejs-20-node-inspector/</id>
+    <link href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-20-node-inspector/"/>
+    <id>https://weijutu.github.io/2017/07/24/nodejs/nodejs-20-node-inspector/</id>
     <published>2017-07-23T16:20:00.000Z</published>
     <updated>2017-07-31T07:30:52.000Z</updated>
     
@@ -680,8 +785,8 @@
   
   <entry>
     <title>Node.js 系列學習日誌#19 - 運用 express, socket.io, boostrap 建立一個簡單的聊天室功能</title>
-    <link href="https://weijutu.github.io/2017/07/24/nodejs-19-chatroom/"/>
-    <id>https://weijutu.github.io/2017/07/24/nodejs-19-chatroom/</id>
+    <link href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-19-chatroom/"/>
+    <id>https://weijutu.github.io/2017/07/24/nodejs/nodejs-19-chatroom/</id>
     <published>2017-07-23T16:19:00.000Z</published>
     <updated>2017-07-29T10:15:52.000Z</updated>
     
@@ -743,8 +848,8 @@
   
   <entry>
     <title>Node.js 系列學習日誌#18 - 使用 Express 實作網頁開發框架</title>
-    <link href="https://weijutu.github.io/2017/07/24/nodejs-18-express/"/>
-    <id>https://weijutu.github.io/2017/07/24/nodejs-18-express/</id>
+    <link href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-18-express/"/>
+    <id>https://weijutu.github.io/2017/07/24/nodejs/nodejs-18-express/</id>
     <published>2017-07-23T16:18:00.000Z</published>
     <updated>2017-07-29T10:07:57.000Z</updated>
     
@@ -786,8 +891,8 @@
   
   <entry>
     <title>Node.js 系列學習日誌#17 - 使用 express, ejs 實作讀取靜態 JSON 格式資料</title>
-    <link href="https://weijutu.github.io/2017/07/24/nodejs-17-ejs-json/"/>
-    <id>https://weijutu.github.io/2017/07/24/nodejs-17-ejs-json/</id>
+    <link href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-17-ejs-json/"/>
+    <id>https://weijutu.github.io/2017/07/24/nodejs/nodejs-17-ejs-json/</id>
     <published>2017-07-23T16:17:00.000Z</published>
     <updated>2017-07-29T09:55:48.000Z</updated>
     
@@ -841,8 +946,8 @@
   
   <entry>
     <title>Node.js 系列學習日誌#16 - 基礎工具核心模組 util.inherits 實現原型繼承</title>
-    <link href="https://weijutu.github.io/2017/07/24/nodejs-16-util-inherits/"/>
-    <id>https://weijutu.github.io/2017/07/24/nodejs-16-util-inherits/</id>
+    <link href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-16-util-inherits/"/>
+    <id>https://weijutu.github.io/2017/07/24/nodejs/nodejs-16-util-inherits/</id>
     <published>2017-07-23T16:16:00.000Z</published>
     <updated>2017-07-25T15:05:40.000Z</updated>
     
@@ -885,8 +990,8 @@
   
   <entry>
     <title>Node.js 系列學習日誌#15 - 讀取 markdown 檔案內容顯示在頁面上</title>
-    <link href="https://weijutu.github.io/2017/07/24/nodejs-15-markdown/"/>
-    <id>https://weijutu.github.io/2017/07/24/nodejs-15-markdown/</id>
+    <link href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-15-markdown/"/>
+    <id>https://weijutu.github.io/2017/07/24/nodejs/nodejs-15-markdown/</id>
     <published>2017-07-23T16:15:00.000Z</published>
     <updated>2017-07-25T11:52:00.000Z</updated>
     
@@ -935,8 +1040,8 @@
   
   <entry>
     <title>Node.js 系列學習日誌#14 - middleware 應用與開發</title>
-    <link href="https://weijutu.github.io/2017/07/24/nodejs-14-middleware/"/>
-    <id>https://weijutu.github.io/2017/07/24/nodejs-14-middleware/</id>
+    <link href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-14-middleware/"/>
+    <id>https://weijutu.github.io/2017/07/24/nodejs/nodejs-14-middleware/</id>
     <published>2017-07-23T16:14:00.000Z</published>
     <updated>2017-07-25T11:51:45.000Z</updated>
     
@@ -976,8 +1081,8 @@
   
   <entry>
     <title>Node.js 系列學習日誌#13 - 核心模組檔案系統 fs</title>
-    <link href="https://weijutu.github.io/2017/07/24/nodejs-13-fs/"/>
-    <id>https://weijutu.github.io/2017/07/24/nodejs-13-fs/</id>
+    <link href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-13-fs/"/>
+    <id>https://weijutu.github.io/2017/07/24/nodejs/nodejs-13-fs/</id>
     <published>2017-07-23T16:13:00.000Z</published>
     <updated>2017-07-25T11:51:27.000Z</updated>
     
@@ -1028,111 +1133,6 @@
       <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
     
       <category term="fs" scheme="https://weijutu.github.io/tags/fs/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Node.js 系列學習日誌#12 - 使用 nodemailer 套件透過 gmail 發送電子信箱</title>
-    <link href="https://weijutu.github.io/2017/07/24/nodejs-12-nodemailer/"/>
-    <id>https://weijutu.github.io/2017/07/24/nodejs-12-nodemailer/</id>
-    <published>2017-07-23T16:12:00.000Z</published>
-    <updated>2017-07-25T11:51:09.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>在上幾篇完成了 mysql  的 CRUD 的四大操作，本篇就來個輕鬆一點的應用，在這篇介紹使用 nodemailer 套件透過  gmail 來發送電子信箱，在安裝跟實作上也相當容易，我們透過 <a href="https://github.com/andris9/Nodemailer" target="_blank" rel="external">https://github.com/andris9/Nodemailer</a> 來講解，在運用上也無需再重新打造輪子，學習如何使用即可。</p>
-<a id="more"></a>
-<p>在這邊先建立一個目錄夾 nodejs-nodemailer ，接著再指令將 package.json 建立起來 （本篇不著重在如何建立 package.json ，如需安裝操作請見 <a href="http://ithelp.ithome.com.tw/ironman7/app/article/all/recent/10158140" target="_blank" rel="external">http://ithelp.ithome.com.tw/ironman7/app/article/all/recent/10158140</a> ）。由於我們要安裝 nodemailer 套件，因此下指令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$npm</span> install —save node mailer</div></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/52.png" alt=""></p>
-<p>其中 —save 會將 nodemailer 相依套件新增到 package.json 檔案裡的 dependencies 項目裡， 如下圖所示：</p>
-<p><img src="/images/nodejs/53.png" alt=""></p>
-<p>安裝完成之後，我們就可以來寫程式的部分了，可以看到上圖寫的 “start”: “node email” ，在這邊我預定起始點是用 email.js ，因此請在根目錄下建立 email.js 檔案。我們初步的思考是這樣：</p>
-<ul>
-<li>引入 nodemailer 套件</li>
-<li>宣告發信的物件 （服務採用 gmail）</li>
-<li>基本參數設定 (包含內文)</li>
-<li>送出發信事件</li>
-</ul>
-<p>我們直接看一下程式的部分：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">//引用 nodemailer</div><div class="line">var nodemailer = require('nodemailer');</div><div class="line"></div><div class="line">//宣告發信物件</div><div class="line">var transporter = nodemailer.createTransport(&#123;</div><div class="line">    service: 'Gmail',</div><div class="line">    auth: &#123;</div><div class="line">        user: ‘account@gmail.com',</div><div class="line">        pass: ‘yourpassword'</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">var options = &#123;</div><div class="line">    //寄件者</div><div class="line">    from: 'account1@gmail.com ',</div><div class="line">    //收件者</div><div class="line">    to: 'account2@gmail.com',</div><div class="line">    //副本</div><div class="line">    cc: 'account3@gmail.com',</div><div class="line">    //密件副本</div><div class="line">    bcc: 'account4@gmail.com',</div><div class="line">    //主旨</div><div class="line">    subject: '這是 node.js 發送的測試信件', // Subject line</div><div class="line">    //純文字</div><div class="line">    text: 'Hello world2', // plaintext body</div><div class="line">    //嵌入 html 的內文</div><div class="line">    html: '&lt;h2&gt;Why and How&lt;/h2&gt; &lt;p&gt;The &lt;a href="http://en.wikipedia.org/wiki/Lorem_ipsum" title="Lorem ipsum - Wikipedia, the free encyclopedia"&gt;Lorem ipsum&lt;/a&gt; text is typically composed of pseudo-Latin words. It is commonly used as placeholder text to examine or demonstrate the visual effects of various graphic design. Since the text itself is meaningless, the viewers are therefore able to focus on the overall layout without being attracted to the text.&lt;/p&gt;',</div><div class="line">    //附件檔案</div><div class="line">    attachments: [ &#123;</div><div class="line">        filename: 'text01.txt',</div><div class="line">        content: '聯候家上去工的調她者壓工，我笑它外有現，血有到同，民由快的重觀在保導然安作但。護見中城備長結現給都看面家銷先然非會生東一無中；內他的下來最書的從人聲觀說的用去生我，生節他活古視心放十壓心急我我們朋吃，毒素一要溫市歷很爾的房用聽調就層樹院少了紀苦客查標地主務所轉，職計急印形。團著先參那害沒造下至算活現興質美是為使！色社影；得良灣……克卻人過朋天點招？不族落過空出著樣家男，去細大如心發有出離問歡馬找事'</div><div class="line">    &#125;, &#123;</div><div class="line">        filename: 'unnamed.jpg',</div><div class="line">        path: '/Users/Weiju/Pictures/unnamed.jpg'</div><div class="line">    &#125;]</div><div class="line">&#125;;</div><div class="line"></div><div class="line">//發送信件方法</div><div class="line">transporter.sendMail(options, function(error, info)&#123;</div><div class="line">    if(error)&#123;</div><div class="line">        console.log(error);</div><div class="line">    &#125;else&#123;</div><div class="line">        console.log('訊息發送: ' + info.response);</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>可以看到引入的 nodemailer 的是使用 nodemailer.createTransport 物件先建立好發信的服務 service 為 Gmail，並且透過 auth 建立 gmail 登入的帳號密碼，接著宣告一下收件者 （to）、副本（cc）、密件副本（bcc）、寄件者（from），當然還有主旨 (Subject)、內文(text, html)、附件檔案（attachments）</p>
-<p>最後發信結果，就如   package.json 上的 scripts.start 指令，下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$node email</div></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/54.png" alt=""></p>
-<p>此時，發送結果會如訊息所說，我們再看看信件收到的樣子，由於附件傳送了兩筆，可以看到  unnamed.jpg  及 text01.txt  已經接收到了</p>
-<p><img src="/images/nodejs/55.png" alt=""></p>
-<p>其中 text01.txt  是直接在程式上面輸入純文字，我們來看看是否有真的寫入：</p>
-<p><img src="/images/nodejs/56.png" alt=""></p>
-<p>更多應用，稍等回來～</p>
-<h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><p><a href="http://www.richyli.com/tool/loremipsum/" target="_blank" rel="external">http://www.richyli.com/tool/loremipsum/</a><br><a href="https://github.com/andris9/Nodemailer" target="_blank" rel="external">https://github.com/andris9/Nodemailer</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在上幾篇完成了 mysql  的 CRUD 的四大操作，本篇就來個輕鬆一點的應用，在這篇介紹使用 nodemailer 套件透過  gmail 來發送電子信箱，在安裝跟實作上也相當容易，我們透過 &lt;a href=&quot;https://github.com/andris9/Nodemailer&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/andris9/Nodemailer&lt;/a&gt; 來講解，在運用上也無需再重新打造輪子，學習如何使用即可。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/categories/Node-js/"/>
-    
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/tags/Node-js/"/>
-    
-      <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
-    
-      <category term="nodemailer" scheme="https://weijutu.github.io/tags/nodemailer/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Node.js 系列學習日誌#11 - MySQL 操作: 更新</title>
-    <link href="https://weijutu.github.io/2017/07/24/nodejs-11-mysql-crud-update/"/>
-    <id>https://weijutu.github.io/2017/07/24/nodejs-11-mysql-crud-update/</id>
-    <published>2017-07-23T16:11:00.000Z</published>
-    <updated>2017-07-25T11:50:32.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>上一篇完成了建立資料，本篇就來介紹更新的部分，我們在上一篇的使用者列表頁面上，每一筆資料的功能建立了一個『更新』的按鈕，如下：</p>
-<p>在這使用者列表的部分，表格列出的語法是：</p>
-<p><img src="/images/nodejs/67.png" alt=""></p>
-<a id="more"></a>
-<p>其中也就是在跑 each 時，每筆資料塞入按鈕語法，在這邊我們設定點選的時候連結 /update 而後面再接一個編號參數 /#{user.id}：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">a(href='/update/#&#123;user.id&#125;', class='btn btn-warning') 更新</div></pre></td></tr></table></figure>
-<p>我們簡單看一下表格佈局如下：</p>
-<p><img src="/images/nodejs/47.png" alt=""></p>
-<p>並且繼續打開 app.js 檔案，放上 update 的操作</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">app.get(<span class="string">'/update/:id'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</div><div class="line">    pool.getConnection(<span class="function"><span class="keyword">function</span>(<span class="params">err, connection</span>) </span>&#123;</div><div class="line">        connection.query(<span class="string">'SELECT * from users where id=?'</span>,[req.params.id],<span class="function"><span class="keyword">function</span>(<span class="params">err, rows, fields</span>) </span>&#123;</div><div class="line">            <span class="keyword">if</span> (err)</div><div class="line">                <span class="keyword">throw</span> err;</div><div class="line">            <span class="built_in">console</span>.log(<span class="string">'search is success.'</span>);</div><div class="line">            res.render(<span class="string">'create'</span>, &#123;</div><div class="line">                <span class="attr">title</span> : <span class="string">'Update user'</span>,</div><div class="line">                <span class="attr">user</span> : rows[<span class="number">0</span>]</div><div class="line">            &#125;);</div><div class="line">        &#125;);</div><div class="line">        connection.release();</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>在這邊先進入到 /update 頁面，預定在打開 update 時，會列出某一筆資料，因此在這邊會先用 sql 語法來查詢某一筆資料，而 id 的部分由網址列的參數取得，也就是 connection.query 的方法的第二參數，是取得網址的參數 [req.params.id] ，完成取得動作之後，顯示在 create 的頁面 （由於上一篇新增的頁面跟本篇的更新頁面欄位相同，所以用的是一樣的頁面）</p>
-<p>另外在 render 的參數多了一個 user: rows[0], 主要是用來判別是不是更新的資料，若有資料則是更新、若沒資料就是新增</p>
-<p><img src="/images/nodejs/48.png" alt=""></p>
-<p>每項  input 就用 user.[欄位] 將值帶入，顯示部分是：</p>
-<p><img src="/images/nodejs/49.png" alt=""></p>
-<p>我們按下儲存之後，將表單送到 /update，因此這邊要做  update 的操作，再度打開 app.js 新增</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">app.post(<span class="string">'/update'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</div><div class="line">    pool.getConnection(<span class="function"><span class="keyword">function</span>(<span class="params">err, connection</span>) </span>&#123;</div><div class="line">        connection.query(<span class="string">'update users set ? where id = ?'</span>, [&#123;</div><div class="line">            <span class="attr">id</span> : req.body.user.id,</div><div class="line">            <span class="attr">name</span> : req.body.user.name,</div><div class="line">            <span class="attr">description</span> : req.body.user.description</div><div class="line">        &#125;,req.body.user.id], <span class="function"><span class="keyword">function</span>(<span class="params">err, fields</span>) </span>&#123;</div><div class="line">            <span class="keyword">if</span> (err)</div><div class="line">                <span class="keyword">throw</span> err;</div><div class="line">        &#125;);</div><div class="line">        connection.query(<span class="string">'SELECT * from users'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, rows, fields</span>) </span>&#123;</div><div class="line">            <span class="keyword">if</span> (err)</div><div class="line">                <span class="keyword">throw</span> err;</div><div class="line">            res.render(<span class="string">'user'</span>, &#123;</div><div class="line">                <span class="attr">title</span> : <span class="string">'使用者列表'</span>,</div><div class="line">                <span class="attr">user</span> : rows</div><div class="line">            &#125;);</div><div class="line">        &#125;);</div><div class="line">        connection.release();</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>其中以</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">connection.query(<span class="string">'update users set ? where id = ?'</span>, [&#123;</div><div class="line">    <span class="attr">id</span> : req.body.user.id,</div><div class="line">    <span class="attr">name</span> : req.body.user.name,</div><div class="line">    <span class="attr">description</span> : req.body.user.description</div><div class="line">&#125;,req.body.user.id], <span class="function"><span class="keyword">function</span>(<span class="params">err, fields</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (err)</div><div class="line">        <span class="keyword">throw</span> err;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>作為 update 的操作，在第二參數時，就是從表單傳送過來的資料，以陣列來表示，裏面每個欄位再以 key/value 呈現，然後最後再</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">connection.query(<span class="string">'SELECT * from users'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, rows, fields</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (err)</div><div class="line">        <span class="keyword">throw</span> err;</div><div class="line">    res.render(<span class="string">'user'</span>, &#123;</div><div class="line">        <span class="attr">title</span> : <span class="string">'使用者列表'</span>,</div><div class="line">        <span class="attr">user</span> : rows</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>新增完成後顯示最後的結果列到使用者列表</p>
-<p><img src="/images/nodejs/50.png" alt=""></p>
-<p>結果退到使用者列表：</p>
-<p><img src="/images/nodejs/51.png" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;上一篇完成了建立資料，本篇就來介紹更新的部分，我們在上一篇的使用者列表頁面上，每一筆資料的功能建立了一個『更新』的按鈕，如下：&lt;/p&gt;
-&lt;p&gt;在這使用者列表的部分，表格列出的語法是：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/nodejs/67.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/categories/Node-js/"/>
-    
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/tags/Node-js/"/>
-    
-      <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
-    
-      <category term="MySQL" scheme="https://weijutu.github.io/tags/MySQL/"/>
     
   </entry>
   
