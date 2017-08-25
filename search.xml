@@ -3,6 +3,211 @@
   
     
     <entry>
+      <title><![CDATA[Javascript - 介紹 Gulp.js 並實作壓縮（minify）圖片]]></title>
+      <url>/2017/08/25/javascript/javascript-gulpjs-minify-image/</url>
+      <content type="html"><![CDATA[<p><img src="/images/javascript/5.png" alt=""></p>
+<p>它是建立在 node.js 的一個套件。The streaming build system. 它的觀念是一套利用串流方式輔助建置系統，優化前端工程的效能（縮小js 檔案大小，編譯預處理的css, less ）加快js, css…etc 載入速度，特色在於代碼優於配置關做法讓事情變得更簡單，更直覺的方式構建系統。</p>
+<h3 id="什麼是字串流-Stream-（也可以叫串流）"><a href="#什麼是字串流-Stream-（也可以叫串流）" class="headerlink" title="什麼是字串流 Stream? （也可以叫串流）"></a>什麼是字串流 Stream? （也可以叫串流）</h3><p>谷歌一下Wiki 的「 Stream 」的意思：</p>
+<blockquote>
+<p>在電腦科學裡面，字串流(stream，或者串流)這個詞有很多用法。所有這一些用法都是代表一個包含資料的序列。我們可以將字串流想做是一個允許資料一個接一個，而非將資料包作一整個，來進行處理的輸送帶。</p>
+</blockquote>
+<a id="more"></a>
+<p>用個 gulp.js 的簡單例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">gulp.src(&apos;js/app.js&apos;)</div><div class="line">    .pipe(uglify())</div><div class="line">    .pipe(gulp.dest(&apos;build&apos;))</div></pre></td></tr></table></figure>
+<p>以這個例子來說，gulp.src 方法帶了一個字串參數 js/app.js，這個是對應一個主要的 js 檔案，主要是建立物件串流來表示的文件，接這透過 .pipe 方法將所有檔案做 uglify() 的動作，而這個動作將會縮小之後回傳一個新的物件，最後將這個輸出用 gulp.dest 目標位置到 build 資料夾裡面。</p>
+<p>流程會是如下：</p>
+<p><img src="/images/javascript/6.png" alt=""></p>
+<h3 id="Grunt-vs-Gulp"><a href="#Grunt-vs-Gulp" class="headerlink" title="Grunt vs Gulp"></a>Grunt vs Gulp</h3><p>Grunt.js 與 Gulp.js 都做相同的事情，都是做自動化處理，但是 Grunt 處理的方式繞了很多圈，我們可以看一下以下的比較：</p>
+<ul>
+<li>Grunt 套件執行多個任務；Gulp 只會專注做一件事情上。</li>
+<li>Grunt 需要套件的基本功能；Gulp 裡的功能已經是內建的了。</li>
+<li>Grunt 使用 JSON 方式做資料配置的文件：Gulp 使用的方式更精簡，是使用 JS 語法撰寫</li>
+</ul>
+<p>Let’s start using Gulp.</p>
+<h3 id="安裝-Node-js"><a href="#安裝-Node-js" class="headerlink" title="安裝 Node.js"></a>安裝 Node.js</h3><p>這裡我不會做太多解釋如何安裝 node.js ，安裝方式請詳見之前寫的一篇文章 「<a href="http://weijutu.github.io/2017/07/24/nodejs/nodejs-02-install/">Node.js 系列學習日誌#2 - Node.js 安裝配置</a>」</p>
+<h3 id="安裝-Gulp"><a href="#安裝-Gulp" class="headerlink" title="安裝 Gulp"></a>安裝 Gulp</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$sudo npm install gulp -g</div></pre></td></tr></table></figure>
+<p>請先確認 nodejs, npm, gulp 是否有正常安裝，我們可以驗證一下版本</p>
+<p><img src="/images/javascript/7.png" alt=""></p>
+<h3 id="建立專案"><a href="#建立專案" class="headerlink" title="建立專案"></a>建立專案</h3><p>請先建立一個資料夾，這裡叫做 gulptest 的資料夾，這裡面包含：</p>
+<ul>
+<li>src — the location of pre-processed HTML source files and folders:<ul>
+<li>images — uncompressed images</li>
+<li>scripts — multiple pre-processed script files</li>
+<li>styles — multiple pre-processed CSS files</li>
+</ul>
+</li>
+<li>build — the location of production files for upload including:<ul>
+<li>images — compressed images</li>
+<li>scripts — a single minified script file</li>
+<li>styles — a single minified CSS file</li>
+</ul>
+</li>
+</ul>
+<p>接著我們在資料夾下安裝 Gulp 套件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$npm install gulp --save-dev</div></pre></td></tr></table></figure>
+<p>在這邊它會自動建立 node_module 永久性的資料夾，裡面包含被安裝的 gulp</p>
+<p><img src="/images/javascript/8.png" alt=""></p>
+<p>最後先在 gulptest 資料夾下建立空的 gulpfile.js 檔案，之後會介紹如何使用</p>
+<h3 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h3><p>我們需要安裝與配置一個套件來執行任務，在這裡做個簡單的例子就使用一套 jshint 套件，請輸入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$npm install gulp-jshint --save-dev</div></pre></td></tr></table></figure>
+<p>然後開啟剛才建立好的 gulpfile.js，建立一個名叫 imagemin 的任務。請寫以下程式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">// include gulp</div><div class="line">var gulp = require(&apos;gulp&apos;);</div><div class="line"></div><div class="line">gulp.task(&apos;imagemin&apos;, function() &#123;</div><div class="line">  var imgSrc = &apos;./src/images/**/*&apos;,</div><div class="line">      imgDst = &apos;./build/images&apos;;</div><div class="line"></div><div class="line">  gulp.src(imgSrc)</div><div class="line">    .pipe(changed(imgDst))</div><div class="line">    .pipe(imagemin())</div><div class="line">    .pipe(gulp.dest(imgDst));</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>我在 /src/images/ 放了三張圖 (隨便到 google design 抓了三張圖，暫時找不到照片就先拿很小kb數來練啦～)</p>
+<ul>
+<li><code>components-bottomsheet-for-mobile-1a_large_mdpi.png (31kb)</code></li>
+<li><code>components-bottomsheet-for-mobile-1b_large_mdpi.png (18kb)</code></li>
+<li><code>components-bottomsheet-for-mobile-1b_large_mdpi.png (8kb)</code></li>
+</ul>
+<p><img src="/images/javascript/9.png" alt=""></p>
+<p>gulpfile.js 存檔之後用以下的命令執行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$gulp imagemin</div></pre></td></tr></table></figure>
+<p><img src="/images/javascript/10.png" alt=""></p>
+<p>注意看執行結果的最後一行，上面寫 gulp-imagemin: Minified 3 images (saved 11.23 KB - 19.5%)，意思就是節省了 11.23KB, 總體省了 19.5%</p>
+<ul>
+<li><code>components-bottomsheet-for-mobile-1a_large_mdpi.png (29kb)</code></li>
+<li><code>components-bottomsheet-for-mobile-1b_large_mdpi.png (13kb)</code></li>
+<li><code>components-bottomsheet-for-mobile-1b_large_mdpi.png (4kb)</code></li>
+</ul>
+<p>最後請到 /build/images/<em>.</em>.png 查看被壓縮結果</p>
+<p><img src="/images/javascript/11.png" alt=""></p>
+<h3 id="資料參考"><a href="#資料參考" class="headerlink" title="資料參考"></a>資料參考</h3><ul>
+<li><a href="http://david.nowinsky.net/gulp-book/" target="_blank" rel="external">Gulp-book@Gitbook</a></li>
+<li>Wikipedia: <a href="http://zh.wikipedia.org/wiki/字串流" target="_blank" rel="external">http://zh.wikipedia.org/wiki/字串流</a></li>
+</ul>
+<h3 id="備註"><a href="#備註" class="headerlink" title="備註"></a>備註</h3><ul>
+<li>gulp.task(name, fn) it registers the function with a name. you can optionally specify some dependencies if other tasks need to run first</li>
+<li>gulp.run(task) runs all tasks with maximun concurrency</li>
+<li>gulp.src(glob) this returns a readable stream. takes a file system glob(like grunt) and starts emitting files that match</li>
+<li>gulp.dest(folder) this returns a writable stream, file objects piped to this are saved to the file system</li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> Javascript </tag>
+            
+            <tag> Gulp.js </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Google Material Design 非官方正體中文版電子書]]></title>
+      <url>/2017/08/25/achieve/achieve-google-material-design/</url>
+      <content type="html"><![CDATA[<p><img src="/images/achieve/1.png" alt=""></p>
+<p>Google I/O  2014 開發者大會公佈了最新的設計理念出了一份指南手冊，只單純看圖片就已經感受到強烈的設計風格，後來同事提出了一個想法，想要把指南手冊翻成非官方版的繁體中文版，由於海倫是參與翻譯的一員，在這邊也分享給大家做參考喔！</p>
+<a id="more"></a>
+<p>就這樣我跟同事還有同事的朋友，踏上了 <code>不歸路</code> 翻譯這條路，就開始協同翻譯了幾篇，我主要都是在 components 的部分，其他就順便整理英文格式的備份檔。</p>
+<p>請看翻譯的電子書：</p>
+<p><a href="http://wcc723.gitbooks.io/google_design_translate/" target="_blank" rel="external">http://wcc723.gitbooks.io/google_design_translate/</a></p>
+<h3 id="團結力量大"><a href="#團結力量大" class="headerlink" title="團結力量大"></a>團結力量大</h3><p>這電子書的出爐，拜大家努力翻譯所賜，小妹我也給予鞠躬致意，翻譯人員如下：</p>
+<ul>
+<li>Casper</li>
+<li>Charlene</li>
+<li>Frances</li>
+<li>Helen</li>
+<li>Mkdodos</li>
+<li>Tillonter Hsu</li>
+<li>Peter</li>
+<li>Xuan</li>
+<li>Xunyi</li>
+<li>陳聖博</li>
+</ul>
+<h3 id="翻譯時還要一些工具的幫忙"><a href="#翻譯時還要一些工具的幫忙" class="headerlink" title="翻譯時還要一些工具的幫忙"></a>翻譯時還要一些工具的幫忙</h3><p>我們看一下我翻譯這篇 Google Material Design 非官方正體中文電子書 時需要會哪些技能：</p>
+<ul>
+<li>使用 git 提交、更新、分支</li>
+<li>使用 github 提交總有個目的，放在託管空間能一目了然看編寫情形</li>
+<li>使用 gitbook 在本地端查看轉譯後的電子書</li>
+<li>使用 hackpad 追蹤翻譯進度</li>
+<li>使用 markdown 編寫翻譯</li>
+</ul>
+<p>你可能想說，翻個譯要搞這麼多？哈～對！翻譯電子書可是用了不少技能於一身技術而成的，由於翻譯不是一個人完成，因此需要有更多的工具搭配管理來掌控，正好我也想說自己因為對上述的操作不太熟，透過這樣的邊做邊練，還可以增加自己的實戰經驗咧。</p>
+<h3 id="Material-Design-是什麼？"><a href="#Material-Design-是什麼？" class="headerlink" title="Material Design 是什麼？"></a>Material Design 是什麼？</h3><p>老實講，為了加速翻譯件數都只專注在翻譯有沒有順暢，雖然翻譯過程加減看自己翻譯的章節在講些什麼，不過還是無法全面理解每個細節，翻譯完成之後我才真正完整閱讀每個設計理念的觀念是什麼。Material Design 是一種設計語言，就像學習程式就是學習一套語言一樣，每個程式都有它的規範去撰寫，設計從這次的 Google material design 的釋出，展現了一個設計風格。</p>
+<p>雖然我自己不是做視覺端的設計師，但是透過這樣的翻譯，理解設計的原理與理念，在自己開發觀念或是在開發網頁的頁面呈現上，有一些些的想法與心得，還不賴呢！</p>
+<h3 id="還真頗有成就感-der"><a href="#還真頗有成就感-der" class="headerlink" title="還真頗有成就感 der"></a>還真頗有成就感 der</h3><p>隨著翻譯篇數越來越完整的時候，真覺得許多翻譯的夥伴都好有熱誠在努力這件事情上，尤其是發起者  <a href="https://wcc723.github.io/" target="_blank" rel="external">Casper</a> ，假日也不得閒，繼續翻譯為了讓廣大的設計同好得到更有親切感的電子書。</p>
+<p>真是該給翻譯的大夥們一個大力的掌聲鼓勵。</p>
+<p>謝謝各位<br>這個翻譯完成了，繼續邁向下一個目標… Go~</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> Google Material Design </tag>
+            
+            <tag> gitbook </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Gitbook - 用 Gitbook 寫一個教學的電子書]]></title>
+      <url>/2017/08/25/gitbook/gitbook-install/</url>
+      <content type="html"><![CDATA[<p><img src="/images/gitbook/1.png" alt=""></p>
+<p>今天介紹這套GitBook 是用 node.js 的 npm 管理工具搭建的一種建立電子書的套件，藉由這篇文章可以清楚的瞭解如何建立電子書</p>
+<a id="more"></a>
+<h3 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h3><p>首先是安裝的部分，安裝之前請先確定 npm 這個管理工具有被安裝起來</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$sudo npm install -g gitbook</div></pre></td></tr></table></figure>
+<p><img src="/images/gitbook/2.png" alt=""></p>
+<p>接著，先在某一個目錄夾裏建立一個電子書的檔案庫</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$gitbook serve ./repository</div></pre></td></tr></table></figure>
+<p>像這樣子</p>
+<p><img src="/images/gitbook/3.png" alt=""></p>
+<p>在製作這個電子書，特別要注意的是請先建立 <code>README.md</code> 和 <code>SUMMARY.md</code> 這兩個文件，因為這兩個文件代表著電子書的架構導覽</p>
+<ul>
+<li>README.md   &gt;&gt;&gt; 代表這本電子書的簡介</li>
+</ul>
+<p><img src="/images/gitbook/4.png" alt=""></p>
+<ul>
+<li>SUMMARY.md  &gt;&gt;&gt; 定義這本電子書的章節結構</li>
+</ul>
+<p><img src="/images/gitbook/5.png" alt=""></p>
+<h3 id="實作該怎麼做"><a href="#實作該怎麼做" class="headerlink" title="實作該怎麼做"></a>實作該怎麼做</h3><p>在我們定義好 readme.md, summary.md 之後呢，可以看到我在 SUMMARY.md 檔案，建立了四個連結，分別是：</p>
+<ul>
+<li>source/intro/first.md</li>
+<li>source/install/secode.md</li>
+<li>source/install/2-1.md</li>
+<li>source/install/2-2.md</li>
+</ul>
+<p>我們可以利用以下的指令，讓 gitbook 找到 <code>summary.md</code> 所定義的章節結構去自動地去產生對應的檔案</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$gitbook init</div></pre></td></tr></table></figure>
+<p>到建立 gitbook 的資料夾看，就可以看到自動建立 source 資料夾之外，在source 下層也建立 intro 及 install 這兩個資料夾，然後再進去看某個資料夾下後，可以發現 markdown 的空白檔案也已經自動建立起來，在這邊就可以隨心所欲去建置屬於自己的章節內容。</p>
+<p><img src="/images/gitbook/6.png" alt=""></p>
+<p>喔！等等，別忘了看看結果<br>內容寫好之後，建立一個靜態頁面，預設會開 port 4000 的網址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$gitbook serve</div></pre></td></tr></table></figure>
+<p>可依照指令指示，開啓 <a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a></p>
+<p><img src="/images/gitbook/7.png" alt=""></p>
+<h3 id="看看樣子"><a href="#看看樣子" class="headerlink" title="看看樣子"></a>看看樣子</h3><p>這是首頁的樣子，呈現的首頁就能閱覽我們在 README.md 所寫的內容</p>
+<p><img src="/images/gitbook/8.png" alt=""></p>
+<p>自定義的第一章節，在頁面上有個左右兩邊的箭頭，可以點選後翻到下一個章節</p>
+<p><img src="/images/gitbook/9.png" alt=""></p>
+<p>自定義的第二章節</p>
+<p><img src="/images/gitbook/10.png" alt=""></p>
+<h3 id="BTW"><a href="#BTW" class="headerlink" title="BTW,"></a>BTW,</h3><p>Gitbook 支援多種檔案格式：</p>
+<ul>
+<li>靜態網頁：這個是 Gitbook 預設的輸入格式</li>
+<li>PDF : 需要安裝 gitbook-pdf 套件</li>
+<li>eBook: 需要安裝 ebook-convert</li>
+<li>單一 HTML 網頁，支援將內容輸出成一個單頁的 html (但我沒用過，不知道＠＠)</li>
+<li>JSON: 用在資料取得</li>
+</ul>
+<p>ps. 在編寫 markdown 文件時，再存檔的時候會有 live reload 效果，即時更新頁面喔！酷耶～</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> gitbook </tag>
+            
+            <tag> nodejs </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Javascript - 使用 console.table() 偵錯 js 物件]]></title>
       <url>/2017/08/25/javascript/javascript-console-table/</url>
       <content type="html"><![CDATA[<p>今天介紹一個在 Chrome debug 的時候使用一個 console.table() 的方法除錯。一般我們都會用  console.log 或 console.debug 來看物件的狀況，今天就嘗試一個新的不一樣的吧</p>

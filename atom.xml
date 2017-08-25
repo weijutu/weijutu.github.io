@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://weijutu.github.io/"/>
-  <updated>2017-08-25T02:02:20.000Z</updated>
+  <updated>2017-08-25T03:53:11.000Z</updated>
   <id>https://weijutu.github.io/</id>
   
   <author>
@@ -14,6 +14,236 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Javascript - 介紹 Gulp.js 並實作壓縮（minify）圖片</title>
+    <link href="https://weijutu.github.io/2017/08/25/javascript/javascript-gulpjs-minify-image/"/>
+    <id>https://weijutu.github.io/2017/08/25/javascript/javascript-gulpjs-minify-image/</id>
+    <published>2017-08-25T03:45:14.000Z</published>
+    <updated>2017-08-25T03:53:11.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/images/javascript/5.png" alt=""></p>
+<p>它是建立在 node.js 的一個套件。The streaming build system. 它的觀念是一套利用串流方式輔助建置系統，優化前端工程的效能（縮小js 檔案大小，編譯預處理的css, less ）加快js, css…etc 載入速度，特色在於代碼優於配置關做法讓事情變得更簡單，更直覺的方式構建系統。</p>
+<h3 id="什麼是字串流-Stream-（也可以叫串流）"><a href="#什麼是字串流-Stream-（也可以叫串流）" class="headerlink" title="什麼是字串流 Stream? （也可以叫串流）"></a>什麼是字串流 Stream? （也可以叫串流）</h3><p>谷歌一下Wiki 的「 Stream 」的意思：</p>
+<blockquote>
+<p>在電腦科學裡面，字串流(stream，或者串流)這個詞有很多用法。所有這一些用法都是代表一個包含資料的序列。我們可以將字串流想做是一個允許資料一個接一個，而非將資料包作一整個，來進行處理的輸送帶。</p>
+</blockquote>
+<a id="more"></a>
+<p>用個 gulp.js 的簡單例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">gulp.src(&apos;js/app.js&apos;)</div><div class="line">    .pipe(uglify())</div><div class="line">    .pipe(gulp.dest(&apos;build&apos;))</div></pre></td></tr></table></figure>
+<p>以這個例子來說，gulp.src 方法帶了一個字串參數 js/app.js，這個是對應一個主要的 js 檔案，主要是建立物件串流來表示的文件，接這透過 .pipe 方法將所有檔案做 uglify() 的動作，而這個動作將會縮小之後回傳一個新的物件，最後將這個輸出用 gulp.dest 目標位置到 build 資料夾裡面。</p>
+<p>流程會是如下：</p>
+<p><img src="/images/javascript/6.png" alt=""></p>
+<h3 id="Grunt-vs-Gulp"><a href="#Grunt-vs-Gulp" class="headerlink" title="Grunt vs Gulp"></a>Grunt vs Gulp</h3><p>Grunt.js 與 Gulp.js 都做相同的事情，都是做自動化處理，但是 Grunt 處理的方式繞了很多圈，我們可以看一下以下的比較：</p>
+<ul>
+<li>Grunt 套件執行多個任務；Gulp 只會專注做一件事情上。</li>
+<li>Grunt 需要套件的基本功能；Gulp 裡的功能已經是內建的了。</li>
+<li>Grunt 使用 JSON 方式做資料配置的文件：Gulp 使用的方式更精簡，是使用 JS 語法撰寫</li>
+</ul>
+<p>Let’s start using Gulp.</p>
+<h3 id="安裝-Node-js"><a href="#安裝-Node-js" class="headerlink" title="安裝 Node.js"></a>安裝 Node.js</h3><p>這裡我不會做太多解釋如何安裝 node.js ，安裝方式請詳見之前寫的一篇文章 「<a href="http://weijutu.github.io/2017/07/24/nodejs/nodejs-02-install/">Node.js 系列學習日誌#2 - Node.js 安裝配置</a>」</p>
+<h3 id="安裝-Gulp"><a href="#安裝-Gulp" class="headerlink" title="安裝 Gulp"></a>安裝 Gulp</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$sudo npm install gulp -g</div></pre></td></tr></table></figure>
+<p>請先確認 nodejs, npm, gulp 是否有正常安裝，我們可以驗證一下版本</p>
+<p><img src="/images/javascript/7.png" alt=""></p>
+<h3 id="建立專案"><a href="#建立專案" class="headerlink" title="建立專案"></a>建立專案</h3><p>請先建立一個資料夾，這裡叫做 gulptest 的資料夾，這裡面包含：</p>
+<ul>
+<li>src — the location of pre-processed HTML source files and folders:<ul>
+<li>images — uncompressed images</li>
+<li>scripts — multiple pre-processed script files</li>
+<li>styles — multiple pre-processed CSS files</li>
+</ul>
+</li>
+<li>build — the location of production files for upload including:<ul>
+<li>images — compressed images</li>
+<li>scripts — a single minified script file</li>
+<li>styles — a single minified CSS file</li>
+</ul>
+</li>
+</ul>
+<p>接著我們在資料夾下安裝 Gulp 套件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$npm install gulp --save-dev</div></pre></td></tr></table></figure>
+<p>在這邊它會自動建立 node_module 永久性的資料夾，裡面包含被安裝的 gulp</p>
+<p><img src="/images/javascript/8.png" alt=""></p>
+<p>最後先在 gulptest 資料夾下建立空的 gulpfile.js 檔案，之後會介紹如何使用</p>
+<h3 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h3><p>我們需要安裝與配置一個套件來執行任務，在這裡做個簡單的例子就使用一套 jshint 套件，請輸入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$npm install gulp-jshint --save-dev</div></pre></td></tr></table></figure>
+<p>然後開啟剛才建立好的 gulpfile.js，建立一個名叫 imagemin 的任務。請寫以下程式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">// include gulp</div><div class="line">var gulp = require(&apos;gulp&apos;);</div><div class="line"></div><div class="line">gulp.task(&apos;imagemin&apos;, function() &#123;</div><div class="line">  var imgSrc = &apos;./src/images/**/*&apos;,</div><div class="line">      imgDst = &apos;./build/images&apos;;</div><div class="line"></div><div class="line">  gulp.src(imgSrc)</div><div class="line">    .pipe(changed(imgDst))</div><div class="line">    .pipe(imagemin())</div><div class="line">    .pipe(gulp.dest(imgDst));</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>我在 /src/images/ 放了三張圖 (隨便到 google design 抓了三張圖，暫時找不到照片就先拿很小kb數來練啦～)</p>
+<ul>
+<li><code>components-bottomsheet-for-mobile-1a_large_mdpi.png (31kb)</code></li>
+<li><code>components-bottomsheet-for-mobile-1b_large_mdpi.png (18kb)</code></li>
+<li><code>components-bottomsheet-for-mobile-1b_large_mdpi.png (8kb)</code></li>
+</ul>
+<p><img src="/images/javascript/9.png" alt=""></p>
+<p>gulpfile.js 存檔之後用以下的命令執行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$gulp imagemin</div></pre></td></tr></table></figure>
+<p><img src="/images/javascript/10.png" alt=""></p>
+<p>注意看執行結果的最後一行，上面寫 gulp-imagemin: Minified 3 images (saved 11.23 KB - 19.5%)，意思就是節省了 11.23KB, 總體省了 19.5%</p>
+<ul>
+<li><code>components-bottomsheet-for-mobile-1a_large_mdpi.png (29kb)</code></li>
+<li><code>components-bottomsheet-for-mobile-1b_large_mdpi.png (13kb)</code></li>
+<li><code>components-bottomsheet-for-mobile-1b_large_mdpi.png (4kb)</code></li>
+</ul>
+<p>最後請到 /build/images/<em>.</em>.png 查看被壓縮結果</p>
+<p><img src="/images/javascript/11.png" alt=""></p>
+<h3 id="資料參考"><a href="#資料參考" class="headerlink" title="資料參考"></a>資料參考</h3><ul>
+<li><a href="http://david.nowinsky.net/gulp-book/" target="_blank" rel="external">Gulp-book@Gitbook</a></li>
+<li>Wikipedia: <a href="http://zh.wikipedia.org/wiki/字串流" target="_blank" rel="external">http://zh.wikipedia.org/wiki/字串流</a></li>
+</ul>
+<h3 id="備註"><a href="#備註" class="headerlink" title="備註"></a>備註</h3><ul>
+<li>gulp.task(name, fn) it registers the function with a name. you can optionally specify some dependencies if other tasks need to run first</li>
+<li>gulp.run(task) runs all tasks with maximun concurrency</li>
+<li>gulp.src(glob) this returns a readable stream. takes a file system glob(like grunt) and starts emitting files that match</li>
+<li>gulp.dest(folder) this returns a writable stream, file objects piped to this are saved to the file system</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;/images/javascript/5.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;它是建立在 node.js 的一個套件。The streaming build system. 它的觀念是一套利用串流方式輔助建置系統，優化前端工程的效能（縮小js 檔案大小，編譯預處理的css, less ）加快js, css…etc 載入速度，特色在於代碼優於配置關做法讓事情變得更簡單，更直覺的方式構建系統。&lt;/p&gt;
+&lt;h3 id=&quot;什麼是字串流-Stream-（也可以叫串流）&quot;&gt;&lt;a href=&quot;#什麼是字串流-Stream-（也可以叫串流）&quot; class=&quot;headerlink&quot; title=&quot;什麼是字串流 Stream? （也可以叫串流）&quot;&gt;&lt;/a&gt;什麼是字串流 Stream? （也可以叫串流）&lt;/h3&gt;&lt;p&gt;谷歌一下Wiki 的「 Stream 」的意思：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在電腦科學裡面，字串流(stream，或者串流)這個詞有很多用法。所有這一些用法都是代表一個包含資料的序列。我們可以將字串流想做是一個允許資料一個接一個，而非將資料包作一整個，來進行處理的輸送帶。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+    
+      <category term="Javascript" scheme="https://weijutu.github.io/tags/Javascript/"/>
+    
+      <category term="Gulp.js" scheme="https://weijutu.github.io/tags/Gulp-js/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Google Material Design 非官方正體中文版電子書</title>
+    <link href="https://weijutu.github.io/2017/08/25/achieve/achieve-google-material-design/"/>
+    <id>https://weijutu.github.io/2017/08/25/achieve/achieve-google-material-design/</id>
+    <published>2017-08-25T03:37:25.000Z</published>
+    <updated>2017-08-25T03:43:16.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/images/achieve/1.png" alt=""></p>
+<p>Google I/O  2014 開發者大會公佈了最新的設計理念出了一份指南手冊，只單純看圖片就已經感受到強烈的設計風格，後來同事提出了一個想法，想要把指南手冊翻成非官方版的繁體中文版，由於海倫是參與翻譯的一員，在這邊也分享給大家做參考喔！</p>
+<a id="more"></a>
+<p>就這樣我跟同事還有同事的朋友，踏上了 <code>不歸路</code> 翻譯這條路，就開始協同翻譯了幾篇，我主要都是在 components 的部分，其他就順便整理英文格式的備份檔。</p>
+<p>請看翻譯的電子書：</p>
+<p><a href="http://wcc723.gitbooks.io/google_design_translate/" target="_blank" rel="external">http://wcc723.gitbooks.io/google_design_translate/</a></p>
+<h3 id="團結力量大"><a href="#團結力量大" class="headerlink" title="團結力量大"></a>團結力量大</h3><p>這電子書的出爐，拜大家努力翻譯所賜，小妹我也給予鞠躬致意，翻譯人員如下：</p>
+<ul>
+<li>Casper</li>
+<li>Charlene</li>
+<li>Frances</li>
+<li>Helen</li>
+<li>Mkdodos</li>
+<li>Tillonter Hsu</li>
+<li>Peter</li>
+<li>Xuan</li>
+<li>Xunyi</li>
+<li>陳聖博</li>
+</ul>
+<h3 id="翻譯時還要一些工具的幫忙"><a href="#翻譯時還要一些工具的幫忙" class="headerlink" title="翻譯時還要一些工具的幫忙"></a>翻譯時還要一些工具的幫忙</h3><p>我們看一下我翻譯這篇 Google Material Design 非官方正體中文電子書 時需要會哪些技能：</p>
+<ul>
+<li>使用 git 提交、更新、分支</li>
+<li>使用 github 提交總有個目的，放在託管空間能一目了然看編寫情形</li>
+<li>使用 gitbook 在本地端查看轉譯後的電子書</li>
+<li>使用 hackpad 追蹤翻譯進度</li>
+<li>使用 markdown 編寫翻譯</li>
+</ul>
+<p>你可能想說，翻個譯要搞這麼多？哈～對！翻譯電子書可是用了不少技能於一身技術而成的，由於翻譯不是一個人完成，因此需要有更多的工具搭配管理來掌控，正好我也想說自己因為對上述的操作不太熟，透過這樣的邊做邊練，還可以增加自己的實戰經驗咧。</p>
+<h3 id="Material-Design-是什麼？"><a href="#Material-Design-是什麼？" class="headerlink" title="Material Design 是什麼？"></a>Material Design 是什麼？</h3><p>老實講，為了加速翻譯件數都只專注在翻譯有沒有順暢，雖然翻譯過程加減看自己翻譯的章節在講些什麼，不過還是無法全面理解每個細節，翻譯完成之後我才真正完整閱讀每個設計理念的觀念是什麼。Material Design 是一種設計語言，就像學習程式就是學習一套語言一樣，每個程式都有它的規範去撰寫，設計從這次的 Google material design 的釋出，展現了一個設計風格。</p>
+<p>雖然我自己不是做視覺端的設計師，但是透過這樣的翻譯，理解設計的原理與理念，在自己開發觀念或是在開發網頁的頁面呈現上，有一些些的想法與心得，還不賴呢！</p>
+<h3 id="還真頗有成就感-der"><a href="#還真頗有成就感-der" class="headerlink" title="還真頗有成就感 der"></a>還真頗有成就感 der</h3><p>隨著翻譯篇數越來越完整的時候，真覺得許多翻譯的夥伴都好有熱誠在努力這件事情上，尤其是發起者  <a href="https://wcc723.github.io/" target="_blank" rel="external">Casper</a> ，假日也不得閒，繼續翻譯為了讓廣大的設計同好得到更有親切感的電子書。</p>
+<p>真是該給翻譯的大夥們一個大力的掌聲鼓勵。</p>
+<p>謝謝各位<br>這個翻譯完成了，繼續邁向下一個目標… Go~</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;/images/achieve/1.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Google I/O  2014 開發者大會公佈了最新的設計理念出了一份指南手冊，只單純看圖片就已經感受到強烈的設計風格，後來同事提出了一個想法，想要把指南手冊翻成非官方版的繁體中文版，由於海倫是參與翻譯的一員，在這邊也分享給大家做參考喔！&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Google Material Design" scheme="https://weijutu.github.io/tags/Google-Material-Design/"/>
+    
+      <category term="gitbook" scheme="https://weijutu.github.io/tags/gitbook/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Gitbook - 用 Gitbook 寫一個教學的電子書</title>
+    <link href="https://weijutu.github.io/2017/08/25/gitbook/gitbook-install/"/>
+    <id>https://weijutu.github.io/2017/08/25/gitbook/gitbook-install/</id>
+    <published>2017-08-25T03:26:07.000Z</published>
+    <updated>2017-08-25T03:33:06.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/images/gitbook/1.png" alt=""></p>
+<p>今天介紹這套GitBook 是用 node.js 的 npm 管理工具搭建的一種建立電子書的套件，藉由這篇文章可以清楚的瞭解如何建立電子書</p>
+<a id="more"></a>
+<h3 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h3><p>首先是安裝的部分，安裝之前請先確定 npm 這個管理工具有被安裝起來</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$sudo npm install -g gitbook</div></pre></td></tr></table></figure>
+<p><img src="/images/gitbook/2.png" alt=""></p>
+<p>接著，先在某一個目錄夾裏建立一個電子書的檔案庫</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$gitbook serve ./repository</div></pre></td></tr></table></figure>
+<p>像這樣子</p>
+<p><img src="/images/gitbook/3.png" alt=""></p>
+<p>在製作這個電子書，特別要注意的是請先建立 <code>README.md</code> 和 <code>SUMMARY.md</code> 這兩個文件，因為這兩個文件代表著電子書的架構導覽</p>
+<ul>
+<li>README.md   &gt;&gt;&gt; 代表這本電子書的簡介</li>
+</ul>
+<p><img src="/images/gitbook/4.png" alt=""></p>
+<ul>
+<li>SUMMARY.md  &gt;&gt;&gt; 定義這本電子書的章節結構</li>
+</ul>
+<p><img src="/images/gitbook/5.png" alt=""></p>
+<h3 id="實作該怎麼做"><a href="#實作該怎麼做" class="headerlink" title="實作該怎麼做"></a>實作該怎麼做</h3><p>在我們定義好 readme.md, summary.md 之後呢，可以看到我在 SUMMARY.md 檔案，建立了四個連結，分別是：</p>
+<ul>
+<li>source/intro/first.md</li>
+<li>source/install/secode.md</li>
+<li>source/install/2-1.md</li>
+<li>source/install/2-2.md</li>
+</ul>
+<p>我們可以利用以下的指令，讓 gitbook 找到 <code>summary.md</code> 所定義的章節結構去自動地去產生對應的檔案</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$gitbook init</div></pre></td></tr></table></figure>
+<p>到建立 gitbook 的資料夾看，就可以看到自動建立 source 資料夾之外，在source 下層也建立 intro 及 install 這兩個資料夾，然後再進去看某個資料夾下後，可以發現 markdown 的空白檔案也已經自動建立起來，在這邊就可以隨心所欲去建置屬於自己的章節內容。</p>
+<p><img src="/images/gitbook/6.png" alt=""></p>
+<p>喔！等等，別忘了看看結果<br>內容寫好之後，建立一個靜態頁面，預設會開 port 4000 的網址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$gitbook serve</div></pre></td></tr></table></figure>
+<p>可依照指令指示，開啓 <a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a></p>
+<p><img src="/images/gitbook/7.png" alt=""></p>
+<h3 id="看看樣子"><a href="#看看樣子" class="headerlink" title="看看樣子"></a>看看樣子</h3><p>這是首頁的樣子，呈現的首頁就能閱覽我們在 README.md 所寫的內容</p>
+<p><img src="/images/gitbook/8.png" alt=""></p>
+<p>自定義的第一章節，在頁面上有個左右兩邊的箭頭，可以點選後翻到下一個章節</p>
+<p><img src="/images/gitbook/9.png" alt=""></p>
+<p>自定義的第二章節</p>
+<p><img src="/images/gitbook/10.png" alt=""></p>
+<h3 id="BTW"><a href="#BTW" class="headerlink" title="BTW,"></a>BTW,</h3><p>Gitbook 支援多種檔案格式：</p>
+<ul>
+<li>靜態網頁：這個是 Gitbook 預設的輸入格式</li>
+<li>PDF : 需要安裝 gitbook-pdf 套件</li>
+<li>eBook: 需要安裝 ebook-convert</li>
+<li>單一 HTML 網頁，支援將內容輸出成一個單頁的 html (但我沒用過，不知道＠＠)</li>
+<li>JSON: 用在資料取得</li>
+</ul>
+<p>ps. 在編寫 markdown 文件時，再存檔的時候會有 live reload 效果，即時更新頁面喔！酷耶～</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;/images/gitbook/1.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;今天介紹這套GitBook 是用 node.js 的 npm 管理工具搭建的一種建立電子書的套件，藉由這篇文章可以清楚的瞭解如何建立電子書&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="gitbook" scheme="https://weijutu.github.io/tags/gitbook/"/>
+    
+      <category term="nodejs" scheme="https://weijutu.github.io/tags/nodejs/"/>
+    
+  </entry>
   
   <entry>
     <title>Javascript - 使用 console.table() 偵錯 js 物件</title>
@@ -964,155 +1194,6 @@
       <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
     
       <category term="express" scheme="https://weijutu.github.io/tags/express/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Node.js 系列學習日誌#17 - 使用 express, ejs 實作讀取靜態 JSON 格式資料</title>
-    <link href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-17-ejs-json/"/>
-    <id>https://weijutu.github.io/2017/07/24/nodejs/nodejs-17-ejs-json/</id>
-    <published>2017-07-23T16:17:00.000Z</published>
-    <updated>2017-07-29T09:55:48.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>今天來介紹 express, ejs 實作讀取靜態 JSON 格式資料程式</p>
-<p>本章節將會學習到：</p>
-<ul>
-<li>使用 ejs 樣板引擎建立檢視頁面</li>
-<li>建立 Json 檔案及資料，並採取 /api/posts 列出所有 json 資料</li>
-<li>採取 /post/:id 取得某一筆資料<br>首先我們先建立一個目錄叫 demo-express-json 的資料夾，然後使用指令進入到 demo-express-json 資料夾裡面，接著安裝 express 框架以及 ejs 的樣板引擎</li>
-</ul>
-<a id="more"></a>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$npm</span> install —save express ejs</div></pre></td></tr></table></figure>
-<h3 id="建立-josn-檔案"><a href="#建立-josn-檔案" class="headerlink" title="建立 josn 檔案"></a>建立 josn 檔案</h3><p>建立完成之後，我們在 demo-express-json 會出現 node_module 資料夾，裡面則是有 express, ejs 套件相關檔案，接下來在根目錄下建立一個  posts.json 格式檔案，資料先假定設定為：</p>
-<p>（文字是用亂數假文產生器弄的，因此無需認真讀囉）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">[</div><div class="line">     &#123;</div><div class="line">       &quot;title&quot;: &quot;會濟報好大必者政下二&quot;,</div><div class="line">       &quot;id&quot;: &quot;fdb61c16-4bba-11e4-9e35-164230d1df67&quot;,</div><div class="line">       &quot;content&quot;: &quot;容有那一氣持地來於結主了友如頭……院還地入。出乎機富事的著度同禮、時在科種力事再數總源式孩？&quot;</div><div class="line">     &#125;,</div><div class="line">     &#123;</div><div class="line">       &quot;title&quot;: &quot;主覺問我的食什期和&quot;,</div><div class="line">       &quot;id&quot;: &quot;0bc365ac-4bbb-11e4-9e35-164230d1df67&quot;,</div><div class="line">       &quot;content&quot;: &quot;生老了險實去供考權是車子氣長不別相且員高麼也工家看&quot;</div><div class="line">     &#125;,</div><div class="line">     &#123;</div><div class="line">       &quot;title&quot;: &quot;是實裡在園時傳&quot;,</div><div class="line">       &quot;id&quot;: &quot;0ff44786-4bbb-11e4-9e35-164230d1df67&quot;,</div><div class="line">       &quot;content&quot;: &quot;不半過何：為濟是在制們。裡得一方出，處師取是你賣而陽&quot;</div><div class="line">     &#125;</div><div class="line">]</div></pre></td></tr></table></figure>
-<p>這個 json 檔每一筆資料以 title, id, content 參數為主</p>
-<h3 id="建立-app-js"><a href="#建立-app-js" class="headerlink" title="建立 app.js"></a>建立 app.js</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">// express web framework</div><div class="line">var express = require(&apos;express&apos;);</div><div class="line">//讀取 posts.json</div><div class="line">var fs = require(&apos;fs&apos;);</div><div class="line">var app = express();</div><div class="line"></div><div class="line">//放置靜態網頁</div><div class="line">app.use(&apos;/public&apos;, express.static(__dirname + &apos;/public&apos;));</div><div class="line"></div><div class="line">//定義網站標題</div><div class="line">app.locals.title=&quot;Get json data using express web framework&quot;;</div><div class="line"></div><div class="line">app.all(&apos;*&apos;, function(req, res, next)&#123;</div><div class="line">  fs.readFile(&apos;posts.json&apos;, function(err, data)&#123;</div><div class="line">    res.locals.posts = JSON.parse(data);</div><div class="line">    next();</div><div class="line">  &#125;);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">//網頁主進入點</div><div class="line">app.get(&apos;/&apos;, function(req, res)&#123;</div><div class="line">  //指定 /views/idex.ejs</div><div class="line">  res.render(&apos;index.ejs&apos;);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">//顯示 posts.json 資料</div><div class="line">app.get(&apos;/api/posts&apos;, function(req, res)&#123;</div><div class="line">  res.json(res.locals.posts);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">//當 url 是 /post/:id 時, 取得某一筆資料</div><div class="line">app.get(&apos;/post/:id&apos;, function(req, res, next)&#123;</div><div class="line">  //取得 post.json 資料夾</div><div class="line">  res.locals.posts.forEach(function(post)&#123;</div><div class="line">    //從 url 取得 id 參數與 posts.json 裡的 id</div><div class="line">    if (req.params.id === post.id)&#123;</div><div class="line">      //顯示參數為  url 中 id 的 post.id, 那麼顯示部分資料</div><div class="line">      res.render(&apos;post.ejs&apos;, &#123; post: post &#125;);</div><div class="line">    &#125;</div><div class="line">  &#125;)</div><div class="line">&#125;);</div><div class="line"></div><div class="line">app.listen(3000);</div><div class="line">console.log(&apos;app is listening at localhost:3000...’);</div></pre></td></tr></table></figure>
-<p>再來是建立檢視資料夾 views，因為我們在 app.js 裡面設定樣板引擎是用 ejs，所以在 views 資料夾裡面新增三個檔案，分別是 header.ejs, index.ejs, footer.ejs</p>
-<p>header.ejs</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">&lt;!doctype html&gt;</div><div class="line">&lt;html lang=&quot;en&quot;&gt;</div><div class="line">&lt;head&gt;</div><div class="line">  &lt;meta charset=&quot;utf-8&quot;&gt;</div><div class="line">  &lt;title&gt;&lt;%= title %&gt;&lt;/title&gt;</div><div class="line">  &lt;link rel=&quot;stylesheet&quot; href=&quot;/public/styles.css&quot;&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line"></div><div class="line">&lt;header&gt;</div><div class="line">  &lt;div class=&quot;container&quot;&gt;</div><div class="line">    &lt;h1&gt;&lt;a href=&quot;/&quot;&gt;&lt;%= title %&gt;&lt;/a&gt;&lt;/h1&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">&lt;/header&gt;</div><div class="line"></div><div class="line">footer.ejs</div><div class="line"></div><div class="line">&lt;footer&gt;</div><div class="line">  &lt;div class=&quot;container&quot;&gt;</div><div class="line">    This is footer side.</div><div class="line">  &lt;/div&gt;</div><div class="line">&lt;/footer&gt;</div><div class="line"></div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div><div class="line"></div><div class="line">index.ejs</div><div class="line"></div><div class="line">&lt;% include header %&gt;</div><div class="line"></div><div class="line">&lt;main role=&quot;main&quot;&gt;</div><div class="line">  &lt;div class=&quot;container&quot;&gt;</div><div class="line">    &lt;h3&gt;&lt;a href=&quot;/api/posts&quot;&gt;/api/posts&lt;/a&gt;&lt;/h3&gt;</div><div class="line">    &lt;% posts.forEach(function(post)&#123; %&gt;</div><div class="line">      &lt;h3&gt;</div><div class="line">        &lt;a href=&quot;/post/&lt;%= post.id %&gt;&quot;&gt;</div><div class="line">          &lt;%= post.title %&gt;</div><div class="line">        &lt;/a&gt;</div><div class="line">      &lt;/h3&gt;</div><div class="line">      &lt;div&gt;&lt;%= post.content %&gt;&lt;/div&gt;</div><div class="line">    &lt;% &#125;); %&gt;</div><div class="line">  &lt;/main&gt;</div><div class="line">&lt;/div&gt;</div><div class="line"></div><div class="line">&lt;% include footer %&gt;</div></pre></td></tr></table></figure>
-<h3 id="建立靜態資料"><a href="#建立靜態資料" class="headerlink" title="建立靜態資料"></a>建立靜態資料</h3><p>在 app.js 檔案裡有一行是</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">app.use(&apos;/public&apos;, express.static(__dirname + &apos;/public&apos;));</div></pre></td></tr></table></figure>
-<p>在做網站的過程，我們會建立 css,js 檔案，在根目錄下建立一個 public，並且在這個檔案增加一個 style.css，去定義一些樣式的方式，我這邊就不太多做 css 的解釋囉。</p>
-<h3 id="執行"><a href="#執行" class="headerlink" title="執行"></a>執行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$node index.js</div></pre></td></tr></table></figure>
-<h3 id="結果"><a href="#結果" class="headerlink" title="結果"></a>結果</h3><p><img src="/images/nodejs/68.png" alt=""></p>
-<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="http://expressjs.com/" target="_blank" rel="external">http://expressjs.com/</a><br><a href="http://expressjs.com/4x/api.html#app.locals" target="_blank" rel="external">http://expressjs.com/4x/api.html#app.locals</a><br><a href="http://www.richyli.com/tool/loremipsum/" target="_blank" rel="external">http://www.richyli.com/tool/loremipsum/</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;今天來介紹 express, ejs 實作讀取靜態 JSON 格式資料程式&lt;/p&gt;
-&lt;p&gt;本章節將會學習到：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;使用 ejs 樣板引擎建立檢視頁面&lt;/li&gt;
-&lt;li&gt;建立 Json 檔案及資料，並採取 /api/posts 列出所有 json 資料&lt;/li&gt;
-&lt;li&gt;採取 /post/:id 取得某一筆資料&lt;br&gt;首先我們先建立一個目錄叫 demo-express-json 的資料夾，然後使用指令進入到 demo-express-json 資料夾裡面，接著安裝 express 框架以及 ejs 的樣板引擎&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/categories/Node-js/"/>
-    
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/tags/Node-js/"/>
-    
-      <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
-    
-      <category term="json" scheme="https://weijutu.github.io/tags/json/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Node.js 系列學習日誌#16 - 基礎工具核心模組 util.inherits 實現原型繼承</title>
-    <link href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-16-util-inherits/"/>
-    <id>https://weijutu.github.io/2017/07/24/nodejs/nodejs-16-util-inherits/</id>
-    <published>2017-07-23T16:16:00.000Z</published>
-    <updated>2017-07-25T15:05:40.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>在 js 的內建功能裡面如果有些不適合或無法滿足需求的時候，多半都要動手刻程式然後做到自己要的模組來呼叫方法。而 Node.js 提供了一個函數的集合，能夠比 js 更多的一些基本的處理，我們可以看到以下官方網站所提供 util 可用的方法。在本章節將介紹比較重要關注的方法</p>
-<p><img src="/images/nodejs/64.png" alt=""></p>
-<a id="more"></a>
-<h1 id="util-inherits-實現原型繼承"><a href="#util-inherits-實現原型繼承" class="headerlink" title="util.inherits 實現原型繼承"></a>util.inherits 實現原型繼承</h1><p>引用內建基礎工具  util，請在程式第一行寫 var util = require(‘util’);  方可使用工具的方法。在這邊我們介紹繼承的功能，也就是  util.inherits(constructor, superConstructor)，在參數的第一個作為建構子，而第二參數為父建構子，直接來看程式的部分</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fnBase</span>(<span class="params"></span>) </span>&#123;</div><div class="line">     <span class="keyword">this</span>.name = <span class="string">'java'</span>;</div><div class="line">     <span class="keyword">this</span>.price = <span class="number">250</span>;</div><div class="line"></div><div class="line">     <span class="keyword">this</span>.getBookName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">          <span class="built_in">console</span>.log(<span class="string">"getBookName: the book name is "</span> + <span class="keyword">this</span>.name);</div><div class="line">     &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">fnBase.prototype.showName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">     <span class="built_in">console</span>.log(<span class="string">"showName: "</span> + <span class="keyword">this</span>.name);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">fnBase.prototype.showPrice = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">     <span class="built_in">console</span>.log(<span class="string">"showPrice: "</span> + <span class="keyword">this</span>.price);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>在這邊開始先建立了一個 fnBase 的物件，包含 name, price 屬性並且給予初始化值以及 getBookName 方法，而這個取得 book 的名稱。另外再多兩個 prototype 的原型方法，一個是 showName 以及 showPrice 方法，接著我們在建立一個物件</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Book</span>(<span class="params"></span>) </span>&#123;</div><div class="line">     <span class="keyword">this</span>.name = <span class="string">"nodejs"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>我們定義好基礎對象為 fnBase 之後，以及繼承 fnBook  的 Book 建構子的屬性 name 為 nodejs，我們在透過以下方法來塑造繼承關係</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">util.inherits(Book, fnBase);</div></pre></td></tr></table></figure>
-<p>接下來呼叫一下看看會有什麼變化，首先我們先建立 fnBase  的物件，在呼叫內部包含的方法，showName 及 getBookName</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> fnBase();</div><div class="line">obj.showName();</div><div class="line">obj.getBookName();</div><div class="line"><span class="built_in">console</span>.log(obj);</div></pre></td></tr></table></figure>
-<p>其結果如下，可以看到呼叫的兩個方法皆有顯示答案</p>
-<p><img src="/images/nodejs/65.png" alt=""></p>
-<p>最後將 new fnBase() 換成  new Book() 看看，程式如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> book = <span class="keyword">new</span> Book();</div><div class="line">book.showName();</div><div class="line">book.getBookName();</div><div class="line"><span class="built_in">console</span>.log(book);</div></pre></td></tr></table></figure>
-<p>Oops! 為什麼會出錯？結果居然只呼叫得到 showName, 卻無法取得  getBookName.</p>
-<p><img src="/images/nodejs/66.png" alt=""></p>
-<p>原因是因為 Book  只會繼承 fnBase 在原型 prototype 的函數，其建立的屬性與 getBookName 並不會被 Book 繼承。因此在繼承上的觀念則要特別注意了</p>
-<p>參考資料：<br><a href="http://nodejs.org/api/util.html" target="_blank" rel="external">http://nodejs.org/api/util.html</a><br><a href="http://www.w3schools.com/js/js_object_prototypes.asp" target="_blank" rel="external">http://www.w3schools.com/js/js_object_prototypes.asp</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在 js 的內建功能裡面如果有些不適合或無法滿足需求的時候，多半都要動手刻程式然後做到自己要的模組來呼叫方法。而 Node.js 提供了一個函數的集合，能夠比 js 更多的一些基本的處理，我們可以看到以下官方網站所提供 util 可用的方法。在本章節將介紹比較重要關注的方法&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/nodejs/64.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/categories/Node-js/"/>
-    
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/tags/Node-js/"/>
-    
-      <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Node.js 系列學習日誌#15 - 讀取 markdown 檔案內容顯示在頁面上</title>
-    <link href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-15-markdown/"/>
-    <id>https://weijutu.github.io/2017/07/24/nodejs/nodejs-15-markdown/</id>
-    <published>2017-07-23T16:15:00.000Z</published>
-    <updated>2017-07-25T11:52:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>繼上一篇完成讀取檔案的操作之後，本篇將介紹讀取  markdown 檔案內容顯示在頁面上面。</p>
-<h1 id="話說前頭，什麼是-markdown"><a href="#話說前頭，什麼是-markdown" class="headerlink" title="話說前頭，什麼是 markdown?"></a>話說前頭，什麼是 markdown?</h1><p>從 wiki 網站所說的，它是一種輕量級的標記語言，允許使用容易讀也容易寫的純文字的格式，最後轉換 xhtml, html 檔案，就有點像是一般電子郵件純文本的特性。可以從這個網址來 <a href="http://markdown.tw/" target="_blank" rel="external">http://markdown.tw/</a> 學習每個元素的寫法。</p>
-<a id="more"></a>
-<h1 id="node-markdown-實作"><a href="#node-markdown-實作" class="headerlink" title="node-markdown 實作"></a>node-markdown 實作</h1><p>首先我們建立一個 express web framework 的專案，在這邊的樣板引擎是用 ejs ，因此下的指令是</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$express -e nodejs-fs-markdown</div></pre></td></tr></table></figure>
-<p>在根目錄底下建立一個 markdown 檔案，名為 book.md 的檔案，開啓 book.md 檔案後，我們任意打一些 markdown 的格式預備要來轉換  html 格式</p>
-<p><img src="/images/nodejs/61.png" alt=""></p>
-<p>接著重要我們要採用  node-markdown 的套件來安裝，詳見 <a href="https://www.npmjs.org/package/node-markdown" target="_blank" rel="external">https://www.npmjs.org/package/node-markdown</a> ，安裝方式可使用</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$npm</span> install node-markdown</div></pre></td></tr></table></figure>
-<p>其檔案結構會是：</p>
-<p><img src="/images/nodejs/62.png" alt=""></p>
-<p>請打開 app.js 檔案，我們要將 node-markdown 引入，因此宣告方式為：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> md = <span class="built_in">require</span>(<span class="string">"node-markdown"</span>).Markdown;</div></pre></td></tr></table></figure>
-<p>並且在 app.js 檔案裡面安插以下這段</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">app.get(<span class="string">'/markdown'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>)</span>&#123;</div><div class="line">    fs.readFile(<span class="string">"./book.md"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, data</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (err) &#123;</div><div class="line">            <span class="keyword">throw</span> err;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">       <span class="comment">//使用  md 方法將檔案內容轉行為 html 格式</span></div><div class="line">        str = md(data.toString());</div><div class="line">        <span class="built_in">console</span>.log(str);</div><div class="line"></div><div class="line">        <span class="comment">//回應結果顯示在頁面上</span></div><div class="line">        res.send(str)</div><div class="line">        res.end();</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>在這邊使用了 /markdown 作為進入的網址，而這個網址主要是去解析 markdown 的檔案，在這個 function 下，我們還需要利用  fs 核心模組來讀取 book.md 檔案，請務必在宣告的地方加入  var fs = require(“fs”);</p>
-<p>讀取的方式就使用  fs.readFile 方法，接著更重要的是再使用 md 方法將檔案內容轉換成  html 格式，最後，看一下結果如下，將會依照 markdown 的格式轉換</p>
-<p><img src="/images/nodejs/63.png" alt=""></p>
-<p>學習了這個工具，之後再撰寫 html 的檔案時，可以利用 markdown 的格式來寫，寫起來又輕鬆又好懂喔！<br>下集待續…</p>
-<h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><ul>
-<li><a href="http://markdown.tw/" target="_blank" rel="external">http://markdown.tw/</a></li>
-<li><a href="http://www.wikiwand.com/zh-tw/Markdown" target="_blank" rel="external">http://www.wikiwand.com/zh-tw/Markdown </a></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;繼上一篇完成讀取檔案的操作之後，本篇將介紹讀取  markdown 檔案內容顯示在頁面上面。&lt;/p&gt;
-&lt;h1 id=&quot;話說前頭，什麼是-markdown&quot;&gt;&lt;a href=&quot;#話說前頭，什麼是-markdown&quot; class=&quot;headerlink&quot; title=&quot;話說前頭，什麼是 markdown?&quot;&gt;&lt;/a&gt;話說前頭，什麼是 markdown?&lt;/h1&gt;&lt;p&gt;從 wiki 網站所說的，它是一種輕量級的標記語言，允許使用容易讀也容易寫的純文字的格式，最後轉換 xhtml, html 檔案，就有點像是一般電子郵件純文本的特性。可以從這個網址來 &lt;a href=&quot;http://markdown.tw/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://markdown.tw/&lt;/a&gt; 學習每個元素的寫法。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/categories/Node-js/"/>
-    
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/tags/Node-js/"/>
-    
-      <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
-    
-      <category term="Markdown" scheme="https://weijutu.github.io/tags/Markdown/"/>
     
   </entry>
   
