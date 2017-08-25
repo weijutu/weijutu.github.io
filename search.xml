@@ -3,6 +3,68 @@
   
     
     <entry>
+      <title><![CDATA[Javascript - 使用 console.table() 偵錯 js 物件]]></title>
+      <url>/2017/08/25/javascript/javascript-console-table/</url>
+      <content type="html"><![CDATA[<p>今天介紹一個在 Chrome debug 的時候使用一個 console.table() 的方法除錯。一般我們都會用  console.log 或 console.debug 來看物件的狀況，今天就嘗試一個新的不一樣的吧</p>
+<h3 id="使用-console-log-函數"><a href="#使用-console-log-函數" class="headerlink" title="使用 console.log() 函數"></a>使用 console.log() 函數</h3><p><img src="/images/javascript/1.png" alt=""></p>
+<p>在 script 裡，第 7 行～ 第 12 行，先定義一個陣列，裡面有 object ，其屬性包含 id, name，然後第  13 行建立一個 <code>console.log(json);</code> 的函數，輸出裡面 json 的資料。接著請開啓 chrome 瀏覽器然後把這個網頁 html 打開，接著在按 <code>command + shift + c</code> 會開啟開發人員管理工具 （喔對了，我環境是用 macbook，所以如果是其他系統的話可以按 <code>ctrl + shift + c</code></p>
+<a id="more"></a>
+<h3 id="看看-console-log-輸出結果"><a href="#看看-console-log-輸出結果" class="headerlink" title="看看 console.log() 輸出結果"></a>看看 console.log() 輸出結果</h3><p>這邊會看到用樹狀圖呈現一個  Array 物件呈現變數裡的值，裡面包含了四組資料，依序展開如下圖：</p>
+<p><img src="/images/javascript/2.png" alt=""></p>
+<h3 id="使用-console-table-函數"><a href="#使用-console-table-函數" class="headerlink" title="使用 console.table() 函數"></a>使用 console.table() 函數</h3><p>將 log 改成  table 函數，直接看第 13 行…</p>
+<p><img src="/images/javascript/3.png" alt=""></p>
+<h3 id="看看-console-table-輸出結果"><a href="#看看-console-table-輸出結果" class="headerlink" title="看看 console.table() 輸出結果"></a>看看 console.table() 輸出結果</h3><p><img src="/images/javascript/4.png" alt=""></p>
+<p>下次就這樣用吧～  ：）</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> Javascript </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Mongodb - 在 OS X 上透過手動安裝與設定]]></title>
+      <url>/2017/08/25/mongodb/mongodb-install-on-osx/</url>
+      <content type="html"><![CDATA[<p><img src="/images/mongodb/MongoDB-logo.png" alt=""></p>
+<h3 id="下載-MongoDB"><a href="#下載-MongoDB" class="headerlink" title="下載 MongoDB"></a>下載 MongoDB</h3><p>我的環境是用 mac osx 10.9.4，到官方網站 <a href="http://www.mongodb.org/downloads" target="_blank" rel="external">http://www.mongodb.org/downloads</a> 找到 Mac OX 64bit 區塊，下載 <code>mongodb-osx-x86_64-2.6.4.tgz</code> 檔案，接著我們用指令進行安裝，解壓縮 tgz 檔案</p>
+<p>解壓縮之後，把它挪到 <code>/usr/local/mongodb</code> 資料夾</p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$cd ~/Download</div><div class="line">$tar xzf mongodb-osx-x86_64-2.2.3.tgz</div><div class="line">$sudo mv mongodb-osx-x86_64-2.2.3 /usr/local/mongodb</div></pre></td></tr></table></figure>
+<p><img src="/images/mongodb/1.png" alt=""></p>
+<h3 id="MongoDB-資料"><a href="#MongoDB-資料" class="headerlink" title="MongoDB 資料"></a>MongoDB 資料</h3><p>預設時，資料會寫到 /data/db/ 資料夾，在這裏手動建立儲存位置，去建立 /data/db</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$sudo mkdir -p /data/db</div><div class="line">$whoami</div><div class="line"> /User/Weiju</div><div class="line">$sudo chown /User/Weiju /data/db</div></pre></td></tr></table></figure>
+<h3 id="建立-bash-profile-參數設定環境變數"><a href="#建立-bash-profile-參數設定環境變數" class="headerlink" title="建立 ~/.bash_profile 參數設定環境變數"></a>建立 ~/.bash_profile 參數設定環境變數</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$cd ~</div><div class="line">$pwd</div><div class="line">/User/Weiju</div><div class="line">$touch .bash_profile</div><div class="line">$vim .bash_profile</div></pre></td></tr></table></figure>
+<h3 id="編輯-bash-profile-檔案"><a href="#編輯-bash-profile-檔案" class="headerlink" title="編輯 .bash_profile 檔案"></a>編輯 .bash_profile 檔案</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">export MONGO_PATH=/usr/local/mongodb</div><div class="line">export PATH=$PATH:$MONGO_PATH/bin</div></pre></td></tr></table></figure>
+<h3 id="檢視版本"><a href="#檢視版本" class="headerlink" title="檢視版本"></a>檢視版本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$mongo -version</div></pre></td></tr></table></figure>
+<p><img src="/images/mongodb/2.png" alt=""></p>
+<p>預設之下，mongodb 安裝完之後，下一次開機又要重新啟動。在這邊設定一下自動啟動方法：</p>
+<p>找到</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$sudo vim /Library/LaunchDaemons/</div></pre></td></tr></table></figure>
+<p>新增 mongodb.plist，並且建立以下參數</p>
+<p><img src="/images/mongodb/3.png" alt=""></p>
+<h3 id="載入系統排程"><a href="#載入系統排程" class="headerlink" title="載入系統排程"></a>載入系統排程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$sudo launchctl load /Library/LaunchDaemons/mongodb.plist</div><div class="line">ps -ef | grep mongo</div></pre></td></tr></table></figure>
+<p><img src="/images/mongodb/4.png" alt=""></p>
+<h3 id="馬上來試看看"><a href="#馬上來試看看" class="headerlink" title="馬上來試看看"></a>馬上來試看看</h3><p>第一種：試試新增一筆資料</p>
+<p><img src="/images/mongodb/5.png" alt=""></p>
+<p>第二種：跑個廻圈＋寫入好了</p>
+<p><img src="/images/mongodb/6.png" alt=""></p>
+<p>good, got it.</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> mongodb </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Excel - 使用函數取得不重複值並計算總計]]></title>
       <url>/2017/08/21/excel/excel-get-value-by-fn/</url>
       <content type="html"><![CDATA[<p>有沒有使用 Excel 輸入資料後，想要把某一列的資料做不重複的篩選？若您剛好有這個疑問，來到這裡算是走對地方了～ 我們有很簡單的例子一步一步的說明</p>
@@ -185,52 +247,6 @@
     </entry>
     
     <entry>
-      <title><![CDATA[Node.js 系列學習日誌#28 - REST 路由規則]]></title>
-      <url>/2017/07/26/nodejs/nodejs-28-rest/</url>
-      <content type="html"><![CDATA[<p>今天我們使用 express 框架介紹一下 REST  路由規則，REST 是一種  http 協定的網路應用，http 提供了八種方法使用：</p>
-<a id="more"></a>
-<ul>
-<li><p>OPTIONS：這個方法可使伺服器傳回該資源所支援的所有HTTP請求方法。用<code>*</code>來代替資源名稱，向Web伺服器傳送OPTIONS請求，可以測試伺服器功能是否正常運作。</p>
-</li>
-<li><p>HEAD：與GET方法一樣，都是向伺服器發出指定資源的請求。只不過伺服器將不傳回資源的本文部份。它的好處在於，使用這個方法可以在不必傳輸全部內容的情況下，就可以獲取其中「關於該資源的資訊」（元資訊或稱元資料）。</p>
-</li>
-<li><p>GET：向指定的資源發出「顯示」請求。使用GET方法應該只用在讀取資料，而不應當被用於產生「副作用」的操作中，例如在Web Application中。其中一個原因是GET可能會被網路蜘蛛等隨意存取。參見安全方法</p>
-</li>
-<li><p>POST：向指定資源提交資料，請求伺服器進行處理（例如提交表單或者上傳檔案）。資料被包含在請求本文中。這個請求可能會建立新的資源或修改現有資源，或二者皆有。</p>
-</li>
-<li><p>PUT：向指定資源位置上傳其最新內容。</p>
-</li>
-<li><p>DELETE：請求伺服器刪除Request-URI所標識的資源。</p>
-</li>
-<li><p>TRACE：回顯伺服器收到的請求，主要用於測試或診斷。</p>
-</li>
-<li><p>CONNECT：HTTP/1.1協定中預留給能夠將連線改為管道方式的代理伺服器。通常用於SSL加密伺服器的連結（經由非加密的HTTP代理伺服器）</p>
-</li>
-</ul>
-<p>而 express 網頁框架也針對 http 請求方法設計路由的函數：</p>
-<p><img src="/images/nodejs/124.png" alt=""></p>
-<p>通常在設計 rest 時，常用的是 get (取得), post (新增), put (更新), delete (刪除)</p>
-<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE" target="_blank" rel="external">http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE</a></p>
-]]></content>
-      
-        <categories>
-            
-            <category> Node.js </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Node.js </tag>
-            
-            <tag> 鐵人賽 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[Node.js 系列學習日誌#27 - forever 讓程式保持執行狀態]]></title>
       <url>/2017/07/26/nodejs/nodejs-27-forever/</url>
       <content type="html"><![CDATA[<p>程式準備要部署上線時，就會面臨到執行程式的方式，伺服器的管理，是不是能有一個運行 Node.js 程式，並且有個工具處理這件事情。<br>forever 可以作為保持運行的狀態，管理 Node.js 程式服務，在 forever 進程之下，建立子進程，執行啟動與停止的命令相當簡單。<br>更特別的是，經常我們在寫 Node.js 的時候，每次更動的檔案時都需要再重新執行啟動服務的指令 (例如：node app.js)，而這個工具是當每次更新程式的時候，它會自動重新啟動服務，更方便許多了呢！</p>
@@ -273,6 +289,52 @@
             <tag> 鐵人賽 </tag>
             
             <tag> forever </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Node.js 系列學習日誌#28 - REST 路由規則]]></title>
+      <url>/2017/07/26/nodejs/nodejs-28-rest/</url>
+      <content type="html"><![CDATA[<p>今天我們使用 express 框架介紹一下 REST  路由規則，REST 是一種  http 協定的網路應用，http 提供了八種方法使用：</p>
+<a id="more"></a>
+<ul>
+<li><p>OPTIONS：這個方法可使伺服器傳回該資源所支援的所有HTTP請求方法。用<code>*</code>來代替資源名稱，向Web伺服器傳送OPTIONS請求，可以測試伺服器功能是否正常運作。</p>
+</li>
+<li><p>HEAD：與GET方法一樣，都是向伺服器發出指定資源的請求。只不過伺服器將不傳回資源的本文部份。它的好處在於，使用這個方法可以在不必傳輸全部內容的情況下，就可以獲取其中「關於該資源的資訊」（元資訊或稱元資料）。</p>
+</li>
+<li><p>GET：向指定的資源發出「顯示」請求。使用GET方法應該只用在讀取資料，而不應當被用於產生「副作用」的操作中，例如在Web Application中。其中一個原因是GET可能會被網路蜘蛛等隨意存取。參見安全方法</p>
+</li>
+<li><p>POST：向指定資源提交資料，請求伺服器進行處理（例如提交表單或者上傳檔案）。資料被包含在請求本文中。這個請求可能會建立新的資源或修改現有資源，或二者皆有。</p>
+</li>
+<li><p>PUT：向指定資源位置上傳其最新內容。</p>
+</li>
+<li><p>DELETE：請求伺服器刪除Request-URI所標識的資源。</p>
+</li>
+<li><p>TRACE：回顯伺服器收到的請求，主要用於測試或診斷。</p>
+</li>
+<li><p>CONNECT：HTTP/1.1協定中預留給能夠將連線改為管道方式的代理伺服器。通常用於SSL加密伺服器的連結（經由非加密的HTTP代理伺服器）</p>
+</li>
+</ul>
+<p>而 express 網頁框架也針對 http 請求方法設計路由的函數：</p>
+<p><img src="/images/nodejs/124.png" alt=""></p>
+<p>通常在設計 rest 時，常用的是 get (取得), post (新增), put (更新), delete (刪除)</p>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE" target="_blank" rel="external">http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> Node.js </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Node.js </tag>
+            
+            <tag> 鐵人賽 </tag>
             
         </tags>
         
@@ -1802,11 +1864,11 @@
 <h2 id="安裝-Meteor"><a href="#安裝-Meteor" class="headerlink" title="安裝 Meteor"></a>安裝 Meteor</h2><p>安裝 Meteor 的方式在 terminal 輸入以下命令：</p>
 <p><code>curl https://install.meteor.com | sh</code></p>
 <p>安裝完之後你可以再次輸入 <code>meteor</code> 後，執行會說明目前不是在 meteor 專案下，所以目前還只能確認 Meteor 安裝成功並且還會指引你建立 Meteor 專案的指令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> meteor</span></div><div class="line">  run: You\'re not in a Meteor project directory.</div><div class="line"></div><div class="line">  To create a new Meteor project:</div><div class="line">    meteor create &lt;project name&gt;</div><div class="line">  For example:</div><div class="line">    meteor create myapp</div><div class="line"></div><div class="line">  For more help, see 'meteor --help'.</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> meteor</div><div class="line">  run: You\'re not in a Meteor project directory.</div><div class="line"></div><div class="line">  To create a new Meteor project:</div><div class="line">    meteor create &lt;project name&gt;</div><div class="line">  For example:</div><div class="line">    meteor create myapp</div><div class="line"></div><div class="line">  For more help, see 'meteor --help'.</div></pre></td></tr></table></figure>
 <h2 id="建立新的專案"><a href="#建立新的專案" class="headerlink" title="建立新的專案"></a>建立新的專案</h2><p>裝好 meteor 後，我們建立一個新的專案，建立時使用 meteor 的工具</p>
 <p><code>meteor create meteor_demo</code></p>
 <p>按照命令就會把 meteor 建立基礎的檔案結構，建立完成後就會有一個 <code>meteor_demo</code> 的資料夾，並且說明如何執行應用程式</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> meteor create meteor_demo</span></div><div class="line">  Created a new Meteor app in 'meteor_demo'.</div><div class="line"></div><div class="line">  To run your new app:</div><div class="line">    cd meteor_demo</div><div class="line">    meteor npm install</div><div class="line">    meteor</div><div class="line"></div><div class="line">  If you are new to Meteor, try some of the learning resources here:</div><div class="line">    https://www.meteor.com/learn</div><div class="line"></div><div class="line">  meteor create --bare to create an empty app.</div><div class="line">  meteor create --full to create a scaffolded app.</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> meteor create meteor_demo</div><div class="line">  Created a new Meteor app in 'meteor_demo'.</div><div class="line"></div><div class="line">  To run your new app:</div><div class="line">    cd meteor_demo</div><div class="line">    meteor npm install</div><div class="line">    meteor</div><div class="line"></div><div class="line">  If you are new to Meteor, try some of the learning resources here:</div><div class="line">    https://www.meteor.com/learn</div><div class="line"></div><div class="line">  meteor create --bare to create an empty app.</div><div class="line">  meteor create --full to create a scaffolded app.</div></pre></td></tr></table></figure>
 <p>也包含以下的檔案與資料夾</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">drwxr-xr-x   7 User  staff   238 Feb 12 08:40 .</div><div class="line">drwxr-xr-x  49 User  staff  1666 Feb 12 08:40 ..</div><div class="line">drwxr-xr-x  10 User  staff   340 Feb 12 08:40 .meteor</div><div class="line">drwxr-xr-x   5 User  staff   170 Feb 12 08:40 client</div><div class="line">-rw-r--r--   1 User  staff   183 Feb 12 08:40 package.json</div><div class="line">drwxr-xr-x   3 User  staff   102 Feb 12 08:40 server</div></pre></td></tr></table></figure>
 <p>接著，我們就依照他的指引安裝一些套件</p>

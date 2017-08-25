@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://weijutu.github.io/2017/08/25/javascript/javascript-console-table/</loc>
+    
+    <lastmod>2017-08-25T02:02:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2017/08/25/mongodb/mongodb-install-on-osx/</loc>
+    
+    <lastmod>2017-08-25T01:45:30.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/about/index.html</loc>
+    
+    <lastmod>2017-08-21T02:25:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://weijutu.github.io/2017/08/21/excel/excel-get-value-by-fn/</loc>
     
     <lastmod>2017-08-21T02:19:44.000Z</lastmod>
@@ -12,13 +33,6 @@
     <loc>https://weijutu.github.io/2017/08/21/excel/excel-string-splite-to-cell/</loc>
     
     <lastmod>2017-08-21T01:56:40.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://weijutu.github.io/about/index.html</loc>
-    
-    <lastmod>2017-08-01T06:19:27.000Z</lastmod>
     
   </url>
   
@@ -233,13 +247,6 @@
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/03/02/metero/metero-intro/</loc>
-    
-    <lastmod>2017-07-24T01:04:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://weijutu.github.io/2017/03/04/r/r-xy-scatter-diagram/</loc>
     
     <lastmod>2017-07-24T01:04:20.000Z</lastmod>
@@ -247,14 +254,21 @@
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/tags/index.html</loc>
+    <loc>https://weijutu.github.io/categories/index.html</loc>
     
     <lastmod>2017-07-24T01:04:20.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/categories/index.html</loc>
+    <loc>https://weijutu.github.io/2017/03/02/metero/metero-intro/</loc>
+    
+    <lastmod>2017-07-24T01:04:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/tags/index.html</loc>
     
     <lastmod>2017-07-24T01:04:20.000Z</lastmod>
     

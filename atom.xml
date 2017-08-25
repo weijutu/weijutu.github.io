@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://weijutu.github.io/"/>
-  <updated>2017-08-21T02:19:44.000Z</updated>
+  <updated>2017-08-25T02:02:20.000Z</updated>
   <id>https://weijutu.github.io/</id>
   
   <author>
@@ -14,6 +14,84 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Javascript - 使用 console.table() 偵錯 js 物件</title>
+    <link href="https://weijutu.github.io/2017/08/25/javascript/javascript-console-table/"/>
+    <id>https://weijutu.github.io/2017/08/25/javascript/javascript-console-table/</id>
+    <published>2017-08-25T01:56:32.000Z</published>
+    <updated>2017-08-25T02:02:20.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天介紹一個在 Chrome debug 的時候使用一個 console.table() 的方法除錯。一般我們都會用  console.log 或 console.debug 來看物件的狀況，今天就嘗試一個新的不一樣的吧</p>
+<h3 id="使用-console-log-函數"><a href="#使用-console-log-函數" class="headerlink" title="使用 console.log() 函數"></a>使用 console.log() 函數</h3><p><img src="/images/javascript/1.png" alt=""></p>
+<p>在 script 裡，第 7 行～ 第 12 行，先定義一個陣列，裡面有 object ，其屬性包含 id, name，然後第  13 行建立一個 <code>console.log(json);</code> 的函數，輸出裡面 json 的資料。接著請開啓 chrome 瀏覽器然後把這個網頁 html 打開，接著在按 <code>command + shift + c</code> 會開啟開發人員管理工具 （喔對了，我環境是用 macbook，所以如果是其他系統的話可以按 <code>ctrl + shift + c</code></p>
+<a id="more"></a>
+<h3 id="看看-console-log-輸出結果"><a href="#看看-console-log-輸出結果" class="headerlink" title="看看 console.log() 輸出結果"></a>看看 console.log() 輸出結果</h3><p>這邊會看到用樹狀圖呈現一個  Array 物件呈現變數裡的值，裡面包含了四組資料，依序展開如下圖：</p>
+<p><img src="/images/javascript/2.png" alt=""></p>
+<h3 id="使用-console-table-函數"><a href="#使用-console-table-函數" class="headerlink" title="使用 console.table() 函數"></a>使用 console.table() 函數</h3><p>將 log 改成  table 函數，直接看第 13 行…</p>
+<p><img src="/images/javascript/3.png" alt=""></p>
+<h3 id="看看-console-table-輸出結果"><a href="#看看-console-table-輸出結果" class="headerlink" title="看看 console.table() 輸出結果"></a>看看 console.table() 輸出結果</h3><p><img src="/images/javascript/4.png" alt=""></p>
+<p>下次就這樣用吧～  ：）</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天介紹一個在 Chrome debug 的時候使用一個 console.table() 的方法除錯。一般我們都會用  console.log 或 console.debug 來看物件的狀況，今天就嘗試一個新的不一樣的吧&lt;/p&gt;
+&lt;h3 id=&quot;使用-console-log-函數&quot;&gt;&lt;a href=&quot;#使用-console-log-函數&quot; class=&quot;headerlink&quot; title=&quot;使用 console.log() 函數&quot;&gt;&lt;/a&gt;使用 console.log() 函數&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;/images/javascript/1.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;在 script 裡，第 7 行～ 第 12 行，先定義一個陣列，裡面有 object ，其屬性包含 id, name，然後第  13 行建立一個 &lt;code&gt;console.log(json);&lt;/code&gt; 的函數，輸出裡面 json 的資料。接著請開啓 chrome 瀏覽器然後把這個網頁 html 打開，接著在按 &lt;code&gt;command + shift + c&lt;/code&gt; 會開啟開發人員管理工具 （喔對了，我環境是用 macbook，所以如果是其他系統的話可以按 &lt;code&gt;ctrl + shift + c&lt;/code&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Javascript" scheme="https://weijutu.github.io/tags/Javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Mongodb - 在 OS X 上透過手動安裝與設定</title>
+    <link href="https://weijutu.github.io/2017/08/25/mongodb/mongodb-install-on-osx/"/>
+    <id>https://weijutu.github.io/2017/08/25/mongodb/mongodb-install-on-osx/</id>
+    <published>2017-08-25T01:38:54.000Z</published>
+    <updated>2017-08-25T01:45:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/images/mongodb/MongoDB-logo.png" alt=""></p>
+<h3 id="下載-MongoDB"><a href="#下載-MongoDB" class="headerlink" title="下載 MongoDB"></a>下載 MongoDB</h3><p>我的環境是用 mac osx 10.9.4，到官方網站 <a href="http://www.mongodb.org/downloads" target="_blank" rel="external">http://www.mongodb.org/downloads</a> 找到 Mac OX 64bit 區塊，下載 <code>mongodb-osx-x86_64-2.6.4.tgz</code> 檔案，接著我們用指令進行安裝，解壓縮 tgz 檔案</p>
+<p>解壓縮之後，把它挪到 <code>/usr/local/mongodb</code> 資料夾</p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$cd ~/Download</div><div class="line">$tar xzf mongodb-osx-x86_64-2.2.3.tgz</div><div class="line">$sudo mv mongodb-osx-x86_64-2.2.3 /usr/local/mongodb</div></pre></td></tr></table></figure>
+<p><img src="/images/mongodb/1.png" alt=""></p>
+<h3 id="MongoDB-資料"><a href="#MongoDB-資料" class="headerlink" title="MongoDB 資料"></a>MongoDB 資料</h3><p>預設時，資料會寫到 /data/db/ 資料夾，在這裏手動建立儲存位置，去建立 /data/db</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$sudo mkdir -p /data/db</div><div class="line">$whoami</div><div class="line"> /User/Weiju</div><div class="line">$sudo chown /User/Weiju /data/db</div></pre></td></tr></table></figure>
+<h3 id="建立-bash-profile-參數設定環境變數"><a href="#建立-bash-profile-參數設定環境變數" class="headerlink" title="建立 ~/.bash_profile 參數設定環境變數"></a>建立 ~/.bash_profile 參數設定環境變數</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$cd ~</div><div class="line">$pwd</div><div class="line">/User/Weiju</div><div class="line">$touch .bash_profile</div><div class="line">$vim .bash_profile</div></pre></td></tr></table></figure>
+<h3 id="編輯-bash-profile-檔案"><a href="#編輯-bash-profile-檔案" class="headerlink" title="編輯 .bash_profile 檔案"></a>編輯 .bash_profile 檔案</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">export MONGO_PATH=/usr/local/mongodb</div><div class="line">export PATH=$PATH:$MONGO_PATH/bin</div></pre></td></tr></table></figure>
+<h3 id="檢視版本"><a href="#檢視版本" class="headerlink" title="檢視版本"></a>檢視版本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$mongo -version</div></pre></td></tr></table></figure>
+<p><img src="/images/mongodb/2.png" alt=""></p>
+<p>預設之下，mongodb 安裝完之後，下一次開機又要重新啟動。在這邊設定一下自動啟動方法：</p>
+<p>找到</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$sudo vim /Library/LaunchDaemons/</div></pre></td></tr></table></figure>
+<p>新增 mongodb.plist，並且建立以下參數</p>
+<p><img src="/images/mongodb/3.png" alt=""></p>
+<h3 id="載入系統排程"><a href="#載入系統排程" class="headerlink" title="載入系統排程"></a>載入系統排程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$sudo launchctl load /Library/LaunchDaemons/mongodb.plist</div><div class="line">ps -ef | grep mongo</div></pre></td></tr></table></figure>
+<p><img src="/images/mongodb/4.png" alt=""></p>
+<h3 id="馬上來試看看"><a href="#馬上來試看看" class="headerlink" title="馬上來試看看"></a>馬上來試看看</h3><p>第一種：試試新增一筆資料</p>
+<p><img src="/images/mongodb/5.png" alt=""></p>
+<p>第二種：跑個廻圈＋寫入好了</p>
+<p><img src="/images/mongodb/6.png" alt=""></p>
+<p>good, got it.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;/images/mongodb/MongoDB-logo.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;下載-MongoDB&quot;&gt;&lt;a href=&quot;#下載-MongoDB&quot; class=&quot;headerlink&quot; title=&quot;下載 MongoDB&quot;&gt;&lt;/a&gt;下載 MongoDB&lt;/h3&gt;&lt;p&gt;我的環境是用 mac osx 10.9.4，到官方網站 &lt;a href=&quot;http://www.mongodb.org/downloads&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.mongodb.org/downloads&lt;/a&gt; 找到 Mac OX 64bit 區塊，下載 &lt;code&gt;mongodb-osx-x86_64-2.6.4.tgz&lt;/code&gt; 檔案，接著我們用指令進行安裝，解壓縮 tgz 檔案&lt;/p&gt;
+&lt;p&gt;解壓縮之後，把它挪到 &lt;code&gt;/usr/local/mongodb&lt;/code&gt; 資料夾&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="mongodb" scheme="https://weijutu.github.io/tags/mongodb/"/>
+    
+  </entry>
   
   <entry>
     <title>Excel - 使用函數取得不重複值並計算總計</title>
@@ -227,54 +305,6 @@
   </entry>
   
   <entry>
-    <title>Node.js 系列學習日誌#28 - REST 路由規則</title>
-    <link href="https://weijutu.github.io/2017/07/26/nodejs/nodejs-28-rest/"/>
-    <id>https://weijutu.github.io/2017/07/26/nodejs/nodejs-28-rest/</id>
-    <published>2017-07-25T16:27:00.000Z</published>
-    <updated>2017-07-31T10:27:16.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>今天我們使用 express 框架介紹一下 REST  路由規則，REST 是一種  http 協定的網路應用，http 提供了八種方法使用：</p>
-<a id="more"></a>
-<ul>
-<li><p>OPTIONS：這個方法可使伺服器傳回該資源所支援的所有HTTP請求方法。用<code>*</code>來代替資源名稱，向Web伺服器傳送OPTIONS請求，可以測試伺服器功能是否正常運作。</p>
-</li>
-<li><p>HEAD：與GET方法一樣，都是向伺服器發出指定資源的請求。只不過伺服器將不傳回資源的本文部份。它的好處在於，使用這個方法可以在不必傳輸全部內容的情況下，就可以獲取其中「關於該資源的資訊」（元資訊或稱元資料）。</p>
-</li>
-<li><p>GET：向指定的資源發出「顯示」請求。使用GET方法應該只用在讀取資料，而不應當被用於產生「副作用」的操作中，例如在Web Application中。其中一個原因是GET可能會被網路蜘蛛等隨意存取。參見安全方法</p>
-</li>
-<li><p>POST：向指定資源提交資料，請求伺服器進行處理（例如提交表單或者上傳檔案）。資料被包含在請求本文中。這個請求可能會建立新的資源或修改現有資源，或二者皆有。</p>
-</li>
-<li><p>PUT：向指定資源位置上傳其最新內容。</p>
-</li>
-<li><p>DELETE：請求伺服器刪除Request-URI所標識的資源。</p>
-</li>
-<li><p>TRACE：回顯伺服器收到的請求，主要用於測試或診斷。</p>
-</li>
-<li><p>CONNECT：HTTP/1.1協定中預留給能夠將連線改為管道方式的代理伺服器。通常用於SSL加密伺服器的連結（經由非加密的HTTP代理伺服器）</p>
-</li>
-</ul>
-<p>而 express 網頁框架也針對 http 請求方法設計路由的函數：</p>
-<p><img src="/images/nodejs/124.png" alt=""></p>
-<p>通常在設計 rest 時，常用的是 get (取得), post (新增), put (更新), delete (刪除)</p>
-<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE" target="_blank" rel="external">http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;今天我們使用 express 框架介紹一下 REST  路由規則，REST 是一種  http 協定的網路應用，http 提供了八種方法使用：&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/categories/Node-js/"/>
-    
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/tags/Node-js/"/>
-    
-      <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Node.js 系列學習日誌#27 - forever 讓程式保持執行狀態</title>
     <link href="https://weijutu.github.io/2017/07/26/nodejs/nodejs-27-forever/"/>
     <id>https://weijutu.github.io/2017/07/26/nodejs/nodejs-27-forever/</id>
@@ -323,6 +353,54 @@
       <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
     
       <category term="forever" scheme="https://weijutu.github.io/tags/forever/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Node.js 系列學習日誌#28 - REST 路由規則</title>
+    <link href="https://weijutu.github.io/2017/07/26/nodejs/nodejs-28-rest/"/>
+    <id>https://weijutu.github.io/2017/07/26/nodejs/nodejs-28-rest/</id>
+    <published>2017-07-25T16:27:00.000Z</published>
+    <updated>2017-07-31T10:27:16.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天我們使用 express 框架介紹一下 REST  路由規則，REST 是一種  http 協定的網路應用，http 提供了八種方法使用：</p>
+<a id="more"></a>
+<ul>
+<li><p>OPTIONS：這個方法可使伺服器傳回該資源所支援的所有HTTP請求方法。用<code>*</code>來代替資源名稱，向Web伺服器傳送OPTIONS請求，可以測試伺服器功能是否正常運作。</p>
+</li>
+<li><p>HEAD：與GET方法一樣，都是向伺服器發出指定資源的請求。只不過伺服器將不傳回資源的本文部份。它的好處在於，使用這個方法可以在不必傳輸全部內容的情況下，就可以獲取其中「關於該資源的資訊」（元資訊或稱元資料）。</p>
+</li>
+<li><p>GET：向指定的資源發出「顯示」請求。使用GET方法應該只用在讀取資料，而不應當被用於產生「副作用」的操作中，例如在Web Application中。其中一個原因是GET可能會被網路蜘蛛等隨意存取。參見安全方法</p>
+</li>
+<li><p>POST：向指定資源提交資料，請求伺服器進行處理（例如提交表單或者上傳檔案）。資料被包含在請求本文中。這個請求可能會建立新的資源或修改現有資源，或二者皆有。</p>
+</li>
+<li><p>PUT：向指定資源位置上傳其最新內容。</p>
+</li>
+<li><p>DELETE：請求伺服器刪除Request-URI所標識的資源。</p>
+</li>
+<li><p>TRACE：回顯伺服器收到的請求，主要用於測試或診斷。</p>
+</li>
+<li><p>CONNECT：HTTP/1.1協定中預留給能夠將連線改為管道方式的代理伺服器。通常用於SSL加密伺服器的連結（經由非加密的HTTP代理伺服器）</p>
+</li>
+</ul>
+<p>而 express 網頁框架也針對 http 請求方法設計路由的函數：</p>
+<p><img src="/images/nodejs/124.png" alt=""></p>
+<p>通常在設計 rest 時，常用的是 get (取得), post (新增), put (更新), delete (刪除)</p>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE" target="_blank" rel="external">http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天我們使用 express 框架介紹一下 REST  路由規則，REST 是一種  http 協定的網路應用，http 提供了八種方法使用：&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Node.js" scheme="https://weijutu.github.io/categories/Node-js/"/>
+    
+    
+      <category term="Node.js" scheme="https://weijutu.github.io/tags/Node-js/"/>
+    
+      <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
     
   </entry>
   
@@ -1035,104 +1113,6 @@
       <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
     
       <category term="Markdown" scheme="https://weijutu.github.io/tags/Markdown/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Node.js 系列學習日誌#14 - middleware 應用與開發</title>
-    <link href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-14-middleware/"/>
-    <id>https://weijutu.github.io/2017/07/24/nodejs/nodejs-14-middleware/</id>
-    <published>2017-07-23T16:14:00.000Z</published>
-    <updated>2017-07-25T11:51:45.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>從我們前幾篇用到 express web framework 框架的時候，express 就已經內建啟用 middleware 的概念，可以利用中間層的這個部分做一些效果，接下來本章節就來介紹  middleware 。首先我們先建立好一個 express web framework 框架</p>
-<p>建立 express 的指令是：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$express</span> -e nodejs-middleware</div></pre></td></tr></table></figure>
-<a id="more"></a>
-<p>並且打開 app.js 檔案</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</div><div class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</div><div class="line"><span class="keyword">var</span> favicon = <span class="built_in">require</span>(<span class="string">'static-favicon'</span>);</div><div class="line"><span class="keyword">var</span> logger = <span class="built_in">require</span>(<span class="string">'morgan'</span>);</div><div class="line"><span class="keyword">var</span> cookieParser = <span class="built_in">require</span>(<span class="string">'cookie-parser'</span>);</div><div class="line"><span class="keyword">var</span> bodyParser = <span class="built_in">require</span>(<span class="string">'body-parser'</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> routes = <span class="built_in">require</span>(<span class="string">'./routes/index'</span>);</div><div class="line"><span class="keyword">var</span> users = <span class="built_in">require</span>(<span class="string">'./routes/users'</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> app = express();</div><div class="line"></div><div class="line"><span class="comment">// view engine setup</span></div><div class="line">app.set(<span class="string">'views'</span>, path.join(__dirname, <span class="string">'views'</span>));</div><div class="line">app.set(<span class="string">'view engine'</span>, <span class="string">'ejs'</span>);</div><div class="line"></div><div class="line">app.use(favicon());</div><div class="line">app.use(logger(<span class="string">'dev'</span>));</div><div class="line">app.use(bodyParser.json());</div><div class="line">app.use(bodyParser.urlencoded());</div><div class="line">app.use(cookieParser());</div><div class="line">app.use(express.static(path.join(__dirname, <span class="string">'public'</span>)));</div><div class="line"></div><div class="line">app.use(<span class="string">'/'</span>, routes);</div><div class="line">app.use(<span class="string">'/users'</span>, users);</div><div class="line"></div><div class="line"><span class="comment">/// catch 404 and forward to error handler</span></div><div class="line">app.use(<span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> err = <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Not Found'</span>);</div><div class="line">    err.status = <span class="number">404</span>;</div><div class="line">    next(err);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">/// error handlers</span></div><div class="line"></div><div class="line"><span class="comment">// development error handler</span></div><div class="line"><span class="comment">// will print stacktrace</span></div><div class="line"><span class="keyword">if</span> (app.get(<span class="string">'env'</span>) === <span class="string">'development'</span>) &#123;</div><div class="line">    app.use(<span class="function"><span class="keyword">function</span>(<span class="params">err, req, res, next</span>) </span>&#123;</div><div class="line">        res.status(err.status || <span class="number">500</span>);</div><div class="line">        res.render(<span class="string">'error'</span>, &#123;</div><div class="line">            <span class="attr">message</span>: err.message,</div><div class="line">            <span class="attr">error</span>: err</div><div class="line">        &#125;);</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// production error handler</span></div><div class="line"><span class="comment">// no stacktraces leaked to user</span></div><div class="line">app.use(<span class="function"><span class="keyword">function</span>(<span class="params">err, req, res, next</span>) </span>&#123;</div><div class="line">    res.status(err.status || <span class="number">500</span>);</div><div class="line">    res.render(<span class="string">'error'</span>, &#123;</div><div class="line">        <span class="attr">message</span>: err.message,</div><div class="line">        <span class="attr">error</span>: &#123;&#125;</div><div class="line">    &#125;);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = app;</div></pre></td></tr></table></figure>
-<p>從上面建立的  express 框架可以看到這裡用了許多的 app.use 的方法，包含靜態檔案、body 解析器、路由機制。當預設 middleware 之後，每當瀏覽器收到連線要求的時候，middleware 就會被呼叫啟用。簡單來講 middleware 就像一個薄薄的一層過濾網</p>
-<h1 id="建立-middleware"><a href="#建立-middleware" class="headerlink" title="建立 middleware"></a>建立 middleware</h1><p>由於基本設定接已經有提供高效能的套件，其 express  所建立好的 middleware 設定之外，也可以自定撰寫 middleware 安排到基本設定流程當中，我們建立一個簡單的 middleware 功能，請在 app.js 安插以下程式：</p>
-<p><img src="/images/nodejs/58.png" alt=""></p>
-<p>一開始先建立一個 middleHandler ，其基本參數有  request, response, next，而  next方法 是代表交給下一個 middleware 繼續作處理，接著在建立 app.get ，我們預期要從瀏覽器  /test ㄙㄟ來做請求，第二個參數為 middleHandler function ，以及第三個 callback 函式</p>
-<p><img src="/images/nodejs/59.png" alt=""></p>
-<p>一開始從瀏覽器 localhost:3000/test 發送出去之後，會先進到 middleHandler ，所以會先顯示 <strong>start</strong> :: middle handler function ，然後遇到  next(); 之後再回到 app.get  繼續作處理，因此再將 <strong>end</strong> :: middle handler function 顯示，最後用了一個 res.send 方法將一個小字串文字直接輸出到瀏覽器上面。</p>
-<h1 id="下圖可看結果："><a href="#下圖可看結果：" class="headerlink" title="下圖可看結果："></a>下圖可看結果：</h1><p><img src="/images/nodejs/60.png" alt=""></p>
-<p>更多應用，下回待續…</p>
-<p>參考資料：<br><a href="http://stephensugden.com/middleware_guide/" target="_blank" rel="external">http://stephensugden.com/middleware_guide/</a><br><a href="http://www.hacksparrow.com/how-to-write-midddleware-for-connect-express-js.html" target="_blank" rel="external">http://www.hacksparrow.com/how-to-write-midddleware-for-connect-express-js.html</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;從我們前幾篇用到 express web framework 框架的時候，express 就已經內建啟用 middleware 的概念，可以利用中間層的這個部分做一些效果，接下來本章節就來介紹  middleware 。首先我們先建立好一個 express web framework 框架&lt;/p&gt;
-&lt;p&gt;建立 express 的指令是：&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;variable&quot;&gt;$express&lt;/span&gt; -e nodejs-middleware&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/categories/Node-js/"/>
-    
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/tags/Node-js/"/>
-    
-      <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Node.js 系列學習日誌#13 - 核心模組檔案系統 fs</title>
-    <link href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-13-fs/"/>
-    <id>https://weijutu.github.io/2017/07/24/nodejs/nodejs-13-fs/</id>
-    <published>2017-07-23T16:13:00.000Z</published>
-    <updated>2017-07-25T11:51:27.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>node.js  提供了檔案操作的模組，包含讀取、刪除、寫入、更名等等的檔案操作。其中 fs 模組他還提供了同步與非同步的方法來使用。他的方法名稱也相當好懂，如果是非同步那麼就 fs.readFile() ，同步的話就是 fs.readFileSync()，相當好區別。本章節將會介紹檔案系統的基本操作，如：</p>
-<ul>
-<li>讀取檔案 fs.readFile</li>
-<li>寫入檔案 fs.writeFile</li>
-<li>附加檔案內容 fs.appendFile</li>
-<li>更名檔案 fs.rename</li>
-<li>刪除檔案 fs.unlink</li>
-</ul>
-<a id="more"></a>
-<p>首先我們先建立一個 nodejs-fs 目錄夾，預設檔案結構如下：</p>
-<p><img src="/images/nodejs/57.png" alt=""></p>
-<p>content.txt , test.txt 簡單預設寫一些內文，就可以進行以下的檔案系統相關操作：</p>
-<p>在操作的宣告裡面，在 index.js 檔案，首先務必要檔案檔案系統模組</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div></pre></td></tr></table></figure>
-<p>接著我們就可以使用 fs 所提供的方法，方法可參考 <a href="http://nodejs.org/api/fs.html" target="_blank" rel="external">http://nodejs.org/api/fs.html</a>：</p>
-<h1 id="讀取檔案-fs-readFile"><a href="#讀取檔案-fs-readFile" class="headerlink" title="讀取檔案 fs.readFile"></a>讀取檔案 fs.readFile</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>); <span class="comment">//載入檔案系統模組</span></div><div class="line"><span class="comment">//讀取  content.txt 檔案內容</span></div><div class="line">fs.readFile(<span class="string">'content.txt'</span>, <span class="string">'utf-8'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, data</span>)</span>&#123;</div><div class="line">     <span class="comment">//若有錯誤就列印訊息</span></div><div class="line">     <span class="keyword">if</span> (err) &#123;</div><div class="line">          <span class="built_in">console</span>.error(err);</div><div class="line">     &#125; <span class="keyword">else</span> &#123;</div><div class="line"></div><div class="line">          <span class="comment">//將檔案內容輸入</span></div><div class="line">          <span class="built_in">console</span>.log(data);</div><div class="line">     &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<h1 id="寫入檔案-fs-writeFile"><a href="#寫入檔案-fs-writeFile" class="headerlink" title="寫入檔案 fs.writeFile"></a>寫入檔案 fs.writeFile</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> data1 = <span class="string">"hello, ithome 鐵人賽"</span>;</div><div class="line">fs.writeFile(__dirname + <span class="string">'/content.txt'</span>, data1, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</div><div class="line">     <span class="keyword">if</span> (err) &#123;</div><div class="line">          <span class="built_in">console</span>.error(err)</div><div class="line">     &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<h1 id="附加檔案內容-fs-appendFile"><a href="#附加檔案內容-fs-appendFile" class="headerlink" title="附加檔案內容 fs.appendFile"></a>附加檔案內容 fs.appendFile</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> data2 = <span class="string">"的主計林車修該自是"</span>;</div><div class="line">fs.appendFile(__dirname + <span class="string">'/content.txt'</span>, data2, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</div><div class="line">     <span class="keyword">if</span> (err) &#123;</div><div class="line">          <span class="built_in">console</span>.error(err)</div><div class="line">     &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<h1 id="更名檔案-fs-rename"><a href="#更名檔案-fs-rename" class="headerlink" title="更名檔案 fs.rename"></a>更名檔案 fs.rename</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> oldpath = <span class="string">"content2.txt"</span>;</div><div class="line"><span class="keyword">var</span> newpath = <span class="string">"content.txt"</span>;</div><div class="line">fs.rename(oldpath, newpath, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</div><div class="line">     <span class="keyword">if</span> (err)</div><div class="line">          <span class="keyword">throw</span> err;</div><div class="line"></div><div class="line">       fs.stat(<span class="string">'content.txt'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, stats</span>) </span>&#123;</div><div class="line">         <span class="keyword">if</span> (err)</div><div class="line">              <span class="keyword">throw</span> err;</div><div class="line"></div><div class="line">         <span class="comment">//將檔案的狀態顯示出來</span></div><div class="line">          <span class="comment">// stats: &#123;"dev":16777218,</span></div><div class="line">         <span class="comment">//      "mode":33204,</span></div><div class="line">         <span class="comment">//      "nlink":1,</span></div><div class="line">         <span class="comment">//      "uid":501,</span></div><div class="line">         <span class="comment">//      "gid":20,</span></div><div class="line">         <span class="comment">//      "rdev":0,"blksize":4096,</span></div><div class="line">         <span class="comment">//      "ino":33307834,</span></div><div class="line">         <span class="comment">//      "size":1254,</span></div><div class="line">         <span class="comment">//      "blocks":8,</span></div><div class="line">         <span class="comment">//      "atime":"2014-10-21T14:25:18.000Z",</span></div><div class="line">         <span class="comment">//      "mtime":"2014-10-21T14:24:56.000Z",</span></div><div class="line">         <span class="comment">//      "ctime":"2014-10-21T14:24:56.000Z"</span></div><div class="line">         <span class="comment">// &#125;</span></div><div class="line"></div><div class="line">         <span class="built_in">console</span>.log(<span class="string">'stats: '</span> + <span class="built_in">JSON</span>.stringify(stats));</div><div class="line">       &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<h1 id="刪除檔案-fs-unlink"><a href="#刪除檔案-fs-unlink" class="headerlink" title="刪除檔案 fs.unlink"></a>刪除檔案 fs.unlink</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">fs.unlink(<span class="string">'test.txt'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (err) <span class="keyword">throw</span> err;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'successfully deleted test.txt'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>事實上檔案系統操作還有很多方法可以使用，可以看到我們</p>
-<h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><ul>
-<li><a href="http://nodejs.org/api/fs.html" target="_blank" rel="external">http://nodejs.org/api/fs.html</a></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;node.js  提供了檔案操作的模組，包含讀取、刪除、寫入、更名等等的檔案操作。其中 fs 模組他還提供了同步與非同步的方法來使用。他的方法名稱也相當好懂，如果是非同步那麼就 fs.readFile() ，同步的話就是 fs.readFileSync()，相當好區別。本章節將會介紹檔案系統的基本操作，如：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;讀取檔案 fs.readFile&lt;/li&gt;
-&lt;li&gt;寫入檔案 fs.writeFile&lt;/li&gt;
-&lt;li&gt;附加檔案內容 fs.appendFile&lt;/li&gt;
-&lt;li&gt;更名檔案 fs.rename&lt;/li&gt;
-&lt;li&gt;刪除檔案 fs.unlink&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/categories/Node-js/"/>
-    
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/tags/Node-js/"/>
-    
-      <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
-    
-      <category term="fs" scheme="https://weijutu.github.io/tags/fs/"/>
     
   </entry>
   
