@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://weijutu.github.io/2017/08/29/books/books-001-9789862291597-ghost/</loc>
+    
+    <lastmod>2017-08-31T04:09:51.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2017/08/25/gitbook/gitbook-install/</loc>
+    
+    <lastmod>2017-08-30T07:11:41.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2017/08/21/excel/excel-string-splite-to-cell/</loc>
+    
+    <lastmod>2017-08-30T07:11:30.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2017/08/21/excel/excel-get-value-by-fn/</loc>
+    
+    <lastmod>2017-08-30T07:11:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://weijutu.github.io/2017/08/25/javascript/javascript-gulpjs-minify-image/</loc>
     
     <lastmod>2017-08-25T03:53:11.000Z</lastmod>
@@ -12,13 +40,6 @@
     <loc>https://weijutu.github.io/2017/08/25/achieve/achieve-google-material-design/</loc>
     
     <lastmod>2017-08-25T03:43:16.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://weijutu.github.io/2017/08/25/gitbook/gitbook-install/</loc>
-    
-    <lastmod>2017-08-25T03:33:06.000Z</lastmod>
     
   </url>
   
@@ -40,20 +61,6 @@
     <loc>https://weijutu.github.io/about/index.html</loc>
     
     <lastmod>2017-08-21T02:25:14.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://weijutu.github.io/2017/08/21/excel/excel-get-value-by-fn/</loc>
-    
-    <lastmod>2017-08-21T02:19:44.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://weijutu.github.io/2017/08/21/excel/excel-string-splite-to-cell/</loc>
-    
-    <lastmod>2017-08-21T01:56:40.000Z</lastmod>
     
   </url>
   
