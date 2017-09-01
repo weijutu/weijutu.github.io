@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://weijutu.github.io/"/>
-  <updated>2017-08-31T04:09:51.000Z</updated>
+  <updated>2017-09-01T15:22:56.000Z</updated>
   <id>https://weijutu.github.io/</id>
   
   <author>
@@ -14,6 +14,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>股典閱#1 - 認識投資概念</title>
+    <link href="https://weijutu.github.io/2017/09/01/stock/stock-001-concept/"/>
+    <id>https://weijutu.github.io/2017/09/01/stock/stock-001-concept/</id>
+    <published>2017-09-01T10:07:51.000Z</published>
+    <updated>2017-09-01T15:22:56.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>「人兩腳，錢四腳」</p>
+<p>不知道你有沒有聽過這句話呢？意思是人追不上錢的速度，經常想著一天小時一共有 1440 分鐘，每一分鐘比起來怎麼差這麼多，為什麼有錢人賺的錢總是看不到他們的車尾燈似的迅速擴張他們的資產。</p>
+<p>我想，人人都需要了解投資，未必是身為金融科系的人才能了解，投資一直在我們生活當中，也必須了解投資這件事，而投資這件事情喔，通常分成了實質的投資跟金融的投資，前者的投資就是房地產、投資廠房設備、珠寶這一類的，後者就像是投資股票、債券等等的金融商品，投資正因為如此，所以有錢人善用了這些手法讓投資標的有成長的發揮，這篇文章是股典閱的第一集，想先讓大家認識一下投資的概念。</p>
+<a id="more"></a>
+<h3 id="投資一定有風險，基金投資有賺有賠，申購前應詳閱公開說明書"><a href="#投資一定有風險，基金投資有賺有賠，申購前應詳閱公開說明書" class="headerlink" title="投資一定有風險，基金投資有賺有賠，申購前應詳閱公開說明書"></a>投資一定有風險，基金投資有賺有賠，申購前應詳閱公開說明書</h3><p>這句廣告台詞真的透過廣告播送，整個朗朗上口了啦。投資因為有了供給需求存在的關係，整個經濟活動就形成了金融市場，舉例來說公司發行金融工具比如股票，讓有資金的人來認購，資金的需求者收到錢之後就能夠做最有效的運用了。那風險呢？我要怎麼避免風險發生？先別急，我們需要了解投資可能會遇到的各種議題。</p>
+<h4 id="不要把雞蛋放在同一個籃子裡"><a href="#不要把雞蛋放在同一個籃子裡" class="headerlink" title="不要把雞蛋放在同一個籃子裡"></a>不要把雞蛋放在同一個籃子裡</h4><p>這個就是分散風險的概念了，投資的股票也不是天天都在上漲，也有時候是下跌的走勢，如果只有投資一款標的，當下跌時那可真的需要有強大的心臟，每個人的風險承受能力不一樣，需要找到一個適合自己的投資，可以透過將低風險的方式建立一個比較有效的投資組合喔！</p>
+<h4 id="市場的敏感度"><a href="#市場的敏感度" class="headerlink" title="市場的敏感度"></a>市場的敏感度</h4><p>把握到的機會就好好掌握，雖然這句話人人會說，但實際執行時又覺得好困難，所以要隨時關心市場動向，觀察事情的關聯性，也許就能對投資有所幫助的。</p>
+<h4 id="投資策略"><a href="#投資策略" class="headerlink" title="投資策略"></a>投資策略</h4><p>這個部分就要先評估自己有多少的籌碼，了解自己能夠承受的風險，設定停損或停利的目標並且多閱讀領域上的行情、知識， 試算出報酬數據建立屬於自己的投資策略。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;「人兩腳，錢四腳」&lt;/p&gt;
+&lt;p&gt;不知道你有沒有聽過這句話呢？意思是人追不上錢的速度，經常想著一天小時一共有 1440 分鐘，每一分鐘比起來怎麼差這麼多，為什麼有錢人賺的錢總是看不到他們的車尾燈似的迅速擴張他們的資產。&lt;/p&gt;
+&lt;p&gt;我想，人人都需要了解投資，未必是身為金融科系的人才能了解，投資一直在我們生活當中，也必須了解投資這件事，而投資這件事情喔，通常分成了實質的投資跟金融的投資，前者的投資就是房地產、投資廠房設備、珠寶這一類的，後者就像是投資股票、債券等等的金融商品，投資正因為如此，所以有錢人善用了這些手法讓投資標的有成長的發揮，這篇文章是股典閱的第一集，想先讓大家認識一下投資的概念。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="投資" scheme="https://weijutu.github.io/tags/%E6%8A%95%E8%B3%87/"/>
+    
+  </entry>
   
   <entry>
     <title>丸閱讀#1 - 《靈界的譯者：從學生靈媒到棒球女主審的通靈之路》讀後心得</title>
@@ -574,6 +604,54 @@
   </entry>
   
   <entry>
+    <title>Node.js 系列學習日誌#28 - REST 路由規則</title>
+    <link href="https://weijutu.github.io/2017/07/26/nodejs/nodejs-28-rest/"/>
+    <id>https://weijutu.github.io/2017/07/26/nodejs/nodejs-28-rest/</id>
+    <published>2017-07-25T16:27:00.000Z</published>
+    <updated>2017-07-31T10:27:16.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天我們使用 express 框架介紹一下 REST  路由規則，REST 是一種  http 協定的網路應用，http 提供了八種方法使用：</p>
+<a id="more"></a>
+<ul>
+<li><p>OPTIONS：這個方法可使伺服器傳回該資源所支援的所有HTTP請求方法。用<code>*</code>來代替資源名稱，向Web伺服器傳送OPTIONS請求，可以測試伺服器功能是否正常運作。</p>
+</li>
+<li><p>HEAD：與GET方法一樣，都是向伺服器發出指定資源的請求。只不過伺服器將不傳回資源的本文部份。它的好處在於，使用這個方法可以在不必傳輸全部內容的情況下，就可以獲取其中「關於該資源的資訊」（元資訊或稱元資料）。</p>
+</li>
+<li><p>GET：向指定的資源發出「顯示」請求。使用GET方法應該只用在讀取資料，而不應當被用於產生「副作用」的操作中，例如在Web Application中。其中一個原因是GET可能會被網路蜘蛛等隨意存取。參見安全方法</p>
+</li>
+<li><p>POST：向指定資源提交資料，請求伺服器進行處理（例如提交表單或者上傳檔案）。資料被包含在請求本文中。這個請求可能會建立新的資源或修改現有資源，或二者皆有。</p>
+</li>
+<li><p>PUT：向指定資源位置上傳其最新內容。</p>
+</li>
+<li><p>DELETE：請求伺服器刪除Request-URI所標識的資源。</p>
+</li>
+<li><p>TRACE：回顯伺服器收到的請求，主要用於測試或診斷。</p>
+</li>
+<li><p>CONNECT：HTTP/1.1協定中預留給能夠將連線改為管道方式的代理伺服器。通常用於SSL加密伺服器的連結（經由非加密的HTTP代理伺服器）</p>
+</li>
+</ul>
+<p>而 express 網頁框架也針對 http 請求方法設計路由的函數：</p>
+<p><img src="/images/nodejs/124.png" alt=""></p>
+<p>通常在設計 rest 時，常用的是 get (取得), post (新增), put (更新), delete (刪除)</p>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE" target="_blank" rel="external">http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天我們使用 express 框架介紹一下 REST  路由規則，REST 是一種  http 協定的網路應用，http 提供了八種方法使用：&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Node.js" scheme="https://weijutu.github.io/categories/Node-js/"/>
+    
+    
+      <category term="Node.js" scheme="https://weijutu.github.io/tags/Node-js/"/>
+    
+      <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Node.js 系列學習日誌#27 - forever 讓程式保持執行狀態</title>
     <link href="https://weijutu.github.io/2017/07/26/nodejs/nodejs-27-forever/"/>
     <id>https://weijutu.github.io/2017/07/26/nodejs/nodejs-27-forever/</id>
@@ -622,54 +700,6 @@
       <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
     
       <category term="forever" scheme="https://weijutu.github.io/tags/forever/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Node.js 系列學習日誌#28 - REST 路由規則</title>
-    <link href="https://weijutu.github.io/2017/07/26/nodejs/nodejs-28-rest/"/>
-    <id>https://weijutu.github.io/2017/07/26/nodejs/nodejs-28-rest/</id>
-    <published>2017-07-25T16:27:00.000Z</published>
-    <updated>2017-07-31T10:27:16.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>今天我們使用 express 框架介紹一下 REST  路由規則，REST 是一種  http 協定的網路應用，http 提供了八種方法使用：</p>
-<a id="more"></a>
-<ul>
-<li><p>OPTIONS：這個方法可使伺服器傳回該資源所支援的所有HTTP請求方法。用<code>*</code>來代替資源名稱，向Web伺服器傳送OPTIONS請求，可以測試伺服器功能是否正常運作。</p>
-</li>
-<li><p>HEAD：與GET方法一樣，都是向伺服器發出指定資源的請求。只不過伺服器將不傳回資源的本文部份。它的好處在於，使用這個方法可以在不必傳輸全部內容的情況下，就可以獲取其中「關於該資源的資訊」（元資訊或稱元資料）。</p>
-</li>
-<li><p>GET：向指定的資源發出「顯示」請求。使用GET方法應該只用在讀取資料，而不應當被用於產生「副作用」的操作中，例如在Web Application中。其中一個原因是GET可能會被網路蜘蛛等隨意存取。參見安全方法</p>
-</li>
-<li><p>POST：向指定資源提交資料，請求伺服器進行處理（例如提交表單或者上傳檔案）。資料被包含在請求本文中。這個請求可能會建立新的資源或修改現有資源，或二者皆有。</p>
-</li>
-<li><p>PUT：向指定資源位置上傳其最新內容。</p>
-</li>
-<li><p>DELETE：請求伺服器刪除Request-URI所標識的資源。</p>
-</li>
-<li><p>TRACE：回顯伺服器收到的請求，主要用於測試或診斷。</p>
-</li>
-<li><p>CONNECT：HTTP/1.1協定中預留給能夠將連線改為管道方式的代理伺服器。通常用於SSL加密伺服器的連結（經由非加密的HTTP代理伺服器）</p>
-</li>
-</ul>
-<p>而 express 網頁框架也針對 http 請求方法設計路由的函數：</p>
-<p><img src="/images/nodejs/124.png" alt=""></p>
-<p>通常在設計 rest 時，常用的是 get (取得), post (新增), put (更新), delete (刪除)</p>
-<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE" target="_blank" rel="external">http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;今天我們使用 express 框架介紹一下 REST  路由規則，REST 是一種  http 協定的網路應用，http 提供了八種方法使用：&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/categories/Node-js/"/>
-    
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/tags/Node-js/"/>
-    
-      <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
     
   </entry>
   
@@ -1127,69 +1157,6 @@
       <category term="Node.js" scheme="https://weijutu.github.io/tags/Node-js/"/>
     
       <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Node.js 系列學習日誌#19 - 運用 express, socket.io, boostrap 建立一個簡單的聊天室功能</title>
-    <link href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-19-chatroom/"/>
-    <id>https://weijutu.github.io/2017/07/24/nodejs/nodejs-19-chatroom/</id>
-    <published>2017-07-23T16:19:00.000Z</published>
-    <updated>2017-07-29T10:15:52.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>寫過網頁的大家們，大致上都了解 http 是一種無狀態的形式，假設頁面登進來的使用者，為了保存它的登入資訊，通常會使用 session 的觀念作為存放的物件，否則 server 端就不知道 client 端登進來的人是誰，不過今天不講session  的部分，而是我們要透過 socket.io 做雙向溝通，只要一旦建立了連線之後，就可以立即傳訊息出去，Client 的部分也立即接收到，相互取得訊息。</p>
-<p>今天要來透過介紹的是簡單的聊天室功能，讓大家了解 node.js 在 socket.io 運作的方式，以下是本章節會學習到的部分：</p>
-<ul>
-<li>使用 Bootstrap 規劃製作前端頁面框架</li>
-<li>使用 express 套功能</li>
-<li>使用 socket.io 套件</li>
-<li>開發聊天室功能</li>
-</ul>
-<a id="more"></a>
-<p>本章節程式同步放置於 ：<a href="https://github.com/weijutu/nodejs-simple-chatroom" target="_blank" rel="external">https://github.com/weijutu/nodejs-simple-chatroom</a></p>
-<p>首先我們先定義好需要的動向有：</p>
-<ol>
-<li>進入聊天室之前需要先輸入姓名</li>
-<li>進入聊天室頁面之後，左邊區域負責聊天的顯示部分，右邊區域負責登入的名單</li>
-<li>聊天功能會有個按鈕，當使用者輸入訊息後，按下按鈕送出</li>
-<li>瀏覽器關閉時，也等於退出聊天功能</li>
-</ol>
-<p>首先建立一個 nodejs-simple-chatroom 資料夾，安裝 express, socket.io 相依套件，package.json 檔案內容為：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">     &quot;name&quot;: &quot;nodejs-simple-chatroom&quot;,</div><div class="line">     &quot;version&quot;: &quot;0.0.1&quot;,</div><div class="line">     &quot;private&quot;: true,</div><div class="line">     &quot;dependencies&quot;: &#123;</div><div class="line">          &quot;socket.io&quot;: &quot;1.0.3&quot;,</div><div class="line">          &quot;express&quot;: &quot;4.4.0&quot;</div><div class="line">     &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>(安裝相依套件方式請詳情：<a href="http://ithelp.ithome.com.tw/ironman7/app/article/dev/recent/10158140" target="_blank" rel="external">http://ithelp.ithome.com.tw/ironman7/app/article/dev/recent/10158140</a>)<br>建立 package.json 完成之後，先將畫面基礎規劃完成</p>
-<h3 id="client-端"><a href="#client-端" class="headerlink" title="client 端"></a>client 端</h3><p>當多開幾個瀏覽器，可以輸入進入聊天的姓名，以下是在聊天之前先輸入的欄位：</p>
-<p><img src="/images/nodejs/74.png" alt=""></p>
-<p>在這邊使用了 bootstrap 前端框架來美化一下聊天室外觀</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;container&quot;&gt;</div><div class="line">          &lt;div id=&quot;nickWrap&quot;&gt;</div><div class="line">               &lt;form id=&quot;setNick&quot; role=&quot;form&quot;&gt;</div><div class="line">                    &lt;h2 class=&quot;form-signin-heading&quot;&gt;請輸入您的名字:&lt;/h2&gt;</div><div class="line">                    &lt;p id=&quot;nickError&quot;&gt;&lt;/p&gt;</div><div class="line">                    &lt;div style=&quot;margin:20px;&quot;&gt;</div><div class="line">                         &lt;input size=&quot;35&quot; id=&quot;txtNickname&quot; required=&quot;&quot; /&gt;</div><div class="line">                    &lt;/div&gt;</div><div class="line">                    &lt;input type=&quot;Submit&quot; class=&quot;btn btn-lg btn-primary&quot;&gt;</div><div class="line">               &lt;/form&gt;</div><div class="line">          &lt;/div&gt;</div><div class="line"></div><div class="line"></div><div class="line">          &lt;div id=&quot;contentWrap&quot;&gt;</div><div class="line">               &lt;div id=&quot;chatWrap&quot; class=&quot;panel panel-default&quot; &gt;</div><div class="line">                      &lt;div class=&quot;panel-heading&quot;&gt;即時聊天&lt;/div&gt;</div><div class="line">                      &lt;div class=&quot;panel-body&quot;&gt;</div><div class="line">                           &lt;div class=&quot;row&quot;&gt;</div><div class="line">                                &lt;div class=&quot;col-md-9&quot;&gt;</div><div class="line">                                     &lt;div id=&quot;chat&quot;&gt;&lt;/div&gt;</div><div class="line">                                  &lt;form id=&quot;send-message&quot;&gt;</div><div class="line">                                    &lt;div class=&quot;input-group&quot;&gt;</div><div class="line">                                      &lt;input type=&quot;text&quot; class=&quot;form-control&quot; placeholder=&quot;請輸入聊天訊息...&quot; id=&quot;message&quot;&gt;</div><div class="line">                                      &lt;span class=&quot;input-group-btn&quot;&gt;</div><div class="line">                                        &lt;button type=&quot;submit&quot; class=&quot;btn btn-default&quot;&gt;送出留言&lt;/button&gt;</div><div class="line">                                      &lt;/span&gt;</div><div class="line">                                    &lt;/div&gt;</div><div class="line">                                  &lt;/form&gt;</div><div class="line">                              &lt;/div&gt;</div><div class="line">                              &lt;div class=&quot;col-md-3&quot;&gt;</div><div class="line">                                    線上名單：</div><div class="line">                                   &lt;div id=&quot;users&quot;&gt;&lt;/div&gt;</div><div class="line">                              &lt;/div&gt;</div><div class="line">                         &lt;/div&gt;</div><div class="line">                      &lt;/div&gt;</div><div class="line">               &lt;/div&gt;</div><div class="line"></div><div class="line">          &lt;/div&gt;</div><div class="line"></div><div class="line">          &lt;script type=&quot;text/javascript&quot; src=&quot;//code.jquery.com/jquery-latest.min.js&quot;&gt;&lt;/script&gt;</div><div class="line">          &lt;script type=&quot;text/javascript&quot; src=&quot;/socket.io/socket.io.js&quot;&gt;&lt;/script&gt;</div><div class="line"></div><div class="line">     &lt;/div&gt;</div></pre></td></tr></table></figure>
-<h3 id="javascript-部分"><a href="#javascript-部分" class="headerlink" title="javascript 部分"></a>javascript 部分</h3><p>這部分寫在 client 裏面，作為控制像的事件觸發操作</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">          $(function()&#123;</div><div class="line">               var socket = io.connect();</div><div class="line">               var $frmMessage = $(&apos;#send-message&apos;);</div><div class="line">               var $frmNick = $(&apos;#setNick&apos;);</div><div class="line">               var $nickError = $(&apos;#nickError&apos;);</div><div class="line">               var $nickBox = $(&apos;#txtNickname&apos;);</div><div class="line">               var $boxMessage = $(&apos;#message&apos;);</div><div class="line">               var $chat = $(&apos;#chat&apos;);</div><div class="line"></div><div class="line"></div><div class="line">               $frmNick.submit(function(e)&#123;</div><div class="line">                    console.log($nickBox.val());</div><div class="line">                    console.log(&apos;hi, frmNick&apos;);</div><div class="line">                    e.preventDefault();</div><div class="line"></div><div class="line">                    socket.emit(&apos;new user&apos;, $nickBox.val() );</div><div class="line"></div><div class="line">                    $nickBox.val(&apos;&apos;);</div><div class="line"></div><div class="line">                    $(&apos;#nickWrap&apos;).hide();</div><div class="line">                    $(&apos;#contentWrap&apos;).show();</div><div class="line"></div><div class="line">               &#125;);</div><div class="line"></div><div class="line">               $frmMessage.submit(function(e)&#123;</div><div class="line">                    e.preventDefault();</div><div class="line">                    socket.emit(&apos;send message&apos;, $boxMessage.val().trim());</div><div class="line">                    $boxMessage.val(&apos;&apos;);</div><div class="line">               &#125;);</div><div class="line"></div><div class="line">               socket.on(&apos;usernames&apos;, function(data)&#123;</div><div class="line">                    var sb = &apos;&apos;;</div><div class="line">                    for(var d = 0; d &lt; data.length; d++ ) &#123;</div><div class="line">                         console.log(data[d]);</div><div class="line">                         sb += data[d] + &quot;&lt;br /&gt;&quot;;</div><div class="line">                    &#125;</div><div class="line">                    $(&apos;div#users&apos;).html(sb);</div><div class="line"></div><div class="line">               &#125;);</div><div class="line"></div><div class="line">               socket.on(&apos;chat&apos;, function(server,msg)&#123;</div><div class="line"></div><div class="line">                    var now = new Date();</div><div class="line">                    var datetime = now.getFullYear()+&apos;/&apos;+(now.getMonth()+1)+&apos;/&apos;+now.getDate();</div><div class="line">                      datetime += &apos; &apos;+now.getHours()+&apos;:&apos;+now.getMinutes()+&apos;:&apos;+now.getSeconds();</div><div class="line"></div><div class="line">                    $chat.append(&quot;&lt;br /&gt;&lt;i&gt;系統訊息: &lt;b&gt;[ &quot; + msg + &quot; ]&lt;/b&gt; (&quot; +</div><div class="line">                         datetime + &quot;)&lt;/i&gt;&lt;br /&gt;&quot;);</div><div class="line">               &#125;);</div><div class="line"></div><div class="line">               socket.on(&apos;new message&apos;, function(data)&#123;</div><div class="line">                    var msg = data.msg;</div><div class="line">                    var name = data.nick;</div><div class="line"></div><div class="line">                    var now = new Date();</div><div class="line">                    var datetime = now.getFullYear()+&apos;/&apos;+(now.getMonth()+1)+&apos;/&apos;+now.getDate();</div><div class="line">                      datetime += &apos; &apos;+now.getHours()+&apos;:&apos;+now.getMinutes()+&apos;:&apos;+now.getSeconds();</div><div class="line"></div><div class="line">                    $chat.append(&quot;&lt;b&gt;&quot; + name + &quot; &lt;/b&gt;: &quot; + msg + &quot; (&lt;i&gt;&quot; + datetime + &quot;&lt;i&gt;)&lt;br /&gt;&quot;);</div><div class="line">               &#125;);</div><div class="line">          &#125;);</div><div class="line">          &lt;/script&gt;</div></pre></td></tr></table></figure>
-<h3 id="server-端：-app-js"><a href="#server-端：-app-js" class="headerlink" title="server 端：(app.js)"></a>server 端：(app.js)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">var express = require(&apos;express&apos;),</div><div class="line">     app = express(),</div><div class="line">     server = require(&apos;http&apos;).createServer(app),</div><div class="line">     io = require(&apos;socket.io&apos;).listen(server),</div><div class="line">     nicknames = [];</div><div class="line"></div><div class="line">server.listen(3000);</div><div class="line"></div><div class="line">app.get(&apos;/&apos;, function(req, res)&#123;</div><div class="line">     res.sendfile(__dirname + &apos;/index.html&apos;);</div><div class="line">&#125;);</div><div class="line">app.use(&apos;/public&apos;, express.static(__dirname + &apos;/public&apos;));</div><div class="line"></div><div class="line">io.sockets.on(&apos;connection&apos;, function(socket) &#123;</div><div class="line">     socket.on(&apos;new user&apos;, function(data)&#123;</div><div class="line">          console.log(data);</div><div class="line">          if (nicknames.indexOf(data) != -1) &#123;</div><div class="line"></div><div class="line">          &#125; else &#123;</div><div class="line">               socket.emit(&apos;chat&apos;, &apos;SERVER&apos;, &apos;歡迎光臨 &apos; + data);</div><div class="line"></div><div class="line">               socket.nickname = data;</div><div class="line">               nicknames.push(socket.nickname);</div><div class="line">               io.sockets.emit(&apos;usernames&apos;, nicknames);</div><div class="line">               updateNicknames();</div><div class="line">          &#125;</div><div class="line">     &#125;);</div><div class="line"></div><div class="line">     function updateNicknames()&#123;</div><div class="line">          io.sockets.emit(&apos;usernames&apos;, nicknames);</div><div class="line">     &#125;</div><div class="line"></div><div class="line">     //</div><div class="line">     socket.on(&apos;send message&apos;, function(data)&#123;</div><div class="line">          io.sockets.emit(&apos;new message&apos;, &#123; msg: data, nick: socket.nickname &#125;);</div><div class="line">     &#125;);</div><div class="line"></div><div class="line">     socket.on(&apos;disconnect&apos;, function(data)&#123;</div><div class="line">          if (!socket.nickname) return;</div><div class="line">          io.sockets.emit(&apos;chat&apos;, &apos;SERVER&apos;, socket.nickname + &apos; 離開了聊天室～&apos;);</div><div class="line">          nicknames.splice(nicknames.indexOf(socket.nickname), 1);</div><div class="line">          updateNicknames();</div><div class="line">     &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<h3 id="結果"><a href="#結果" class="headerlink" title="結果"></a>結果</h3><p><img src="/images/nodejs/75.png" alt=""></p>
-<p>已上圖來講，原本有三個聊天者，當某一個使用者關閉瀏覽器 離開聊天室時，將會把使用者從名單上移除。<br>本章節是個簡易的聊天室功能，當然也可以進階一點做一些顯示上的呈現，或者將這些的留言都使用資料庫（例如：mongodb）儲存這些訊息。</p>
-<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="http://getbootstrap.com/" target="_blank" rel="external">http://getbootstrap.com/</a><br><a href="http://expressjs.com" target="_blank" rel="external">http://expressjs.com</a><br><a href="http://socket.io/" target="_blank" rel="external">http://socket.io/</a><br><a href="https://www.ptt.cc/bbs/joke/M.1412577767.A.0EB.html" target="_blank" rel="external">https://www.ptt.cc/bbs/joke/M.1412577767.A.0EB.html</a><br><a href="http://segmentfault.com/a/1190000000479518" target="_blank" rel="external">http://segmentfault.com/a/1190000000479518</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;寫過網頁的大家們，大致上都了解 http 是一種無狀態的形式，假設頁面登進來的使用者，為了保存它的登入資訊，通常會使用 session 的觀念作為存放的物件，否則 server 端就不知道 client 端登進來的人是誰，不過今天不講session  的部分，而是我們要透過 socket.io 做雙向溝通，只要一旦建立了連線之後，就可以立即傳訊息出去，Client 的部分也立即接收到，相互取得訊息。&lt;/p&gt;
-&lt;p&gt;今天要來透過介紹的是簡單的聊天室功能，讓大家了解 node.js 在 socket.io 運作的方式，以下是本章節會學習到的部分：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;使用 Bootstrap 規劃製作前端頁面框架&lt;/li&gt;
-&lt;li&gt;使用 express 套功能&lt;/li&gt;
-&lt;li&gt;使用 socket.io 套件&lt;/li&gt;
-&lt;li&gt;開發聊天室功能&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/categories/Node-js/"/>
-    
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/tags/Node-js/"/>
-    
-      <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
-    
-      <category term="socket.io" scheme="https://weijutu.github.io/tags/socket-io/"/>
     
   </entry>
   
