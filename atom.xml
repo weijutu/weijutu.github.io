@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://weijutu.github.io/"/>
-  <updated>2017-09-01T15:25:12.000Z</updated>
+  <updated>2017-09-02T03:38:51.000Z</updated>
   <id>https://weijutu.github.io/</id>
   
   <author>
@@ -16,11 +16,38 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>資料探勘#1 - 認識資料探勘</title>
+    <link href="https://weijutu.github.io/2017/09/02/dm/dm-001-start/"/>
+    <id>https://weijutu.github.io/2017/09/02/dm/dm-001-start/</id>
+    <published>2017-09-02T03:07:51.000Z</published>
+    <updated>2017-09-02T03:38:51.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>資料探勘 Data Mining 一個技術演進的議題，廣義的觀點是資料探勘是從大量資料裡面挖掘出有意義的模式的過程，也有另一種說法是資料探勘跟資料庫知識發現 (KDD)具有同義詞的意思，而 KDD 的意思是「從資料中辨別有效的、新穎的、潛在有用的、最終可理解的模式的過程」、資料探勘是「KDD通過特定的演算法在可接受的計算效率限制內生成特定模式的一個步驟」(資料來源：wiki <a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98" target="_blank" rel="external">https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98</a>)</p>
+<a id="more"></a>
+<h3 id="為什麼需要資料探勘？"><a href="#為什麼需要資料探勘？" class="headerlink" title="為什麼需要資料探勘？"></a>為什麼需要資料探勘？</h3><p>從早期我們知道的原始資料處理進而發展資料庫管理系統  (DBMS，可以透過SQL查詢語言取得一個關聯子集，例如：查詢今天的訂單數，就能夠過 count 這類的聚合函數來查詢)，透過數據得出一個分析結果方便地用在有效的決策上面，但是，到這邊為甚麼還需要資料探勘呢？因為，正所謂「科技始終來自於人性」、柏拉圖說的「需求是發明之母」，我們周遭都是數字、資料、分析、紀錄各種資訊，這些數字的快速增長，讓大數據的時代需要找出有價值的資訊，然後把這些資訊經過擷取、分析進而轉化成知識。</p>
+<h3 id="garbage-in-garbage-out-GIGO-垃圾進，垃圾出"><a href="#garbage-in-garbage-out-GIGO-垃圾進，垃圾出" class="headerlink" title="garbage in, garbage out. (GIGO) 垃圾進，垃圾出"></a>garbage in, garbage out. (GIGO) 垃圾進，垃圾出</h3><p>到底什麼才是獲得有價值的資訊？資料的來源、整理、擷取相當的重要，有句名言「garbage in, garbage out.」也就是說拿著無用的資料、有誤差的資訊輸入進電腦裡面，卻得到不能使用的結果，因此輸入時需要刪除不一致、無意義的資料，在資料的準確度做個嚴格把關。</p>
+<h4 id="挖掘什麼類型的資料或模式呢？"><a href="#挖掘什麼類型的資料或模式呢？" class="headerlink" title="挖掘什麼類型的資料或模式呢？"></a>挖掘什麼類型的資料或模式呢？</h4><p>資料探勘可以用在很多類型的資料，包含資料庫、Web、資料倉儲、OLTP 線上分析處理 、有序/序列資料、時間序列分析、多媒體等等。至於模式的話，有許多的觀點可以採用，像是特徵型、關聯、相關性的探勘、分類、回歸分析、離散、預測、群聚 (clustering) 等等。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;資料探勘 Data Mining 一個技術演進的議題，廣義的觀點是資料探勘是從大量資料裡面挖掘出有意義的模式的過程，也有另一種說法是資料探勘跟資料庫知識發現 (KDD)具有同義詞的意思，而 KDD 的意思是「從資料中辨別有效的、新穎的、潛在有用的、最終可理解的模式的過程」、資料探勘是「KDD通過特定的演算法在可接受的計算效率限制內生成特定模式的一個步驟」(資料來源：wiki &lt;a href=&quot;https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98&lt;/a&gt;)&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="資料探勘" scheme="https://weijutu.github.io/categories/%E8%B3%87%E6%96%99%E6%8E%A2%E5%8B%98/"/>
+    
+    
+      <category term="data mining" scheme="https://weijutu.github.io/tags/data-mining/"/>
+    
+  </entry>
+  
+  <entry>
     <title>股典閱#1 - 認識投資概念</title>
     <link href="https://weijutu.github.io/2017/09/01/stock/stock-001-concept/"/>
     <id>https://weijutu.github.io/2017/09/01/stock/stock-001-concept/</id>
     <published>2017-09-01T10:07:51.000Z</published>
-    <updated>2017-09-01T15:25:12.000Z</updated>
+    <updated>2017-09-02T03:37:08.000Z</updated>
     
     <content type="html"><![CDATA[<p>「人兩腳，錢四腳」</p>
 <p>不知道你有沒有聽過這句話呢？意思是人追不上錢的速度，經常想著一天小時一共有 1440 分鐘，每一分鐘比起來怎麼差這麼多，為什麼有錢人賺的錢總是看不到他們的車尾燈似的迅速擴張他們的資產。</p>
@@ -1116,49 +1143,6 @@
       <category term="mysql" scheme="https://weijutu.github.io/tags/mysql/"/>
     
       <category term="ejs" scheme="https://weijutu.github.io/tags/ejs/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Node.js 系列學習日誌#20 - 調校 Debug 工具 node-inspector</title>
-    <link href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-20-node-inspector/"/>
-    <id>https://weijutu.github.io/2017/07/24/nodejs/nodejs-20-node-inspector/</id>
-    <published>2017-07-23T16:20:00.000Z</published>
-    <updated>2017-07-31T07:30:52.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>開發過程所撰寫的程式，總是要跟 bugs 打交道，本篇文章介紹一套官方推薦的 Node.js Debug 調校工具 node-inspector，而Node.js 是可以透過  command 命令列方式除錯，不過 node-inspector 則是透過 Web 網頁的方式來操作，讓開發者在調校更美觀方便一些。在這 node-inspector 安裝之前，我們必須要有一個 webkit 的瀏覽器，比如許多人使用的 chrome。接著我們就可以進行安裝 node-inspector</p>
-<a id="more"></a>
-<h3 id="安裝指令"><a href="#安裝指令" class="headerlink" title="安裝指令"></a>安裝指令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$npm install -g node-inspector</div></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/76.png" alt=""></p>
-<h3 id="調校"><a href="#調校" class="headerlink" title="調校"></a>調校</h3><p>執行時會預設 5858 port 口。我們使用前一個聊天室專案來示範 ，使進行  debug 動作時請下指令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node —debug app.js</div></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/77.png" alt=""></p>
-<p>這時候會開始做  5858 port 的監聽，接著我們在打開另一個命令提示字元的視窗，在執行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$node-inspector &amp;</div></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/78.png" alt=""></p>
-<p>上面會提示說請造訪 <a href="http://127.0.0.1:8080/debug?port=5858" target="_blank" rel="external">http://127.0.0.1:8080/debug?port=5858</a> 路徑去啟動  debugging 模式</p>
-<p><img src="/images/nodejs/79.png" alt=""></p>
-<p>打開之後，可以看到調校的工具載入程式碼，您可以在行號下中斷點，右手邊的   breakpoints 就會顯示下中斷點的位置</p>
-<p><img src="/images/nodejs/80.png" alt=""></p>
-<p>在這邊我下了一個 建立新的使用者的中斷點，也就是新的使用者進到聊天室裡面，可以看到調校的頁面就立刻監測到，如下所示：</p>
-<p><img src="/images/nodejs/81.png" alt=""></p>
-<p>您可以將滑鼠指向  socket 的位置，可以看到 socket 相關的屬性及方法</p>
-<p><img src="/images/nodejs/82.png" alt=""></p>
-<p>以上的基本操作就可以很方便的調校 node.js 的程式，也不用一直在程式上面插旗子 （console.log 的方法）可以透過這個工具可以進行 debugging 囉</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;開發過程所撰寫的程式，總是要跟 bugs 打交道，本篇文章介紹一套官方推薦的 Node.js Debug 調校工具 node-inspector，而Node.js 是可以透過  command 命令列方式除錯，不過 node-inspector 則是透過 Web 網頁的方式來操作，讓開發者在調校更美觀方便一些。在這 node-inspector 安裝之前，我們必須要有一個 webkit 的瀏覽器，比如許多人使用的 chrome。接著我們就可以進行安裝 node-inspector&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/categories/Node-js/"/>
-    
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/tags/Node-js/"/>
-    
-      <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
     
   </entry>
   
