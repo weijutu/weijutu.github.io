@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://weijutu.github.io/2017/04/09/python/python-install-for-windows/</loc>
+    
+    <lastmod>2017-09-05T10:10:28.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2015/01/31/mac/2014-10-11-mac-kill-port/</loc>
+    
+    <lastmod>2017-09-05T10:09:39.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://weijutu.github.io/2017/09/02/dm/dm-001-start/</loc>
     
     <lastmod>2017-09-02T03:38:51.000Z</lastmod>
@@ -289,14 +303,14 @@
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/03/04/r/r-xy-scatter-diagram/</loc>
+    <loc>https://weijutu.github.io/tags/index.html</loc>
     
     <lastmod>2017-07-24T01:04:20.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/03/02/metero/metero-intro/</loc>
+    <loc>https://weijutu.github.io/2017/03/04/r/r-xy-scatter-diagram/</loc>
     
     <lastmod>2017-07-24T01:04:20.000Z</lastmod>
     
@@ -310,7 +324,7 @@
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/tags/index.html</loc>
+    <loc>https://weijutu.github.io/2017/03/02/metero/metero-intro/</loc>
     
     <lastmod>2017-07-24T01:04:20.000Z</lastmod>
     
