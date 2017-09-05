@@ -102,7 +102,7 @@
 <meta property="og:url" content="https://weijutu.github.io/2017/03/03/r/r-intro/index.html">
 <meta property="og:site_name" content="噗噗。故我在">
 <meta property="og:description" content="R 語言可以用來處理資料、統計分析、模擬、科學運算以及圖形功能，你可以直接安裝 R Studio 軟體 (R軟體官方網站)，就可以很輕易的在 GUI 上透過許多的套件模組並搭配 R 程式來畫出許多圖形，要能夠善用這些套件之前我們要先學習基本的資料型態以及語法運用。">
-<meta property="og:updated_time" content="2017-07-21T02:17:31.000Z">
+<meta property="og:updated_time" content="2017-09-05T14:44:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="R 語言 - 基本介紹與套件工具函數">
 <meta name="twitter:description" content="R 語言可以用來處理資料、統計分析、模擬、科學運算以及圖形功能，你可以直接安裝 R Studio 軟體 (R軟體官方網站)，就可以很輕易的在 GUI 上透過許多的套件模組並搭配 R 程式來畫出許多圖形，要能夠善用這些套件之前我們要先學習基本的資料型態以及語法運用。">
@@ -406,9 +406,14 @@
 <li>變數型態：有很多其他程式語言沒有的，包含 list, factor, ordered factor, data frame, ts，也可以自建資料型態</li>
 </ol>
 <h2 id="套件有關的工具函數"><a href="#套件有關的工具函數" class="headerlink" title="套件有關的工具函數"></a>套件有關的工具函數</h2><ul>
-<li>在 console 輸入指令安裝 package</li>
+<li>在 console 輸入指令下載安裝套件</li>
 </ul>
+<p>括號內是套件的名字，一般來說要加雙引號</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; install.packages(&quot;car&quot;)</div></pre></td></tr></table></figure>
+<p>然而有些套件會隨著功能的更新，需要定期的更新套件，使用更新套件的指令是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; update.packages()</div></pre></td></tr></table></figure>
+<p>若想知道安裝了哪些套件，那麼可以使用指令是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; installed.packages()</div></pre></td></tr></table></figure>
 <ul>
 <li>使用套件的函數，先載入套件方法有二：library, require</li>
 </ul>
@@ -600,7 +605,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-count">46</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://weijutu.github.io/"/>
-  <updated>2017-09-02T03:38:51.000Z</updated>
+  <updated>2017-09-05T16:34:41.000Z</updated>
   <id>https://weijutu.github.io/</id>
   
   <author>
@@ -14,6 +14,50 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>R - 矩陣相乘法運算 (Matrix multiplication)</title>
+    <link href="https://weijutu.github.io/2017/09/06/r/r-matrix-multiplication/"/>
+    <id>https://weijutu.github.io/2017/09/06/r/r-matrix-multiplication/</id>
+    <published>2017-09-05T16:34:11.000Z</published>
+    <updated>2017-09-05T16:34:41.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="學習目標"><a href="#學習目標" class="headerlink" title="學習目標"></a>學習目標</h3><p>學習如何計算矩陣相乘以及R語言的用法</p>
+<h3 id="矩陣相乘法"><a href="#矩陣相乘法" class="headerlink" title="矩陣相乘法"></a>矩陣相乘法</h3><p>兩個矩陣必須滿足 A 矩陣的<code>行數</code>等於 B 矩陣的<code>列數</code>才可以相乘。在這邊用一個簡單的例子介紹矩陣相乘法的運算</p>
+<p>$$A_{3*2}=\begin{bmatrix}1 &amp; 2\\ 3 &amp; 4\\ 5 &amp; 6\end{bmatrix}$$</p>
+<p>$$B_{2*3}=\begin{bmatrix}7 &amp; 8 &amp; 9\\ 10 &amp; 11 &amp; 12\end{bmatrix}$$</p>
+<p>則：</p>
+<p>$A \times B = \begin{bmatrix}1 \times 7 + 2 \times 10 &amp; 1 \times 8 + 2 \times 11 &amp; 1 \times 9 + 2 \ \times 12\\3 \times 7 + 4 \times 10 &amp; 3 \times 8 + 4 \times 11 &amp; 3 \times 9 + 4 \times 12\\5 \times 7 + 6 \times 10 &amp; 5 \times 8 + 6 \times 11 &amp; 5 \times 9 + 6 \times 12\end{bmatrix} = \begin{bmatrix}27 &amp; 30 &amp; 33\\61 &amp; 68 &amp; 75\\95 &amp; 106 &amp; 117\end{bmatrix}$</p>
+<p>那麼用 R 語法又是怎麼寫呢？</p>
+<a id="more"></a>
+<h3 id="使用-R-語言運算"><a href="#使用-R-語言運算" class="headerlink" title="使用 R 語言運算"></a>使用 R 語言運算</h3><p>已知如上述的矩陣 A 裡面的矩陣是 <code>1,3,5,2,4,6</code>, 而 B 裡面的矩陣是 <code>7,10,8,11,9,12</code>，我們運用 matrix 將矩陣建立起來</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; A&lt;-matrix(c(1,3,5,2,4,6), nrow = 3)</div><div class="line">&gt; B&lt;-matrix(c(7,10,8,11,9,12), nrow = 2)</div></pre></td></tr></table></figure>
+<p>如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&gt; A&lt;-matrix(c(1,3,5,2,4,6), nrow = 3)</div><div class="line">&gt; A</div><div class="line">     [,1] [,2]</div><div class="line">[1,]    1    2</div><div class="line">[2,]    3    4</div><div class="line">[3,]    5    6</div><div class="line">&gt; B&lt;-matrix(c(7,10,8,11,9,12), nrow = 2)</div><div class="line">&gt; B</div><div class="line">     [,1] [,2] [,3]</div><div class="line">[1,]    7    8    9</div><div class="line">[2,]   10   11   12</div></pre></td></tr></table></figure>
+<p>相乘的話就用 <code>A%*%B</code> ，結果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt; A%*%B</div><div class="line">     [,1] [,2] [,3]</div><div class="line">[1,]   27   30   33</div><div class="line">[2,]   61   68   75</div><div class="line">[3,]   95  106  117</div></pre></td></tr></table></figure>
+<h3 id="不能只用-嗎？"><a href="#不能只用-嗎？" class="headerlink" title="不能只用 * 嗎？"></a>不能只用 <code>*</code> 嗎？</h3><p>如果你想要只有使用 <code>*</code> 的話，那麼就要兩個矩陣的行列都要一樣，否則會出現錯誤是 <code>Error in A * B : 非調和陣列</code>。要使用 <code>*</code> 我們修改一下上面的例子，在 B 的 matrix 參數將 nrow 改為 3</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&gt; A&lt;-matrix(c(1,3,5,2,4,6), nrow = 3)</div><div class="line">&gt; A</div><div class="line">     [,1] [,2]</div><div class="line">[1,]    1    2</div><div class="line">[2,]    3    4</div><div class="line">[3,]    5    6</div><div class="line">&gt; B&lt;-matrix(c(7,10,8,11,9,12), nrow = 3)</div><div class="line">&gt; B</div><div class="line">     [,1] [,2]</div><div class="line">[1,]    7   11</div><div class="line">[2,]   10    9</div><div class="line">[3,]    8   12</div></pre></td></tr></table></figure>
+<p>接著就可以直接相乘了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt; A*B</div><div class="line">     [,1] [,2]</div><div class="line">[1,]    7   22</div><div class="line">[2,]   30   36</div><div class="line">[3,]   40   72</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;學習目標&quot;&gt;&lt;a href=&quot;#學習目標&quot; class=&quot;headerlink&quot; title=&quot;學習目標&quot;&gt;&lt;/a&gt;學習目標&lt;/h3&gt;&lt;p&gt;學習如何計算矩陣相乘以及R語言的用法&lt;/p&gt;
+&lt;h3 id=&quot;矩陣相乘法&quot;&gt;&lt;a href=&quot;#矩陣相乘法&quot; class=&quot;headerlink&quot; title=&quot;矩陣相乘法&quot;&gt;&lt;/a&gt;矩陣相乘法&lt;/h3&gt;&lt;p&gt;兩個矩陣必須滿足 A 矩陣的&lt;code&gt;行數&lt;/code&gt;等於 B 矩陣的&lt;code&gt;列數&lt;/code&gt;才可以相乘。在這邊用一個簡單的例子介紹矩陣相乘法的運算&lt;/p&gt;
+&lt;p&gt;$$A_{3*2}=\begin{bmatrix}1 &amp;amp; 2\\ 3 &amp;amp; 4\\ 5 &amp;amp; 6\end{bmatrix}$$&lt;/p&gt;
+&lt;p&gt;$$B_{2*3}=\begin{bmatrix}7 &amp;amp; 8 &amp;amp; 9\\ 10 &amp;amp; 11 &amp;amp; 12\end{bmatrix}$$&lt;/p&gt;
+&lt;p&gt;則：&lt;/p&gt;
+&lt;p&gt;$A \times B = \begin{bmatrix}1 \times 7 + 2 \times 10 &amp;amp; 1 \times 8 + 2 \times 11 &amp;amp; 1 \times 9 + 2 \ \times 12\\3 \times 7 + 4 \times 10 &amp;amp; 3 \times 8 + 4 \times 11 &amp;amp; 3 \times 9 + 4 \times 12\\5 \times 7 + 6 \times 10 &amp;amp; 5 \times 8 + 6 \times 11 &amp;amp; 5 \times 9 + 6 \times 12\end{bmatrix} = \begin{bmatrix}27 &amp;amp; 30 &amp;amp; 33\\61 &amp;amp; 68 &amp;amp; 75\\95 &amp;amp; 106 &amp;amp; 117\end{bmatrix}$&lt;/p&gt;
+&lt;p&gt;那麼用 R 語法又是怎麼寫呢？&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="R" scheme="https://weijutu.github.io/tags/R/"/>
+    
+  </entry>
   
   <entry>
     <title>資料探勘#1 - 認識資料探勘</title>
@@ -633,6 +677,54 @@
   </entry>
   
   <entry>
+    <title>Node.js 系列學習日誌#28 - REST 路由規則</title>
+    <link href="https://weijutu.github.io/2017/07/26/nodejs/nodejs-28-rest/"/>
+    <id>https://weijutu.github.io/2017/07/26/nodejs/nodejs-28-rest/</id>
+    <published>2017-07-25T16:27:00.000Z</published>
+    <updated>2017-07-31T10:27:16.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天我們使用 express 框架介紹一下 REST  路由規則，REST 是一種  http 協定的網路應用，http 提供了八種方法使用：</p>
+<a id="more"></a>
+<ul>
+<li><p>OPTIONS：這個方法可使伺服器傳回該資源所支援的所有HTTP請求方法。用<code>*</code>來代替資源名稱，向Web伺服器傳送OPTIONS請求，可以測試伺服器功能是否正常運作。</p>
+</li>
+<li><p>HEAD：與GET方法一樣，都是向伺服器發出指定資源的請求。只不過伺服器將不傳回資源的本文部份。它的好處在於，使用這個方法可以在不必傳輸全部內容的情況下，就可以獲取其中「關於該資源的資訊」（元資訊或稱元資料）。</p>
+</li>
+<li><p>GET：向指定的資源發出「顯示」請求。使用GET方法應該只用在讀取資料，而不應當被用於產生「副作用」的操作中，例如在Web Application中。其中一個原因是GET可能會被網路蜘蛛等隨意存取。參見安全方法</p>
+</li>
+<li><p>POST：向指定資源提交資料，請求伺服器進行處理（例如提交表單或者上傳檔案）。資料被包含在請求本文中。這個請求可能會建立新的資源或修改現有資源，或二者皆有。</p>
+</li>
+<li><p>PUT：向指定資源位置上傳其最新內容。</p>
+</li>
+<li><p>DELETE：請求伺服器刪除Request-URI所標識的資源。</p>
+</li>
+<li><p>TRACE：回顯伺服器收到的請求，主要用於測試或診斷。</p>
+</li>
+<li><p>CONNECT：HTTP/1.1協定中預留給能夠將連線改為管道方式的代理伺服器。通常用於SSL加密伺服器的連結（經由非加密的HTTP代理伺服器）</p>
+</li>
+</ul>
+<p>而 express 網頁框架也針對 http 請求方法設計路由的函數：</p>
+<p><img src="/images/nodejs/124.png" alt=""></p>
+<p>通常在設計 rest 時，常用的是 get (取得), post (新增), put (更新), delete (刪除)</p>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE" target="_blank" rel="external">http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天我們使用 express 框架介紹一下 REST  路由規則，REST 是一種  http 協定的網路應用，http 提供了八種方法使用：&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Node.js" scheme="https://weijutu.github.io/categories/Node-js/"/>
+    
+    
+      <category term="Node.js" scheme="https://weijutu.github.io/tags/Node-js/"/>
+    
+      <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Node.js 系列學習日誌#27 - forever 讓程式保持執行狀態</title>
     <link href="https://weijutu.github.io/2017/07/26/nodejs/nodejs-27-forever/"/>
     <id>https://weijutu.github.io/2017/07/26/nodejs/nodejs-27-forever/</id>
@@ -681,54 +773,6 @@
       <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
     
       <category term="forever" scheme="https://weijutu.github.io/tags/forever/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Node.js 系列學習日誌#28 - REST 路由規則</title>
-    <link href="https://weijutu.github.io/2017/07/26/nodejs/nodejs-28-rest/"/>
-    <id>https://weijutu.github.io/2017/07/26/nodejs/nodejs-28-rest/</id>
-    <published>2017-07-25T16:27:00.000Z</published>
-    <updated>2017-07-31T10:27:16.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>今天我們使用 express 框架介紹一下 REST  路由規則，REST 是一種  http 協定的網路應用，http 提供了八種方法使用：</p>
-<a id="more"></a>
-<ul>
-<li><p>OPTIONS：這個方法可使伺服器傳回該資源所支援的所有HTTP請求方法。用<code>*</code>來代替資源名稱，向Web伺服器傳送OPTIONS請求，可以測試伺服器功能是否正常運作。</p>
-</li>
-<li><p>HEAD：與GET方法一樣，都是向伺服器發出指定資源的請求。只不過伺服器將不傳回資源的本文部份。它的好處在於，使用這個方法可以在不必傳輸全部內容的情況下，就可以獲取其中「關於該資源的資訊」（元資訊或稱元資料）。</p>
-</li>
-<li><p>GET：向指定的資源發出「顯示」請求。使用GET方法應該只用在讀取資料，而不應當被用於產生「副作用」的操作中，例如在Web Application中。其中一個原因是GET可能會被網路蜘蛛等隨意存取。參見安全方法</p>
-</li>
-<li><p>POST：向指定資源提交資料，請求伺服器進行處理（例如提交表單或者上傳檔案）。資料被包含在請求本文中。這個請求可能會建立新的資源或修改現有資源，或二者皆有。</p>
-</li>
-<li><p>PUT：向指定資源位置上傳其最新內容。</p>
-</li>
-<li><p>DELETE：請求伺服器刪除Request-URI所標識的資源。</p>
-</li>
-<li><p>TRACE：回顯伺服器收到的請求，主要用於測試或診斷。</p>
-</li>
-<li><p>CONNECT：HTTP/1.1協定中預留給能夠將連線改為管道方式的代理伺服器。通常用於SSL加密伺服器的連結（經由非加密的HTTP代理伺服器）</p>
-</li>
-</ul>
-<p>而 express 網頁框架也針對 http 請求方法設計路由的函數：</p>
-<p><img src="/images/nodejs/124.png" alt=""></p>
-<p>通常在設計 rest 時，常用的是 get (取得), post (新增), put (更新), delete (刪除)</p>
-<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE" target="_blank" rel="external">http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;今天我們使用 express 框架介紹一下 REST  路由規則，REST 是一種  http 協定的網路應用，http 提供了八種方法使用：&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/categories/Node-js/"/>
-    
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/tags/Node-js/"/>
-    
-      <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
     
   </entry>
   
@@ -1075,59 +1119,6 @@
     
       &lt;p&gt;上篇介紹了註冊，相對的就一定要來介紹登入的功能。在資料庫上定義了 username, userpass 的欄位，登入的時候就在頁面上擺上兩個輸入框，以及登入的按鈕。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/images/nodejs/86.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/categories/Node-js/"/>
-    
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/tags/Node-js/"/>
-    
-      <category term="express" scheme="https://weijutu.github.io/tags/express/"/>
-    
-      <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
-    
-      <category term="mysql" scheme="https://weijutu.github.io/tags/mysql/"/>
-    
-      <category term="ejs" scheme="https://weijutu.github.io/tags/ejs/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Node.js 系列學習日誌#21 - 使用 express, mysql, ejs 實作註冊功能</title>
-    <link href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-21-express-register/"/>
-    <id>https://weijutu.github.io/2017/07/24/nodejs/nodejs-21-express-register/</id>
-    <published>2017-07-23T16:21:00.000Z</published>
-    <updated>2017-07-31T07:35:57.000Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="/images/nodejs/83.png" alt=""></p>
-<p>本篇將介紹 node.js 系列學習日誌以來的一些整合應用，預計來做註冊、登入、登出這類的動態程式，在這裏首先介紹註冊的部分，本著  node.js express web framework 的 mvc 架構，實際的應用，我們會預想著註冊時會用到哪些、資料庫要有哪些規劃安排。</p>
-<a id="more"></a>
-<p>請建立好 express web framework 框架，指令輸入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$express -e nodejs-auth</div></pre></td></tr></table></figure>
-<p>建立完成之後，打開 app.js 在 var app = express();  新增</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">app.use(&apos;/reg&apos;, reg);</div></pre></td></tr></table></figure>
-<p>因為我們要使用  mysql 作為儲存的資料庫，因此建立一個  models/user.js ，其宣告資料庫如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var mysql = require(&apos;mysql&apos;);</div><div class="line">var DB_NAME = &apos;demo_nodejs&apos;;</div><div class="line"></div><div class="line">var pool  = mysql.createPool(&#123;</div><div class="line">    host     : &apos;localhost&apos;,</div><div class="line">    user     : &apos;nodejs&apos;,</div><div class="line">    password : &apos;nodejs&apos;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>定義資料庫欄位 id, UserName, UserPass ，其中 id 使自動增加號碼</p>
-<p><img src="/images/nodejs/84.png" alt=""></p>
-<p>因為註冊的時候只需要填寫帳號、密碼，因此在 models/user.js 的地方先建立一個 User 物件，定義兩個 username, userpass 屬性，如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">function User(user)&#123;</div><div class="line">    this.username = user.username;</div><div class="line">    this.userpass = user.userpass;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>建立好 user 的 models 之後，開始要開發 routes 的部分，請先建立 <code>/routes/reg.js</code> 檔案，將以下程式碼填入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">var express = require(&apos;express&apos;),</div><div class="line">    router = express.Router(),</div><div class="line">    User = require(&apos;../models/user.js&apos;),</div><div class="line">    crypto = require(&apos;crypto&apos;),</div><div class="line">    TITLE_REG = &apos;註冊&apos;;</div><div class="line"></div><div class="line">router.get(&apos;/&apos;, function(req, res) &#123;</div><div class="line">  res.render(&apos;reg&apos;,&#123;title:TITLE_REG&#125;);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">router.post(&apos;/&apos;, function(req, res) &#123;</div><div class="line">  var userName = req.body[&apos;txtUserName&apos;],</div><div class="line">      userPwd = req.body[&apos;txtUserPwd&apos;],</div><div class="line">      userRePwd = req.body[&apos;txtUserRePwd&apos;],     </div><div class="line">      md5 = crypto.createHash(&apos;md5&apos;);</div><div class="line"></div><div class="line">      userPwd = md5.update(userPwd).digest(&apos;hex&apos;);</div><div class="line"></div><div class="line">  var newUser = new User(&#123;</div><div class="line">      username: userName,</div><div class="line">      userpass: userPwd</div><div class="line">  &#125;);</div><div class="line">module.exports = router;</div></pre></td></tr></table></figure>
-<h3 id="寫入資料庫"><a href="#寫入資料庫" class="headerlink" title="寫入資料庫"></a>寫入資料庫</h3><p>我們定義好  User 這個物件之後，接下來就是寫入的功能我們要善用學習日誌的一篇 （連接 MySQL 並實現 CRUD 操作 - 建立 (Create)）文章，請詳見 <a href="http://ithelp.ithome.com.tw/ironman7/app/article/all/recent/10160394" target="_blank" rel="external">http://ithelp.ithome.com.tw/ironman7/app/article/all/recent/10160394</a> 我們再打開 models/users.js 這支檔案，將表單傳送的  insert 的動作方法，如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">User.prototype.save = function save(callback) &#123;</div><div class="line">        var user = &#123;</div><div class="line">            username: this.username,</div><div class="line">            userpass: this.userpass</div><div class="line">        &#125;;</div><div class="line"></div><div class="line">        var insertUser_Sql = &quot;INSERT INTO userinfo(id, username, userpass) VALUES(0,?,?)&quot;;</div><div class="line"></div><div class="line">        connection.query(insertUser_Sql, [user.username, user.userpass], function (err,result) &#123;</div><div class="line">            if (err) &#123;</div><div class="line">                return;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            connection.release();</div><div class="line">            callback(err,result);                    </div><div class="line">        &#125;);      </div><div class="line">    &#125;;</div></pre></td></tr></table></figure>
-<p>在章節的最前面的 UI 佈局</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;form class=&quot;form-signin&quot; role=&quot;form&quot; method=&quot;post&quot;&gt;</div><div class="line">    &lt;h2 class=&quot;form-signin-heading&quot;&gt;註冊&lt;/h2&gt;</div><div class="line"></div><div class="line">    &lt;input id=&quot;txtUserName&quot; name=&quot;txtUserName&quot; type=&quot;text&quot; class=&quot;form-control&quot; placeholder=&quot;帳號&quot; required /&gt;</div><div class="line">    &lt;input id=&quot;txtUserPwd&quot; name=&quot;txtUserPwd&quot; type=&quot;password&quot; class=&quot;form-control&quot; placeholder=&quot;密碼&quot; required/&gt;</div><div class="line">    &lt;input id=&quot;txtUserRePwd&quot;  name=&quot;txtUserRePwd&quot; type=&quot;password&quot; class=&quot;form-control&quot; placeholder=&quot;再輸入密碼&quot; required/&gt;  </div><div class="line"></div><div class="line">    &lt;button id=&quot;btnSub&quot; class=&quot;btn btn-lg btn-primary&quot; type=&quot;submit&quot;&gt;註冊&lt;/button&gt;</div><div class="line">   &lt;a class=&quot;btn btn-link&quot; href=&quot;/login&quot; role=&quot;button&quot;&gt;登入&lt;/a&gt;</div><div class="line">&lt;/form&gt;</div></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/85.png" alt=""></p>
-<p>下一篇將介紹註冊完成後的登入操作。</p>
-<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="http://stackoverflow.com/questions/22994589/nodejs-express-routes-and-mysql" target="_blank" rel="external">http://stackoverflow.com/questions/22994589/nodejs-express-routes-and-mysql</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;/images/nodejs/83.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;本篇將介紹 node.js 系列學習日誌以來的一些整合應用，預計來做註冊、登入、登出這類的動態程式，在這裏首先介紹註冊的部分，本著  node.js express web framework 的 mvc 架構，實際的應用，我們會預想著註冊時會用到哪些、資料庫要有哪些規劃安排。&lt;/p&gt;
     
     </summary>
     
