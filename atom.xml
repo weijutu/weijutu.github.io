@@ -414,6 +414,41 @@
   </entry>
   
   <entry>
+    <title>股典閱#2 - 股市大盤指數與漲跌</title>
+    <link href="https://weijutu.github.io/2017/09/02/stock/stock-002-company/"/>
+    <id>https://weijutu.github.io/2017/09/02/stock/stock-002-company/</id>
+    <published>2017-09-02T10:07:51.000Z</published>
+    <updated>2017-10-20T09:09:59.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="「大盤指數」計算方式"><a href="#「大盤指數」計算方式" class="headerlink" title="「大盤指數」計算方式"></a>「大盤指數」計算方式</h3><p>台股用的是「發行量加權股價」指數，簡單來講就是股市的所有公司加起來值多少錢。股本較大的公司對大盤指數影響比較大，權重也比較大，通常都叫權值股，可以到 <a href="http://www.taifex.com.tw/chinese/9/9_7_1.asp" target="_blank" rel="external">臺灣證券交易所發行量加權股價指數成分股暨市值比重</a> 查到目前市值佔大盤比重，較大的前幾名，第一名是台積電，第二名是鴻海，第三名是台塑化，所以如果前幾名的市值大的公司上漲，整個大盤也幾乎就是上漲的現象。</p>
+<a id="more"></a>
+<h4 id="公司的市值以台積電為例"><a href="#公司的市值以台積電為例" class="headerlink" title="公司的市值以台積電為例"></a>公司的市值以台積電為例</h4><p>公式：市值 = 當日的收盤價 x 當日流通的股數</p>
+<p>已知台積電流通的股數是 259 億股 (<a href="https://goodinfo.tw/StockInfo/BasicInfo.asp?STOCK_ID=2330" target="_blank" rel="external">台積電發行股數</a>)，以及 2017/10/06 收盤價是 224.5 元</p>
+<p>那麼台積電的市值就是 224.5 x 259 億股，以每股面值 10 元來說，目前市值大概是在 5.82 兆元</p>
+<h3 id="一天的漲跌"><a href="#一天的漲跌" class="headerlink" title="一天的漲跌"></a>一天的漲跌</h3><p>通常在上午九點開始開盤，下午一點半收盤，一整天下來的漲跌以 10% 為限，也就是說假設前一天的收盤價如果是在 20 元的話，隔天的開盤最多能漲到 22 元，下跌的部分只能跌到 18 元，除了看台股以外，國際股市與台股的連動關係，台股大部分都以電子股為交易主軸，舉個例來說經常聽到蘋果科技公司的股價表現，會影響到台股的表現，相對的影響其他供應商的股價</p>
+<h3 id="台股上櫃與上市申請條件比較表"><a href="#台股上櫃與上市申請條件比較表" class="headerlink" title="台股上櫃與上市申請條件比較表"></a>台股上櫃與上市申請條件比較表</h3><p>台股依照交易形式分別了集中市場、店頭市場、興櫃市場，那麼許多公司在申請上市上櫃的時候的一些條件可以看如下圖：</p>
+<p><img src="/images/stock/1.png" alt=""></p>
+<p>參考資料來源：</p>
+<ul>
+<li><a href="http://www.tpex.org.tw/web/service/sotck_info/comparison/apply_comparison.php?l=zh-tw" target="_blank" rel="external">證券櫃檯買賣中心:股票上櫃與上市申請條件比較表</a></li>
+<li><a href="http://www.taifex.com.tw/chinese/9/9_7_1.asp" target="_blank" rel="external">臺灣證券交易所發行量加權股價指數成分股暨市值比重</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;「大盤指數」計算方式&quot;&gt;&lt;a href=&quot;#「大盤指數」計算方式&quot; class=&quot;headerlink&quot; title=&quot;「大盤指數」計算方式&quot;&gt;&lt;/a&gt;「大盤指數」計算方式&lt;/h3&gt;&lt;p&gt;台股用的是「發行量加權股價」指數，簡單來講就是股市的所有公司加起來值多少錢。股本較大的公司對大盤指數影響比較大，權重也比較大，通常都叫權值股，可以到 &lt;a href=&quot;http://www.taifex.com.tw/chinese/9/9_7_1.asp&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;臺灣證券交易所發行量加權股價指數成分股暨市值比重&lt;/a&gt; 查到目前市值佔大盤比重，較大的前幾名，第一名是台積電，第二名是鴻海，第三名是台塑化，所以如果前幾名的市值大的公司上漲，整個大盤也幾乎就是上漲的現象。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="股典閱" scheme="https://weijutu.github.io/categories/%E8%82%A1%E5%85%B8%E9%96%B1/"/>
+    
+    
+      <category term="投資" scheme="https://weijutu.github.io/tags/%E6%8A%95%E8%B3%87/"/>
+    
+  </entry>
+  
+  <entry>
     <title>資料探勘#1 - 認識資料探勘</title>
     <link href="https://weijutu.github.io/2017/09/02/dm/dm-001-start/"/>
     <id>https://weijutu.github.io/2017/09/02/dm/dm-001-start/</id>
@@ -445,7 +480,7 @@
     <link href="https://weijutu.github.io/2017/09/01/stock/stock-001-concept/"/>
     <id>https://weijutu.github.io/2017/09/01/stock/stock-001-concept/</id>
     <published>2017-09-01T10:07:51.000Z</published>
-    <updated>2017-09-02T03:37:08.000Z</updated>
+    <updated>2017-10-20T09:09:36.000Z</updated>
     
     <content type="html"><![CDATA[<p>「人兩腳，錢四腳」</p>
 <p>不知道你有沒有聽過這句話呢？意思是人追不上錢的速度，經常想著一天小時一共有 1440 分鐘，每一分鐘比起來怎麼差這麼多，為什麼有錢人賺的錢總是看不到他們的車尾燈似的迅速擴張他們的資產。</p>
@@ -1127,68 +1162,6 @@
       <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
     
       <category term="forever" scheme="https://weijutu.github.io/tags/forever/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Node.js 系列學習日誌#26 - 介紹 Jade  Template Engine 模板引擎 (下)</title>
-    <link href="https://weijutu.github.io/2017/07/26/nodejs/nodejs-26-jade-2/"/>
-    <id>https://weijutu.github.io/2017/07/26/nodejs/nodejs-26-jade-2/</id>
-    <published>2017-07-25T16:26:00.000Z</published>
-    <updated>2017-07-31T08:03:44.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>繼上一篇 （<a href="http://ithelp.ithome.com.tw/ironman7/app/article/dev/recent/10157760）上集介紹了" target="_blank" rel="external">http://ithelp.ithome.com.tw/ironman7/app/article/dev/recent/10157760）上集介紹了</a> 標籤、條件、迴圈、語法，本章節繼續介紹 Jade 的用法<br>分別是</p>
-<ul>
-<li>comments</li>
-<li>mixins</li>
-<li>case</li>
-<li>使用 Jade 撰寫註冊表單</li>
-</ul>
-<p>繼續使用 <a href="http://codepen.io/" target="_blank" rel="external">http://codepen.io/</a> 作為線上編輯做以下實作的測試編輯器</p>
-<p><img src="/images/nodejs/113.png" alt=""></p>
-<a id="more"></a>
-<h3 id="comments-註解"><a href="#comments-註解" class="headerlink" title="comments 註解"></a>comments 註解</h3><p>這是註解的寫法，註解的寫法就像 javascript 的方式一樣兩個斜線。若你想要把註解寫的方式不想要呈現在原始碼的話，那麼可以試著用  //- 的方式撰寫，這是滿好的手法之一。以下是單行註解跟多行註解的示範：</p>
-<p><img src="/images/nodejs/114.png" alt=""></p>
-<h3 id="mixins"><a href="#mixins" class="headerlink" title="mixins"></a>mixins</h3><p>mixin 的用途是用在當某一段程式重複性高的時候，可以將它抽出來做  mixins，作為重複使用的區塊，mixin 可以將她當作 javascript 的 function 的概念</p>
-<p>寫法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mixin 方法名稱(參數)</div><div class="line">     呈現資料</div></pre></td></tr></table></figure>
-<p>下圖的範例，我們將ul li 的 li 部分做 mixin，在第一行的地方，我們假定 li 裡面的內容要擺放 name = &gt; price ，這就代表需要將參數放到方法的括弧裡面，因此，就如果有參數的話，就在方法名稱括號內，並以逗號分隔的方式擺參數，最後在 li 的地方就將參數值以 #{參數名} 帶入。在第五、第六行得地方呼叫的方式就用  + 號，後面接方法名稱，就像 js 呼叫的方式相同，寫為 +book(“name”, “price”)</p>
-<p><img src="/images/nodejs/115.png" alt=""></p>
-<h3 id="case-條件式判斷"><a href="#case-條件式判斷" class="headerlink" title="case 條件式判斷"></a>case 條件式判斷</h3><p>case 是一種類似 if else 的判斷方式，從下圖的語法來看，一開始建立一個變數為 book ，然後使用 case 後面再接變數，再第二行取到變數值之後，程式就會開始與 when 所設定的字串做比對，如果有符合，那麼就進行以下的陳述句，如果都沒有符合，那麼就會跑預設值  default，然而 default 可以不一定需要，這點可以省去</p>
-<p><img src="/images/nodejs/116.png" alt=""></p>
-<h3 id="使用-Jade-撰寫註冊表單"><a href="#使用-Jade-撰寫註冊表單" class="headerlink" title="使用 Jade 撰寫註冊表單"></a>使用 Jade 撰寫註冊表單</h3><p>從上一篇也是 jade 的學習到本篇的延續，大致上的語言都簡略的描述過一遍，接著我們需要來做個實際點的應用，我這邊使用的範例是經常網頁開發會使用到的註冊表單。簡單寫一些表單，那就用帳號、密碼、再加一個註冊的按鈕，如下圖所示：</p>
-<p><img src="/images/nodejs/117.png" alt=""></p>
-<p>Jade 課程就到這裡</p>
-<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ol>
-<li><a href="http://jade-lang.com/" target="_blank" rel="external">http://jade-lang.com/</a></li>
-<li><a href="http://naltatis.github.io/jade-syntax-docs/" target="_blank" rel="external">http://naltatis.github.io/jade-syntax-docs/</a></li>
-<li><a href="http://naltatis.github.io/jade-syntax-docs/#basics" target="_blank" rel="external">http://naltatis.github.io/jade-syntax-docs/#basics</a></li>
-<li><a href="http://blog.kerash.tw/2013/04/nodejs-jade-template-engine/" target="_blank" rel="external">http://blog.kerash.tw/2013/04/nodejs-jade-template-engine/</a></li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;繼上一篇 （&lt;a href=&quot;http://ithelp.ithome.com.tw/ironman7/app/article/dev/recent/10157760）上集介紹了&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://ithelp.ithome.com.tw/ironman7/app/article/dev/recent/10157760）上集介紹了&lt;/a&gt; 標籤、條件、迴圈、語法，本章節繼續介紹 Jade 的用法&lt;br&gt;分別是&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;comments&lt;/li&gt;
-&lt;li&gt;mixins&lt;/li&gt;
-&lt;li&gt;case&lt;/li&gt;
-&lt;li&gt;使用 Jade 撰寫註冊表單&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;繼續使用 &lt;a href=&quot;http://codepen.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://codepen.io/&lt;/a&gt; 作為線上編輯做以下實作的測試編輯器&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/nodejs/113.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/categories/Node-js/"/>
-    
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/tags/Node-js/"/>
-    
-      <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
-    
-      <category term="jade" scheme="https://weijutu.github.io/tags/jade/"/>
     
   </entry>
   
