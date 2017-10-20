@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://weijutu.github.io/"/>
-  <updated>2017-10-08T03:57:02.000Z</updated>
+  <updated>2017-10-20T09:04:17.000Z</updated>
   <id>https://weijutu.github.io/</id>
   
   <author>
@@ -14,6 +14,311 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>R 學習日誌#3 - 資料結構 (向量 Vector、矩陣 Matrix、陣列 Array ) 的區別與基本運算</title>
+    <link href="https://weijutu.github.io/2017/10/20/r/r-03-data-structure/"/>
+    <id>https://weijutu.github.io/2017/10/20/r/r-03-data-structure/</id>
+    <published>2017-10-20T06:03:00.000Z</published>
+    <updated>2017-10-20T09:04:17.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在使用資料做統計分析之前，需要先了解 R 語言支援資料類型的語法技巧。在這個章節裡面惠介紹到向量 Vector、矩陣 Matrix、陣列 Array 用法，以及基本運算的寫法。</p>
+<ul>
+<li>向量 Vector</li>
+<li>矩陣 Matrix</li>
+<li>陣列 Array</li>
+<li>向量、矩陣、陣列的區別</li>
+</ul>
+<a id="more"></a>
+<h2 id="向量-Vector"><a href="#向量-Vector" class="headerlink" title="向量 Vector"></a>向量 Vector</h2><ul>
+<li>向量 (vector) 的第一個指標是 1，取值要用 [] 中括號</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"># 向量表示法</div><div class="line">&gt; x &lt;- c(5, 32, 56)</div><div class="line">&gt; x</div><div class="line">[1]  5 32 56</div><div class="line"></div><div class="line"># 取其中一筆</div><div class="line">&gt; x &lt;- c(5, 32, 56)</div><div class="line">&gt; x[2]</div><div class="line"></div><div class="line">結果: [1] 32</div></pre></td></tr></table></figure>
+<ul>
+<li>(…) 把運算式用括弧刮起來，可以強制的顯示執行結果</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; (a &lt;- 2 + 3)</div><div class="line"></div><div class="line">結果：[1] 5</div></pre></td></tr></table></figure>
+<ul>
+<li>物件的自動循環，也就是說在運算的時候會對長度較短的數字或向量做重複循環</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt; x &lt;- c(4, 3, 7, 8)</div><div class="line">&gt; x + 4</div><div class="line"></div><div class="line">結果：[1] 8  7  11  12</div><div class="line">說明：相當於 c(4, 3, 7, 8) + c(4, 4, 4, 4)</div></pre></td></tr></table></figure>
+<h2 id="矩陣-Matrix"><a href="#矩陣-Matrix" class="headerlink" title="矩陣 Matrix"></a>矩陣 Matrix</h2><p>相同資料類型依照行 (Row) 與列 (Column) 的組合就形成了矩陣，屬於二維資料結構。使用 <code>matrix()</code> 函數建立矩陣</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; m &lt;- matrix(data &lt;- NA, nrow = 1, ncol = 3, byrow = FALSE)</div><div class="line">&gt; m</div><div class="line">     [,1] [,2] [,3]</div><div class="line">[1,]   NA   NA   NA</div></pre></td></tr></table></figure>
+<ul>
+<li>data: 資料</li>
+<li>nrow: 行數</li>
+<li>ncol: 列數</li>
+<li>byrow: 預設是照列排序下來，如果想以行排列的話可以這麼寫，看一下以下例子：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"># 這是 byrow = FALSE</div><div class="line">&gt; mdata &lt;- c(1,2,3,4,5,6)</div><div class="line">&gt; m &lt;- matrix(data &lt;- mdata, nrow = 2, ncol = 3, byrow = FALSE)</div><div class="line">&gt; m</div><div class="line">     [,1] [,2] [,3]</div><div class="line">[1,]    1    3    5</div><div class="line">[2,]    2    4    6</div><div class="line"></div><div class="line"># 這是 byrow = TRUE</div><div class="line">&gt; m &lt;- matrix(data = mdata, nrow = 2, ncol = 3, byrow = TRUE)</div><div class="line">&gt; m</div><div class="line">     [,1] [,2] [,3]</div><div class="line">[1,]    1    2    3</div><div class="line">[2,]    4    5    6</div></pre></td></tr></table></figure>
+<h3 id="矩陣的索引"><a href="#矩陣的索引" class="headerlink" title="矩陣的索引"></a>矩陣的索引</h3><p>建立矩陣之後可以透過 <code>[]</code> 來索引矩陣的元素，從上面的例子來看，我們想找第二行的資料，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&gt; m &lt;- matrix(data = mdata, nrow = 2, ncol = 3, byrow = TRUE)</div><div class="line">&gt; m</div><div class="line">     [,1] [,2] [,3]</div><div class="line">[1,]    1    2    3</div><div class="line">[2,]    4    5    6</div><div class="line"></div><div class="line">&gt; m[2, ]</div><div class="line">[1] 4 5 6</div></pre></td></tr></table></figure>
+<p>也就是透過 <code>m[2, ]</code> 來找到第二行資料，那麼若要找 第三列的資料，應該也難不倒你的，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt; m &lt;- matrix(data = mdata, nrow = 2, ncol = 3, byrow = TRUE)</div><div class="line">&gt; m</div><div class="line">     [,1] [,2] [,3]</div><div class="line">[1,]    1    2    3</div><div class="line">[2,]    4    5    6</div><div class="line">&gt; m[, 3]</div><div class="line">[1] 3 6</div></pre></td></tr></table></figure>
+<p>嗯嗯，就是反過來寫成 <code>m[, 3]</code> 就可以了。當然你也可以多行或多烈的方式列出，此時會透過 c 向量來做到這個問題，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"># 這個例子是找第一行跟第三行</div><div class="line">&gt; m &lt;- matrix(data = mdata, nrow = 2, ncol = 3, byrow = TRUE)</div><div class="line">&gt; m</div><div class="line">     [,1] [,2] [,3]</div><div class="line">[1,]    1    2    3</div><div class="line">[2,]    4    5    6</div><div class="line">&gt; m[, c(1,3)]</div><div class="line">     [,1] [,2]</div><div class="line">[1,]    1    3</div><div class="line">[2,]    4    6</div></pre></td></tr></table></figure>
+<p>反之，若要找第一列跟第二列的那就 <code>m[c(1,2),]</code> 就可以囉</p>
+<h2 id="陣列-Array"><a href="#陣列-Array" class="headerlink" title="陣列 Array"></a>陣列 Array</h2><p>陣列用 <code>array()</code> 建立，以下透過 array() 函數產生 3 x 3 x 2 的三維陣列，每個維度加上標籤，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&gt; dim1 &lt;- c(&apos;a1&apos;, &apos;a2&apos;, &apos;a3&apos;)</div><div class="line">&gt; dim2 &lt;- c(&apos;b1&apos;, &apos;b2&apos;, &apos;b3&apos;)</div><div class="line">&gt; dim3 &lt;- c(&apos;c1&apos;, &apos;c2&apos;)</div><div class="line">&gt; arr &lt;- array(1:18, c(3,3,2), dimnames = list(dim1, dim2, dim3))</div><div class="line">&gt; arr</div><div class="line">, , c1</div><div class="line"></div><div class="line">   b1 b2 b3</div><div class="line">a1  1  4  7</div><div class="line">a2  2  5  8</div><div class="line">a3  3  6  9</div><div class="line"></div><div class="line">, , c2</div><div class="line"></div><div class="line">   b1 b2 b3</div><div class="line">a1 10 13 16</div><div class="line">a2 11 14 17</div><div class="line">a3 12 15 18</div></pre></td></tr></table></figure>
+<h2 id="向量、矩陣、陣列的區別"><a href="#向量、矩陣、陣列的區別" class="headerlink" title="向量、矩陣、陣列的區別"></a>向量、矩陣、陣列的區別</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&gt; # 建立向量</div><div class="line">&gt; x &lt;- c(5, 32, 56)</div><div class="line">&gt; x</div><div class="line">[1]  5 32 56</div><div class="line"></div><div class="line"></div><div class="line">&gt; # 建立矩陣</div><div class="line">&gt; y &lt;- matrix(1:6, nrow = 2)</div><div class="line">&gt; y</div><div class="line">     [,1] [,2] [,3]</div><div class="line">[1,]    1    3    5</div><div class="line">[2,]    2    4    6</div><div class="line"></div><div class="line"></div><div class="line">&gt; # 建立陣列</div><div class="line">&gt; z &lt;- array(c(2:8), 4)</div><div class="line">&gt; z</div><div class="line">[1] 2 3 4 5</div></pre></td></tr></table></figure>
+<h2 id="基本運算方式"><a href="#基本運算方式" class="headerlink" title="基本運算方式"></a>基本運算方式</h2><p>運算次序：括號 &gt; 指數 &gt; 乘法 &gt; 除法 &gt; 加減法</p>
+<ul>
+<li>基礎運算</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; 1 + 2   # 加法, 結果: [1] 3</div><div class="line">&gt; 1 / 2   # 除法</div><div class="line">&gt; 1 %/% 2 # 整除</div><div class="line">&gt; 9 %% 2  # 取餘數</div><div class="line">&gt; 2 ^ 0.5  # 冪次運算</div><div class="line">&gt; cos(1.0) # 三角函數運算</div></pre></td></tr></table></figure>
+<ul>
+<li>有序數列</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt; 1:5  # 結果: [1] 1 2 3 4 5</div><div class="line">&gt; 1.5:6 # 結果: [1] 1.5 2.5 3.5 4.5 5.5</div><div class="line">&gt; c(2.4:10, 5) # 結果: [1] 2.4 3.4 4.4 5.4 6.4 7.4 8.4 9.4 5.0</div><div class="line">&gt; prod(1:6) # 結果: [1] 720 屬於階乘函數</div><div class="line">&gt; seq(1, 9) # 結果: [1] 1 2 3 4 5 6 7 8 9</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在使用資料做統計分析之前，需要先了解 R 語言支援資料類型的語法技巧。在這個章節裡面惠介紹到向量 Vector、矩陣 Matrix、陣列 Array 用法，以及基本運算的寫法。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;向量 Vector&lt;/li&gt;
+&lt;li&gt;矩陣 Matrix&lt;/li&gt;
+&lt;li&gt;陣列 Array&lt;/li&gt;
+&lt;li&gt;向量、矩陣、陣列的區別&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="R" scheme="https://weijutu.github.io/categories/R/"/>
+    
+    
+      <category term="R" scheme="https://weijutu.github.io/tags/R/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>R 學習日誌#2 - 資料類型與套件工具函數</title>
+    <link href="https://weijutu.github.io/2017/10/20/r/r-02-intro/"/>
+    <id>https://weijutu.github.io/2017/10/20/r/r-02-intro/</id>
+    <published>2017-10-20T06:02:00.000Z</published>
+    <updated>2017-10-20T08:12:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>R 語言可以用來處理資料、統計分析、模擬、科學運算以及圖形功能，你可以直接安裝 R Studio 軟體 (<a href="https://www.r-project.org/" target="_blank" rel="external">R軟體官方網站</a>)，就可以很輕易的在 GUI 上透過許多的套件模組並搭配 R 程式來畫出許多圖形，要能夠善用這些套件之前我們要先學習基本的資料型態以及語法運用。</p>
+<a id="more"></a>
+<h2 id="學習目標"><a href="#學習目標" class="headerlink" title="學習目標"></a>學習目標</h2><p>R 語言的基本介紹以及語法上的寫法。</p>
+<h2 id="常見的資料類型"><a href="#常見的資料類型" class="headerlink" title="常見的資料類型"></a>常見的資料類型</h2><ul>
+<li>原型 Raw：二進制的資料</li>
+<li>數字 Numeric：可以是整數 Integers 、小數 Decimal Fractions 、科學符號 Scientific Notation</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt; a&lt;-3</div><div class="line">&gt; class(a)</div><div class="line">[1] &quot;numeric&quot;</div><div class="line"></div><div class="line">&gt; b&lt;-3.14</div><div class="line">&gt; class(b)</div><div class="line">[1] &quot;numeric&quot;</div></pre></td></tr></table></figure>
+<ul>
+<li>字串 Character</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; c&lt;-&quot;3&quot;</div><div class="line">&gt; class(c)</div><div class="line">[1] &quot;character&quot;</div></pre></td></tr></table></figure>
+<ul>
+<li>邏輯 Logical：TRUE / FALSE 兩種值</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&gt; d&lt;-T</div><div class="line">&gt; class(d)</div><div class="line">[1] &quot;logical&quot;</div><div class="line"></div><div class="line">&gt; e&lt;-TRUE</div><div class="line">&gt; class(e)</div><div class="line">[1] &quot;logical&quot;</div><div class="line"></div><div class="line">&gt; f&lt;-FALSE</div><div class="line">&gt; class(f)</div><div class="line">[1] &quot;logical&quot;</div><div class="line"></div><div class="line">這裡的 T 就代表 TRUE, 如果輸入 F 就代表  FALSE</div></pre></td></tr></table></figure>
+<ul>
+<li>複數 Complex：包含虛數</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; 3+2i</div><div class="line">[1] 3+2i</div><div class="line">&gt; class(3+2i)</div><div class="line">[1] &quot;complex&quot;</div></pre></td></tr></table></figure>
+<h2 id="賦值"><a href="#賦值" class="headerlink" title="賦值"></a>賦值</h2><p>我們先看一個例子，在控制台輸入以下程式，假設有五個人的成績分別是 <code>53</code>, <code>65</code>, <code>98</code>, <code>42</code>, <code>62</code>，那麼我們用 <code>c()</code>  Concatenate 代表連結成一個向量，把這個向量賦值給 x，而 x 就是向量的名稱。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; x &lt;- c(53, 65, 98, 42, 62)</div><div class="line">&gt; x</div><div class="line">[1] 53 65 98 42 62</div></pre></td></tr></table></figure>
+<p>R 語言的賦值運算符號是用 <code>&lt;-</code> 而非 <code>=</code>，雖然也是可以用 <code>=</code> 但不建議使用，可能會在環境下產生衝突，所以如果遇到給值的變數，就使用 <code>&lt;-</code> 方式。另外 R 語言有一些內建函數，可以對這個向量做一些簡單的運算</p>
+<ul>
+<li>找出最大值</li>
+<li>找出最小值</li>
+<li>算出平均數</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&gt; # 找出最大值</div><div class="line">&gt; max(x)</div><div class="line">[1] 98</div><div class="line">&gt; # 找出最小值</div><div class="line">&gt; min(x)</div><div class="line">[1] 42</div><div class="line">&gt; # 算出平均數</div><div class="line">&gt; mean(x)</div><div class="line">[1] 64</div></pre></td></tr></table></figure>
+<p>是不是很簡單呢？</p>
+<h2 id="資料類型的判斷-is-系列函數"><a href="#資料類型的判斷-is-系列函數" class="headerlink" title="資料類型的判斷 :: is 系列函數"></a>資料類型的判斷 :: is 系列函數</h2><p>用來檢查某一個物件是否具有查詢的屬性，回傳會是 true or false，包含：</p>
+<ul>
+<li>is.numeric</li>
+<li>is.list</li>
+<li>is.function</li>
+<li>is.character</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&gt; data &lt;- &apos;example&apos;</div><div class="line">&gt; # 檢查是否為數字類型</div><div class="line">&gt; is.numeric(data)</div><div class="line">[1] FALSE</div><div class="line"></div><div class="line">&gt; # 檢查是否為串列類型</div><div class="line">&gt; is.list(data)</div><div class="line">[1] FALSE</div><div class="line"></div><div class="line">&gt; # 檢查是否為函數類型</div><div class="line">&gt; is.function(data)</div><div class="line">[1] FALSE</div><div class="line"></div><div class="line">&gt; # 檢查是否為字串類型</div><div class="line">&gt; is.character(data)</div><div class="line">[1] TRUE</div></pre></td></tr></table></figure>
+<h3 id="資料類型的轉換-as-系列函數"><a href="#資料類型的轉換-as-系列函數" class="headerlink" title="資料類型的轉換 :: as 系列函數"></a>資料類型的轉換 :: as 系列函數</h3><p>用來將變數強迫轉換，包含：</p>
+<ul>
+<li>as.vector</li>
+<li>as factor</li>
+<li>as.matrix</li>
+<li>as.numeric</li>
+<li>as.double</li>
+<li>as.data.frame</li>
+<li>as.list</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt; data &lt;- &apos;example&apos;</div><div class="line">&gt; as.vector(data)</div><div class="line">[1] &quot;example&quot;</div><div class="line">&gt; data2 &lt;- 2345</div><div class="line"></div><div class="line">&gt; as.character(data2)</div><div class="line">[1] &quot;2345&quot;</div></pre></td></tr></table></figure>
+<h4 id="常見的轉換函數表"><a href="#常見的轉換函數表" class="headerlink" title="常見的轉換函數表"></a>常見的轉換函數表</h4><table>
+<thead>
+<tr>
+<th>資料類型</th>
+<th>中文</th>
+<th>判斷函數</th>
+<th>轉換函數</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>character</td>
+<td>字串</td>
+<td>is.character()</td>
+<td>as.character()</td>
+</tr>
+<tr>
+<td>numeric</td>
+<td>數字</td>
+<td>is.numeric()</td>
+<td>as.numeric()</td>
+</tr>
+<tr>
+<td>logical</td>
+<td>邏輯</td>
+<td>is.logical()</td>
+<td>as.logical()</td>
+</tr>
+<tr>
+<td>complex</td>
+<td>複數</td>
+<td>is.complex()</td>
+<td>as.complex()</td>
+</tr>
+<tr>
+<td>NA</td>
+<td>缺少</td>
+<td>is.na()</td>
+<td>as.na()</td>
+</tr>
+</tbody>
+</table>
+<h2 id="套件有關的工具函數"><a href="#套件有關的工具函數" class="headerlink" title="套件有關的工具函數"></a>套件有關的工具函數</h2><ul>
+<li>在 console 輸入指令下載安裝套件，括號內是套件的名字，一般來說要加雙引號</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; install.packages(&quot;car&quot;)</div></pre></td></tr></table></figure>
+<p>然而有些套件會隨著功能的更新，需要定期的更新套件，使用更新套件的指令是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; update.packages()</div></pre></td></tr></table></figure>
+<p>若想知道安裝了哪些套件，那麼可以使用指令是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; installed.packages()</div></pre></td></tr></table></figure>
+<ul>
+<li>使用套件的函數，先載入套件方法有二：library, require</li>
+</ul>
+<p>library 和 require 都是載入 package，但是最大的差別在於 library 如果是載入的 package 不存在，是會發生 error 程式停止，但是 require 卻不會，而且 require 會回傳 true or false</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; libaray(套件名稱)</div><div class="line">&gt; require(套件名稱)</div></pre></td></tr></table></figure>
+<p>範例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt; libaray(quantmod)</div><div class="line">&gt; require(quantmod)</div><div class="line">&gt; x&lt;-require(quantmod)</div><div class="line">&gt; x</div><div class="line">[1] TRUE</div></pre></td></tr></table></figure>
+<ul>
+<li>避免記憶體吃緊或避免不同套件的同名函數彼此衝突，簡單來說就是「卸載」</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; detach(套件名稱)</div></pre></td></tr></table></figure>
+<ul>
+<li>想知道怎麼查詢函數的定義</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; ??norm</div><div class="line">&gt; help(norm)</div></pre></td></tr></table></figure>
+<ul>
+<li>demo 示範功能</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; demo(graphics)</div><div class="line"></div><div class="line">結果：說明文件裡面顯示範例程式</div></pre></td></tr></table></figure>
+<ul>
+<li>網站文件遠端搜尋：RSiteSearch 可以查詢遠端網站的文件 <a href="http://search.r-project.org/cgi-bin/namazu.cgi?query=anova&amp;max=20&amp;result=normal&amp;sort=score&amp;idxname=functions&amp;idxname=vignettes&amp;idxname=views" target="_blank" rel="external">search anova document</a></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; RSiteSearch(&quot;anova&quot;)</div><div class="line"></div><div class="line">結果：就會開啟網頁到 R Site Search 上面查詢你所下的關鍵字</div></pre></td></tr></table></figure>
+<ul>
+<li>source 函數執行外部檔案</li>
+</ul>
+<p>若你有一支自訂函數的檔案為 test.R，那麼你就可以透過以下指令來呼叫使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; source(&quot;/user/code/test.R&quot;)</div></pre></td></tr></table></figure>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
+<li>R Studio <a href="https://www.rstudio.com/" target="_blank" rel="external">https://www.rstudio.com/</a></li>
+<li>R Project <a href="https://www.r-project.org/" target="_blank" rel="external">https://www.r-project.org/</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;R 語言可以用來處理資料、統計分析、模擬、科學運算以及圖形功能，你可以直接安裝 R Studio 軟體 (&lt;a href=&quot;https://www.r-project.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;R軟體官方網站&lt;/a&gt;)，就可以很輕易的在 GUI 上透過許多的套件模組並搭配 R 程式來畫出許多圖形，要能夠善用這些套件之前我們要先學習基本的資料型態以及語法運用。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="R" scheme="https://weijutu.github.io/categories/R/"/>
+    
+    
+      <category term="R" scheme="https://weijutu.github.io/tags/R/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>R 學習日誌#1 - 簡介、安裝 RStudio</title>
+    <link href="https://weijutu.github.io/2017/10/20/r/r-01-start/"/>
+    <id>https://weijutu.github.io/2017/10/20/r/r-01-start/</id>
+    <published>2017-10-20T06:01:00.000Z</published>
+    <updated>2017-10-20T07:28:45.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>R 語言是 Ross Ihaka, Robert Gentleman 共同開發的程式語言，會取名為 R 是因為他們的名字都是  R 開頭，所以就把這程式語言取名為 R。R 是專門在處理資料處理以及統計分析，語言寫起來相當精簡，外傳說如果沒有學過程式語言的人，又想學習資料分析，那麼就直接學 R，許多複雜的分析任務只需要幾行程式就能夠完成了，如果已經有程式底子或是已經有物件導向的觀念的人 (比如之前有寫過 Java)，那可以學習 Python，但話說回來…這裡是 R 學習日誌，這是 R 語言的第一篇文章，會用一個淺白的文字來介紹喔。</p>
+<h2 id="R-軟體的特色"><a href="#R-軟體的特色" class="headerlink" title="R 軟體的特色"></a>R 軟體的特色</h2><ol>
+<li>基本核心是向量 (vector)、陣列 (array)：在其他程式都需要跑個迴圈才能做到元素的運算，而在 R 軟體裡面只需要幾行就能做到。</li>
+<li>計算模組是函數 (function)：可以善用貢獻者寫好的套件 (packages) 或者自己寫個套件也可以。</li>
+<li>繪圖功能：2D 還是 3D 或是直向圖都可以做到，而且就幾行的程式就能得到想要的結果。</li>
+<li>變數型態：有很多其他程式語言沒有的，包含 list, factor, ordered factor, data frame, ts，也可以自建資料型態</li>
+</ol>
+<a id="more"></a>
+<h2 id="下載與安裝"><a href="#下載與安裝" class="headerlink" title="下載與安裝"></a>下載與安裝</h2><p>安裝 R 就兩個重點</p>
+<ol>
+<li>安裝 R 語言的環境</li>
+<li>安裝 RStudio 開發工具</li>
+</ol>
+<h3 id="安裝-R-語言的環境"><a href="#安裝-R-語言的環境" class="headerlink" title="安裝 R 語言的環境"></a>安裝 R 語言的環境</h3><ul>
+<li><p>請先進入 <a href="https://www.r-project.org/" target="_blank" rel="external">R 網站</a>，就會像下方的頁面：</p>
+<p><img src="/images/r/1.png" alt=""></p>
+</li>
+<li><p>進入 <a href="https://ftp.yzu.edu.tw/CRAN/index.html" target="_blank" rel="external">Download CRAN 的 Taiwan 站點</a>，R 語言提供了 Windows, Linux, Mac 三個版本安裝程式，在這邊是用 Mac 版本進行介紹，如下方的頁面：</p>
+<p><img src="/images/r/3.png" alt=""></p>
+<p>選擇 <code>Download R for (Mac) OS X</code> 連結後，點選 <code>R-3.4.2.pkg</code> 就下載套件包</p>
+<p><img src="/images/r/2.png" alt=""></p>
+</li>
+<li><p>安裝完之後打開 RGui 介面，輸入 <code>123 + 456</code> 就可以得到 <code>579</code> 答案</p>
+<p><img src="/images/r/4.png" alt=""></p>
+</li>
+</ul>
+<h3 id="安裝-RStudio-開發工具"><a href="#安裝-RStudio-開發工具" class="headerlink" title="安裝 RStudio 開發工具"></a>安裝 RStudio 開發工具</h3><ul>
+<li><p>請進入 <a href="https://www.rstudio.com/products/rstudio/download/" target="_blank" rel="external">RStudio 網站</a></p>
+<p><img src="/images/r/6.png" alt=""></p>
+<p>點選 [RSutdio 下載(<a href="https://www.rstudio.com/products/RStudio/" target="_blank" rel="external">https://www.rstudio.com/products/RStudio/</a>) 選擇 <code>RStudio 1.1.383 - Mac OS X 10.6+ (64-bit)</code> ，將它安裝起來</p>
+<p><img src="/images/r/5.png" alt=""></p>
+</li>
+<li><p>安裝完畢後打開 RStudio 軟體，可以發現有四個區塊可以使用</p>
+<ol>
+<li>左上角：程式撰寫的位置</li>
+<li>左下角：控制 Console, 命令列 Terminal ，就跟 RGui 打開來的介面一樣，執行程式結果的位置</li>
+<li>右上角：環境 Environment, 歷史 History, 連線 Connections 可以觀察變數狀態，以及輸入過哪些指令的歷史紀錄</li>
+<li>右下角：檔案工作目錄 File, 圖形化 Plots, 套件 Packages, 查詢 Help, 預覽 Viewer</li>
+</ol>
+<p><img src="/images/r/7.png" alt=""></p>
+</li>
+</ul>
+<p>這樣子我們就把 R 語言的開發環境安裝完畢了。</p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a href="https://zh.wikipedia.org/zh-tw/R%E8%AF%AD%E8%A8%80" target="_blank" rel="external">R 語言維基百科</a></li>
+<li>R Studio <a href="https://www.rstudio.com/" target="_blank" rel="external">https://www.rstudio.com/</a></li>
+<li>R Project <a href="https://www.r-project.org/" target="_blank" rel="external">https://www.r-project.org/</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;R 語言是 Ross Ihaka, Robert Gentleman 共同開發的程式語言，會取名為 R 是因為他們的名字都是  R 開頭，所以就把這程式語言取名為 R。R 是專門在處理資料處理以及統計分析，語言寫起來相當精簡，外傳說如果沒有學過程式語言的人，又想學習資料分析，那麼就直接學 R，許多複雜的分析任務只需要幾行程式就能夠完成了，如果已經有程式底子或是已經有物件導向的觀念的人 (比如之前有寫過 Java)，那可以學習 Python，但話說回來…這裡是 R 學習日誌，這是 R 語言的第一篇文章，會用一個淺白的文字來介紹喔。&lt;/p&gt;
+&lt;h2 id=&quot;R-軟體的特色&quot;&gt;&lt;a href=&quot;#R-軟體的特色&quot; class=&quot;headerlink&quot; title=&quot;R 軟體的特色&quot;&gt;&lt;/a&gt;R 軟體的特色&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;基本核心是向量 (vector)、陣列 (array)：在其他程式都需要跑個迴圈才能做到元素的運算，而在 R 軟體裡面只需要幾行就能做到。&lt;/li&gt;
+&lt;li&gt;計算模組是函數 (function)：可以善用貢獻者寫好的套件 (packages) 或者自己寫個套件也可以。&lt;/li&gt;
+&lt;li&gt;繪圖功能：2D 還是 3D 或是直向圖都可以做到，而且就幾行的程式就能得到想要的結果。&lt;/li&gt;
+&lt;li&gt;變數型態：有很多其他程式語言沒有的，包含 list, factor, ordered factor, data frame, ts，也可以自建資料型態&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+      <category term="R" scheme="https://weijutu.github.io/categories/R/"/>
+    
+    
+      <category term="R" scheme="https://weijutu.github.io/tags/R/"/>
+    
+  </entry>
   
   <entry>
     <title>丸閱讀#2 - 《富爸爸，有錢有理：神奇的現金流象限》讀後心得</title>
@@ -63,11 +368,11 @@
   </entry>
   
   <entry>
-    <title>R - 矩陣相乘法運算 (Matrix multiplication)</title>
+    <title>R 學習日誌 - 矩陣相乘法運算 (Matrix multiplication)</title>
     <link href="https://weijutu.github.io/2017/09/06/r/r-matrix-multiplication/"/>
     <id>https://weijutu.github.io/2017/09/06/r/r-matrix-multiplication/</id>
     <published>2017-09-05T16:34:11.000Z</published>
-    <updated>2017-09-05T16:34:41.000Z</updated>
+    <updated>2017-10-20T06:14:53.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="學習目標"><a href="#學習目標" class="headerlink" title="學習目標"></a>學習目標</h3><p>學習如何計算矩陣相乘以及R語言的用法</p>
 <h3 id="矩陣相乘法"><a href="#矩陣相乘法" class="headerlink" title="矩陣相乘法"></a>矩陣相乘法</h3><p>兩個矩陣必須滿足 A 矩陣的<code>行數</code>等於 B 矩陣的<code>列數</code>才可以相乘。在這邊用一個簡單的例子介紹矩陣相乘法的運算</p>
@@ -100,6 +405,8 @@
 &lt;p&gt;那麼用 R 語法又是怎麼寫呢？&lt;/p&gt;
     
     </summary>
+    
+      <category term="R" scheme="https://weijutu.github.io/categories/R/"/>
     
     
       <category term="R" scheme="https://weijutu.github.io/tags/R/"/>
@@ -882,261 +1189,6 @@
       <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
     
       <category term="jade" scheme="https://weijutu.github.io/tags/jade/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Node.js 系列學習日誌#25 - 介紹 Jade  Template Engine 模板引擎 (上)</title>
-    <link href="https://weijutu.github.io/2017/07/25/nodejs/nodejs-25-jade-1/"/>
-    <id>https://weijutu.github.io/2017/07/25/nodejs/nodejs-25-jade-1/</id>
-    <published>2017-07-24T16:25:00.000Z</published>
-    <updated>2017-07-31T07:59:23.000Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="/images/nodejs/107.png" alt=""></p>
-<p>Node.js 開發網頁它有許多的樣板引擎可以使用，例如常見的 Jade, EJS。樣板引擎也可以稱為樣板處理器 （Template Processor）或者叫過濾器 （Filter）。其他的語言也有個別使用的樣板引擎，像是 PHP 的 Smarty、 Ruby 的 ERB，本章節會以 jade 作為基礎的介紹如何透過樣板引擎實作 Node.js 網頁。</p>
-<p>官方網站：<a href="http://jade-lang.com/" target="_blank" rel="external">http://jade-lang.com/</a></p>
-<p>今天會介紹的內容有</p>
-<ul>
-<li>Jade 特點</li>
-<li>Jade 語法<ul>
-<li>屬性</li>
-</ul>
-</li>
-<li>Jade 輸出資料<ul>
-<li>迴圈</li>
-<li>條件</li>
-</ul>
-</li>
-</ul>
-<a id="more"></a>
-<p>接下來您可以使用：<a href="http://codepen.io/" target="_blank" rel="external">http://codepen.io/</a> 作為線上編輯做以下實作的測試編輯器</p>
-<p><img src="/images/nodejs/108.png" alt=""></p>
-<p>首先，我們先來比較一下 HTML  跟 Jade 的表示方式</p>
-<p>===== HTML =====</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;wrap&quot;&gt;</div><div class="line">  &lt;h1&gt;Lorem Ipsum&lt;/h1&gt;</div><div class="line">  &lt;p&gt;Contrary to popular belief, Lorem Ipsum is not simply random text. &lt;/p&gt;</div><div class="line"> &lt;a href=“http://www.google.com&quot;&gt;Google&lt;/a&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
-<p>===== Jade =====</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">.wrap</div><div class="line">  h1 Lorem Ipsum</div><div class="line">  p Contrary to popular belief, Lorem Ipsum is not simply random text.</div><div class="line">  a(href=&apos;http://www.google.com&apos;) Google</div></pre></td></tr></table></figure>
-<h3 id="Jade-特點"><a href="#Jade-特點" class="headerlink" title="Jade 特點"></a>Jade 特點</h3><ul>
-<li>Jade 用縮排來定義 HTML 的階層結構</li>
-<li>Jade  比 HTML 寫起來更簡潔</li>
-<li>Jade 在編譯後，會將 HTML  的補上結束標籤</li>
-<li>Jade 不需要寫小於大於的符號</li>
-</ul>
-<h3 id="Jade-語法"><a href="#Jade-語法" class="headerlink" title="Jade 語法"></a>Jade 語法</h3><p>因為 Jade 是利用縮排的方式來定義 HTML 的階層結構，也就是說，下一行的縮排的話，就是上一行的子節點。</p>
-<p>撰寫</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">html</div></pre></td></tr></table></figure>
-<p>編譯後</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;html&gt;&lt;/html&gt;</div></pre></td></tr></table></figure>
-<hr>
-<p>撰寫</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">div#wrap</div></pre></td></tr></table></figure>
-<p>編譯後</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;wrap&quot;&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
-<hr>
-<p>撰寫</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">p.article.a1.a2.a3</div></pre></td></tr></table></figure>
-<p>編譯後</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;p class=&quot;article a1 a2 a3&quot;&gt;&lt;/p&gt;</div></pre></td></tr></table></figure>
-<hr>
-<p>撰寫</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">p</div><div class="line">     span</div></pre></td></tr></table></figure>
-<p>編譯後</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;p&gt;&lt;span&gt;&lt;/span&gt;&lt;/p&gt;</div></pre></td></tr></table></figure>
-<hr>
-<p>撰寫</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">p</div><div class="line">     | Contrary to popular belief</div><div class="line">     | Lorem Ipsum is simply dummy text of the printing</div><div class="line">     | It has survived not only five centuries</div></pre></td></tr></table></figure>
-<p>編譯後</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;p&gt;Contrary to popular belief Lorem Ipsum is simply dummy text of the printing It has survived not only five centuries &lt;/p&gt;</div></pre></td></tr></table></figure>
-<hr>
-<p>標籤屬性：屬性部分就用括號的方式括弧起來，有多個屬性時就用逗點分隔或者段行來分隔</p>
-<p>方法一</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">input(type=&quot;text&quot;, placeholder=&quot;hello&quot;)</div></pre></td></tr></table></figure>
-<p>方法二</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">input(</div><div class="line">     type=&apos;text&apos;</div><div class="line">     name=&apos;age&apos;</div><div class="line">     placeholder=&apos;typing your age&apos;</div><div class="line">)</div></pre></td></tr></table></figure>
-<p>方法三：也可以用 javascript 的判斷控制屬性資料</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">- var isFemale = true</div><div class="line">input(type=&apos;text&apos; value=isFemale ? &apos;Female&apos; : &apos;Male&apos;)</div></pre></td></tr></table></figure>
-<h3 id="Jade-輸出資料"><a href="#Jade-輸出資料" class="headerlink" title="Jade 輸出資料"></a>Jade 輸出資料</h3><h4 id="迴圈"><a href="#迴圈" class="headerlink" title="迴圈"></a>迴圈</h4><p>試著寫迴圈</p>
-<p><img src="/images/nodejs/109.png" alt=""></p>
-<p>輸出結果</p>
-<p><img src="/images/nodejs/110.png" alt=""></p>
-<h4 id="條件"><a href="#條件" class="headerlink" title="條件"></a>條件</h4><p>條件是指當判斷為真或否時，各別出現不同的結果，什麼意思呢？直接看範例好了</p>
-<p><img src="/images/nodejs/111.png" alt=""></p>
-<p>結果</p>
-<p><img src="/images/nodejs/112.png" alt=""></p>
-<p>Jade 就先寫到這裡，下集待續..</p>
-<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ol>
-<li><a href="http://jade-lang.com/" target="_blank" rel="external">http://jade-lang.com/</a></li>
-<li><a href="http://naltatis.github.io/jade-syntax-docs/" target="_blank" rel="external">http://naltatis.github.io/jade-syntax-docs/</a></li>
-<li><a href="http://naltatis.github.io/jade-syntax-docs/#basics" target="_blank" rel="external">http://naltatis.github.io/jade-syntax-docs/#basics</a></li>
-<li><a href="http://blog.kerash.tw/2013/04/nodejs-jade-template-engine/" target="_blank" rel="external">http://blog.kerash.tw/2013/04/nodejs-jade-template-engine/</a></li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;/images/nodejs/107.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Node.js 開發網頁它有許多的樣板引擎可以使用，例如常見的 Jade, EJS。樣板引擎也可以稱為樣板處理器 （Template Processor）或者叫過濾器 （Filter）。其他的語言也有個別使用的樣板引擎，像是 PHP 的 Smarty、 Ruby 的 ERB，本章節會以 jade 作為基礎的介紹如何透過樣板引擎實作 Node.js 網頁。&lt;/p&gt;
-&lt;p&gt;官方網站：&lt;a href=&quot;http://jade-lang.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://jade-lang.com/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;今天會介紹的內容有&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Jade 特點&lt;/li&gt;
-&lt;li&gt;Jade 語法&lt;ul&gt;
-&lt;li&gt;屬性&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Jade 輸出資料&lt;ul&gt;
-&lt;li&gt;迴圈&lt;/li&gt;
-&lt;li&gt;條件&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/categories/Node-js/"/>
-    
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/tags/Node-js/"/>
-    
-      <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
-    
-      <category term="jade" scheme="https://weijutu.github.io/tags/jade/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Node.js 系列學習日誌#24 - npm 相依套件指定版本與自動更新 package.json</title>
-    <link href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-24-npm-version/"/>
-    <id>https://weijutu.github.io/2017/07/24/nodejs/nodejs-24-npm-version/</id>
-    <published>2017-07-23T16:24:00.000Z</published>
-    <updated>2017-07-31T07:51:25.000Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="/images/nodejs/101.png" alt=""></p>
-<p>在管理套件工具的版本時，在 package.json  檔案裡面有一個 dependencies 的部分，裡面包含著套件的名稱與版本號，今天要談的是版本號的指定。</p>
-<a id="more"></a>
-<p>而這個版本號的指定是有個規範，它是語意化版本 <a href="http://semver.org/lang/zh-TW/" target="_blank" rel="external">http://semver.org/lang/zh-TW/</a> 根據它作為版號的規則</p>
-<p>版本格式：主版號.次版號.修訂號  也就是  Major.Minor.Path 的形式</p>
-<ol>
-<li>主版號：當你做了不相容的 API 修改，</li>
-<li>次版號：當你做了向下相容的功能性新增，</li>
-<li>修訂號：當你做了向下相容的問題修正。<br>那麼在 package.json 檔案裡面的相依套件的版本要怎麼填呢？版本號的範圍？</li>
-</ol>
-<ul>
-<li>1.2.3, = 1.2.3 : 指定版本 1.2.3</li>
-<li><blockquote>
-<p>1.2.3 ：大於 1.2.3</p>
-</blockquote>
-</li>
-<li>&lt;1.2.3 ：小於 1.2.3</li>
-<li><blockquote>
-<p>=1.2.3 ：大於 1.2.3</p>
-</blockquote>
-</li>
-<li>&lt;=1.2.3：小於 1.2.3</li>
-<li>1.2.3 - 2.3.4 ：大於 1.2.3 且小於 2.3.4</li>
-<li>~1.2.3 ：合理接近 1.2.3 版本， 等價 &gt;=1.2.3-0 &lt;1.3.0-0</li>
-<li>~1.2 ：等價  &gt;1.2.0-0 &lt;1.3.0-0，也就是 1.2 版本的同樣等價於 1.2.x 版本奧</li>
-<li>~1：等價於 &gt;1.0.0-0 &lt;2.0.0-0 ，也就是 1 開頭的版本等價於 1.x 版本號</li>
-<li><ul>
-<li>：任意版本</li>
-</ul>
-</li>
-</ul>
-<p>最上面的圖，使用了好幾種定義版本的方式，就以 * 的寫法風險也比較大一點，因為無法保證 npm 安裝的版本是最新的版本，最保守一點的就是直接指定版本號，而如何得知版本號，可以透過</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$npm info &#123;套件名稱&#125; version</div></pre></td></tr></table></figure>
-<p>方式去做查詢。</p>
-<hr>
-<h3 id="介紹-autod"><a href="#介紹-autod" class="headerlink" title="介紹 autod"></a>介紹 autod</h3><p><a href="https://github.com/node-modules/autod" target="_blank" rel="external">https://github.com/node-modules/autod</a></p>
-<p>這是一個自動分析所有的文件，引入的模組不需要手動更新 package.json ，並且它會同時自動更新 package.json</p>
-<p><img src="/images/nodejs/102.png" alt=""></p>
-<p>先看一下有哪些的  help 可以使用</p>
-<p><img src="/images/nodejs/103.png" alt=""></p>
-<p>接著開始執行 autod 的指令，在這邊我下了一個 -e  把 public, view 忽略，另外 -w 讓這份 package.json 能夠自動更新寫入</p>
-<p><img src="/images/nodejs/104.png" alt=""></p>
-<p>原始的 package.json</p>
-<p><img src="/images/nodejs/105.png" alt=""></p>
-<p>自動修正後的  package.json</p>
-<p><img src="/images/nodejs/106.png" alt=""></p>
-<p>是不是有很大的不同呢，而且又能夠自動更新，試試看囉  </p>
-<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ol>
-<li><a href="http://semver.org/lang/zh-TW/" target="_blank" rel="external">http://semver.org/lang/zh-TW/</a></li>
-<li><a href="http://blog.eisneim.com/articles/2014-7-5-meaning-of-npm-bower-version-prefix.html" target="_blank" rel="external">http://blog.eisneim.com/articles/2014-7-5-meaning-of-npm-bower-version-prefix.html</a></li>
-<li><a href="https://cnodejs.org/topic/52dcc0a578990b04112e2f09" target="_blank" rel="external">https://cnodejs.org/topic/52dcc0a578990b04112e2f09</a></li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;/images/nodejs/101.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;在管理套件工具的版本時，在 package.json  檔案裡面有一個 dependencies 的部分，裡面包含著套件的名稱與版本號，今天要談的是版本號的指定。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/categories/Node-js/"/>
-    
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/tags/Node-js/"/>
-    
-      <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
-    
-      <category term="npm" scheme="https://weijutu.github.io/tags/npm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Node.js 系列學習日誌#23 - 部署上線至 Heroku 雲端平台環境</title>
-    <link href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-23-heroku/"/>
-    <id>https://weijutu.github.io/2017/07/24/nodejs/nodejs-23-heroku/</id>
-    <published>2017-07-23T16:23:00.000Z</published>
-    <updated>2017-07-31T07:46:08.000Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="/images/nodejs/88.png" alt=""></p>
-<p>Heroku 是雲端運算的平台，您可以將您的應用程式放到雲端空間上面</p>
-<a id="more"></a>
-<h3 id="註冊-Heroku-帳號"><a href="#註冊-Heroku-帳號" class="headerlink" title="註冊 Heroku 帳號"></a>註冊 Heroku 帳號</h3><p>請先註冊一個  Heroku  帳號，<a href="https://www.heroku.com/，由於我們要部署上線的語法是" target="_blank" rel="external">https://www.heroku.com/，由於我們要部署上線的語法是</a>  Node.js 語言，因此也確認您的  Node.js, npm 已安裝至您的電腦裡面。</p>
-<h3 id="安裝-Heroku-Toolbelt-工具"><a href="#安裝-Heroku-Toolbelt-工具" class="headerlink" title="安裝 Heroku Toolbelt 工具"></a>安裝 Heroku Toolbelt 工具</h3><p>這個工具將提供您 Command Line 的工具以及 git 版控工具，透過這個工具將輔助您接下來後續的超過指令，工具請至 <a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up" target="_blank" rel="external">https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up</a> 下載，在這邊可以選擇您的作業系統環境。而我這邊將用 mac 做介紹</p>
-<p><img src="/images/nodejs/89.png" alt=""></p>
-<p>安裝首頁畫面，安裝過程基本上就是都下一步，偶爾出現可以自定的選項。</p>
-<p><img src="/images/nodejs/90.png" alt=""></p>
-<h4 id="安裝進度"><a href="#安裝進度" class="headerlink" title="安裝進度"></a>安裝進度</h4><p><img src="/images/nodejs/91.png" alt=""></p>
-<p>安裝後的檢查，請到命令字元輸入 heroku，如果出現以下訊息就代表安裝成功噢！</p>
-<p><img src="/images/nodejs/92.png" alt=""></p>
-<p>用指令登入 heroku ， $heroku login ，按照指令輸入 email 與密碼</p>
-<p><img src="/images/nodejs/93.png" alt=""></p>
-<p>在這邊還需要建立一個  key ，請繼續輸入  $heroku keys ，如果沒有 key的存在，請手動建立 $heroku keys:add  (<a href="https://devcenter.heroku.com/articles/keys)，建立完成後會像以下結果：" target="_blank" rel="external">https://devcenter.heroku.com/articles/keys)，建立完成後會像以下結果：</a></p>
-<p><img src="/images/nodejs/94.png" alt=""></p>
-<p>部署程式到 Heroku，本章節選用來 <a href="http://ithelp.ithome.com.tw/ironman7/app/article/all/recent/10159261" target="_blank" rel="external">http://ithelp.ithome.com.tw/ironman7/app/article/all/recent/10159261</a> 專案進行初始化的建立，請先輸入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$heroku create</div></pre></td></tr></table></figure>
-<p>建立完成後可以看到訊息提到，配了一組 aqueous-dawn-4266 的名字，馬上轉到 heroku 上的 dashboard ，立即就看到上面多了一個名為 aqueous-dawn-4266 專案，但這時候程式還並沒有部署到  heroku ，目前已經建立遠端的檔案庫在上面。</p>
-<p><img src="/images/nodejs/95.png" alt=""></p>
-<p>您也許覺得 aqueous-dawn-4266 好難記，在 heroku 也提供了更名的指令，請輸入 $heroku apps:rename newname<br>我將專案名稱改成 nodejs-express-bower ，而 heroku 的 dashboard 專案列表也會跟著改噢</p>
-<p><img src="/images/nodejs/96.png" alt=""></p>
-<p><img src="/images/nodejs/97.png" alt=""></p>
-<p>接下來就部署程式，請輸入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$git push heroku master</div></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/98.png" alt=""></p>
-<p>這時候進到 heroku dashboard ，選擇 nodejs-express-bower 專案，點選上方標題右邊的 icon</p>
-<p><img src="/images/nodejs/99.png" alt=""></p>
-<p>觀察結果顯示如下：</p>
-<p><img src="/images/nodejs/100.png" alt=""></p>
-<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction" target="_blank" rel="external">https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;/images/nodejs/88.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Heroku 是雲端運算的平台，您可以將您的應用程式放到雲端空間上面&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/categories/Node-js/"/>
-    
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/tags/Node-js/"/>
-    
-      <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
-    
-      <category term="Heroku" scheme="https://weijutu.github.io/tags/Heroku/"/>
     
   </entry>
   
