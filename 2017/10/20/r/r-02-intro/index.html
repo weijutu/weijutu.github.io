@@ -102,6 +102,7 @@
 <meta property="og:url" content="https://weijutu.github.io/2017/10/20/r/r-02-intro/index.html">
 <meta property="og:site_name" content="噗噗。故我在">
 <meta property="og:description" content="R 語言可以用來處理資料、統計分析、模擬、科學運算以及圖形功能，你可以直接安裝 R Studio 軟體 (R軟體官方網站)，就可以很輕易的在 GUI 上透過許多的套件模組並搭配 R 程式來畫出許多圖形，要能夠善用這些套件之前我們要先學習基本的資料型態以及語法運用。">
+<meta property="og:locale" content="zh-tw">
 <meta property="og:updated_time" content="2017-10-20T08:12:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="R 學習日誌#2 - 資料類型與套件工具函數">
@@ -418,35 +419,35 @@
       
 
       
-        <p>R 語言可以用來處理資料、統計分析、模擬、科學運算以及圖形功能，你可以直接安裝 R Studio 軟體 (<a href="https://www.r-project.org/" target="_blank" rel="external">R軟體官方網站</a>)，就可以很輕易的在 GUI 上透過許多的套件模組並搭配 R 程式來畫出許多圖形，要能夠善用這些套件之前我們要先學習基本的資料型態以及語法運用。</p>
+        <p>R 語言可以用來處理資料、統計分析、模擬、科學運算以及圖形功能，你可以直接安裝 R Studio 軟體 (<a href="https://www.r-project.org/" target="_blank" rel="noopener">R軟體官方網站</a>)，就可以很輕易的在 GUI 上透過許多的套件模組並搭配 R 程式來畫出許多圖形，要能夠善用這些套件之前我們要先學習基本的資料型態以及語法運用。</p>
 <a id="more"></a>
 <h2 id="學習目標"><a href="#學習目標" class="headerlink" title="學習目標"></a>學習目標</h2><p>R 語言的基本介紹以及語法上的寫法。</p>
 <h2 id="常見的資料類型"><a href="#常見的資料類型" class="headerlink" title="常見的資料類型"></a>常見的資料類型</h2><ul>
 <li>原型 Raw：二進制的資料</li>
 <li>數字 Numeric：可以是整數 Integers 、小數 Decimal Fractions 、科學符號 Scientific Notation</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt; a&lt;-3</div><div class="line">&gt; class(a)</div><div class="line">[1] &quot;numeric&quot;</div><div class="line"></div><div class="line">&gt; b&lt;-3.14</div><div class="line">&gt; class(b)</div><div class="line">[1] &quot;numeric&quot;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; a&lt;-3</span><br><span class="line">&gt; class(a)</span><br><span class="line">[1] &quot;numeric&quot;</span><br><span class="line"></span><br><span class="line">&gt; b&lt;-3.14</span><br><span class="line">&gt; class(b)</span><br><span class="line">[1] &quot;numeric&quot;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>字串 Character</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; c&lt;-&quot;3&quot;</div><div class="line">&gt; class(c)</div><div class="line">[1] &quot;character&quot;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; c&lt;-&quot;3&quot;</span><br><span class="line">&gt; class(c)</span><br><span class="line">[1] &quot;character&quot;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>邏輯 Logical：TRUE / FALSE 兩種值</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&gt; d&lt;-T</div><div class="line">&gt; class(d)</div><div class="line">[1] &quot;logical&quot;</div><div class="line"></div><div class="line">&gt; e&lt;-TRUE</div><div class="line">&gt; class(e)</div><div class="line">[1] &quot;logical&quot;</div><div class="line"></div><div class="line">&gt; f&lt;-FALSE</div><div class="line">&gt; class(f)</div><div class="line">[1] &quot;logical&quot;</div><div class="line"></div><div class="line">這裡的 T 就代表 TRUE, 如果輸入 F 就代表  FALSE</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt; d&lt;-T</span><br><span class="line">&gt; class(d)</span><br><span class="line">[1] &quot;logical&quot;</span><br><span class="line"></span><br><span class="line">&gt; e&lt;-TRUE</span><br><span class="line">&gt; class(e)</span><br><span class="line">[1] &quot;logical&quot;</span><br><span class="line"></span><br><span class="line">&gt; f&lt;-FALSE</span><br><span class="line">&gt; class(f)</span><br><span class="line">[1] &quot;logical&quot;</span><br><span class="line"></span><br><span class="line">這裡的 T 就代表 TRUE, 如果輸入 F 就代表  FALSE</span><br></pre></td></tr></table></figure>
 <ul>
 <li>複數 Complex：包含虛數</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; 3+2i</div><div class="line">[1] 3+2i</div><div class="line">&gt; class(3+2i)</div><div class="line">[1] &quot;complex&quot;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; 3+2i</span><br><span class="line">[1] 3+2i</span><br><span class="line">&gt; class(3+2i)</span><br><span class="line">[1] &quot;complex&quot;</span><br></pre></td></tr></table></figure>
 <h2 id="賦值"><a href="#賦值" class="headerlink" title="賦值"></a>賦值</h2><p>我們先看一個例子，在控制台輸入以下程式，假設有五個人的成績分別是 <code>53</code>, <code>65</code>, <code>98</code>, <code>42</code>, <code>62</code>，那麼我們用 <code>c()</code>  Concatenate 代表連結成一個向量，把這個向量賦值給 x，而 x 就是向量的名稱。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; x &lt;- c(53, 65, 98, 42, 62)</div><div class="line">&gt; x</div><div class="line">[1] 53 65 98 42 62</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; x &lt;- c(53, 65, 98, 42, 62)</span><br><span class="line">&gt; x</span><br><span class="line">[1] 53 65 98 42 62</span><br></pre></td></tr></table></figure>
 <p>R 語言的賦值運算符號是用 <code>&lt;-</code> 而非 <code>=</code>，雖然也是可以用 <code>=</code> 但不建議使用，可能會在環境下產生衝突，所以如果遇到給值的變數，就使用 <code>&lt;-</code> 方式。另外 R 語言有一些內建函數，可以對這個向量做一些簡單的運算</p>
 <ul>
 <li>找出最大值</li>
 <li>找出最小值</li>
 <li>算出平均數</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&gt; # 找出最大值</div><div class="line">&gt; max(x)</div><div class="line">[1] 98</div><div class="line">&gt; # 找出最小值</div><div class="line">&gt; min(x)</div><div class="line">[1] 42</div><div class="line">&gt; # 算出平均數</div><div class="line">&gt; mean(x)</div><div class="line">[1] 64</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt; # 找出最大值</span><br><span class="line">&gt; max(x)</span><br><span class="line">[1] 98</span><br><span class="line">&gt; # 找出最小值</span><br><span class="line">&gt; min(x)</span><br><span class="line">[1] 42</span><br><span class="line">&gt; # 算出平均數</span><br><span class="line">&gt; mean(x)</span><br><span class="line">[1] 64</span><br></pre></td></tr></table></figure>
 <p>是不是很簡單呢？</p>
 <h2 id="資料類型的判斷-is-系列函數"><a href="#資料類型的判斷-is-系列函數" class="headerlink" title="資料類型的判斷 :: is 系列函數"></a>資料類型的判斷 :: is 系列函數</h2><p>用來檢查某一個物件是否具有查詢的屬性，回傳會是 true or false，包含：</p>
 <ul>
@@ -455,7 +456,7 @@
 <li>is.function</li>
 <li>is.character</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&gt; data &lt;- &apos;example&apos;</div><div class="line">&gt; # 檢查是否為數字類型</div><div class="line">&gt; is.numeric(data)</div><div class="line">[1] FALSE</div><div class="line"></div><div class="line">&gt; # 檢查是否為串列類型</div><div class="line">&gt; is.list(data)</div><div class="line">[1] FALSE</div><div class="line"></div><div class="line">&gt; # 檢查是否為函數類型</div><div class="line">&gt; is.function(data)</div><div class="line">[1] FALSE</div><div class="line"></div><div class="line">&gt; # 檢查是否為字串類型</div><div class="line">&gt; is.character(data)</div><div class="line">[1] TRUE</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&gt; data &lt;- &apos;example&apos;</span><br><span class="line">&gt; # 檢查是否為數字類型</span><br><span class="line">&gt; is.numeric(data)</span><br><span class="line">[1] FALSE</span><br><span class="line"></span><br><span class="line">&gt; # 檢查是否為串列類型</span><br><span class="line">&gt; is.list(data)</span><br><span class="line">[1] FALSE</span><br><span class="line"></span><br><span class="line">&gt; # 檢查是否為函數類型</span><br><span class="line">&gt; is.function(data)</span><br><span class="line">[1] FALSE</span><br><span class="line"></span><br><span class="line">&gt; # 檢查是否為字串類型</span><br><span class="line">&gt; is.character(data)</span><br><span class="line">[1] TRUE</span><br></pre></td></tr></table></figure>
 <h3 id="資料類型的轉換-as-系列函數"><a href="#資料類型的轉換-as-系列函數" class="headerlink" title="資料類型的轉換 :: as 系列函數"></a>資料類型的轉換 :: as 系列函數</h3><p>用來將變數強迫轉換，包含：</p>
 <ul>
 <li>as.vector</li>
@@ -466,7 +467,7 @@
 <li>as.data.frame</li>
 <li>as.list</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt; data &lt;- &apos;example&apos;</div><div class="line">&gt; as.vector(data)</div><div class="line">[1] &quot;example&quot;</div><div class="line">&gt; data2 &lt;- 2345</div><div class="line"></div><div class="line">&gt; as.character(data2)</div><div class="line">[1] &quot;2345&quot;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; data &lt;- &apos;example&apos;</span><br><span class="line">&gt; as.vector(data)</span><br><span class="line">[1] &quot;example&quot;</span><br><span class="line">&gt; data2 &lt;- 2345</span><br><span class="line"></span><br><span class="line">&gt; as.character(data2)</span><br><span class="line">[1] &quot;2345&quot;</span><br></pre></td></tr></table></figure>
 <h4 id="常見的轉換函數表"><a href="#常見的轉換函數表" class="headerlink" title="常見的轉換函數表"></a>常見的轉換函數表</h4><table>
 <thead>
 <tr>
@@ -512,42 +513,42 @@
 <h2 id="套件有關的工具函數"><a href="#套件有關的工具函數" class="headerlink" title="套件有關的工具函數"></a>套件有關的工具函數</h2><ul>
 <li>在 console 輸入指令下載安裝套件，括號內是套件的名字，一般來說要加雙引號</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; install.packages(&quot;car&quot;)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; install.packages(&quot;car&quot;)</span><br></pre></td></tr></table></figure>
 <p>然而有些套件會隨著功能的更新，需要定期的更新套件，使用更新套件的指令是</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; update.packages()</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; update.packages()</span><br></pre></td></tr></table></figure>
 <p>若想知道安裝了哪些套件，那麼可以使用指令是</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; installed.packages()</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; installed.packages()</span><br></pre></td></tr></table></figure>
 <ul>
 <li>使用套件的函數，先載入套件方法有二：library, require</li>
 </ul>
 <p>library 和 require 都是載入 package，但是最大的差別在於 library 如果是載入的 package 不存在，是會發生 error 程式停止，但是 require 卻不會，而且 require 會回傳 true or false</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; libaray(套件名稱)</div><div class="line">&gt; require(套件名稱)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; libaray(套件名稱)</span><br><span class="line">&gt; require(套件名稱)</span><br></pre></td></tr></table></figure>
 <p>範例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt; libaray(quantmod)</div><div class="line">&gt; require(quantmod)</div><div class="line">&gt; x&lt;-require(quantmod)</div><div class="line">&gt; x</div><div class="line">[1] TRUE</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; libaray(quantmod)</span><br><span class="line">&gt; require(quantmod)</span><br><span class="line">&gt; x&lt;-require(quantmod)</span><br><span class="line">&gt; x</span><br><span class="line">[1] TRUE</span><br></pre></td></tr></table></figure>
 <ul>
 <li>避免記憶體吃緊或避免不同套件的同名函數彼此衝突，簡單來說就是「卸載」</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; detach(套件名稱)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; detach(套件名稱)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>想知道怎麼查詢函數的定義</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; ??norm</div><div class="line">&gt; help(norm)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; ??norm</span><br><span class="line">&gt; help(norm)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>demo 示範功能</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; demo(graphics)</div><div class="line"></div><div class="line">結果：說明文件裡面顯示範例程式</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; demo(graphics)</span><br><span class="line"></span><br><span class="line">結果：說明文件裡面顯示範例程式</span><br></pre></td></tr></table></figure>
 <ul>
-<li>網站文件遠端搜尋：RSiteSearch 可以查詢遠端網站的文件 <a href="http://search.r-project.org/cgi-bin/namazu.cgi?query=anova&amp;max=20&amp;result=normal&amp;sort=score&amp;idxname=functions&amp;idxname=vignettes&amp;idxname=views" target="_blank" rel="external">search anova document</a></li>
+<li>網站文件遠端搜尋：RSiteSearch 可以查詢遠端網站的文件 <a href="http://search.r-project.org/cgi-bin/namazu.cgi?query=anova&amp;max=20&amp;result=normal&amp;sort=score&amp;idxname=functions&amp;idxname=vignettes&amp;idxname=views" target="_blank" rel="noopener">search anova document</a></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; RSiteSearch(&quot;anova&quot;)</div><div class="line"></div><div class="line">結果：就會開啟網頁到 R Site Search 上面查詢你所下的關鍵字</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; RSiteSearch(&quot;anova&quot;)</span><br><span class="line"></span><br><span class="line">結果：就會開啟網頁到 R Site Search 上面查詢你所下的關鍵字</span><br></pre></td></tr></table></figure>
 <ul>
 <li>source 函數執行外部檔案</li>
 </ul>
 <p>若你有一支自訂函數的檔案為 test.R，那麼你就可以透過以下指令來呼叫使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; source(&quot;/user/code/test.R&quot;)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; source(&quot;/user/code/test.R&quot;)</span><br></pre></td></tr></table></figure>
 <h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
-<li>R Studio <a href="https://www.rstudio.com/" target="_blank" rel="external">https://www.rstudio.com/</a></li>
-<li>R Project <a href="https://www.r-project.org/" target="_blank" rel="external">https://www.r-project.org/</a></li>
+<li>R Studio <a href="https://www.rstudio.com/" target="_blank" rel="noopener">https://www.rstudio.com/</a></li>
+<li>R Project <a href="https://www.r-project.org/" target="_blank" rel="noopener">https://www.r-project.org/</a></li>
 </ul>
 
       
@@ -683,7 +684,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">51</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
@@ -694,7 +695,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分類</span>
               </a>
             </div>
@@ -790,7 +791,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1271,7 +1272,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

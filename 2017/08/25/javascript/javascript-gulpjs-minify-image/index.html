@@ -102,6 +102,7 @@
 <meta property="og:url" content="https://weijutu.github.io/2017/08/25/javascript/javascript-gulpjs-minify-image/index.html">
 <meta property="og:site_name" content="噗噗。故我在">
 <meta property="og:description" content="它是建立在 node.js 的一個套件。The streaming build system. 它的觀念是一套利用串流方式輔助建置系統，優化前端工程的效能（縮小js 檔案大小，編譯預處理的css, less ）加快js, css…etc 載入速度，特色在於代碼優於配置關做法讓事情變得更簡單，更直覺的方式構建系統。 什麼是字串流 Stream? （也可以叫串流）谷歌一下Wiki 的「 Stream">
+<meta property="og:locale" content="zh-tw">
 <meta property="og:image" content="https://weijutu.github.io/images/javascript/5.png">
 <meta property="og:image" content="https://weijutu.github.io/images/javascript/6.png">
 <meta property="og:image" content="https://weijutu.github.io/images/javascript/7.png">
@@ -412,7 +413,7 @@
 </blockquote>
 <a id="more"></a>
 <p>用個 gulp.js 的簡單例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">gulp.src(&apos;js/app.js&apos;)</div><div class="line">    .pipe(uglify())</div><div class="line">    .pipe(gulp.dest(&apos;build&apos;))</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gulp.src(&apos;js/app.js&apos;)</span><br><span class="line">    .pipe(uglify())</span><br><span class="line">    .pipe(gulp.dest(&apos;build&apos;))</span><br></pre></td></tr></table></figure>
 <p>以這個例子來說，gulp.src 方法帶了一個字串參數 js/app.js，這個是對應一個主要的 js 檔案，主要是建立物件串流來表示的文件，接這透過 .pipe 方法將所有檔案做 uglify() 的動作，而這個動作將會縮小之後回傳一個新的物件，最後將這個輸出用 gulp.dest 目標位置到 build 資料夾裡面。</p>
 <p>流程會是如下：</p>
 <p><img src="/images/javascript/6.png" alt=""></p>
@@ -424,7 +425,7 @@
 </ul>
 <p>Let’s start using Gulp.</p>
 <h3 id="安裝-Node-js"><a href="#安裝-Node-js" class="headerlink" title="安裝 Node.js"></a>安裝 Node.js</h3><p>這裡我不會做太多解釋如何安裝 node.js ，安裝方式請詳見之前寫的一篇文章 「<a href="http://weijutu.github.io/2017/07/24/nodejs/nodejs-02-install/">Node.js 系列學習日誌#2 - Node.js 安裝配置</a>」</p>
-<h3 id="安裝-Gulp"><a href="#安裝-Gulp" class="headerlink" title="安裝 Gulp"></a>安裝 Gulp</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$sudo npm install gulp -g</div></pre></td></tr></table></figure>
+<h3 id="安裝-Gulp"><a href="#安裝-Gulp" class="headerlink" title="安裝 Gulp"></a>安裝 Gulp</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sudo npm install gulp -g</span><br></pre></td></tr></table></figure>
 <p>請先確認 nodejs, npm, gulp 是否有正常安裝，我們可以驗證一下版本</p>
 <p><img src="/images/javascript/7.png" alt=""></p>
 <h3 id="建立專案"><a href="#建立專案" class="headerlink" title="建立專案"></a>建立專案</h3><p>請先建立一個資料夾，這裡叫做 gulptest 的資料夾，這裡面包含：</p>
@@ -443,14 +444,14 @@
 </li>
 </ul>
 <p>接著我們在資料夾下安裝 Gulp 套件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$npm install gulp --save-dev</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm install gulp --save-dev</span><br></pre></td></tr></table></figure>
 <p>在這邊它會自動建立 node_module 永久性的資料夾，裡面包含被安裝的 gulp</p>
 <p><img src="/images/javascript/8.png" alt=""></p>
 <p>最後先在 gulptest 資料夾下建立空的 gulpfile.js 檔案，之後會介紹如何使用</p>
 <h3 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h3><p>我們需要安裝與配置一個套件來執行任務，在這裡做個簡單的例子就使用一套 jshint 套件，請輸入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$npm install gulp-jshint --save-dev</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm install gulp-jshint --save-dev</span><br></pre></td></tr></table></figure>
 <p>然後開啟剛才建立好的 gulpfile.js，建立一個名叫 imagemin 的任務。請寫以下程式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">// include gulp</div><div class="line">var gulp = require(&apos;gulp&apos;);</div><div class="line"></div><div class="line">gulp.task(&apos;imagemin&apos;, function() &#123;</div><div class="line">  var imgSrc = &apos;./src/images/**/*&apos;,</div><div class="line">      imgDst = &apos;./build/images&apos;;</div><div class="line"></div><div class="line">  gulp.src(imgSrc)</div><div class="line">    .pipe(changed(imgDst))</div><div class="line">    .pipe(imagemin())</div><div class="line">    .pipe(gulp.dest(imgDst));</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// include gulp</span><br><span class="line">var gulp = require(&apos;gulp&apos;);</span><br><span class="line"></span><br><span class="line">gulp.task(&apos;imagemin&apos;, function() &#123;</span><br><span class="line">  var imgSrc = &apos;./src/images/**/*&apos;,</span><br><span class="line">      imgDst = &apos;./build/images&apos;;</span><br><span class="line"></span><br><span class="line">  gulp.src(imgSrc)</span><br><span class="line">    .pipe(changed(imgDst))</span><br><span class="line">    .pipe(imagemin())</span><br><span class="line">    .pipe(gulp.dest(imgDst));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>我在 /src/images/ 放了三張圖 (隨便到 google design 抓了三張圖，暫時找不到照片就先拿很小kb數來練啦～)</p>
 <ul>
 <li><code>components-bottomsheet-for-mobile-1a_large_mdpi.png (31kb)</code></li>
@@ -459,7 +460,7 @@
 </ul>
 <p><img src="/images/javascript/9.png" alt=""></p>
 <p>gulpfile.js 存檔之後用以下的命令執行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$gulp imagemin</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$gulp imagemin</span><br></pre></td></tr></table></figure>
 <p><img src="/images/javascript/10.png" alt=""></p>
 <p>注意看執行結果的最後一行，上面寫 gulp-imagemin: Minified 3 images (saved 11.23 KB - 19.5%)，意思就是節省了 11.23KB, 總體省了 19.5%</p>
 <ul>
@@ -470,8 +471,8 @@
 <p>最後請到 /build/images/<em>.</em>.png 查看被壓縮結果</p>
 <p><img src="/images/javascript/11.png" alt=""></p>
 <h3 id="資料參考"><a href="#資料參考" class="headerlink" title="資料參考"></a>資料參考</h3><ul>
-<li><a href="http://david.nowinsky.net/gulp-book/" target="_blank" rel="external">Gulp-book@Gitbook</a></li>
-<li>Wikipedia: <a href="http://zh.wikipedia.org/wiki/字串流" target="_blank" rel="external">http://zh.wikipedia.org/wiki/字串流</a></li>
+<li><a href="http://david.nowinsky.net/gulp-book/" target="_blank" rel="noopener">Gulp-book@Gitbook</a></li>
+<li>Wikipedia: <a href="http://zh.wikipedia.org/wiki/字串流" target="_blank" rel="noopener">http://zh.wikipedia.org/wiki/字串流</a></li>
 </ul>
 <h3 id="備註"><a href="#備註" class="headerlink" title="備註"></a>備註</h3><ul>
 <li>gulp.task(name, fn) it registers the function with a name. you can optionally specify some dependencies if other tasks need to run first</li>
@@ -615,7 +616,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">51</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
@@ -626,7 +627,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分類</span>
               </a>
             </div>
@@ -722,7 +723,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1203,7 +1204,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

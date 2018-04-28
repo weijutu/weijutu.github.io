@@ -102,6 +102,7 @@
 <meta property="og:url" content="https://weijutu.github.io/2017/03/04/r/r-xy-scatter-diagram/index.html">
 <meta property="og:site_name" content="噗噗。故我在">
 <meta property="og:description" content="試做：使用 N(172, 5)模擬 100人身高、使用 N(58, 5)模擬 100 人，繪製  X-Y 散佈圖 XY 散佈圖是指：  XY 圖的基本形式是以一個資料數列為基礎，而這個資料數列包含名稱、X 軸值清單以及 Y 軸值清單。每個值配對 (x|y) 在座標系統中都會顯示為一點。">
+<meta property="og:locale" content="zh-tw">
 <meta property="og:image" content="https://weijutu.github.io/images/r/r-xy-scatter-diagram.png">
 <meta property="og:updated_time" content="2017-10-20T06:14:57.000Z">
 <meta name="twitter:card" content="summary">
@@ -427,18 +428,18 @@
 </blockquote>
 <a id="more"></a>
 <h2 id="學習目標"><a href="#學習目標" class="headerlink" title="學習目標"></a>學習目標</h2><p>透過 R 軟體畫出 XY 散佈圖。</p>
-<h2 id="語法"><a href="#語法" class="headerlink" title="語法"></a>語法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; weight &lt;- rnorm(100, 58, 5)</div><div class="line">&gt; height &lt;- rnorm(100, 172, 5)</div></pre></td></tr></table></figure>
+<h2 id="語法"><a href="#語法" class="headerlink" title="語法"></a>語法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; weight &lt;- rnorm(100, 58, 5)</span><br><span class="line">&gt; height &lt;- rnorm(100, 172, 5)</span><br></pre></td></tr></table></figure>
 <p>接著畫出身高體重的 XY 散佈圖</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; plot(weight, height, xlab=&quot;Weight&quot;, ylab=&quot;Height&quot;)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; plot(weight, height, xlab=&quot;Weight&quot;, ylab=&quot;Height&quot;)</span><br></pre></td></tr></table></figure>
 <p>結果</p>
 <p><img src="/images/r/r-xy-scatter-diagram.png" alt=""></p>
 <h2 id="線性迴歸分析"><a href="#線性迴歸分析" class="headerlink" title="線性迴歸分析"></a>線性迴歸分析</h2><p>height 為「被解釋變數」<br>weight 為「解釋變數」</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; summary(lm(height ~ weight))</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; summary(lm(height ~ weight))</span><br></pre></td></tr></table></figure>
 <p>結果</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">Call:</div><div class="line">lm(formula = height ~ weight)</div><div class="line"></div><div class="line">Residuals:</div><div class="line">    Min      1Q  Median      3Q     Max</div><div class="line">-9.6905 -3.3894  0.0386  3.0392 12.8012</div><div class="line"></div><div class="line">Coefficients:</div><div class="line">             Estimate Std. Error t value Pr(&gt;|t|)    </div><div class="line">(Intercept) 174.28142    5.72277  30.454   &lt;2e-16 ***</div><div class="line">weight       -0.03555    0.09803  -0.363    0.718    </div><div class="line">---</div><div class="line">Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</div><div class="line"></div><div class="line">Residual standard error: 4.955 on 98 degrees of freedom</div><div class="line">Multiple R-squared:  0.00134,	Adjusted R-squared:  -0.00885</div><div class="line">F-statistic: 0.1315 on 1 and 98 DF,  p-value: 0.7176</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Call:</span><br><span class="line">lm(formula = height ~ weight)</span><br><span class="line"></span><br><span class="line">Residuals:</span><br><span class="line">    Min      1Q  Median      3Q     Max</span><br><span class="line">-9.6905 -3.3894  0.0386  3.0392 12.8012</span><br><span class="line"></span><br><span class="line">Coefficients:</span><br><span class="line">             Estimate Std. Error t value Pr(&gt;|t|)    </span><br><span class="line">(Intercept) 174.28142    5.72277  30.454   &lt;2e-16 ***</span><br><span class="line">weight       -0.03555    0.09803  -0.363    0.718    </span><br><span class="line">---</span><br><span class="line">Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span><br><span class="line"></span><br><span class="line">Residual standard error: 4.955 on 98 degrees of freedom</span><br><span class="line">Multiple R-squared:  0.00134,	Adjusted R-squared:  -0.00885</span><br><span class="line">F-statistic: 0.1315 on 1 and 98 DF,  p-value: 0.7176</span><br></pre></td></tr></table></figure>
 <p>迴歸分析 F 檢定 p-value = 0.7176</p>
 <h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ol>
-<li>IBM Lotus Symphony  <a href="http://infolib.lotus.com/resources/symphony/3.0.0/sym20abd014/zh_tw/text/schart/01/type_xy.html" target="_blank" rel="external">圖表類型：XY（散佈）圖</a></li>
+<li>IBM Lotus Symphony  <a href="http://infolib.lotus.com/resources/symphony/3.0.0/sym20abd014/zh_tw/text/schart/01/type_xy.html" target="_blank" rel="noopener">圖表類型：XY（散佈）圖</a></li>
 </ol>
 
       
@@ -574,7 +575,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">51</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
@@ -585,7 +586,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分類</span>
               </a>
             </div>
@@ -681,7 +682,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1162,7 +1163,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

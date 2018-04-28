@@ -102,6 +102,7 @@
 <meta property="og:url" content="https://weijutu.github.io/2017/08/25/gitbook/gitbook-install/index.html">
 <meta property="og:site_name" content="噗噗。故我在">
 <meta property="og:description" content="今天介紹這套GitBook 是用 node.js 的 npm 管理工具搭建的一種建立電子書的套件，藉由這篇文章可以清楚的瞭解如何建立電子書">
+<meta property="og:locale" content="zh-tw">
 <meta property="og:image" content="https://weijutu.github.io/images/gitbook/1.png">
 <meta property="og:image" content="https://weijutu.github.io/images/gitbook/2.png">
 <meta property="og:image" content="https://weijutu.github.io/images/gitbook/3.png">
@@ -433,10 +434,10 @@
 <p>今天介紹這套GitBook 是用 node.js 的 npm 管理工具搭建的一種建立電子書的套件，藉由這篇文章可以清楚的瞭解如何建立電子書</p>
 <a id="more"></a>
 <h3 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h3><p>首先是安裝的部分，安裝之前請先確定 npm 這個管理工具有被安裝起來</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$sudo npm install -g gitbook</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sudo npm install -g gitbook</span><br></pre></td></tr></table></figure>
 <p><img src="/images/gitbook/2.png" alt=""></p>
 <p>接著，先在某一個目錄夾裏建立一個電子書的檔案庫</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$gitbook serve ./repository</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$gitbook serve ./repository</span><br></pre></td></tr></table></figure>
 <p>像這樣子</p>
 <p><img src="/images/gitbook/3.png" alt=""></p>
 <p>在製作這個電子書，特別要注意的是請先建立 <code>README.md</code> 和 <code>SUMMARY.md</code> 這兩個文件，因為這兩個文件代表著電子書的架構導覽</p>
@@ -456,12 +457,12 @@
 <li>source/install/2-2.md</li>
 </ul>
 <p>我們可以利用以下的指令，讓 gitbook 找到 <code>summary.md</code> 所定義的章節結構去自動地去產生對應的檔案</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$gitbook init</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$gitbook init</span><br></pre></td></tr></table></figure>
 <p>到建立 gitbook 的資料夾看，就可以看到自動建立 source 資料夾之外，在source 下層也建立 intro 及 install 這兩個資料夾，然後再進去看某個資料夾下後，可以發現 markdown 的空白檔案也已經自動建立起來，在這邊就可以隨心所欲去建置屬於自己的章節內容。</p>
 <p><img src="/images/gitbook/6.png" alt=""></p>
 <p>喔！等等，別忘了看看結果<br>內容寫好之後，建立一個靜態頁面，預設會開 port 4000 的網址</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$gitbook serve</div></pre></td></tr></table></figure>
-<p>可依照指令指示，開啓 <a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$gitbook serve</span><br></pre></td></tr></table></figure>
+<p>可依照指令指示，開啓 <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a></p>
 <p><img src="/images/gitbook/7.png" alt=""></p>
 <h3 id="看看樣子"><a href="#看看樣子" class="headerlink" title="看看樣子"></a>看看樣子</h3><p>這是首頁的樣子，呈現的首頁就能閱覽我們在 README.md 所寫的內容</p>
 <p><img src="/images/gitbook/8.png" alt=""></p>
@@ -614,7 +615,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">51</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
@@ -625,7 +626,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分類</span>
               </a>
             </div>
@@ -721,7 +722,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1202,7 +1203,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

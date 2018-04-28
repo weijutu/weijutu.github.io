@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://weijutu.github.io/2018/04/28/nodejs/nodejs-31-ubuntu-install-nodejs/</loc>
+    
+    <lastmod>2018-04-28T07:16:05.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://weijutu.github.io/2017/09/02/stock/stock-002-company/</loc>
     
     <lastmod>2017-10-20T09:09:59.000Z</lastmod>
@@ -352,14 +359,14 @@
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/categories/index.html</loc>
+    <loc>https://weijutu.github.io/2017/03/02/metero/metero-intro/</loc>
     
     <lastmod>2017-07-24T01:04:20.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/03/02/metero/metero-intro/</loc>
+    <loc>https://weijutu.github.io/categories/index.html</loc>
     
     <lastmod>2017-07-24T01:04:20.000Z</lastmod>
     

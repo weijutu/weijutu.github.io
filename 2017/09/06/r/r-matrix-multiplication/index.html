@@ -102,6 +102,7 @@
 <meta property="og:url" content="https://weijutu.github.io/2017/09/06/r/r-matrix-multiplication/index.html">
 <meta property="og:site_name" content="噗噗。故我在">
 <meta property="og:description" content="學習目標學習如何計算矩陣相乘以及R語言的用法 矩陣相乘法兩個矩陣必須滿足 A 矩陣的行數等於 B 矩陣的列數才可以相乘。在這邊用一個簡單的例子介紹矩陣相乘法的運算 $$A_{3*2}=\begin{bmatrix}1 &amp;amp; 2\\ 3 &amp;amp; 4\\ 5 &amp;amp; 6\end{bmatrix}$$ $$B_{2*3}=\begin{bmatrix}7 &amp;amp; 8 &amp;amp; 9\\">
+<meta property="og:locale" content="zh-tw">
 <meta property="og:updated_time" content="2017-10-20T06:14:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="R 學習日誌 - 矩陣相乘法運算 (Matrix multiplication)">
@@ -427,15 +428,15 @@
 <p>那麼用 R 語法又是怎麼寫呢？</p>
 <a id="more"></a>
 <h3 id="使用-R-語言運算"><a href="#使用-R-語言運算" class="headerlink" title="使用 R 語言運算"></a>使用 R 語言運算</h3><p>已知如上述的矩陣 A 裡面的矩陣是 <code>1,3,5,2,4,6</code>, 而 B 裡面的矩陣是 <code>7,10,8,11,9,12</code>，我們運用 matrix 將矩陣建立起來</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; A&lt;-matrix(c(1,3,5,2,4,6), nrow = 3)</div><div class="line">&gt; B&lt;-matrix(c(7,10,8,11,9,12), nrow = 2)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; A&lt;-matrix(c(1,3,5,2,4,6), nrow = 3)</span><br><span class="line">&gt; B&lt;-matrix(c(7,10,8,11,9,12), nrow = 2)</span><br></pre></td></tr></table></figure>
 <p>如下所示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&gt; A&lt;-matrix(c(1,3,5,2,4,6), nrow = 3)</div><div class="line">&gt; A</div><div class="line">     [,1] [,2]</div><div class="line">[1,]    1    2</div><div class="line">[2,]    3    4</div><div class="line">[3,]    5    6</div><div class="line">&gt; B&lt;-matrix(c(7,10,8,11,9,12), nrow = 2)</div><div class="line">&gt; B</div><div class="line">     [,1] [,2] [,3]</div><div class="line">[1,]    7    8    9</div><div class="line">[2,]   10   11   12</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt; A&lt;-matrix(c(1,3,5,2,4,6), nrow = 3)</span><br><span class="line">&gt; A</span><br><span class="line">     [,1] [,2]</span><br><span class="line">[1,]    1    2</span><br><span class="line">[2,]    3    4</span><br><span class="line">[3,]    5    6</span><br><span class="line">&gt; B&lt;-matrix(c(7,10,8,11,9,12), nrow = 2)</span><br><span class="line">&gt; B</span><br><span class="line">     [,1] [,2] [,3]</span><br><span class="line">[1,]    7    8    9</span><br><span class="line">[2,]   10   11   12</span><br></pre></td></tr></table></figure>
 <p>相乘的話就用 <code>A%*%B</code> ，結果如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt; A%*%B</div><div class="line">     [,1] [,2] [,3]</div><div class="line">[1,]   27   30   33</div><div class="line">[2,]   61   68   75</div><div class="line">[3,]   95  106  117</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; A%*%B</span><br><span class="line">     [,1] [,2] [,3]</span><br><span class="line">[1,]   27   30   33</span><br><span class="line">[2,]   61   68   75</span><br><span class="line">[3,]   95  106  117</span><br></pre></td></tr></table></figure>
 <h3 id="不能只用-嗎？"><a href="#不能只用-嗎？" class="headerlink" title="不能只用 * 嗎？"></a>不能只用 <code>*</code> 嗎？</h3><p>如果你想要只有使用 <code>*</code> 的話，那麼就要兩個矩陣的行列都要一樣，否則會出現錯誤是 <code>Error in A * B : 非調和陣列</code>。要使用 <code>*</code> 我們修改一下上面的例子，在 B 的 matrix 參數將 nrow 改為 3</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&gt; A&lt;-matrix(c(1,3,5,2,4,6), nrow = 3)</div><div class="line">&gt; A</div><div class="line">     [,1] [,2]</div><div class="line">[1,]    1    2</div><div class="line">[2,]    3    4</div><div class="line">[3,]    5    6</div><div class="line">&gt; B&lt;-matrix(c(7,10,8,11,9,12), nrow = 3)</div><div class="line">&gt; B</div><div class="line">     [,1] [,2]</div><div class="line">[1,]    7   11</div><div class="line">[2,]   10    9</div><div class="line">[3,]    8   12</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt; A&lt;-matrix(c(1,3,5,2,4,6), nrow = 3)</span><br><span class="line">&gt; A</span><br><span class="line">     [,1] [,2]</span><br><span class="line">[1,]    1    2</span><br><span class="line">[2,]    3    4</span><br><span class="line">[3,]    5    6</span><br><span class="line">&gt; B&lt;-matrix(c(7,10,8,11,9,12), nrow = 3)</span><br><span class="line">&gt; B</span><br><span class="line">     [,1] [,2]</span><br><span class="line">[1,]    7   11</span><br><span class="line">[2,]   10    9</span><br><span class="line">[3,]    8   12</span><br></pre></td></tr></table></figure>
 <p>接著就可以直接相乘了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt; A*B</div><div class="line">     [,1] [,2]</div><div class="line">[1,]    7   22</div><div class="line">[2,]   30   36</div><div class="line">[3,]   40   72</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; A*B</span><br><span class="line">     [,1] [,2]</span><br><span class="line">[1,]    7   22</span><br><span class="line">[2,]   30   36</span><br><span class="line">[3,]   40   72</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -570,7 +571,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">51</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
@@ -581,7 +582,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分類</span>
               </a>
             </div>
@@ -677,7 +678,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1158,7 +1159,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

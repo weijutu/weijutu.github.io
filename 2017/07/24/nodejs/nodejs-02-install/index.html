@@ -102,6 +102,7 @@
 <meta property="og:url" content="https://weijutu.github.io/2017/07/24/nodejs/nodejs-02-install/index.html">
 <meta property="og:site_name" content="噗噗。故我在">
 <meta property="og:description" content="Node.js 是一套使用了 Google V8 虛擬機來解釋 Javascript 語法，允許在後端運行 Javascript 的語法，發生在把頁面發送給 browser 之前的服務器上，所以要實現後台運行的 Javascript 語法，那麼語法要先被編譯後才可以正確執行。 本章節會學習到  安裝 Node.js 驗證  Node.js 是否正確安裝 建立基本 Node.js 程式 啟動基本 N">
+<meta property="og:locale" content="zh-tw">
 <meta property="og:image" content="https://weijutu.github.io/images/nodejs/2.png">
 <meta property="og:image" content="https://weijutu.github.io/images/nodejs/3.png">
 <meta property="og:image" content="https://weijutu.github.io/images/nodejs/4.png">
@@ -442,9 +443,9 @@
 <li>查看 npm 是否有安裝</li>
 </ul>
 <a id="more"></a>
-<h2 id="安裝系統："><a href="#安裝系統：" class="headerlink" title="安裝系統："></a>安裝系統：</h2><p>首先，簡單的來安裝一下 Node.js ，在這裡示範的系統環境是 Windows XP 32bit，可以到 <a href="http://nodejs.org/" target="_blank" rel="external">http://nodejs.org/</a> 的首頁上下載安裝軟體</p>
+<h2 id="安裝系統："><a href="#安裝系統：" class="headerlink" title="安裝系統："></a>安裝系統：</h2><p>首先，簡單的來安裝一下 Node.js ，在這裡示範的系統環境是 Windows XP 32bit，可以到 <a href="http://nodejs.org/" target="_blank" rel="noopener">http://nodejs.org/</a> 的首頁上下載安裝軟體</p>
 <ul>
-<li>進入 node.js 官方網站 <a href="http://nodejs.org/" target="_blank" rel="external">http://nodejs.org/</a> 點選 install 後, 會下載一個 node-v0.10.25-x86.msi 安裝檔案</li>
+<li>進入 node.js 官方網站 <a href="http://nodejs.org/" target="_blank" rel="noopener">http://nodejs.org/</a> 點選 install 後, 會下載一個 node-v0.10.25-x86.msi 安裝檔案</li>
 </ul>
 <p><img src="/images/nodejs/2.png" alt=""></p>
 <ul>
@@ -482,7 +483,7 @@
 </ul>
 <p><img src="/images/nodejs/10.png" alt=""></p>
 <h2 id="建立-Hello-world-的-Node-js-程式"><a href="#建立-Hello-world-的-Node-js-程式" class="headerlink" title="建立 Hello world 的 Node.js 程式"></a>建立 Hello world 的 Node.js 程式</h2><p>不管利用記事本或是會善用 IDE 做為開發的工具，建立一個 <code>my.js</code> 的檔案，輸入以下的語法</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</div><div class="line">http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>)</span>&#123;</div><div class="line">  res.writeHead(<span class="number">200</span>, &#123; <span class="string">'Content-Type'</span>: <span class="string">'text/html'</span> &#125;);</div><div class="line">  res.write(<span class="string">'&lt;h1&gt; Hello Helen, this is Node.js &lt;/h1&gt;'</span>);</div><div class="line">  res.end(<span class="string">'Hello world'</span>);</div><div class="line">&#125;).listen(<span class="number">3232</span>);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(<span class="string">"HTTP Server is listening at port 3232"</span>);</div><div class="line"><span class="string">`</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line">http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>)</span>&#123;</span><br><span class="line">  res.writeHead(<span class="number">200</span>, &#123; <span class="string">'Content-Type'</span>: <span class="string">'text/html'</span> &#125;);</span><br><span class="line">  res.write(<span class="string">'&lt;h1&gt; Hello Helen, this is Node.js &lt;/h1&gt;'</span>);</span><br><span class="line">  res.end(<span class="string">'Hello world'</span>);</span><br><span class="line">&#125;).listen(<span class="number">3232</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"HTTP Server is listening at port 3232"</span>);</span><br><span class="line"><span class="string">`</span></span><br></pre></td></tr></table></figure>
 <h3 id="開始執行啟動"><a href="#開始執行啟動" class="headerlink" title="開始執行啟動"></a>開始執行啟動</h3><p>接著打開命令提示字元，輸入 <code>node my.js</code><br>之後就會看到 <code>Http Server is listening at port 3232</code>，這就代表有成功啟動</p>
 <p><img src="/images/nodejs/11.png" alt=""></p>
 <h2 id="安全警示"><a href="#安全警示" class="headerlink" title="安全警示"></a>安全警示</h2><p>由於 node.js 是利用 google chrome v8 引擎執行, 會出現以下安全性警示，按下解除封鎖按鈕</p>
@@ -627,7 +628,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">51</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
@@ -638,7 +639,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分類</span>
               </a>
             </div>
@@ -734,7 +735,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1215,7 +1216,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

@@ -102,6 +102,7 @@
 <meta property="og:url" content="https://weijutu.github.io/2017/07/24/nodejs/nodejs-12-nodemailer/index.html">
 <meta property="og:site_name" content="噗噗。故我在">
 <meta property="og:description" content="在上幾篇完成了 mysql  的 CRUD 的四大操作，本篇就來個輕鬆一點的應用，在這篇介紹使用 nodemailer 套件透過  gmail 來發送電子信箱，在安裝跟實作上也相當容易，我們透過 https://github.com/andris9/Nodemailer 來講解，在運用上也無需再重新打造輪子，學習如何使用即可。">
+<meta property="og:locale" content="zh-tw">
 <meta property="og:image" content="https://weijutu.github.io/images/nodejs/52.png">
 <meta property="og:image" content="https://weijutu.github.io/images/nodejs/53.png">
 <meta property="og:image" content="https://weijutu.github.io/images/nodejs/54.png">
@@ -424,10 +425,10 @@
       
 
       
-        <p>在上幾篇完成了 mysql  的 CRUD 的四大操作，本篇就來個輕鬆一點的應用，在這篇介紹使用 nodemailer 套件透過  gmail 來發送電子信箱，在安裝跟實作上也相當容易，我們透過 <a href="https://github.com/andris9/Nodemailer" target="_blank" rel="external">https://github.com/andris9/Nodemailer</a> 來講解，在運用上也無需再重新打造輪子，學習如何使用即可。</p>
+        <p>在上幾篇完成了 mysql  的 CRUD 的四大操作，本篇就來個輕鬆一點的應用，在這篇介紹使用 nodemailer 套件透過  gmail 來發送電子信箱，在安裝跟實作上也相當容易，我們透過 <a href="https://github.com/andris9/Nodemailer" target="_blank" rel="noopener">https://github.com/andris9/Nodemailer</a> 來講解，在運用上也無需再重新打造輪子，學習如何使用即可。</p>
 <a id="more"></a>
-<p>在這邊先建立一個目錄夾 nodejs-nodemailer ，接著再指令將 package.json 建立起來 （本篇不著重在如何建立 package.json ，如需安裝操作請見 <a href="http://ithelp.ithome.com.tw/ironman7/app/article/all/recent/10158140" target="_blank" rel="external">http://ithelp.ithome.com.tw/ironman7/app/article/all/recent/10158140</a> ）。由於我們要安裝 nodemailer 套件，因此下指令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$npm</span> install —save node mailer</div></pre></td></tr></table></figure>
+<p>在這邊先建立一個目錄夾 nodejs-nodemailer ，接著再指令將 package.json 建立起來 （本篇不著重在如何建立 package.json ，如需安裝操作請見 <a href="http://ithelp.ithome.com.tw/ironman7/app/article/all/recent/10158140" target="_blank" rel="noopener">http://ithelp.ithome.com.tw/ironman7/app/article/all/recent/10158140</a> ）。由於我們要安裝 nodemailer 套件，因此下指令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$npm</span> install —save node mailer</span><br></pre></td></tr></table></figure>
 <p><img src="/images/nodejs/52.png" alt=""></p>
 <p>其中 —save 會將 nodemailer 相依套件新增到 package.json 檔案裡的 dependencies 項目裡， 如下圖所示：</p>
 <p><img src="/images/nodejs/53.png" alt=""></p>
@@ -439,17 +440,17 @@
 <li>送出發信事件</li>
 </ul>
 <p>我們直接看一下程式的部分：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">//引用 nodemailer</div><div class="line">var nodemailer = require('nodemailer');</div><div class="line"></div><div class="line">//宣告發信物件</div><div class="line">var transporter = nodemailer.createTransport(&#123;</div><div class="line">    service: 'Gmail',</div><div class="line">    auth: &#123;</div><div class="line">        user: ‘account@gmail.com',</div><div class="line">        pass: ‘yourpassword'</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">var options = &#123;</div><div class="line">    //寄件者</div><div class="line">    from: 'account1@gmail.com ',</div><div class="line">    //收件者</div><div class="line">    to: 'account2@gmail.com',</div><div class="line">    //副本</div><div class="line">    cc: 'account3@gmail.com',</div><div class="line">    //密件副本</div><div class="line">    bcc: 'account4@gmail.com',</div><div class="line">    //主旨</div><div class="line">    subject: '這是 node.js 發送的測試信件', // Subject line</div><div class="line">    //純文字</div><div class="line">    text: 'Hello world2', // plaintext body</div><div class="line">    //嵌入 html 的內文</div><div class="line">    html: '&lt;h2&gt;Why and How&lt;/h2&gt; &lt;p&gt;The &lt;a href="http://en.wikipedia.org/wiki/Lorem_ipsum" title="Lorem ipsum - Wikipedia, the free encyclopedia"&gt;Lorem ipsum&lt;/a&gt; text is typically composed of pseudo-Latin words. It is commonly used as placeholder text to examine or demonstrate the visual effects of various graphic design. Since the text itself is meaningless, the viewers are therefore able to focus on the overall layout without being attracted to the text.&lt;/p&gt;',</div><div class="line">    //附件檔案</div><div class="line">    attachments: [ &#123;</div><div class="line">        filename: 'text01.txt',</div><div class="line">        content: '聯候家上去工的調她者壓工，我笑它外有現，血有到同，民由快的重觀在保導然安作但。護見中城備長結現給都看面家銷先然非會生東一無中；內他的下來最書的從人聲觀說的用去生我，生節他活古視心放十壓心急我我們朋吃，毒素一要溫市歷很爾的房用聽調就層樹院少了紀苦客查標地主務所轉，職計急印形。團著先參那害沒造下至算活現興質美是為使！色社影；得良灣……克卻人過朋天點招？不族落過空出著樣家男，去細大如心發有出離問歡馬找事'</div><div class="line">    &#125;, &#123;</div><div class="line">        filename: 'unnamed.jpg',</div><div class="line">        path: '/Users/Weiju/Pictures/unnamed.jpg'</div><div class="line">    &#125;]</div><div class="line">&#125;;</div><div class="line"></div><div class="line">//發送信件方法</div><div class="line">transporter.sendMail(options, function(error, info)&#123;</div><div class="line">    if(error)&#123;</div><div class="line">        console.log(error);</div><div class="line">    &#125;else&#123;</div><div class="line">        console.log('訊息發送: ' + info.response);</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//引用 nodemailer</span></span><br><span class="line"><span class="keyword">var</span> nodemailer = <span class="built_in">require</span>(<span class="string">'nodemailer'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//宣告發信物件</span></span><br><span class="line"><span class="keyword">var</span> transporter = nodemailer.createTransport(&#123;</span><br><span class="line">    service: <span class="string">'Gmail'</span>,</span><br><span class="line">    auth: &#123;</span><br><span class="line">        user: ‘account@gmail.com<span class="string">',</span></span><br><span class="line"><span class="string">        pass: ‘yourpassword'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> options = &#123;</span><br><span class="line">    <span class="comment">//寄件者</span></span><br><span class="line">    <span class="keyword">from</span>: <span class="string">'account1@gmail.com '</span>,</span><br><span class="line">    <span class="comment">//收件者</span></span><br><span class="line">    to: <span class="string">'account2@gmail.com'</span>,</span><br><span class="line">    <span class="comment">//副本</span></span><br><span class="line">    cc: <span class="string">'account3@gmail.com'</span>,</span><br><span class="line">    <span class="comment">//密件副本</span></span><br><span class="line">    bcc: <span class="string">'account4@gmail.com'</span>,</span><br><span class="line">    <span class="comment">//主旨</span></span><br><span class="line">    subject: <span class="string">'這是 node.js 發送的測試信件'</span>, <span class="comment">// Subject line</span></span><br><span class="line">    <span class="comment">//純文字</span></span><br><span class="line">    text: <span class="string">'Hello world2'</span>, <span class="comment">// plaintext body</span></span><br><span class="line">    <span class="comment">//嵌入 html 的內文</span></span><br><span class="line">    html: <span class="string">'&lt;h2&gt;Why and How&lt;/h2&gt; &lt;p&gt;The &lt;a href="http://en.wikipedia.org/wiki/Lorem_ipsum" title="Lorem ipsum - Wikipedia, the free encyclopedia"&gt;Lorem ipsum&lt;/a&gt; text is typically composed of pseudo-Latin words. It is commonly used as placeholder text to examine or demonstrate the visual effects of various graphic design. Since the text itself is meaningless, the viewers are therefore able to focus on the overall layout without being attracted to the text.&lt;/p&gt;'</span>,</span><br><span class="line">    <span class="comment">//附件檔案</span></span><br><span class="line">    attachments: [ &#123;</span><br><span class="line">        filename: <span class="string">'text01.txt'</span>,</span><br><span class="line">        content: <span class="string">'聯候家上去工的調她者壓工，我笑它外有現，血有到同，民由快的重觀在保導然安作但。護見中城備長結現給都看面家銷先然非會生東一無中；內他的下來最書的從人聲觀說的用去生我，生節他活古視心放十壓心急我我們朋吃，毒素一要溫市歷很爾的房用聽調就層樹院少了紀苦客查標地主務所轉，職計急印形。團著先參那害沒造下至算活現興質美是為使！色社影；得良灣……克卻人過朋天點招？不族落過空出著樣家男，去細大如心發有出離問歡馬找事'</span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        filename: <span class="string">'unnamed.jpg'</span>,</span><br><span class="line">        path: <span class="string">'/Users/Weiju/Pictures/unnamed.jpg'</span></span><br><span class="line">    &#125;]</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//發送信件方法</span></span><br><span class="line">transporter.sendMail(options, <span class="function"><span class="keyword">function</span>(<span class="params">error, info</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(error)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(error);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'訊息發送: '</span> + info.response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>可以看到引入的 nodemailer 的是使用 nodemailer.createTransport 物件先建立好發信的服務 service 為 Gmail，並且透過 auth 建立 gmail 登入的帳號密碼，接著宣告一下收件者 （to）、副本（cc）、密件副本（bcc）、寄件者（from），當然還有主旨 (Subject)、內文(text, html)、附件檔案（attachments）</p>
 <p>最後發信結果，就如   package.json 上的 scripts.start 指令，下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$node email</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$node email</span><br></pre></td></tr></table></figure>
 <p><img src="/images/nodejs/54.png" alt=""></p>
 <p>此時，發送結果會如訊息所說，我們再看看信件收到的樣子，由於附件傳送了兩筆，可以看到  unnamed.jpg  及 text01.txt  已經接收到了</p>
 <p><img src="/images/nodejs/55.png" alt=""></p>
 <p>其中 text01.txt  是直接在程式上面輸入純文字，我們來看看是否有真的寫入：</p>
 <p><img src="/images/nodejs/56.png" alt=""></p>
 <p>更多應用，稍等回來～</p>
-<h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><p><a href="http://www.richyli.com/tool/loremipsum/" target="_blank" rel="external">http://www.richyli.com/tool/loremipsum/</a><br><a href="https://github.com/andris9/Nodemailer" target="_blank" rel="external">https://github.com/andris9/Nodemailer</a></p>
+<h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><p><a href="http://www.richyli.com/tool/loremipsum/" target="_blank" rel="noopener">http://www.richyli.com/tool/loremipsum/</a><br><a href="https://github.com/andris9/Nodemailer" target="_blank" rel="noopener">https://github.com/andris9/Nodemailer</a></p>
 
       
     </div>
@@ -588,7 +589,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">51</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
@@ -599,7 +600,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分類</span>
               </a>
             </div>
@@ -695,7 +696,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1176,7 +1177,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

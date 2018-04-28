@@ -102,6 +102,7 @@
 <meta property="og:url" content="https://weijutu.github.io/2017/07/26/nodejs/nodejs-30-kp-api/index.html">
 <meta property="og:site_name" content="噗噗。故我在">
 <meta property="og:description" content="本篇將介紹用野生柯P API來製作 api 的呼叫，但是api 網站已經失效，僅能提供概念說明。這是透過 node-rest-client 的套件製作">
+<meta property="og:locale" content="zh-tw">
 <meta property="og:image" content="https://weijutu.github.io/images/nodejs/130.png">
 <meta property="og:image" content="https://weijutu.github.io/images/nodejs/131.png">
 <meta property="og:image" content="https://weijutu.github.io/images/nodejs/132.png">
@@ -429,30 +430,30 @@
         <p>本篇將介紹用野生柯P API來製作 api 的呼叫，但是api 網站已經失效，僅能提供概念說明。這是透過 node-rest-client 的套件製作</p>
 <a id="more"></a>
 <p>首先先建立一個 express web framework 框架，請在 terminal  上輸入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$express -e nodejs-kp-albums-sample</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$express -e nodejs-kp-albums-sample</span><br></pre></td></tr></table></figure>
 <p><img src="/images/nodejs/130.png" alt=""></p>
 <p>接著按照只是安裝相依套件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$cd nodejs-kp-albums-sample &amp;&amp; npm install</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$cd nodejs-kp-albums-sample &amp;&amp; npm install</span><br></pre></td></tr></table></figure>
 <p><img src="/images/nodejs/131.png" alt=""></p>
 <p>接著由於我們要使用到柯 p 官網提供的相簿 api ，在開發前我們需要安裝一個可以支援 restful api 的套件 node-rest-client，接著請在 terminal 輸入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$npm install node-rest-client —save</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm install node-rest-client —save</span><br></pre></td></tr></table></figure>
 <p><img src="/images/nodejs/132.png" alt=""></p>
 <p>一切安裝完成之後，就開始來撰寫程式的部分，請先打開 app.js 檔案，在這邊我們要引用裝好的 node-rest-client 套件，將以下語法填入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var Client = require(&apos;node-rest-client&apos;).Client;</div><div class="line">client = new Client();</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var Client = require(&apos;node-rest-client&apos;).Client;</span><br><span class="line">client = new Client();</span><br></pre></td></tr></table></figure>
 <p>先宣告 node-rest-client 之後，我們預計將相簿列表印在主首頁 (index)，可以在 app.js 裡面找到var routes = require(‘./routes/index’); 與 app.use(‘/‘, routes); 這一段，也就是說根目錄的位置會指引到 /routes/index.js 檔案裡面，接著就打開  /routes/index.js ，由於我們在 app.js  完成了宣告，在 index.js 撰寫如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">var express = require(&apos;express&apos;);</div><div class="line">var router = express.Router();</div><div class="line"></div><div class="line">/* GET home page. */</div><div class="line">router.get(&apos;/&apos;, function(req, resp) &#123;</div><div class="line"></div><div class="line">    //取得 KP albums 相簿清單列表</div><div class="line">     client.get(&quot;http://api.kptaipei.tw/v1/albums&quot;, &#123; author: ‘xxx&apos; &#125;, function(data, res)&#123;</div><div class="line">        var config = JSON.parse(data.toString());</div><div class="line">        console.log(config.data);</div><div class="line"></div><div class="line">        //將資料寫在 locals</div><div class="line">        resp.locals.posts = config.data;</div><div class="line"></div><div class="line">        var renderData = &#123;</div><div class="line">             title: &apos;柯 p 野生 API&apos;,</div><div class="line">             data: config.data</div><div class="line">        &#125;;</div><div class="line"></div><div class="line">        // 將取得到的 json 格式渲染到畫面上</div><div class="line">        resp.render(&apos;index&apos;, renderData);</div><div class="line">    &#125;);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">module.exports = router;</div></pre></td></tr></table></figure>
-<p>可以看到用了 client.get 方法，其有三個參數，第一個參數請到 <a href="http://unlimited.kptaipei.tw/docs/#api-ch3" target="_blank" rel="external">http://unlimited.kptaipei.tw/docs/#api-ch3</a> 得到相簿清單的 api ：<a href="http://api.kptaipei.tw/v1/albums/" target="_blank" rel="external">http://api.kptaipei.tw/v1/albums/</a>  ，預期會知道 api 結果會是如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">var express = require(&apos;express&apos;);</span><br><span class="line">var router = express.Router();</span><br><span class="line"></span><br><span class="line">/* GET home page. */</span><br><span class="line">router.get(&apos;/&apos;, function(req, resp) &#123;</span><br><span class="line"></span><br><span class="line">    //取得 KP albums 相簿清單列表</span><br><span class="line">     client.get(&quot;http://api.kptaipei.tw/v1/albums&quot;, &#123; author: ‘xxx&apos; &#125;, function(data, res)&#123;</span><br><span class="line">        var config = JSON.parse(data.toString());</span><br><span class="line">        console.log(config.data);</span><br><span class="line"></span><br><span class="line">        //將資料寫在 locals</span><br><span class="line">        resp.locals.posts = config.data;</span><br><span class="line"></span><br><span class="line">        var renderData = &#123;</span><br><span class="line">             title: &apos;柯 p 野生 API&apos;,</span><br><span class="line">             data: config.data</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        // 將取得到的 json 格式渲染到畫面上</span><br><span class="line">        resp.render(&apos;index&apos;, renderData);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">module.exports = router;</span><br></pre></td></tr></table></figure>
+<p>可以看到用了 client.get 方法，其有三個參數，第一個參數請到 <a href="http://unlimited.kptaipei.tw/docs/#api-ch3" target="_blank" rel="noopener">http://unlimited.kptaipei.tw/docs/#api-ch3</a> 得到相簿清單的 api ：<a href="http://api.kptaipei.tw/v1/albums/" target="_blank" rel="noopener">http://api.kptaipei.tw/v1/albums/</a>  ，預期會知道 api 結果會是如下</p>
 <p><img src="/images/nodejs/133.png" alt=""></p>
 <p><img src="/images/nodejs/134.png" alt=""></p>
 <p>第二參數由於本篇只做列表，就保持為空 {}，第三個參數就 function callback 操作，在取得  json 格式的資料之後，經過 json.parse 由字串轉換 json  ，並且我們已知要抓  data 的陣列，透過物件 renderData 將資料存放，最後就將得到的資料渲染到畫面上 ，也就是 resp.render(‘index’, renderData);</p>
 <p>接著到了 views 的部分，就請開啓  /views/index.ejs 檔案</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">  &lt;head&gt;</div><div class="line">    &lt;title&gt;&lt;%= title %&gt;&lt;/title&gt;</div><div class="line">    &lt;link rel=&apos;stylesheet&apos; href=&apos;/stylesheets/style.css&apos; /&gt;</div><div class="line">  &lt;/head&gt;</div><div class="line">  &lt;body&gt;</div><div class="line">    &lt;%</div><div class="line">         posts.forEach(function(post) &#123;</div><div class="line">              var thumb = post.thumbnails;</div><div class="line">              var t_small = thumb.small_square;</div><div class="line">    %&gt;</div><div class="line">          &lt;img src=&apos;&lt;%= t_small %&gt;&apos; alt=&apos;&lt;%=post.title %&gt;&apos; /&gt;</div><div class="line">    &lt;% &#125;);%&gt;</div><div class="line">  &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;title&gt;&lt;%= title %&gt;&lt;/title&gt;</span><br><span class="line">    &lt;link rel=&apos;stylesheet&apos; href=&apos;/stylesheets/style.css&apos; /&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">    &lt;%</span><br><span class="line">         posts.forEach(function(post) &#123;</span><br><span class="line">              var thumb = post.thumbnails;</span><br><span class="line">              var t_small = thumb.small_square;</span><br><span class="line">    %&gt;</span><br><span class="line">          &lt;img src=&apos;&lt;%= t_small %&gt;&apos; alt=&apos;&lt;%=post.title %&gt;&apos; /&gt;</span><br><span class="line">    &lt;% &#125;);%&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
 <p>在這邊我只需要顯示柯p相簿的小張圖，也就是 thumbnails.small_square ，由於已經轉成  json  格式，那麼就當做物件找到 thumbnails.small_square  位置，將取得到的圖片網址塞到 img tag 裡的 src 屬性。那麼，一切的一切準備好之後，就請執行應用程式吧！輸入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$npm start</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm start</span><br></pre></td></tr></table></figure>
 <p><img src="/images/nodejs/135.png" alt=""></p>
 <p>網站預設為 3000 port ，請開啓 localhost:3000，結果如下圖顯示</p>
 <p><img src="/images/nodejs/136.png" alt=""></p>
-<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="https://www.npmjs.org/package/node-rest-client" target="_blank" rel="external">https://www.npmjs.org/package/node-rest-client</a></p>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="https://www.npmjs.org/package/node-rest-client" target="_blank" rel="noopener">https://www.npmjs.org/package/node-rest-client</a></p>
 
       
     </div>
@@ -591,7 +592,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">51</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
@@ -602,7 +603,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分類</span>
               </a>
             </div>
@@ -698,7 +699,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1179,7 +1180,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

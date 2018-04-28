@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>噗噗。故我在</title>
+  
   <subtitle>a &gt; 1, a ^ n = ∞</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://weijutu.github.io/"/>
-  <updated>2017-10-20T09:04:17.000Z</updated>
+  <updated>2018-04-28T07:16:05.000Z</updated>
   <id>https://weijutu.github.io/</id>
   
   <author>
@@ -16,61 +17,39 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Node.js 系列學習日誌#31 - 如何 Ubuntu 16.04 安裝 Node.js / n 管理 Nodejs 版本 / yarn 包管理套件</title>
+    <link href="https://weijutu.github.io/2018/04/28/nodejs/nodejs-31-ubuntu-install-nodejs/"/>
+    <id>https://weijutu.github.io/2018/04/28/nodejs/nodejs-31-ubuntu-install-nodejs/</id>
+    <published>2018-04-28T07:15:00.000Z</published>
+    <updated>2018-04-28T07:16:05.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在 Ubuntu 16.04 作業系統版本下，我們需要使用  <code>apt</code> 包管理器，在安裝 Node.js 之前先安裝 <code>npm</code> ，也就是 Node.js 包管理器</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get install nodejs</span><br><span class="line">$ sudo apt-get install npm</span><br></pre></td></tr></table></figure><p>接著使用 <code>n</code> 來管理 nodejs 版本 <a href="https://github.com/tj/n" target="_blank" rel="noopener">https://github.com/tj/n</a> ，既然有了 <code>node</code> 最簡單的安裝 n 的方式是 <code>npm</code></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g n</span><br></pre></td></tr></table></figure><p>如果安裝出現了以下的錯誤</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g n</span><br><span class="line">npm http GET https://registry.npmjs.org/n</span><br><span class="line">npm http GET https://registry.npmjs.org/n</span><br><span class="line">npm http GET https://registry.npmjs.org/n</span><br><span class="line">npm ERR! Error: CERT_UNTRUSTED</span><br><span class="line">npm ERR!     at SecurePair.&lt;anonymous&gt; (tls.js:1370:32)</span><br><span class="line">npm ERR!     at SecurePair.EventEmitter.emit (events.js:92:17)</span><br><span class="line">npm ERR!     at SecurePair.maybeInitFinished (tls.js:982:10)</span><br><span class="line">npm ERR!     at CleartextStream.read [as _read] (tls.js:469:13)</span><br><span class="line">npm ERR!     at CleartextStream.Readable.read (_stream_readable.js:320:10)</span><br><span class="line">npm ERR!     at EncryptedStream.write [as _write] (tls.js:366:25)</span><br><span class="line">npm ERR!     at doWrite (_stream_writable.js:223:10)</span><br><span class="line">npm ERR!     at writeOrBuffer (_stream_writable.js:213:5)</span><br><span class="line">npm ERR!     at EncryptedStream.Writable.write (_stream_writable.js:180:11)</span><br><span class="line">npm ERR!     at write (_stream_readable.js:583:24)</span><br></pre></td></tr></table></figure><p>那麼可以用以下命令繞過 <code>https</code></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm config set strict-ssl false</span><br></pre></td></tr></table></figure><p>接著在重新安裝一次 <code>n</code></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo npm cache clean -f</span><br><span class="line">$ sudo npm install -g n</span><br><span class="line">$ sudo n stable</span><br></pre></td></tr></table></figure><p>安裝完畢之後，輸入以下命令以確定安裝的版本</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ node -v</span><br><span class="line"></span><br><span class="line">## Output</span><br><span class="line">v10.0.0</span><br><span class="line"></span><br><span class="line">$ npm -v</span><br><span class="line"></span><br><span class="line">## Output</span><br><span class="line">1.3.10</span><br></pre></td></tr></table></figure><p>然後，也需要安裝 Yarn 來管理套件</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -</span><br><span class="line">$ sudo apt-get update &amp;&amp; sudo apt-get install yarn</span><br></pre></td></tr></table></figure><p>測試 Yarn 安裝狀況</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn --version</span><br></pre></td></tr></table></figure><p>但是如果出現錯誤訊息寫 <code>The program &#39;yarn&#39; is currently not installed. To run &#39;yarn&#39; please ask your administrator to install the package &#39;cmdtest&#39;</code> 代表著需要安裝 <code>cmdtest</code> 套件</p><p>輸入並且安裝 cmdtest</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install cmdtest</span><br></pre></td></tr></table></figure><p>再做一次 <code>$ yarn --version</code> 確認後，就成功出現版本號碼</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">## Output:</span><br><span class="line">0.10</span><br></pre></td></tr></table></figure><h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ul><li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-16-04" target="_blank" rel="noopener">How To Install Node.js on Ubuntu 16.04</a></li><li><a href="https://stackoverflow.com/questions/21855035/ssl-error-cert-untrusted-while-using-npm-command" target="_blank" rel="noopener">SSL Error: CERT_UNTRUSTED while using npm command@stackoverflow</a><br>-</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;在 Ubuntu 16.04 作業系統版本下，我們需要使用  &lt;code&gt;apt&lt;/code&gt; 包管理器，在安裝 Node.js 之前先安裝 &lt;code&gt;npm&lt;/code&gt; ，也就是 Node.js 包管理器&lt;/p&gt;
+&lt;figure class=&quot;highlight pl
+      
+    
+    </summary>
+    
+      <category term="Node.js" scheme="https://weijutu.github.io/categories/Node-js/"/>
+    
+    
+      <category term="Node.js" scheme="https://weijutu.github.io/tags/Node-js/"/>
+    
+  </entry>
+  
+  <entry>
     <title>R 學習日誌#3 - 資料結構 (向量 Vector、矩陣 Matrix、陣列 Array ) 的區別與基本運算</title>
     <link href="https://weijutu.github.io/2017/10/20/r/r-03-data-structure/"/>
     <id>https://weijutu.github.io/2017/10/20/r/r-03-data-structure/</id>
     <published>2017-10-20T06:03:00.000Z</published>
     <updated>2017-10-20T09:04:17.000Z</updated>
     
-    <content type="html"><![CDATA[<p>在使用資料做統計分析之前，需要先了解 R 語言支援資料類型的語法技巧。在這個章節裡面惠介紹到向量 Vector、矩陣 Matrix、陣列 Array 用法，以及基本運算的寫法。</p>
-<ul>
-<li>向量 Vector</li>
-<li>矩陣 Matrix</li>
-<li>陣列 Array</li>
-<li>向量、矩陣、陣列的區別</li>
-</ul>
-<a id="more"></a>
-<h2 id="向量-Vector"><a href="#向量-Vector" class="headerlink" title="向量 Vector"></a>向量 Vector</h2><ul>
-<li>向量 (vector) 的第一個指標是 1，取值要用 [] 中括號</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"># 向量表示法</div><div class="line">&gt; x &lt;- c(5, 32, 56)</div><div class="line">&gt; x</div><div class="line">[1]  5 32 56</div><div class="line"></div><div class="line"># 取其中一筆</div><div class="line">&gt; x &lt;- c(5, 32, 56)</div><div class="line">&gt; x[2]</div><div class="line"></div><div class="line">結果: [1] 32</div></pre></td></tr></table></figure>
-<ul>
-<li>(…) 把運算式用括弧刮起來，可以強制的顯示執行結果</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; (a &lt;- 2 + 3)</div><div class="line"></div><div class="line">結果：[1] 5</div></pre></td></tr></table></figure>
-<ul>
-<li>物件的自動循環，也就是說在運算的時候會對長度較短的數字或向量做重複循環</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt; x &lt;- c(4, 3, 7, 8)</div><div class="line">&gt; x + 4</div><div class="line"></div><div class="line">結果：[1] 8  7  11  12</div><div class="line">說明：相當於 c(4, 3, 7, 8) + c(4, 4, 4, 4)</div></pre></td></tr></table></figure>
-<h2 id="矩陣-Matrix"><a href="#矩陣-Matrix" class="headerlink" title="矩陣 Matrix"></a>矩陣 Matrix</h2><p>相同資料類型依照行 (Row) 與列 (Column) 的組合就形成了矩陣，屬於二維資料結構。使用 <code>matrix()</code> 函數建立矩陣</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; m &lt;- matrix(data &lt;- NA, nrow = 1, ncol = 3, byrow = FALSE)</div><div class="line">&gt; m</div><div class="line">     [,1] [,2] [,3]</div><div class="line">[1,]   NA   NA   NA</div></pre></td></tr></table></figure>
-<ul>
-<li>data: 資料</li>
-<li>nrow: 行數</li>
-<li>ncol: 列數</li>
-<li>byrow: 預設是照列排序下來，如果想以行排列的話可以這麼寫，看一下以下例子：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"># 這是 byrow = FALSE</div><div class="line">&gt; mdata &lt;- c(1,2,3,4,5,6)</div><div class="line">&gt; m &lt;- matrix(data &lt;- mdata, nrow = 2, ncol = 3, byrow = FALSE)</div><div class="line">&gt; m</div><div class="line">     [,1] [,2] [,3]</div><div class="line">[1,]    1    3    5</div><div class="line">[2,]    2    4    6</div><div class="line"></div><div class="line"># 這是 byrow = TRUE</div><div class="line">&gt; m &lt;- matrix(data = mdata, nrow = 2, ncol = 3, byrow = TRUE)</div><div class="line">&gt; m</div><div class="line">     [,1] [,2] [,3]</div><div class="line">[1,]    1    2    3</div><div class="line">[2,]    4    5    6</div></pre></td></tr></table></figure>
-<h3 id="矩陣的索引"><a href="#矩陣的索引" class="headerlink" title="矩陣的索引"></a>矩陣的索引</h3><p>建立矩陣之後可以透過 <code>[]</code> 來索引矩陣的元素，從上面的例子來看，我們想找第二行的資料，如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&gt; m &lt;- matrix(data = mdata, nrow = 2, ncol = 3, byrow = TRUE)</div><div class="line">&gt; m</div><div class="line">     [,1] [,2] [,3]</div><div class="line">[1,]    1    2    3</div><div class="line">[2,]    4    5    6</div><div class="line"></div><div class="line">&gt; m[2, ]</div><div class="line">[1] 4 5 6</div></pre></td></tr></table></figure>
-<p>也就是透過 <code>m[2, ]</code> 來找到第二行資料，那麼若要找 第三列的資料，應該也難不倒你的，如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt; m &lt;- matrix(data = mdata, nrow = 2, ncol = 3, byrow = TRUE)</div><div class="line">&gt; m</div><div class="line">     [,1] [,2] [,3]</div><div class="line">[1,]    1    2    3</div><div class="line">[2,]    4    5    6</div><div class="line">&gt; m[, 3]</div><div class="line">[1] 3 6</div></pre></td></tr></table></figure>
-<p>嗯嗯，就是反過來寫成 <code>m[, 3]</code> 就可以了。當然你也可以多行或多烈的方式列出，此時會透過 c 向量來做到這個問題，如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"># 這個例子是找第一行跟第三行</div><div class="line">&gt; m &lt;- matrix(data = mdata, nrow = 2, ncol = 3, byrow = TRUE)</div><div class="line">&gt; m</div><div class="line">     [,1] [,2] [,3]</div><div class="line">[1,]    1    2    3</div><div class="line">[2,]    4    5    6</div><div class="line">&gt; m[, c(1,3)]</div><div class="line">     [,1] [,2]</div><div class="line">[1,]    1    3</div><div class="line">[2,]    4    6</div></pre></td></tr></table></figure>
-<p>反之，若要找第一列跟第二列的那就 <code>m[c(1,2),]</code> 就可以囉</p>
-<h2 id="陣列-Array"><a href="#陣列-Array" class="headerlink" title="陣列 Array"></a>陣列 Array</h2><p>陣列用 <code>array()</code> 建立，以下透過 array() 函數產生 3 x 3 x 2 的三維陣列，每個維度加上標籤，如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&gt; dim1 &lt;- c(&apos;a1&apos;, &apos;a2&apos;, &apos;a3&apos;)</div><div class="line">&gt; dim2 &lt;- c(&apos;b1&apos;, &apos;b2&apos;, &apos;b3&apos;)</div><div class="line">&gt; dim3 &lt;- c(&apos;c1&apos;, &apos;c2&apos;)</div><div class="line">&gt; arr &lt;- array(1:18, c(3,3,2), dimnames = list(dim1, dim2, dim3))</div><div class="line">&gt; arr</div><div class="line">, , c1</div><div class="line"></div><div class="line">   b1 b2 b3</div><div class="line">a1  1  4  7</div><div class="line">a2  2  5  8</div><div class="line">a3  3  6  9</div><div class="line"></div><div class="line">, , c2</div><div class="line"></div><div class="line">   b1 b2 b3</div><div class="line">a1 10 13 16</div><div class="line">a2 11 14 17</div><div class="line">a3 12 15 18</div></pre></td></tr></table></figure>
-<h2 id="向量、矩陣、陣列的區別"><a href="#向量、矩陣、陣列的區別" class="headerlink" title="向量、矩陣、陣列的區別"></a>向量、矩陣、陣列的區別</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&gt; # 建立向量</div><div class="line">&gt; x &lt;- c(5, 32, 56)</div><div class="line">&gt; x</div><div class="line">[1]  5 32 56</div><div class="line"></div><div class="line"></div><div class="line">&gt; # 建立矩陣</div><div class="line">&gt; y &lt;- matrix(1:6, nrow = 2)</div><div class="line">&gt; y</div><div class="line">     [,1] [,2] [,3]</div><div class="line">[1,]    1    3    5</div><div class="line">[2,]    2    4    6</div><div class="line"></div><div class="line"></div><div class="line">&gt; # 建立陣列</div><div class="line">&gt; z &lt;- array(c(2:8), 4)</div><div class="line">&gt; z</div><div class="line">[1] 2 3 4 5</div></pre></td></tr></table></figure>
-<h2 id="基本運算方式"><a href="#基本運算方式" class="headerlink" title="基本運算方式"></a>基本運算方式</h2><p>運算次序：括號 &gt; 指數 &gt; 乘法 &gt; 除法 &gt; 加減法</p>
-<ul>
-<li>基礎運算</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; 1 + 2   # 加法, 結果: [1] 3</div><div class="line">&gt; 1 / 2   # 除法</div><div class="line">&gt; 1 %/% 2 # 整除</div><div class="line">&gt; 9 %% 2  # 取餘數</div><div class="line">&gt; 2 ^ 0.5  # 冪次運算</div><div class="line">&gt; cos(1.0) # 三角函數運算</div></pre></td></tr></table></figure>
-<ul>
-<li>有序數列</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt; 1:5  # 結果: [1] 1 2 3 4 5</div><div class="line">&gt; 1.5:6 # 結果: [1] 1.5 2.5 3.5 4.5 5.5</div><div class="line">&gt; c(2.4:10, 5) # 結果: [1] 2.4 3.4 4.4 5.4 6.4 7.4 8.4 9.4 5.0</div><div class="line">&gt; prod(1:6) # 結果: [1] 720 屬於階乘函數</div><div class="line">&gt; seq(1, 9) # 結果: [1] 1 2 3 4 5 6 7 8 9</div></pre></td></tr></table></figure>
-]]></content>
+    <content type="html"><![CDATA[<p>在使用資料做統計分析之前，需要先了解 R 語言支援資料類型的語法技巧。在這個章節裡面惠介紹到向量 Vector、矩陣 Matrix、陣列 Array 用法，以及基本運算的寫法。</p><ul><li>向量 Vector</li><li>矩陣 Matrix</li><li>陣列 Array</li><li>向量、矩陣、陣列的區別</li></ul><a id="more"></a><h2 id="向量-Vector"><a href="#向量-Vector" class="headerlink" title="向量 Vector"></a>向量 Vector</h2><ul><li>向量 (vector) 的第一個指標是 1，取值要用 [] 中括號</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 向量表示法</span><br><span class="line">&gt; x &lt;- c(5, 32, 56)</span><br><span class="line">&gt; x</span><br><span class="line">[1]  5 32 56</span><br><span class="line"></span><br><span class="line"># 取其中一筆</span><br><span class="line">&gt; x &lt;- c(5, 32, 56)</span><br><span class="line">&gt; x[2]</span><br><span class="line"></span><br><span class="line">結果: [1] 32</span><br></pre></td></tr></table></figure><ul><li>(…) 把運算式用括弧刮起來，可以強制的顯示執行結果</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; (a &lt;- 2 + 3)</span><br><span class="line"></span><br><span class="line">結果：[1] 5</span><br></pre></td></tr></table></figure><ul><li>物件的自動循環，也就是說在運算的時候會對長度較短的數字或向量做重複循環</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; x &lt;- c(4, 3, 7, 8)</span><br><span class="line">&gt; x + 4</span><br><span class="line"></span><br><span class="line">結果：[1] 8  7  11  12</span><br><span class="line">說明：相當於 c(4, 3, 7, 8) + c(4, 4, 4, 4)</span><br></pre></td></tr></table></figure><h2 id="矩陣-Matrix"><a href="#矩陣-Matrix" class="headerlink" title="矩陣 Matrix"></a>矩陣 Matrix</h2><p>相同資料類型依照行 (Row) 與列 (Column) 的組合就形成了矩陣，屬於二維資料結構。使用 <code>matrix()</code> 函數建立矩陣</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; m &lt;- matrix(data &lt;- NA, nrow = 1, ncol = 3, byrow = FALSE)</span><br><span class="line">&gt; m</span><br><span class="line">     [,1] [,2] [,3]</span><br><span class="line">[1,]   NA   NA   NA</span><br></pre></td></tr></table></figure><ul><li>data: 資料</li><li>nrow: 行數</li><li>ncol: 列數</li><li>byrow: 預設是照列排序下來，如果想以行排列的話可以這麼寫，看一下以下例子：</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 這是 byrow = FALSE</span><br><span class="line">&gt; mdata &lt;- c(1,2,3,4,5,6)</span><br><span class="line">&gt; m &lt;- matrix(data &lt;- mdata, nrow = 2, ncol = 3, byrow = FALSE)</span><br><span class="line">&gt; m</span><br><span class="line">     [,1] [,2] [,3]</span><br><span class="line">[1,]    1    3    5</span><br><span class="line">[2,]    2    4    6</span><br><span class="line"></span><br><span class="line"># 這是 byrow = TRUE</span><br><span class="line">&gt; m &lt;- matrix(data = mdata, nrow = 2, ncol = 3, byrow = TRUE)</span><br><span class="line">&gt; m</span><br><span class="line">     [,1] [,2] [,3]</span><br><span class="line">[1,]    1    2    3</span><br><span class="line">[2,]    4    5    6</span><br></pre></td></tr></table></figure><h3 id="矩陣的索引"><a href="#矩陣的索引" class="headerlink" title="矩陣的索引"></a>矩陣的索引</h3><p>建立矩陣之後可以透過 <code>[]</code> 來索引矩陣的元素，從上面的例子來看，我們想找第二行的資料，如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt; m &lt;- matrix(data = mdata, nrow = 2, ncol = 3, byrow = TRUE)</span><br><span class="line">&gt; m</span><br><span class="line">     [,1] [,2] [,3]</span><br><span class="line">[1,]    1    2    3</span><br><span class="line">[2,]    4    5    6</span><br><span class="line"></span><br><span class="line">&gt; m[2, ]</span><br><span class="line">[1] 4 5 6</span><br></pre></td></tr></table></figure><p>也就是透過 <code>m[2, ]</code> 來找到第二行資料，那麼若要找 第三列的資料，應該也難不倒你的，如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; m &lt;- matrix(data = mdata, nrow = 2, ncol = 3, byrow = TRUE)</span><br><span class="line">&gt; m</span><br><span class="line">     [,1] [,2] [,3]</span><br><span class="line">[1,]    1    2    3</span><br><span class="line">[2,]    4    5    6</span><br><span class="line">&gt; m[, 3]</span><br><span class="line">[1] 3 6</span><br></pre></td></tr></table></figure><p>嗯嗯，就是反過來寫成 <code>m[, 3]</code> 就可以了。當然你也可以多行或多烈的方式列出，此時會透過 c 向量來做到這個問題，如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 這個例子是找第一行跟第三行</span><br><span class="line">&gt; m &lt;- matrix(data = mdata, nrow = 2, ncol = 3, byrow = TRUE)</span><br><span class="line">&gt; m</span><br><span class="line">     [,1] [,2] [,3]</span><br><span class="line">[1,]    1    2    3</span><br><span class="line">[2,]    4    5    6</span><br><span class="line">&gt; m[, c(1,3)]</span><br><span class="line">     [,1] [,2]</span><br><span class="line">[1,]    1    3</span><br><span class="line">[2,]    4    6</span><br></pre></td></tr></table></figure><p>反之，若要找第一列跟第二列的那就 <code>m[c(1,2),]</code> 就可以囉</p><h2 id="陣列-Array"><a href="#陣列-Array" class="headerlink" title="陣列 Array"></a>陣列 Array</h2><p>陣列用 <code>array()</code> 建立，以下透過 array() 函數產生 3 x 3 x 2 的三維陣列，每個維度加上標籤，如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&gt; dim1 &lt;- c(&apos;a1&apos;, &apos;a2&apos;, &apos;a3&apos;)</span><br><span class="line">&gt; dim2 &lt;- c(&apos;b1&apos;, &apos;b2&apos;, &apos;b3&apos;)</span><br><span class="line">&gt; dim3 &lt;- c(&apos;c1&apos;, &apos;c2&apos;)</span><br><span class="line">&gt; arr &lt;- array(1:18, c(3,3,2), dimnames = list(dim1, dim2, dim3))</span><br><span class="line">&gt; arr</span><br><span class="line">, , c1</span><br><span class="line"></span><br><span class="line">   b1 b2 b3</span><br><span class="line">a1  1  4  7</span><br><span class="line">a2  2  5  8</span><br><span class="line">a3  3  6  9</span><br><span class="line"></span><br><span class="line">, , c2</span><br><span class="line"></span><br><span class="line">   b1 b2 b3</span><br><span class="line">a1 10 13 16</span><br><span class="line">a2 11 14 17</span><br><span class="line">a3 12 15 18</span><br></pre></td></tr></table></figure><h2 id="向量、矩陣、陣列的區別"><a href="#向量、矩陣、陣列的區別" class="headerlink" title="向量、矩陣、陣列的區別"></a>向量、矩陣、陣列的區別</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&gt; # 建立向量</span><br><span class="line">&gt; x &lt;- c(5, 32, 56)</span><br><span class="line">&gt; x</span><br><span class="line">[1]  5 32 56</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&gt; # 建立矩陣</span><br><span class="line">&gt; y &lt;- matrix(1:6, nrow = 2)</span><br><span class="line">&gt; y</span><br><span class="line">     [,1] [,2] [,3]</span><br><span class="line">[1,]    1    3    5</span><br><span class="line">[2,]    2    4    6</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&gt; # 建立陣列</span><br><span class="line">&gt; z &lt;- array(c(2:8), 4)</span><br><span class="line">&gt; z</span><br><span class="line">[1] 2 3 4 5</span><br></pre></td></tr></table></figure><h2 id="基本運算方式"><a href="#基本運算方式" class="headerlink" title="基本運算方式"></a>基本運算方式</h2><p>運算次序：括號 &gt; 指數 &gt; 乘法 &gt; 除法 &gt; 加減法</p><ul><li>基礎運算</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; 1 + 2   # 加法, 結果: [1] 3</span><br><span class="line">&gt; 1 / 2   # 除法</span><br><span class="line">&gt; 1 %/% 2 # 整除</span><br><span class="line">&gt; 9 %% 2  # 取餘數</span><br><span class="line">&gt; 2 ^ 0.5  # 冪次運算</span><br><span class="line">&gt; cos(1.0) # 三角函數運算</span><br></pre></td></tr></table></figure><ul><li>有序數列</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; 1:5  # 結果: [1] 1 2 3 4 5</span><br><span class="line">&gt; 1.5:6 # 結果: [1] 1.5 2.5 3.5 4.5 5.5</span><br><span class="line">&gt; c(2.4:10, 5) # 結果: [1] 2.4 3.4 4.4 5.4 6.4 7.4 8.4 9.4 5.0</span><br><span class="line">&gt; prod(1:6) # 結果: [1] 720 屬於階乘函數</span><br><span class="line">&gt; seq(1, 9) # 結果: [1] 1 2 3 4 5 6 7 8 9</span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
@@ -98,142 +77,11 @@
     <published>2017-10-20T06:02:00.000Z</published>
     <updated>2017-10-20T08:12:36.000Z</updated>
     
-    <content type="html"><![CDATA[<p>R 語言可以用來處理資料、統計分析、模擬、科學運算以及圖形功能，你可以直接安裝 R Studio 軟體 (<a href="https://www.r-project.org/" target="_blank" rel="external">R軟體官方網站</a>)，就可以很輕易的在 GUI 上透過許多的套件模組並搭配 R 程式來畫出許多圖形，要能夠善用這些套件之前我們要先學習基本的資料型態以及語法運用。</p>
-<a id="more"></a>
-<h2 id="學習目標"><a href="#學習目標" class="headerlink" title="學習目標"></a>學習目標</h2><p>R 語言的基本介紹以及語法上的寫法。</p>
-<h2 id="常見的資料類型"><a href="#常見的資料類型" class="headerlink" title="常見的資料類型"></a>常見的資料類型</h2><ul>
-<li>原型 Raw：二進制的資料</li>
-<li>數字 Numeric：可以是整數 Integers 、小數 Decimal Fractions 、科學符號 Scientific Notation</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt; a&lt;-3</div><div class="line">&gt; class(a)</div><div class="line">[1] &quot;numeric&quot;</div><div class="line"></div><div class="line">&gt; b&lt;-3.14</div><div class="line">&gt; class(b)</div><div class="line">[1] &quot;numeric&quot;</div></pre></td></tr></table></figure>
-<ul>
-<li>字串 Character</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; c&lt;-&quot;3&quot;</div><div class="line">&gt; class(c)</div><div class="line">[1] &quot;character&quot;</div></pre></td></tr></table></figure>
-<ul>
-<li>邏輯 Logical：TRUE / FALSE 兩種值</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&gt; d&lt;-T</div><div class="line">&gt; class(d)</div><div class="line">[1] &quot;logical&quot;</div><div class="line"></div><div class="line">&gt; e&lt;-TRUE</div><div class="line">&gt; class(e)</div><div class="line">[1] &quot;logical&quot;</div><div class="line"></div><div class="line">&gt; f&lt;-FALSE</div><div class="line">&gt; class(f)</div><div class="line">[1] &quot;logical&quot;</div><div class="line"></div><div class="line">這裡的 T 就代表 TRUE, 如果輸入 F 就代表  FALSE</div></pre></td></tr></table></figure>
-<ul>
-<li>複數 Complex：包含虛數</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; 3+2i</div><div class="line">[1] 3+2i</div><div class="line">&gt; class(3+2i)</div><div class="line">[1] &quot;complex&quot;</div></pre></td></tr></table></figure>
-<h2 id="賦值"><a href="#賦值" class="headerlink" title="賦值"></a>賦值</h2><p>我們先看一個例子，在控制台輸入以下程式，假設有五個人的成績分別是 <code>53</code>, <code>65</code>, <code>98</code>, <code>42</code>, <code>62</code>，那麼我們用 <code>c()</code>  Concatenate 代表連結成一個向量，把這個向量賦值給 x，而 x 就是向量的名稱。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; x &lt;- c(53, 65, 98, 42, 62)</div><div class="line">&gt; x</div><div class="line">[1] 53 65 98 42 62</div></pre></td></tr></table></figure>
-<p>R 語言的賦值運算符號是用 <code>&lt;-</code> 而非 <code>=</code>，雖然也是可以用 <code>=</code> 但不建議使用，可能會在環境下產生衝突，所以如果遇到給值的變數，就使用 <code>&lt;-</code> 方式。另外 R 語言有一些內建函數，可以對這個向量做一些簡單的運算</p>
-<ul>
-<li>找出最大值</li>
-<li>找出最小值</li>
-<li>算出平均數</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&gt; # 找出最大值</div><div class="line">&gt; max(x)</div><div class="line">[1] 98</div><div class="line">&gt; # 找出最小值</div><div class="line">&gt; min(x)</div><div class="line">[1] 42</div><div class="line">&gt; # 算出平均數</div><div class="line">&gt; mean(x)</div><div class="line">[1] 64</div></pre></td></tr></table></figure>
-<p>是不是很簡單呢？</p>
-<h2 id="資料類型的判斷-is-系列函數"><a href="#資料類型的判斷-is-系列函數" class="headerlink" title="資料類型的判斷 :: is 系列函數"></a>資料類型的判斷 :: is 系列函數</h2><p>用來檢查某一個物件是否具有查詢的屬性，回傳會是 true or false，包含：</p>
-<ul>
-<li>is.numeric</li>
-<li>is.list</li>
-<li>is.function</li>
-<li>is.character</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&gt; data &lt;- &apos;example&apos;</div><div class="line">&gt; # 檢查是否為數字類型</div><div class="line">&gt; is.numeric(data)</div><div class="line">[1] FALSE</div><div class="line"></div><div class="line">&gt; # 檢查是否為串列類型</div><div class="line">&gt; is.list(data)</div><div class="line">[1] FALSE</div><div class="line"></div><div class="line">&gt; # 檢查是否為函數類型</div><div class="line">&gt; is.function(data)</div><div class="line">[1] FALSE</div><div class="line"></div><div class="line">&gt; # 檢查是否為字串類型</div><div class="line">&gt; is.character(data)</div><div class="line">[1] TRUE</div></pre></td></tr></table></figure>
-<h3 id="資料類型的轉換-as-系列函數"><a href="#資料類型的轉換-as-系列函數" class="headerlink" title="資料類型的轉換 :: as 系列函數"></a>資料類型的轉換 :: as 系列函數</h3><p>用來將變數強迫轉換，包含：</p>
-<ul>
-<li>as.vector</li>
-<li>as factor</li>
-<li>as.matrix</li>
-<li>as.numeric</li>
-<li>as.double</li>
-<li>as.data.frame</li>
-<li>as.list</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt; data &lt;- &apos;example&apos;</div><div class="line">&gt; as.vector(data)</div><div class="line">[1] &quot;example&quot;</div><div class="line">&gt; data2 &lt;- 2345</div><div class="line"></div><div class="line">&gt; as.character(data2)</div><div class="line">[1] &quot;2345&quot;</div></pre></td></tr></table></figure>
-<h4 id="常見的轉換函數表"><a href="#常見的轉換函數表" class="headerlink" title="常見的轉換函數表"></a>常見的轉換函數表</h4><table>
-<thead>
-<tr>
-<th>資料類型</th>
-<th>中文</th>
-<th>判斷函數</th>
-<th>轉換函數</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>character</td>
-<td>字串</td>
-<td>is.character()</td>
-<td>as.character()</td>
-</tr>
-<tr>
-<td>numeric</td>
-<td>數字</td>
-<td>is.numeric()</td>
-<td>as.numeric()</td>
-</tr>
-<tr>
-<td>logical</td>
-<td>邏輯</td>
-<td>is.logical()</td>
-<td>as.logical()</td>
-</tr>
-<tr>
-<td>complex</td>
-<td>複數</td>
-<td>is.complex()</td>
-<td>as.complex()</td>
-</tr>
-<tr>
-<td>NA</td>
-<td>缺少</td>
-<td>is.na()</td>
-<td>as.na()</td>
-</tr>
-</tbody>
-</table>
-<h2 id="套件有關的工具函數"><a href="#套件有關的工具函數" class="headerlink" title="套件有關的工具函數"></a>套件有關的工具函數</h2><ul>
-<li>在 console 輸入指令下載安裝套件，括號內是套件的名字，一般來說要加雙引號</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; install.packages(&quot;car&quot;)</div></pre></td></tr></table></figure>
-<p>然而有些套件會隨著功能的更新，需要定期的更新套件，使用更新套件的指令是</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; update.packages()</div></pre></td></tr></table></figure>
-<p>若想知道安裝了哪些套件，那麼可以使用指令是</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; installed.packages()</div></pre></td></tr></table></figure>
-<ul>
-<li>使用套件的函數，先載入套件方法有二：library, require</li>
-</ul>
-<p>library 和 require 都是載入 package，但是最大的差別在於 library 如果是載入的 package 不存在，是會發生 error 程式停止，但是 require 卻不會，而且 require 會回傳 true or false</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; libaray(套件名稱)</div><div class="line">&gt; require(套件名稱)</div></pre></td></tr></table></figure>
-<p>範例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt; libaray(quantmod)</div><div class="line">&gt; require(quantmod)</div><div class="line">&gt; x&lt;-require(quantmod)</div><div class="line">&gt; x</div><div class="line">[1] TRUE</div></pre></td></tr></table></figure>
-<ul>
-<li>避免記憶體吃緊或避免不同套件的同名函數彼此衝突，簡單來說就是「卸載」</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; detach(套件名稱)</div></pre></td></tr></table></figure>
-<ul>
-<li>想知道怎麼查詢函數的定義</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; ??norm</div><div class="line">&gt; help(norm)</div></pre></td></tr></table></figure>
-<ul>
-<li>demo 示範功能</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; demo(graphics)</div><div class="line"></div><div class="line">結果：說明文件裡面顯示範例程式</div></pre></td></tr></table></figure>
-<ul>
-<li>網站文件遠端搜尋：RSiteSearch 可以查詢遠端網站的文件 <a href="http://search.r-project.org/cgi-bin/namazu.cgi?query=anova&amp;max=20&amp;result=normal&amp;sort=score&amp;idxname=functions&amp;idxname=vignettes&amp;idxname=views" target="_blank" rel="external">search anova document</a></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; RSiteSearch(&quot;anova&quot;)</div><div class="line"></div><div class="line">結果：就會開啟網頁到 R Site Search 上面查詢你所下的關鍵字</div></pre></td></tr></table></figure>
-<ul>
-<li>source 函數執行外部檔案</li>
-</ul>
-<p>若你有一支自訂函數的檔案為 test.R，那麼你就可以透過以下指令來呼叫使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; source(&quot;/user/code/test.R&quot;)</div></pre></td></tr></table></figure>
-<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
-<li>R Studio <a href="https://www.rstudio.com/" target="_blank" rel="external">https://www.rstudio.com/</a></li>
-<li>R Project <a href="https://www.r-project.org/" target="_blank" rel="external">https://www.r-project.org/</a></li>
-</ul>
-]]></content>
+    <content type="html"><![CDATA[<p>R 語言可以用來處理資料、統計分析、模擬、科學運算以及圖形功能，你可以直接安裝 R Studio 軟體 (<a href="https://www.r-project.org/" target="_blank" rel="noopener">R軟體官方網站</a>)，就可以很輕易的在 GUI 上透過許多的套件模組並搭配 R 程式來畫出許多圖形，要能夠善用這些套件之前我們要先學習基本的資料型態以及語法運用。</p><a id="more"></a><h2 id="學習目標"><a href="#學習目標" class="headerlink" title="學習目標"></a>學習目標</h2><p>R 語言的基本介紹以及語法上的寫法。</p><h2 id="常見的資料類型"><a href="#常見的資料類型" class="headerlink" title="常見的資料類型"></a>常見的資料類型</h2><ul><li>原型 Raw：二進制的資料</li><li>數字 Numeric：可以是整數 Integers 、小數 Decimal Fractions 、科學符號 Scientific Notation</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; a&lt;-3</span><br><span class="line">&gt; class(a)</span><br><span class="line">[1] &quot;numeric&quot;</span><br><span class="line"></span><br><span class="line">&gt; b&lt;-3.14</span><br><span class="line">&gt; class(b)</span><br><span class="line">[1] &quot;numeric&quot;</span><br></pre></td></tr></table></figure><ul><li>字串 Character</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; c&lt;-&quot;3&quot;</span><br><span class="line">&gt; class(c)</span><br><span class="line">[1] &quot;character&quot;</span><br></pre></td></tr></table></figure><ul><li>邏輯 Logical：TRUE / FALSE 兩種值</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt; d&lt;-T</span><br><span class="line">&gt; class(d)</span><br><span class="line">[1] &quot;logical&quot;</span><br><span class="line"></span><br><span class="line">&gt; e&lt;-TRUE</span><br><span class="line">&gt; class(e)</span><br><span class="line">[1] &quot;logical&quot;</span><br><span class="line"></span><br><span class="line">&gt; f&lt;-FALSE</span><br><span class="line">&gt; class(f)</span><br><span class="line">[1] &quot;logical&quot;</span><br><span class="line"></span><br><span class="line">這裡的 T 就代表 TRUE, 如果輸入 F 就代表  FALSE</span><br></pre></td></tr></table></figure><ul><li>複數 Complex：包含虛數</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; 3+2i</span><br><span class="line">[1] 3+2i</span><br><span class="line">&gt; class(3+2i)</span><br><span class="line">[1] &quot;complex&quot;</span><br></pre></td></tr></table></figure><h2 id="賦值"><a href="#賦值" class="headerlink" title="賦值"></a>賦值</h2><p>我們先看一個例子，在控制台輸入以下程式，假設有五個人的成績分別是 <code>53</code>, <code>65</code>, <code>98</code>, <code>42</code>, <code>62</code>，那麼我們用 <code>c()</code>  Concatenate 代表連結成一個向量，把這個向量賦值給 x，而 x 就是向量的名稱。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; x &lt;- c(53, 65, 98, 42, 62)</span><br><span class="line">&gt; x</span><br><span class="line">[1] 53 65 98 42 62</span><br></pre></td></tr></table></figure><p>R 語言的賦值運算符號是用 <code>&lt;-</code> 而非 <code>=</code>，雖然也是可以用 <code>=</code> 但不建議使用，可能會在環境下產生衝突，所以如果遇到給值的變數，就使用 <code>&lt;-</code> 方式。另外 R 語言有一些內建函數，可以對這個向量做一些簡單的運算</p><ul><li>找出最大值</li><li>找出最小值</li><li>算出平均數</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt; # 找出最大值</span><br><span class="line">&gt; max(x)</span><br><span class="line">[1] 98</span><br><span class="line">&gt; # 找出最小值</span><br><span class="line">&gt; min(x)</span><br><span class="line">[1] 42</span><br><span class="line">&gt; # 算出平均數</span><br><span class="line">&gt; mean(x)</span><br><span class="line">[1] 64</span><br></pre></td></tr></table></figure><p>是不是很簡單呢？</p><h2 id="資料類型的判斷-is-系列函數"><a href="#資料類型的判斷-is-系列函數" class="headerlink" title="資料類型的判斷 :: is 系列函數"></a>資料類型的判斷 :: is 系列函數</h2><p>用來檢查某一個物件是否具有查詢的屬性，回傳會是 true or false，包含：</p><ul><li>is.numeric</li><li>is.list</li><li>is.function</li><li>is.character</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&gt; data &lt;- &apos;example&apos;</span><br><span class="line">&gt; # 檢查是否為數字類型</span><br><span class="line">&gt; is.numeric(data)</span><br><span class="line">[1] FALSE</span><br><span class="line"></span><br><span class="line">&gt; # 檢查是否為串列類型</span><br><span class="line">&gt; is.list(data)</span><br><span class="line">[1] FALSE</span><br><span class="line"></span><br><span class="line">&gt; # 檢查是否為函數類型</span><br><span class="line">&gt; is.function(data)</span><br><span class="line">[1] FALSE</span><br><span class="line"></span><br><span class="line">&gt; # 檢查是否為字串類型</span><br><span class="line">&gt; is.character(data)</span><br><span class="line">[1] TRUE</span><br></pre></td></tr></table></figure><h3 id="資料類型的轉換-as-系列函數"><a href="#資料類型的轉換-as-系列函數" class="headerlink" title="資料類型的轉換 :: as 系列函數"></a>資料類型的轉換 :: as 系列函數</h3><p>用來將變數強迫轉換，包含：</p><ul><li>as.vector</li><li>as factor</li><li>as.matrix</li><li>as.numeric</li><li>as.double</li><li>as.data.frame</li><li>as.list</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; data &lt;- &apos;example&apos;</span><br><span class="line">&gt; as.vector(data)</span><br><span class="line">[1] &quot;example&quot;</span><br><span class="line">&gt; data2 &lt;- 2345</span><br><span class="line"></span><br><span class="line">&gt; as.character(data2)</span><br><span class="line">[1] &quot;2345&quot;</span><br></pre></td></tr></table></figure><h4 id="常見的轉換函數表"><a href="#常見的轉換函數表" class="headerlink" title="常見的轉換函數表"></a>常見的轉換函數表</h4><table><thead><tr><th>資料類型</th><th>中文</th><th>判斷函數</th><th>轉換函數</th></tr></thead><tbody><tr><td>character</td><td>字串</td><td>is.character()</td><td>as.character()</td></tr><tr><td>numeric</td><td>數字</td><td>is.numeric()</td><td>as.numeric()</td></tr><tr><td>logical</td><td>邏輯</td><td>is.logical()</td><td>as.logical()</td></tr><tr><td>complex</td><td>複數</td><td>is.complex()</td><td>as.complex()</td></tr><tr><td>NA</td><td>缺少</td><td>is.na()</td><td>as.na()</td></tr></tbody></table><h2 id="套件有關的工具函數"><a href="#套件有關的工具函數" class="headerlink" title="套件有關的工具函數"></a>套件有關的工具函數</h2><ul><li>在 console 輸入指令下載安裝套件，括號內是套件的名字，一般來說要加雙引號</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; install.packages(&quot;car&quot;)</span><br></pre></td></tr></table></figure><p>然而有些套件會隨著功能的更新，需要定期的更新套件，使用更新套件的指令是</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; update.packages()</span><br></pre></td></tr></table></figure><p>若想知道安裝了哪些套件，那麼可以使用指令是</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; installed.packages()</span><br></pre></td></tr></table></figure><ul><li>使用套件的函數，先載入套件方法有二：library, require</li></ul><p>library 和 require 都是載入 package，但是最大的差別在於 library 如果是載入的 package 不存在，是會發生 error 程式停止，但是 require 卻不會，而且 require 會回傳 true or false</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; libaray(套件名稱)</span><br><span class="line">&gt; require(套件名稱)</span><br></pre></td></tr></table></figure><p>範例</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; libaray(quantmod)</span><br><span class="line">&gt; require(quantmod)</span><br><span class="line">&gt; x&lt;-require(quantmod)</span><br><span class="line">&gt; x</span><br><span class="line">[1] TRUE</span><br></pre></td></tr></table></figure><ul><li>避免記憶體吃緊或避免不同套件的同名函數彼此衝突，簡單來說就是「卸載」</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; detach(套件名稱)</span><br></pre></td></tr></table></figure><ul><li>想知道怎麼查詢函數的定義</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; ??norm</span><br><span class="line">&gt; help(norm)</span><br></pre></td></tr></table></figure><ul><li>demo 示範功能</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; demo(graphics)</span><br><span class="line"></span><br><span class="line">結果：說明文件裡面顯示範例程式</span><br></pre></td></tr></table></figure><ul><li>網站文件遠端搜尋：RSiteSearch 可以查詢遠端網站的文件 <a href="http://search.r-project.org/cgi-bin/namazu.cgi?query=anova&amp;max=20&amp;result=normal&amp;sort=score&amp;idxname=functions&amp;idxname=vignettes&amp;idxname=views" target="_blank" rel="noopener">search anova document</a></li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; RSiteSearch(&quot;anova&quot;)</span><br><span class="line"></span><br><span class="line">結果：就會開啟網頁到 R Site Search 上面查詢你所下的關鍵字</span><br></pre></td></tr></table></figure><ul><li>source 函數執行外部檔案</li></ul><p>若你有一支自訂函數的檔案為 test.R，那麼你就可以透過以下指令來呼叫使用</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; source(&quot;/user/code/test.R&quot;)</span><br></pre></td></tr></table></figure><h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul><li>R Studio <a href="https://www.rstudio.com/" target="_blank" rel="noopener">https://www.rstudio.com/</a></li><li>R Project <a href="https://www.r-project.org/" target="_blank" rel="noopener">https://www.r-project.org/</a></li></ul>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;R 語言可以用來處理資料、統計分析、模擬、科學運算以及圖形功能，你可以直接安裝 R Studio 軟體 (&lt;a href=&quot;https://www.r-project.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;R軟體官方網站&lt;/a&gt;)，就可以很輕易的在 GUI 上透過許多的套件模組並搭配 R 程式來畫出許多圖形，要能夠善用這些套件之前我們要先學習基本的資料型態以及語法運用。&lt;/p&gt;
+      &lt;p&gt;R 語言可以用來處理資料、統計分析、模擬、科學運算以及圖形功能，你可以直接安裝 R Studio 軟體 (&lt;a href=&quot;https://www.r-project.org/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;R軟體官方網站&lt;/a&gt;)，就可以很輕易的在 GUI 上透過許多的套件模組並搭配 R 程式來畫出許多圖形，要能夠善用這些套件之前我們要先學習基本的資料型態以及語法運用。&lt;/p&gt;
     
     </summary>
     
@@ -251,55 +99,7 @@
     <published>2017-10-20T06:01:00.000Z</published>
     <updated>2017-10-20T07:28:45.000Z</updated>
     
-    <content type="html"><![CDATA[<p>R 語言是 Ross Ihaka, Robert Gentleman 共同開發的程式語言，會取名為 R 是因為他們的名字都是  R 開頭，所以就把這程式語言取名為 R。R 是專門在處理資料處理以及統計分析，語言寫起來相當精簡，外傳說如果沒有學過程式語言的人，又想學習資料分析，那麼就直接學 R，許多複雜的分析任務只需要幾行程式就能夠完成了，如果已經有程式底子或是已經有物件導向的觀念的人 (比如之前有寫過 Java)，那可以學習 Python，但話說回來…這裡是 R 學習日誌，這是 R 語言的第一篇文章，會用一個淺白的文字來介紹喔。</p>
-<h2 id="R-軟體的特色"><a href="#R-軟體的特色" class="headerlink" title="R 軟體的特色"></a>R 軟體的特色</h2><ol>
-<li>基本核心是向量 (vector)、陣列 (array)：在其他程式都需要跑個迴圈才能做到元素的運算，而在 R 軟體裡面只需要幾行就能做到。</li>
-<li>計算模組是函數 (function)：可以善用貢獻者寫好的套件 (packages) 或者自己寫個套件也可以。</li>
-<li>繪圖功能：2D 還是 3D 或是直向圖都可以做到，而且就幾行的程式就能得到想要的結果。</li>
-<li>變數型態：有很多其他程式語言沒有的，包含 list, factor, ordered factor, data frame, ts，也可以自建資料型態</li>
-</ol>
-<a id="more"></a>
-<h2 id="下載與安裝"><a href="#下載與安裝" class="headerlink" title="下載與安裝"></a>下載與安裝</h2><p>安裝 R 就兩個重點</p>
-<ol>
-<li>安裝 R 語言的環境</li>
-<li>安裝 RStudio 開發工具</li>
-</ol>
-<h3 id="安裝-R-語言的環境"><a href="#安裝-R-語言的環境" class="headerlink" title="安裝 R 語言的環境"></a>安裝 R 語言的環境</h3><ul>
-<li><p>請先進入 <a href="https://www.r-project.org/" target="_blank" rel="external">R 網站</a>，就會像下方的頁面：</p>
-<p><img src="/images/r/1.png" alt=""></p>
-</li>
-<li><p>進入 <a href="https://ftp.yzu.edu.tw/CRAN/index.html" target="_blank" rel="external">Download CRAN 的 Taiwan 站點</a>，R 語言提供了 Windows, Linux, Mac 三個版本安裝程式，在這邊是用 Mac 版本進行介紹，如下方的頁面：</p>
-<p><img src="/images/r/3.png" alt=""></p>
-<p>選擇 <code>Download R for (Mac) OS X</code> 連結後，點選 <code>R-3.4.2.pkg</code> 就下載套件包</p>
-<p><img src="/images/r/2.png" alt=""></p>
-</li>
-<li><p>安裝完之後打開 RGui 介面，輸入 <code>123 + 456</code> 就可以得到 <code>579</code> 答案</p>
-<p><img src="/images/r/4.png" alt=""></p>
-</li>
-</ul>
-<h3 id="安裝-RStudio-開發工具"><a href="#安裝-RStudio-開發工具" class="headerlink" title="安裝 RStudio 開發工具"></a>安裝 RStudio 開發工具</h3><ul>
-<li><p>請進入 <a href="https://www.rstudio.com/products/rstudio/download/" target="_blank" rel="external">RStudio 網站</a></p>
-<p><img src="/images/r/6.png" alt=""></p>
-<p>點選 [RSutdio 下載(<a href="https://www.rstudio.com/products/RStudio/" target="_blank" rel="external">https://www.rstudio.com/products/RStudio/</a>) 選擇 <code>RStudio 1.1.383 - Mac OS X 10.6+ (64-bit)</code> ，將它安裝起來</p>
-<p><img src="/images/r/5.png" alt=""></p>
-</li>
-<li><p>安裝完畢後打開 RStudio 軟體，可以發現有四個區塊可以使用</p>
-<ol>
-<li>左上角：程式撰寫的位置</li>
-<li>左下角：控制 Console, 命令列 Terminal ，就跟 RGui 打開來的介面一樣，執行程式結果的位置</li>
-<li>右上角：環境 Environment, 歷史 History, 連線 Connections 可以觀察變數狀態，以及輸入過哪些指令的歷史紀錄</li>
-<li>右下角：檔案工作目錄 File, 圖形化 Plots, 套件 Packages, 查詢 Help, 預覽 Viewer</li>
-</ol>
-<p><img src="/images/r/7.png" alt=""></p>
-</li>
-</ul>
-<p>這樣子我們就把 R 語言的開發環境安裝完畢了。</p>
-<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
-<li><a href="https://zh.wikipedia.org/zh-tw/R%E8%AF%AD%E8%A8%80" target="_blank" rel="external">R 語言維基百科</a></li>
-<li>R Studio <a href="https://www.rstudio.com/" target="_blank" rel="external">https://www.rstudio.com/</a></li>
-<li>R Project <a href="https://www.r-project.org/" target="_blank" rel="external">https://www.r-project.org/</a></li>
-</ul>
-]]></content>
+    <content type="html"><![CDATA[<p>R 語言是 Ross Ihaka, Robert Gentleman 共同開發的程式語言，會取名為 R 是因為他們的名字都是  R 開頭，所以就把這程式語言取名為 R。R 是專門在處理資料處理以及統計分析，語言寫起來相當精簡，外傳說如果沒有學過程式語言的人，又想學習資料分析，那麼就直接學 R，許多複雜的分析任務只需要幾行程式就能夠完成了，如果已經有程式底子或是已經有物件導向的觀念的人 (比如之前有寫過 Java)，那可以學習 Python，但話說回來…這裡是 R 學習日誌，這是 R 語言的第一篇文章，會用一個淺白的文字來介紹喔。</p><h2 id="R-軟體的特色"><a href="#R-軟體的特色" class="headerlink" title="R 軟體的特色"></a>R 軟體的特色</h2><ol><li>基本核心是向量 (vector)、陣列 (array)：在其他程式都需要跑個迴圈才能做到元素的運算，而在 R 軟體裡面只需要幾行就能做到。</li><li>計算模組是函數 (function)：可以善用貢獻者寫好的套件 (packages) 或者自己寫個套件也可以。</li><li>繪圖功能：2D 還是 3D 或是直向圖都可以做到，而且就幾行的程式就能得到想要的結果。</li><li>變數型態：有很多其他程式語言沒有的，包含 list, factor, ordered factor, data frame, ts，也可以自建資料型態</li></ol><a id="more"></a><h2 id="下載與安裝"><a href="#下載與安裝" class="headerlink" title="下載與安裝"></a>下載與安裝</h2><p>安裝 R 就兩個重點</p><ol><li>安裝 R 語言的環境</li><li>安裝 RStudio 開發工具</li></ol><h3 id="安裝-R-語言的環境"><a href="#安裝-R-語言的環境" class="headerlink" title="安裝 R 語言的環境"></a>安裝 R 語言的環境</h3><ul><li><p>請先進入 <a href="https://www.r-project.org/" target="_blank" rel="noopener">R 網站</a>，就會像下方的頁面：</p><p><img src="/images/r/1.png" alt=""></p></li><li><p>進入 <a href="https://ftp.yzu.edu.tw/CRAN/index.html" target="_blank" rel="noopener">Download CRAN 的 Taiwan 站點</a>，R 語言提供了 Windows, Linux, Mac 三個版本安裝程式，在這邊是用 Mac 版本進行介紹，如下方的頁面：</p><p><img src="/images/r/3.png" alt=""></p><p>選擇 <code>Download R for (Mac) OS X</code> 連結後，點選 <code>R-3.4.2.pkg</code> 就下載套件包</p><p><img src="/images/r/2.png" alt=""></p></li><li><p>安裝完之後打開 RGui 介面，輸入 <code>123 + 456</code> 就可以得到 <code>579</code> 答案</p><p><img src="/images/r/4.png" alt=""></p></li></ul><h3 id="安裝-RStudio-開發工具"><a href="#安裝-RStudio-開發工具" class="headerlink" title="安裝 RStudio 開發工具"></a>安裝 RStudio 開發工具</h3><ul><li><p>請進入 <a href="https://www.rstudio.com/products/rstudio/download/" target="_blank" rel="noopener">RStudio 網站</a></p><p><img src="/images/r/6.png" alt=""></p><p>點選 [RSutdio 下載(<a href="https://www.rstudio.com/products/RStudio/" target="_blank" rel="noopener">https://www.rstudio.com/products/RStudio/</a>) 選擇 <code>RStudio 1.1.383 - Mac OS X 10.6+ (64-bit)</code> ，將它安裝起來</p><p><img src="/images/r/5.png" alt=""></p></li><li><p>安裝完畢後打開 RStudio 軟體，可以發現有四個區塊可以使用</p><ol><li>左上角：程式撰寫的位置</li><li>左下角：控制 Console, 命令列 Terminal ，就跟 RGui 打開來的介面一樣，執行程式結果的位置</li><li>右上角：環境 Environment, 歷史 History, 連線 Connections 可以觀察變數狀態，以及輸入過哪些指令的歷史紀錄</li><li>右下角：檔案工作目錄 File, 圖形化 Plots, 套件 Packages, 查詢 Help, 預覽 Viewer</li></ol><p><img src="/images/r/7.png" alt=""></p></li></ul><p>這樣子我們就把 R 語言的開發環境安裝完畢了。</p><h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul><li><a href="https://zh.wikipedia.org/zh-tw/R%E8%AF%AD%E8%A8%80" target="_blank" rel="noopener">R 語言維基百科</a></li><li>R Studio <a href="https://www.rstudio.com/" target="_blank" rel="noopener">https://www.rstudio.com/</a></li><li>R Project <a href="https://www.r-project.org/" target="_blank" rel="noopener">https://www.r-project.org/</a></li></ul>]]></content>
     
     <summary type="html">
     
@@ -327,35 +127,11 @@
     <published>2017-09-09T00:00:00.000Z</published>
     <updated>2017-10-08T03:57:02.000Z</updated>
     
-    <content type="html"><![CDATA[<p>書名：<a href="http://www.books.com.tw/products/0010498894" target="_blank" rel="external">《富爸爸，有錢有理：神奇的現金流象限》</a><br>原文作者：Robert T. Kiyosaki、Sharon L. Lechter<br>譯者：龍秀<br>出版社：高寶<br>出版日期：2011/04/27</p>
-<h3 id="為甚麼選這本書"><a href="#為甚麼選這本書" class="headerlink" title="為甚麼選這本書"></a>為甚麼選這本書</h3><p>這本書一直放在我的書架上很久很久了，有天在整理書架閱讀了一下摘要，會有一種為何不早點讀這本書的感覺。經常覺得為什麼有錢人可以輕鬆的工作，為什麼有些人再怎麼努力就也只能滿足生活開支的收入，我想應該世界是很公平的只是需要思考怎麼賺錢這件事情，因為有錢有理！那麼想解開這個謎題，就先看看這本書來改變你對錢的看法吧。</p>
-<a id="more"></a>
-<h3 id="讀後分享"><a href="#讀後分享" class="headerlink" title="讀後分享"></a>讀後分享</h3><p>「E、S、B、I 象限」是這本書一直提到的核心價值，這分別是不同現金流的人，通常一個人會處在一到兩項左右的角色，而這也決定了你的現金來源，分別的意思是：</p>
-<ul>
-<li>E 一般僱員、打工族：為他人工作 (受僱於他人，也就是領薪水的人)</li>
-<li>S 自由工作者、專家：你為自己工作 (跟一般僱員都是在象限的左邊)</li>
-<li>B 企業家：自己獨立的事業 (雇用員工替自己做更重要的事情)</li>
-<li>I 投資者：用錢來賺錢 (投資什麼呢？投資 B 的人)</li>
-</ul>
-<p>排列就像下圖所示：</p>
-<p><img src="/images/books/1.png" alt=""></p>
-<p>故事裡面的角色主要是主角本身跟富爸爸、窮爸爸的對話來做了思維與價值觀上的區別，窮爸爸的背景是個高知識份子，希望主角是一個「萬般皆下品，惟有讀書高」的觀念來指引主角用功唸書，以後從學校畢業之後可以找一份好的工作，也關心職業的保障與福利，相對而言比較保守許多。而富爸爸則是雖然沒有受到太多的教育，但是提出了很多不同的看法，希望主角可以努力的朝向象限右側的人，注重自由的理想生活。</p>
-<p>這本書的用意是在於如果你本身是在 E 或是 S 的人，就努力成為右側的人，那麼要在什麼時候在怎樣才是在對的情況下用現金流為自己工作，也就是用錢來幫你賺錢，以下是書本的建議步驟：</p>
-<ul>
-<li>第一步：考慮你的事業的時候到了：你應該設定自己的財務目標</li>
-<li>第二步：控制你的現金流：控制現金流之前，先了解自己的財產</li>
-<li>第三步：瞭解風險和有風險之間的區別：多增加市場敏感度，了解財務的知識，以及風險</li>
-<li>第四步：決定你想成為哪種類型的投資者：保守？積極？保守又積極？</li>
-<li>第五步：尋找導師：有時候需要找 seafood</li>
-<li>第六步：將失望轉化成力量：遇到挫折就知道該怎麼在挫折中成長，這樣進步更快</li>
-<li>第七步：信心的力量</li>
-</ul>
-<p>這本書是一本值得閱讀的好書而且又收穫滿滿，對事情思維與看法都不一樣了，越年輕的時候如果提早有這樣想法的話，也許未來的美好人生更是慢慢踏實了起來。</p>
-]]></content>
+    <content type="html"><![CDATA[<p>書名：<a href="http://www.books.com.tw/products/0010498894" target="_blank" rel="noopener">《富爸爸，有錢有理：神奇的現金流象限》</a><br>原文作者：Robert T. Kiyosaki、Sharon L. Lechter<br>譯者：龍秀<br>出版社：高寶<br>出版日期：2011/04/27</p><h3 id="為甚麼選這本書"><a href="#為甚麼選這本書" class="headerlink" title="為甚麼選這本書"></a>為甚麼選這本書</h3><p>這本書一直放在我的書架上很久很久了，有天在整理書架閱讀了一下摘要，會有一種為何不早點讀這本書的感覺。經常覺得為什麼有錢人可以輕鬆的工作，為什麼有些人再怎麼努力就也只能滿足生活開支的收入，我想應該世界是很公平的只是需要思考怎麼賺錢這件事情，因為有錢有理！那麼想解開這個謎題，就先看看這本書來改變你對錢的看法吧。</p><a id="more"></a><h3 id="讀後分享"><a href="#讀後分享" class="headerlink" title="讀後分享"></a>讀後分享</h3><p>「E、S、B、I 象限」是這本書一直提到的核心價值，這分別是不同現金流的人，通常一個人會處在一到兩項左右的角色，而這也決定了你的現金來源，分別的意思是：</p><ul><li>E 一般僱員、打工族：為他人工作 (受僱於他人，也就是領薪水的人)</li><li>S 自由工作者、專家：你為自己工作 (跟一般僱員都是在象限的左邊)</li><li>B 企業家：自己獨立的事業 (雇用員工替自己做更重要的事情)</li><li>I 投資者：用錢來賺錢 (投資什麼呢？投資 B 的人)</li></ul><p>排列就像下圖所示：</p><p><img src="/images/books/1.png" alt=""></p><p>故事裡面的角色主要是主角本身跟富爸爸、窮爸爸的對話來做了思維與價值觀上的區別，窮爸爸的背景是個高知識份子，希望主角是一個「萬般皆下品，惟有讀書高」的觀念來指引主角用功唸書，以後從學校畢業之後可以找一份好的工作，也關心職業的保障與福利，相對而言比較保守許多。而富爸爸則是雖然沒有受到太多的教育，但是提出了很多不同的看法，希望主角可以努力的朝向象限右側的人，注重自由的理想生活。</p><p>這本書的用意是在於如果你本身是在 E 或是 S 的人，就努力成為右側的人，那麼要在什麼時候在怎樣才是在對的情況下用現金流為自己工作，也就是用錢來幫你賺錢，以下是書本的建議步驟：</p><ul><li>第一步：考慮你的事業的時候到了：你應該設定自己的財務目標</li><li>第二步：控制你的現金流：控制現金流之前，先了解自己的財產</li><li>第三步：瞭解風險和有風險之間的區別：多增加市場敏感度，了解財務的知識，以及風險</li><li>第四步：決定你想成為哪種類型的投資者：保守？積極？保守又積極？</li><li>第五步：尋找導師：有時候需要找 seafood</li><li>第六步：將失望轉化成力量：遇到挫折就知道該怎麼在挫折中成長，這樣進步更快</li><li>第七步：信心的力量</li></ul><p>這本書是一本值得閱讀的好書而且又收穫滿滿，對事情思維與看法都不一樣了，越年輕的時候如果提早有這樣想法的話，也許未來的美好人生更是慢慢踏實了起來。</p>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;書名：&lt;a href=&quot;http://www.books.com.tw/products/0010498894&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;《富爸爸，有錢有理：神奇的現金流象限》&lt;/a&gt;&lt;br&gt;原文作者：Robert T. Kiyosaki、Sharon L. Lechter&lt;br&gt;譯者：龍秀&lt;br&gt;出版社：高寶&lt;br&gt;出版日期：2011/04/27&lt;/p&gt;
+      &lt;p&gt;書名：&lt;a href=&quot;http://www.books.com.tw/products/0010498894&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;《富爸爸，有錢有理：神奇的現金流象限》&lt;/a&gt;&lt;br&gt;原文作者：Robert T. Kiyosaki、Sharon L. Lechter&lt;br&gt;譯者：龍秀&lt;br&gt;出版社：高寶&lt;br&gt;出版日期：2011/04/27&lt;/p&gt;
 &lt;h3 id=&quot;為甚麼選這本書&quot;&gt;&lt;a href=&quot;#為甚麼選這本書&quot; class=&quot;headerlink&quot; title=&quot;為甚麼選這本書&quot;&gt;&lt;/a&gt;為甚麼選這本書&lt;/h3&gt;&lt;p&gt;這本書一直放在我的書架上很久很久了，有天在整理書架閱讀了一下摘要，會有一種為何不早點讀這本書的感覺。經常覺得為什麼有錢人可以輕鬆的工作，為什麼有些人再怎麼努力就也只能滿足生活開支的收入，我想應該世界是很公平的只是需要思考怎麼賺錢這件事情，因為有錢有理！那麼想解開這個謎題，就先看看這本書來改變你對錢的看法吧。&lt;/p&gt;
     
     </summary>
@@ -374,25 +150,7 @@
     <published>2017-09-05T16:34:11.000Z</published>
     <updated>2017-10-20T06:14:53.000Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="學習目標"><a href="#學習目標" class="headerlink" title="學習目標"></a>學習目標</h3><p>學習如何計算矩陣相乘以及R語言的用法</p>
-<h3 id="矩陣相乘法"><a href="#矩陣相乘法" class="headerlink" title="矩陣相乘法"></a>矩陣相乘法</h3><p>兩個矩陣必須滿足 A 矩陣的<code>行數</code>等於 B 矩陣的<code>列數</code>才可以相乘。在這邊用一個簡單的例子介紹矩陣相乘法的運算</p>
-<p>$$A_{3*2}=\begin{bmatrix}1 &amp; 2\\ 3 &amp; 4\\ 5 &amp; 6\end{bmatrix}$$</p>
-<p>$$B_{2*3}=\begin{bmatrix}7 &amp; 8 &amp; 9\\ 10 &amp; 11 &amp; 12\end{bmatrix}$$</p>
-<p>則：</p>
-<p>$A \times B = \begin{bmatrix}1 \times 7 + 2 \times 10 &amp; 1 \times 8 + 2 \times 11 &amp; 1 \times 9 + 2 \ \times 12\\3 \times 7 + 4 \times 10 &amp; 3 \times 8 + 4 \times 11 &amp; 3 \times 9 + 4 \times 12\\5 \times 7 + 6 \times 10 &amp; 5 \times 8 + 6 \times 11 &amp; 5 \times 9 + 6 \times 12\end{bmatrix} = \begin{bmatrix}27 &amp; 30 &amp; 33\\61 &amp; 68 &amp; 75\\95 &amp; 106 &amp; 117\end{bmatrix}$</p>
-<p>那麼用 R 語法又是怎麼寫呢？</p>
-<a id="more"></a>
-<h3 id="使用-R-語言運算"><a href="#使用-R-語言運算" class="headerlink" title="使用 R 語言運算"></a>使用 R 語言運算</h3><p>已知如上述的矩陣 A 裡面的矩陣是 <code>1,3,5,2,4,6</code>, 而 B 裡面的矩陣是 <code>7,10,8,11,9,12</code>，我們運用 matrix 將矩陣建立起來</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; A&lt;-matrix(c(1,3,5,2,4,6), nrow = 3)</div><div class="line">&gt; B&lt;-matrix(c(7,10,8,11,9,12), nrow = 2)</div></pre></td></tr></table></figure>
-<p>如下所示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&gt; A&lt;-matrix(c(1,3,5,2,4,6), nrow = 3)</div><div class="line">&gt; A</div><div class="line">     [,1] [,2]</div><div class="line">[1,]    1    2</div><div class="line">[2,]    3    4</div><div class="line">[3,]    5    6</div><div class="line">&gt; B&lt;-matrix(c(7,10,8,11,9,12), nrow = 2)</div><div class="line">&gt; B</div><div class="line">     [,1] [,2] [,3]</div><div class="line">[1,]    7    8    9</div><div class="line">[2,]   10   11   12</div></pre></td></tr></table></figure>
-<p>相乘的話就用 <code>A%*%B</code> ，結果如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt; A%*%B</div><div class="line">     [,1] [,2] [,3]</div><div class="line">[1,]   27   30   33</div><div class="line">[2,]   61   68   75</div><div class="line">[3,]   95  106  117</div></pre></td></tr></table></figure>
-<h3 id="不能只用-嗎？"><a href="#不能只用-嗎？" class="headerlink" title="不能只用 * 嗎？"></a>不能只用 <code>*</code> 嗎？</h3><p>如果你想要只有使用 <code>*</code> 的話，那麼就要兩個矩陣的行列都要一樣，否則會出現錯誤是 <code>Error in A * B : 非調和陣列</code>。要使用 <code>*</code> 我們修改一下上面的例子，在 B 的 matrix 參數將 nrow 改為 3</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&gt; A&lt;-matrix(c(1,3,5,2,4,6), nrow = 3)</div><div class="line">&gt; A</div><div class="line">     [,1] [,2]</div><div class="line">[1,]    1    2</div><div class="line">[2,]    3    4</div><div class="line">[3,]    5    6</div><div class="line">&gt; B&lt;-matrix(c(7,10,8,11,9,12), nrow = 3)</div><div class="line">&gt; B</div><div class="line">     [,1] [,2]</div><div class="line">[1,]    7   11</div><div class="line">[2,]   10    9</div><div class="line">[3,]    8   12</div></pre></td></tr></table></figure>
-<p>接著就可以直接相乘了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt; A*B</div><div class="line">     [,1] [,2]</div><div class="line">[1,]    7   22</div><div class="line">[2,]   30   36</div><div class="line">[3,]   40   72</div></pre></td></tr></table></figure>
-]]></content>
+    <content type="html"><![CDATA[<h3 id="學習目標"><a href="#學習目標" class="headerlink" title="學習目標"></a>學習目標</h3><p>學習如何計算矩陣相乘以及R語言的用法</p><h3 id="矩陣相乘法"><a href="#矩陣相乘法" class="headerlink" title="矩陣相乘法"></a>矩陣相乘法</h3><p>兩個矩陣必須滿足 A 矩陣的<code>行數</code>等於 B 矩陣的<code>列數</code>才可以相乘。在這邊用一個簡單的例子介紹矩陣相乘法的運算</p><p>$$A_{3*2}=\begin{bmatrix}1 &amp; 2\\ 3 &amp; 4\\ 5 &amp; 6\end{bmatrix}$$</p><p>$$B_{2*3}=\begin{bmatrix}7 &amp; 8 &amp; 9\\ 10 &amp; 11 &amp; 12\end{bmatrix}$$</p><p>則：</p><p>$A \times B = \begin{bmatrix}1 \times 7 + 2 \times 10 &amp; 1 \times 8 + 2 \times 11 &amp; 1 \times 9 + 2 \ \times 12\\3 \times 7 + 4 \times 10 &amp; 3 \times 8 + 4 \times 11 &amp; 3 \times 9 + 4 \times 12\\5 \times 7 + 6 \times 10 &amp; 5 \times 8 + 6 \times 11 &amp; 5 \times 9 + 6 \times 12\end{bmatrix} = \begin{bmatrix}27 &amp; 30 &amp; 33\\61 &amp; 68 &amp; 75\\95 &amp; 106 &amp; 117\end{bmatrix}$</p><p>那麼用 R 語法又是怎麼寫呢？</p><a id="more"></a><h3 id="使用-R-語言運算"><a href="#使用-R-語言運算" class="headerlink" title="使用 R 語言運算"></a>使用 R 語言運算</h3><p>已知如上述的矩陣 A 裡面的矩陣是 <code>1,3,5,2,4,6</code>, 而 B 裡面的矩陣是 <code>7,10,8,11,9,12</code>，我們運用 matrix 將矩陣建立起來</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; A&lt;-matrix(c(1,3,5,2,4,6), nrow = 3)</span><br><span class="line">&gt; B&lt;-matrix(c(7,10,8,11,9,12), nrow = 2)</span><br></pre></td></tr></table></figure><p>如下所示：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt; A&lt;-matrix(c(1,3,5,2,4,6), nrow = 3)</span><br><span class="line">&gt; A</span><br><span class="line">     [,1] [,2]</span><br><span class="line">[1,]    1    2</span><br><span class="line">[2,]    3    4</span><br><span class="line">[3,]    5    6</span><br><span class="line">&gt; B&lt;-matrix(c(7,10,8,11,9,12), nrow = 2)</span><br><span class="line">&gt; B</span><br><span class="line">     [,1] [,2] [,3]</span><br><span class="line">[1,]    7    8    9</span><br><span class="line">[2,]   10   11   12</span><br></pre></td></tr></table></figure><p>相乘的話就用 <code>A%*%B</code> ，結果如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; A%*%B</span><br><span class="line">     [,1] [,2] [,3]</span><br><span class="line">[1,]   27   30   33</span><br><span class="line">[2,]   61   68   75</span><br><span class="line">[3,]   95  106  117</span><br></pre></td></tr></table></figure><h3 id="不能只用-嗎？"><a href="#不能只用-嗎？" class="headerlink" title="不能只用 * 嗎？"></a>不能只用 <code>*</code> 嗎？</h3><p>如果你想要只有使用 <code>*</code> 的話，那麼就要兩個矩陣的行列都要一樣，否則會出現錯誤是 <code>Error in A * B : 非調和陣列</code>。要使用 <code>*</code> 我們修改一下上面的例子，在 B 的 matrix 參數將 nrow 改為 3</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt; A&lt;-matrix(c(1,3,5,2,4,6), nrow = 3)</span><br><span class="line">&gt; A</span><br><span class="line">     [,1] [,2]</span><br><span class="line">[1,]    1    2</span><br><span class="line">[2,]    3    4</span><br><span class="line">[3,]    5    6</span><br><span class="line">&gt; B&lt;-matrix(c(7,10,8,11,9,12), nrow = 3)</span><br><span class="line">&gt; B</span><br><span class="line">     [,1] [,2]</span><br><span class="line">[1,]    7   11</span><br><span class="line">[2,]   10    9</span><br><span class="line">[3,]    8   12</span><br></pre></td></tr></table></figure><p>接著就可以直接相乘了</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; A*B</span><br><span class="line">     [,1] [,2]</span><br><span class="line">[1,]    7   22</span><br><span class="line">[2,]   30   36</span><br><span class="line">[3,]   40   72</span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
@@ -420,24 +178,11 @@
     <published>2017-09-02T10:07:51.000Z</published>
     <updated>2017-10-20T09:09:59.000Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="「大盤指數」計算方式"><a href="#「大盤指數」計算方式" class="headerlink" title="「大盤指數」計算方式"></a>「大盤指數」計算方式</h3><p>台股用的是「發行量加權股價」指數，簡單來講就是股市的所有公司加起來值多少錢。股本較大的公司對大盤指數影響比較大，權重也比較大，通常都叫權值股，可以到 <a href="http://www.taifex.com.tw/chinese/9/9_7_1.asp" target="_blank" rel="external">臺灣證券交易所發行量加權股價指數成分股暨市值比重</a> 查到目前市值佔大盤比重，較大的前幾名，第一名是台積電，第二名是鴻海，第三名是台塑化，所以如果前幾名的市值大的公司上漲，整個大盤也幾乎就是上漲的現象。</p>
-<a id="more"></a>
-<h4 id="公司的市值以台積電為例"><a href="#公司的市值以台積電為例" class="headerlink" title="公司的市值以台積電為例"></a>公司的市值以台積電為例</h4><p>公式：市值 = 當日的收盤價 x 當日流通的股數</p>
-<p>已知台積電流通的股數是 259 億股 (<a href="https://goodinfo.tw/StockInfo/BasicInfo.asp?STOCK_ID=2330" target="_blank" rel="external">台積電發行股數</a>)，以及 2017/10/06 收盤價是 224.5 元</p>
-<p>那麼台積電的市值就是 224.5 x 259 億股，以每股面值 10 元來說，目前市值大概是在 5.82 兆元</p>
-<h3 id="一天的漲跌"><a href="#一天的漲跌" class="headerlink" title="一天的漲跌"></a>一天的漲跌</h3><p>通常在上午九點開始開盤，下午一點半收盤，一整天下來的漲跌以 10% 為限，也就是說假設前一天的收盤價如果是在 20 元的話，隔天的開盤最多能漲到 22 元，下跌的部分只能跌到 18 元，除了看台股以外，國際股市與台股的連動關係，台股大部分都以電子股為交易主軸，舉個例來說經常聽到蘋果科技公司的股價表現，會影響到台股的表現，相對的影響其他供應商的股價</p>
-<h3 id="台股上櫃與上市申請條件比較表"><a href="#台股上櫃與上市申請條件比較表" class="headerlink" title="台股上櫃與上市申請條件比較表"></a>台股上櫃與上市申請條件比較表</h3><p>台股依照交易形式分別了集中市場、店頭市場、興櫃市場，那麼許多公司在申請上市上櫃的時候的一些條件可以看如下圖：</p>
-<p><img src="/images/stock/1.png" alt=""></p>
-<p>參考資料來源：</p>
-<ul>
-<li><a href="http://www.tpex.org.tw/web/service/sotck_info/comparison/apply_comparison.php?l=zh-tw" target="_blank" rel="external">證券櫃檯買賣中心:股票上櫃與上市申請條件比較表</a></li>
-<li><a href="http://www.taifex.com.tw/chinese/9/9_7_1.asp" target="_blank" rel="external">臺灣證券交易所發行量加權股價指數成分股暨市值比重</a></li>
-</ul>
-]]></content>
+    <content type="html"><![CDATA[<h3 id="「大盤指數」計算方式"><a href="#「大盤指數」計算方式" class="headerlink" title="「大盤指數」計算方式"></a>「大盤指數」計算方式</h3><p>台股用的是「發行量加權股價」指數，簡單來講就是股市的所有公司加起來值多少錢。股本較大的公司對大盤指數影響比較大，權重也比較大，通常都叫權值股，可以到 <a href="http://www.taifex.com.tw/chinese/9/9_7_1.asp" target="_blank" rel="noopener">臺灣證券交易所發行量加權股價指數成分股暨市值比重</a> 查到目前市值佔大盤比重，較大的前幾名，第一名是台積電，第二名是鴻海，第三名是台塑化，所以如果前幾名的市值大的公司上漲，整個大盤也幾乎就是上漲的現象。</p><a id="more"></a><h4 id="公司的市值以台積電為例"><a href="#公司的市值以台積電為例" class="headerlink" title="公司的市值以台積電為例"></a>公司的市值以台積電為例</h4><p>公式：市值 = 當日的收盤價 x 當日流通的股數</p><p>已知台積電流通的股數是 259 億股 (<a href="https://goodinfo.tw/StockInfo/BasicInfo.asp?STOCK_ID=2330" target="_blank" rel="noopener">台積電發行股數</a>)，以及 2017/10/06 收盤價是 224.5 元</p><p>那麼台積電的市值就是 224.5 x 259 億股，以每股面值 10 元來說，目前市值大概是在 5.82 兆元</p><h3 id="一天的漲跌"><a href="#一天的漲跌" class="headerlink" title="一天的漲跌"></a>一天的漲跌</h3><p>通常在上午九點開始開盤，下午一點半收盤，一整天下來的漲跌以 10% 為限，也就是說假設前一天的收盤價如果是在 20 元的話，隔天的開盤最多能漲到 22 元，下跌的部分只能跌到 18 元，除了看台股以外，國際股市與台股的連動關係，台股大部分都以電子股為交易主軸，舉個例來說經常聽到蘋果科技公司的股價表現，會影響到台股的表現，相對的影響其他供應商的股價</p><h3 id="台股上櫃與上市申請條件比較表"><a href="#台股上櫃與上市申請條件比較表" class="headerlink" title="台股上櫃與上市申請條件比較表"></a>台股上櫃與上市申請條件比較表</h3><p>台股依照交易形式分別了集中市場、店頭市場、興櫃市場，那麼許多公司在申請上市上櫃的時候的一些條件可以看如下圖：</p><p><img src="/images/stock/1.png" alt=""></p><p>參考資料來源：</p><ul><li><a href="http://www.tpex.org.tw/web/service/sotck_info/comparison/apply_comparison.php?l=zh-tw" target="_blank" rel="noopener">證券櫃檯買賣中心:股票上櫃與上市申請條件比較表</a></li><li><a href="http://www.taifex.com.tw/chinese/9/9_7_1.asp" target="_blank" rel="noopener">臺灣證券交易所發行量加權股價指數成分股暨市值比重</a></li></ul>]]></content>
     
     <summary type="html">
     
-      &lt;h3 id=&quot;「大盤指數」計算方式&quot;&gt;&lt;a href=&quot;#「大盤指數」計算方式&quot; class=&quot;headerlink&quot; title=&quot;「大盤指數」計算方式&quot;&gt;&lt;/a&gt;「大盤指數」計算方式&lt;/h3&gt;&lt;p&gt;台股用的是「發行量加權股價」指數，簡單來講就是股市的所有公司加起來值多少錢。股本較大的公司對大盤指數影響比較大，權重也比較大，通常都叫權值股，可以到 &lt;a href=&quot;http://www.taifex.com.tw/chinese/9/9_7_1.asp&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;臺灣證券交易所發行量加權股價指數成分股暨市值比重&lt;/a&gt; 查到目前市值佔大盤比重，較大的前幾名，第一名是台積電，第二名是鴻海，第三名是台塑化，所以如果前幾名的市值大的公司上漲，整個大盤也幾乎就是上漲的現象。&lt;/p&gt;
+      &lt;h3 id=&quot;「大盤指數」計算方式&quot;&gt;&lt;a href=&quot;#「大盤指數」計算方式&quot; class=&quot;headerlink&quot; title=&quot;「大盤指數」計算方式&quot;&gt;&lt;/a&gt;「大盤指數」計算方式&lt;/h3&gt;&lt;p&gt;台股用的是「發行量加權股價」指數，簡單來講就是股市的所有公司加起來值多少錢。股本較大的公司對大盤指數影響比較大，權重也比較大，通常都叫權值股，可以到 &lt;a href=&quot;http://www.taifex.com.tw/chinese/9/9_7_1.asp&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;臺灣證券交易所發行量加權股價指數成分股暨市值比重&lt;/a&gt; 查到目前市值佔大盤比重，較大的前幾名，第一名是台積電，第二名是鴻海，第三名是台塑化，所以如果前幾名的市值大的公司上漲，整個大盤也幾乎就是上漲的現象。&lt;/p&gt;
     
     </summary>
     
@@ -449,48 +194,13 @@
   </entry>
   
   <entry>
-    <title>資料探勘#1 - 認識資料探勘</title>
-    <link href="https://weijutu.github.io/2017/09/02/dm/dm-001-start/"/>
-    <id>https://weijutu.github.io/2017/09/02/dm/dm-001-start/</id>
-    <published>2017-09-02T03:07:51.000Z</published>
-    <updated>2017-09-02T03:38:51.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>資料探勘 Data Mining 一個技術演進的議題，廣義的觀點是資料探勘是從大量資料裡面挖掘出有意義的模式的過程，也有另一種說法是資料探勘跟資料庫知識發現 (KDD)具有同義詞的意思，而 KDD 的意思是「從資料中辨別有效的、新穎的、潛在有用的、最終可理解的模式的過程」、資料探勘是「KDD通過特定的演算法在可接受的計算效率限制內生成特定模式的一個步驟」(資料來源：wiki <a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98" target="_blank" rel="external">https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98</a>)</p>
-<a id="more"></a>
-<h3 id="為什麼需要資料探勘？"><a href="#為什麼需要資料探勘？" class="headerlink" title="為什麼需要資料探勘？"></a>為什麼需要資料探勘？</h3><p>從早期我們知道的原始資料處理進而發展資料庫管理系統  (DBMS，可以透過SQL查詢語言取得一個關聯子集，例如：查詢今天的訂單數，就能夠過 count 這類的聚合函數來查詢)，透過數據得出一個分析結果方便地用在有效的決策上面，但是，到這邊為甚麼還需要資料探勘呢？因為，正所謂「科技始終來自於人性」、柏拉圖說的「需求是發明之母」，我們周遭都是數字、資料、分析、紀錄各種資訊，這些數字的快速增長，讓大數據的時代需要找出有價值的資訊，然後把這些資訊經過擷取、分析進而轉化成知識。</p>
-<h3 id="garbage-in-garbage-out-GIGO-垃圾進，垃圾出"><a href="#garbage-in-garbage-out-GIGO-垃圾進，垃圾出" class="headerlink" title="garbage in, garbage out. (GIGO) 垃圾進，垃圾出"></a>garbage in, garbage out. (GIGO) 垃圾進，垃圾出</h3><p>到底什麼才是獲得有價值的資訊？資料的來源、整理、擷取相當的重要，有句名言「garbage in, garbage out.」也就是說拿著無用的資料、有誤差的資訊輸入進電腦裡面，卻得到不能使用的結果，因此輸入時需要刪除不一致、無意義的資料，在資料的準確度做個嚴格把關。</p>
-<h4 id="挖掘什麼類型的資料或模式呢？"><a href="#挖掘什麼類型的資料或模式呢？" class="headerlink" title="挖掘什麼類型的資料或模式呢？"></a>挖掘什麼類型的資料或模式呢？</h4><p>資料探勘可以用在很多類型的資料，包含資料庫、Web、資料倉儲、OLTP 線上分析處理 、有序/序列資料、時間序列分析、多媒體等等。至於模式的話，有許多的觀點可以採用，像是特徵型、關聯、相關性的探勘、分類、回歸分析、離散、預測、群聚 (clustering) 等等。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;資料探勘 Data Mining 一個技術演進的議題，廣義的觀點是資料探勘是從大量資料裡面挖掘出有意義的模式的過程，也有另一種說法是資料探勘跟資料庫知識發現 (KDD)具有同義詞的意思，而 KDD 的意思是「從資料中辨別有效的、新穎的、潛在有用的、最終可理解的模式的過程」、資料探勘是「KDD通過特定的演算法在可接受的計算效率限制內生成特定模式的一個步驟」(資料來源：wiki &lt;a href=&quot;https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98&lt;/a&gt;)&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="資料探勘" scheme="https://weijutu.github.io/categories/%E8%B3%87%E6%96%99%E6%8E%A2%E5%8B%98/"/>
-    
-    
-      <category term="data mining" scheme="https://weijutu.github.io/tags/data-mining/"/>
-    
-  </entry>
-  
-  <entry>
     <title>股典閱#1 - 認識投資概念</title>
     <link href="https://weijutu.github.io/2017/09/01/stock/stock-001-concept/"/>
     <id>https://weijutu.github.io/2017/09/01/stock/stock-001-concept/</id>
     <published>2017-09-01T10:07:51.000Z</published>
     <updated>2017-10-20T09:09:36.000Z</updated>
     
-    <content type="html"><![CDATA[<p>「人兩腳，錢四腳」</p>
-<p>不知道你有沒有聽過這句話呢？意思是人追不上錢的速度，經常想著一天小時一共有 1440 分鐘，每一分鐘比起來怎麼差這麼多，為什麼有錢人賺的錢總是看不到他們的車尾燈似的迅速擴張他們的資產。</p>
-<p>我想，人人都需要了解投資，未必是身為金融科系的人才能了解，投資一直在我們生活當中，也必須了解投資這件事，而投資這件事情喔，通常分成了實質的投資跟金融的投資，前者的投資就是房地產、投資廠房設備、珠寶這一類的，後者就像是投資股票、債券等等的金融商品，投資正因為如此，所以有錢人善用了這些手法讓投資標的有成長的發揮，這篇文章是股典閱的第一集，想先讓大家認識一下投資的概念。</p>
-<a id="more"></a>
-<h3 id="投資一定有風險，基金投資有賺有賠，申購前應詳閱公開說明書"><a href="#投資一定有風險，基金投資有賺有賠，申購前應詳閱公開說明書" class="headerlink" title="投資一定有風險，基金投資有賺有賠，申購前應詳閱公開說明書"></a>投資一定有風險，基金投資有賺有賠，申購前應詳閱公開說明書</h3><p>這句廣告台詞真的透過廣告播送，整個朗朗上口了啦。投資因為有了供給需求存在的關係，整個經濟活動就形成了金融市場，舉例來說公司發行金融工具比如股票，讓有資金的人來認購，資金的需求者收到錢之後就能夠做最有效的運用了。那風險呢？我要怎麼避免風險發生？先別急，我們需要了解投資可能會遇到的各種議題。</p>
-<h4 id="不要把雞蛋放在同一個籃子裡"><a href="#不要把雞蛋放在同一個籃子裡" class="headerlink" title="不要把雞蛋放在同一個籃子裡"></a>不要把雞蛋放在同一個籃子裡</h4><p>這個就是分散風險的概念了，投資的股票也不是天天都在上漲，也有時候是下跌的走勢，如果只有投資一款標的，當下跌時那可真的需要有強大的心臟，每個人的風險承受能力不一樣，需要找到一個適合自己的投資，可以透過將低風險的方式建立一個比較有效的投資組合喔！</p>
-<h4 id="市場的敏感度"><a href="#市場的敏感度" class="headerlink" title="市場的敏感度"></a>市場的敏感度</h4><p>把握到的機會就好好掌握，雖然這句話人人會說，但實際執行時又覺得好困難，所以要隨時關心市場動向，觀察事情的關聯性，也許就能對投資有所幫助的。</p>
-<h4 id="投資策略"><a href="#投資策略" class="headerlink" title="投資策略"></a>投資策略</h4><p>這個部分就要先評估自己有多少的籌碼，了解自己能夠承受的風險，設定停損或停利的目標並且多閱讀領域上的行情、知識， 試算出報酬數據建立屬於自己的投資策略。</p>
-]]></content>
+    <content type="html"><![CDATA[<p>「人兩腳，錢四腳」</p><p>不知道你有沒有聽過這句話呢？意思是人追不上錢的速度，經常想著一天小時一共有 1440 分鐘，每一分鐘比起來怎麼差這麼多，為什麼有錢人賺的錢總是看不到他們的車尾燈似的迅速擴張他們的資產。</p><p>我想，人人都需要了解投資，未必是身為金融科系的人才能了解，投資一直在我們生活當中，也必須了解投資這件事，而投資這件事情喔，通常分成了實質的投資跟金融的投資，前者的投資就是房地產、投資廠房設備、珠寶這一類的，後者就像是投資股票、債券等等的金融商品，投資正因為如此，所以有錢人善用了這些手法讓投資標的有成長的發揮，這篇文章是股典閱的第一集，想先讓大家認識一下投資的概念。</p><a id="more"></a><h3 id="投資一定有風險，基金投資有賺有賠，申購前應詳閱公開說明書"><a href="#投資一定有風險，基金投資有賺有賠，申購前應詳閱公開說明書" class="headerlink" title="投資一定有風險，基金投資有賺有賠，申購前應詳閱公開說明書"></a>投資一定有風險，基金投資有賺有賠，申購前應詳閱公開說明書</h3><p>這句廣告台詞真的透過廣告播送，整個朗朗上口了啦。投資因為有了供給需求存在的關係，整個經濟活動就形成了金融市場，舉例來說公司發行金融工具比如股票，讓有資金的人來認購，資金的需求者收到錢之後就能夠做最有效的運用了。那風險呢？我要怎麼避免風險發生？先別急，我們需要了解投資可能會遇到的各種議題。</p><h4 id="不要把雞蛋放在同一個籃子裡"><a href="#不要把雞蛋放在同一個籃子裡" class="headerlink" title="不要把雞蛋放在同一個籃子裡"></a>不要把雞蛋放在同一個籃子裡</h4><p>這個就是分散風險的概念了，投資的股票也不是天天都在上漲，也有時候是下跌的走勢，如果只有投資一款標的，當下跌時那可真的需要有強大的心臟，每個人的風險承受能力不一樣，需要找到一個適合自己的投資，可以透過將低風險的方式建立一個比較有效的投資組合喔！</p><h4 id="市場的敏感度"><a href="#市場的敏感度" class="headerlink" title="市場的敏感度"></a>市場的敏感度</h4><p>把握到的機會就好好掌握，雖然這句話人人會說，但實際執行時又覺得好困難，所以要隨時關心市場動向，觀察事情的關聯性，也許就能對投資有所幫助的。</p><h4 id="投資策略"><a href="#投資策略" class="headerlink" title="投資策略"></a>投資策略</h4><p>這個部分就要先評估自己有多少的籌碼，了解自己能夠承受的風險，設定停損或停利的目標並且多閱讀領域上的行情、知識， 試算出報酬數據建立屬於自己的投資策略。</p>]]></content>
     
     <summary type="html">
     
@@ -514,22 +224,12 @@
     <published>2017-08-29T08:08:42.000Z</published>
     <updated>2017-08-31T04:09:51.000Z</updated>
     
-    <content type="html"><![CDATA[<p>書名：<a href="http://www.books.com.tw/products/0010446893" target="_blank" rel="external">《靈界的譯者：從學生靈媒到棒球女主審的通靈之路》</a><br>作者：索非亞<br>出版社：三采<br>出版日期：2017/04/30</p>
-<h3 id="為甚麼選這本書"><a href="#為甚麼選這本書" class="headerlink" title="為甚麼選這本書"></a>為甚麼選這本書</h3><p>前陣子有一個電視劇集《通靈少女》超火的，影集內容講述一個從小就有通靈能力的真人真事故事，因為影片拍得很棒，每次影片結束的後面都留下一些伏筆，滿心期待下一集的發展，有時候實在是期待不已，很想再了解更多就開始上網爬文，《通靈少女》原來背後的主要的故事主角是索非亞的親身經歷，才發現原來有出一本<a href="http://www.books.com.tw/products/0010446893" target="_blank" rel="external">《靈界的譯者：從學生靈媒到棒球女主審的通靈之路》</a> 的書，書本的摘要來看會發覺怎麼跟我們平常經常聽到的觀念很不一樣，例如：改運有用嗎？鬼月真的鬼比較多嗎？很多很有意思的議題，顛覆了人云亦云的看法，讓我充滿好奇這本書的內容了</p>
-<a id="more"></a>
-<h3 id="讀後分享"><a href="#讀後分享" class="headerlink" title="讀後分享"></a>讀後分享</h3><p>在還沒有看過這本書之前，對一些習俗(比如：廟的儀式、拜拜之類的)其實也就是從上一輩的所言傳下來的，也不會想太多，就 follow 就是了。記得小時候看鬼話連篇的電視，那種既好奇又害怕受傷害的心，真的是害怕到拿著棉被看電視，隨時突然出現的時候，馬上可以躲在棉被裡之後接著順便尖叫…</p>
-<p>會知道索非亞這位譯者人物，是從新聞哇哇哇的節目看到這位來賓，在他描述未知世界的故事時整個很豁達又很看很開，所以對她的故事有了印象深刻。只不過發覺這本書有些故事已經在電視上講過了，整本書也看到許多相當口語化的文字，但這不就是很真實的樣子！？</p>
-<h4 id="更看的是人心層面"><a href="#更看的是人心層面" class="headerlink" title="更看的是人心層面"></a>更看的是人心層面</h4><p>為什麼遇到不順遂時會想到找宗教幫助？<br>因為宗教可以帶來安定人心的慰藉，因為未知的世界可以藉由靈媒的角色轉述得到指點迷津的指示，也因為這樣許多人也因此著迷著靈界給的答案</p>
-<p>為什麼遇到生病會想到找神明的幫助？<br>也許是自己先認為醫生解決不了的而神明能提出解決方案的處方，一定有效果! 造成的一種借助宗教的求助，而忘記可以利用科學根據的醫學來解決</p>
-<p>這本書看了之後發覺很難得有一本書能夠很直白的寫出真實故事，人在脆弱的時候，總有個理由希望透過宗教能給一個聲音之後讓自己的心更堅強一點靈媒在這個地方就扮演重要的角色了，身為靈媒的索菲亞內容揭發了許多不為人知的事</p>
-<p>不是每個人都會有這類的特殊能力，就會有時容易陷入那種好像真的是如此的錯覺感～是迷信了嗎？經常在新聞看到很多靈媒的負面消息層出不窮，利用人心脆弱的時候謀取利益，實在不是很正派的做法。</p>
-<p>有一次聽到不同信仰的人提問，「為什麼你們要拜木頭？」嗯… 有意思的問題，我想每個信仰都有一種偶像尊敬或無偶像的思想，但就是持續堅持著自己正向的面對人生的信念吧！總結一句，自己要能夠有獨立判斷對錯並且就是「心存善念」就行了。</p>
-]]></content>
+    <content type="html"><![CDATA[<p>書名：<a href="http://www.books.com.tw/products/0010446893" target="_blank" rel="noopener">《靈界的譯者：從學生靈媒到棒球女主審的通靈之路》</a><br>作者：索非亞<br>出版社：三采<br>出版日期：2017/04/30</p><h3 id="為甚麼選這本書"><a href="#為甚麼選這本書" class="headerlink" title="為甚麼選這本書"></a>為甚麼選這本書</h3><p>前陣子有一個電視劇集《通靈少女》超火的，影集內容講述一個從小就有通靈能力的真人真事故事，因為影片拍得很棒，每次影片結束的後面都留下一些伏筆，滿心期待下一集的發展，有時候實在是期待不已，很想再了解更多就開始上網爬文，《通靈少女》原來背後的主要的故事主角是索非亞的親身經歷，才發現原來有出一本<a href="http://www.books.com.tw/products/0010446893" target="_blank" rel="noopener">《靈界的譯者：從學生靈媒到棒球女主審的通靈之路》</a> 的書，書本的摘要來看會發覺怎麼跟我們平常經常聽到的觀念很不一樣，例如：改運有用嗎？鬼月真的鬼比較多嗎？很多很有意思的議題，顛覆了人云亦云的看法，讓我充滿好奇這本書的內容了</p><a id="more"></a><h3 id="讀後分享"><a href="#讀後分享" class="headerlink" title="讀後分享"></a>讀後分享</h3><p>在還沒有看過這本書之前，對一些習俗(比如：廟的儀式、拜拜之類的)其實也就是從上一輩的所言傳下來的，也不會想太多，就 follow 就是了。記得小時候看鬼話連篇的電視，那種既好奇又害怕受傷害的心，真的是害怕到拿著棉被看電視，隨時突然出現的時候，馬上可以躲在棉被裡之後接著順便尖叫…</p><p>會知道索非亞這位譯者人物，是從新聞哇哇哇的節目看到這位來賓，在他描述未知世界的故事時整個很豁達又很看很開，所以對她的故事有了印象深刻。只不過發覺這本書有些故事已經在電視上講過了，整本書也看到許多相當口語化的文字，但這不就是很真實的樣子！？</p><h4 id="更看的是人心層面"><a href="#更看的是人心層面" class="headerlink" title="更看的是人心層面"></a>更看的是人心層面</h4><p>為什麼遇到不順遂時會想到找宗教幫助？<br>因為宗教可以帶來安定人心的慰藉，因為未知的世界可以藉由靈媒的角色轉述得到指點迷津的指示，也因為這樣許多人也因此著迷著靈界給的答案</p><p>為什麼遇到生病會想到找神明的幫助？<br>也許是自己先認為醫生解決不了的而神明能提出解決方案的處方，一定有效果! 造成的一種借助宗教的求助，而忘記可以利用科學根據的醫學來解決</p><p>這本書看了之後發覺很難得有一本書能夠很直白的寫出真實故事，人在脆弱的時候，總有個理由希望透過宗教能給一個聲音之後讓自己的心更堅強一點靈媒在這個地方就扮演重要的角色了，身為靈媒的索菲亞內容揭發了許多不為人知的事</p><p>不是每個人都會有這類的特殊能力，就會有時容易陷入那種好像真的是如此的錯覺感～是迷信了嗎？經常在新聞看到很多靈媒的負面消息層出不窮，利用人心脆弱的時候謀取利益，實在不是很正派的做法。</p><p>有一次聽到不同信仰的人提問，「為什麼你們要拜木頭？」嗯… 有意思的問題，我想每個信仰都有一種偶像尊敬或無偶像的思想，但就是持續堅持著自己正向的面對人生的信念吧！總結一句，自己要能夠有獨立判斷對錯並且就是「心存善念」就行了。</p>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;書名：&lt;a href=&quot;http://www.books.com.tw/products/0010446893&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;《靈界的譯者：從學生靈媒到棒球女主審的通靈之路》&lt;/a&gt;&lt;br&gt;作者：索非亞&lt;br&gt;出版社：三采&lt;br&gt;出版日期：2017/04/30&lt;/p&gt;
-&lt;h3 id=&quot;為甚麼選這本書&quot;&gt;&lt;a href=&quot;#為甚麼選這本書&quot; class=&quot;headerlink&quot; title=&quot;為甚麼選這本書&quot;&gt;&lt;/a&gt;為甚麼選這本書&lt;/h3&gt;&lt;p&gt;前陣子有一個電視劇集《通靈少女》超火的，影集內容講述一個從小就有通靈能力的真人真事故事，因為影片拍得很棒，每次影片結束的後面都留下一些伏筆，滿心期待下一集的發展，有時候實在是期待不已，很想再了解更多就開始上網爬文，《通靈少女》原來背後的主要的故事主角是索非亞的親身經歷，才發現原來有出一本&lt;a href=&quot;http://www.books.com.tw/products/0010446893&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;《靈界的譯者：從學生靈媒到棒球女主審的通靈之路》&lt;/a&gt; 的書，書本的摘要來看會發覺怎麼跟我們平常經常聽到的觀念很不一樣，例如：改運有用嗎？鬼月真的鬼比較多嗎？很多很有意思的議題，顛覆了人云亦云的看法，讓我充滿好奇這本書的內容了&lt;/p&gt;
+      &lt;p&gt;書名：&lt;a href=&quot;http://www.books.com.tw/products/0010446893&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;《靈界的譯者：從學生靈媒到棒球女主審的通靈之路》&lt;/a&gt;&lt;br&gt;作者：索非亞&lt;br&gt;出版社：三采&lt;br&gt;出版日期：2017/04/30&lt;/p&gt;
+&lt;h3 id=&quot;為甚麼選這本書&quot;&gt;&lt;a href=&quot;#為甚麼選這本書&quot; class=&quot;headerlink&quot; title=&quot;為甚麼選這本書&quot;&gt;&lt;/a&gt;為甚麼選這本書&lt;/h3&gt;&lt;p&gt;前陣子有一個電視劇集《通靈少女》超火的，影集內容講述一個從小就有通靈能力的真人真事故事，因為影片拍得很棒，每次影片結束的後面都留下一些伏筆，滿心期待下一集的發展，有時候實在是期待不已，很想再了解更多就開始上網爬文，《通靈少女》原來背後的主要的故事主角是索非亞的親身經歷，才發現原來有出一本&lt;a href=&quot;http://www.books.com.tw/products/0010446893&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;《靈界的譯者：從學生靈媒到棒球女主審的通靈之路》&lt;/a&gt; 的書，書本的摘要來看會發覺怎麼跟我們平常經常聽到的觀念很不一樣，例如：改運有用嗎？鬼月真的鬼比較多嗎？很多很有意思的議題，顛覆了人云亦云的看法，讓我充滿好奇這本書的內容了&lt;/p&gt;
     
     </summary>
     
@@ -547,82 +247,7 @@
     <published>2017-08-25T03:45:14.000Z</published>
     <updated>2017-08-25T03:53:11.000Z</updated>
     
-    <content type="html"><![CDATA[<p><img src="/images/javascript/5.png" alt=""></p>
-<p>它是建立在 node.js 的一個套件。The streaming build system. 它的觀念是一套利用串流方式輔助建置系統，優化前端工程的效能（縮小js 檔案大小，編譯預處理的css, less ）加快js, css…etc 載入速度，特色在於代碼優於配置關做法讓事情變得更簡單，更直覺的方式構建系統。</p>
-<h3 id="什麼是字串流-Stream-（也可以叫串流）"><a href="#什麼是字串流-Stream-（也可以叫串流）" class="headerlink" title="什麼是字串流 Stream? （也可以叫串流）"></a>什麼是字串流 Stream? （也可以叫串流）</h3><p>谷歌一下Wiki 的「 Stream 」的意思：</p>
-<blockquote>
-<p>在電腦科學裡面，字串流(stream，或者串流)這個詞有很多用法。所有這一些用法都是代表一個包含資料的序列。我們可以將字串流想做是一個允許資料一個接一個，而非將資料包作一整個，來進行處理的輸送帶。</p>
-</blockquote>
-<a id="more"></a>
-<p>用個 gulp.js 的簡單例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">gulp.src(&apos;js/app.js&apos;)</div><div class="line">    .pipe(uglify())</div><div class="line">    .pipe(gulp.dest(&apos;build&apos;))</div></pre></td></tr></table></figure>
-<p>以這個例子來說，gulp.src 方法帶了一個字串參數 js/app.js，這個是對應一個主要的 js 檔案，主要是建立物件串流來表示的文件，接這透過 .pipe 方法將所有檔案做 uglify() 的動作，而這個動作將會縮小之後回傳一個新的物件，最後將這個輸出用 gulp.dest 目標位置到 build 資料夾裡面。</p>
-<p>流程會是如下：</p>
-<p><img src="/images/javascript/6.png" alt=""></p>
-<h3 id="Grunt-vs-Gulp"><a href="#Grunt-vs-Gulp" class="headerlink" title="Grunt vs Gulp"></a>Grunt vs Gulp</h3><p>Grunt.js 與 Gulp.js 都做相同的事情，都是做自動化處理，但是 Grunt 處理的方式繞了很多圈，我們可以看一下以下的比較：</p>
-<ul>
-<li>Grunt 套件執行多個任務；Gulp 只會專注做一件事情上。</li>
-<li>Grunt 需要套件的基本功能；Gulp 裡的功能已經是內建的了。</li>
-<li>Grunt 使用 JSON 方式做資料配置的文件：Gulp 使用的方式更精簡，是使用 JS 語法撰寫</li>
-</ul>
-<p>Let’s start using Gulp.</p>
-<h3 id="安裝-Node-js"><a href="#安裝-Node-js" class="headerlink" title="安裝 Node.js"></a>安裝 Node.js</h3><p>這裡我不會做太多解釋如何安裝 node.js ，安裝方式請詳見之前寫的一篇文章 「<a href="http://weijutu.github.io/2017/07/24/nodejs/nodejs-02-install/">Node.js 系列學習日誌#2 - Node.js 安裝配置</a>」</p>
-<h3 id="安裝-Gulp"><a href="#安裝-Gulp" class="headerlink" title="安裝 Gulp"></a>安裝 Gulp</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$sudo npm install gulp -g</div></pre></td></tr></table></figure>
-<p>請先確認 nodejs, npm, gulp 是否有正常安裝，我們可以驗證一下版本</p>
-<p><img src="/images/javascript/7.png" alt=""></p>
-<h3 id="建立專案"><a href="#建立專案" class="headerlink" title="建立專案"></a>建立專案</h3><p>請先建立一個資料夾，這裡叫做 gulptest 的資料夾，這裡面包含：</p>
-<ul>
-<li>src — the location of pre-processed HTML source files and folders:<ul>
-<li>images — uncompressed images</li>
-<li>scripts — multiple pre-processed script files</li>
-<li>styles — multiple pre-processed CSS files</li>
-</ul>
-</li>
-<li>build — the location of production files for upload including:<ul>
-<li>images — compressed images</li>
-<li>scripts — a single minified script file</li>
-<li>styles — a single minified CSS file</li>
-</ul>
-</li>
-</ul>
-<p>接著我們在資料夾下安裝 Gulp 套件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$npm install gulp --save-dev</div></pre></td></tr></table></figure>
-<p>在這邊它會自動建立 node_module 永久性的資料夾，裡面包含被安裝的 gulp</p>
-<p><img src="/images/javascript/8.png" alt=""></p>
-<p>最後先在 gulptest 資料夾下建立空的 gulpfile.js 檔案，之後會介紹如何使用</p>
-<h3 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h3><p>我們需要安裝與配置一個套件來執行任務，在這裡做個簡單的例子就使用一套 jshint 套件，請輸入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$npm install gulp-jshint --save-dev</div></pre></td></tr></table></figure>
-<p>然後開啟剛才建立好的 gulpfile.js，建立一個名叫 imagemin 的任務。請寫以下程式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">// include gulp</div><div class="line">var gulp = require(&apos;gulp&apos;);</div><div class="line"></div><div class="line">gulp.task(&apos;imagemin&apos;, function() &#123;</div><div class="line">  var imgSrc = &apos;./src/images/**/*&apos;,</div><div class="line">      imgDst = &apos;./build/images&apos;;</div><div class="line"></div><div class="line">  gulp.src(imgSrc)</div><div class="line">    .pipe(changed(imgDst))</div><div class="line">    .pipe(imagemin())</div><div class="line">    .pipe(gulp.dest(imgDst));</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>我在 /src/images/ 放了三張圖 (隨便到 google design 抓了三張圖，暫時找不到照片就先拿很小kb數來練啦～)</p>
-<ul>
-<li><code>components-bottomsheet-for-mobile-1a_large_mdpi.png (31kb)</code></li>
-<li><code>components-bottomsheet-for-mobile-1b_large_mdpi.png (18kb)</code></li>
-<li><code>components-bottomsheet-for-mobile-1b_large_mdpi.png (8kb)</code></li>
-</ul>
-<p><img src="/images/javascript/9.png" alt=""></p>
-<p>gulpfile.js 存檔之後用以下的命令執行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$gulp imagemin</div></pre></td></tr></table></figure>
-<p><img src="/images/javascript/10.png" alt=""></p>
-<p>注意看執行結果的最後一行，上面寫 gulp-imagemin: Minified 3 images (saved 11.23 KB - 19.5%)，意思就是節省了 11.23KB, 總體省了 19.5%</p>
-<ul>
-<li><code>components-bottomsheet-for-mobile-1a_large_mdpi.png (29kb)</code></li>
-<li><code>components-bottomsheet-for-mobile-1b_large_mdpi.png (13kb)</code></li>
-<li><code>components-bottomsheet-for-mobile-1b_large_mdpi.png (4kb)</code></li>
-</ul>
-<p>最後請到 /build/images/<em>.</em>.png 查看被壓縮結果</p>
-<p><img src="/images/javascript/11.png" alt=""></p>
-<h3 id="資料參考"><a href="#資料參考" class="headerlink" title="資料參考"></a>資料參考</h3><ul>
-<li><a href="http://david.nowinsky.net/gulp-book/" target="_blank" rel="external">Gulp-book@Gitbook</a></li>
-<li>Wikipedia: <a href="http://zh.wikipedia.org/wiki/字串流" target="_blank" rel="external">http://zh.wikipedia.org/wiki/字串流</a></li>
-</ul>
-<h3 id="備註"><a href="#備註" class="headerlink" title="備註"></a>備註</h3><ul>
-<li>gulp.task(name, fn) it registers the function with a name. you can optionally specify some dependencies if other tasks need to run first</li>
-<li>gulp.run(task) runs all tasks with maximun concurrency</li>
-<li>gulp.src(glob) this returns a readable stream. takes a file system glob(like grunt) and starts emitting files that match</li>
-<li>gulp.dest(folder) this returns a writable stream, file objects piped to this are saved to the file system</li>
-</ul>
-]]></content>
+    <content type="html"><![CDATA[<p><img src="/images/javascript/5.png" alt=""></p><p>它是建立在 node.js 的一個套件。The streaming build system. 它的觀念是一套利用串流方式輔助建置系統，優化前端工程的效能（縮小js 檔案大小，編譯預處理的css, less ）加快js, css…etc 載入速度，特色在於代碼優於配置關做法讓事情變得更簡單，更直覺的方式構建系統。</p><h3 id="什麼是字串流-Stream-（也可以叫串流）"><a href="#什麼是字串流-Stream-（也可以叫串流）" class="headerlink" title="什麼是字串流 Stream? （也可以叫串流）"></a>什麼是字串流 Stream? （也可以叫串流）</h3><p>谷歌一下Wiki 的「 Stream 」的意思：</p><blockquote><p>在電腦科學裡面，字串流(stream，或者串流)這個詞有很多用法。所有這一些用法都是代表一個包含資料的序列。我們可以將字串流想做是一個允許資料一個接一個，而非將資料包作一整個，來進行處理的輸送帶。</p></blockquote><a id="more"></a><p>用個 gulp.js 的簡單例子：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gulp.src(&apos;js/app.js&apos;)</span><br><span class="line">    .pipe(uglify())</span><br><span class="line">    .pipe(gulp.dest(&apos;build&apos;))</span><br></pre></td></tr></table></figure><p>以這個例子來說，gulp.src 方法帶了一個字串參數 js/app.js，這個是對應一個主要的 js 檔案，主要是建立物件串流來表示的文件，接這透過 .pipe 方法將所有檔案做 uglify() 的動作，而這個動作將會縮小之後回傳一個新的物件，最後將這個輸出用 gulp.dest 目標位置到 build 資料夾裡面。</p><p>流程會是如下：</p><p><img src="/images/javascript/6.png" alt=""></p><h3 id="Grunt-vs-Gulp"><a href="#Grunt-vs-Gulp" class="headerlink" title="Grunt vs Gulp"></a>Grunt vs Gulp</h3><p>Grunt.js 與 Gulp.js 都做相同的事情，都是做自動化處理，但是 Grunt 處理的方式繞了很多圈，我們可以看一下以下的比較：</p><ul><li>Grunt 套件執行多個任務；Gulp 只會專注做一件事情上。</li><li>Grunt 需要套件的基本功能；Gulp 裡的功能已經是內建的了。</li><li>Grunt 使用 JSON 方式做資料配置的文件：Gulp 使用的方式更精簡，是使用 JS 語法撰寫</li></ul><p>Let’s start using Gulp.</p><h3 id="安裝-Node-js"><a href="#安裝-Node-js" class="headerlink" title="安裝 Node.js"></a>安裝 Node.js</h3><p>這裡我不會做太多解釋如何安裝 node.js ，安裝方式請詳見之前寫的一篇文章 「<a href="http://weijutu.github.io/2017/07/24/nodejs/nodejs-02-install/">Node.js 系列學習日誌#2 - Node.js 安裝配置</a>」</p><h3 id="安裝-Gulp"><a href="#安裝-Gulp" class="headerlink" title="安裝 Gulp"></a>安裝 Gulp</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sudo npm install gulp -g</span><br></pre></td></tr></table></figure><p>請先確認 nodejs, npm, gulp 是否有正常安裝，我們可以驗證一下版本</p><p><img src="/images/javascript/7.png" alt=""></p><h3 id="建立專案"><a href="#建立專案" class="headerlink" title="建立專案"></a>建立專案</h3><p>請先建立一個資料夾，這裡叫做 gulptest 的資料夾，這裡面包含：</p><ul><li>src — the location of pre-processed HTML source files and folders:<ul><li>images — uncompressed images</li><li>scripts — multiple pre-processed script files</li><li>styles — multiple pre-processed CSS files</li></ul></li><li>build — the location of production files for upload including:<ul><li>images — compressed images</li><li>scripts — a single minified script file</li><li>styles — a single minified CSS file</li></ul></li></ul><p>接著我們在資料夾下安裝 Gulp 套件</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm install gulp --save-dev</span><br></pre></td></tr></table></figure><p>在這邊它會自動建立 node_module 永久性的資料夾，裡面包含被安裝的 gulp</p><p><img src="/images/javascript/8.png" alt=""></p><p>最後先在 gulptest 資料夾下建立空的 gulpfile.js 檔案，之後會介紹如何使用</p><h3 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h3><p>我們需要安裝與配置一個套件來執行任務，在這裡做個簡單的例子就使用一套 jshint 套件，請輸入：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm install gulp-jshint --save-dev</span><br></pre></td></tr></table></figure><p>然後開啟剛才建立好的 gulpfile.js，建立一個名叫 imagemin 的任務。請寫以下程式：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// include gulp</span><br><span class="line">var gulp = require(&apos;gulp&apos;);</span><br><span class="line"></span><br><span class="line">gulp.task(&apos;imagemin&apos;, function() &#123;</span><br><span class="line">  var imgSrc = &apos;./src/images/**/*&apos;,</span><br><span class="line">      imgDst = &apos;./build/images&apos;;</span><br><span class="line"></span><br><span class="line">  gulp.src(imgSrc)</span><br><span class="line">    .pipe(changed(imgDst))</span><br><span class="line">    .pipe(imagemin())</span><br><span class="line">    .pipe(gulp.dest(imgDst));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><p>我在 /src/images/ 放了三張圖 (隨便到 google design 抓了三張圖，暫時找不到照片就先拿很小kb數來練啦～)</p><ul><li><code>components-bottomsheet-for-mobile-1a_large_mdpi.png (31kb)</code></li><li><code>components-bottomsheet-for-mobile-1b_large_mdpi.png (18kb)</code></li><li><code>components-bottomsheet-for-mobile-1b_large_mdpi.png (8kb)</code></li></ul><p><img src="/images/javascript/9.png" alt=""></p><p>gulpfile.js 存檔之後用以下的命令執行：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$gulp imagemin</span><br></pre></td></tr></table></figure><p><img src="/images/javascript/10.png" alt=""></p><p>注意看執行結果的最後一行，上面寫 gulp-imagemin: Minified 3 images (saved 11.23 KB - 19.5%)，意思就是節省了 11.23KB, 總體省了 19.5%</p><ul><li><code>components-bottomsheet-for-mobile-1a_large_mdpi.png (29kb)</code></li><li><code>components-bottomsheet-for-mobile-1b_large_mdpi.png (13kb)</code></li><li><code>components-bottomsheet-for-mobile-1b_large_mdpi.png (4kb)</code></li></ul><p>最後請到 /build/images/<em>.</em>.png 查看被壓縮結果</p><p><img src="/images/javascript/11.png" alt=""></p><h3 id="資料參考"><a href="#資料參考" class="headerlink" title="資料參考"></a>資料參考</h3><ul><li><a href="http://david.nowinsky.net/gulp-book/" target="_blank" rel="noopener">Gulp-book@Gitbook</a></li><li>Wikipedia: <a href="http://zh.wikipedia.org/wiki/字串流" target="_blank" rel="noopener">http://zh.wikipedia.org/wiki/字串流</a></li></ul><h3 id="備註"><a href="#備註" class="headerlink" title="備註"></a>備註</h3><ul><li>gulp.task(name, fn) it registers the function with a name. you can optionally specify some dependencies if other tasks need to run first</li><li>gulp.run(task) runs all tasks with maximun concurrency</li><li>gulp.src(glob) this returns a readable stream. takes a file system glob(like grunt) and starts emitting files that match</li><li>gulp.dest(folder) this returns a writable stream, file objects piped to this are saved to the file system</li></ul>]]></content>
     
     <summary type="html">
     
@@ -649,40 +274,7 @@
     <published>2017-08-25T03:37:25.000Z</published>
     <updated>2017-08-25T03:43:16.000Z</updated>
     
-    <content type="html"><![CDATA[<p><img src="/images/achieve/1.png" alt=""></p>
-<p>Google I/O  2014 開發者大會公佈了最新的設計理念出了一份指南手冊，只單純看圖片就已經感受到強烈的設計風格，後來同事提出了一個想法，想要把指南手冊翻成非官方版的繁體中文版，由於海倫是參與翻譯的一員，在這邊也分享給大家做參考喔！</p>
-<a id="more"></a>
-<p>就這樣我跟同事還有同事的朋友，踏上了 <code>不歸路</code> 翻譯這條路，就開始協同翻譯了幾篇，我主要都是在 components 的部分，其他就順便整理英文格式的備份檔。</p>
-<p>請看翻譯的電子書：</p>
-<p><a href="http://wcc723.gitbooks.io/google_design_translate/" target="_blank" rel="external">http://wcc723.gitbooks.io/google_design_translate/</a></p>
-<h3 id="團結力量大"><a href="#團結力量大" class="headerlink" title="團結力量大"></a>團結力量大</h3><p>這電子書的出爐，拜大家努力翻譯所賜，小妹我也給予鞠躬致意，翻譯人員如下：</p>
-<ul>
-<li>Casper</li>
-<li>Charlene</li>
-<li>Frances</li>
-<li>Helen</li>
-<li>Mkdodos</li>
-<li>Tillonter Hsu</li>
-<li>Peter</li>
-<li>Xuan</li>
-<li>Xunyi</li>
-<li>陳聖博</li>
-</ul>
-<h3 id="翻譯時還要一些工具的幫忙"><a href="#翻譯時還要一些工具的幫忙" class="headerlink" title="翻譯時還要一些工具的幫忙"></a>翻譯時還要一些工具的幫忙</h3><p>我們看一下我翻譯這篇 Google Material Design 非官方正體中文電子書 時需要會哪些技能：</p>
-<ul>
-<li>使用 git 提交、更新、分支</li>
-<li>使用 github 提交總有個目的，放在託管空間能一目了然看編寫情形</li>
-<li>使用 gitbook 在本地端查看轉譯後的電子書</li>
-<li>使用 hackpad 追蹤翻譯進度</li>
-<li>使用 markdown 編寫翻譯</li>
-</ul>
-<p>你可能想說，翻個譯要搞這麼多？哈～對！翻譯電子書可是用了不少技能於一身技術而成的，由於翻譯不是一個人完成，因此需要有更多的工具搭配管理來掌控，正好我也想說自己因為對上述的操作不太熟，透過這樣的邊做邊練，還可以增加自己的實戰經驗咧。</p>
-<h3 id="Material-Design-是什麼？"><a href="#Material-Design-是什麼？" class="headerlink" title="Material Design 是什麼？"></a>Material Design 是什麼？</h3><p>老實講，為了加速翻譯件數都只專注在翻譯有沒有順暢，雖然翻譯過程加減看自己翻譯的章節在講些什麼，不過還是無法全面理解每個細節，翻譯完成之後我才真正完整閱讀每個設計理念的觀念是什麼。Material Design 是一種設計語言，就像學習程式就是學習一套語言一樣，每個程式都有它的規範去撰寫，設計從這次的 Google material design 的釋出，展現了一個設計風格。</p>
-<p>雖然我自己不是做視覺端的設計師，但是透過這樣的翻譯，理解設計的原理與理念，在自己開發觀念或是在開發網頁的頁面呈現上，有一些些的想法與心得，還不賴呢！</p>
-<h3 id="還真頗有成就感-der"><a href="#還真頗有成就感-der" class="headerlink" title="還真頗有成就感 der"></a>還真頗有成就感 der</h3><p>隨著翻譯篇數越來越完整的時候，真覺得許多翻譯的夥伴都好有熱誠在努力這件事情上，尤其是發起者  <a href="https://wcc723.github.io/" target="_blank" rel="external">Casper</a> ，假日也不得閒，繼續翻譯為了讓廣大的設計同好得到更有親切感的電子書。</p>
-<p>真是該給翻譯的大夥們一個大力的掌聲鼓勵。</p>
-<p>謝謝各位<br>這個翻譯完成了，繼續邁向下一個目標… Go~</p>
-]]></content>
+    <content type="html"><![CDATA[<p><img src="/images/achieve/1.png" alt=""></p><p>Google I/O  2014 開發者大會公佈了最新的設計理念出了一份指南手冊，只單純看圖片就已經感受到強烈的設計風格，後來同事提出了一個想法，想要把指南手冊翻成非官方版的繁體中文版，由於海倫是參與翻譯的一員，在這邊也分享給大家做參考喔！</p><a id="more"></a><p>就這樣我跟同事還有同事的朋友，踏上了 <code>不歸路</code> 翻譯這條路，就開始協同翻譯了幾篇，我主要都是在 components 的部分，其他就順便整理英文格式的備份檔。</p><p>請看翻譯的電子書：</p><p><a href="http://wcc723.gitbooks.io/google_design_translate/" target="_blank" rel="noopener">http://wcc723.gitbooks.io/google_design_translate/</a></p><h3 id="團結力量大"><a href="#團結力量大" class="headerlink" title="團結力量大"></a>團結力量大</h3><p>這電子書的出爐，拜大家努力翻譯所賜，小妹我也給予鞠躬致意，翻譯人員如下：</p><ul><li>Casper</li><li>Charlene</li><li>Frances</li><li>Helen</li><li>Mkdodos</li><li>Tillonter Hsu</li><li>Peter</li><li>Xuan</li><li>Xunyi</li><li>陳聖博</li></ul><h3 id="翻譯時還要一些工具的幫忙"><a href="#翻譯時還要一些工具的幫忙" class="headerlink" title="翻譯時還要一些工具的幫忙"></a>翻譯時還要一些工具的幫忙</h3><p>我們看一下我翻譯這篇 Google Material Design 非官方正體中文電子書 時需要會哪些技能：</p><ul><li>使用 git 提交、更新、分支</li><li>使用 github 提交總有個目的，放在託管空間能一目了然看編寫情形</li><li>使用 gitbook 在本地端查看轉譯後的電子書</li><li>使用 hackpad 追蹤翻譯進度</li><li>使用 markdown 編寫翻譯</li></ul><p>你可能想說，翻個譯要搞這麼多？哈～對！翻譯電子書可是用了不少技能於一身技術而成的，由於翻譯不是一個人完成，因此需要有更多的工具搭配管理來掌控，正好我也想說自己因為對上述的操作不太熟，透過這樣的邊做邊練，還可以增加自己的實戰經驗咧。</p><h3 id="Material-Design-是什麼？"><a href="#Material-Design-是什麼？" class="headerlink" title="Material Design 是什麼？"></a>Material Design 是什麼？</h3><p>老實講，為了加速翻譯件數都只專注在翻譯有沒有順暢，雖然翻譯過程加減看自己翻譯的章節在講些什麼，不過還是無法全面理解每個細節，翻譯完成之後我才真正完整閱讀每個設計理念的觀念是什麼。Material Design 是一種設計語言，就像學習程式就是學習一套語言一樣，每個程式都有它的規範去撰寫，設計從這次的 Google material design 的釋出，展現了一個設計風格。</p><p>雖然我自己不是做視覺端的設計師，但是透過這樣的翻譯，理解設計的原理與理念，在自己開發觀念或是在開發網頁的頁面呈現上，有一些些的想法與心得，還不賴呢！</p><h3 id="還真頗有成就感-der"><a href="#還真頗有成就感-der" class="headerlink" title="還真頗有成就感 der"></a>還真頗有成就感 der</h3><p>隨著翻譯篇數越來越完整的時候，真覺得許多翻譯的夥伴都好有熱誠在努力這件事情上，尤其是發起者  <a href="https://wcc723.github.io/" target="_blank" rel="noopener">Casper</a> ，假日也不得閒，繼續翻譯為了讓廣大的設計同好得到更有親切感的電子書。</p><p>真是該給翻譯的大夥們一個大力的掌聲鼓勵。</p><p>謝謝各位<br>這個翻譯完成了，繼續邁向下一個目標… Go~</p>]]></content>
     
     <summary type="html">
     
@@ -705,56 +297,7 @@
     <published>2017-08-25T03:26:07.000Z</published>
     <updated>2017-08-30T07:11:41.000Z</updated>
     
-    <content type="html"><![CDATA[<p><img src="/images/gitbook/1.png" alt=""></p>
-<p>今天介紹這套GitBook 是用 node.js 的 npm 管理工具搭建的一種建立電子書的套件，藉由這篇文章可以清楚的瞭解如何建立電子書</p>
-<a id="more"></a>
-<h3 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h3><p>首先是安裝的部分，安裝之前請先確定 npm 這個管理工具有被安裝起來</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$sudo npm install -g gitbook</div></pre></td></tr></table></figure>
-<p><img src="/images/gitbook/2.png" alt=""></p>
-<p>接著，先在某一個目錄夾裏建立一個電子書的檔案庫</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$gitbook serve ./repository</div></pre></td></tr></table></figure>
-<p>像這樣子</p>
-<p><img src="/images/gitbook/3.png" alt=""></p>
-<p>在製作這個電子書，特別要注意的是請先建立 <code>README.md</code> 和 <code>SUMMARY.md</code> 這兩個文件，因為這兩個文件代表著電子書的架構導覽</p>
-<ul>
-<li>README.md   &gt;&gt;&gt; 代表這本電子書的簡介</li>
-</ul>
-<p><img src="/images/gitbook/4.png" alt=""></p>
-<ul>
-<li>SUMMARY.md  &gt;&gt;&gt; 定義這本電子書的章節結構</li>
-</ul>
-<p><img src="/images/gitbook/5.png" alt=""></p>
-<h3 id="實作該怎麼做"><a href="#實作該怎麼做" class="headerlink" title="實作該怎麼做"></a>實作該怎麼做</h3><p>在我們定義好 readme.md, summary.md 之後呢，可以看到我在 SUMMARY.md 檔案，建立了四個連結，分別是：</p>
-<ul>
-<li>source/intro/first.md</li>
-<li>source/install/secode.md</li>
-<li>source/install/2-1.md</li>
-<li>source/install/2-2.md</li>
-</ul>
-<p>我們可以利用以下的指令，讓 gitbook 找到 <code>summary.md</code> 所定義的章節結構去自動地去產生對應的檔案</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$gitbook init</div></pre></td></tr></table></figure>
-<p>到建立 gitbook 的資料夾看，就可以看到自動建立 source 資料夾之外，在source 下層也建立 intro 及 install 這兩個資料夾，然後再進去看某個資料夾下後，可以發現 markdown 的空白檔案也已經自動建立起來，在這邊就可以隨心所欲去建置屬於自己的章節內容。</p>
-<p><img src="/images/gitbook/6.png" alt=""></p>
-<p>喔！等等，別忘了看看結果<br>內容寫好之後，建立一個靜態頁面，預設會開 port 4000 的網址</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$gitbook serve</div></pre></td></tr></table></figure>
-<p>可依照指令指示，開啓 <a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a></p>
-<p><img src="/images/gitbook/7.png" alt=""></p>
-<h3 id="看看樣子"><a href="#看看樣子" class="headerlink" title="看看樣子"></a>看看樣子</h3><p>這是首頁的樣子，呈現的首頁就能閱覽我們在 README.md 所寫的內容</p>
-<p><img src="/images/gitbook/8.png" alt=""></p>
-<p>自定義的第一章節，在頁面上有個左右兩邊的箭頭，可以點選後翻到下一個章節</p>
-<p><img src="/images/gitbook/9.png" alt=""></p>
-<p>自定義的第二章節</p>
-<p><img src="/images/gitbook/10.png" alt=""></p>
-<h3 id="BTW"><a href="#BTW" class="headerlink" title="BTW,"></a>BTW,</h3><p>Gitbook 支援多種檔案格式：</p>
-<ul>
-<li>靜態網頁：這個是 Gitbook 預設的輸入格式</li>
-<li>PDF : 需要安裝 gitbook-pdf 套件</li>
-<li>eBook: 需要安裝 ebook-convert</li>
-<li>單一 HTML 網頁，支援將內容輸出成一個單頁的 html (但我沒用過，不知道＠＠)</li>
-<li>JSON: 用在資料取得</li>
-</ul>
-<p>ps. 在編寫 markdown 文件時，再存檔的時候會有 live reload 效果，即時更新頁面喔！酷耶～</p>
-]]></content>
+    <content type="html"><![CDATA[<p><img src="/images/gitbook/1.png" alt=""></p><p>今天介紹這套GitBook 是用 node.js 的 npm 管理工具搭建的一種建立電子書的套件，藉由這篇文章可以清楚的瞭解如何建立電子書</p><a id="more"></a><h3 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h3><p>首先是安裝的部分，安裝之前請先確定 npm 這個管理工具有被安裝起來</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sudo npm install -g gitbook</span><br></pre></td></tr></table></figure><p><img src="/images/gitbook/2.png" alt=""></p><p>接著，先在某一個目錄夾裏建立一個電子書的檔案庫</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$gitbook serve ./repository</span><br></pre></td></tr></table></figure><p>像這樣子</p><p><img src="/images/gitbook/3.png" alt=""></p><p>在製作這個電子書，特別要注意的是請先建立 <code>README.md</code> 和 <code>SUMMARY.md</code> 這兩個文件，因為這兩個文件代表著電子書的架構導覽</p><ul><li>README.md   &gt;&gt;&gt; 代表這本電子書的簡介</li></ul><p><img src="/images/gitbook/4.png" alt=""></p><ul><li>SUMMARY.md  &gt;&gt;&gt; 定義這本電子書的章節結構</li></ul><p><img src="/images/gitbook/5.png" alt=""></p><h3 id="實作該怎麼做"><a href="#實作該怎麼做" class="headerlink" title="實作該怎麼做"></a>實作該怎麼做</h3><p>在我們定義好 readme.md, summary.md 之後呢，可以看到我在 SUMMARY.md 檔案，建立了四個連結，分別是：</p><ul><li>source/intro/first.md</li><li>source/install/secode.md</li><li>source/install/2-1.md</li><li>source/install/2-2.md</li></ul><p>我們可以利用以下的指令，讓 gitbook 找到 <code>summary.md</code> 所定義的章節結構去自動地去產生對應的檔案</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$gitbook init</span><br></pre></td></tr></table></figure><p>到建立 gitbook 的資料夾看，就可以看到自動建立 source 資料夾之外，在source 下層也建立 intro 及 install 這兩個資料夾，然後再進去看某個資料夾下後，可以發現 markdown 的空白檔案也已經自動建立起來，在這邊就可以隨心所欲去建置屬於自己的章節內容。</p><p><img src="/images/gitbook/6.png" alt=""></p><p>喔！等等，別忘了看看結果<br>內容寫好之後，建立一個靜態頁面，預設會開 port 4000 的網址</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$gitbook serve</span><br></pre></td></tr></table></figure><p>可依照指令指示，開啓 <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a></p><p><img src="/images/gitbook/7.png" alt=""></p><h3 id="看看樣子"><a href="#看看樣子" class="headerlink" title="看看樣子"></a>看看樣子</h3><p>這是首頁的樣子，呈現的首頁就能閱覽我們在 README.md 所寫的內容</p><p><img src="/images/gitbook/8.png" alt=""></p><p>自定義的第一章節，在頁面上有個左右兩邊的箭頭，可以點選後翻到下一個章節</p><p><img src="/images/gitbook/9.png" alt=""></p><p>自定義的第二章節</p><p><img src="/images/gitbook/10.png" alt=""></p><h3 id="BTW"><a href="#BTW" class="headerlink" title="BTW,"></a>BTW,</h3><p>Gitbook 支援多種檔案格式：</p><ul><li>靜態網頁：這個是 Gitbook 預設的輸入格式</li><li>PDF : 需要安裝 gitbook-pdf 套件</li><li>eBook: 需要安裝 ebook-convert</li><li>單一 HTML 網頁，支援將內容輸出成一個單頁的 html (但我沒用過，不知道＠＠)</li><li>JSON: 用在資料取得</li></ul><p>ps. 在編寫 markdown 文件時，再存檔的時候會有 live reload 效果，即時更新頁面喔！酷耶～</p>]]></content>
     
     <summary type="html">
     
@@ -779,17 +322,7 @@
     <published>2017-08-25T01:56:32.000Z</published>
     <updated>2017-08-25T02:02:20.000Z</updated>
     
-    <content type="html"><![CDATA[<p>今天介紹一個在 Chrome debug 的時候使用一個 console.table() 的方法除錯。一般我們都會用  console.log 或 console.debug 來看物件的狀況，今天就嘗試一個新的不一樣的吧</p>
-<h3 id="使用-console-log-函數"><a href="#使用-console-log-函數" class="headerlink" title="使用 console.log() 函數"></a>使用 console.log() 函數</h3><p><img src="/images/javascript/1.png" alt=""></p>
-<p>在 script 裡，第 7 行～ 第 12 行，先定義一個陣列，裡面有 object ，其屬性包含 id, name，然後第  13 行建立一個 <code>console.log(json);</code> 的函數，輸出裡面 json 的資料。接著請開啓 chrome 瀏覽器然後把這個網頁 html 打開，接著在按 <code>command + shift + c</code> 會開啟開發人員管理工具 （喔對了，我環境是用 macbook，所以如果是其他系統的話可以按 <code>ctrl + shift + c</code></p>
-<a id="more"></a>
-<h3 id="看看-console-log-輸出結果"><a href="#看看-console-log-輸出結果" class="headerlink" title="看看 console.log() 輸出結果"></a>看看 console.log() 輸出結果</h3><p>這邊會看到用樹狀圖呈現一個  Array 物件呈現變數裡的值，裡面包含了四組資料，依序展開如下圖：</p>
-<p><img src="/images/javascript/2.png" alt=""></p>
-<h3 id="使用-console-table-函數"><a href="#使用-console-table-函數" class="headerlink" title="使用 console.table() 函數"></a>使用 console.table() 函數</h3><p>將 log 改成  table 函數，直接看第 13 行…</p>
-<p><img src="/images/javascript/3.png" alt=""></p>
-<h3 id="看看-console-table-輸出結果"><a href="#看看-console-table-輸出結果" class="headerlink" title="看看 console.table() 輸出結果"></a>看看 console.table() 輸出結果</h3><p><img src="/images/javascript/4.png" alt=""></p>
-<p>下次就這樣用吧～  ：）</p>
-]]></content>
+    <content type="html"><![CDATA[<p>今天介紹一個在 Chrome debug 的時候使用一個 console.table() 的方法除錯。一般我們都會用  console.log 或 console.debug 來看物件的狀況，今天就嘗試一個新的不一樣的吧</p><h3 id="使用-console-log-函數"><a href="#使用-console-log-函數" class="headerlink" title="使用 console.log() 函數"></a>使用 console.log() 函數</h3><p><img src="/images/javascript/1.png" alt=""></p><p>在 script 裡，第 7 行～ 第 12 行，先定義一個陣列，裡面有 object ，其屬性包含 id, name，然後第  13 行建立一個 <code>console.log(json);</code> 的函數，輸出裡面 json 的資料。接著請開啓 chrome 瀏覽器然後把這個網頁 html 打開，接著在按 <code>command + shift + c</code> 會開啟開發人員管理工具 （喔對了，我環境是用 macbook，所以如果是其他系統的話可以按 <code>ctrl + shift + c</code></p><a id="more"></a><h3 id="看看-console-log-輸出結果"><a href="#看看-console-log-輸出結果" class="headerlink" title="看看 console.log() 輸出結果"></a>看看 console.log() 輸出結果</h3><p>這邊會看到用樹狀圖呈現一個  Array 物件呈現變數裡的值，裡面包含了四組資料，依序展開如下圖：</p><p><img src="/images/javascript/2.png" alt=""></p><h3 id="使用-console-table-函數"><a href="#使用-console-table-函數" class="headerlink" title="使用 console.table() 函數"></a>使用 console.table() 函數</h3><p>將 log 改成  table 函數，直接看第 13 行…</p><p><img src="/images/javascript/3.png" alt=""></p><h3 id="看看-console-table-輸出結果"><a href="#看看-console-table-輸出結果" class="headerlink" title="看看 console.table() 輸出結果"></a>看看 console.table() 輸出結果</h3><p><img src="/images/javascript/4.png" alt=""></p><p>下次就這樣用吧～  ：）</p>]]></content>
     
     <summary type="html">
     
@@ -811,36 +344,12 @@
     <published>2017-08-25T01:38:54.000Z</published>
     <updated>2017-08-25T01:45:30.000Z</updated>
     
-    <content type="html"><![CDATA[<p><img src="/images/mongodb/MongoDB-logo.png" alt=""></p>
-<h3 id="下載-MongoDB"><a href="#下載-MongoDB" class="headerlink" title="下載 MongoDB"></a>下載 MongoDB</h3><p>我的環境是用 mac osx 10.9.4，到官方網站 <a href="http://www.mongodb.org/downloads" target="_blank" rel="external">http://www.mongodb.org/downloads</a> 找到 Mac OX 64bit 區塊，下載 <code>mongodb-osx-x86_64-2.6.4.tgz</code> 檔案，接著我們用指令進行安裝，解壓縮 tgz 檔案</p>
-<p>解壓縮之後，把它挪到 <code>/usr/local/mongodb</code> 資料夾</p>
-<a id="more"></a>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$cd ~/Download</div><div class="line">$tar xzf mongodb-osx-x86_64-2.2.3.tgz</div><div class="line">$sudo mv mongodb-osx-x86_64-2.2.3 /usr/local/mongodb</div></pre></td></tr></table></figure>
-<p><img src="/images/mongodb/1.png" alt=""></p>
-<h3 id="MongoDB-資料"><a href="#MongoDB-資料" class="headerlink" title="MongoDB 資料"></a>MongoDB 資料</h3><p>預設時，資料會寫到 /data/db/ 資料夾，在這裏手動建立儲存位置，去建立 /data/db</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$sudo mkdir -p /data/db</div><div class="line">$whoami</div><div class="line"> /User/Weiju</div><div class="line">$sudo chown /User/Weiju /data/db</div></pre></td></tr></table></figure>
-<h3 id="建立-bash-profile-參數設定環境變數"><a href="#建立-bash-profile-參數設定環境變數" class="headerlink" title="建立 ~/.bash_profile 參數設定環境變數"></a>建立 ~/.bash_profile 參數設定環境變數</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$cd ~</div><div class="line">$pwd</div><div class="line">/User/Weiju</div><div class="line">$touch .bash_profile</div><div class="line">$vim .bash_profile</div></pre></td></tr></table></figure>
-<h3 id="編輯-bash-profile-檔案"><a href="#編輯-bash-profile-檔案" class="headerlink" title="編輯 .bash_profile 檔案"></a>編輯 .bash_profile 檔案</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">export MONGO_PATH=/usr/local/mongodb</div><div class="line">export PATH=$PATH:$MONGO_PATH/bin</div></pre></td></tr></table></figure>
-<h3 id="檢視版本"><a href="#檢視版本" class="headerlink" title="檢視版本"></a>檢視版本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$mongo -version</div></pre></td></tr></table></figure>
-<p><img src="/images/mongodb/2.png" alt=""></p>
-<p>預設之下，mongodb 安裝完之後，下一次開機又要重新啟動。在這邊設定一下自動啟動方法：</p>
-<p>找到</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$sudo vim /Library/LaunchDaemons/</div></pre></td></tr></table></figure>
-<p>新增 mongodb.plist，並且建立以下參數</p>
-<p><img src="/images/mongodb/3.png" alt=""></p>
-<h3 id="載入系統排程"><a href="#載入系統排程" class="headerlink" title="載入系統排程"></a>載入系統排程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$sudo launchctl load /Library/LaunchDaemons/mongodb.plist</div><div class="line">ps -ef | grep mongo</div></pre></td></tr></table></figure>
-<p><img src="/images/mongodb/4.png" alt=""></p>
-<h3 id="馬上來試看看"><a href="#馬上來試看看" class="headerlink" title="馬上來試看看"></a>馬上來試看看</h3><p>第一種：試試新增一筆資料</p>
-<p><img src="/images/mongodb/5.png" alt=""></p>
-<p>第二種：跑個廻圈＋寫入好了</p>
-<p><img src="/images/mongodb/6.png" alt=""></p>
-<p>good, got it.</p>
-]]></content>
+    <content type="html"><![CDATA[<p><img src="/images/mongodb/MongoDB-logo.png" alt=""></p><h3 id="下載-MongoDB"><a href="#下載-MongoDB" class="headerlink" title="下載 MongoDB"></a>下載 MongoDB</h3><p>我的環境是用 mac osx 10.9.4，到官方網站 <a href="http://www.mongodb.org/downloads" target="_blank" rel="noopener">http://www.mongodb.org/downloads</a> 找到 Mac OX 64bit 區塊，下載 <code>mongodb-osx-x86_64-2.6.4.tgz</code> 檔案，接著我們用指令進行安裝，解壓縮 tgz 檔案</p><p>解壓縮之後，把它挪到 <code>/usr/local/mongodb</code> 資料夾</p><a id="more"></a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$cd ~/Download</span><br><span class="line">$tar xzf mongodb-osx-x86_64-2.2.3.tgz</span><br><span class="line">$sudo mv mongodb-osx-x86_64-2.2.3 /usr/local/mongodb</span><br></pre></td></tr></table></figure><p><img src="/images/mongodb/1.png" alt=""></p><h3 id="MongoDB-資料"><a href="#MongoDB-資料" class="headerlink" title="MongoDB 資料"></a>MongoDB 資料</h3><p>預設時，資料會寫到 /data/db/ 資料夾，在這裏手動建立儲存位置，去建立 /data/db</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$sudo mkdir -p /data/db</span><br><span class="line">$whoami</span><br><span class="line"> /User/Weiju</span><br><span class="line">$sudo chown /User/Weiju /data/db</span><br></pre></td></tr></table></figure><h3 id="建立-bash-profile-參數設定環境變數"><a href="#建立-bash-profile-參數設定環境變數" class="headerlink" title="建立 ~/.bash_profile 參數設定環境變數"></a>建立 ~/.bash_profile 參數設定環境變數</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$cd ~</span><br><span class="line">$pwd</span><br><span class="line">/User/Weiju</span><br><span class="line">$touch .bash_profile</span><br><span class="line">$vim .bash_profile</span><br></pre></td></tr></table></figure><h3 id="編輯-bash-profile-檔案"><a href="#編輯-bash-profile-檔案" class="headerlink" title="編輯 .bash_profile 檔案"></a>編輯 .bash_profile 檔案</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export MONGO_PATH=/usr/local/mongodb</span><br><span class="line">export PATH=$PATH:$MONGO_PATH/bin</span><br></pre></td></tr></table></figure><h3 id="檢視版本"><a href="#檢視版本" class="headerlink" title="檢視版本"></a>檢視版本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$mongo -version</span><br></pre></td></tr></table></figure><p><img src="/images/mongodb/2.png" alt=""></p><p>預設之下，mongodb 安裝完之後，下一次開機又要重新啟動。在這邊設定一下自動啟動方法：</p><p>找到</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sudo vim /Library/LaunchDaemons/</span><br></pre></td></tr></table></figure><p>新增 mongodb.plist，並且建立以下參數</p><p><img src="/images/mongodb/3.png" alt=""></p><h3 id="載入系統排程"><a href="#載入系統排程" class="headerlink" title="載入系統排程"></a>載入系統排程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$sudo launchctl load /Library/LaunchDaemons/mongodb.plist</span><br><span class="line">ps -ef | grep mongo</span><br></pre></td></tr></table></figure><p><img src="/images/mongodb/4.png" alt=""></p><h3 id="馬上來試看看"><a href="#馬上來試看看" class="headerlink" title="馬上來試看看"></a>馬上來試看看</h3><p>第一種：試試新增一筆資料</p><p><img src="/images/mongodb/5.png" alt=""></p><p>第二種：跑個廻圈＋寫入好了</p><p><img src="/images/mongodb/6.png" alt=""></p><p>good, got it.</p>]]></content>
     
     <summary type="html">
     
       &lt;p&gt;&lt;img src=&quot;/images/mongodb/MongoDB-logo.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;h3 id=&quot;下載-MongoDB&quot;&gt;&lt;a href=&quot;#下載-MongoDB&quot; class=&quot;headerlink&quot; title=&quot;下載 MongoDB&quot;&gt;&lt;/a&gt;下載 MongoDB&lt;/h3&gt;&lt;p&gt;我的環境是用 mac osx 10.9.4，到官方網站 &lt;a href=&quot;http://www.mongodb.org/downloads&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.mongodb.org/downloads&lt;/a&gt; 找到 Mac OX 64bit 區塊，下載 &lt;code&gt;mongodb-osx-x86_64-2.6.4.tgz&lt;/code&gt; 檔案，接著我們用指令進行安裝，解壓縮 tgz 檔案&lt;/p&gt;
+&lt;h3 id=&quot;下載-MongoDB&quot;&gt;&lt;a href=&quot;#下載-MongoDB&quot; class=&quot;headerlink&quot; title=&quot;下載 MongoDB&quot;&gt;&lt;/a&gt;下載 MongoDB&lt;/h3&gt;&lt;p&gt;我的環境是用 mac osx 10.9.4，到官方網站 &lt;a href=&quot;http://www.mongodb.org/downloads&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://www.mongodb.org/downloads&lt;/a&gt; 找到 Mac OX 64bit 區塊，下載 &lt;code&gt;mongodb-osx-x86_64-2.6.4.tgz&lt;/code&gt; 檔案，接著我們用指令進行安裝，解壓縮 tgz 檔案&lt;/p&gt;
 &lt;p&gt;解壓縮之後，把它挪到 &lt;code&gt;/usr/local/mongodb&lt;/code&gt; 資料夾&lt;/p&gt;
     
     </summary>
@@ -857,42 +366,7 @@
     <published>2017-08-21T01:58:00.000Z</published>
     <updated>2017-08-30T07:11:14.000Z</updated>
     
-    <content type="html"><![CDATA[<p>有沒有使用 Excel 輸入資料後，想要把某一列的資料做不重複的篩選？若您剛好有這個疑問，來到這裡算是走對地方了～ 我們有很簡單的例子一步一步的說明</p>
-<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>不採取樞扭分析表，請利用函數實作</p>
-<h3 id="說明"><a href="#說明" class="headerlink" title="說明"></a>說明</h3><p>今天有一個資料表欄位有「類型」、「數量」、「名稱」，需要做一些統計，並且在一般資料區塊下方，當有輸入時，必須同時同步計算以下兩項區域</p>
-<ol>
-<li>依照類型將名稱分類，表格呈現上方列為「類型」、左方為「名稱」</li>
-<li>取得不重複的「名稱」，計算各類型的名稱的總數</li>
-</ol>
-<a id="more"></a>
-<h3 id="先定義實作目標"><a href="#先定義實作目標" class="headerlink" title="先定義實作目標"></a>先定義實作目標</h3><p>看到這邊，我們先將把所需要的欄位先定義清楚，主要分為三個部分，分別是資料區（Ａ）、分類區（Ｂ）、統計數量區（Ｃ）</p>
-<h3 id="資料區"><a href="#資料區" class="headerlink" title="資料區"></a>資料區</h3><p>首先是資料區，這裡是一般的資料，也就是會一直在輸入的地方，也預備要讓其他Ｂ、Ｃ區做自動計算，欄位這麼放</p>
-<ul>
-<li>Ａ：輸入「名稱」</li>
-<li>Ｂ：輸入「數量」</li>
-<li>Ｃ：輸入「類型」</li>
-</ul>
-<p>就像這樣子。</p>
-<p><img src="/images/excel/20140521-1.png" alt=""></p>
-<h3 id="分類區"><a href="#分類區" class="headerlink" title="分類區"></a>分類區</h3><p>接下來是分類區，欄位這麼放</p>
-<p><img src="/images/excel/20140521-2.png" alt=""></p>
-<h4 id="E：「名稱」"><a href="#E：「名稱」" class="headerlink" title="Ｅ：「名稱」"></a>Ｅ：「名稱」</h4><p>特別注意的是名稱雖然都來自資料區，可是並不能利用一般複製貼上就貼過去，我們可以利用函數，讓他自動把值帶過來，請輸入以下函數：</p>
-<p><code>=IF(A1&gt;0,A1,&quot;&quot;)</code></p>
-<p>Ｆ、Ｇ、H：「類型」，函數分別是</p>
-<h4 id="F-欄"><a href="#F-欄" class="headerlink" title="F 欄"></a>F 欄</h4><p><code>=IF(C1=&quot;A&quot;,B1,&quot;&quot;)</code></p>
-<h4 id="G-欄"><a href="#G-欄" class="headerlink" title="G 欄"></a>G 欄</h4><p><code>=IF(C1=&quot;B&quot;,B1,&quot;&quot;)</code></p>
-<h4 id="H-欄"><a href="#H-欄" class="headerlink" title="H 欄"></a>H 欄</h4><p><code>=IF(C1=&quot;C&quot;,B1,&quot;&quot;)</code></p>
-<h3 id="統計數量區"><a href="#統計數量區" class="headerlink" title="統計數量區"></a>統計數量區</h3><p>然後，統計數量區，就是計算各種不同分類的不重複水果數量有多少，以下就是各欄位輸入的函數</p>
-<p><img src="/images/excel/20140521-3.png" alt=""></p>
-<h4 id="J-欄"><a href="#J-欄" class="headerlink" title="J 欄"></a>J 欄</h4><p>重點就是在這一段，我們要將資料區的資料，採取不重複的做法呈現，換句話說，當使用者輸入資料區的時候，有出現重複時也只能算是一筆</p>
-<p><code>=INDEX(A:A,SMALL(IF(MATCH($A$1:$A$5000&amp;&quot;&quot;,$A$1:$A$5000&amp;&quot;&quot;,0)=ROW($A$1:$A$5000),ROW($A$1:$A$5000),4^8),ROW(A1)))&amp;&quot;&quot;</code></p>
-<h4 id="K-欄"><a href="#K-欄" class="headerlink" title="K 欄"></a>K 欄</h4><p>這一欄就是要將A類的水果總計起來，我們還需要借用分類區的地方把資料提取出來</p>
-<p><code>=IF($J1&gt;0,SUMIF($E$1:$E$5000,$J1,$F$1:F$5000),&quot;&quot;)</code></p>
-<h4 id="L-欄"><a href="#L-欄" class="headerlink" title="L 欄"></a>L 欄</h4><p>這一欄就是要將B類的水果總計起來，我們還需要借用分類區的地方把資料提取出來</p>
-<p><code>=IF($J1&gt;0,SUMIF($E$1:$E$5000,$J1,$G$1:$H$5000),&quot;&quot;)</code></p>
-<h4 id="M-欄"><a href="#M-欄" class="headerlink" title="M 欄"></a>M 欄</h4><p>這一欄就是要將C類的水果總計起來，我們還需要借用分類區的地方把資料提取出來</p>
-<p><code>=IF($J1&gt;0,SUMIF($E$1:$E$5000,$J1,$H$1:$H$5000),&quot;&quot;)</code></p>
-]]></content>
+    <content type="html"><![CDATA[<p>有沒有使用 Excel 輸入資料後，想要把某一列的資料做不重複的篩選？若您剛好有這個疑問，來到這裡算是走對地方了～ 我們有很簡單的例子一步一步的說明</p><h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>不採取樞扭分析表，請利用函數實作</p><h3 id="說明"><a href="#說明" class="headerlink" title="說明"></a>說明</h3><p>今天有一個資料表欄位有「類型」、「數量」、「名稱」，需要做一些統計，並且在一般資料區塊下方，當有輸入時，必須同時同步計算以下兩項區域</p><ol><li>依照類型將名稱分類，表格呈現上方列為「類型」、左方為「名稱」</li><li>取得不重複的「名稱」，計算各類型的名稱的總數</li></ol><a id="more"></a><h3 id="先定義實作目標"><a href="#先定義實作目標" class="headerlink" title="先定義實作目標"></a>先定義實作目標</h3><p>看到這邊，我們先將把所需要的欄位先定義清楚，主要分為三個部分，分別是資料區（Ａ）、分類區（Ｂ）、統計數量區（Ｃ）</p><h3 id="資料區"><a href="#資料區" class="headerlink" title="資料區"></a>資料區</h3><p>首先是資料區，這裡是一般的資料，也就是會一直在輸入的地方，也預備要讓其他Ｂ、Ｃ區做自動計算，欄位這麼放</p><ul><li>Ａ：輸入「名稱」</li><li>Ｂ：輸入「數量」</li><li>Ｃ：輸入「類型」</li></ul><p>就像這樣子。</p><p><img src="/images/excel/20140521-1.png" alt=""></p><h3 id="分類區"><a href="#分類區" class="headerlink" title="分類區"></a>分類區</h3><p>接下來是分類區，欄位這麼放</p><p><img src="/images/excel/20140521-2.png" alt=""></p><h4 id="E：「名稱」"><a href="#E：「名稱」" class="headerlink" title="Ｅ：「名稱」"></a>Ｅ：「名稱」</h4><p>特別注意的是名稱雖然都來自資料區，可是並不能利用一般複製貼上就貼過去，我們可以利用函數，讓他自動把值帶過來，請輸入以下函數：</p><p><code>=IF(A1&gt;0,A1,&quot;&quot;)</code></p><p>Ｆ、Ｇ、H：「類型」，函數分別是</p><h4 id="F-欄"><a href="#F-欄" class="headerlink" title="F 欄"></a>F 欄</h4><p><code>=IF(C1=&quot;A&quot;,B1,&quot;&quot;)</code></p><h4 id="G-欄"><a href="#G-欄" class="headerlink" title="G 欄"></a>G 欄</h4><p><code>=IF(C1=&quot;B&quot;,B1,&quot;&quot;)</code></p><h4 id="H-欄"><a href="#H-欄" class="headerlink" title="H 欄"></a>H 欄</h4><p><code>=IF(C1=&quot;C&quot;,B1,&quot;&quot;)</code></p><h3 id="統計數量區"><a href="#統計數量區" class="headerlink" title="統計數量區"></a>統計數量區</h3><p>然後，統計數量區，就是計算各種不同分類的不重複水果數量有多少，以下就是各欄位輸入的函數</p><p><img src="/images/excel/20140521-3.png" alt=""></p><h4 id="J-欄"><a href="#J-欄" class="headerlink" title="J 欄"></a>J 欄</h4><p>重點就是在這一段，我們要將資料區的資料，採取不重複的做法呈現，換句話說，當使用者輸入資料區的時候，有出現重複時也只能算是一筆</p><p><code>=INDEX(A:A,SMALL(IF(MATCH($A$1:$A$5000&amp;&quot;&quot;,$A$1:$A$5000&amp;&quot;&quot;,0)=ROW($A$1:$A$5000),ROW($A$1:$A$5000),4^8),ROW(A1)))&amp;&quot;&quot;</code></p><h4 id="K-欄"><a href="#K-欄" class="headerlink" title="K 欄"></a>K 欄</h4><p>這一欄就是要將A類的水果總計起來，我們還需要借用分類區的地方把資料提取出來</p><p><code>=IF($J1&gt;0,SUMIF($E$1:$E$5000,$J1,$F$1:F$5000),&quot;&quot;)</code></p><h4 id="L-欄"><a href="#L-欄" class="headerlink" title="L 欄"></a>L 欄</h4><p>這一欄就是要將B類的水果總計起來，我們還需要借用分類區的地方把資料提取出來</p><p><code>=IF($J1&gt;0,SUMIF($E$1:$E$5000,$J1,$G$1:$H$5000),&quot;&quot;)</code></p><h4 id="M-欄"><a href="#M-欄" class="headerlink" title="M 欄"></a>M 欄</h4><p>這一欄就是要將C類的水果總計起來，我們還需要借用分類區的地方把資料提取出來</p><p><code>=IF($J1&gt;0,SUMIF($E$1:$E$5000,$J1,$H$1:$H$5000),&quot;&quot;)</code></p>]]></content>
     
     <summary type="html">
     
@@ -920,32 +394,13 @@
     <published>2017-08-21T01:50:05.000Z</published>
     <updated>2017-08-30T07:11:30.000Z</updated>
     
-    <content type="html"><![CDATA[<p>今天要介紹的是，如何將字串分割到不同的儲存格，也就是說當你今天遇到一個字串，但是字串裡面有兩個資訊想要各別放</p>
-<p>比如以下字串：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">common.delete=Delete</div></pre></td></tr></table></figure>
-<p>結果預計要像這樣</p>
-<p><img src="/images/excel/20140523-1.png" alt=""></p>
-<p>如果你有很多個像這樣的要把字串切割的話，這時候你還會用 Copy &amp; Paste 的做法去貼到不同的欄位嗎？</p>
-<a id="more"></a>
-<p>以下用個簡單的資料當作例子，我想要將等於的左右兩邊，各別的放到不同的儲存格</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">common.delete=Delete</div><div class="line">common.add=Create</div><div class="line">common.modify=Edit</div><div class="line">common.name=Name</div><div class="line">common.change=Change</div><div class="line">common.manage=Management</div><div class="line">common.search=Search</div><div class="line">btn.cancel=Cancel</div><div class="line">btn.Submit=Submit</div></pre></td></tr></table></figure>
-<h3 id="快速實作方法"><a href="#快速實作方法" class="headerlink" title="快速實作方法"></a>快速實作方法</h3><h4 id="第一步-先將欄位選取起來"><a href="#第一步-先將欄位選取起來" class="headerlink" title="第一步: 先將欄位選取起來"></a>第一步: 先將欄位選取起來</h4><p>請先將資料擺在 A 欄位那邊，然後滑鼠將資料選取起來，如下圖所示：</p>
-<p><img src="/images/excel/20140523-2.png" alt=""></p>
-<h4 id="第二步-按下-資料-gt-資料剖析-啟動-資料剖析精靈"><a href="#第二步-按下-資料-gt-資料剖析-啟動-資料剖析精靈" class="headerlink" title="第二步: 按下 [資料] &gt; [資料剖析] 啟動 [資料剖析精靈]"></a>第二步: 按下 [資料] &gt; [資料剖析] 啟動 [資料剖析精靈]</h4><p>接著他就會開資料剖析精靈，超簡單，三個小步驟而已<br>(步驟 3 之 1)：我們的目標是要分隔，所以選第一個，如果直接按完成的話，事實上跟我們需求不符，因為他會利用預設的 tab 區分隔，所以請繼續按下一步</p>
-<p><img src="/images/excel/20140523-3.png" alt=""></p>
-<p>(步驟 3 之 2) ：這邊我們要確定資料分隔的符號是什麼</p>
-<p><img src="/images/excel/20140523-4.png" alt=""></p>
-<p>(步驟 3 之 3)：最後可以看看預覽分割的結果，確定之後就按完成按鈕</p>
-<p><img src="/images/excel/20140523-5.png" alt=""></p>
-<p>結果: 一秒完成 !</p>
-<p><img src="/images/excel/20140523-6.png" alt=""></p>
-]]></content>
+    <content type="html"><![CDATA[<p>今天要介紹的是，如何將字串分割到不同的儲存格，也就是說當你今天遇到一個字串，但是字串裡面有兩個資訊想要各別放</p><p>比如以下字串：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">common.delete=Delete</span><br></pre></td></tr></table></figure><p>結果預計要像這樣</p><p><img src="/images/excel/20140523-1.png" alt=""></p><p>如果你有很多個像這樣的要把字串切割的話，這時候你還會用 Copy &amp; Paste 的做法去貼到不同的欄位嗎？</p><a id="more"></a><p>以下用個簡單的資料當作例子，我想要將等於的左右兩邊，各別的放到不同的儲存格</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">common.delete=Delete</span><br><span class="line">common.add=Create</span><br><span class="line">common.modify=Edit</span><br><span class="line">common.name=Name</span><br><span class="line">common.change=Change</span><br><span class="line">common.manage=Management</span><br><span class="line">common.search=Search</span><br><span class="line">btn.cancel=Cancel</span><br><span class="line">btn.Submit=Submit</span><br></pre></td></tr></table></figure><h3 id="快速實作方法"><a href="#快速實作方法" class="headerlink" title="快速實作方法"></a>快速實作方法</h3><h4 id="第一步-先將欄位選取起來"><a href="#第一步-先將欄位選取起來" class="headerlink" title="第一步: 先將欄位選取起來"></a>第一步: 先將欄位選取起來</h4><p>請先將資料擺在 A 欄位那邊，然後滑鼠將資料選取起來，如下圖所示：</p><p><img src="/images/excel/20140523-2.png" alt=""></p><h4 id="第二步-按下-資料-gt-資料剖析-啟動-資料剖析精靈"><a href="#第二步-按下-資料-gt-資料剖析-啟動-資料剖析精靈" class="headerlink" title="第二步: 按下 [資料] &gt; [資料剖析] 啟動 [資料剖析精靈]"></a>第二步: 按下 [資料] &gt; [資料剖析] 啟動 [資料剖析精靈]</h4><p>接著他就會開資料剖析精靈，超簡單，三個小步驟而已<br>(步驟 3 之 1)：我們的目標是要分隔，所以選第一個，如果直接按完成的話，事實上跟我們需求不符，因為他會利用預設的 tab 區分隔，所以請繼續按下一步</p><p><img src="/images/excel/20140523-3.png" alt=""></p><p>(步驟 3 之 2) ：這邊我們要確定資料分隔的符號是什麼</p><p><img src="/images/excel/20140523-4.png" alt=""></p><p>(步驟 3 之 3)：最後可以看看預覽分割的結果，確定之後就按完成按鈕</p><p><img src="/images/excel/20140523-5.png" alt=""></p><p>結果: 一秒完成 !</p><p><img src="/images/excel/20140523-6.png" alt=""></p>]]></content>
     
     <summary type="html">
     
       &lt;p&gt;今天要介紹的是，如何將字串分割到不同的儲存格，也就是說當你今天遇到一個字串，但是字串裡面有兩個資訊想要各別放&lt;/p&gt;
 &lt;p&gt;比如以下字串：&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;common.delete=Delete&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;common.delete=Delete&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;結果預計要像這樣&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/images/excel/20140523-1.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;p&gt;如果你有很多個像這樣的要把字串切割的話，這時候你還會用 Copy &amp;amp; Paste 的做法去貼到不同的欄位嗎？&lt;/p&gt;
@@ -966,34 +421,7 @@
     <published>2017-07-25T16:30:00.000Z</published>
     <updated>2017-07-31T10:47:52.000Z</updated>
     
-    <content type="html"><![CDATA[<p>本篇將介紹用野生柯P API來製作 api 的呼叫，但是api 網站已經失效，僅能提供概念說明。這是透過 node-rest-client 的套件製作</p>
-<a id="more"></a>
-<p>首先先建立一個 express web framework 框架，請在 terminal  上輸入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$express -e nodejs-kp-albums-sample</div></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/130.png" alt=""></p>
-<p>接著按照只是安裝相依套件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$cd nodejs-kp-albums-sample &amp;&amp; npm install</div></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/131.png" alt=""></p>
-<p>接著由於我們要使用到柯 p 官網提供的相簿 api ，在開發前我們需要安裝一個可以支援 restful api 的套件 node-rest-client，接著請在 terminal 輸入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$npm install node-rest-client —save</div></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/132.png" alt=""></p>
-<p>一切安裝完成之後，就開始來撰寫程式的部分，請先打開 app.js 檔案，在這邊我們要引用裝好的 node-rest-client 套件，將以下語法填入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var Client = require(&apos;node-rest-client&apos;).Client;</div><div class="line">client = new Client();</div></pre></td></tr></table></figure>
-<p>先宣告 node-rest-client 之後，我們預計將相簿列表印在主首頁 (index)，可以在 app.js 裡面找到var routes = require(‘./routes/index’); 與 app.use(‘/‘, routes); 這一段，也就是說根目錄的位置會指引到 /routes/index.js 檔案裡面，接著就打開  /routes/index.js ，由於我們在 app.js  完成了宣告，在 index.js 撰寫如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">var express = require(&apos;express&apos;);</div><div class="line">var router = express.Router();</div><div class="line"></div><div class="line">/* GET home page. */</div><div class="line">router.get(&apos;/&apos;, function(req, resp) &#123;</div><div class="line"></div><div class="line">    //取得 KP albums 相簿清單列表</div><div class="line">     client.get(&quot;http://api.kptaipei.tw/v1/albums&quot;, &#123; author: ‘xxx&apos; &#125;, function(data, res)&#123;</div><div class="line">        var config = JSON.parse(data.toString());</div><div class="line">        console.log(config.data);</div><div class="line"></div><div class="line">        //將資料寫在 locals</div><div class="line">        resp.locals.posts = config.data;</div><div class="line"></div><div class="line">        var renderData = &#123;</div><div class="line">             title: &apos;柯 p 野生 API&apos;,</div><div class="line">             data: config.data</div><div class="line">        &#125;;</div><div class="line"></div><div class="line">        // 將取得到的 json 格式渲染到畫面上</div><div class="line">        resp.render(&apos;index&apos;, renderData);</div><div class="line">    &#125;);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">module.exports = router;</div></pre></td></tr></table></figure>
-<p>可以看到用了 client.get 方法，其有三個參數，第一個參數請到 <a href="http://unlimited.kptaipei.tw/docs/#api-ch3" target="_blank" rel="external">http://unlimited.kptaipei.tw/docs/#api-ch3</a> 得到相簿清單的 api ：<a href="http://api.kptaipei.tw/v1/albums/" target="_blank" rel="external">http://api.kptaipei.tw/v1/albums/</a>  ，預期會知道 api 結果會是如下</p>
-<p><img src="/images/nodejs/133.png" alt=""></p>
-<p><img src="/images/nodejs/134.png" alt=""></p>
-<p>第二參數由於本篇只做列表，就保持為空 {}，第三個參數就 function callback 操作，在取得  json 格式的資料之後，經過 json.parse 由字串轉換 json  ，並且我們已知要抓  data 的陣列，透過物件 renderData 將資料存放，最後就將得到的資料渲染到畫面上 ，也就是 resp.render(‘index’, renderData);</p>
-<p>接著到了 views 的部分，就請開啓  /views/index.ejs 檔案</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">  &lt;head&gt;</div><div class="line">    &lt;title&gt;&lt;%= title %&gt;&lt;/title&gt;</div><div class="line">    &lt;link rel=&apos;stylesheet&apos; href=&apos;/stylesheets/style.css&apos; /&gt;</div><div class="line">  &lt;/head&gt;</div><div class="line">  &lt;body&gt;</div><div class="line">    &lt;%</div><div class="line">         posts.forEach(function(post) &#123;</div><div class="line">              var thumb = post.thumbnails;</div><div class="line">              var t_small = thumb.small_square;</div><div class="line">    %&gt;</div><div class="line">          &lt;img src=&apos;&lt;%= t_small %&gt;&apos; alt=&apos;&lt;%=post.title %&gt;&apos; /&gt;</div><div class="line">    &lt;% &#125;);%&gt;</div><div class="line">  &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
-<p>在這邊我只需要顯示柯p相簿的小張圖，也就是 thumbnails.small_square ，由於已經轉成  json  格式，那麼就當做物件找到 thumbnails.small_square  位置，將取得到的圖片網址塞到 img tag 裡的 src 屬性。那麼，一切的一切準備好之後，就請執行應用程式吧！輸入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$npm start</div></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/135.png" alt=""></p>
-<p>網站預設為 3000 port ，請開啓 localhost:3000，結果如下圖顯示</p>
-<p><img src="/images/nodejs/136.png" alt=""></p>
-<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="https://www.npmjs.org/package/node-rest-client" target="_blank" rel="external">https://www.npmjs.org/package/node-rest-client</a></p>
-]]></content>
+    <content type="html"><![CDATA[<p>本篇將介紹用野生柯P API來製作 api 的呼叫，但是api 網站已經失效，僅能提供概念說明。這是透過 node-rest-client 的套件製作</p><a id="more"></a><p>首先先建立一個 express web framework 框架，請在 terminal  上輸入：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$express -e nodejs-kp-albums-sample</span><br></pre></td></tr></table></figure><p><img src="/images/nodejs/130.png" alt=""></p><p>接著按照只是安裝相依套件</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$cd nodejs-kp-albums-sample &amp;&amp; npm install</span><br></pre></td></tr></table></figure><p><img src="/images/nodejs/131.png" alt=""></p><p>接著由於我們要使用到柯 p 官網提供的相簿 api ，在開發前我們需要安裝一個可以支援 restful api 的套件 node-rest-client，接著請在 terminal 輸入</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm install node-rest-client —save</span><br></pre></td></tr></table></figure><p><img src="/images/nodejs/132.png" alt=""></p><p>一切安裝完成之後，就開始來撰寫程式的部分，請先打開 app.js 檔案，在這邊我們要引用裝好的 node-rest-client 套件，將以下語法填入</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var Client = require(&apos;node-rest-client&apos;).Client;</span><br><span class="line">client = new Client();</span><br></pre></td></tr></table></figure><p>先宣告 node-rest-client 之後，我們預計將相簿列表印在主首頁 (index)，可以在 app.js 裡面找到var routes = require(‘./routes/index’); 與 app.use(‘/‘, routes); 這一段，也就是說根目錄的位置會指引到 /routes/index.js 檔案裡面，接著就打開  /routes/index.js ，由於我們在 app.js  完成了宣告，在 index.js 撰寫如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">var express = require(&apos;express&apos;);</span><br><span class="line">var router = express.Router();</span><br><span class="line"></span><br><span class="line">/* GET home page. */</span><br><span class="line">router.get(&apos;/&apos;, function(req, resp) &#123;</span><br><span class="line"></span><br><span class="line">    //取得 KP albums 相簿清單列表</span><br><span class="line">     client.get(&quot;http://api.kptaipei.tw/v1/albums&quot;, &#123; author: ‘xxx&apos; &#125;, function(data, res)&#123;</span><br><span class="line">        var config = JSON.parse(data.toString());</span><br><span class="line">        console.log(config.data);</span><br><span class="line"></span><br><span class="line">        //將資料寫在 locals</span><br><span class="line">        resp.locals.posts = config.data;</span><br><span class="line"></span><br><span class="line">        var renderData = &#123;</span><br><span class="line">             title: &apos;柯 p 野生 API&apos;,</span><br><span class="line">             data: config.data</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        // 將取得到的 json 格式渲染到畫面上</span><br><span class="line">        resp.render(&apos;index&apos;, renderData);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">module.exports = router;</span><br></pre></td></tr></table></figure><p>可以看到用了 client.get 方法，其有三個參數，第一個參數請到 <a href="http://unlimited.kptaipei.tw/docs/#api-ch3" target="_blank" rel="noopener">http://unlimited.kptaipei.tw/docs/#api-ch3</a> 得到相簿清單的 api ：<a href="http://api.kptaipei.tw/v1/albums/" target="_blank" rel="noopener">http://api.kptaipei.tw/v1/albums/</a>  ，預期會知道 api 結果會是如下</p><p><img src="/images/nodejs/133.png" alt=""></p><p><img src="/images/nodejs/134.png" alt=""></p><p>第二參數由於本篇只做列表，就保持為空 {}，第三個參數就 function callback 操作，在取得  json 格式的資料之後，經過 json.parse 由字串轉換 json  ，並且我們已知要抓  data 的陣列，透過物件 renderData 將資料存放，最後就將得到的資料渲染到畫面上 ，也就是 resp.render(‘index’, renderData);</p><p>接著到了 views 的部分，就請開啓  /views/index.ejs 檔案</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;title&gt;&lt;%= title %&gt;&lt;/title&gt;</span><br><span class="line">    &lt;link rel=&apos;stylesheet&apos; href=&apos;/stylesheets/style.css&apos; /&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">    &lt;%</span><br><span class="line">         posts.forEach(function(post) &#123;</span><br><span class="line">              var thumb = post.thumbnails;</span><br><span class="line">              var t_small = thumb.small_square;</span><br><span class="line">    %&gt;</span><br><span class="line">          &lt;img src=&apos;&lt;%= t_small %&gt;&apos; alt=&apos;&lt;%=post.title %&gt;&apos; /&gt;</span><br><span class="line">    &lt;% &#125;);%&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure><p>在這邊我只需要顯示柯p相簿的小張圖，也就是 thumbnails.small_square ，由於已經轉成  json  格式，那麼就當做物件找到 thumbnails.small_square  位置，將取得到的圖片網址塞到 img tag 裡的 src 屬性。那麼，一切的一切準備好之後，就請執行應用程式吧！輸入：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm start</span><br></pre></td></tr></table></figure><p><img src="/images/nodejs/135.png" alt=""></p><p>網站預設為 3000 port ，請開啓 localhost:3000，結果如下圖顯示</p><p><img src="/images/nodejs/136.png" alt=""></p><h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="https://www.npmjs.org/package/node-rest-client" target="_blank" rel="noopener">https://www.npmjs.org/package/node-rest-client</a></p>]]></content>
     
     <summary type="html">
     
@@ -1019,38 +447,13 @@
     <published>2017-07-25T16:29:00.000Z</published>
     <updated>2017-07-31T10:33:56.000Z</updated>
     
-    <content type="html"><![CDATA[<p>npm 包管理器是 Node.js 的模組管理工具，npm 的包就像 java 的類別庫，將功能獨立封裝起來，目前已經有相當多的工具可以運用，因此首先我們看一下 npm 的指令有哪些，而 npm 的命令會與  package.json 這個檔案息息相關，是接下來會說明到的。</p>
-<p>package.json</p>
-<p>它是一種 CommonJS 規定用來描述包的文件，是一個包含 json 格式的說明文件，裡面可以定義相依的相關套件以及應用程式的資訊，我們從 <a href="http://wiki.commonjs.org/wiki/Packages/1.1" target="_blank" rel="external">http://wiki.commonjs.org/wiki/Packages/1.1</a> Wiki 網頁了解到，他基本可以定義 應用程式名稱、版本、描述、關鍵字、授權、貢獻者、維護者、腳本等其他，還有更令 Node.js 最重要的就相依套件將是會在開發過程中會經常遇到的，它是以套件名稱和版本號組成的。</p>
-<a id="more"></a>
-<p>你可能心想說這邊該不會要用手刻吧…答案是不全然！可以透過指令的指引可以將它完成基本操作。一開始請先建立一個資料夾 demo-nodejs ，然後在目錄裡面執行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$npm init</div></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/125.png" alt=""></p>
-<p>輸入完他所指示的資料之後，在資料夾裡面他就會自動產生 package.json 檔案，是不是很簡單方便呢？（對了，用 npm init 指令，當他指示到 version 的時候，務必要三階的版本號，也就是 x.x.x，否則會出錯呢！) 接著我們定義我們需要用到的相依套件，假定我們要安裝一個 socket.io 及 express 框架，這時候在 package.json 補上 dependencies 物件，像下圖的紅框處</p>
-<p><img src="/images/nodejs/126.png" alt=""></p>
-<p>然後，你可能又發出一個疑問，我如何知道個別的套件版本要寫哪一個版本？你可以採用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$npm info &#123;套件名稱&#125; version</div></pre></td></tr></table></figure>
-<p>來取得最新版本號</p>
-<p><img src="/images/nodejs/127.png" alt=""></p>
-<p>輸入完成之後存檔，這時候我們只是定義相依套件，但還沒有安裝，因此在 demo-nodejs 這個目錄下，輸入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$npm install</div></pre></td></tr></table></figure>
-<p>指令來安裝這兩個套件，結果將會在這個目錄夾底下多了一個 node_module 資料夾，如下：</p>
-<p><img src="/images/nodejs/128.png" alt=""></p>
-<p>若需要移除套件的話，也相當容易</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$npm uninstall socket.io</div></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/129.png" alt=""></p>
-<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ol>
-<li><a href="https://www.npmjs.org/" target="_blank" rel="external">https://www.npmjs.org/</a></li>
-<li><a href="http://wiki.commonjs.org/wiki/Packages/1.1" target="_blank" rel="external">http://wiki.commonjs.org/wiki/Packages/1.1</a></li>
-<li><a href="http://semver.org/lang/zh-TW/" target="_blank" rel="external">http://semver.org/lang/zh-TW/</a></li>
-</ol>
-]]></content>
+    <content type="html"><![CDATA[<p>npm 包管理器是 Node.js 的模組管理工具，npm 的包就像 java 的類別庫，將功能獨立封裝起來，目前已經有相當多的工具可以運用，因此首先我們看一下 npm 的指令有哪些，而 npm 的命令會與  package.json 這個檔案息息相關，是接下來會說明到的。</p><p>package.json</p><p>它是一種 CommonJS 規定用來描述包的文件，是一個包含 json 格式的說明文件，裡面可以定義相依的相關套件以及應用程式的資訊，我們從 <a href="http://wiki.commonjs.org/wiki/Packages/1.1" target="_blank" rel="noopener">http://wiki.commonjs.org/wiki/Packages/1.1</a> Wiki 網頁了解到，他基本可以定義 應用程式名稱、版本、描述、關鍵字、授權、貢獻者、維護者、腳本等其他，還有更令 Node.js 最重要的就相依套件將是會在開發過程中會經常遇到的，它是以套件名稱和版本號組成的。</p><a id="more"></a><p>你可能心想說這邊該不會要用手刻吧…答案是不全然！可以透過指令的指引可以將它完成基本操作。一開始請先建立一個資料夾 demo-nodejs ，然後在目錄裡面執行</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm init</span><br></pre></td></tr></table></figure><p><img src="/images/nodejs/125.png" alt=""></p><p>輸入完他所指示的資料之後，在資料夾裡面他就會自動產生 package.json 檔案，是不是很簡單方便呢？（對了，用 npm init 指令，當他指示到 version 的時候，務必要三階的版本號，也就是 x.x.x，否則會出錯呢！) 接著我們定義我們需要用到的相依套件，假定我們要安裝一個 socket.io 及 express 框架，這時候在 package.json 補上 dependencies 物件，像下圖的紅框處</p><p><img src="/images/nodejs/126.png" alt=""></p><p>然後，你可能又發出一個疑問，我如何知道個別的套件版本要寫哪一個版本？你可以採用</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm info &#123;套件名稱&#125; version</span><br></pre></td></tr></table></figure><p>來取得最新版本號</p><p><img src="/images/nodejs/127.png" alt=""></p><p>輸入完成之後存檔，這時候我們只是定義相依套件，但還沒有安裝，因此在 demo-nodejs 這個目錄下，輸入：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm install</span><br></pre></td></tr></table></figure><p>指令來安裝這兩個套件，結果將會在這個目錄夾底下多了一個 node_module 資料夾，如下：</p><p><img src="/images/nodejs/128.png" alt=""></p><p>若需要移除套件的話，也相當容易</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm uninstall socket.io</span><br></pre></td></tr></table></figure><p><img src="/images/nodejs/129.png" alt=""></p><h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ol><li><a href="https://www.npmjs.org/" target="_blank" rel="noopener">https://www.npmjs.org/</a></li><li><a href="http://wiki.commonjs.org/wiki/Packages/1.1" target="_blank" rel="noopener">http://wiki.commonjs.org/wiki/Packages/1.1</a></li><li><a href="http://semver.org/lang/zh-TW/" target="_blank" rel="noopener">http://semver.org/lang/zh-TW/</a></li></ol>]]></content>
     
     <summary type="html">
     
       &lt;p&gt;npm 包管理器是 Node.js 的模組管理工具，npm 的包就像 java 的類別庫，將功能獨立封裝起來，目前已經有相當多的工具可以運用，因此首先我們看一下 npm 的指令有哪些，而 npm 的命令會與  package.json 這個檔案息息相關，是接下來會說明到的。&lt;/p&gt;
 &lt;p&gt;package.json&lt;/p&gt;
-&lt;p&gt;它是一種 CommonJS 規定用來描述包的文件，是一個包含 json 格式的說明文件，裡面可以定義相依的相關套件以及應用程式的資訊，我們從 &lt;a href=&quot;http://wiki.commonjs.org/wiki/Packages/1.1&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://wiki.commonjs.org/wiki/Packages/1.1&lt;/a&gt; Wiki 網頁了解到，他基本可以定義 應用程式名稱、版本、描述、關鍵字、授權、貢獻者、維護者、腳本等其他，還有更令 Node.js 最重要的就相依套件將是會在開發過程中會經常遇到的，它是以套件名稱和版本號組成的。&lt;/p&gt;
+&lt;p&gt;它是一種 CommonJS 規定用來描述包的文件，是一個包含 json 格式的說明文件，裡面可以定義相依的相關套件以及應用程式的資訊，我們從 &lt;a href=&quot;http://wiki.commonjs.org/wiki/Packages/1.1&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://wiki.commonjs.org/wiki/Packages/1.1&lt;/a&gt; Wiki 網頁了解到，他基本可以定義 應用程式名稱、版本、描述、關鍵字、授權、貢獻者、維護者、腳本等其他，還有更令 Node.js 最重要的就相依套件將是會在開發過程中會經常遇到的，它是以套件名稱和版本號組成的。&lt;/p&gt;
     
     </summary>
     
@@ -1072,36 +475,12 @@
     <published>2017-07-25T16:27:00.000Z</published>
     <updated>2017-07-31T10:26:00.000Z</updated>
     
-    <content type="html"><![CDATA[<p>程式準備要部署上線時，就會面臨到執行程式的方式，伺服器的管理，是不是能有一個運行 Node.js 程式，並且有個工具處理這件事情。<br>forever 可以作為保持運行的狀態，管理 Node.js 程式服務，在 forever 進程之下，建立子進程，執行啟動與停止的命令相當簡單。<br>更特別的是，經常我們在寫 Node.js 的時候，每次更動的檔案時都需要再重新執行啟動服務的指令 (例如：node app.js)，而這個工具是當每次更新程式的時候，它會自動重新啟動服務，更方便許多了呢！</p>
-<p>這是官方的描述：（<a href="https://github.com/nodejitsu/forever）" target="_blank" rel="external">https://github.com/nodejitsu/forever）</a></p>
-<p>A simple CLI tool for ensuring that a given script runs continuously (i.e. forever).</p>
-<a id="more"></a>
-<h3 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 一般建議加上 -g 將 forever 全域安裝</div><div class="line">$[sudo] npm install forever -g</div></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/118.png" alt=""></p>
-<p>當然若你要在某個特定目錄下安裝也是可以</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$cd /path/projects/abc</div><div class="line">$[sudo] npm install forever</div></pre></td></tr></table></figure>
-<h3 id="指令的幫助"><a href="#指令的幫助" class="headerlink" title="指令的幫助"></a>指令的幫助</h3><p>可以透過以下指令列出說明</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$forever —help</div></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/119.png" alt=""></p>
-<h3 id="顯示所有運行的服務"><a href="#顯示所有運行的服務" class="headerlink" title="顯示所有運行的服務"></a>顯示所有運行的服務</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$forever list</div></pre></td></tr></table></figure>
-<h3 id="啟動"><a href="#啟動" class="headerlink" title="啟動"></a>啟動</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$forever start app.js</div></pre></td></tr></table></figure>
-<h3 id="停止操作"><a href="#停止操作" class="headerlink" title="停止操作"></a>停止操作</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$forever stopall</div></pre></td></tr></table></figure>
-<h3 id="停止某一個程式專案"><a href="#停止某一個程式專案" class="headerlink" title="停止某一個程式專案"></a>停止某一個程式專案</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$forever stop app.js</div></pre></td></tr></table></figure>
-<h3 id="實作一個簡單運用"><a href="#實作一個簡單運用" class="headerlink" title="實作一個簡單運用"></a>實作一個簡單運用</h3><p>我們先用 express 這個框架建一個簡單的網站</p>
-<p><img src="/images/nodejs/120.png" alt=""></p>
-<h3 id="啟動程式"><a href="#啟動程式" class="headerlink" title="啟動程式"></a>啟動程式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$forever start app.js</div></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/121.png" alt=""></p>
-<h3 id="forever-列表清單"><a href="#forever-列表清單" class="headerlink" title="forever  列表清單"></a>forever  列表清單</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$forever list</div></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/122.png" alt=""></p>
-<p>可以看到紫色部分，就是在放 log file 的路徑</p>
-<h3 id="關閉進程"><a href="#關閉進程" class="headerlink" title="關閉進程"></a>關閉進程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$forever stop app.js</div></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/123.png" alt=""></p>
-]]></content>
+    <content type="html"><![CDATA[<p>程式準備要部署上線時，就會面臨到執行程式的方式，伺服器的管理，是不是能有一個運行 Node.js 程式，並且有個工具處理這件事情。<br>forever 可以作為保持運行的狀態，管理 Node.js 程式服務，在 forever 進程之下，建立子進程，執行啟動與停止的命令相當簡單。<br>更特別的是，經常我們在寫 Node.js 的時候，每次更動的檔案時都需要再重新執行啟動服務的指令 (例如：node app.js)，而這個工具是當每次更新程式的時候，它會自動重新啟動服務，更方便許多了呢！</p><p>這是官方的描述：（<a href="https://github.com/nodejitsu/forever）" target="_blank" rel="noopener">https://github.com/nodejitsu/forever）</a></p><p>A simple CLI tool for ensuring that a given script runs continuously (i.e. forever).</p><a id="more"></a><h3 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 一般建議加上 -g 將 forever 全域安裝</span><br><span class="line">$[sudo] npm install forever -g</span><br></pre></td></tr></table></figure><p><img src="/images/nodejs/118.png" alt=""></p><p>當然若你要在某個特定目錄下安裝也是可以</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$cd /path/projects/abc</span><br><span class="line">$[sudo] npm install forever</span><br></pre></td></tr></table></figure><h3 id="指令的幫助"><a href="#指令的幫助" class="headerlink" title="指令的幫助"></a>指令的幫助</h3><p>可以透過以下指令列出說明</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever —help</span><br></pre></td></tr></table></figure><p><img src="/images/nodejs/119.png" alt=""></p><h3 id="顯示所有運行的服務"><a href="#顯示所有運行的服務" class="headerlink" title="顯示所有運行的服務"></a>顯示所有運行的服務</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever list</span><br></pre></td></tr></table></figure><h3 id="啟動"><a href="#啟動" class="headerlink" title="啟動"></a>啟動</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever start app.js</span><br></pre></td></tr></table></figure><h3 id="停止操作"><a href="#停止操作" class="headerlink" title="停止操作"></a>停止操作</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever stopall</span><br></pre></td></tr></table></figure><h3 id="停止某一個程式專案"><a href="#停止某一個程式專案" class="headerlink" title="停止某一個程式專案"></a>停止某一個程式專案</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever stop app.js</span><br></pre></td></tr></table></figure><h3 id="實作一個簡單運用"><a href="#實作一個簡單運用" class="headerlink" title="實作一個簡單運用"></a>實作一個簡單運用</h3><p>我們先用 express 這個框架建一個簡單的網站</p><p><img src="/images/nodejs/120.png" alt=""></p><h3 id="啟動程式"><a href="#啟動程式" class="headerlink" title="啟動程式"></a>啟動程式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever start app.js</span><br></pre></td></tr></table></figure><p><img src="/images/nodejs/121.png" alt=""></p><h3 id="forever-列表清單"><a href="#forever-列表清單" class="headerlink" title="forever  列表清單"></a>forever  列表清單</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever list</span><br></pre></td></tr></table></figure><p><img src="/images/nodejs/122.png" alt=""></p><p>可以看到紫色部分，就是在放 log file 的路徑</p><h3 id="關閉進程"><a href="#關閉進程" class="headerlink" title="關閉進程"></a>關閉進程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever stop app.js</span><br></pre></td></tr></table></figure><p><img src="/images/nodejs/123.png" alt=""></p>]]></content>
     
     <summary type="html">
     
       &lt;p&gt;程式準備要部署上線時，就會面臨到執行程式的方式，伺服器的管理，是不是能有一個運行 Node.js 程式，並且有個工具處理這件事情。&lt;br&gt;forever 可以作為保持運行的狀態，管理 Node.js 程式服務，在 forever 進程之下，建立子進程，執行啟動與停止的命令相當簡單。&lt;br&gt;更特別的是，經常我們在寫 Node.js 的時候，每次更動的檔案時都需要再重新執行啟動服務的指令 (例如：node app.js)，而這個工具是當每次更新程式的時候，它會自動重新啟動服務，更方便許多了呢！&lt;/p&gt;
-&lt;p&gt;這是官方的描述：（&lt;a href=&quot;https://github.com/nodejitsu/forever）&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/nodejitsu/forever）&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;這是官方的描述：（&lt;a href=&quot;https://github.com/nodejitsu/forever）&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://github.com/nodejitsu/forever）&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;A simple CLI tool for ensuring that a given script runs continuously (i.e. forever).&lt;/p&gt;
     
     </summary>
@@ -1124,31 +503,7 @@
     <published>2017-07-25T16:27:00.000Z</published>
     <updated>2017-07-31T10:27:16.000Z</updated>
     
-    <content type="html"><![CDATA[<p>今天我們使用 express 框架介紹一下 REST  路由規則，REST 是一種  http 協定的網路應用，http 提供了八種方法使用：</p>
-<a id="more"></a>
-<ul>
-<li><p>OPTIONS：這個方法可使伺服器傳回該資源所支援的所有HTTP請求方法。用<code>*</code>來代替資源名稱，向Web伺服器傳送OPTIONS請求，可以測試伺服器功能是否正常運作。</p>
-</li>
-<li><p>HEAD：與GET方法一樣，都是向伺服器發出指定資源的請求。只不過伺服器將不傳回資源的本文部份。它的好處在於，使用這個方法可以在不必傳輸全部內容的情況下，就可以獲取其中「關於該資源的資訊」（元資訊或稱元資料）。</p>
-</li>
-<li><p>GET：向指定的資源發出「顯示」請求。使用GET方法應該只用在讀取資料，而不應當被用於產生「副作用」的操作中，例如在Web Application中。其中一個原因是GET可能會被網路蜘蛛等隨意存取。參見安全方法</p>
-</li>
-<li><p>POST：向指定資源提交資料，請求伺服器進行處理（例如提交表單或者上傳檔案）。資料被包含在請求本文中。這個請求可能會建立新的資源或修改現有資源，或二者皆有。</p>
-</li>
-<li><p>PUT：向指定資源位置上傳其最新內容。</p>
-</li>
-<li><p>DELETE：請求伺服器刪除Request-URI所標識的資源。</p>
-</li>
-<li><p>TRACE：回顯伺服器收到的請求，主要用於測試或診斷。</p>
-</li>
-<li><p>CONNECT：HTTP/1.1協定中預留給能夠將連線改為管道方式的代理伺服器。通常用於SSL加密伺服器的連結（經由非加密的HTTP代理伺服器）</p>
-</li>
-</ul>
-<p>而 express 網頁框架也針對 http 請求方法設計路由的函數：</p>
-<p><img src="/images/nodejs/124.png" alt=""></p>
-<p>通常在設計 rest 時，常用的是 get (取得), post (新增), put (更新), delete (刪除)</p>
-<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE" target="_blank" rel="external">http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE</a></p>
-]]></content>
+    <content type="html"><![CDATA[<p>今天我們使用 express 框架介紹一下 REST  路由規則，REST 是一種  http 協定的網路應用，http 提供了八種方法使用：</p><a id="more"></a><ul><li><p>OPTIONS：這個方法可使伺服器傳回該資源所支援的所有HTTP請求方法。用<code>*</code>來代替資源名稱，向Web伺服器傳送OPTIONS請求，可以測試伺服器功能是否正常運作。</p></li><li><p>HEAD：與GET方法一樣，都是向伺服器發出指定資源的請求。只不過伺服器將不傳回資源的本文部份。它的好處在於，使用這個方法可以在不必傳輸全部內容的情況下，就可以獲取其中「關於該資源的資訊」（元資訊或稱元資料）。</p></li><li><p>GET：向指定的資源發出「顯示」請求。使用GET方法應該只用在讀取資料，而不應當被用於產生「副作用」的操作中，例如在Web Application中。其中一個原因是GET可能會被網路蜘蛛等隨意存取。參見安全方法</p></li><li><p>POST：向指定資源提交資料，請求伺服器進行處理（例如提交表單或者上傳檔案）。資料被包含在請求本文中。這個請求可能會建立新的資源或修改現有資源，或二者皆有。</p></li><li><p>PUT：向指定資源位置上傳其最新內容。</p></li><li><p>DELETE：請求伺服器刪除Request-URI所標識的資源。</p></li><li><p>TRACE：回顯伺服器收到的請求，主要用於測試或診斷。</p></li><li><p>CONNECT：HTTP/1.1協定中預留給能夠將連線改為管道方式的代理伺服器。通常用於SSL加密伺服器的連結（經由非加密的HTTP代理伺服器）</p></li></ul><p>而 express 網頁框架也針對 http 請求方法設計路由的函數：</p><p><img src="/images/nodejs/124.png" alt=""></p><p>通常在設計 rest 時，常用的是 get (取得), post (新增), put (更新), delete (刪除)</p><h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE" target="_blank" rel="noopener">http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE</a></p>]]></content>
     
     <summary type="html">
     

@@ -102,6 +102,7 @@
 <meta property="og:url" content="https://weijutu.github.io/2017/07/25/nodejs/nodejs-25-jade-1/index.html">
 <meta property="og:site_name" content="噗噗。故我在">
 <meta property="og:description" content="Node.js 開發網頁它有許多的樣板引擎可以使用，例如常見的 Jade, EJS。樣板引擎也可以稱為樣板處理器 （Template Processor）或者叫過濾器 （Filter）。其他的語言也有個別使用的樣板引擎，像是 PHP 的 Smarty、 Ruby 的 ERB，本章節會以 jade 作為基礎的介紹如何透過樣板引擎實作 Node.js 網頁。 官方網站：http://jade-lan">
+<meta property="og:locale" content="zh-tw">
 <meta property="og:image" content="https://weijutu.github.io/images/nodejs/107.png">
 <meta property="og:image" content="https://weijutu.github.io/images/nodejs/108.png">
 <meta property="og:image" content="https://weijutu.github.io/images/nodejs/109.png">
@@ -427,7 +428,7 @@
       
         <p><img src="/images/nodejs/107.png" alt=""></p>
 <p>Node.js 開發網頁它有許多的樣板引擎可以使用，例如常見的 Jade, EJS。樣板引擎也可以稱為樣板處理器 （Template Processor）或者叫過濾器 （Filter）。其他的語言也有個別使用的樣板引擎，像是 PHP 的 Smarty、 Ruby 的 ERB，本章節會以 jade 作為基礎的介紹如何透過樣板引擎實作 Node.js 網頁。</p>
-<p>官方網站：<a href="http://jade-lang.com/" target="_blank" rel="external">http://jade-lang.com/</a></p>
+<p>官方網站：<a href="http://jade-lang.com/" target="_blank" rel="noopener">http://jade-lang.com/</a></p>
 <p>今天會介紹的內容有</p>
 <ul>
 <li>Jade 特點</li>
@@ -442,13 +443,13 @@
 </li>
 </ul>
 <a id="more"></a>
-<p>接下來您可以使用：<a href="http://codepen.io/" target="_blank" rel="external">http://codepen.io/</a> 作為線上編輯做以下實作的測試編輯器</p>
+<p>接下來您可以使用：<a href="http://codepen.io/" target="_blank" rel="noopener">http://codepen.io/</a> 作為線上編輯做以下實作的測試編輯器</p>
 <p><img src="/images/nodejs/108.png" alt=""></p>
 <p>首先，我們先來比較一下 HTML  跟 Jade 的表示方式</p>
 <p>===== HTML =====</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;wrap&quot;&gt;</div><div class="line">  &lt;h1&gt;Lorem Ipsum&lt;/h1&gt;</div><div class="line">  &lt;p&gt;Contrary to popular belief, Lorem Ipsum is not simply random text. &lt;/p&gt;</div><div class="line"> &lt;a href=“http://www.google.com&quot;&gt;Google&lt;/a&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;wrap&quot;&gt;</span><br><span class="line">  &lt;h1&gt;Lorem Ipsum&lt;/h1&gt;</span><br><span class="line">  &lt;p&gt;Contrary to popular belief, Lorem Ipsum is not simply random text. &lt;/p&gt;</span><br><span class="line"> &lt;a href=“http://www.google.com&quot;&gt;Google&lt;/a&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
 <p>===== Jade =====</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">.wrap</div><div class="line">  h1 Lorem Ipsum</div><div class="line">  p Contrary to popular belief, Lorem Ipsum is not simply random text.</div><div class="line">  a(href=&apos;http://www.google.com&apos;) Google</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.wrap</span><br><span class="line">  h1 Lorem Ipsum</span><br><span class="line">  p Contrary to popular belief, Lorem Ipsum is not simply random text.</span><br><span class="line">  a(href=&apos;http://www.google.com&apos;) Google</span><br></pre></td></tr></table></figure>
 <h3 id="Jade-特點"><a href="#Jade-特點" class="headerlink" title="Jade 特點"></a>Jade 特點</h3><ul>
 <li>Jade 用縮排來定義 HTML 的階層結構</li>
 <li>Jade  比 HTML 寫起來更簡潔</li>
@@ -457,37 +458,37 @@
 </ul>
 <h3 id="Jade-語法"><a href="#Jade-語法" class="headerlink" title="Jade 語法"></a>Jade 語法</h3><p>因為 Jade 是利用縮排的方式來定義 HTML 的階層結構，也就是說，下一行的縮排的話，就是上一行的子節點。</p>
 <p>撰寫</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">html</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">html</span><br></pre></td></tr></table></figure>
 <p>編譯後</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;html&gt;&lt;/html&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;&lt;/html&gt;</span><br></pre></td></tr></table></figure>
 <hr>
 <p>撰寫</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">div#wrap</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">div#wrap</span><br></pre></td></tr></table></figure>
 <p>編譯後</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;wrap&quot;&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;wrap&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
 <hr>
 <p>撰寫</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">p.article.a1.a2.a3</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p.article.a1.a2.a3</span><br></pre></td></tr></table></figure>
 <p>編譯後</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;p class=&quot;article a1 a2 a3&quot;&gt;&lt;/p&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p class=&quot;article a1 a2 a3&quot;&gt;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
 <hr>
 <p>撰寫</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">p</div><div class="line">     span</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p</span><br><span class="line">     span</span><br></pre></td></tr></table></figure>
 <p>編譯後</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;p&gt;&lt;span&gt;&lt;/span&gt;&lt;/p&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;&lt;span&gt;&lt;/span&gt;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
 <hr>
 <p>撰寫</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">p</div><div class="line">     | Contrary to popular belief</div><div class="line">     | Lorem Ipsum is simply dummy text of the printing</div><div class="line">     | It has survived not only five centuries</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">p</span><br><span class="line">     | Contrary to popular belief</span><br><span class="line">     | Lorem Ipsum is simply dummy text of the printing</span><br><span class="line">     | It has survived not only five centuries</span><br></pre></td></tr></table></figure>
 <p>編譯後</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;p&gt;Contrary to popular belief Lorem Ipsum is simply dummy text of the printing It has survived not only five centuries &lt;/p&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;Contrary to popular belief Lorem Ipsum is simply dummy text of the printing It has survived not only five centuries &lt;/p&gt;</span><br></pre></td></tr></table></figure>
 <hr>
 <p>標籤屬性：屬性部分就用括號的方式括弧起來，有多個屬性時就用逗點分隔或者段行來分隔</p>
 <p>方法一</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">input(type=&quot;text&quot;, placeholder=&quot;hello&quot;)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">input(type=&quot;text&quot;, placeholder=&quot;hello&quot;)</span><br></pre></td></tr></table></figure>
 <p>方法二</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">input(</div><div class="line">     type=&apos;text&apos;</div><div class="line">     name=&apos;age&apos;</div><div class="line">     placeholder=&apos;typing your age&apos;</div><div class="line">)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">input(</span><br><span class="line">     type=&apos;text&apos;</span><br><span class="line">     name=&apos;age&apos;</span><br><span class="line">     placeholder=&apos;typing your age&apos;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <p>方法三：也可以用 javascript 的判斷控制屬性資料</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">- var isFemale = true</div><div class="line">input(type=&apos;text&apos; value=isFemale ? &apos;Female&apos; : &apos;Male&apos;)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- var isFemale = true</span><br><span class="line">input(type=&apos;text&apos; value=isFemale ? &apos;Female&apos; : &apos;Male&apos;)</span><br></pre></td></tr></table></figure>
 <h3 id="Jade-輸出資料"><a href="#Jade-輸出資料" class="headerlink" title="Jade 輸出資料"></a>Jade 輸出資料</h3><h4 id="迴圈"><a href="#迴圈" class="headerlink" title="迴圈"></a>迴圈</h4><p>試著寫迴圈</p>
 <p><img src="/images/nodejs/109.png" alt=""></p>
 <p>輸出結果</p>
@@ -498,10 +499,10 @@
 <p><img src="/images/nodejs/112.png" alt=""></p>
 <p>Jade 就先寫到這裡，下集待續..</p>
 <h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ol>
-<li><a href="http://jade-lang.com/" target="_blank" rel="external">http://jade-lang.com/</a></li>
-<li><a href="http://naltatis.github.io/jade-syntax-docs/" target="_blank" rel="external">http://naltatis.github.io/jade-syntax-docs/</a></li>
-<li><a href="http://naltatis.github.io/jade-syntax-docs/#basics" target="_blank" rel="external">http://naltatis.github.io/jade-syntax-docs/#basics</a></li>
-<li><a href="http://blog.kerash.tw/2013/04/nodejs-jade-template-engine/" target="_blank" rel="external">http://blog.kerash.tw/2013/04/nodejs-jade-template-engine/</a></li>
+<li><a href="http://jade-lang.com/" target="_blank" rel="noopener">http://jade-lang.com/</a></li>
+<li><a href="http://naltatis.github.io/jade-syntax-docs/" target="_blank" rel="noopener">http://naltatis.github.io/jade-syntax-docs/</a></li>
+<li><a href="http://naltatis.github.io/jade-syntax-docs/#basics" target="_blank" rel="noopener">http://naltatis.github.io/jade-syntax-docs/#basics</a></li>
+<li><a href="http://blog.kerash.tw/2013/04/nodejs-jade-template-engine/" target="_blank" rel="noopener">http://blog.kerash.tw/2013/04/nodejs-jade-template-engine/</a></li>
 </ol>
 
       
@@ -641,7 +642,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">51</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
@@ -652,7 +653,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分類</span>
               </a>
             </div>
@@ -748,7 +749,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1229,7 +1230,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

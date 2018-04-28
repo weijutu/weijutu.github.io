@@ -102,6 +102,7 @@
 <meta property="og:url" content="https://weijutu.github.io/2017/07/24/nodejs/nodejs-24-npm-version/index.html">
 <meta property="og:site_name" content="噗噗。故我在">
 <meta property="og:description" content="在管理套件工具的版本時，在 package.json  檔案裡面有一個 dependencies 的部分，裡面包含著套件的名稱與版本號，今天要談的是版本號的指定。">
+<meta property="og:locale" content="zh-tw">
 <meta property="og:image" content="https://weijutu.github.io/images/nodejs/101.png">
 <meta property="og:image" content="https://weijutu.github.io/images/nodejs/102.png">
 <meta property="og:image" content="https://weijutu.github.io/images/nodejs/103.png">
@@ -428,7 +429,7 @@
         <p><img src="/images/nodejs/101.png" alt=""></p>
 <p>在管理套件工具的版本時，在 package.json  檔案裡面有一個 dependencies 的部分，裡面包含著套件的名稱與版本號，今天要談的是版本號的指定。</p>
 <a id="more"></a>
-<p>而這個版本號的指定是有個規範，它是語意化版本 <a href="http://semver.org/lang/zh-TW/" target="_blank" rel="external">http://semver.org/lang/zh-TW/</a> 根據它作為版號的規則</p>
+<p>而這個版本號的指定是有個規範，它是語意化版本 <a href="http://semver.org/lang/zh-TW/" target="_blank" rel="noopener">http://semver.org/lang/zh-TW/</a> 根據它作為版號的規則</p>
 <p>版本格式：主版號.次版號.修訂號  也就是  Major.Minor.Path 的形式</p>
 <ol>
 <li>主版號：當你做了不相容的 API 修改，</li>
@@ -457,10 +458,10 @@
 </li>
 </ul>
 <p>最上面的圖，使用了好幾種定義版本的方式，就以 * 的寫法風險也比較大一點，因為無法保證 npm 安裝的版本是最新的版本，最保守一點的就是直接指定版本號，而如何得知版本號，可以透過</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$npm info &#123;套件名稱&#125; version</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm info &#123;套件名稱&#125; version</span><br></pre></td></tr></table></figure>
 <p>方式去做查詢。</p>
 <hr>
-<h3 id="介紹-autod"><a href="#介紹-autod" class="headerlink" title="介紹 autod"></a>介紹 autod</h3><p><a href="https://github.com/node-modules/autod" target="_blank" rel="external">https://github.com/node-modules/autod</a></p>
+<h3 id="介紹-autod"><a href="#介紹-autod" class="headerlink" title="介紹 autod"></a>介紹 autod</h3><p><a href="https://github.com/node-modules/autod" target="_blank" rel="noopener">https://github.com/node-modules/autod</a></p>
 <p>這是一個自動分析所有的文件，引入的模組不需要手動更新 package.json ，並且它會同時自動更新 package.json</p>
 <p><img src="/images/nodejs/102.png" alt=""></p>
 <p>先看一下有哪些的  help 可以使用</p>
@@ -473,9 +474,9 @@
 <p><img src="/images/nodejs/106.png" alt=""></p>
 <p>是不是有很大的不同呢，而且又能夠自動更新，試試看囉  </p>
 <h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ol>
-<li><a href="http://semver.org/lang/zh-TW/" target="_blank" rel="external">http://semver.org/lang/zh-TW/</a></li>
-<li><a href="http://blog.eisneim.com/articles/2014-7-5-meaning-of-npm-bower-version-prefix.html" target="_blank" rel="external">http://blog.eisneim.com/articles/2014-7-5-meaning-of-npm-bower-version-prefix.html</a></li>
-<li><a href="https://cnodejs.org/topic/52dcc0a578990b04112e2f09" target="_blank" rel="external">https://cnodejs.org/topic/52dcc0a578990b04112e2f09</a></li>
+<li><a href="http://semver.org/lang/zh-TW/" target="_blank" rel="noopener">http://semver.org/lang/zh-TW/</a></li>
+<li><a href="http://blog.eisneim.com/articles/2014-7-5-meaning-of-npm-bower-version-prefix.html" target="_blank" rel="noopener">http://blog.eisneim.com/articles/2014-7-5-meaning-of-npm-bower-version-prefix.html</a></li>
+<li><a href="https://cnodejs.org/topic/52dcc0a578990b04112e2f09" target="_blank" rel="noopener">https://cnodejs.org/topic/52dcc0a578990b04112e2f09</a></li>
 </ol>
 
       
@@ -615,7 +616,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">51</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
@@ -626,7 +627,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分類</span>
               </a>
             </div>
@@ -722,7 +723,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1203,7 +1204,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

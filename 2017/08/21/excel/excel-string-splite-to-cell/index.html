@@ -102,6 +102,7 @@
 <meta property="og:url" content="https://weijutu.github.io/2017/08/21/excel/excel-string-splite-to-cell/index.html">
 <meta property="og:site_name" content="噗噗。故我在">
 <meta property="og:description" content="今天要介紹的是，如何將字串分割到不同的儲存格，也就是說當你今天遇到一個字串，但是字串裡面有兩個資訊想要各別放 比如以下字串： 1common.delete=Delete 結果預計要像這樣  如果你有很多個像這樣的要把字串切割的話，這時候你還會用 Copy &amp;amp; Paste 的做法去貼到不同的欄位嗎？">
+<meta property="og:locale" content="zh-tw">
 <meta property="og:image" content="https://weijutu.github.io/images/excel/20140523-1.png">
 <meta property="og:image" content="https://weijutu.github.io/images/excel/20140523-2.png">
 <meta property="og:image" content="https://weijutu.github.io/images/excel/20140523-3.png">
@@ -427,13 +428,13 @@
       
         <p>今天要介紹的是，如何將字串分割到不同的儲存格，也就是說當你今天遇到一個字串，但是字串裡面有兩個資訊想要各別放</p>
 <p>比如以下字串：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">common.delete=Delete</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">common.delete=Delete</span><br></pre></td></tr></table></figure>
 <p>結果預計要像這樣</p>
 <p><img src="/images/excel/20140523-1.png" alt=""></p>
 <p>如果你有很多個像這樣的要把字串切割的話，這時候你還會用 Copy &amp; Paste 的做法去貼到不同的欄位嗎？</p>
 <a id="more"></a>
 <p>以下用個簡單的資料當作例子，我想要將等於的左右兩邊，各別的放到不同的儲存格</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">common.delete=Delete</div><div class="line">common.add=Create</div><div class="line">common.modify=Edit</div><div class="line">common.name=Name</div><div class="line">common.change=Change</div><div class="line">common.manage=Management</div><div class="line">common.search=Search</div><div class="line">btn.cancel=Cancel</div><div class="line">btn.Submit=Submit</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">common.delete=Delete</span><br><span class="line">common.add=Create</span><br><span class="line">common.modify=Edit</span><br><span class="line">common.name=Name</span><br><span class="line">common.change=Change</span><br><span class="line">common.manage=Management</span><br><span class="line">common.search=Search</span><br><span class="line">btn.cancel=Cancel</span><br><span class="line">btn.Submit=Submit</span><br></pre></td></tr></table></figure>
 <h3 id="快速實作方法"><a href="#快速實作方法" class="headerlink" title="快速實作方法"></a>快速實作方法</h3><h4 id="第一步-先將欄位選取起來"><a href="#第一步-先將欄位選取起來" class="headerlink" title="第一步: 先將欄位選取起來"></a>第一步: 先將欄位選取起來</h4><p>請先將資料擺在 A 欄位那邊，然後滑鼠將資料選取起來，如下圖所示：</p>
 <p><img src="/images/excel/20140523-2.png" alt=""></p>
 <h4 id="第二步-按下-資料-gt-資料剖析-啟動-資料剖析精靈"><a href="#第二步-按下-資料-gt-資料剖析-啟動-資料剖析精靈" class="headerlink" title="第二步: 按下 [資料] &gt; [資料剖析] 啟動 [資料剖析精靈]"></a>第二步: 按下 [資料] &gt; [資料剖析] 啟動 [資料剖析精靈]</h4><p>接著他就會開資料剖析精靈，超簡單，三個小步驟而已<br>(步驟 3 之 1)：我們的目標是要分隔，所以選第一個，如果直接按完成的話，事實上跟我們需求不符，因為他會利用預設的 tab 區分隔，所以請繼續按下一步</p>
@@ -578,7 +579,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">51</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
@@ -589,7 +590,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分類</span>
               </a>
             </div>
@@ -662,7 +663,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#快速實作方法"><span class="nav-number">1.</span> <span class="nav-text">快速實作方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一步-先將欄位選取起來"><span class="nav-number">1.1.</span> <span class="nav-text">第一步: 先將欄位選取起來</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第二步-按下-資料-gt-資料剖析-啟動-資料剖析精靈"><span class="nav-number">1.2.</span> <span class="nav-text">第二步: 按下 [資料] > [資料剖析] 啟動 [資料剖析精靈]</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#快速實作方法"><span class="nav-number">1.</span> <span class="nav-text">快速實作方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一步-先將欄位選取起來"><span class="nav-number">1.1.</span> <span class="nav-text">第一步: 先將欄位選取起來</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第二步-按下-資料-gt-資料剖析-啟動-資料剖析精靈"><span class="nav-number">1.2.</span> <span class="nav-text">第二步: 按下 [資料] &gt; [資料剖析] 啟動 [資料剖析精靈]</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -685,7 +686,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1166,7 +1167,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

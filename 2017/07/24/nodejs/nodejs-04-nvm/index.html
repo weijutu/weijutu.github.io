@@ -102,6 +102,7 @@
 <meta property="og:url" content="https://weijutu.github.io/2017/07/24/nodejs/nodejs-04-nvm/index.html">
 <meta property="og:site_name" content="噗噗。故我在">
 <meta property="og:description" content="nvm 是一種在管理多個 Node.js 版本的套件，當你預計採用不同版本執行Node.js 的時候，可以採用這個套件，那麼我們可以先進到這個網址裡面找到安裝指令 https://github.com/creationix/nvm">
+<meta property="og:locale" content="zh-tw">
 <meta property="og:image" content="https://weijutu.github.io/images/nodejs/16.png">
 <meta property="og:image" content="https://weijutu.github.io/images/nodejs/17.png">
 <meta property="og:image" content="https://weijutu.github.io/images/nodejs/18.png">
@@ -427,35 +428,35 @@
 
       
         <p>nvm 是一種在管理多個 Node.js 版本的套件，當你預計採用不同版本執行Node.js 的時候，可以採用這個套件，那麼我們可以先進到這個網址裡面找到安裝指令</p>
-<p><a href="https://github.com/creationix/nvm" target="_blank" rel="external">https://github.com/creationix/nvm</a></p>
+<p><a href="https://github.com/creationix/nvm" target="_blank" rel="noopener">https://github.com/creationix/nvm</a></p>
 <a id="more"></a>
 <p>安裝指令請在下方找到：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl https://raw.githubusercontent.com/creationix/nvm/v0.17.2/install.sh | bash</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://raw.githubusercontent.com/creationix/nvm/v0.17.2/install.sh | bash</span><br></pre></td></tr></table></figure>
 <p>或者用 wget 方式下載</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.17.2/install.sh | bash</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.17.2/install.sh | bash</span><br></pre></td></tr></table></figure>
 <p><img src="/images/nodejs/16.png" alt=""></p>
 <p>將這個指令貼到命令提示字元</p>
 <p>安裝完之後，請先將命令提示字元關閉，再重新開啟以使用 nvm 指令<br>接著重啟之後，輸入</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$nvm</span></div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$nvm</span></span><br></pre></td></tr></table></figure>
 <p><img src="/images/nodejs/17.png" alt=""></p>
 <p>確定有  nvm 之後，可以輸入 $nvm ls-remote 指令看有哪些版本可以安裝，在命令提示字元會看到落落長的版本號</p>
 <p><img src="/images/nodejs/18.png" alt=""></p>
 <h1 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h1><p>依照 nvm help 指令的說明上，請使用  $nvm install 安裝 node.js  版本，這些版本會實際放在 /usr/local/n/資料夾，例如：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$nvm</span> install v0.10.32</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$nvm</span> install v0.10.32</span><br></pre></td></tr></table></figure>
 <p><img src="/images/nodejs/19.png" alt=""></p>
 <p>再裝一個不同版本的 node，那麼就安裝 v0.11.14 (版本前面的 v 可以不用寫)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$nvm</span> install v0.11.14</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$nvm</span> install v0.11.14</span><br></pre></td></tr></table></figure>
 <p><img src="/images/nodejs/20.png" alt=""></p>
 <p>這時候下一個  $nvm ls 指令，這時候安裝最後的版本，將會當做是當前的版本，可以下 $nvm current ，此時，綠色箭頭就是目前的版本號 v0.11.14</p>
 <p><img src="/images/nodejs/21.png" alt=""></p>
 <p>接下來我們可以用簡單的指令切換 Node.js 版本，這時候綠色箭頭就換成 v0.10.32</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$nvm</span> use 0.10.32</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$nvm</span> use 0.10.32</span><br></pre></td></tr></table></figure>
 <p><img src="/images/nodejs/22.png" alt=""></p>
 <h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><ul>
-<li><a href="http://nodejs.org/" target="_blank" rel="external">http://nodejs.org/</a></li>
-<li><a href="https://github.com/creationix/nvm" target="_blank" rel="external">https://github.com/creationix/nvm</a></li>
-<li><a href="https://github.com/Gizra/KnowledgeBase/wiki/How-to-install-nvm-(Node-Version-Manager" target="_blank" rel="external">https://github.com/Gizra/KnowledgeBase/wiki/How-to-install-nvm-(Node-Version-Manager)</a>)</li>
-<li><a href="https://www.npmjs.org/package/nvm" target="_blank" rel="external">https://www.npmjs.org/package/nvm</a></li>
+<li><a href="http://nodejs.org/" target="_blank" rel="noopener">http://nodejs.org/</a></li>
+<li><a href="https://github.com/creationix/nvm" target="_blank" rel="noopener">https://github.com/creationix/nvm</a></li>
+<li><a href="https://github.com/Gizra/KnowledgeBase/wiki/How-to-install-nvm-(Node-Version-Manager" target="_blank" rel="noopener">https://github.com/Gizra/KnowledgeBase/wiki/How-to-install-nvm-(Node-Version-Manager)</a>)</li>
+<li><a href="https://www.npmjs.org/package/nvm" target="_blank" rel="noopener">https://www.npmjs.org/package/nvm</a></li>
 </ul>
 
       
@@ -597,7 +598,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">51</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
@@ -608,7 +609,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分類</span>
               </a>
             </div>
@@ -704,7 +705,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1185,7 +1186,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

@@ -102,6 +102,7 @@
 <meta property="og:url" content="https://weijutu.github.io/2017/07/24/nodejs/nodejs-20-node-inspector/index.html">
 <meta property="og:site_name" content="噗噗。故我在">
 <meta property="og:description" content="開發過程所撰寫的程式，總是要跟 bugs 打交道，本篇文章介紹一套官方推薦的 Node.js Debug 調校工具 node-inspector，而Node.js 是可以透過  command 命令列方式除錯，不過 node-inspector 則是透過 Web 網頁的方式來操作，讓開發者在調校更美觀方便一些。在這 node-inspector 安裝之前，我們必須要有一個 webkit 的瀏覽器，">
+<meta property="og:locale" content="zh-tw">
 <meta property="og:image" content="https://weijutu.github.io/images/nodejs/76.png">
 <meta property="og:image" content="https://weijutu.github.io/images/nodejs/77.png">
 <meta property="og:image" content="https://weijutu.github.io/images/nodejs/78.png">
@@ -428,15 +429,15 @@
       
         <p>開發過程所撰寫的程式，總是要跟 bugs 打交道，本篇文章介紹一套官方推薦的 Node.js Debug 調校工具 node-inspector，而Node.js 是可以透過  command 命令列方式除錯，不過 node-inspector 則是透過 Web 網頁的方式來操作，讓開發者在調校更美觀方便一些。在這 node-inspector 安裝之前，我們必須要有一個 webkit 的瀏覽器，比如許多人使用的 chrome。接著我們就可以進行安裝 node-inspector</p>
 <a id="more"></a>
-<h3 id="安裝指令"><a href="#安裝指令" class="headerlink" title="安裝指令"></a>安裝指令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$npm install -g node-inspector</div></pre></td></tr></table></figure>
+<h3 id="安裝指令"><a href="#安裝指令" class="headerlink" title="安裝指令"></a>安裝指令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm install -g node-inspector</span><br></pre></td></tr></table></figure>
 <p><img src="/images/nodejs/76.png" alt=""></p>
 <h3 id="調校"><a href="#調校" class="headerlink" title="調校"></a>調校</h3><p>執行時會預設 5858 port 口。我們使用前一個聊天室專案來示範 ，使進行  debug 動作時請下指令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node —debug app.js</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node —debug app.js</span><br></pre></td></tr></table></figure>
 <p><img src="/images/nodejs/77.png" alt=""></p>
 <p>這時候會開始做  5858 port 的監聽，接著我們在打開另一個命令提示字元的視窗，在執行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$node-inspector &amp;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$node-inspector &amp;</span><br></pre></td></tr></table></figure>
 <p><img src="/images/nodejs/78.png" alt=""></p>
-<p>上面會提示說請造訪 <a href="http://127.0.0.1:8080/debug?port=5858" target="_blank" rel="external">http://127.0.0.1:8080/debug?port=5858</a> 路徑去啟動  debugging 模式</p>
+<p>上面會提示說請造訪 <a href="http://127.0.0.1:8080/debug?port=5858" target="_blank" rel="noopener">http://127.0.0.1:8080/debug?port=5858</a> 路徑去啟動  debugging 模式</p>
 <p><img src="/images/nodejs/79.png" alt=""></p>
 <p>打開之後，可以看到調校的工具載入程式碼，您可以在行號下中斷點，右手邊的   breakpoints 就會顯示下中斷點的位置</p>
 <p><img src="/images/nodejs/80.png" alt=""></p>
@@ -581,7 +582,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">51</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
@@ -592,7 +593,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分類</span>
               </a>
             </div>
@@ -688,7 +689,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1169,7 +1170,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
