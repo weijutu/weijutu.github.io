@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://weijutu.github.io/2018/05/04/r/r-05-foreach/</loc>
+    
+    <lastmod>2018-05-04T17:20:28.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2018/05/04/r/r-04-rstudio-shortcut/</loc>
+    
+    <lastmod>2018-05-04T11:45:55.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://weijutu.github.io/2018/04/28/nodejs/nodejs-31-ubuntu-install-nodejs/</loc>
     
-    <lastmod>2018-04-28T07:16:05.000Z</lastmod>
+    <lastmod>2018-04-28T07:38:50.000Z</lastmod>
     
   </url>
   
@@ -359,14 +373,14 @@
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/03/02/metero/metero-intro/</loc>
+    <loc>https://weijutu.github.io/categories/index.html</loc>
     
     <lastmod>2017-07-24T01:04:20.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/categories/index.html</loc>
+    <loc>https://weijutu.github.io/2017/03/02/metero/metero-intro/</loc>
     
     <lastmod>2017-07-24T01:04:20.000Z</lastmod>
     

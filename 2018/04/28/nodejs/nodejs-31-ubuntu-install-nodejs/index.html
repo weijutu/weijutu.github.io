@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="噗噗。故我在">
 <meta property="og:description" content="在 Ubuntu 16.04 作業系統版本下，我們需要使用  apt 包管理器，在安裝 Node.js 之前先安裝 npm ，也就是 Node.js 包管理器 123$ sudo apt-get update$ sudo apt-get install nodejs$ sudo apt-get install npm 接著使用 n 來管理 nodejs 版本 https://github.com/">
 <meta property="og:locale" content="zh-tw">
-<meta property="og:updated_time" content="2018-04-28T07:16:05.000Z">
+<meta property="og:updated_time" content="2018-04-28T07:38:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Node.js 系列學習日誌#31 - 如何 Ubuntu 16.04 安裝 Node.js &#x2F; n 管理 Nodejs 版本 &#x2F; yarn 包管理套件">
 <meta name="twitter:description" content="在 Ubuntu 16.04 作業系統版本下，我們需要使用  apt 包管理器，在安裝 Node.js 之前先安裝 npm ，也就是 Node.js 包管理器 123$ sudo apt-get update$ sudo apt-get install nodejs$ sudo apt-get install npm 接著使用 n 來管理 nodejs 版本 https://github.com/">
@@ -430,8 +430,10 @@
 <p>接著在重新安裝一次 <code>n</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo npm cache clean -f</span><br><span class="line">$ sudo npm install -g n</span><br><span class="line">$ sudo n stable</span><br></pre></td></tr></table></figure>
 <p>安裝完畢之後，輸入以下命令以確定安裝的版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ node -v</span><br><span class="line"></span><br><span class="line">## Output</span><br><span class="line">v10.0.0</span><br><span class="line"></span><br><span class="line">$ npm -v</span><br><span class="line"></span><br><span class="line">## Output</span><br><span class="line">1.3.10</span><br></pre></td></tr></table></figure>
-<p>然後，也需要安裝 Yarn 來管理套件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">## 查看 n 版本</span><br><span class="line">$ n -V</span><br><span class="line"></span><br><span class="line">## Output</span><br><span class="line">2.1.7</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">## 查看 node 版本</span><br><span class="line">$ node -v</span><br><span class="line"></span><br><span class="line">## Output</span><br><span class="line">v10.0.0</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">## 查看 npm 版本</span><br><span class="line">$ npm -v</span><br><span class="line"></span><br><span class="line">## Output</span><br><span class="line">1.3.10</span><br></pre></td></tr></table></figure>
+<p>接著，也需要安裝 Yarn 來管理套件，它是一套 Javascript 套件管理工具，到這邊想說不是已經有 <code>npm</code>，為何還需要 <code>yarn</code> ?， 這是因為使用 <code>npm</code> 最困擾的地方就是安裝速度比較慢，Yarn 則是快速、可靠又安全的依賴管理。（用過都說讚…），那麼底下就輸入命令安裝 Yarn</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -</span><br><span class="line">$ sudo apt-get update &amp;&amp; sudo apt-get install yarn</span><br></pre></td></tr></table></figure>
 <p>測試 Yarn 安裝狀況</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn --version</span><br></pre></td></tr></table></figure>
@@ -441,8 +443,9 @@
 <p>再做一次 <code>$ yarn --version</code> 確認後，就成功出現版本號碼</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">## Output:</span><br><span class="line">0.10</span><br></pre></td></tr></table></figure>
 <h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ul>
-<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-16-04" target="_blank" rel="noopener">How To Install Node.js on Ubuntu 16.04</a></li>
-<li><a href="https://stackoverflow.com/questions/21855035/ssl-error-cert-untrusted-while-using-npm-command" target="_blank" rel="noopener">SSL Error: CERT_UNTRUSTED while using npm command@stackoverflow</a><br>-</li>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-16-04" target="_blank" rel="noopener">How To Install Node.js on Ubuntu16.04</a></li>
+<li><a href="https://stackoverflow.com/questions/21855035/ssl-error-cert-untrusted-while-using-npm-command" target="_blank" rel="noopener">SSL Error: CERT_UNTRUSTED while using npm command@stackoverflow</a></li>
+<li><a href="https://yarnpkg.com/zh-Hans/" target="_blank" rel="noopener">Yarn 官方</a></li>
 </ul>
 
       
@@ -495,6 +498,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/04/r/r-04-rstudio-shortcut/" rel="prev" title="R 學習日誌#4 - RStudio 常用的快捷鍵">
+                R 學習日誌#4 - RStudio 常用的快捷鍵 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -574,7 +581,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-count">53</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
@@ -585,7 +592,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分類</span>
               </a>
             </div>
@@ -596,7 +603,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">標籤</span>
               </a>
             </div>

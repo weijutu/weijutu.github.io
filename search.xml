@@ -1,9 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[R 學習日誌#5 - 程式的邏輯與迴圈結構]]></title>
+    <url>%2F2018%2F05%2F04%2Fr%2Fr-05-foreach%2F</url>
+    <content type="text"><![CDATA[判斷分為邏輯判斷以及條件判斷。 邏輯判斷大於、等於、小於、大於等於、小於等於、不等於 12345678910111213&gt; x &lt;- 20&gt; x &gt; 20[1] FALSE&gt; x == 20[1] TRUE&gt; x &lt; 20[1] FALSE&gt; x &gt;= 20[1] TRUE&gt; x &lt;= 20[1] TRUE&gt; x != 20[1] FALSE 條件判斷123456&gt; x &lt;- 20&gt; if (x == 20) print (&quot;x == 20&quot;)[1] &quot;x == 20&quot;&gt; if (x &gt; 15) print (&quot;x &gt; 15&quot;) else print (&quot;x &lt;= 15 &quot;)[1] &quot;x &gt; 15&quot; switch 語句的判斷結構 12345678&gt; y &lt;- 3&gt; switch(y, + print(&quot;a&quot;),+ print(&quot;b&quot;),+ print(&quot;c&quot;),+ print(&quot;d&quot;)+ )[1] &quot;c&quot; 函數自定義與使用函數，以下這個例子是不用傳入參數，只要呼叫 fnTest() ，就會執行方法。 12345&gt; fnTest &lt;- function() &#123;+ print(&quot;噗噗。故我在&quot;)+ &#125;&gt; fnTest()[1] &quot;噗噗。故我在&quot; 接著再做一個有放參數的方法，當傳入參數 x 與 y 之後，將由 x 到 y 做加總（當然 x 必須要小於 y 了，這樣才能執行迴圈，否則 x&gt;y 的話，預設會為 0），如下： 12345678910111213&gt; fnTest2 &lt;- function(x, y) &#123;+ sum &lt;- 0+ if (x &lt; y) &#123;+ for (i in x:y) &#123;+ sum &lt;- sum + i+ &#125;+ &#125;+ return(sum);+ &#125;&gt; fnTest2(2, 8)[1] 35&gt; fnTest2(12, 8)[1] 0 迴圈for 迴圈透過 x:y 產生數值 x 到 y 的向量，再利用迴圈做循環以 cat 函數將字串顯示出來。12345678&gt; for (i in 1:5) &#123;+ cat(&quot;num:&quot;, i, &quot;\n&quot;)+ &#125;num: 1 num: 2 num: 3 num: 4 num: 5 while 迴圈while 迴圈是除了 for 迴圈另外一種迴圈了，差異在於 while 是透過邏輯判斷進行迴圈，for 則是定義了有限的變數或向量物件來作迴圈，以下方的例子就是若判斷超過 10 的話，那麼就會跳出迴圈，跳出之後就不會再做任何的計算，是個相當容易閱讀的。 123456789101112131415&gt; x &lt;- 1&gt; while (x &lt;= 10) &#123;+ print(x)+ x &lt;- x + 1+ &#125;[1] 1[1] 2[1] 3[1] 4[1] 5[1] 6[1] 7[1] 8[1] 9[1] 10 repeatrepeat 跟 while 相似，但是 repeat 的特性就是以無限迴圈開始建構的，除非有做判斷，否則都是繼續執行下去。以下的例子就是 y 的變數是從 1 加到 50，而 x 在 51 時跳出 (break) 迴圈。 1234567891011&gt; x &lt;- 1&gt; y &lt;- 0&gt; repeat &#123;+ if (x &gt; 50) break;+ y &lt;- x + y+ x &lt;- x + 1+ &#125;&gt; x[1] 51&gt; y[1] 1275 break 表示跳出迴圈，相反的 next 則是跳出迴圈的某一個循環 1234567891011121314151617181920&gt; x &lt;- sample(1: 10)&gt; x [1] 4 7 10 9 2 5 6 8 3 1&gt; for (i in x) &#123;+ if (i &gt; 4) &#123;+ print(&quot;the number &gt; 4&quot;)+ next;+ &#125;+ print(i)+ &#125;[1] 4[1] &quot;the number &gt; 4&quot;[1] &quot;the number &gt; 4&quot;[1] &quot;the number &gt; 4&quot;[1] 2[1] &quot;the number &gt; 4&quot;[1] &quot;the number &gt; 4&quot;[1] &quot;the number &gt; 4&quot;[1] 3[1] 1]]></content>
+      <categories>
+        <category>R</category>
+      </categories>
+      <tags>
+        <tag>R</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[R 學習日誌#4 - RStudio 常用的快捷鍵]]></title>
+    <url>%2F2018%2F05%2F04%2Fr%2Fr-04-rstudio-shortcut%2F</url>
+    <content type="text"><![CDATA[RStudio 快捷鍵若練熟了，不需滑鼠的移動，手指就在鍵盤上飛快的敲擊起來，讓人感覺超厲害的 @@。在這邊我示範的是用 Mac 環境。 Mac 說明 control + c 中斷執行 control + Enter 執行單行指令 control + shift + s 執行全部指令 control + shift + c 註解指令 control + L 清除控制台 (Console) 輸出 control + 1 將游標定位到腳本區域 control + 2 將游標定位到控制台 (Console) control + 3 將游標定位到幫助文檔 command + 左 將游標定位到行首 command + 右 將游標定位到行末 command + s 存檔 command + w 關閉當前文件 command + d 刪除整行 command + z 恢復上一步 command + c 複製 command + v 貼上 command + a 全選 command + x 剪下 (其實快捷鍵還很多，但是如果有常用的話再補充)]]></content>
+      <categories>
+        <category>R</category>
+      </categories>
+      <tags>
+        <tag>R</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Node.js 系列學習日誌#31 - 如何 Ubuntu 16.04 安裝 Node.js / n 管理 Nodejs 版本 / yarn 包管理套件]]></title>
     <url>%2F2018%2F04%2F28%2Fnodejs%2Fnodejs-31-ubuntu-install-nodejs%2F</url>
-    <content type="text"><![CDATA[在 Ubuntu 16.04 作業系統版本下，我們需要使用 apt 包管理器，在安裝 Node.js 之前先安裝 npm ，也就是 Node.js 包管理器 123$ sudo apt-get update$ sudo apt-get install nodejs$ sudo apt-get install npm 接著使用 n 來管理 nodejs 版本 https://github.com/tj/n ，既然有了 node 最簡單的安裝 n 的方式是 npm 1$ npm install -g n 如果安裝出現了以下的錯誤 123456789101112131415$ npm install -g nnpm http GET https://registry.npmjs.org/nnpm http GET https://registry.npmjs.org/nnpm http GET https://registry.npmjs.org/nnpm ERR! Error: CERT_UNTRUSTEDnpm ERR! at SecurePair.&lt;anonymous&gt; (tls.js:1370:32)npm ERR! at SecurePair.EventEmitter.emit (events.js:92:17)npm ERR! at SecurePair.maybeInitFinished (tls.js:982:10)npm ERR! at CleartextStream.read [as _read] (tls.js:469:13)npm ERR! at CleartextStream.Readable.read (_stream_readable.js:320:10)npm ERR! at EncryptedStream.write [as _write] (tls.js:366:25)npm ERR! at doWrite (_stream_writable.js:223:10)npm ERR! at writeOrBuffer (_stream_writable.js:213:5)npm ERR! at EncryptedStream.Writable.write (_stream_writable.js:180:11)npm ERR! at write (_stream_readable.js:583:24) 那麼可以用以下命令繞過 https 1$ npm config set strict-ssl false 接著在重新安裝一次 n 123$ sudo npm cache clean -f$ sudo npm install -g n$ sudo n stable 安裝完畢之後，輸入以下命令以確定安裝的版本 123456789$ node -v## Outputv10.0.0$ npm -v## Output1.3.10 然後，也需要安裝 Yarn 來管理套件 12$ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -$ sudo apt-get update &amp;&amp; sudo apt-get install yarn 測試 Yarn 安裝狀況 1$ yarn --version 但是如果出現錯誤訊息寫 The program &#39;yarn&#39; is currently not installed. To run &#39;yarn&#39; please ask your administrator to install the package &#39;cmdtest&#39; 代表著需要安裝 cmdtest 套件 輸入並且安裝 cmdtest 1$ sudo apt-get install cmdtest 再做一次 $ yarn --version 確認後，就成功出現版本號碼 12## Output:0.10 參考資料 How To Install Node.js on Ubuntu 16.04 SSL Error: CERT_UNTRUSTED while using npm command@stackoverflow-]]></content>
+    <content type="text"><![CDATA[在 Ubuntu 16.04 作業系統版本下，我們需要使用 apt 包管理器，在安裝 Node.js 之前先安裝 npm ，也就是 Node.js 包管理器 123$ sudo apt-get update$ sudo apt-get install nodejs$ sudo apt-get install npm 接著使用 n 來管理 nodejs 版本 https://github.com/tj/n ，既然有了 node 最簡單的安裝 n 的方式是 npm 1$ npm install -g n 如果安裝出現了以下的錯誤 123456789101112131415$ npm install -g nnpm http GET https://registry.npmjs.org/nnpm http GET https://registry.npmjs.org/nnpm http GET https://registry.npmjs.org/nnpm ERR! Error: CERT_UNTRUSTEDnpm ERR! at SecurePair.&lt;anonymous&gt; (tls.js:1370:32)npm ERR! at SecurePair.EventEmitter.emit (events.js:92:17)npm ERR! at SecurePair.maybeInitFinished (tls.js:982:10)npm ERR! at CleartextStream.read [as _read] (tls.js:469:13)npm ERR! at CleartextStream.Readable.read (_stream_readable.js:320:10)npm ERR! at EncryptedStream.write [as _write] (tls.js:366:25)npm ERR! at doWrite (_stream_writable.js:223:10)npm ERR! at writeOrBuffer (_stream_writable.js:213:5)npm ERR! at EncryptedStream.Writable.write (_stream_writable.js:180:11)npm ERR! at write (_stream_readable.js:583:24) 那麼可以用以下命令繞過 https 1$ npm config set strict-ssl false 接著在重新安裝一次 n 123$ sudo npm cache clean -f$ sudo npm install -g n$ sudo n stable 安裝完畢之後，輸入以下命令以確定安裝的版本 12345## 查看 n 版本$ n -V## Output2.1.7 12345## 查看 node 版本$ node -v## Outputv10.0.0 12345## 查看 npm 版本$ npm -v## Output1.3.10 接著，也需要安裝 Yarn 來管理套件，它是一套 Javascript 套件管理工具，到這邊想說不是已經有 npm，為何還需要 yarn ?， 這是因為使用 npm 最困擾的地方就是安裝速度比較慢，Yarn 則是快速、可靠又安全的依賴管理。（用過都說讚…），那麼底下就輸入命令安裝 Yarn 12$ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -$ sudo apt-get update &amp;&amp; sudo apt-get install yarn 測試 Yarn 安裝狀況 1$ yarn --version 但是如果出現錯誤訊息寫 The program &#39;yarn&#39; is currently not installed. To run &#39;yarn&#39; please ask your administrator to install the package &#39;cmdtest&#39; 代表著需要安裝 cmdtest 套件 輸入並且安裝 cmdtest 1$ sudo apt-get install cmdtest 再做一次 $ yarn --version 確認後，就成功出現版本號碼 12## Output:0.10 參考資料 How To Install Node.js on Ubuntu16.04 SSL Error: CERT_UNTRUSTED while using npm command@stackoverflow Yarn 官方]]></content>
       <categories>
         <category>Node.js</category>
       </categories>
@@ -290,8 +312,8 @@
       </categories>
       <tags>
         <tag>Node.js</tag>
-        <tag>express</tag>
         <tag>鐵人賽</tag>
+        <tag>express</tag>
         <tag>mysql</tag>
         <tag>ejs</tag>
       </tags>
@@ -305,8 +327,8 @@
       </categories>
       <tags>
         <tag>Node.js</tag>
-        <tag>express</tag>
         <tag>鐵人賽</tag>
+        <tag>express</tag>
         <tag>mysql</tag>
         <tag>ejs</tag>
       </tags>
@@ -345,8 +367,8 @@
       </categories>
       <tags>
         <tag>Node.js</tag>
-        <tag>express</tag>
         <tag>鐵人賽</tag>
+        <tag>express</tag>
       </tags>
   </entry>
   <entry>
