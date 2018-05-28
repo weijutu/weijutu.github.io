@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="噗噗。故我在">
 <meta property="og:description" content="判斷分為邏輯判斷以及條件判斷。 邏輯判斷大於、等於、小於、大於等於、小於等於、不等於 12345678910111213&amp;gt; x &amp;lt;- 20&amp;gt; x &amp;gt; 20[1] FALSE&amp;gt; x == 20[1] TRUE&amp;gt; x &amp;lt; 20[1] FALSE&amp;gt; x &amp;gt;= 20[1] TRUE&amp;gt; x &amp;lt;= 20[1] TRUE&amp;gt; x != 20">
 <meta property="og:locale" content="zh-tw">
-<meta property="og:updated_time" content="2018-05-04T17:20:28.000Z">
+<meta property="og:updated_time" content="2018-05-04T17:22:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="R 學習日誌#5 - 程式的邏輯與迴圈結構">
 <meta name="twitter:description" content="判斷分為邏輯判斷以及條件判斷。 邏輯判斷大於、等於、小於、大於等於、小於等於、不等於 12345678910111213&amp;gt; x &amp;lt;- 20&amp;gt; x &amp;gt; 20[1] FALSE&amp;gt; x == 20[1] TRUE&amp;gt; x &amp;lt; 20[1] FALSE&amp;gt; x &amp;gt;= 20[1] TRUE&amp;gt; x &amp;lt;= 20[1] TRUE&amp;gt; x != 20">
@@ -420,9 +420,9 @@
 
       
         <h2 id="判斷"><a href="#判斷" class="headerlink" title="判斷"></a>判斷</h2><p>分為邏輯判斷以及條件判斷。</p>
-<h4 id="邏輯判斷"><a href="#邏輯判斷" class="headerlink" title="邏輯判斷"></a>邏輯判斷</h4><p>大於、等於、小於、大於等於、小於等於、不等於</p>
+<h3 id="邏輯判斷"><a href="#邏輯判斷" class="headerlink" title="邏輯判斷"></a>邏輯判斷</h3><p>大於、等於、小於、大於等於、小於等於、不等於</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt; x &lt;- 20</span><br><span class="line">&gt; x &gt; 20</span><br><span class="line">[1] FALSE</span><br><span class="line">&gt; x == 20</span><br><span class="line">[1] TRUE</span><br><span class="line">&gt; x &lt; 20</span><br><span class="line">[1] FALSE</span><br><span class="line">&gt; x &gt;= 20</span><br><span class="line">[1] TRUE</span><br><span class="line">&gt; x &lt;= 20</span><br><span class="line">[1] TRUE</span><br><span class="line">&gt; x != 20</span><br><span class="line">[1] FALSE</span><br></pre></td></tr></table></figure>
-<h4 id="條件判斷"><a href="#條件判斷" class="headerlink" title="條件判斷"></a>條件判斷</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; x &lt;- 20</span><br><span class="line">&gt; if (x == 20) print (&quot;x == 20&quot;)</span><br><span class="line">[1] &quot;x == 20&quot;</span><br><span class="line"></span><br><span class="line">&gt; if (x &gt; 15) print (&quot;x &gt; 15&quot;) else print (&quot;x &lt;= 15 &quot;)</span><br><span class="line">[1] &quot;x &gt; 15&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="條件判斷"><a href="#條件判斷" class="headerlink" title="條件判斷"></a>條件判斷</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; x &lt;- 20</span><br><span class="line">&gt; if (x == 20) print (&quot;x == 20&quot;)</span><br><span class="line">[1] &quot;x == 20&quot;</span><br><span class="line"></span><br><span class="line">&gt; if (x &gt; 15) print (&quot;x &gt; 15&quot;) else print (&quot;x &lt;= 15 &quot;)</span><br><span class="line">[1] &quot;x &gt; 15&quot;</span><br></pre></td></tr></table></figure>
 <p><code>switch</code> 語句的判斷結構</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt; y &lt;- 3</span><br><span class="line">&gt; switch(y, </span><br><span class="line">+        print(&quot;a&quot;),</span><br><span class="line">+        print(&quot;b&quot;),</span><br><span class="line">+        print(&quot;c&quot;),</span><br><span class="line">+        print(&quot;d&quot;)</span><br><span class="line">+ )</span><br><span class="line">[1] &quot;c&quot;</span><br></pre></td></tr></table></figure>
 <h2 id="函數"><a href="#函數" class="headerlink" title="函數"></a>函數</h2><p>自定義與使用函數，以下這個例子是不用傳入參數，只要呼叫 fnTest() ，就會執行方法。</p>
@@ -649,7 +649,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#判斷"><span class="nav-number">1.</span> <span class="nav-text">判斷</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#邏輯判斷"><span class="nav-number">1.0.1.</span> <span class="nav-text">邏輯判斷</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#條件判斷"><span class="nav-number">1.0.2.</span> <span class="nav-text">條件判斷</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函數"><span class="nav-number">2.</span> <span class="nav-text">函數</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迴圈"><span class="nav-number">3.</span> <span class="nav-text">迴圈</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#for-迴圈"><span class="nav-number">3.1.</span> <span class="nav-text">for 迴圈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#while-迴圈"><span class="nav-number">3.2.</span> <span class="nav-text">while 迴圈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#repeat"><span class="nav-number">3.3.</span> <span class="nav-text">repeat</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#判斷"><span class="nav-number">1.</span> <span class="nav-text">判斷</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#邏輯判斷"><span class="nav-number">1.1.</span> <span class="nav-text">邏輯判斷</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#條件判斷"><span class="nav-number">1.2.</span> <span class="nav-text">條件判斷</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函數"><span class="nav-number">2.</span> <span class="nav-text">函數</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迴圈"><span class="nav-number">3.</span> <span class="nav-text">迴圈</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#for-迴圈"><span class="nav-number">3.1.</span> <span class="nav-text">for 迴圈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#while-迴圈"><span class="nav-number">3.2.</span> <span class="nav-text">while 迴圈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#repeat"><span class="nav-number">3.3.</span> <span class="nav-text">repeat</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -678,6 +678,9 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Helen</span>
 </div>
+<!-- 到訪數量 -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv">到訪數：<span id="busuanzi_value_site_pv"></span> 次</span>
 
 
 <div class="powered-by">
