@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://weijutu.github.io/2017/09/09/books/books-002-rich-dad-and-poor-dad/</loc>
+    
+    <lastmod>2018-06-23T11:37:24.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2017/08/29/books/books-001-9789862291597-ghost/</loc>
+    
+    <lastmod>2018-06-23T11:37:16.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2018/06/07/vuejs/vue-express-starter/</loc>
+    
+    <lastmod>2018-06-06T17:07:53.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://weijutu.github.io/2018/05/04/r/r-05-foreach/</loc>
     
     <lastmod>2018-05-04T17:22:13.000Z</lastmod>
@@ -72,13 +93,6 @@
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/09/09/books/books-002-rich-dad-and-poor-dad/</loc>
-    
-    <lastmod>2017-10-08T03:57:02.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://weijutu.github.io/2017/04/09/python/python-install-for-windows/</loc>
     
     <lastmod>2017-09-05T10:14:24.000Z</lastmod>
@@ -96,13 +110,6 @@
     <loc>https://weijutu.github.io/2017/09/02/dm/dm-001-start/</loc>
     
     <lastmod>2017-09-02T03:38:51.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://weijutu.github.io/2017/08/29/books/books-001-9789862291597-ghost/</loc>
-    
-    <lastmod>2017-08-31T04:09:51.000Z</lastmod>
     
   </url>
   
@@ -380,14 +387,14 @@
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/tags/index.html</loc>
+    <loc>https://weijutu.github.io/categories/index.html</loc>
     
     <lastmod>2017-07-24T01:04:20.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/categories/index.html</loc>
+    <loc>https://weijutu.github.io/tags/index.html</loc>
     
     <lastmod>2017-07-24T01:04:20.000Z</lastmod>
     

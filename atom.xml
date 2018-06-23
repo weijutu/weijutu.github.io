@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://weijutu.github.io/"/>
-  <updated>2018-05-04T17:22:13.000Z</updated>
+  <updated>2018-06-06T17:07:53.000Z</updated>
   <id>https://weijutu.github.io/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>建立 Vue + Express</title>
+    <link href="https://weijutu.github.io/2018/06/07/vuejs/vue-express-starter/"/>
+    <id>https://weijutu.github.io/2018/06/07/vuejs/vue-express-starter/</id>
+    <published>2018-06-07T04:00:00.000Z</published>
+    <updated>2018-06-06T17:07:53.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="Vue.js" scheme="https://weijutu.github.io/categories/Vue-js/"/>
+    
+    
+      <category term="Vue.js" scheme="https://weijutu.github.io/tags/Vue-js/"/>
+    
+      <category term="node.js" scheme="https://weijutu.github.io/tags/node-js/"/>
+    
+  </entry>
   
   <entry>
     <title>R 學習日誌#5 - 程式的邏輯與迴圈結構</title>
@@ -184,13 +204,14 @@
     <link href="https://weijutu.github.io/2017/09/09/books/books-002-rich-dad-and-poor-dad/"/>
     <id>https://weijutu.github.io/2017/09/09/books/books-002-rich-dad-and-poor-dad/</id>
     <published>2017-09-09T00:00:00.000Z</published>
-    <updated>2017-10-08T03:57:02.000Z</updated>
+    <updated>2018-06-23T11:37:24.000Z</updated>
     
-    <content type="html"><![CDATA[<p>書名：<a href="http://www.books.com.tw/products/0010498894" target="_blank" rel="noopener">《富爸爸，有錢有理：神奇的現金流象限》</a><br>原文作者：Robert T. Kiyosaki、Sharon L. Lechter<br>譯者：龍秀<br>出版社：高寶<br>出版日期：2011/04/27</p><h3 id="為甚麼選這本書"><a href="#為甚麼選這本書" class="headerlink" title="為甚麼選這本書"></a>為甚麼選這本書</h3><p>這本書一直放在我的書架上很久很久了，有天在整理書架閱讀了一下摘要，會有一種為何不早點讀這本書的感覺。經常覺得為什麼有錢人可以輕鬆的工作，為什麼有些人再怎麼努力就也只能滿足生活開支的收入，我想應該世界是很公平的只是需要思考怎麼賺錢這件事情，因為有錢有理！那麼想解開這個謎題，就先看看這本書來改變你對錢的看法吧。</p><a id="more"></a><h3 id="讀後分享"><a href="#讀後分享" class="headerlink" title="讀後分享"></a>讀後分享</h3><p>「E、S、B、I 象限」是這本書一直提到的核心價值，這分別是不同現金流的人，通常一個人會處在一到兩項左右的角色，而這也決定了你的現金來源，分別的意思是：</p><ul><li>E 一般僱員、打工族：為他人工作 (受僱於他人，也就是領薪水的人)</li><li>S 自由工作者、專家：你為自己工作 (跟一般僱員都是在象限的左邊)</li><li>B 企業家：自己獨立的事業 (雇用員工替自己做更重要的事情)</li><li>I 投資者：用錢來賺錢 (投資什麼呢？投資 B 的人)</li></ul><p>排列就像下圖所示：</p><p><img src="/images/books/1.png" alt=""></p><p>故事裡面的角色主要是主角本身跟富爸爸、窮爸爸的對話來做了思維與價值觀上的區別，窮爸爸的背景是個高知識份子，希望主角是一個「萬般皆下品，惟有讀書高」的觀念來指引主角用功唸書，以後從學校畢業之後可以找一份好的工作，也關心職業的保障與福利，相對而言比較保守許多。而富爸爸則是雖然沒有受到太多的教育，但是提出了很多不同的看法，希望主角可以努力的朝向象限右側的人，注重自由的理想生活。</p><p>這本書的用意是在於如果你本身是在 E 或是 S 的人，就努力成為右側的人，那麼要在什麼時候在怎樣才是在對的情況下用現金流為自己工作，也就是用錢來幫你賺錢，以下是書本的建議步驟：</p><ul><li>第一步：考慮你的事業的時候到了：你應該設定自己的財務目標</li><li>第二步：控制你的現金流：控制現金流之前，先了解自己的財產</li><li>第三步：瞭解風險和有風險之間的區別：多增加市場敏感度，了解財務的知識，以及風險</li><li>第四步：決定你想成為哪種類型的投資者：保守？積極？保守又積極？</li><li>第五步：尋找導師：有時候需要找 seafood</li><li>第六步：將失望轉化成力量：遇到挫折就知道該怎麼在挫折中成長，這樣進步更快</li><li>第七步：信心的力量</li></ul><p>這本書是一本值得閱讀的好書而且又收穫滿滿，對事情思維與看法都不一樣了，越年輕的時候如果提早有這樣想法的話，也許未來的美好人生更是慢慢踏實了起來。</p>]]></content>
+    <content type="html"><![CDATA[<p><img src="/images/books/3.jpg" alt=""></p><p>書名：<a href="http://www.books.com.tw/products/0010498894" target="_blank" rel="noopener">《富爸爸，有錢有理：神奇的現金流象限》</a><br>原文作者：Robert T. Kiyosaki、Sharon L. Lechter<br>譯者：龍秀<br>出版社：高寶<br>出版日期：2011/04/27</p><h3 id="為甚麼選這本書"><a href="#為甚麼選這本書" class="headerlink" title="為甚麼選這本書"></a>為甚麼選這本書</h3><p>這本書一直放在我的書架上很久很久了，有天在整理書架閱讀了一下摘要，會有一種為何不早點讀這本書的感覺。經常覺得為什麼有錢人可以輕鬆的工作，為什麼有些人再怎麼努力就也只能滿足生活開支的收入，我想應該世界是很公平的只是需要思考怎麼賺錢這件事情，因為有錢有理！那麼想解開這個謎題，就先看看這本書來改變你對錢的看法吧。</p><a id="more"></a><h3 id="讀後分享"><a href="#讀後分享" class="headerlink" title="讀後分享"></a>讀後分享</h3><p>「E、S、B、I 象限」是這本書一直提到的核心價值，這分別是不同現金流的人，通常一個人會處在一到兩項左右的角色，而這也決定了你的現金來源，分別的意思是：</p><ul><li>E 一般僱員、打工族：為他人工作 (受僱於他人，也就是領薪水的人)</li><li>S 自由工作者、專家：你為自己工作 (跟一般僱員都是在象限的左邊)</li><li>B 企業家：自己獨立的事業 (雇用員工替自己做更重要的事情)</li><li>I 投資者：用錢來賺錢 (投資什麼呢？投資 B 的人)</li></ul><p>排列就像下圖所示：</p><p><img src="/images/books/1.png" alt=""></p><p>故事裡面的角色主要是主角本身跟富爸爸、窮爸爸的對話來做了思維與價值觀上的區別，窮爸爸的背景是個高知識份子，希望主角是一個「萬般皆下品，惟有讀書高」的觀念來指引主角用功唸書，以後從學校畢業之後可以找一份好的工作，也關心職業的保障與福利，相對而言比較保守許多。而富爸爸則是雖然沒有受到太多的教育，但是提出了很多不同的看法，希望主角可以努力的朝向象限右側的人，注重自由的理想生活。</p><p>這本書的用意是在於如果你本身是在 E 或是 S 的人，就努力成為右側的人，那麼要在什麼時候在怎樣才是在對的情況下用現金流為自己工作，也就是用錢來幫你賺錢，以下是書本的建議步驟：</p><ul><li>第一步：考慮你的事業的時候到了：你應該設定自己的財務目標</li><li>第二步：控制你的現金流：控制現金流之前，先了解自己的財產</li><li>第三步：瞭解風險和有風險之間的區別：多增加市場敏感度，了解財務的知識，以及風險</li><li>第四步：決定你想成為哪種類型的投資者：保守？積極？保守又積極？</li><li>第五步：尋找導師：有時候需要找 seafood</li><li>第六步：將失望轉化成力量：遇到挫折就知道該怎麼在挫折中成長，這樣進步更快</li><li>第七步：信心的力量</li></ul><p>這本書是一本值得閱讀的好書而且又收穫滿滿，對事情思維與看法都不一樣了，越年輕的時候如果提早有這樣想法的話，也許未來的美好人生更是慢慢踏實了起來。</p>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;書名：&lt;a href=&quot;http://www.books.com.tw/products/0010498894&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;《富爸爸，有錢有理：神奇的現金流象限》&lt;/a&gt;&lt;br&gt;原文作者：Robert T. Kiyosaki、Sharon L. Lechter&lt;br&gt;譯者：龍秀&lt;br&gt;出版社：高寶&lt;br&gt;出版日期：2011/04/27&lt;/p&gt;
+      &lt;p&gt;&lt;img src=&quot;/images/books/3.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;書名：&lt;a href=&quot;http://www.books.com.tw/products/0010498894&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;《富爸爸，有錢有理：神奇的現金流象限》&lt;/a&gt;&lt;br&gt;原文作者：Robert T. Kiyosaki、Sharon L. Lechter&lt;br&gt;譯者：龍秀&lt;br&gt;出版社：高寶&lt;br&gt;出版日期：2011/04/27&lt;/p&gt;
 &lt;h3 id=&quot;為甚麼選這本書&quot;&gt;&lt;a href=&quot;#為甚麼選這本書&quot; class=&quot;headerlink&quot; title=&quot;為甚麼選這本書&quot;&gt;&lt;/a&gt;為甚麼選這本書&lt;/h3&gt;&lt;p&gt;這本書一直放在我的書架上很久很久了，有天在整理書架閱讀了一下摘要，會有一種為何不早點讀這本書的感覺。經常覺得為什麼有錢人可以輕鬆的工作，為什麼有些人再怎麼努力就也只能滿足生活開支的收入，我想應該世界是很公平的只是需要思考怎麼賺錢這件事情，因為有錢有理！那麼想解開這個謎題，就先看看這本書來改變你對錢的看法吧。&lt;/p&gt;
     
     </summary>
@@ -281,13 +302,14 @@
     <link href="https://weijutu.github.io/2017/08/29/books/books-001-9789862291597-ghost/"/>
     <id>https://weijutu.github.io/2017/08/29/books/books-001-9789862291597-ghost/</id>
     <published>2017-08-29T08:08:42.000Z</published>
-    <updated>2017-08-31T04:09:51.000Z</updated>
+    <updated>2018-06-23T11:37:16.000Z</updated>
     
-    <content type="html"><![CDATA[<p>書名：<a href="http://www.books.com.tw/products/0010446893" target="_blank" rel="noopener">《靈界的譯者：從學生靈媒到棒球女主審的通靈之路》</a><br>作者：索非亞<br>出版社：三采<br>出版日期：2017/04/30</p><h3 id="為甚麼選這本書"><a href="#為甚麼選這本書" class="headerlink" title="為甚麼選這本書"></a>為甚麼選這本書</h3><p>前陣子有一個電視劇集《通靈少女》超火的，影集內容講述一個從小就有通靈能力的真人真事故事，因為影片拍得很棒，每次影片結束的後面都留下一些伏筆，滿心期待下一集的發展，有時候實在是期待不已，很想再了解更多就開始上網爬文，《通靈少女》原來背後的主要的故事主角是索非亞的親身經歷，才發現原來有出一本<a href="http://www.books.com.tw/products/0010446893" target="_blank" rel="noopener">《靈界的譯者：從學生靈媒到棒球女主審的通靈之路》</a> 的書，書本的摘要來看會發覺怎麼跟我們平常經常聽到的觀念很不一樣，例如：改運有用嗎？鬼月真的鬼比較多嗎？很多很有意思的議題，顛覆了人云亦云的看法，讓我充滿好奇這本書的內容了</p><a id="more"></a><h3 id="讀後分享"><a href="#讀後分享" class="headerlink" title="讀後分享"></a>讀後分享</h3><p>在還沒有看過這本書之前，對一些習俗(比如：廟的儀式、拜拜之類的)其實也就是從上一輩的所言傳下來的，也不會想太多，就 follow 就是了。記得小時候看鬼話連篇的電視，那種既好奇又害怕受傷害的心，真的是害怕到拿著棉被看電視，隨時突然出現的時候，馬上可以躲在棉被裡之後接著順便尖叫…</p><p>會知道索非亞這位譯者人物，是從新聞哇哇哇的節目看到這位來賓，在他描述未知世界的故事時整個很豁達又很看很開，所以對她的故事有了印象深刻。只不過發覺這本書有些故事已經在電視上講過了，整本書也看到許多相當口語化的文字，但這不就是很真實的樣子！？</p><h4 id="更看的是人心層面"><a href="#更看的是人心層面" class="headerlink" title="更看的是人心層面"></a>更看的是人心層面</h4><p>為什麼遇到不順遂時會想到找宗教幫助？<br>因為宗教可以帶來安定人心的慰藉，因為未知的世界可以藉由靈媒的角色轉述得到指點迷津的指示，也因為這樣許多人也因此著迷著靈界給的答案</p><p>為什麼遇到生病會想到找神明的幫助？<br>也許是自己先認為醫生解決不了的而神明能提出解決方案的處方，一定有效果! 造成的一種借助宗教的求助，而忘記可以利用科學根據的醫學來解決</p><p>這本書看了之後發覺很難得有一本書能夠很直白的寫出真實故事，人在脆弱的時候，總有個理由希望透過宗教能給一個聲音之後讓自己的心更堅強一點靈媒在這個地方就扮演重要的角色了，身為靈媒的索菲亞內容揭發了許多不為人知的事</p><p>不是每個人都會有這類的特殊能力，就會有時容易陷入那種好像真的是如此的錯覺感～是迷信了嗎？經常在新聞看到很多靈媒的負面消息層出不窮，利用人心脆弱的時候謀取利益，實在不是很正派的做法。</p><p>有一次聽到不同信仰的人提問，「為什麼你們要拜木頭？」嗯… 有意思的問題，我想每個信仰都有一種偶像尊敬或無偶像的思想，但就是持續堅持著自己正向的面對人生的信念吧！總結一句，自己要能夠有獨立判斷對錯並且就是「心存善念」就行了。</p>]]></content>
+    <content type="html"><![CDATA[<p><img src="/images/books/2.jpg" alt=""></p><p>書名：<a href="http://www.books.com.tw/products/0010446893" target="_blank" rel="noopener">《靈界的譯者：從學生靈媒到棒球女主審的通靈之路》</a><br>作者：索非亞<br>出版社：三采<br>出版日期：2017/04/30</p><h3 id="為甚麼選這本書"><a href="#為甚麼選這本書" class="headerlink" title="為甚麼選這本書"></a>為甚麼選這本書</h3><p>前陣子有一個電視劇集《通靈少女》超火的，影集內容講述一個從小就有通靈能力的真人真事故事，因為影片拍得很棒，每次影片結束的後面都留下一些伏筆，滿心期待下一集的發展，有時候實在是期待不已，很想再了解更多就開始上網爬文，《通靈少女》原來背後的主要的故事主角是索非亞的親身經歷，才發現原來有出一本<a href="http://www.books.com.tw/products/0010446893" target="_blank" rel="noopener">《靈界的譯者：從學生靈媒到棒球女主審的通靈之路》</a> 的書，書本的摘要來看會發覺怎麼跟我們平常經常聽到的觀念很不一樣，例如：改運有用嗎？鬼月真的鬼比較多嗎？很多很有意思的議題，顛覆了人云亦云的看法，讓我充滿好奇這本書的內容了</p><a id="more"></a><h3 id="讀後分享"><a href="#讀後分享" class="headerlink" title="讀後分享"></a>讀後分享</h3><p>在還沒有看過這本書之前，對一些習俗(比如：廟的儀式、拜拜之類的)其實也就是從上一輩的所言傳下來的，也不會想太多，就 follow 就是了。記得小時候看鬼話連篇的電視，那種既好奇又害怕受傷害的心，真的是害怕到拿著棉被看電視，隨時突然出現的時候，馬上可以躲在棉被裡之後接著順便尖叫…</p><p>會知道索非亞這位譯者人物，是從新聞哇哇哇的節目看到這位來賓，在他描述未知世界的故事時整個很豁達又很看很開，所以對她的故事有了印象深刻。只不過發覺這本書有些故事已經在電視上講過了，整本書也看到許多相當口語化的文字，但這不就是很真實的樣子！？</p><h4 id="更看的是人心層面"><a href="#更看的是人心層面" class="headerlink" title="更看的是人心層面"></a>更看的是人心層面</h4><p>為什麼遇到不順遂時會想到找宗教幫助？<br>因為宗教可以帶來安定人心的慰藉，因為未知的世界可以藉由靈媒的角色轉述得到指點迷津的指示，也因為這樣許多人也因此著迷著靈界給的答案</p><p>為什麼遇到生病會想到找神明的幫助？<br>也許是自己先認為醫生解決不了的而神明能提出解決方案的處方，一定有效果! 造成的一種借助宗教的求助，而忘記可以利用科學根據的醫學來解決</p><p>這本書看了之後發覺很難得有一本書能夠很直白的寫出真實故事，人在脆弱的時候，總有個理由希望透過宗教能給一個聲音之後讓自己的心更堅強一點靈媒在這個地方就扮演重要的角色了，身為靈媒的索菲亞內容揭發了許多不為人知的事</p><p>不是每個人都會有這類的特殊能力，就會有時容易陷入那種好像真的是如此的錯覺感～是迷信了嗎？經常在新聞看到很多靈媒的負面消息層出不窮，利用人心脆弱的時候謀取利益，實在不是很正派的做法。</p><p>有一次聽到不同信仰的人提問，「為什麼你們要拜木頭？」嗯… 有意思的問題，我想每個信仰都有一種偶像尊敬或無偶像的思想，但就是持續堅持著自己正向的面對人生的信念吧！總結一句，自己要能夠有獨立判斷對錯並且就是「心存善念」就行了。</p>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;書名：&lt;a href=&quot;http://www.books.com.tw/products/0010446893&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;《靈界的譯者：從學生靈媒到棒球女主審的通靈之路》&lt;/a&gt;&lt;br&gt;作者：索非亞&lt;br&gt;出版社：三采&lt;br&gt;出版日期：2017/04/30&lt;/p&gt;
+      &lt;p&gt;&lt;img src=&quot;/images/books/2.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;書名：&lt;a href=&quot;http://www.books.com.tw/products/0010446893&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;《靈界的譯者：從學生靈媒到棒球女主審的通靈之路》&lt;/a&gt;&lt;br&gt;作者：索非亞&lt;br&gt;出版社：三采&lt;br&gt;出版日期：2017/04/30&lt;/p&gt;
 &lt;h3 id=&quot;為甚麼選這本書&quot;&gt;&lt;a href=&quot;#為甚麼選這本書&quot; class=&quot;headerlink&quot; title=&quot;為甚麼選這本書&quot;&gt;&lt;/a&gt;為甚麼選這本書&lt;/h3&gt;&lt;p&gt;前陣子有一個電視劇集《通靈少女》超火的，影集內容講述一個從小就有通靈能力的真人真事故事，因為影片拍得很棒，每次影片結束的後面都留下一些伏筆，滿心期待下一集的發展，有時候實在是期待不已，很想再了解更多就開始上網爬文，《通靈少女》原來背後的主要的故事主角是索非亞的親身經歷，才發現原來有出一本&lt;a href=&quot;http://www.books.com.tw/products/0010446893&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;《靈界的譯者：從學生靈媒到棒球女主審的通靈之路》&lt;/a&gt; 的書，書本的摘要來看會發覺怎麼跟我們平常經常聽到的觀念很不一樣，例如：改運有用嗎？鬼月真的鬼比較多嗎？很多很有意思的議題，顛覆了人云亦云的看法，讓我充滿好奇這本書的內容了&lt;/p&gt;
     
     </summary>
@@ -496,34 +518,6 @@
       <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
     
       <category term="api" scheme="https://weijutu.github.io/tags/api/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Node.js 系列學習日誌#29 - 使用 package.json 安裝、管理模組</title>
-    <link href="https://weijutu.github.io/2017/07/26/nodejs/nodejs-29-package/"/>
-    <id>https://weijutu.github.io/2017/07/26/nodejs/nodejs-29-package/</id>
-    <published>2017-07-25T16:29:00.000Z</published>
-    <updated>2017-07-31T10:33:56.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>npm 包管理器是 Node.js 的模組管理工具，npm 的包就像 java 的類別庫，將功能獨立封裝起來，目前已經有相當多的工具可以運用，因此首先我們看一下 npm 的指令有哪些，而 npm 的命令會與  package.json 這個檔案息息相關，是接下來會說明到的。</p><p>package.json</p><p>它是一種 CommonJS 規定用來描述包的文件，是一個包含 json 格式的說明文件，裡面可以定義相依的相關套件以及應用程式的資訊，我們從 <a href="http://wiki.commonjs.org/wiki/Packages/1.1" target="_blank" rel="noopener">http://wiki.commonjs.org/wiki/Packages/1.1</a> Wiki 網頁了解到，他基本可以定義 應用程式名稱、版本、描述、關鍵字、授權、貢獻者、維護者、腳本等其他，還有更令 Node.js 最重要的就相依套件將是會在開發過程中會經常遇到的，它是以套件名稱和版本號組成的。</p><a id="more"></a><p>你可能心想說這邊該不會要用手刻吧…答案是不全然！可以透過指令的指引可以將它完成基本操作。一開始請先建立一個資料夾 demo-nodejs ，然後在目錄裡面執行</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm init</span><br></pre></td></tr></table></figure><p><img src="/images/nodejs/125.png" alt=""></p><p>輸入完他所指示的資料之後，在資料夾裡面他就會自動產生 package.json 檔案，是不是很簡單方便呢？（對了，用 npm init 指令，當他指示到 version 的時候，務必要三階的版本號，也就是 x.x.x，否則會出錯呢！) 接著我們定義我們需要用到的相依套件，假定我們要安裝一個 socket.io 及 express 框架，這時候在 package.json 補上 dependencies 物件，像下圖的紅框處</p><p><img src="/images/nodejs/126.png" alt=""></p><p>然後，你可能又發出一個疑問，我如何知道個別的套件版本要寫哪一個版本？你可以採用</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm info &#123;套件名稱&#125; version</span><br></pre></td></tr></table></figure><p>來取得最新版本號</p><p><img src="/images/nodejs/127.png" alt=""></p><p>輸入完成之後存檔，這時候我們只是定義相依套件，但還沒有安裝，因此在 demo-nodejs 這個目錄下，輸入：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm install</span><br></pre></td></tr></table></figure><p>指令來安裝這兩個套件，結果將會在這個目錄夾底下多了一個 node_module 資料夾，如下：</p><p><img src="/images/nodejs/128.png" alt=""></p><p>若需要移除套件的話，也相當容易</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm uninstall socket.io</span><br></pre></td></tr></table></figure><p><img src="/images/nodejs/129.png" alt=""></p><h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ol><li><a href="https://www.npmjs.org/" target="_blank" rel="noopener">https://www.npmjs.org/</a></li><li><a href="http://wiki.commonjs.org/wiki/Packages/1.1" target="_blank" rel="noopener">http://wiki.commonjs.org/wiki/Packages/1.1</a></li><li><a href="http://semver.org/lang/zh-TW/" target="_blank" rel="noopener">http://semver.org/lang/zh-TW/</a></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;npm 包管理器是 Node.js 的模組管理工具，npm 的包就像 java 的類別庫，將功能獨立封裝起來，目前已經有相當多的工具可以運用，因此首先我們看一下 npm 的指令有哪些，而 npm 的命令會與  package.json 這個檔案息息相關，是接下來會說明到的。&lt;/p&gt;
-&lt;p&gt;package.json&lt;/p&gt;
-&lt;p&gt;它是一種 CommonJS 規定用來描述包的文件，是一個包含 json 格式的說明文件，裡面可以定義相依的相關套件以及應用程式的資訊，我們從 &lt;a href=&quot;http://wiki.commonjs.org/wiki/Packages/1.1&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://wiki.commonjs.org/wiki/Packages/1.1&lt;/a&gt; Wiki 網頁了解到，他基本可以定義 應用程式名稱、版本、描述、關鍵字、授權、貢獻者、維護者、腳本等其他，還有更令 Node.js 最重要的就相依套件將是會在開發過程中會經常遇到的，它是以套件名稱和版本號組成的。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/categories/Node-js/"/>
-    
-    
-      <category term="Node.js" scheme="https://weijutu.github.io/tags/Node-js/"/>
-    
-      <category term="鐵人賽" scheme="https://weijutu.github.io/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/"/>
-    
-      <category term="package" scheme="https://weijutu.github.io/tags/package/"/>
     
   </entry>
   
