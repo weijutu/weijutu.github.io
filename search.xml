@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[靜態網站如何在 Ubuntu 設置 Apache2 網站伺服器]]></title>
+    <url>%2F2018%2F06%2F28%2Fweb%2Fubuntu-apache-web%2F</url>
+    <content type="text"><![CDATA[在這邊做一個紀錄，避免每次部署的時候還要找谷歌大神。 Apache Web 網站伺服器是一個相當主流的網站部署方式，它把配置很清楚的獨立開來，接下來這篇會引導你如何在 Ubuntu 設置 Apache2 網站伺服器部署。在 Apache2 部署，主要目錄會使用 apache 的 sites-available 與 sites-enable。 網站編譯後打包首先到網站進入根目錄 /my_web_site 之後執行以下的指令，進行打包的操作 1$ npm run build 這時候會產生 dist 資料夾之後，利用 pwd 找到這個資料夾， 顯示路徑是 /home/cube/my_web_site/dist 編輯 “sites-available” 內的設定檔在 /etc/apache2/sites-available 在可用的組態檔案資料夾裡面先複製一份範本，命名為另一個檔案 my_web_site.conf 1$ sudo cp 000-default.conf my_web_site.conf 多了一份設定檔之後，編輯設定檔案 my_web_site.conf 1$ sudo vi my_web_site.conf 修改檔案如下 123456&lt;VirtualHost *:8001&gt; ServerAdmin webmaster@localhost DocumentRoot DocumentRoot /home/cube/my_web_site/dist ErrorLog $&#123;APACHE_LOG_DIR&#125;/error.log CustomLog $&#123;APACHE_LOG_DIR&#125;/access.log combined&lt;/VirtualHost&gt; 改 VirtualHost 的 port，比如我改成 :8001 找到 DocumentRoot 改剛剛編譯出來的檔案路徑 /home/cube/my_web_site/dist 其他項目不需要改，完成之後就把這個 conf 檔案存下來 從 “sites-enabled” 建立連結接著到 /etc/apach2/sites-enable 加入快速連結，讓這份設定檔做啟用 1$ sudo ln -s /etc/apache2/sites-available/my_web_site.conf /etc/apache2/sites-enabled/my_web_site.conf 重新啟動 Apache2最後改好的設定，要將網站伺服器做重啟！找到在路徑底下的 /etc/init.d ，確定有 apache2 服務在完成修改之後，請務必要重新啟動 Apache，那麼這樣才會把變更的組態檔案載入系統裡。 1$sudo service apache2 restart 接著會得到類似的訊息，寫了一個 [OK] ，那麼這樣設置就完成了喔。 12* Restarting web server apache2 AH00558: apache2: Could not reliably determine the server&apos;s fully qualified domain name, using 127.0.0.1. Set the &apos;ServerName&apos; directive globally to suppress this message [ OK ] 測試你的結果最後剛剛網站指定端口為 8001 ，連結網址是 http://&lt;domain.name.com&gt;:8001/，就會出現你的靜態網站囉。 參考 How To Set Up Apache Virtual Hosts on Ubuntu 14.04 LTS | DigitalOcean]]></content>
+      <categories>
+        <category>網站</category>
+      </categories>
+      <tags>
+        <tag>Apache</tag>
+        <tag>Ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[R 學習日誌#5 - 程式的邏輯與迴圈結構]]></title>
     <url>%2F2018%2F05%2F04%2Fr%2Fr-05-foreach%2F</url>
     <content type="text"><![CDATA[判斷分為邏輯判斷以及條件判斷。 邏輯判斷大於、等於、小於、大於等於、小於等於、不等於 12345678910111213&gt; x &lt;- 20&gt; x &gt; 20[1] FALSE&gt; x == 20[1] TRUE&gt; x &lt; 20[1] FALSE&gt; x &gt;= 20[1] TRUE&gt; x &lt;= 20[1] TRUE&gt; x != 20[1] FALSE 條件判斷123456&gt; x &lt;- 20&gt; if (x == 20) print (&quot;x == 20&quot;)[1] &quot;x == 20&quot;&gt; if (x &gt; 15) print (&quot;x &gt; 15&quot;) else print (&quot;x &lt;= 15 &quot;)[1] &quot;x &gt; 15&quot; switch 語句的判斷結構 12345678&gt; y &lt;- 3&gt; switch(y, + print(&quot;a&quot;),+ print(&quot;b&quot;),+ print(&quot;c&quot;),+ print(&quot;d&quot;)+ )[1] &quot;c&quot; 函數自定義與使用函數，以下這個例子是不用傳入參數，只要呼叫 fnTest() ，就會執行方法。 12345&gt; fnTest &lt;- function() &#123;+ print(&quot;噗噗。故我在&quot;)+ &#125;&gt; fnTest()[1] &quot;噗噗。故我在&quot; 接著再做一個有放參數的方法，當傳入參數 x 與 y 之後，將由 x 到 y 做加總（當然 x 必須要小於 y 了，這樣才能執行迴圈，否則 x&gt;y 的話，預設會為 0），如下： 12345678910111213&gt; fnTest2 &lt;- function(x, y) &#123;+ sum &lt;- 0+ if (x &lt; y) &#123;+ for (i in x:y) &#123;+ sum &lt;- sum + i+ &#125;+ &#125;+ return(sum);+ &#125;&gt; fnTest2(2, 8)[1] 35&gt; fnTest2(12, 8)[1] 0 迴圈for 迴圈透過 x:y 產生數值 x 到 y 的向量，再利用迴圈做循環以 cat 函數將字串顯示出來。12345678&gt; for (i in 1:5) &#123;+ cat(&quot;num:&quot;, i, &quot;\n&quot;)+ &#125;num: 1 num: 2 num: 3 num: 4 num: 5 while 迴圈while 迴圈是除了 for 迴圈另外一種迴圈了，差異在於 while 是透過邏輯判斷進行迴圈，for 則是定義了有限的變數或向量物件來作迴圈，以下方的例子就是若判斷超過 10 的話，那麼就會跳出迴圈，跳出之後就不會再做任何的計算，是個相當容易閱讀的。 123456789101112131415&gt; x &lt;- 1&gt; while (x &lt;= 10) &#123;+ print(x)+ x &lt;- x + 1+ &#125;[1] 1[1] 2[1] 3[1] 4[1] 5[1] 6[1] 7[1] 8[1] 9[1] 10 repeatrepeat 跟 while 相似，但是 repeat 的特性就是以無限迴圈開始建構的，除非有做判斷，否則都是繼續執行下去。以下的例子就是 y 的變數是從 1 加到 50，而 x 在 51 時跳出 (break) 迴圈。 1234567891011&gt; x &lt;- 1&gt; y &lt;- 0&gt; repeat &#123;+ if (x &gt; 50) break;+ y &lt;- x + y+ x &lt;- x + 1+ &#125;&gt; x[1] 51&gt; y[1] 1275 break 表示跳出迴圈，相反的 next 則是跳出迴圈的某一個循環 1234567891011121314151617181920&gt; x &lt;- sample(1: 10)&gt; x [1] 4 7 10 9 2 5 6 8 3 1&gt; for (i in x) &#123;+ if (i &gt; 4) &#123;+ print(&quot;the number &gt; 4&quot;)+ next;+ &#125;+ print(i)+ &#125;[1] 4[1] &quot;the number &gt; 4&quot;[1] &quot;the number &gt; 4&quot;[1] &quot;the number &gt; 4&quot;[1] 2[1] &quot;the number &gt; 4&quot;[1] &quot;the number &gt; 4&quot;[1] &quot;the number &gt; 4&quot;[1] 3[1] 1]]></content>
@@ -227,18 +239,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Node.js 系列學習日誌#28 - REST 路由規則]]></title>
-    <url>%2F2017%2F07%2F26%2Fnodejs%2Fnodejs-28-rest%2F</url>
-    <content type="text"><![CDATA[今天我們使用 express 框架介紹一下 REST 路由規則，REST 是一種 http 協定的網路應用，http 提供了八種方法使用： OPTIONS：這個方法可使伺服器傳回該資源所支援的所有HTTP請求方法。用*來代替資源名稱，向Web伺服器傳送OPTIONS請求，可以測試伺服器功能是否正常運作。 HEAD：與GET方法一樣，都是向伺服器發出指定資源的請求。只不過伺服器將不傳回資源的本文部份。它的好處在於，使用這個方法可以在不必傳輸全部內容的情況下，就可以獲取其中「關於該資源的資訊」（元資訊或稱元資料）。 GET：向指定的資源發出「顯示」請求。使用GET方法應該只用在讀取資料，而不應當被用於產生「副作用」的操作中，例如在Web Application中。其中一個原因是GET可能會被網路蜘蛛等隨意存取。參見安全方法 POST：向指定資源提交資料，請求伺服器進行處理（例如提交表單或者上傳檔案）。資料被包含在請求本文中。這個請求可能會建立新的資源或修改現有資源，或二者皆有。 PUT：向指定資源位置上傳其最新內容。 DELETE：請求伺服器刪除Request-URI所標識的資源。 TRACE：回顯伺服器收到的請求，主要用於測試或診斷。 CONNECT：HTTP/1.1協定中預留給能夠將連線改為管道方式的代理伺服器。通常用於SSL加密伺服器的連結（經由非加密的HTTP代理伺服器） 而 express 網頁框架也針對 http 請求方法設計路由的函數： 通常在設計 rest 時，常用的是 get (取得), post (新增), put (更新), delete (刪除) 參考資料http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE]]></content>
-      <categories>
-        <category>Node.js</category>
-      </categories>
-      <tags>
-        <tag>Node.js</tag>
-        <tag>鐵人賽</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Node.js 系列學習日誌#27 - forever 讓程式保持執行狀態]]></title>
     <url>%2F2017%2F07%2F26%2Fnodejs%2Fnodejs-27-forever%2F</url>
     <content type="text"><![CDATA[程式準備要部署上線時，就會面臨到執行程式的方式，伺服器的管理，是不是能有一個運行 Node.js 程式，並且有個工具處理這件事情。forever 可以作為保持運行的狀態，管理 Node.js 程式服務，在 forever 進程之下，建立子進程，執行啟動與停止的命令相當簡單。更特別的是，經常我們在寫 Node.js 的時候，每次更動的檔案時都需要再重新執行啟動服務的指令 (例如：node app.js)，而這個工具是當每次更新程式的時候，它會自動重新啟動服務，更方便許多了呢！ 這是官方的描述：（https://github.com/nodejitsu/forever） A simple CLI tool for ensuring that a given script runs continuously (i.e. forever). 安裝12// 一般建議加上 -g 將 forever 全域安裝$[sudo] npm install forever -g 當然若你要在某個特定目錄下安裝也是可以 12$cd /path/projects/abc$[sudo] npm install forever 指令的幫助可以透過以下指令列出說明 1$forever —help 顯示所有運行的服務1$forever list 啟動1$forever start app.js 停止操作1$forever stopall 停止某一個程式專案1$forever stop app.js 實作一個簡單運用我們先用 express 這個框架建一個簡單的網站 啟動程式1$forever start app.js forever 列表清單1$forever list 可以看到紫色部分，就是在放 log file 的路徑 關閉進程1$forever stop app.js]]></content>
@@ -249,6 +249,18 @@
         <tag>Node.js</tag>
         <tag>鐵人賽</tag>
         <tag>forever</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Node.js 系列學習日誌#28 - REST 路由規則]]></title>
+    <url>%2F2017%2F07%2F26%2Fnodejs%2Fnodejs-28-rest%2F</url>
+    <content type="text"><![CDATA[今天我們使用 express 框架介紹一下 REST 路由規則，REST 是一種 http 協定的網路應用，http 提供了八種方法使用： OPTIONS：這個方法可使伺服器傳回該資源所支援的所有HTTP請求方法。用*來代替資源名稱，向Web伺服器傳送OPTIONS請求，可以測試伺服器功能是否正常運作。 HEAD：與GET方法一樣，都是向伺服器發出指定資源的請求。只不過伺服器將不傳回資源的本文部份。它的好處在於，使用這個方法可以在不必傳輸全部內容的情況下，就可以獲取其中「關於該資源的資訊」（元資訊或稱元資料）。 GET：向指定的資源發出「顯示」請求。使用GET方法應該只用在讀取資料，而不應當被用於產生「副作用」的操作中，例如在Web Application中。其中一個原因是GET可能會被網路蜘蛛等隨意存取。參見安全方法 POST：向指定資源提交資料，請求伺服器進行處理（例如提交表單或者上傳檔案）。資料被包含在請求本文中。這個請求可能會建立新的資源或修改現有資源，或二者皆有。 PUT：向指定資源位置上傳其最新內容。 DELETE：請求伺服器刪除Request-URI所標識的資源。 TRACE：回顯伺服器收到的請求，主要用於測試或診斷。 CONNECT：HTTP/1.1協定中預留給能夠將連線改為管道方式的代理伺服器。通常用於SSL加密伺服器的連結（經由非加密的HTTP代理伺服器） 而 express 網頁框架也針對 http 請求方法設計路由的函數： 通常在設計 rest 時，常用的是 get (取得), post (新增), put (更新), delete (刪除) 參考資料http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE]]></content>
+      <categories>
+        <category>Node.js</category>
+      </categories>
+      <tags>
+        <tag>Node.js</tag>
+        <tag>鐵人賽</tag>
       </tags>
   </entry>
   <entry>
