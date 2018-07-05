@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[在 Mac 上 Apache 部署 Vue 網站]]></title>
+    <url>%2F2018%2F07%2F05%2Fvuejs%2Fvuejs-deploy-on-apache%2F</url>
+    <content type="text"><![CDATA[基本上 Mac 作業系統裡面已經有內建的 Apache，所以本篇文章就不提如何安裝 Apache 的伺服器。在使用 Apache 的時候需要有 root 的權限，請先輸入以下的指令。 ps. Apache 伺服器版本為：Apache/2.4.23 (Unix) 1$ sudo su - 接著再輸入 Apache 的啟動指令 1$ apachectl start 這時候會看到服務已經載入啟動 12&lt;Username&gt;:~ root# apachectl start/System/Library/LaunchDaemons/org.apache.httpd.plist: service already loaded 然後看一下 http://localhost/ 有沒有出現 It works! 字眼，就代表 Apache 有正常運行，而這個網頁目錄是放在 /Library/WebServer/Documents Apache 參數設定修改 httpd.conf輸入完畢之後，在 /etc/apache2/httpd.conf 把以下的項目的註解 # 移除 1234LoadModule authz_core_module libexec/apache2/mod_authz_core.soLoadModule authz_host_module libexec/apache2/mod_authz_host.soLoadModule userdir_module libexec/apache2/mod_userdir.soInclude /private/etc/apache2/extra/httpd-userdir.conf 修改 httpd-userdir.conf在 httpd 編輯完畢之後，再修改 /etc/apache2/extra/httpd-userdir.conf 檔案，將以下的項目的註解 # 移除 1Include /private/etc/apache2/users/*.conf 這樣子，都編輯完畢再將 Apache 重啟。這時候進入 http://localhost/ 就會得到以下畫面。 如果出現 You don t have permission to access / on this server 也就代表訪問的位置是沒有權限的。可以將資料夾調整一下權限，(如果網站放在 /Projects/demo) 1$ sudo chmod -R 777 /Users/&lt;Username&gt;/Projects/demo Vue 網站的修訂修改 config/index.js找到 build 內的 assetsPublicPath 參數，原本預設值是 /，而這個路徑對靜態的資源文件是絕對路徑。 12345678910build: &#123; // Template for index.html index: path.resolve(__dirname, &apos;../dist/index.html&apos;), // Paths assetsRoot: path.resolve(__dirname, &apos;../dist&apos;), assetsSubDirectory: &apos;static&apos;, assetsPublicPath: &apos;/&apos;, // 預設值 ... (以下省略) 改成相對路徑的寫法，將 assetsPublicPath 參數改為 ./ 12345678910build: &#123; // Template for index.html index: path.resolve(__dirname, &apos;../dist/index.html&apos;), // Paths assetsRoot: path.resolve(__dirname, &apos;../dist&apos;), assetsSubDirectory: &apos;static&apos;, assetsPublicPath: &apos;./&apos;, // 改相對路徑 ... (以下省略) 修改 build/utils.js接著進入 build/utils.js 改 css 位置的路徑 publicPath 12345678910 if (options.extract) &#123; return ExtractTextPlugin.extract(&#123; use: loaders, publicPath: &apos;../../&apos;, // according to path 20180704 fallback: &apos;vue-style-loader&apos; &#125;) &#125; else &#123; return [&apos;vue-style-loader&apos;].concat(loaders) &#125;&#125; 修訂 index.pug找到網站根目錄的 index.pug 檔案，修改 /static/favicon.ico 為 ./static/favicon.ico 1link(rel=&apos;shortcut icon&apos;, type=&apos;image/png&apos;, href=&apos;./static/favicon.ico&apos;) 修訂 vue-router由於我們希望網址是 http://localhost/demo/ ，要在 route 配置裡面加上 base 參數。 1234export default new VueRouter(&#123; base: &apos;/demo/&apos; // 補上這一行， mode: &apos;history&apos;, scrollBehavior: () =&gt; (&#123; y: 0 &#125;), 部署到伺服器一切都就緒之後，進入到根目錄下執行 1$ npm run build build 出來網站會產生一個打包好的 dist 的資料夾，這時在 Apache 的網站空間內，做一個 link 指向這個位置 1$ sudo ln -s /Users/&lt;Username&gt;/Projects/demo /Library/WebServer/Documents/demo ps. 記得後面的 /demo 不要多一個斜線 /demo/ 不然會找不到。 這樣就完成大部分的設置了。 新增 .htaccess 檔案但是，又為什麼設置完畢之後，網站卻又一片空白？也是因為 Vue 的 history 模式概念，不會自動地發起 http 請求，解決方法將所有的請求進行轉發到 http://localhost/demo/index.html 可以在網站目錄夾裡面新增 .htaccess 檔案，內容輸入以下 1234567891011&lt;IfModule mod_rewrite.c&gt; Options +FollowSymlinks RewriteEngine On RewriteCond %&#123;REQUEST_URI&#125; ^/(demo|demo/.*)$ RewriteRule ^/demo/index\.html$ - [L,NC] RewriteCond %&#123;REQUEST_FILENAME&#125; !-d RewriteCond %&#123;REQUEST_FILENAME&#125; !-f RewriteRule ^(demo|demo/.*)$ demo/index.html [L]&lt;/IfModule&gt; 這樣就能用 http://localhost/demo/ 來訪問網站了。 參考 VUE 服务器部署路径问题 在Mac設定Apache、PHP、MySQL]]></content>
+      <categories>
+        <category>網站</category>
+      </categories>
+      <tags>
+        <tag>Apache</tag>
+        <tag>Mac</tag>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[靜態網站如何在 Ubuntu 設置 Apache2 網站伺服器]]></title>
     <url>%2F2018%2F06%2F28%2Fweb%2Fubuntu-apache-web%2F</url>
     <content type="text"><![CDATA[在這邊做一個紀錄，避免每次部署的時候還要找谷歌大神。 Apache Web 網站伺服器是一個相當主流的網站部署方式，它把配置很清楚的獨立開來，接下來這篇會引導你如何在 Ubuntu 設置 Apache2 網站伺服器部署。在 Apache2 部署，主要目錄會使用 apache 的 sites-available 與 sites-enable。 網站編譯後打包首先到網站進入根目錄 /my_web_site 之後執行以下的指令，進行打包的操作 1$ npm run build 這時候會產生 dist 資料夾之後，利用 pwd 找到這個資料夾， 顯示路徑是 /home/cube/my_web_site/dist 編輯 “sites-available” 內的設定檔在 /etc/apache2/sites-available 在可用的組態檔案資料夾裡面先複製一份範本，命名為另一個檔案 my_web_site.conf 1$ sudo cp 000-default.conf my_web_site.conf 多了一份設定檔之後，編輯設定檔案 my_web_site.conf 1$ sudo vi my_web_site.conf 修改檔案如下 123456&lt;VirtualHost *:8001&gt; ServerAdmin webmaster@localhost DocumentRoot DocumentRoot /home/cube/my_web_site/dist ErrorLog $&#123;APACHE_LOG_DIR&#125;/error.log CustomLog $&#123;APACHE_LOG_DIR&#125;/access.log combined&lt;/VirtualHost&gt; 改 VirtualHost 的 port，比如我改成 :8001 找到 DocumentRoot 改剛剛編譯出來的檔案路徑 /home/cube/my_web_site/dist 其他項目不需要改，完成之後就把這個 conf 檔案存下來 從 “sites-enabled” 建立連結接著到 /etc/apach2/sites-enable 加入快速連結，讓這份設定檔做啟用 1$ sudo ln -s /etc/apache2/sites-available/my_web_site.conf /etc/apache2/sites-enabled/my_web_site.conf 重新啟動 Apache2最後改好的設定，要將網站伺服器做重啟！找到在路徑底下的 /etc/init.d ，確定有 apache2 服務在完成修改之後，請務必要重新啟動 Apache，那麼這樣才會把變更的組態檔案載入系統裡。 1$sudo service apache2 restart 接著會得到類似的訊息，寫了一個 [OK] ，那麼這樣設置就完成了喔。 12* Restarting web server apache2 AH00558: apache2: Could not reliably determine the server&apos;s fully qualified domain name, using 127.0.0.1. Set the &apos;ServerName&apos; directive globally to suppress this message [ OK ] 測試你的結果最後剛剛網站指定端口為 8001 ，連結網址是 http://&lt;domain.name.com&gt;:8001/，就會出現你的靜態網站囉。 參考 How To Set Up Apache Virtual Hosts on Ubuntu 14.04 LTS | DigitalOcean]]></content>
@@ -239,6 +252,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[Node.js 系列學習日誌#28 - REST 路由規則]]></title>
+    <url>%2F2017%2F07%2F26%2Fnodejs%2Fnodejs-28-rest%2F</url>
+    <content type="text"><![CDATA[今天我們使用 express 框架介紹一下 REST 路由規則，REST 是一種 http 協定的網路應用，http 提供了八種方法使用： OPTIONS：這個方法可使伺服器傳回該資源所支援的所有HTTP請求方法。用*來代替資源名稱，向Web伺服器傳送OPTIONS請求，可以測試伺服器功能是否正常運作。 HEAD：與GET方法一樣，都是向伺服器發出指定資源的請求。只不過伺服器將不傳回資源的本文部份。它的好處在於，使用這個方法可以在不必傳輸全部內容的情況下，就可以獲取其中「關於該資源的資訊」（元資訊或稱元資料）。 GET：向指定的資源發出「顯示」請求。使用GET方法應該只用在讀取資料，而不應當被用於產生「副作用」的操作中，例如在Web Application中。其中一個原因是GET可能會被網路蜘蛛等隨意存取。參見安全方法 POST：向指定資源提交資料，請求伺服器進行處理（例如提交表單或者上傳檔案）。資料被包含在請求本文中。這個請求可能會建立新的資源或修改現有資源，或二者皆有。 PUT：向指定資源位置上傳其最新內容。 DELETE：請求伺服器刪除Request-URI所標識的資源。 TRACE：回顯伺服器收到的請求，主要用於測試或診斷。 CONNECT：HTTP/1.1協定中預留給能夠將連線改為管道方式的代理伺服器。通常用於SSL加密伺服器的連結（經由非加密的HTTP代理伺服器） 而 express 網頁框架也針對 http 請求方法設計路由的函數： 通常在設計 rest 時，常用的是 get (取得), post (新增), put (更新), delete (刪除) 參考資料http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE]]></content>
+      <categories>
+        <category>Node.js</category>
+      </categories>
+      <tags>
+        <tag>Node.js</tag>
+        <tag>鐵人賽</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Node.js 系列學習日誌#27 - forever 讓程式保持執行狀態]]></title>
     <url>%2F2017%2F07%2F26%2Fnodejs%2Fnodejs-27-forever%2F</url>
     <content type="text"><![CDATA[程式準備要部署上線時，就會面臨到執行程式的方式，伺服器的管理，是不是能有一個運行 Node.js 程式，並且有個工具處理這件事情。forever 可以作為保持運行的狀態，管理 Node.js 程式服務，在 forever 進程之下，建立子進程，執行啟動與停止的命令相當簡單。更特別的是，經常我們在寫 Node.js 的時候，每次更動的檔案時都需要再重新執行啟動服務的指令 (例如：node app.js)，而這個工具是當每次更新程式的時候，它會自動重新啟動服務，更方便許多了呢！ 這是官方的描述：（https://github.com/nodejitsu/forever） A simple CLI tool for ensuring that a given script runs continuously (i.e. forever). 安裝12// 一般建議加上 -g 將 forever 全域安裝$[sudo] npm install forever -g 當然若你要在某個特定目錄下安裝也是可以 12$cd /path/projects/abc$[sudo] npm install forever 指令的幫助可以透過以下指令列出說明 1$forever —help 顯示所有運行的服務1$forever list 啟動1$forever start app.js 停止操作1$forever stopall 停止某一個程式專案1$forever stop app.js 實作一個簡單運用我們先用 express 這個框架建一個簡單的網站 啟動程式1$forever start app.js forever 列表清單1$forever list 可以看到紫色部分，就是在放 log file 的路徑 關閉進程1$forever stop app.js]]></content>
@@ -249,18 +274,6 @@
         <tag>Node.js</tag>
         <tag>鐵人賽</tag>
         <tag>forever</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Node.js 系列學習日誌#28 - REST 路由規則]]></title>
-    <url>%2F2017%2F07%2F26%2Fnodejs%2Fnodejs-28-rest%2F</url>
-    <content type="text"><![CDATA[今天我們使用 express 框架介紹一下 REST 路由規則，REST 是一種 http 協定的網路應用，http 提供了八種方法使用： OPTIONS：這個方法可使伺服器傳回該資源所支援的所有HTTP請求方法。用*來代替資源名稱，向Web伺服器傳送OPTIONS請求，可以測試伺服器功能是否正常運作。 HEAD：與GET方法一樣，都是向伺服器發出指定資源的請求。只不過伺服器將不傳回資源的本文部份。它的好處在於，使用這個方法可以在不必傳輸全部內容的情況下，就可以獲取其中「關於該資源的資訊」（元資訊或稱元資料）。 GET：向指定的資源發出「顯示」請求。使用GET方法應該只用在讀取資料，而不應當被用於產生「副作用」的操作中，例如在Web Application中。其中一個原因是GET可能會被網路蜘蛛等隨意存取。參見安全方法 POST：向指定資源提交資料，請求伺服器進行處理（例如提交表單或者上傳檔案）。資料被包含在請求本文中。這個請求可能會建立新的資源或修改現有資源，或二者皆有。 PUT：向指定資源位置上傳其最新內容。 DELETE：請求伺服器刪除Request-URI所標識的資源。 TRACE：回顯伺服器收到的請求，主要用於測試或診斷。 CONNECT：HTTP/1.1協定中預留給能夠將連線改為管道方式的代理伺服器。通常用於SSL加密伺服器的連結（經由非加密的HTTP代理伺服器） 而 express 網頁框架也針對 http 請求方法設計路由的函數： 通常在設計 rest 時，常用的是 get (取得), post (新增), put (更新), delete (刪除) 參考資料http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE]]></content>
-      <categories>
-        <category>Node.js</category>
-      </categories>
-      <tags>
-        <tag>Node.js</tag>
-        <tag>鐵人賽</tag>
       </tags>
   </entry>
   <entry>
