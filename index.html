@@ -319,6 +319,157 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2018/07/20/vuejs/vuejs-parent-child-value/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Helen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="噗噗。故我在">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/20/vuejs/vuejs-parent-child-value/" itemprop="url">Vue 父組件與子組件之間的資料傳值方法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2018-07-20T18:07:51+08:00">
+                2018-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index">
+                    <span itemprop="name">Vue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/07/20/vuejs/vuejs-parent-child-value/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/07/20/vuejs/vuejs-parent-child-value/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="父組件傳值給子組件-使用-props-屬性"><a href="#父組件傳值給子組件-使用-props-屬性" class="headerlink" title="父組件傳值給子組件 (使用 props 屬性)"></a>父組件傳值給子組件 (使用 props 屬性)</h2><p>當需要做動態的綁定將父組件的資料傳給子組件的方式是 props，而 props 是單向傳遞</p>
+<h4 id="父組件"><a href="#父組件" class="headerlink" title="父組件"></a>父組件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;template lang=&quot;pug&quot;&gt;</span><br><span class="line">	div.dvIssue</span><br><span class="line">    // 引入 `issue-create` 組件 (props 需要轉換相對應的 kebab-case (短橫線隔開) 方式命名</span><br><span class="line">		issue-create(:info=&quot;info&quot;)</span><br><span class="line">&lt;/template&gt;	</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;coffee&quot;&gt;</span><br><span class="line">import IssueCreate from &apos;@/IssueCreate&apos;</span><br><span class="line">export default </span><br><span class="line">  name: &apos;IssueShow&apos;</span><br><span class="line">  components: &#123; </span><br><span class="line">    IssueCreate</span><br><span class="line">  &#125;</span><br><span class="line">  data: ()-&gt;</span><br><span class="line">    info: </span><br><span class="line">      msgVal: &apos;abc&apos;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="子組件"><a href="#子組件" class="headerlink" title="子組件"></a>子組件</h4><p>接收時，就用 props 屬性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;template lang=&quot;pug&quot;&gt;</span><br><span class="line">	div.dvIssueCreate</span><br><span class="line">		span &#123;&#123; info.msgVal &#125;&#125;</span><br><span class="line">&lt;/template&gt;	</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;coffee&quot;&gt;</span><br><span class="line">export default </span><br><span class="line">  name: &apos;IssueCreate&apos;</span><br><span class="line">  props:</span><br><span class="line">    info: </span><br><span class="line">      type: Object # 指定傳入的類型，如果類型不正確就會警告</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="子組件傳值給父組件-emit"><a href="#子組件傳值給父組件-emit" class="headerlink" title="子組件傳值給父組件 ($emit)"></a>子組件傳值給父組件 ($emit)</h2><p>有因為props 是單向傳遞的，主要是為了避免子組件不小心修改父組件的狀態，造成可怕現象。所以若我們想在子組件通知父組件的話，可以透過觸發事件來通知父組件 $emit 方法。</p>
+<h4 id="父組件-1"><a href="#父組件-1" class="headerlink" title="父組件"></a>父組件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;template lang=&quot;pug&quot;&gt;</span><br><span class="line">	div.dvIssue</span><br><span class="line">		issue-create(v-on:issueState=&quot;onIssueCallback&quot;)</span><br><span class="line">&lt;/template&gt;	</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;coffee&quot;&gt;</span><br><span class="line">import IssueCreate from &apos;@/IssueCreate&apos;</span><br><span class="line">export default </span><br><span class="line">  name: &apos;Issue&apos;</span><br><span class="line">  components: &#123; </span><br><span class="line">    IssueCreate,</span><br><span class="line">  &#125;</span><br><span class="line">  methods:</span><br><span class="line">  	onIssueCallback: (data)-&gt;</span><br><span class="line">  		# 寫回傳後續的操作</span><br><span class="line">  		console.log(data)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="子組件-1"><a href="#子組件-1" class="headerlink" title="子組件"></a>子組件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;template lang=&quot;pug&quot;&gt;</span><br><span class="line">	div.dvIssueCreate</span><br><span class="line">		v-btn(@click=&quot;onCreateTicket()&quot;) 這是按鈕</span><br><span class="line">&lt;/template&gt;	</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;coffee&quot;&gt;</span><br><span class="line">export default </span><br><span class="line">  name: &apos;IssueCreate&apos;</span><br><span class="line">  methods:</span><br><span class="line">  	onCreateTicket: ()-&gt;</span><br><span class="line">      param = </span><br><span class="line">        data: &apos;Hello&apos;</span><br><span class="line">  		@.$emit(&apos;issueState&apos;, param)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2018/07/05/vuejs/vuejs-deploy-on-apache/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1025,183 +1176,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2018/04/28/nodejs/nodejs-31-ubuntu-install-nodejs/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Helen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="噗噗。故我在">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/28/nodejs/nodejs-31-ubuntu-install-nodejs/" itemprop="url">Node.js 系列學習日誌#31 - 如何 Ubuntu 16.04 安裝 Node.js / n 管理 Nodejs 版本 / yarn 包管理套件</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2018-04-28T15:15:00+08:00">
-                2018-04-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Node-js/" itemprop="url" rel="index">
-                    <span itemprop="name">Node.js</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/04/28/nodejs/nodejs-31-ubuntu-install-nodejs/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/04/28/nodejs/nodejs-31-ubuntu-install-nodejs/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在 Ubuntu 16.04 作業系統版本下，我們需要使用  <code>apt</code> 包管理器，在安裝 Node.js 之前先安裝 <code>npm</code> ，也就是 Node.js 包管理器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get install nodejs</span><br><span class="line">$ sudo apt-get install npm</span><br></pre></td></tr></table></figure>
-<p>接著使用 <code>n</code> 來管理 nodejs 版本 <a href="https://github.com/tj/n" target="_blank" rel="noopener">https://github.com/tj/n</a> ，既然有了 <code>node</code> 最簡單的安裝 n 的方式是 <code>npm</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g n</span><br></pre></td></tr></table></figure>
-<p>如果安裝出現了以下的錯誤</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g n</span><br><span class="line">npm http GET https://registry.npmjs.org/n</span><br><span class="line">npm http GET https://registry.npmjs.org/n</span><br><span class="line">npm http GET https://registry.npmjs.org/n</span><br><span class="line">npm ERR! Error: CERT_UNTRUSTED</span><br><span class="line">npm ERR!     at SecurePair.&lt;anonymous&gt; (tls.js:1370:32)</span><br><span class="line">npm ERR!     at SecurePair.EventEmitter.emit (events.js:92:17)</span><br><span class="line">npm ERR!     at SecurePair.maybeInitFinished (tls.js:982:10)</span><br><span class="line">npm ERR!     at CleartextStream.read [as _read] (tls.js:469:13)</span><br><span class="line">npm ERR!     at CleartextStream.Readable.read (_stream_readable.js:320:10)</span><br><span class="line">npm ERR!     at EncryptedStream.write [as _write] (tls.js:366:25)</span><br><span class="line">npm ERR!     at doWrite (_stream_writable.js:223:10)</span><br><span class="line">npm ERR!     at writeOrBuffer (_stream_writable.js:213:5)</span><br><span class="line">npm ERR!     at EncryptedStream.Writable.write (_stream_writable.js:180:11)</span><br><span class="line">npm ERR!     at write (_stream_readable.js:583:24)</span><br></pre></td></tr></table></figure>
-<p>那麼可以用以下命令繞過 <code>https</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm config set strict-ssl false</span><br></pre></td></tr></table></figure>
-<p>接著在重新安裝一次 <code>n</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo npm cache clean -f</span><br><span class="line">$ sudo npm install -g n</span><br><span class="line">$ sudo n stable</span><br></pre></td></tr></table></figure>
-<p>安裝完畢之後，輸入以下命令以確定安裝的版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">## 查看 n 版本</span><br><span class="line">$ n -V</span><br><span class="line"></span><br><span class="line">## Output</span><br><span class="line">2.1.7</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">## 查看 node 版本</span><br><span class="line">$ node -v</span><br><span class="line"></span><br><span class="line">## Output</span><br><span class="line">v10.0.0</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">## 查看 npm 版本</span><br><span class="line">$ npm -v</span><br><span class="line"></span><br><span class="line">## Output</span><br><span class="line">1.3.10</span><br></pre></td></tr></table></figure>
-<p>接著，也需要安裝 Yarn 來管理套件，它是一套 Javascript 套件管理工具，到這邊想說不是已經有 <code>npm</code>，為何還需要 <code>yarn</code> ?， 這是因為使用 <code>npm</code> 最困擾的地方就是安裝速度比較慢，Yarn 則是快速、可靠又安全的依賴管理。（用過都說讚…），那麼底下就輸入命令安裝 Yarn</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -</span><br><span class="line">$ sudo apt-get update &amp;&amp; sudo apt-get install yarn</span><br></pre></td></tr></table></figure>
-<p>測試 Yarn 安裝狀況</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn --version</span><br></pre></td></tr></table></figure>
-<p>但是如果出現錯誤訊息寫 <code>The program &#39;yarn&#39; is currently not installed. To run &#39;yarn&#39; please ask your administrator to install the package &#39;cmdtest&#39;</code> 代表著需要安裝 <code>cmdtest</code> 套件</p>
-<p>輸入並且安裝 cmdtest</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install cmdtest</span><br></pre></td></tr></table></figure>
-<p>再做一次 <code>$ yarn --version</code> 確認後，就成功出現版本號碼</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">## Output:</span><br><span class="line">0.10</span><br></pre></td></tr></table></figure>
-<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ul>
-<li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-16-04" target="_blank" rel="noopener">How To Install Node.js on Ubuntu16.04</a></li>
-<li><a href="https://stackoverflow.com/questions/21855035/ssl-error-cert-untrusted-while-using-npm-command" target="_blank" rel="noopener">SSL Error: CERT_UNTRUSTED while using npm command@stackoverflow</a></li>
-<li><a href="https://yarnpkg.com/zh-Hans/" target="_blank" rel="noopener">Yarn 官方</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1247,7 +1226,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">55</span>
+                <span class="site-state-item-count">56</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
@@ -1258,7 +1237,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">分類</span>
               </a>
             </div>

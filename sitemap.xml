@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://weijutu.github.io/2018/07/20/vuejs/vuejs-parent-child-value/</loc>
+    
+    <lastmod>2018-07-20T02:23:53.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://weijutu.github.io/2018/07/05/vuejs/vuejs-deploy-on-apache/</loc>
     
     <lastmod>2018-07-05T01:57:21.000Z</lastmod>

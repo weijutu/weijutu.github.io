@@ -319,6 +319,161 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/09/06/r/r-matrix-multiplication/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Helen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="噗噗。故我在">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/09/06/r/r-matrix-multiplication/" itemprop="url">R 學習日誌 - 矩陣相乘法運算 (Matrix multiplication)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-09-06T00:34:11+08:00">
+                2017-09-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/R/" itemprop="url" rel="index">
+                    <span itemprop="name">R</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/09/06/r/r-matrix-multiplication/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/09/06/r/r-matrix-multiplication/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="學習目標"><a href="#學習目標" class="headerlink" title="學習目標"></a>學習目標</h3><p>學習如何計算矩陣相乘以及R語言的用法</p>
+<h3 id="矩陣相乘法"><a href="#矩陣相乘法" class="headerlink" title="矩陣相乘法"></a>矩陣相乘法</h3><p>兩個矩陣必須滿足 A 矩陣的<code>行數</code>等於 B 矩陣的<code>列數</code>才可以相乘。在這邊用一個簡單的例子介紹矩陣相乘法的運算</p>
+<p>$$A_{3*2}=\begin{bmatrix}1 &amp; 2\\ 3 &amp; 4\\ 5 &amp; 6\end{bmatrix}$$</p>
+<p>$$B_{2*3}=\begin{bmatrix}7 &amp; 8 &amp; 9\\ 10 &amp; 11 &amp; 12\end{bmatrix}$$</p>
+<p>則：</p>
+<p>$A \times B = \begin{bmatrix}1 \times 7 + 2 \times 10 &amp; 1 \times 8 + 2 \times 11 &amp; 1 \times 9 + 2 \ \times 12\\3 \times 7 + 4 \times 10 &amp; 3 \times 8 + 4 \times 11 &amp; 3 \times 9 + 4 \times 12\\5 \times 7 + 6 \times 10 &amp; 5 \times 8 + 6 \times 11 &amp; 5 \times 9 + 6 \times 12\end{bmatrix} = \begin{bmatrix}27 &amp; 30 &amp; 33\\61 &amp; 68 &amp; 75\\95 &amp; 106 &amp; 117\end{bmatrix}$</p>
+<p>那麼用 R 語法又是怎麼寫呢？</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/09/06/r/r-matrix-multiplication/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/09/02/stock/stock-002-company/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -910,143 +1065,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/08/25/javascript/javascript-gulpjs-minify-image/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Helen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="噗噗。故我在">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/25/javascript/javascript-gulpjs-minify-image/" itemprop="url">Javascript - 介紹 Gulp.js 並實作壓縮（minify）圖片</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-25T11:45:14+08:00">
-                2017-08-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/08/25/javascript/javascript-gulpjs-minify-image/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/08/25/javascript/javascript-gulpjs-minify-image/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><img src="/images/javascript/5.png" alt=""></p>
-<p>它是建立在 node.js 的一個套件。The streaming build system. 它的觀念是一套利用串流方式輔助建置系統，優化前端工程的效能（縮小js 檔案大小，編譯預處理的css, less ）加快js, css…etc 載入速度，特色在於代碼優於配置關做法讓事情變得更簡單，更直覺的方式構建系統。</p>
-<h3 id="什麼是字串流-Stream-（也可以叫串流）"><a href="#什麼是字串流-Stream-（也可以叫串流）" class="headerlink" title="什麼是字串流 Stream? （也可以叫串流）"></a>什麼是字串流 Stream? （也可以叫串流）</h3><p>谷歌一下Wiki 的「 Stream 」的意思：</p>
-<blockquote>
-<p>在電腦科學裡面，字串流(stream，或者串流)這個詞有很多用法。所有這一些用法都是代表一個包含資料的序列。我們可以將字串流想做是一個允許資料一個接一個，而非將資料包作一整個，來進行處理的輸送帶。</p>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/25/javascript/javascript-gulpjs-minify-image/#more" rel="contents">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1092,7 +1115,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">55</span>
+                <span class="site-state-item-count">56</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
@@ -1103,7 +1126,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">分類</span>
               </a>
             </div>

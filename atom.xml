@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://weijutu.github.io/"/>
-  <updated>2018-07-05T01:57:21.000Z</updated>
+  <updated>2018-07-20T02:23:53.000Z</updated>
   <id>https://weijutu.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Vue 父組件與子組件之間的資料傳值方法</title>
+    <link href="https://weijutu.github.io/2018/07/20/vuejs/vuejs-parent-child-value/"/>
+    <id>https://weijutu.github.io/2018/07/20/vuejs/vuejs-parent-child-value/</id>
+    <published>2018-07-20T10:07:51.000Z</published>
+    <updated>2018-07-20T02:23:53.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="父組件傳值給子組件-使用-props-屬性"><a href="#父組件傳值給子組件-使用-props-屬性" class="headerlink" title="父組件傳值給子組件 (使用 props 屬性)"></a>父組件傳值給子組件 (使用 props 屬性)</h2><p>當需要做動態的綁定將父組件的資料傳給子組件的方式是 props，而 props 是單向傳遞</p><h4 id="父組件"><a href="#父組件" class="headerlink" title="父組件"></a>父組件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;template lang=&quot;pug&quot;&gt;</span><br><span class="line">div.dvIssue</span><br><span class="line">    // 引入 `issue-create` 組件 (props 需要轉換相對應的 kebab-case (短橫線隔開) 方式命名</span><br><span class="line">issue-create(:info=&quot;info&quot;)</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;coffee&quot;&gt;</span><br><span class="line">import IssueCreate from &apos;@/IssueCreate&apos;</span><br><span class="line">export default </span><br><span class="line">  name: &apos;IssueShow&apos;</span><br><span class="line">  components: &#123; </span><br><span class="line">    IssueCreate</span><br><span class="line">  &#125;</span><br><span class="line">  data: ()-&gt;</span><br><span class="line">    info: </span><br><span class="line">      msgVal: &apos;abc&apos;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure><h4 id="子組件"><a href="#子組件" class="headerlink" title="子組件"></a>子組件</h4><p>接收時，就用 props 屬性</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;template lang=&quot;pug&quot;&gt;</span><br><span class="line">div.dvIssueCreate</span><br><span class="line">span &#123;&#123; info.msgVal &#125;&#125;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;coffee&quot;&gt;</span><br><span class="line">export default </span><br><span class="line">  name: &apos;IssueCreate&apos;</span><br><span class="line">  props:</span><br><span class="line">    info: </span><br><span class="line">      type: Object # 指定傳入的類型，如果類型不正確就會警告</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure><h2 id="子組件傳值給父組件-emit"><a href="#子組件傳值給父組件-emit" class="headerlink" title="子組件傳值給父組件 ($emit)"></a>子組件傳值給父組件 ($emit)</h2><p>有因為props 是單向傳遞的，主要是為了避免子組件不小心修改父組件的狀態，造成可怕現象。所以若我們想在子組件通知父組件的話，可以透過觸發事件來通知父組件 $emit 方法。</p><h4 id="父組件-1"><a href="#父組件-1" class="headerlink" title="父組件"></a>父組件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;template lang=&quot;pug&quot;&gt;</span><br><span class="line">div.dvIssue</span><br><span class="line">issue-create(v-on:issueState=&quot;onIssueCallback&quot;)</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;coffee&quot;&gt;</span><br><span class="line">import IssueCreate from &apos;@/IssueCreate&apos;</span><br><span class="line">export default </span><br><span class="line">  name: &apos;Issue&apos;</span><br><span class="line">  components: &#123; </span><br><span class="line">    IssueCreate,</span><br><span class="line">  &#125;</span><br><span class="line">  methods:</span><br><span class="line">  onIssueCallback: (data)-&gt;</span><br><span class="line">  # 寫回傳後續的操作</span><br><span class="line">  console.log(data)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure><h4 id="子組件-1"><a href="#子組件-1" class="headerlink" title="子組件"></a>子組件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;template lang=&quot;pug&quot;&gt;</span><br><span class="line">div.dvIssueCreate</span><br><span class="line">v-btn(@click=&quot;onCreateTicket()&quot;) 這是按鈕</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;coffee&quot;&gt;</span><br><span class="line">export default </span><br><span class="line">  name: &apos;IssueCreate&apos;</span><br><span class="line">  methods:</span><br><span class="line">  onCreateTicket: ()-&gt;</span><br><span class="line">      param = </span><br><span class="line">        data: &apos;Hello&apos;</span><br><span class="line">  @.$emit(&apos;issueState&apos;, param)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;父組件傳值給子組件-使用-props-屬性&quot;&gt;&lt;a href=&quot;#父組件傳值給子組件-使用-props-屬性&quot; class=&quot;headerlink&quot; title=&quot;父組件傳值給子組件 (使用 props 屬性)&quot;&gt;&lt;/a&gt;父組件傳值給子組件 (使用 props 屬
+      
+    
+    </summary>
+    
+      <category term="Vue" scheme="https://weijutu.github.io/categories/Vue/"/>
+    
+    
+      <category term="Vue" scheme="https://weijutu.github.io/tags/Vue/"/>
+    
+  </entry>
   
   <entry>
     <title>在 Mac 上 Apache 部署 Vue 網站</title>
@@ -500,33 +525,6 @@
 &lt;li&gt;依照類型將名稱分類，表格呈現上方列為「類型」、左方為「名稱」&lt;/li&gt;
 &lt;li&gt;取得不重複的「名稱」，計算各類型的名稱的總數&lt;/li&gt;
 &lt;/ol&gt;
-    
-    </summary>
-    
-      <category term="Excel" scheme="https://weijutu.github.io/categories/Excel/"/>
-    
-    
-      <category term="excel" scheme="https://weijutu.github.io/tags/excel/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Excel - 字串分割到不同的儲存格</title>
-    <link href="https://weijutu.github.io/2017/08/21/excel/excel-string-splite-to-cell/"/>
-    <id>https://weijutu.github.io/2017/08/21/excel/excel-string-splite-to-cell/</id>
-    <published>2017-08-21T01:50:05.000Z</published>
-    <updated>2017-08-30T07:11:30.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>今天要介紹的是，如何將字串分割到不同的儲存格，也就是說當你今天遇到一個字串，但是字串裡面有兩個資訊想要各別放</p><p>比如以下字串：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">common.delete=Delete</span><br></pre></td></tr></table></figure><p>結果預計要像這樣</p><p><img src="/images/excel/20140523-1.png" alt=""></p><p>如果你有很多個像這樣的要把字串切割的話，這時候你還會用 Copy &amp; Paste 的做法去貼到不同的欄位嗎？</p><a id="more"></a><p>以下用個簡單的資料當作例子，我想要將等於的左右兩邊，各別的放到不同的儲存格</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">common.delete=Delete</span><br><span class="line">common.add=Create</span><br><span class="line">common.modify=Edit</span><br><span class="line">common.name=Name</span><br><span class="line">common.change=Change</span><br><span class="line">common.manage=Management</span><br><span class="line">common.search=Search</span><br><span class="line">btn.cancel=Cancel</span><br><span class="line">btn.Submit=Submit</span><br></pre></td></tr></table></figure><h3 id="快速實作方法"><a href="#快速實作方法" class="headerlink" title="快速實作方法"></a>快速實作方法</h3><h4 id="第一步-先將欄位選取起來"><a href="#第一步-先將欄位選取起來" class="headerlink" title="第一步: 先將欄位選取起來"></a>第一步: 先將欄位選取起來</h4><p>請先將資料擺在 A 欄位那邊，然後滑鼠將資料選取起來，如下圖所示：</p><p><img src="/images/excel/20140523-2.png" alt=""></p><h4 id="第二步-按下-資料-gt-資料剖析-啟動-資料剖析精靈"><a href="#第二步-按下-資料-gt-資料剖析-啟動-資料剖析精靈" class="headerlink" title="第二步: 按下 [資料] &gt; [資料剖析] 啟動 [資料剖析精靈]"></a>第二步: 按下 [資料] &gt; [資料剖析] 啟動 [資料剖析精靈]</h4><p>接著他就會開資料剖析精靈，超簡單，三個小步驟而已<br>(步驟 3 之 1)：我們的目標是要分隔，所以選第一個，如果直接按完成的話，事實上跟我們需求不符，因為他會利用預設的 tab 區分隔，所以請繼續按下一步</p><p><img src="/images/excel/20140523-3.png" alt=""></p><p>(步驟 3 之 2) ：這邊我們要確定資料分隔的符號是什麼</p><p><img src="/images/excel/20140523-4.png" alt=""></p><p>(步驟 3 之 3)：最後可以看看預覽分割的結果，確定之後就按完成按鈕</p><p><img src="/images/excel/20140523-5.png" alt=""></p><p>結果: 一秒完成 !</p><p><img src="/images/excel/20140523-6.png" alt=""></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;今天要介紹的是，如何將字串分割到不同的儲存格，也就是說當你今天遇到一個字串，但是字串裡面有兩個資訊想要各別放&lt;/p&gt;
-&lt;p&gt;比如以下字串：&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;common.delete=Delete&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;結果預計要像這樣&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/excel/20140523-1.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;如果你有很多個像這樣的要把字串切割的話，這時候你還會用 Copy &amp;amp; Paste 的做法去貼到不同的欄位嗎？&lt;/p&gt;
     
     </summary>
     
