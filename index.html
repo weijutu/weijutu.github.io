@@ -319,6 +319,158 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2018/07/26/web/how-to-deply-redmine-to-heroku/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Helen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="噗噗。故我在">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/26/web/how-to-deply-redmine-to-heroku/" itemprop="url">部署 Redmine 專案管理追蹤系統到 Heroku 平台</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2018-07-26T22:07:51+08:00">
+                2018-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/網站/" itemprop="url" rel="index">
+                    <span itemprop="name">網站</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/07/26/web/how-to-deply-redmine-to-heroku/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/07/26/web/how-to-deply-redmine-to-heroku/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>在本篇的介紹使用 Redmine 的好工具，部署到 Heroku 平台上面，屆時就能省去不少設定網路組態，推上 Heroku 後得到的網址便能直接透過瀏覽器開啟 Redmine 應用程式。</p>
+<h2 id="Redmin-介紹"><a href="#Redmin-介紹" class="headerlink" title="Redmin 介紹"></a>Redmin 介紹</h2><p>Redmine 是一套開源的專案管理追蹤系統，大部分都是用來做系統開發的進度追蹤、問題的管理，在很多專案上的問題追蹤、通知、管理和版本管控都非常方便，替你的工作流程幫助非常大。而這套平台的操作也相當的靈活，甚至還可以設定開放 restful api 方式，可以用程式來呼叫使用，能讓使用這套平台的團隊建立一個良好的管理機制。</p>
+<h2 id="從-Github-複製-Redmine-專案"><a href="#從-Github-複製-Redmine-專案" class="headerlink" title="從 Github 複製 Redmine 專案"></a>從 Github 複製 Redmine 專案</h2><p>找一個目錄執行以下的指令，將 redmine 複製一份下來，並且找個新的版本，這裡用的是 <code>3.4-stable</code> 版本，你也可以在 Github 找其他的 Redmine 版本 <a href="https://github.com/redmine/redmine" target="_blank" rel="noopener">GitHub</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/redmine/redmine.git -b 3.4-stable</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/26/web/how-to-deply-redmine-to-heroku/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2018/07/20/vuejs/vuejs-parent-child-value/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -419,16 +571,15 @@
 
       
         
-          
-            <h2 id="父組件傳值給子組件-使用-props-屬性"><a href="#父組件傳值給子組件-使用-props-屬性" class="headerlink" title="父組件傳值給子組件 (使用 props 屬性)"></a>父組件傳值給子組件 (使用 props 屬性)</h2><p>當需要做動態的綁定將父組件的資料傳給子組件的方式是 props，而 props 是單向傳遞<br>引入 <code>issue-create</code> 組件 (props 需要轉換相對應的 kebab-case (短橫線隔開) 方式命名</p>
-<h4 id="父組件"><a href="#父組件" class="headerlink" title="父組件"></a>父組件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;template lang=&quot;pug&quot;&gt;</span><br><span class="line">	div.dvIssue</span><br><span class="line">    issue-create(:info=&quot;info&quot;)</span><br><span class="line">&lt;/template&gt;	</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;coffee&quot;&gt;</span><br><span class="line">import IssueCreate from &apos;@/IssueCreate&apos;</span><br><span class="line">export default </span><br><span class="line">  name: &apos;IssueShow&apos;</span><br><span class="line">  components: &#123; </span><br><span class="line">    IssueCreate</span><br><span class="line">  &#125;</span><br><span class="line">  data: ()-&gt;</span><br><span class="line">    info: </span><br><span class="line">      msgVal: &apos;abc&apos;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="子組件"><a href="#子組件" class="headerlink" title="子組件"></a>子組件</h4><p>接收時，就用 props 屬性</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;template lang=&quot;pug&quot;&gt;</span><br><span class="line">  div.dvIssueCreate</span><br><span class="line">    span &#123;&#123; info.msgVal &#125;&#125;</span><br><span class="line">&lt;/template&gt;	</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;coffee&quot;&gt;</span><br><span class="line">export default </span><br><span class="line">  name: &apos;IssueCreate&apos;</span><br><span class="line">  props:</span><br><span class="line">    info: </span><br><span class="line">      type: Object # 指定傳入的類型，如果類型不正確就會警告</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="子組件傳值給父組件-emit"><a href="#子組件傳值給父組件-emit" class="headerlink" title="子組件傳值給父組件 ($emit)"></a>子組件傳值給父組件 ($emit)</h2><p>有因為props 是單向傳遞的，主要是為了避免子組件不小心修改父組件的狀態，造成可怕現象。所以若我們想在子組件通知父組件的話，可以透過觸發事件來通知父組件 $emit 方法。</p>
-<h4 id="父組件-1"><a href="#父組件-1" class="headerlink" title="父組件"></a>父組件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;template lang=&quot;pug&quot;&gt;</span><br><span class="line">	div.dvIssue</span><br><span class="line">    issue-create(v-on:issueState=&quot;onIssueCallback&quot;)</span><br><span class="line">&lt;/template&gt;	</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;coffee&quot;&gt;</span><br><span class="line">import IssueCreate from &apos;@/IssueCreate&apos;</span><br><span class="line">export default </span><br><span class="line">  name: &apos;Issue&apos;</span><br><span class="line">  components: &#123; </span><br><span class="line">    IssueCreate,</span><br><span class="line">  &#125;</span><br><span class="line">  methods:</span><br><span class="line">    onIssueCallback: (data)-&gt;</span><br><span class="line">      # 寫回傳後續的操作</span><br><span class="line">      console.log(data)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="子組件-1"><a href="#子組件-1" class="headerlink" title="子組件"></a>子組件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;template lang=&quot;pug&quot;&gt;</span><br><span class="line">	div.dvIssueCreate</span><br><span class="line">    v-btn(@click=&quot;onCreate()&quot;) 這是按鈕</span><br><span class="line">&lt;/template&gt;	</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;coffee&quot;&gt;</span><br><span class="line">export default </span><br><span class="line">  name: &apos;IssueCreate&apos;</span><br><span class="line">  methods:</span><br><span class="line">  	onCreate: ()-&gt;</span><br><span class="line">      param = </span><br><span class="line">        data: &apos;Hello&apos;</span><br><span class="line">  		@.$emit(&apos;issueState&apos;, param)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-          
+          <h1 id="父組件傳值給子組件-使用-props-屬性"><a href="#父組件傳值給子組件-使用-props-屬性" class="headerlink" title="父組件傳值給子組件 (使用 props 屬性)"></a>父組件傳值給子組件 (使用 props 屬性)</h1><p>當需要做動態的綁定將父組件的資料傳給子組件的方式是 props，而 props 是單向傳遞<br>引入 <code>issue-create</code> 組件 (props 需要轉換相對應的 kebab-case (短橫線隔開) 方式命名</p>
+<h2 id="父組件"><a href="#父組件" class="headerlink" title="父組件"></a>父組件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;template lang=&quot;pug&quot;&gt;</span><br><span class="line">  div.dvIssue</span><br><span class="line">    issue-create(:info=&quot;info&quot;)</span><br><span class="line">&lt;/template&gt;	</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;coffee&quot;&gt;</span><br><span class="line">import IssueCreate from &apos;@/IssueCreate&apos;</span><br><span class="line">export default </span><br><span class="line">  name: &apos;IssueShow&apos;</span><br><span class="line">  components: &#123; </span><br><span class="line">    IssueCreate</span><br><span class="line">  &#125;</span><br><span class="line">  data: ()-&gt;</span><br><span class="line">    info: </span><br><span class="line">      msgVal: &apos;abc&apos;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/20/vuejs/vuejs-parent-child-value/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -948,234 +1099,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2018/05/04/r/r-04-rstudio-shortcut/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Helen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="噗噗。故我在">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/04/r/r-04-rstudio-shortcut/" itemprop="url">R 學習日誌#4 - RStudio 常用的快捷鍵</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2018-05-04T19:13:00+08:00">
-                2018-05-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/R/" itemprop="url" rel="index">
-                    <span itemprop="name">R</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/05/04/r/r-04-rstudio-shortcut/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/05/04/r/r-04-rstudio-shortcut/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>RStudio 快捷鍵若練熟了，不需滑鼠的移動，手指就在鍵盤上飛快的敲擊起來，讓人感覺超厲害的 @@。在這邊我示範的是用 Mac 環境。</p>
-<table>
-<thead>
-<tr>
-<th>Mac</th>
-<th>說明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>control + c</td>
-<td>中斷執行</td>
-</tr>
-<tr>
-<td>control + Enter</td>
-<td>執行單行指令</td>
-</tr>
-<tr>
-<td>control + shift + s</td>
-<td>執行全部指令</td>
-</tr>
-<tr>
-<td>control + shift + c</td>
-<td>註解指令</td>
-</tr>
-<tr>
-<td>control + L</td>
-<td>清除控制台 (Console) 輸出</td>
-</tr>
-<tr>
-<td>control + 1</td>
-<td>將游標定位到腳本區域</td>
-</tr>
-<tr>
-<td>control + 2</td>
-<td>將游標定位到控制台 (Console)</td>
-</tr>
-<tr>
-<td>control + 3</td>
-<td>將游標定位到幫助文檔</td>
-</tr>
-<tr>
-<td>command + 左</td>
-<td>將游標定位到行首</td>
-</tr>
-<tr>
-<td>command + 右</td>
-<td>將游標定位到行末</td>
-</tr>
-<tr>
-<td>command + s</td>
-<td>存檔</td>
-</tr>
-<tr>
-<td>command + w</td>
-<td>關閉當前文件</td>
-</tr>
-<tr>
-<td>command + d</td>
-<td>刪除整行</td>
-</tr>
-<tr>
-<td>command + z</td>
-<td>恢復上一步</td>
-</tr>
-<tr>
-<td>command + c</td>
-<td>複製</td>
-</tr>
-<tr>
-<td>command + v</td>
-<td>貼上</td>
-</tr>
-<tr>
-<td>command + a</td>
-<td>全選</td>
-</tr>
-<tr>
-<td>command + x</td>
-<td>剪下</td>
-</tr>
-</tbody>
-</table>
-<p>(其實快捷鍵還很多，但是如果有常用的話再補充)</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1226,7 +1149,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-count">57</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
@@ -1248,7 +1171,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-count">46</span>
                 <span class="site-state-item-name">標籤</span>
               </a>
             </div>
@@ -1271,16 +1194,12 @@
               <span class="links-of-author-item">
                 <a href="https://github.com/weijutu" target="_blank" title="GitHub">
                   
-                    <i class="fa fa-fw fa-github"></i>
-                  
                   GitHub
                 </a>
               </span>
             
               <span class="links-of-author-item">
                 <a href="https://www.facebook.com/weiju516" target="_blank" title="Facebook">
-                  
-                    <i class="fa fa-fw fa-facebook"></i>
                   
                   Facebook
                 </a>
