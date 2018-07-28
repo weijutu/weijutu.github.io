@@ -324,13 +324,7 @@ ruby.mps {
 }
 ruby.zhuyin > rt,
 ruby.mps > rt {
-  -moz-transform: scale(.8);
-  -ms-transform: scale(.8);
-  -webkit-transform: scale(.8);
   transform: scale(.8);
-  -moz-transform-origin: left center;
-  -ms-transform-origin: left center;
-  -webkit-transform-origin: left center;
   transform-origin: left center;
   font-size: .5em;
 }
@@ -377,9 +371,6 @@ ruby.mps > rt:empty {
   line-height: normal;
   text-decoration: none;
   text-indent: 0;
-  -moz-transform: scale(.5);
-  -ms-transform: scale(.5);
-  -webkit-transform: scale(.5);
   transform: scale(.5);
   position: absolute;
   left: 50%;
@@ -434,8 +425,8 @@ h-ruby.zhuyin h-diao {
 ruby.zhuyin h-diao h-char,
 ruby.mps h-diao h-char,
 h-ruby.zhuyin h-diao h-char {
-  -webkit-writing-mode: horizontal-tb;
-  writing-mode: horizontal-tb;
+  -ms-writing-mode: lr-tb;
+      writing-mode: horizontal-tb;
 }
 ruby.zhuyin [diao="˙"] h-diao,
 ruby.mps [diao="˙"] h-diao,
@@ -537,13 +528,7 @@ h-ruby[rightangle][doubleline] h-ru[annotation] {
   vertical-align: text-top;
 }
 [zhuyin] h-zhuyin > * {
-  -moz-transform: scale(.4);
-  -ms-transform: scale(.4);
-  -webkit-transform: scale(.4);
   transform: scale(.4);
-  -moz-transform-origin: left top;
-  -ms-transform-origin: left top;
-  -webkit-transform-origin: left top;
   transform-origin: left top;
   display: inline-block;
 }
@@ -606,13 +591,7 @@ h-ruby[rightangle][doubleline] h-ru[annotation] {
 }
 [zhuyin] [diao="˪"] h-diao,
 [zhuyin] [diao="˫"] h-diao {
-  -moz-transform: scale(.6);
-  -ms-transform: scale(.6);
-  -webkit-transform: scale(.6);
   transform: scale(.6);
-  -moz-transform-origin: left top;
-  -ms-transform-origin: left top;
-  -webkit-transform-origin: left top;
   transform-origin: left top;
 }
 [zhuyin] [diao^="ㆴ"] h-diao,
@@ -1649,7 +1628,6 @@ ruby.romanization rt,
 h-ruby.romanization rt,
 ruby [annotation] rt,
 h-ruby [annotation] rt {
-  -moz-font-feature-settings: "liga";
   -ms-font-feature-settings: "liga";
   -webkit-font-feature-settings: "liga";
   font-feature-settings: "liga";
@@ -1668,7 +1646,6 @@ samp,
 pre,
 article blockquote i,
 article blockquote var {
-  -moz-font-feature-settings: "liga=1, locl=0";
   -ms-font-feature-settings: "liga", "locl" 0;
   -webkit-font-feature-settings: "liga", "locl" 0;
   font-feature-settings: "liga", "locl" 0;
