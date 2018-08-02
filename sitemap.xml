@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://weijutu.github.io/2018/08/02/mac/how-to-upgrade-ruby-on-mac/</loc>
+    
+    <lastmod>2018-08-02T01:31:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://weijutu.github.io/2017/09/06/r/r-matrix-multiplication/</loc>
     
     <lastmod>2018-07-27T07:36:00.000Z</lastmod>
@@ -401,6 +408,13 @@
   </url>
   
   <url>
+    <loc>https://weijutu.github.io/categories/index.html</loc>
+    
+    <lastmod>2017-07-24T01:04:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://weijutu.github.io/2017/03/02/metero/metero-intro/</loc>
     
     <lastmod>2017-07-24T01:04:20.000Z</lastmod>
@@ -409,13 +423,6 @@
   
   <url>
     <loc>https://weijutu.github.io/tags/index.html</loc>
-    
-    <lastmod>2017-07-24T01:04:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://weijutu.github.io/categories/index.html</loc>
     
     <lastmod>2017-07-24T01:04:20.000Z</lastmod>
     

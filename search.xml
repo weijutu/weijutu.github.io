@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[在 Mac OSX 使用 RVM 升級 Ruby V2.5.1]]></title>
+    <url>%2F2018%2F08%2F02%2Fmac%2Fhow-to-upgrade-ruby-on-mac%2F</url>
+    <content type="text"><![CDATA[RVM 是一套 Ruby 版本的管理工具，這裡頭包含 Ruby 的版本管理和 Gem 庫管理。本篇裡面使用 RVM 工具進行 Ruby 的升級。 RVM (Ruby Version Manager) 安裝 RVM安装 1$ curl -L get.rvm.io | bash -s stable 是否有完成安裝 RVM 1$ rvm -v 結果顯示 1rvm 1.29.4 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io] 使用 RVM 升級 Ruby 顯示目前的 Ruby 版本 1$ ruby -v 顯示結果 1ruby 2.0.0p648 (2015-12-16 revision 53162) [universal.x86_64-darwin16] 安装 Ruby 2.5.1 1rvm install 2.5.1 安裝完畢之後，再用 ruby -v 檢查看看，是不是已經換成下面顯示的結果一樣已完成升級。 1ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-darwin16] 結果 1Linking /usr/local/Cellar/ruby/2.5.1... 3293 symlinks created 那麼，這樣子就安裝完畢了。 參考：https://flinhong.com/2017/10/26/upgrade-ruby-on-mac/]]></content>
+      <categories>
+        <category>Ruby</category>
+      </categories>
+      <tags>
+        <tag>Ruby</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[部署 Redmine 專案管理追蹤系統到 Heroku 平台]]></title>
     <url>%2F2018%2F07%2F26%2Fweb%2Fhow-to-deply-redmine-to-heroku%2F</url>
     <content type="text"><![CDATA[在本篇的介紹使用 Redmine 的好工具，部署到 Heroku 平台上面，屆時就能省去不少設定網路組態，推上 Heroku 後得到的網址便能直接透過瀏覽器開啟 Redmine 應用程式。 Redmin 介紹Redmine 是一套開源的專案管理追蹤系統，大部分都是用來做系統開發的進度追蹤、問題的管理，在很多專案上的問題追蹤、通知、管理和版本管控都非常方便，替你的工作流程幫助非常大。而這套平台的操作也相當的靈活，甚至還可以設定開放 restful api 方式，可以用程式來呼叫使用，能讓使用這套平台的團隊建立一個良好的管理機制。 從 Github 複製 Redmine 專案找一個目錄執行以下的指令，將 redmine 複製一份下來，並且找個新的版本，這裡用的是 3.4-stable 版本，你也可以在 Github 找其他的 Redmine 版本 GitHub 1$ git clone https://github.com/redmine/redmine.git -b 3.4-stable 複製完畢之後會多一個 redmine 資料夾，就直接進入資料夾內 1$ cd redmine 調整/移除項目設定我們需要移除幾個項目，首先是 .gitignore 檔案，將以下的檔案路徑項目都註解起來 1234567Gemfile.lockGemfile.localpublic/plugin_assets config/initializers/session_store.rb config/initializers/secret_token.rb config/configuration.yml config/email.yml 再來是 Gemfile 檔案，也把以下這段註解起來 123456789101112131415161718192021222324252627database_file = File.join(File.dirname(__FILE__), &quot;config/database.yml&quot;)if File.exist?(database_file) database_config = YAML::load(ERB.new(IO.read(database_file)).result) adapters = database_config.values.map &#123;|c| c[&apos;adapter&apos;]&#125;.compact.uniq if adapters.any? adapters.each do |adapter| case adapter when &apos;mysql2&apos; gem &quot;mysql2&quot;, &quot;~&gt; 0.4.6&quot;, :platforms =&gt; [:mri, :mingw, :x64_mingw] when /postgresql/ gem &quot;pg&quot;, &quot;~&gt; 0.18.1&quot;, :platforms =&gt; [:mri, :mingw, :x64_mingw] when /sqlite3/ gem &quot;sqlite3&quot;, (RUBY_VERSION &lt; &quot;2.0&quot; &amp;&amp; RUBY_PLATFORM =~ /mingw/ ? &quot;1.3.12&quot; : &quot;~&gt;1.3.12&quot;), :platforms =&gt; [:mri, :mingw, :x64_mingw] when /sqlserver/ gem &quot;tiny_tds&quot;, (RUBY_VERSION &gt;= &quot;2.0&quot; ? &quot;~&gt; 1.0.5&quot; : &quot;~&gt; 0.7.0&quot;), :platforms =&gt; [:mri, :mingw, :x64_mingw] gem &quot;activerecord-sqlserver-adapter&quot;, :platforms =&gt; [:mri, :mingw, :x64_mingw] else warn(&quot;Unknown database adapter `#&#123;adapter&#125;` found in config/database.yml, use Gemfile.local to load your own database gems&quot;) end end else warn(&quot;No adapter found in config/database.yml, please configure it first&quot;) endelse warn(&quot;Please configure your config/database.yml first&quot;)end 在同樣的 Gemfile 的文件底下 新增 1234567891011group :development, :test do gem &apos;sqlite3&apos;, &apos;1.3.8&apos; gem &apos;rspec-rails&apos;, &apos;2.13.1&apos;endgroup :production do gem &apos;pg&apos;, &apos;0.15.1&apos; gem &apos;rails_12factor&apos; gem &apos;thin&apos; # change this if you want to use other rack web serverend Gemfile 的第一行的 sourçe https://www.rubygems.org 改成 source http://www.rubygems.org 安裝應用程式所有依存的套件在上面的 redmine 文件的組態設定一切都改好之後，就能緊接著執行 bundle install，由於 Rails 用了一套 Bundler 工具可以檢查與安裝所有依存的套件，所以如果沒有 Bundler ，需要執行 gem install bundler 安裝。 1$ bundle install --without production test 如果…. bundle install 過程中出現以下錯誤 1234567The dependency tzinfo-data (&gt;= 0) will be unused by any of the platforms Bundler is installing for. Bundler is installing for ruby but the dependency is only for x86-mingw32, x64-mingw32, x86-mswin32. To add those platforms to the bundle, run `bundle lock --add-platform x86-mingw32 x64-mingw32 x86-mswin32`.Fetching source index from https://rubygems.org/Retrying fetcher due to error (2/4): Bundler::HTTPError Could not fetch specs from https://rubygems.org/Retrying fetcher due to error (3/4): Bundler::HTTPError Could not fetch specs from https://rubygems.org/Retrying fetcher due to error (4/4): Bundler::HTTPError Could not fetch specs from https://rubygems.org/Could not fetch specs from https://rubygems.org/ 那麼可以照錯誤訊息指示的方式解決。以下是我遇到安裝過程中有誤的時候的操作步驟。 1234567$ bundle lock --add-platform x86-mingw32 x64-mingw32 x86-mswin32$ sudo gem install -n /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/bin/gem$ bundle install --path vendor/bundle$ bundle config build.nokogiri --use-system-libraries$ brew install sqlite3$ brew upgrade sqlite$ gem install sqlite3 -v &apos;1.3.13&apos; --source &apos;http://rubygems.org/&apos; 設定 config/application.rb開啟 config/application.rb ，新增一行內容如下： 123module RedmineApp class Application &lt; Rails::Application config.assets.initialize_on_precompile = false # 新增這一行 設定 config/environment.rb開啟 config/environment.rb ，將 exit 1 註解起來 1234567891011121314# Load the Rails applicationrequire File.expand_path(&apos;../application&apos;, __FILE__)# Make sure there&apos;s no plugin in vendor/plugin before startingvendor_plugins_dir = File.join(Rails.root, &quot;vendor&quot;, &quot;plugins&quot;)if Dir.glob(File.join(vendor_plugins_dir, &quot;*&quot;)).any? $stderr.puts &quot;Plugins in vendor/plugins (#&#123;vendor_plugins_dir&#125;) are no longer allowed. &quot; + &quot;Please, put your Redmine plugins in the `plugins` directory at the root of your &quot; + &quot;Redmine directory (#&#123;File.join(Rails.root, &quot;plugins&quot;)&#125;)&quot; # exit 1 &gt;&gt; 註解這一行end# Initialize the Rails applicationRails.application.initialize! 最後，在應用程式上面需要建立一個權杖 1$ rake generate_secret_token 開始建立部署 Heroku建立一個 heroku app 空的應用空間，在 heroku 新增 postgresql 1234$ heroku create &lt;&lt;YOUR_APP_NAME&gt;&gt;$ heroku addons:create heroku-postgresql$ heroku run rake db:migrate$ heroku run rake redmine:load_default_data 把程式推上 Heroku123$ git add --all$ git commit -am &quot;init&quot;$ git push heroku master 立刻看看 Redmine用瀏覽器打開或是輸入 heroku open 的話，就會看到 Redmine 已經被裝好了。OH YA.一開始的初始帳號與密碼是 帳號：admin密碼：admin 參考 Redmine@Wiki How to deploy Redmine to Heroku Bundle command not found mac Ruby on Rails入门——macOS 下搭建Ruby Rails Web开发环境 Bundle command not found mac Bundle install is not working Gem::LoadError: Specified ‘postgresql’ for database adapter, but the gem is not loaded. Add gem &#39;pg&#39; to your Gemfile Ruby Sqlite3 installation sqlite3_libversion_number() macOS Sierra Ruby on Rails入门——macOS 下搭建Ruby Rails Web开发环境]]></content>
@@ -275,18 +286,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Node.js 系列學習日誌#28 - REST 路由規則]]></title>
-    <url>%2F2017%2F07%2F26%2Fnodejs%2Fnodejs-28-rest%2F</url>
-    <content type="text"><![CDATA[今天我們使用 express 框架介紹一下 REST 路由規則，REST 是一種 http 協定的網路應用，http 提供了八種方法使用： OPTIONS：這個方法可使伺服器傳回該資源所支援的所有HTTP請求方法。用*來代替資源名稱，向Web伺服器傳送OPTIONS請求，可以測試伺服器功能是否正常運作。 HEAD：與GET方法一樣，都是向伺服器發出指定資源的請求。只不過伺服器將不傳回資源的本文部份。它的好處在於，使用這個方法可以在不必傳輸全部內容的情況下，就可以獲取其中「關於該資源的資訊」（元資訊或稱元資料）。 GET：向指定的資源發出「顯示」請求。使用GET方法應該只用在讀取資料，而不應當被用於產生「副作用」的操作中，例如在Web Application中。其中一個原因是GET可能會被網路蜘蛛等隨意存取。參見安全方法 POST：向指定資源提交資料，請求伺服器進行處理（例如提交表單或者上傳檔案）。資料被包含在請求本文中。這個請求可能會建立新的資源或修改現有資源，或二者皆有。 PUT：向指定資源位置上傳其最新內容。 DELETE：請求伺服器刪除Request-URI所標識的資源。 TRACE：回顯伺服器收到的請求，主要用於測試或診斷。 CONNECT：HTTP/1.1協定中預留給能夠將連線改為管道方式的代理伺服器。通常用於SSL加密伺服器的連結（經由非加密的HTTP代理伺服器） 而 express 網頁框架也針對 http 請求方法設計路由的函數： 通常在設計 rest 時，常用的是 get (取得), post (新增), put (更新), delete (刪除) 參考資料http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE]]></content>
-      <categories>
-        <category>Node.js</category>
-      </categories>
-      <tags>
-        <tag>Node.js</tag>
-        <tag>鐵人賽</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Node.js 系列學習日誌#27 - forever 讓程式保持執行狀態]]></title>
     <url>%2F2017%2F07%2F26%2Fnodejs%2Fnodejs-27-forever%2F</url>
     <content type="text"><![CDATA[程式準備要部署上線時，就會面臨到執行程式的方式，伺服器的管理，是不是能有一個運行 Node.js 程式，並且有個工具處理這件事情。forever 可以作為保持運行的狀態，管理 Node.js 程式服務，在 forever 進程之下，建立子進程，執行啟動與停止的命令相當簡單。更特別的是，經常我們在寫 Node.js 的時候，每次更動的檔案時都需要再重新執行啟動服務的指令 (例如：node app.js)，而這個工具是當每次更新程式的時候，它會自動重新啟動服務，更方便許多了呢！ 這是官方的描述：（https://github.com/nodejitsu/forever） A simple CLI tool for ensuring that a given script runs continuously (i.e. forever). 安裝12// 一般建議加上 -g 將 forever 全域安裝$[sudo] npm install forever -g 當然若你要在某個特定目錄下安裝也是可以 12$cd /path/projects/abc$[sudo] npm install forever 指令的幫助可以透過以下指令列出說明 1$forever —help 顯示所有運行的服務1$forever list 啟動1$forever start app.js 停止操作1$forever stopall 停止某一個程式專案1$forever stop app.js 實作一個簡單運用我們先用 express 這個框架建一個簡單的網站 啟動程式1$forever start app.js forever 列表清單1$forever list 可以看到紫色部分，就是在放 log file 的路徑 關閉進程1$forever stop app.js]]></content>
@@ -297,6 +296,18 @@
         <tag>Node.js</tag>
         <tag>鐵人賽</tag>
         <tag>forever</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Node.js 系列學習日誌#28 - REST 路由規則]]></title>
+    <url>%2F2017%2F07%2F26%2Fnodejs%2Fnodejs-28-rest%2F</url>
+    <content type="text"><![CDATA[今天我們使用 express 框架介紹一下 REST 路由規則，REST 是一種 http 協定的網路應用，http 提供了八種方法使用： OPTIONS：這個方法可使伺服器傳回該資源所支援的所有HTTP請求方法。用*來代替資源名稱，向Web伺服器傳送OPTIONS請求，可以測試伺服器功能是否正常運作。 HEAD：與GET方法一樣，都是向伺服器發出指定資源的請求。只不過伺服器將不傳回資源的本文部份。它的好處在於，使用這個方法可以在不必傳輸全部內容的情況下，就可以獲取其中「關於該資源的資訊」（元資訊或稱元資料）。 GET：向指定的資源發出「顯示」請求。使用GET方法應該只用在讀取資料，而不應當被用於產生「副作用」的操作中，例如在Web Application中。其中一個原因是GET可能會被網路蜘蛛等隨意存取。參見安全方法 POST：向指定資源提交資料，請求伺服器進行處理（例如提交表單或者上傳檔案）。資料被包含在請求本文中。這個請求可能會建立新的資源或修改現有資源，或二者皆有。 PUT：向指定資源位置上傳其最新內容。 DELETE：請求伺服器刪除Request-URI所標識的資源。 TRACE：回顯伺服器收到的請求，主要用於測試或診斷。 CONNECT：HTTP/1.1協定中預留給能夠將連線改為管道方式的代理伺服器。通常用於SSL加密伺服器的連結（經由非加密的HTTP代理伺服器） 而 express 網頁框架也針對 http 請求方法設計路由的函數： 通常在設計 rest 時，常用的是 get (取得), post (新增), put (更新), delete (刪除) 參考資料http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE]]></content>
+      <categories>
+        <category>Node.js</category>
+      </categories>
+      <tags>
+        <tag>Node.js</tag>
+        <tag>鐵人賽</tag>
       </tags>
   </entry>
   <entry>

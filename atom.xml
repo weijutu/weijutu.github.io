@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://weijutu.github.io/"/>
-  <updated>2018-07-26T17:18:14.000Z</updated>
+  <updated>2018-08-02T01:31:23.000Z</updated>
   <id>https://weijutu.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>在 Mac OSX 使用 RVM 升級 Ruby V2.5.1</title>
+    <link href="https://weijutu.github.io/2018/08/02/mac/how-to-upgrade-ruby-on-mac/"/>
+    <id>https://weijutu.github.io/2018/08/02/mac/how-to-upgrade-ruby-on-mac/</id>
+    <published>2018-08-02T01:47:00.000Z</published>
+    <updated>2018-08-02T01:31:23.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>RVM 是一套 Ruby 版本的管理工具，這裡頭包含 Ruby 的版本管理和 Gem 庫管理。本篇裡面使用 RVM 工具進行 Ruby 的升級。</p><h2 id="RVM-Ruby-Version-Manager-安裝"><a href="#RVM-Ruby-Version-Manager-安裝" class="headerlink" title="RVM (Ruby Version Manager) 安裝"></a>RVM (Ruby Version Manager) 安裝</h2><ol><li>RVM安装</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl -L get.rvm.io | bash -s stable</span><br></pre></td></tr></table></figure><ol start="2"><li>是否有完成安裝 RVM </li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rvm -v</span><br></pre></td></tr></table></figure><p>結果顯示</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rvm 1.29.4 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]</span><br></pre></td></tr></table></figure><h2 id="使用-RVM-升級-Ruby"><a href="#使用-RVM-升級-Ruby" class="headerlink" title="使用 RVM 升級 Ruby"></a>使用 RVM 升級 Ruby</h2><ol><li>顯示目前的 Ruby 版本</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ruby -v</span><br></pre></td></tr></table></figure><p>顯示結果</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby 2.0.0p648 (2015-12-16 revision 53162) [universal.x86_64-darwin16]</span><br></pre></td></tr></table></figure><ol start="2"><li>安装 Ruby 2.5.1</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rvm install 2.5.1</span><br></pre></td></tr></table></figure><p>安裝完畢之後，再用 <code>ruby -v</code> 檢查看看，是不是已經換成下面顯示的結果一樣已完成升級。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-darwin16]</span><br></pre></td></tr></table></figure><p>結果</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Linking /usr/local/Cellar/ruby/2.5.1... 3293 symlinks created</span><br></pre></td></tr></table></figure><p>那麼，這樣子就安裝完畢了。</p><p>參考：<br><a href="https://flinhong.com/2017/10/26/upgrade-ruby-on-mac/" target="_blank" rel="noopener">https://flinhong.com/2017/10/26/upgrade-ruby-on-mac/</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;RVM 是一套 Ruby 版本的管理工具，這裡頭包含 Ruby 的版本管理和 Gem 庫管理。本篇裡面使用 RVM 工具進行 Ruby 的升級。&lt;/p&gt;
+&lt;h2 id=&quot;RVM-Ruby-Version-Manager-安裝&quot;&gt;&lt;a href=&quot;#RVM-Ruby-Vers
+      
+    
+    </summary>
+    
+      <category term="Ruby" scheme="https://weijutu.github.io/categories/Ruby/"/>
+    
+    
+      <category term="Ruby" scheme="https://weijutu.github.io/tags/Ruby/"/>
+    
+  </entry>
   
   <entry>
     <title>部署 Redmine 專案管理追蹤系統到 Heroku 平台</title>
@@ -507,28 +533,6 @@
     
     
       <category term="Javascript" scheme="https://weijutu.github.io/tags/Javascript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Mongodb - 在 OS X 上透過手動安裝與設定</title>
-    <link href="https://weijutu.github.io/2017/08/25/mongodb/mongodb-install-on-osx/"/>
-    <id>https://weijutu.github.io/2017/08/25/mongodb/mongodb-install-on-osx/</id>
-    <published>2017-08-25T01:38:54.000Z</published>
-    <updated>2017-08-25T01:45:30.000Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="/images/mongodb/MongoDB-logo.png" alt=""></p><h3 id="下載-MongoDB"><a href="#下載-MongoDB" class="headerlink" title="下載 MongoDB"></a>下載 MongoDB</h3><p>我的環境是用 mac osx 10.9.4，到官方網站 <a href="http://www.mongodb.org/downloads" target="_blank" rel="noopener">http://www.mongodb.org/downloads</a> 找到 Mac OX 64bit 區塊，下載 <code>mongodb-osx-x86_64-2.6.4.tgz</code> 檔案，接著我們用指令進行安裝，解壓縮 tgz 檔案</p><p>解壓縮之後，把它挪到 <code>/usr/local/mongodb</code> 資料夾</p><a id="more"></a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$cd ~/Download</span><br><span class="line">$tar xzf mongodb-osx-x86_64-2.2.3.tgz</span><br><span class="line">$sudo mv mongodb-osx-x86_64-2.2.3 /usr/local/mongodb</span><br></pre></td></tr></table></figure><p><img src="/images/mongodb/1.png" alt=""></p><h3 id="MongoDB-資料"><a href="#MongoDB-資料" class="headerlink" title="MongoDB 資料"></a>MongoDB 資料</h3><p>預設時，資料會寫到 /data/db/ 資料夾，在這裏手動建立儲存位置，去建立 /data/db</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$sudo mkdir -p /data/db</span><br><span class="line">$whoami</span><br><span class="line"> /User/Weiju</span><br><span class="line">$sudo chown /User/Weiju /data/db</span><br></pre></td></tr></table></figure><h3 id="建立-bash-profile-參數設定環境變數"><a href="#建立-bash-profile-參數設定環境變數" class="headerlink" title="建立 ~/.bash_profile 參數設定環境變數"></a>建立 ~/.bash_profile 參數設定環境變數</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$cd ~</span><br><span class="line">$pwd</span><br><span class="line">/User/Weiju</span><br><span class="line">$touch .bash_profile</span><br><span class="line">$vim .bash_profile</span><br></pre></td></tr></table></figure><h3 id="編輯-bash-profile-檔案"><a href="#編輯-bash-profile-檔案" class="headerlink" title="編輯 .bash_profile 檔案"></a>編輯 .bash_profile 檔案</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export MONGO_PATH=/usr/local/mongodb</span><br><span class="line">export PATH=$PATH:$MONGO_PATH/bin</span><br></pre></td></tr></table></figure><h3 id="檢視版本"><a href="#檢視版本" class="headerlink" title="檢視版本"></a>檢視版本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$mongo -version</span><br></pre></td></tr></table></figure><p><img src="/images/mongodb/2.png" alt=""></p><p>預設之下，mongodb 安裝完之後，下一次開機又要重新啟動。在這邊設定一下自動啟動方法：</p><p>找到</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sudo vim /Library/LaunchDaemons/</span><br></pre></td></tr></table></figure><p>新增 mongodb.plist，並且建立以下參數</p><p><img src="/images/mongodb/3.png" alt=""></p><h3 id="載入系統排程"><a href="#載入系統排程" class="headerlink" title="載入系統排程"></a>載入系統排程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$sudo launchctl load /Library/LaunchDaemons/mongodb.plist</span><br><span class="line">ps -ef | grep mongo</span><br></pre></td></tr></table></figure><p><img src="/images/mongodb/4.png" alt=""></p><h3 id="馬上來試看看"><a href="#馬上來試看看" class="headerlink" title="馬上來試看看"></a>馬上來試看看</h3><p>第一種：試試新增一筆資料</p><p><img src="/images/mongodb/5.png" alt=""></p><p>第二種：跑個廻圈＋寫入好了</p><p><img src="/images/mongodb/6.png" alt=""></p><p>good, got it.</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;/images/mongodb/MongoDB-logo.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;h3 id=&quot;下載-MongoDB&quot;&gt;&lt;a href=&quot;#下載-MongoDB&quot; class=&quot;headerlink&quot; title=&quot;下載 MongoDB&quot;&gt;&lt;/a&gt;下載 MongoDB&lt;/h3&gt;&lt;p&gt;我的環境是用 mac osx 10.9.4，到官方網站 &lt;a href=&quot;http://www.mongodb.org/downloads&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://www.mongodb.org/downloads&lt;/a&gt; 找到 Mac OX 64bit 區塊，下載 &lt;code&gt;mongodb-osx-x86_64-2.6.4.tgz&lt;/code&gt; 檔案，接著我們用指令進行安裝，解壓縮 tgz 檔案&lt;/p&gt;
-&lt;p&gt;解壓縮之後，把它挪到 &lt;code&gt;/usr/local/mongodb&lt;/code&gt; 資料夾&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="mongodb" scheme="https://weijutu.github.io/tags/mongodb/"/>
     
   </entry>
   

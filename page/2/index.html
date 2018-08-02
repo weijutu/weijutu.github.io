@@ -319,6 +319,166 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2018/05/04/r/r-05-foreach/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Helen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="噗噗。故我在">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/04/r/r-05-foreach/" itemprop="url">R 學習日誌#5 - 程式的邏輯與迴圈結構</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2018-05-04T20:13:00+08:00">
+                2018-05-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/R/" itemprop="url" rel="index">
+                    <span itemprop="name">R</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/04/r/r-05-foreach/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/04/r/r-05-foreach/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="判斷"><a href="#判斷" class="headerlink" title="判斷"></a>判斷</h2><p>分為邏輯判斷以及條件判斷。</p>
+<h3 id="邏輯判斷"><a href="#邏輯判斷" class="headerlink" title="邏輯判斷"></a>邏輯判斷</h3><p>大於、等於、小於、大於等於、小於等於、不等於</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt; x &lt;- 20</span><br><span class="line">&gt; x &gt; 20</span><br><span class="line">[1] FALSE</span><br><span class="line">&gt; x == 20</span><br><span class="line">[1] TRUE</span><br><span class="line">&gt; x &lt; 20</span><br><span class="line">[1] FALSE</span><br><span class="line">&gt; x &gt;= 20</span><br><span class="line">[1] TRUE</span><br><span class="line">&gt; x &lt;= 20</span><br><span class="line">[1] TRUE</span><br><span class="line">&gt; x != 20</span><br><span class="line">[1] FALSE</span><br></pre></td></tr></table></figure>
+<h3 id="條件判斷"><a href="#條件判斷" class="headerlink" title="條件判斷"></a>條件判斷</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; x &lt;- 20</span><br><span class="line">&gt; if (x == 20) print (&quot;x == 20&quot;)</span><br><span class="line">[1] &quot;x == 20&quot;</span><br><span class="line"></span><br><span class="line">&gt; if (x &gt; 15) print (&quot;x &gt; 15&quot;) else print (&quot;x &lt;= 15 &quot;)</span><br><span class="line">[1] &quot;x &gt; 15&quot;</span><br></pre></td></tr></table></figure>
+<p><code>switch</code> 語句的判斷結構</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt; y &lt;- 3</span><br><span class="line">&gt; switch(y, </span><br><span class="line">+        print(&quot;a&quot;),</span><br><span class="line">+        print(&quot;b&quot;),</span><br><span class="line">+        print(&quot;c&quot;),</span><br><span class="line">+        print(&quot;d&quot;)</span><br><span class="line">+ )</span><br><span class="line">[1] &quot;c&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="函數"><a href="#函數" class="headerlink" title="函數"></a>函數</h2><p>自定義與使用函數，以下這個例子是不用傳入參數，只要呼叫 fnTest() ，就會執行方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; fnTest &lt;- function() &#123;</span><br><span class="line">+   print(&quot;噗噗。故我在&quot;)</span><br><span class="line">+ &#125;</span><br><span class="line">&gt; fnTest()</span><br><span class="line">[1] &quot;噗噗。故我在&quot;</span><br></pre></td></tr></table></figure>
+<p>接著再做一個有放參數的方法，當傳入參數 x 與 y 之後，將由 x 到 y 做加總（當然 x 必須要小於 y 了，這樣才能執行迴圈，否則 x&gt;y 的話，預設會為 0），如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt; fnTest2 &lt;- function(x, y) &#123;</span><br><span class="line">+   sum &lt;- 0</span><br><span class="line">+   if (x &lt; y) &#123;</span><br><span class="line">+     for (i in x:y) &#123;</span><br><span class="line">+       sum &lt;- sum + i</span><br><span class="line">+     &#125;</span><br><span class="line">+   &#125;</span><br><span class="line">+   return(sum);</span><br><span class="line">+ &#125;</span><br><span class="line">&gt; fnTest2(2, 8)</span><br><span class="line">[1] 35</span><br><span class="line">&gt; fnTest2(12, 8)</span><br><span class="line">[1] 0</span><br></pre></td></tr></table></figure>
+<h2 id="迴圈"><a href="#迴圈" class="headerlink" title="迴圈"></a>迴圈</h2><h3 id="for-迴圈"><a href="#for-迴圈" class="headerlink" title="for 迴圈"></a>for 迴圈</h3><p>透過 x:y 產生數值 x 到 y 的向量，再利用迴圈做循環以 <code>cat</code> 函數將字串顯示出來。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt; for (i in 1:5) &#123;</span><br><span class="line">+   cat(&quot;num:&quot;, i, &quot;\n&quot;)</span><br><span class="line">+ &#125;</span><br><span class="line">num: 1 </span><br><span class="line">num: 2 </span><br><span class="line">num: 3 </span><br><span class="line">num: 4 </span><br><span class="line">num: 5</span><br></pre></td></tr></table></figure></p>
+<h3 id="while-迴圈"><a href="#while-迴圈" class="headerlink" title="while 迴圈"></a>while 迴圈</h3><p><code>while</code> 迴圈是除了 <code>for</code> 迴圈另外一種迴圈了，差異在於 <code>while</code> <code>是透過邏輯判斷進行迴圈，for</code> 則是定義了有限的變數或向量物件來作迴圈，以下方的例子就是若判斷超過 10 的話，那麼就會跳出迴圈，跳出之後就不會再做任何的計算，是個相當容易閱讀的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt; x &lt;- 1</span><br><span class="line">&gt; while (x &lt;= 10) &#123;</span><br><span class="line">+   print(x)</span><br><span class="line">+   x &lt;- x + 1</span><br><span class="line">+ &#125;</span><br><span class="line">[1] 1</span><br><span class="line">[1] 2</span><br><span class="line">[1] 3</span><br><span class="line">[1] 4</span><br><span class="line">[1] 5</span><br><span class="line">[1] 6</span><br><span class="line">[1] 7</span><br><span class="line">[1] 8</span><br><span class="line">[1] 9</span><br><span class="line">[1] 10</span><br></pre></td></tr></table></figure>
+<h3 id="repeat"><a href="#repeat" class="headerlink" title="repeat"></a>repeat</h3><p><code>repeat</code> 跟 <code>while</code> 相似，但是 repeat 的特性就是以無限迴圈開始建構的，除非有做判斷，否則都是繼續執行下去。以下的例子就是 y 的變數是從 1 加到 50，而 x 在 51 時跳出 (break) 迴圈。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt; x &lt;- 1</span><br><span class="line">&gt; y &lt;- 0</span><br><span class="line">&gt; repeat &#123;</span><br><span class="line">+   if (x &gt; 50) break;</span><br><span class="line">+   y &lt;- x + y</span><br><span class="line">+   x &lt;- x + 1</span><br><span class="line">+ &#125;</span><br><span class="line">&gt; x</span><br><span class="line">[1] 51</span><br><span class="line">&gt; y</span><br><span class="line">[1] 1275</span><br></pre></td></tr></table></figure>
+<p><code>break</code> 表示跳出迴圈，相反的 <code>next</code> 則是跳出迴圈的某一個循環</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&gt; x &lt;- sample(1: 10)</span><br><span class="line">&gt; x</span><br><span class="line"> [1]  4  7 10  9  2  5  6  8  3  1</span><br><span class="line">&gt; for (i in x) &#123;</span><br><span class="line">+   if (i &gt; 4) &#123;</span><br><span class="line">+     print(&quot;the number &gt; 4&quot;)</span><br><span class="line">+     next;</span><br><span class="line">+   &#125;</span><br><span class="line">+   print(i)</span><br><span class="line">+ &#125;</span><br><span class="line">[1] 4</span><br><span class="line">[1] &quot;the number &gt; 4&quot;</span><br><span class="line">[1] &quot;the number &gt; 4&quot;</span><br><span class="line">[1] &quot;the number &gt; 4&quot;</span><br><span class="line">[1] 2</span><br><span class="line">[1] &quot;the number &gt; 4&quot;</span><br><span class="line">[1] &quot;the number &gt; 4&quot;</span><br><span class="line">[1] &quot;the number &gt; 4&quot;</span><br><span class="line">[1] 3</span><br><span class="line">[1] 1</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2018/05/04/r/r-04-rstudio-shortcut/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1014,161 +1174,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/10/20/r/r-01-start/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Helen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="噗噗。故我在">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/20/r/r-01-start/" itemprop="url">R 學習日誌#1 - 簡介、安裝 RStudio</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">發表於</span>
-              
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-10-20T14:01:00+08:00">
-                2017-10-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分類於</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/R/" itemprop="url" rel="index">
-                    <span itemprop="name">R</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/20/r/r-01-start/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/10/20/r/r-01-start/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>R 語言是 Ross Ihaka, Robert Gentleman 共同開發的程式語言，會取名為 R 是因為他們的名字都是  R 開頭，所以就把這程式語言取名為 R。R 是專門在處理資料處理以及統計分析，語言寫起來相當精簡，外傳說如果沒有學過程式語言的人，又想學習資料分析，那麼就直接學 R，許多複雜的分析任務只需要幾行程式就能夠完成了，如果已經有程式底子或是已經有物件導向的觀念的人 (比如之前有寫過 Java)，那可以學習 Python，但話說回來…這裡是 R 學習日誌，這是 R 語言的第一篇文章，會用一個淺白的文字來介紹喔。</p>
-<h2 id="R-軟體的特色"><a href="#R-軟體的特色" class="headerlink" title="R 軟體的特色"></a>R 軟體的特色</h2><ol>
-<li>基本核心是向量 (vector)、陣列 (array)：在其他程式都需要跑個迴圈才能做到元素的運算，而在 R 軟體裡面只需要幾行就能做到。</li>
-<li>計算模組是函數 (function)：可以善用貢獻者寫好的套件 (packages) 或者自己寫個套件也可以。</li>
-<li>繪圖功能：2D 還是 3D 或是直向圖都可以做到，而且就幾行的程式就能得到想要的結果。</li>
-<li>變數型態：有很多其他程式語言沒有的，包含 list, factor, ordered factor, data frame, ts，也可以自建資料型態</li>
-</ol>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/20/r/r-01-start/#more" rel="contents">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1219,7 +1224,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
@@ -1230,7 +1235,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">分類</span>
               </a>
             </div>
@@ -1241,7 +1246,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-count">48</span>
                 <span class="site-state-item-name">標籤</span>
               </a>
             </div>
