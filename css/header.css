@@ -51,7 +51,6 @@
 .header-toolbar-left {
   margin-right: -5px;
   background-color: #eff3f6;
-  background-image: -webkit-linear-gradient(270deg, #fafbfc 0%, #eff3f6 90%);
   background-image: linear-gradient(-180deg, #fafbfc 0%, #eff3f6 90%);
   background-repeat: repeat-x;
   background-position: -1px -1px;
@@ -59,7 +58,6 @@
 }
 .header-toolbar-left:hover {
   background-color: #e6ebf1;
-  background-image: -webkit-linear-gradient(270deg, #f0f3f6 0%, #e6ebf1 90%);
   background-image: linear-gradient(-180deg, #f0f3f6 0%, #e6ebf1 90%);
   background-position: 0 -0.5em;
 }

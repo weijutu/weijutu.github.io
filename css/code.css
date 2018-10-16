@@ -23,7 +23,8 @@ pre {
   margin-top: 0;
   margin-bottom: 0;
   font-style: normal;
-  font-variant-ligatures: normal;
+  -webkit-font-variant-ligatures: normal;
+          font-variant-ligatures: normal;
   font-variant-caps: normal;
   font-variant-numeric: normal;
   font-weight: normal;
