@@ -2,6 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://weijutu.github.io/books/index.html</loc>
+    
+    <lastmod>2018-10-16T09:24:30.217Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/links/index.html</loc>
+    
+    <lastmod>2018-10-16T09:20:09.060Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/tags/index.html</loc>
+    
+    <lastmod>2018-10-16T09:19:06.453Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/categories/index.html</loc>
+    
+    <lastmod>2018-10-16T09:18:40.764Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2017/08/29/books/books-001-9789862291597-ghost/</loc>
+    
+    <lastmod>2018-10-16T09:18:27.157Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://weijutu.github.io/2017/07/24/nodejs/nodejs-07-mysql-start/</loc>
     
     <lastmod>2018-10-16T08:14:04.920Z</lastmod>
@@ -68,13 +103,6 @@
     <loc>https://weijutu.github.io/2017/09/09/books/books-002-rich-dad-and-poor-dad/</loc>
     
     <lastmod>2018-10-16T08:13:38.230Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://weijutu.github.io/2017/08/29/books/books-001-9789862291597-ghost/</loc>
-    
-    <lastmod>2018-10-16T08:13:30.568Z</lastmod>
     
   </url>
   
@@ -418,20 +446,6 @@
     <loc>https://weijutu.github.io/2017/07/24/nodejs/nodejs-08-mysql-crud-create/</loc>
     
     <lastmod>2017-07-25T11:01:35.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://weijutu.github.io/categories/index.html</loc>
-    
-    <lastmod>2017-07-24T01:04:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://weijutu.github.io/tags/index.html</loc>
-    
-    <lastmod>2017-07-24T01:04:20.000Z</lastmod>
     
   </url>
   
