@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[在 Mac OSX 使用 RVM 升級 Ruby V2.5.1]]></title>
+    <url>%2F2018%2F08%2F02%2Fmac%2Fhow-to-upgrade-ruby-on-mac%2F</url>
+    <content type="text"><![CDATA[RVM 是一套 Ruby 版本的管理工具，這裡頭包含 Ruby 的版本管理和 Gem 庫管理。本篇裡面使用 RVM 工具進行 Ruby 的升級。 RVM (Ruby Version Manager) 安裝 RVM安装 1$ curl -L get.rvm.io | bash -s stable 是否有完成安裝 RVM 1$ rvm -v 結果顯示 1rvm 1.29.4 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io] 使用 RVM 升級 Ruby 顯示目前的 Ruby 版本 1$ ruby -v 顯示結果 1ruby 2.0.0p648 (2015-12-16 revision 53162) [universal.x86_64-darwin16] 安装 Ruby 2.5.1 1rvm install 2.5.1 安裝完畢之後，再用 ruby -v 檢查看看，是不是已經換成下面顯示的結果一樣已完成升級。 1ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-darwin16] 結果 1Linking /usr/local/Cellar/ruby/2.5.1... 3293 symlinks created 那麼，這樣子就安裝完畢了。 參考：https://flinhong.com/2017/10/26/upgrade-ruby-on-mac/]]></content>
+      <categories>
+        <category>Ruby</category>
+      </categories>
+      <tags>
+        <tag>Ruby</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Slate - 為你打造漂亮的 API 文件]]></title>
     <url>%2F2018%2F08%2F02%2Ftools%2Fslate-api-document%2F</url>
     <content type="text"><![CDATA[這陣子在找一種工具可以將 Restful API 彙整起來能用網頁的方式執行讀取，上網找了不少工具，例如下方三套是常見的 API 文檔工具，在本篇則是介紹 Slate。 swagger：相當標準的 API 文件化工具，從設計、建置、撰寫、測試、各式各樣的技巧環環包圍。 apidoc： 這套也不錯，寫的方式是將所有 API 的註記放在原始碼的方法(function)的上方，但小缺點也在這了，如果參數值過多、回傳值也好幾行，這樣就一直在滑鼠捲軸了。不過資料不多的話，是滿適合的。 slate : 輕量化的寫法，允許你使用 markdown 撰寫 API 文件，並且是 ruby 語法執行 bundle 套件安裝，打包之後預設是用靜態的 html ，甚至你可以推上 github pages 進行託管。 先決條件務必要有 Ruby 1.9.2 或更高的版本。並且還需要 bundler gem，可以透過命令來做安裝 gem install bundler，安裝或升級可以參考以下連結。 安裝 Ruby 升級 Ruby 安裝 Slate先進入到 slate github https://github.com/lord/slate 首先按右上角的 Fork slate 的 repo fork 的 repo 已經複製一份到你自己的 repo 了https://github.com/&lt;&lt;YOURUSERNAME&gt;&gt;/slate，將它 clone 下來到你的本地端的資料夾 git clone https://github.com/weijutu/slate.git 進入 slate 資料夾 cd slate 初始化 Slate 將套件都裝起來，使用以下的指令進行安裝 1$ bundle install 過程中就會進行安裝套件 12345678910Fetching gem metadata from https://rubygems.org/............Fetching concurrent-ruby 1.0.5Installing concurrent-ruby 1.0.5Fetching i18n 0.7.0Installing i18n 0.7.0Fetching minitest 5.10.1Installing minitest 5.10.1Fetching thread_safe 0.3.5Installing thread_safe 0.3.5Fetching tzinfo 1.2.2 接著將 slate 執行起來 1$ bundle exec middleman server 執行之後，就可以打開瀏覽器開啟 http://localhost:4567，這樣一下子就開了一個全新的 slate api 靜態文件!! 12345 ~/Projects/slate $ bundle exec middleman server== The Middleman is loading== View your site at &quot;http://localhost:4567&quot;== Inspect your site configuration at &quot;http://localhost:4567/__middleman&quot; 是不是看起來很不賴呢？ 開始寫 API 文件大致上是 markdown 寫法的，若有不了解 markdown 語言的人，可以參考這篇文章 Markdown 語法說明。 標題123# Level 1 Header## Level 2 Header### Level 3 Header 段落文字1This is some paragraph text. Exciting, no? 程式碼範本1234const kittn = require('kittn');let api = kittn.authorize('meowmeowmeow');let max = api.kittens.delete(2); 語法註解1&gt; This is a code annotation. 表格1234Table Header 1 | Table Header 2 | Table Header 3-------------- | -------------- | --------------Row 1 col 1 | Row 1 col 2 | Row 1 col 3Row 2 col 1 | Row 2 col 2 | Row 2 col 3 文字格式1This text is **bold**, this is *italic*, this is an `inline code block`. 列表12345671. This2. Is3. An* This* Is* A 連結1This is an [internal link](#error-code-definitions) 產生靜態網頁修改完之後，我們將他產生靜態網站，可以使用以下的命令 1$ bundle exec middleman build --clean 部署過程中 1234567891011121314create build/stylesheets/print.csscreate build/stylesheets/screen.csscreate build/images/navbar.pngcreate build/images/logo.pngcreate build/fonts/slate.woffcreate build/fonts/slate.woff2create build/fonts/slate.ttfcreate build/fonts/slate.eotcreate build/fonts/slate.svgcreate build/index.html.tmpcreate build/javascripts/all_nosearch.jscreate build/javascripts/all.jscreate build/index.htmlProject built successfully. 你會發現會新增了一個 build 資料夾，裡面包含了許多被編譯出來的檔案 打開 index.html 就可以看到建置的結果囉。 提供一個實際範本在 /slate/source/index.html.md 檔案做修改在這裡提供一個實際範本可以做點參考。 語法範本在這裡：範例 顯示如下圖： 參考 https://github.com/lord/slate https://github.com/lord/slate/wiki https://www.sitepoint.com/writing-api-documentation-slate/]]></content>
@@ -10,17 +21,6 @@
       <tags>
         <tag>Ruby</tag>
         <tag>API</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[在 Mac OSX 使用 RVM 升級 Ruby V2.5.1]]></title>
-    <url>%2F2018%2F08%2F02%2Fmac%2Fhow-to-upgrade-ruby-on-mac%2F</url>
-    <content type="text"><![CDATA[RVM 是一套 Ruby 版本的管理工具，這裡頭包含 Ruby 的版本管理和 Gem 庫管理。本篇裡面使用 RVM 工具進行 Ruby 的升級。 RVM (Ruby Version Manager) 安裝 RVM安装 1$ curl -L get.rvm.io | bash -s stable 是否有完成安裝 RVM 1$ rvm -v 結果顯示 1rvm 1.29.4 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io] 使用 RVM 升級 Ruby 顯示目前的 Ruby 版本 1$ ruby -v 顯示結果 1ruby 2.0.0p648 (2015-12-16 revision 53162) [universal.x86_64-darwin16] 安装 Ruby 2.5.1 1rvm install 2.5.1 安裝完畢之後，再用 ruby -v 檢查看看，是不是已經換成下面顯示的結果一樣已完成升級。 1ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-darwin16] 結果 1Linking /usr/local/Cellar/ruby/2.5.1... 3293 symlinks created 那麼，這樣子就安裝完畢了。 參考：https://flinhong.com/2017/10/26/upgrade-ruby-on-mac/]]></content>
-      <categories>
-        <category>Ruby</category>
-      </categories>
-      <tags>
-        <tag>Ruby</tag>
       </tags>
   </entry>
   <entry>
@@ -54,9 +54,9 @@
         <category>網站</category>
       </categories>
       <tags>
-        <tag>Vue</tag>
         <tag>Apache</tag>
         <tag>Mac</tag>
+        <tag>Vue</tag>
       </tags>
   </entry>
   <entry>
