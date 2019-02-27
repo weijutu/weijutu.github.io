@@ -5,11 +5,11 @@
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-TW">
-<head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<html class="theme-next pisces use-motion" lang="zh-tw">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
@@ -19,8 +19,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -38,7 +38,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -46,25 +46,43 @@
   
   
   
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
   
 
   
     
     
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -72,23 +90,23 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Node.js,鐵人賽,express,mysql,ejs," />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="噗噗。故我在" type="application/atom+xml" />
+  <meta name="keywords" content="Node.js,鐵人賽,express,mysql,ejs,">
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+  <link rel="alternate" href="/atom.xml" title="噗噗。故我在" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
 
 
 
@@ -102,7 +120,7 @@
 <meta property="og:url" content="https://weijutu.github.io/2017/07/24/nodejs/nodejs-21-express-register/index.html">
 <meta property="og:site_name" content="噗噗。故我在">
 <meta property="og:description" content="本篇將介紹 node.js 系列學習日誌以來的一些整合應用，預計來做註冊、登入、登出這類的動態程式，在這裏首先介紹註冊的部分，本著  node.js express web framework 的 mvc 架構，實際的應用，我們會預想著註冊時會用到哪些、資料庫要有哪些規劃安排。 請建立好 express web framework 框架，指令輸入 1$express -e nodejs-auth">
-<meta property="og:locale" content="zh-TW">
+<meta property="og:locale" content="zh-tw">
 <meta property="og:image" content="https://weijutu.github.io/images/nodejs/83.png">
 <meta property="og:image" content="https://weijutu.github.io/images/nodejs/84.png">
 <meta property="og:image" content="https://weijutu.github.io/images/nodejs/85.png">
@@ -124,7 +142,7 @@
     motion: true,
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -138,7 +156,7 @@
 
 
 
-  <link rel="canonical" href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-21-express-register/"/>
+  <link rel="canonical" href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-21-express-register/">
 
 
 
@@ -171,7 +189,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-TW">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
 
   
   
@@ -187,7 +205,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">噗噗。故我在</span>
         <span class="logo-line-after"><i></i></span>
@@ -217,9 +235,9 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
-            Home
+            首頁
           </a>
         </li>
       
@@ -227,9 +245,9 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
-            Categories
+            分類
           </a>
         </li>
       
@@ -237,9 +255,9 @@
         <li class="menu-item menu-item-about">
           <a href="/about/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
-            About
+            關於
           </a>
         </li>
       
@@ -247,9 +265,9 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
-            Archives
+            歸檔
           </a>
         </li>
       
@@ -257,9 +275,9 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
-            Tags
+            標籤
           </a>
         </li>
       
@@ -270,9 +288,9 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
-            Search
+            檢索
           </a>
         </li>
       
@@ -291,9 +309,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="Searching..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -330,7 +346,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Helen">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/uploads/avatar.png">
     </span>
 
@@ -353,9 +369,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">發表於</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-24T00:21:00+08:00">
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-07-24T00:21:00+08:00">
                 2017-07-24
               </time>
             
@@ -366,7 +382,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -374,7 +390,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分類於</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -397,8 +413,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/07/24/nodejs/nodejs-21-express-register/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/07/24/nodejs/nodejs-21-express-register/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/07/24/nodejs/nodejs-21-express-register/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -423,7 +438,7 @@
       
 
       
-        <p><img src="/images/nodejs/83.png" alt=""></p>
+        <p><img src="/images/nodejs/83.png" alt></p>
 <p>本篇將介紹 node.js 系列學習日誌以來的一些整合應用，預計來做註冊、登入、登出這類的動態程式，在這裏首先介紹註冊的部分，本著  node.js express web framework 的 mvc 架構，實際的應用，我們會預想著註冊時會用到哪些、資料庫要有哪些規劃安排。</p>
 <p>請建立好 express web framework 框架，指令輸入</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$express -e nodejs-auth</span><br></pre></td></tr></table></figure>
@@ -432,7 +447,7 @@
 <p>因為我們要使用  mysql 作為儲存的資料庫，因此建立一個  models/user.js ，其宣告資料庫如下</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var mysql = require(&apos;mysql&apos;);</span><br><span class="line">var DB_NAME = &apos;demo_nodejs&apos;;</span><br><span class="line"></span><br><span class="line">var pool  = mysql.createPool(&#123;</span><br><span class="line">    host     : &apos;localhost&apos;,</span><br><span class="line">    user     : &apos;nodejs&apos;,</span><br><span class="line">    password : &apos;nodejs&apos;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>定義資料庫欄位 id, UserName, UserPass ，其中 id 使自動增加號碼</p>
-<p><img src="/images/nodejs/84.png" alt=""></p>
+<p><img src="/images/nodejs/84.png" alt></p>
 <p>因為註冊的時候只需要填寫帳號、密碼，因此在 models/user.js 的地方先建立一個 User 物件，定義兩個 username, userpass 屬性，如下</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function User(user)&#123;</span><br><span class="line">    this.username = user.username;</span><br><span class="line">    this.userpass = user.userpass;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>建立好 user 的 models 之後，開始要開發 routes 的部分，請先建立 <code>/routes/reg.js</code> 檔案，將以下程式碼填入：</p>
@@ -441,7 +456,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">User.prototype.save = function save(callback) &#123;</span><br><span class="line">        var user = &#123;</span><br><span class="line">            username: this.username,</span><br><span class="line">            userpass: this.userpass</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        var insertUser_Sql = &quot;INSERT INTO userinfo(id, username, userpass) VALUES(0,?,?)&quot;;</span><br><span class="line"></span><br><span class="line">        connection.query(insertUser_Sql, [user.username, user.userpass], function (err,result) &#123;</span><br><span class="line">            if (err) &#123;</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            connection.release();</span><br><span class="line">            callback(err,result);                    </span><br><span class="line">        &#125;);      </span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
 <p>在章節的最前面的 UI 佈局</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;form class=&quot;form-signin&quot; role=&quot;form&quot; method=&quot;post&quot;&gt;</span><br><span class="line">    &lt;h2 class=&quot;form-signin-heading&quot;&gt;註冊&lt;/h2&gt;</span><br><span class="line"></span><br><span class="line">    &lt;input id=&quot;txtUserName&quot; name=&quot;txtUserName&quot; type=&quot;text&quot; class=&quot;form-control&quot; placeholder=&quot;帳號&quot; required /&gt;</span><br><span class="line">    &lt;input id=&quot;txtUserPwd&quot; name=&quot;txtUserPwd&quot; type=&quot;password&quot; class=&quot;form-control&quot; placeholder=&quot;密碼&quot; required/&gt;</span><br><span class="line">    &lt;input id=&quot;txtUserRePwd&quot;  name=&quot;txtUserRePwd&quot; type=&quot;password&quot; class=&quot;form-control&quot; placeholder=&quot;再輸入密碼&quot; required/&gt;  </span><br><span class="line"></span><br><span class="line">    &lt;button id=&quot;btnSub&quot; class=&quot;btn btn-lg btn-primary&quot; type=&quot;submit&quot;&gt;註冊&lt;/button&gt;</span><br><span class="line">   &lt;a class=&quot;btn btn-link&quot; href=&quot;/login&quot; role=&quot;button&quot;&gt;登入&lt;/a&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/85.png" alt=""></p>
+<p><img src="/images/nodejs/85.png" alt></p>
 <p>下一篇將介紹註冊完成後的登入操作。</p>
 <h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="http://stackoverflow.com/questions/22994589/nodejs-express-routes-and-mysql" target="_blank" rel="noopener">http://stackoverflow.com/questions/22994589/nodejs-express-routes-and-mysql</a></p>
 
@@ -523,7 +538,7 @@
       
         <!-- Go to www.addthis.com/dashboard to customize your tools -->
 <div class="addthis_inline_share_toolbox">
-  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b5bd46496d2854b" async = "async" ></script>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b5bd46496d2854b" async="async"></script>
 </div>
 
       
@@ -568,20 +583,18 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Table of Contents
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            Overview
+            本站概覽
           </li>
         </ul>
       
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.png"
-               alt="Helen" />
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="Helen">
           <p class="site-author-name" itemprop="name">Helen</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -593,7 +606,7 @@
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
                 <span class="site-state-item-count">59</span>
-                <span class="site-state-item-name">posts</span>
+                <span class="site-state-item-name">文章</span>
               </a>
             </div>
           
@@ -603,8 +616,8 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">16</span>
-                <span class="site-state-item-name">categories</span>
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">分類</span>
               </a>
             </div>
           
@@ -614,8 +627,8 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">50</span>
-                <span class="site-state-item-name">tags</span>
+                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-name">標籤</span>
               </a>
             </div>
           
@@ -687,7 +700,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <div class="copyright">
   
   &copy;  2017 - 
   <span itemprop="copyrightYear">2019</span>
@@ -702,11 +715,11 @@
 
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 強力驅動
 </div>
 
 <div class="theme-info">
-  Theme -
+  主題 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Pisces
   </a>

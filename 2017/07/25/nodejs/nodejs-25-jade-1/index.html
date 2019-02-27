@@ -5,11 +5,11 @@
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-TW">
-<head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<html class="theme-next pisces use-motion" lang="zh-tw">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
@@ -19,8 +19,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -38,7 +38,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -46,25 +46,43 @@
   
   
   
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
   
 
   
     
     
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -72,23 +90,23 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Node.js,鐵人賽,jade," />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="噗噗。故我在" type="application/atom+xml" />
+  <meta name="keywords" content="Node.js,鐵人賽,jade,">
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+  <link rel="alternate" href="/atom.xml" title="噗噗。故我在" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
 
 
 
@@ -102,7 +120,7 @@
 <meta property="og:url" content="https://weijutu.github.io/2017/07/25/nodejs/nodejs-25-jade-1/index.html">
 <meta property="og:site_name" content="噗噗。故我在">
 <meta property="og:description" content="Node.js 開發網頁它有許多的樣板引擎可以使用，例如常見的 Jade, EJS。樣板引擎也可以稱為樣板處理器 （Template Processor）或者叫過濾器 （Filter）。其他的語言也有個別使用的樣板引擎，像是 PHP 的 Smarty、 Ruby 的 ERB，本章節會以 jade 作為基礎的介紹如何透過樣板引擎實作 Node.js 網頁。 官方網站：http://jade-lan">
-<meta property="og:locale" content="zh-TW">
+<meta property="og:locale" content="zh-tw">
 <meta property="og:image" content="https://weijutu.github.io/images/nodejs/107.png">
 <meta property="og:image" content="https://weijutu.github.io/images/nodejs/108.png">
 <meta property="og:image" content="https://weijutu.github.io/images/nodejs/109.png">
@@ -127,7 +145,7 @@
     motion: true,
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -141,7 +159,7 @@
 
 
 
-  <link rel="canonical" href="https://weijutu.github.io/2017/07/25/nodejs/nodejs-25-jade-1/"/>
+  <link rel="canonical" href="https://weijutu.github.io/2017/07/25/nodejs/nodejs-25-jade-1/">
 
 
 
@@ -174,7 +192,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-TW">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
 
   
   
@@ -190,7 +208,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">噗噗。故我在</span>
         <span class="logo-line-after"><i></i></span>
@@ -220,9 +238,9 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
-            Home
+            首頁
           </a>
         </li>
       
@@ -230,9 +248,9 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
-            Categories
+            分類
           </a>
         </li>
       
@@ -240,9 +258,9 @@
         <li class="menu-item menu-item-about">
           <a href="/about/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
-            About
+            關於
           </a>
         </li>
       
@@ -250,9 +268,9 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
-            Archives
+            歸檔
           </a>
         </li>
       
@@ -260,9 +278,9 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
-            Tags
+            標籤
           </a>
         </li>
       
@@ -273,9 +291,9 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
-            Search
+            檢索
           </a>
         </li>
       
@@ -294,9 +312,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="Searching..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -333,7 +349,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Helen">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/uploads/avatar.png">
     </span>
 
@@ -356,9 +372,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">發表於</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-25T00:25:00+08:00">
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-07-25T00:25:00+08:00">
                 2017-07-25
               </time>
             
@@ -369,7 +385,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -377,7 +393,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分類於</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -400,8 +416,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/07/25/nodejs/nodejs-25-jade-1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/07/25/nodejs/nodejs-25-jade-1/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/07/25/nodejs/nodejs-25-jade-1/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -426,7 +441,7 @@
       
 
       
-        <p><img src="/images/nodejs/107.png" alt=""></p>
+        <p><img src="/images/nodejs/107.png" alt></p>
 <p>Node.js 開發網頁它有許多的樣板引擎可以使用，例如常見的 Jade, EJS。樣板引擎也可以稱為樣板處理器 （Template Processor）或者叫過濾器 （Filter）。其他的語言也有個別使用的樣板引擎，像是 PHP 的 Smarty、 Ruby 的 ERB，本章節會以 jade 作為基礎的介紹如何透過樣板引擎實作 Node.js 網頁。</p>
 <p>官方網站：<a href="http://jade-lang.com/" target="_blank" rel="noopener">http://jade-lang.com/</a></p>
 <p>今天會介紹的內容有</p>
@@ -443,7 +458,7 @@
 </li>
 </ul>
 <p>接下來您可以使用：<a href="http://codepen.io/" target="_blank" rel="noopener">http://codepen.io/</a> 作為線上編輯做以下實作的測試編輯器</p>
-<p><img src="/images/nodejs/108.png" alt=""></p>
+<p><img src="/images/nodejs/108.png" alt></p>
 <p>首先，我們先來比較一下 HTML  跟 Jade 的表示方式</p>
 <p>===== HTML =====</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;wrap&quot;&gt;</span><br><span class="line">  &lt;h1&gt;Lorem Ipsum&lt;/h1&gt;</span><br><span class="line">  &lt;p&gt;Contrary to popular belief, Lorem Ipsum is not simply random text. &lt;/p&gt;</span><br><span class="line"> &lt;a href=“http://www.google.com&quot;&gt;Google&lt;/a&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
@@ -489,13 +504,13 @@
 <p>方法三：也可以用 javascript 的判斷控制屬性資料</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- var isFemale = true</span><br><span class="line">input(type=&apos;text&apos; value=isFemale ? &apos;Female&apos; : &apos;Male&apos;)</span><br></pre></td></tr></table></figure>
 <h3 id="Jade-輸出資料"><a href="#Jade-輸出資料" class="headerlink" title="Jade 輸出資料"></a>Jade 輸出資料</h3><h4 id="迴圈"><a href="#迴圈" class="headerlink" title="迴圈"></a>迴圈</h4><p>試著寫迴圈</p>
-<p><img src="/images/nodejs/109.png" alt=""></p>
+<p><img src="/images/nodejs/109.png" alt></p>
 <p>輸出結果</p>
-<p><img src="/images/nodejs/110.png" alt=""></p>
+<p><img src="/images/nodejs/110.png" alt></p>
 <h4 id="條件"><a href="#條件" class="headerlink" title="條件"></a>條件</h4><p>條件是指當判斷為真或否時，各別出現不同的結果，什麼意思呢？直接看範例好了</p>
-<p><img src="/images/nodejs/111.png" alt=""></p>
+<p><img src="/images/nodejs/111.png" alt></p>
 <p>結果</p>
-<p><img src="/images/nodejs/112.png" alt=""></p>
+<p><img src="/images/nodejs/112.png" alt></p>
 <p>Jade 就先寫到這裡，下集待續..</p>
 <h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ol>
 <li><a href="http://jade-lang.com/" target="_blank" rel="noopener">http://jade-lang.com/</a></li>
@@ -578,7 +593,7 @@
       
         <!-- Go to www.addthis.com/dashboard to customize your tools -->
 <div class="addthis_inline_share_toolbox">
-  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b5bd46496d2854b" async = "async" ></script>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b5bd46496d2854b" async="async"></script>
 </div>
 
       
@@ -623,20 +638,18 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Table of Contents
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            Overview
+            本站概覽
           </li>
         </ul>
       
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.png"
-               alt="Helen" />
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="Helen">
           <p class="site-author-name" itemprop="name">Helen</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -648,7 +661,7 @@
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
                 <span class="site-state-item-count">59</span>
-                <span class="site-state-item-name">posts</span>
+                <span class="site-state-item-name">文章</span>
               </a>
             </div>
           
@@ -658,8 +671,8 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">16</span>
-                <span class="site-state-item-name">categories</span>
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">分類</span>
               </a>
             </div>
           
@@ -669,8 +682,8 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">50</span>
-                <span class="site-state-item-name">tags</span>
+                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-name">標籤</span>
               </a>
             </div>
           
@@ -742,7 +755,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <div class="copyright">
   
   &copy;  2017 - 
   <span itemprop="copyrightYear">2019</span>
@@ -757,11 +770,11 @@
 
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 強力驅動
 </div>
 
 <div class="theme-info">
-  Theme -
+  主題 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Pisces
   </a>

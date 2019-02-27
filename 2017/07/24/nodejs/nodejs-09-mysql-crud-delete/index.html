@@ -5,11 +5,11 @@
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-TW">
-<head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<html class="theme-next pisces use-motion" lang="zh-tw">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
@@ -19,8 +19,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -38,7 +38,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -46,25 +46,43 @@
   
   
   
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
   
 
   
     
     
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -72,23 +90,23 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Node.js,鐵人賽,MySQL," />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="噗噗。故我在" type="application/atom+xml" />
+  <meta name="keywords" content="Node.js,鐵人賽,MySQL,">
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+  <link rel="alternate" href="/atom.xml" title="噗噗。故我在" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
 
 
 
@@ -102,7 +120,7 @@
 <meta property="og:url" content="https://weijutu.github.io/2017/07/24/nodejs/nodejs-09-mysql-crud-delete/index.html">
 <meta property="og:site_name" content="噗噗。故我在">
 <meta property="og:description" content="前幾篇完成了 Create, Read, Update, 本篇將介紹 Delete 的操作，一樣的我們在使用者列表上面，每筆資料的功能加入『刪除』按鈕，在頁面上表格列出的語法是： 12345678910111213141516171819202122mixin users(users)  h1= title  fieldset   legend 以下是從 mysql 取出的使用者列表   a(hr">
-<meta property="og:locale" content="zh-TW">
+<meta property="og:locale" content="zh-tw">
 <meta property="og:image" content="https://weijutu.github.io/images/nodejs/41.png">
 <meta property="og:image" content="https://weijutu.github.io/images/nodejs/42.png">
 <meta property="og:image" content="https://weijutu.github.io/images/nodejs/43.png">
@@ -124,7 +142,7 @@
     motion: true,
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -138,7 +156,7 @@
 
 
 
-  <link rel="canonical" href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-09-mysql-crud-delete/"/>
+  <link rel="canonical" href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-09-mysql-crud-delete/">
 
 
 
@@ -171,7 +189,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-TW">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
 
   
   
@@ -187,7 +205,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">噗噗。故我在</span>
         <span class="logo-line-after"><i></i></span>
@@ -217,9 +235,9 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
-            Home
+            首頁
           </a>
         </li>
       
@@ -227,9 +245,9 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
-            Categories
+            分類
           </a>
         </li>
       
@@ -237,9 +255,9 @@
         <li class="menu-item menu-item-about">
           <a href="/about/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
-            About
+            關於
           </a>
         </li>
       
@@ -247,9 +265,9 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
-            Archives
+            歸檔
           </a>
         </li>
       
@@ -257,9 +275,9 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
-            Tags
+            標籤
           </a>
         </li>
       
@@ -270,9 +288,9 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
-            Search
+            檢索
           </a>
         </li>
       
@@ -291,9 +309,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="Searching..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -330,7 +346,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Helen">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/uploads/avatar.png">
     </span>
 
@@ -353,9 +369,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">發表於</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-24T00:09:00+08:00">
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-07-24T00:09:00+08:00">
                 2017-07-24
               </time>
             
@@ -366,7 +382,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -374,7 +390,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分類於</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -397,8 +413,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/07/24/nodejs/nodejs-09-mysql-crud-delete/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/07/24/nodejs/nodejs-09-mysql-crud-delete/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/07/24/nodejs/nodejs-09-mysql-crud-delete/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -428,7 +443,7 @@
 <p>刪除部分的語法就是在按鈕點選的時候，連到 /delete ，後面我們指定資料使用者的編號作為參數  /#{user.id}</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a(href='/delete/#&#123;user.id&#125;', class='btn btn-danger') 刪除</span><br></pre></td></tr></table></figure>
 <p>佈局如下：</p>
-<p><img src="/images/nodejs/41.png" alt=""></p>
+<p><img src="/images/nodejs/41.png" alt></p>
 <p>開啓 app.js 補上 delete 的操作</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/delete/:id'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    pool.getConnection(<span class="function"><span class="keyword">function</span>(<span class="params">err, connection</span>) </span>&#123;</span><br><span class="line">        connection.query(<span class="string">'delete from users  where id = ?'</span>, [req.params.id], <span class="function"><span class="keyword">function</span>(<span class="params">err, fields</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (err)</span><br><span class="line">                <span class="keyword">throw</span> err;</span><br><span class="line">        &#125;);</span><br><span class="line">        connection.query(<span class="string">'SELECT * from users'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, rows, fields</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (err)</span><br><span class="line">                <span class="keyword">throw</span> err;</span><br><span class="line">            res.render(<span class="string">'user'</span>, &#123;</span><br><span class="line">                title : <span class="string">'使用者列表'</span>,</span><br><span class="line">                user : rows</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">        connection.release();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>其中在程式的部分，在點選按鈕 /delete 的時候，後面接 :id 也就是預定在網址列上面取得使用者編號的參數，然後再此刪除的部分以以下語法呈現：</p>
@@ -436,9 +451,9 @@
 <p>在 connection.query 方法裡的第二參數  [req.params.id]帶入網址列的參數，最後刪除完成後，再度顯示取得最新的使用者列表</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">connection.query(<span class="string">'SELECT * from users'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, rows, fields</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (err)</span><br><span class="line">        <span class="keyword">throw</span> err;</span><br><span class="line">    res.render(<span class="string">'user'</span>, &#123;</span><br><span class="line">        title : <span class="string">'使用者列表'</span>,</span><br><span class="line">        user : rows</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>在這邊我們刪掉第四筆資料</p>
-<p><img src="/images/nodejs/42.png" alt=""></p>
+<p><img src="/images/nodejs/42.png" alt></p>
 <p>結果如下：</p>
-<p><img src="/images/nodejs/43.png" alt=""></p>
+<p><img src="/images/nodejs/43.png" alt></p>
 <p>我們終於完成了 Create, Read, Update ,Delete 的 mysql 存取操作 ，完整的程式歡迎到這裡 fork 囉</p>
 <p><a href="https://github.com/weijutu/nodejs-mysql-crud" target="_blank" rel="noopener">https://github.com/weijutu/nodejs-mysql-crud</a></p>
 <p>那麼資料庫存取就先到這裡，接下來還有更多應用，敬請期待  ：）</p>
@@ -517,7 +532,7 @@
       
         <!-- Go to www.addthis.com/dashboard to customize your tools -->
 <div class="addthis_inline_share_toolbox">
-  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b5bd46496d2854b" async = "async" ></script>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b5bd46496d2854b" async="async"></script>
 </div>
 
       
@@ -564,9 +579,7 @@
 
       <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.png"
-               alt="Helen" />
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="Helen">
           <p class="site-author-name" itemprop="name">Helen</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -578,7 +591,7 @@
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
                 <span class="site-state-item-count">59</span>
-                <span class="site-state-item-name">posts</span>
+                <span class="site-state-item-name">文章</span>
               </a>
             </div>
           
@@ -588,8 +601,8 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">16</span>
-                <span class="site-state-item-name">categories</span>
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">分類</span>
               </a>
             </div>
           
@@ -599,8 +612,8 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">50</span>
-                <span class="site-state-item-name">tags</span>
+                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-name">標籤</span>
               </a>
             </div>
           
@@ -656,7 +669,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <div class="copyright">
   
   &copy;  2017 - 
   <span itemprop="copyrightYear">2019</span>
@@ -671,11 +684,11 @@
 
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 強力驅動
 </div>
 
 <div class="theme-info">
-  Theme -
+  主題 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Pisces
   </a>

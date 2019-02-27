@@ -5,11 +5,11 @@
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-TW">
-<head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<html class="theme-next pisces use-motion" lang="zh-tw">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
@@ -19,8 +19,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -38,7 +38,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -46,25 +46,43 @@
   
   
   
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
   
 
   
     
     
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -72,23 +90,23 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Node.js,鐵人賽," />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="噗噗。故我在" type="application/atom+xml" />
+  <meta name="keywords" content="Node.js,鐵人賽,">
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+  <link rel="alternate" href="/atom.xml" title="噗噗。故我在" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
 
 
 
@@ -102,7 +120,7 @@
 <meta property="og:url" content="https://weijutu.github.io/2017/07/24/nodejs/nodejs-14-middleware/index.html">
 <meta property="og:site_name" content="噗噗。故我在">
 <meta property="og:description" content="從我們前幾篇用到 express web framework 框架的時候，express 就已經內建啟用 middleware 的概念，可以利用中間層的這個部分做一些效果，接下來本章節就來介紹  middleware 。首先我們先建立好一個 express web framework 框架 建立 express 的指令是： 1$express -e nodejs-middleware 並且打開 a">
-<meta property="og:locale" content="zh-TW">
+<meta property="og:locale" content="zh-tw">
 <meta property="og:image" content="https://weijutu.github.io/images/nodejs/58.png">
 <meta property="og:image" content="https://weijutu.github.io/images/nodejs/59.png">
 <meta property="og:image" content="https://weijutu.github.io/images/nodejs/60.png">
@@ -124,7 +142,7 @@
     motion: true,
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -138,7 +156,7 @@
 
 
 
-  <link rel="canonical" href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-14-middleware/"/>
+  <link rel="canonical" href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-14-middleware/">
 
 
 
@@ -171,7 +189,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-TW">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
 
   
   
@@ -187,7 +205,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">噗噗。故我在</span>
         <span class="logo-line-after"><i></i></span>
@@ -217,9 +235,9 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
-            Home
+            首頁
           </a>
         </li>
       
@@ -227,9 +245,9 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
-            Categories
+            分類
           </a>
         </li>
       
@@ -237,9 +255,9 @@
         <li class="menu-item menu-item-about">
           <a href="/about/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
-            About
+            關於
           </a>
         </li>
       
@@ -247,9 +265,9 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
-            Archives
+            歸檔
           </a>
         </li>
       
@@ -257,9 +275,9 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
-            Tags
+            標籤
           </a>
         </li>
       
@@ -270,9 +288,9 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
-            Search
+            檢索
           </a>
         </li>
       
@@ -291,9 +309,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="Searching..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -330,7 +346,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Helen">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/uploads/avatar.png">
     </span>
 
@@ -353,9 +369,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">發表於</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-24T00:14:00+08:00">
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-07-24T00:14:00+08:00">
                 2017-07-24
               </time>
             
@@ -366,7 +382,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -374,7 +390,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分類於</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -397,8 +413,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/07/24/nodejs/nodejs-14-middleware/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/07/24/nodejs/nodejs-14-middleware/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/07/24/nodejs/nodejs-14-middleware/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -430,11 +445,11 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"><span class="keyword">var</span> favicon = <span class="built_in">require</span>(<span class="string">'static-favicon'</span>);</span><br><span class="line"><span class="keyword">var</span> logger = <span class="built_in">require</span>(<span class="string">'morgan'</span>);</span><br><span class="line"><span class="keyword">var</span> cookieParser = <span class="built_in">require</span>(<span class="string">'cookie-parser'</span>);</span><br><span class="line"><span class="keyword">var</span> bodyParser = <span class="built_in">require</span>(<span class="string">'body-parser'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> routes = <span class="built_in">require</span>(<span class="string">'./routes/index'</span>);</span><br><span class="line"><span class="keyword">var</span> users = <span class="built_in">require</span>(<span class="string">'./routes/users'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line"></span><br><span class="line"><span class="comment">// view engine setup</span></span><br><span class="line">app.set(<span class="string">'views'</span>, path.join(__dirname, <span class="string">'views'</span>));</span><br><span class="line">app.set(<span class="string">'view engine'</span>, <span class="string">'ejs'</span>);</span><br><span class="line"></span><br><span class="line">app.use(favicon());</span><br><span class="line">app.use(logger(<span class="string">'dev'</span>));</span><br><span class="line">app.use(bodyParser.json());</span><br><span class="line">app.use(bodyParser.urlencoded());</span><br><span class="line">app.use(cookieParser());</span><br><span class="line">app.use(express.static(path.join(__dirname, <span class="string">'public'</span>)));</span><br><span class="line"></span><br><span class="line">app.use(<span class="string">'/'</span>, routes);</span><br><span class="line">app.use(<span class="string">'/users'</span>, users);</span><br><span class="line"></span><br><span class="line"><span class="comment">/// catch 404 and forward to error handler</span></span><br><span class="line">app.use(<span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> err = <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Not Found'</span>);</span><br><span class="line">    err.status = <span class="number">404</span>;</span><br><span class="line">    next(err);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">/// error handlers</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// development error handler</span></span><br><span class="line"><span class="comment">// will print stacktrace</span></span><br><span class="line"><span class="keyword">if</span> (app.get(<span class="string">'env'</span>) === <span class="string">'development'</span>) &#123;</span><br><span class="line">    app.use(<span class="function"><span class="keyword">function</span>(<span class="params">err, req, res, next</span>) </span>&#123;</span><br><span class="line">        res.status(err.status || <span class="number">500</span>);</span><br><span class="line">        res.render(<span class="string">'error'</span>, &#123;</span><br><span class="line">            message: err.message,</span><br><span class="line">            error: err</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// production error handler</span></span><br><span class="line"><span class="comment">// no stacktraces leaked to user</span></span><br><span class="line">app.use(<span class="function"><span class="keyword">function</span>(<span class="params">err, req, res, next</span>) </span>&#123;</span><br><span class="line">    res.status(err.status || <span class="number">500</span>);</span><br><span class="line">    res.render(<span class="string">'error'</span>, &#123;</span><br><span class="line">        message: err.message,</span><br><span class="line">        error: &#123;&#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = app;</span><br></pre></td></tr></table></figure>
 <p>從上面建立的  express 框架可以看到這裡用了許多的 app.use 的方法，包含靜態檔案、body 解析器、路由機制。當預設 middleware 之後，每當瀏覽器收到連線要求的時候，middleware 就會被呼叫啟用。簡單來講 middleware 就像一個薄薄的一層過濾網</p>
 <h1 id="建立-middleware"><a href="#建立-middleware" class="headerlink" title="建立 middleware"></a>建立 middleware</h1><p>由於基本設定接已經有提供高效能的套件，其 express  所建立好的 middleware 設定之外，也可以自定撰寫 middleware 安排到基本設定流程當中，我們建立一個簡單的 middleware 功能，請在 app.js 安插以下程式：</p>
-<p><img src="/images/nodejs/58.png" alt=""></p>
+<p><img src="/images/nodejs/58.png" alt></p>
 <p>一開始先建立一個 middleHandler ，其基本參數有  request, response, next，而  next方法 是代表交給下一個 middleware 繼續作處理，接著在建立 app.get ，我們預期要從瀏覽器  /test ㄙㄟ來做請求，第二個參數為 middleHandler function ，以及第三個 callback 函式</p>
-<p><img src="/images/nodejs/59.png" alt=""></p>
+<p><img src="/images/nodejs/59.png" alt></p>
 <p>一開始從瀏覽器 localhost:3000/test 發送出去之後，會先進到 middleHandler ，所以會先顯示 <strong>start</strong> :: middle handler function ，然後遇到  next(); 之後再回到 app.get  繼續作處理，因此再將 <strong>end</strong> :: middle handler function 顯示，最後用了一個 res.send 方法將一個小字串文字直接輸出到瀏覽器上面。</p>
-<h1 id="下圖可看結果："><a href="#下圖可看結果：" class="headerlink" title="下圖可看結果："></a>下圖可看結果：</h1><p><img src="/images/nodejs/60.png" alt=""></p>
+<h1 id="下圖可看結果："><a href="#下圖可看結果：" class="headerlink" title="下圖可看結果："></a>下圖可看結果：</h1><p><img src="/images/nodejs/60.png" alt></p>
 <p>更多應用，下回待續…</p>
 <p>參考資料：<br><a href="http://stephensugden.com/middleware_guide/" target="_blank" rel="noopener">http://stephensugden.com/middleware_guide/</a><br><a href="http://www.hacksparrow.com/how-to-write-midddleware-for-connect-express-js.html" target="_blank" rel="noopener">http://www.hacksparrow.com/how-to-write-midddleware-for-connect-express-js.html</a></p>
 
@@ -510,7 +525,7 @@
       
         <!-- Go to www.addthis.com/dashboard to customize your tools -->
 <div class="addthis_inline_share_toolbox">
-  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b5bd46496d2854b" async = "async" ></script>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b5bd46496d2854b" async="async"></script>
 </div>
 
       
@@ -555,20 +570,18 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Table of Contents
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            Overview
+            本站概覽
           </li>
         </ul>
       
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.png"
-               alt="Helen" />
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="Helen">
           <p class="site-author-name" itemprop="name">Helen</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -580,7 +593,7 @@
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
                 <span class="site-state-item-count">59</span>
-                <span class="site-state-item-name">posts</span>
+                <span class="site-state-item-name">文章</span>
               </a>
             </div>
           
@@ -590,8 +603,8 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">16</span>
-                <span class="site-state-item-name">categories</span>
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">分類</span>
               </a>
             </div>
           
@@ -601,8 +614,8 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">50</span>
-                <span class="site-state-item-name">tags</span>
+                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-name">標籤</span>
               </a>
             </div>
           
@@ -674,7 +687,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <div class="copyright">
   
   &copy;  2017 - 
   <span itemprop="copyrightYear">2019</span>
@@ -689,11 +702,11 @@
 
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 強力驅動
 </div>
 
 <div class="theme-info">
-  Theme -
+  主題 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Pisces
   </a>

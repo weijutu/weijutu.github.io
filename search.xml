@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Postman - Restful API 測試管理工具]]></title>
+    <url>%2F2019%2F02%2F27%2Ftools%2Fpostman-api-tools%2F</url>
+    <content type="text"><![CDATA[內容大綱 Postman 簡介 安裝下載 範例：找 OpenData 來練習 GET 方法請求 Postman 簡介Postman 是一套用來測試 Restful API 的分類管理工具，管理上相當方便，可以整合應用程式上所有用到的 API。 HTTP API 是透過路徑做區分呼叫的方法，請求的方法有很多種，一般常見會用 GET 以及 POST，不過事實上也有更多種方法 (GET/POST/PUT/DELETE/HEAD/OPTIONS…)，可以依照需求做選擇。 安裝下載 請到 POSTMAN 網站 進入下載，下載並且安裝之後介面如下 在這個介面，左邊選單主要有 History (紀錄每一次請求) 以及 Collections (像是資料夾) 頁籤 範例：找 OpenData 來練習在本篇範例我們找一個 高雄市政府資料開放 網站來做練習。 點擊，首頁上方的資料集 由於一般在回傳時都會使用 json 格式 (易讀) ，所以一開始進入頁面時時都會先找 JSON 格式。 在這裡找到一個 Open1999派工受理案件資料 來實作，點選第一個「Open1999派工受理案件即時600筆資料」 進入頁面之後，可以得到一個 資料下載網址 https://soweb.kcg.gov.tw/open1999/ServiceRequestsQuery.asmx/ServiceRequestsQuery?startdate=&amp;enddate= 拿到資料含有 JSON 格式的網址之後，我們將它貼到 POSTMAN 內的 URL 欄位中，而在 Method 選項選擇 GET (從伺服器檢索資料)，資料由 URI(統一資源識別符號) 標識。確認無誤時按下 Send 可以看到下方的結果顯示一個陣列形式的結果，以這個例子來說 Open1999派工受理案件 頁面也會提供詳細的欄位說明，那麼寫程式的您就可以測得結果後，更輕易的讀取這組 URL 給的回應有哪些欄位或是錯誤訊息。 123456789101112131415161718Seq(序號)FileNo(案號)Cre_Date(反映日期)Save_Date(通報日期)ReplyUnit(權責單位代碼)UnitName(權責單位)Zipcode(行政區域代碼_郵政區號)ZipName(行政區域)Address(維修地點)Informdesc(通報事項)Beforedesc(反映內容)Status(管制狀況代碼)StatusName(管制狀況)Close_Date(結案日期)Afterdesc(處理結果)Memo(備註)Lat_(緯度)Lng_(經度) 當您常使用這組 API 時，可以將它存在 POSTMAN 內，並且善用 Collection 做資料夾的管理，下次就不用在到網站苦苦尋找連結了。]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>API</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[在 Mac OSX 使用 RVM 升級 Ruby V2.5.1]]></title>
     <url>%2F2018%2F08%2F02%2Fmac%2Fhow-to-upgrade-ruby-on-mac%2F</url>
     <content type="text"><![CDATA[RVM 是一套 Ruby 版本的管理工具，這裡頭包含 Ruby 的版本管理和 Gem 庫管理。本篇裡面使用 RVM 工具進行 Ruby 的升級。 RVM (Ruby Version Manager) 安裝 RVM安装 1$ curl -L get.rvm.io | bash -s stable 是否有完成安裝 RVM 1$ rvm -v 結果顯示 1rvm 1.29.4 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io] 使用 RVM 升級 Ruby 顯示目前的 Ruby 版本 1$ ruby -v 顯示結果 1ruby 2.0.0p648 (2015-12-16 revision 53162) [universal.x86_64-darwin16] 安装 Ruby 2.5.1 1rvm install 2.5.1 安裝完畢之後，再用 ruby -v 檢查看看，是不是已經換成下面顯示的結果一樣已完成升級。 1ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-darwin16] 結果 1Linking /usr/local/Cellar/ruby/2.5.1... 3293 symlinks created 那麼，這樣子就安裝完畢了。 參考：https://flinhong.com/2017/10/26/upgrade-ruby-on-mac/]]></content>
@@ -52,6 +63,8 @@
     <content type="text"><![CDATA[基本上 Mac 作業系統裡面已經有內建的 Apache，所以本篇文章就不提如何安裝 Apache 的伺服器。在使用 Apache 的時候需要有 root 的權限，請先輸入以下的指令。 ps. Apache 伺服器版本為：Apache/2.4.23 (Unix) 1$ sudo su - 接著再輸入 Apache 的啟動指令 1$ apachectl start 這時候會看到服務已經載入啟動 12&lt;Username&gt;:~ root# apachectl start/System/Library/LaunchDaemons/org.apache.httpd.plist: service already loaded 然後看一下 http://localhost/ 有沒有出現 It works! 字眼，就代表 Apache 有正常運行，而這個網頁目錄是放在 /Library/WebServer/Documents Apache 參數設定修改 httpd.conf輸入完畢之後，在 /etc/apache2/httpd.conf 把以下的項目的註解 # 移除 1234LoadModule authz_core_module libexec/apache2/mod_authz_core.soLoadModule authz_host_module libexec/apache2/mod_authz_host.soLoadModule userdir_module libexec/apache2/mod_userdir.soInclude /private/etc/apache2/extra/httpd-userdir.conf 修改 httpd-userdir.conf在 httpd 編輯完畢之後，再修改 /etc/apache2/extra/httpd-userdir.conf 檔案，將以下的項目的註解 # 移除 1Include /private/etc/apache2/users/*.conf 這樣子，都編輯完畢再將 Apache 重啟。這時候進入 http://localhost/ 就會得到以下畫面。 如果出現 You don t have permission to access / on this server 也就代表訪問的位置是沒有權限的。可以將資料夾調整一下權限，(如果網站放在 /Projects/demo) 1$ sudo chmod -R 777 /Users/&lt;Username&gt;/Projects/demo Vue 網站的修訂修改 config/index.js找到 build 內的 assetsPublicPath 參數，原本預設值是 /，而這個路徑對靜態的資源文件是絕對路徑。 12345678910build: &#123; // Template for index.html index: path.resolve(__dirname, &apos;../dist/index.html&apos;), // Paths assetsRoot: path.resolve(__dirname, &apos;../dist&apos;), assetsSubDirectory: &apos;static&apos;, assetsPublicPath: &apos;/&apos;, // 預設值 ... (以下省略) 改成相對路徑的寫法，將 assetsPublicPath 參數改為 ./ 12345678910build: &#123; // Template for index.html index: path.resolve(__dirname, &apos;../dist/index.html&apos;), // Paths assetsRoot: path.resolve(__dirname, &apos;../dist&apos;), assetsSubDirectory: &apos;static&apos;, assetsPublicPath: &apos;./&apos;, // 改相對路徑 ... (以下省略) 修改 build/utils.js接著進入 build/utils.js 改 css 位置的路徑 publicPath 12345678910 if (options.extract) &#123; return ExtractTextPlugin.extract(&#123; use: loaders, publicPath: &apos;../../&apos;, // according to path 20180704 fallback: &apos;vue-style-loader&apos; &#125;) &#125; else &#123; return [&apos;vue-style-loader&apos;].concat(loaders) &#125;&#125; 修訂 index.pug找到網站根目錄的 index.pug 檔案，修改 /static/favicon.ico 為 ./static/favicon.ico 1link(rel=&apos;shortcut icon&apos;, type=&apos;image/png&apos;, href=&apos;./static/favicon.ico&apos;) 修訂 vue-router由於我們希望網址是 http://localhost/demo/ ，要在 route 配置裡面加上 base 參數。 1234export default new VueRouter(&#123; base: &apos;/demo/&apos; // 補上這一行， mode: &apos;history&apos;, scrollBehavior: () =&gt; (&#123; y: 0 &#125;), 部署到伺服器一切都就緒之後，進入到根目錄下執行 1$ npm run build build 出來網站會產生一個打包好的 dist 的資料夾，這時在 Apache 的網站空間內，做一個 link 指向這個位置 1$ sudo ln -s /Users/&lt;Username&gt;/Projects/demo /Library/WebServer/Documents/demo ps. 記得後面的 /demo 不要多一個斜線 /demo/ 不然會找不到。 這樣就完成大部分的設置了。 新增 .htaccess 檔案但是，又為什麼設置完畢之後，網站卻又一片空白？也是因為 Vue 的 history 模式概念，不會自動地發起 http 請求，解決方法將所有的請求進行轉發到 http://localhost/demo/index.html 可以在網站目錄夾裡面新增 .htaccess 檔案，內容輸入以下 1234567891011&lt;IfModule mod_rewrite.c&gt; Options +FollowSymlinks RewriteEngine On RewriteCond %&#123;REQUEST_URI&#125; ^/(demo|demo/.*)$ RewriteRule ^/demo/index\.html$ - [L,NC] RewriteCond %&#123;REQUEST_FILENAME&#125; !-d RewriteCond %&#123;REQUEST_FILENAME&#125; !-f RewriteRule ^(demo|demo/.*)$ demo/index.html [L]&lt;/IfModule&gt; 這樣就能用 http://localhost/demo/ 來訪問網站了。 參考 VUE 服务器部署路径问题 在Mac設定Apache、PHP、MySQL]]></content>
       <categories>
         <category>網站</category>
+        <category>Vue</category>
+        <category>macbook</category>
       </categories>
       <tags>
         <tag>Apache</tag>
@@ -146,17 +159,6 @@
       </categories>
       <tags>
         <tag>丸閱讀</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[R 學習日誌 - 矩陣相乘法運算 (Matrix multiplication)]]></title>
-    <url>%2F2017%2F09%2F06%2Fr%2Fr-matrix-multiplication%2F</url>
-    <content type="text"><![CDATA[學習目標學習如何計算矩陣相乘以及R語言的用法 矩陣相乘法兩個矩陣必須滿足 A 矩陣的行數等於 B 矩陣的列數才可以相乘。在這邊用一個簡單的例子介紹矩陣相乘法的運算 $$A_{3*2}=\begin{bmatrix}1 &amp; 2\\ 3 &amp; 4\\ 5 &amp; 6\end{bmatrix}$$ $$B_{2*3}=\begin{bmatrix}7 &amp; 8 &amp; 9\\ 10 &amp; 11 &amp; 12\end{bmatrix}$$ 則： $A \times B = \begin{bmatrix}1 \times 7 + 2 \times 10 &amp; 1 \times 8 + 2 \times 11 &amp; 1 \times 9 + 2 \ \times 12\\3 \times 7 + 4 \times 10 &amp; 3 \times 8 + 4 \times 11 &amp; 3 \times 9 + 4 \times 12\\5 \times 7 + 6 \times 10 &amp; 5 \times 8 + 6 \times 11 &amp; 5 \times 9 + 6 \times 12\end{bmatrix} = \begin{bmatrix}27 &amp; 30 &amp; 33\\61 &amp; 68 &amp; 75\\95 &amp; 106 &amp; 117\end{bmatrix}$ 那麼用 R 語法又是怎麼寫呢？ 使用 R 語言運算已知如上述的矩陣 A 裡面的矩陣是 1,3,5,2,4,6, 而 B 裡面的矩陣是 7,10,8,11,9,12，我們運用 matrix 將矩陣建立起來 12&gt; A&lt;-matrix(c(1,3,5,2,4,6), nrow = 3)&gt; B&lt;-matrix(c(7,10,8,11,9,12), nrow = 2) 如下所示： 1234567891011&gt; A&lt;-matrix(c(1,3,5,2,4,6), nrow = 3)&gt; A [,1] [,2][1,] 1 2[2,] 3 4[3,] 5 6&gt; B&lt;-matrix(c(7,10,8,11,9,12), nrow = 2)&gt; B [,1] [,2] [,3][1,] 7 8 9[2,] 10 11 12 相乘的話就用 A%*%B ，結果如下： 12345&gt; A%*%B [,1] [,2] [,3][1,] 27 30 33[2,] 61 68 75[3,] 95 106 117 不能只用 * 嗎？如果你想要只有使用 * 的話，那麼就要兩個矩陣的行列都要一樣，否則會出現錯誤是 Error in A * B : 非調和陣列。要使用 * 我們修改一下上面的例子，在 B 的 matrix 參數將 nrow 改為 3 123456789101112&gt; A&lt;-matrix(c(1,3,5,2,4,6), nrow = 3)&gt; A [,1] [,2][1,] 1 2[2,] 3 4[3,] 5 6&gt; B&lt;-matrix(c(7,10,8,11,9,12), nrow = 3)&gt; B [,1] [,2][1,] 7 11[2,] 10 9[3,] 8 12 接著就可以直接相乘了 12345&gt; A*B [,1] [,2][1,] 7 22[2,] 30 36[3,] 40 72]]></content>
-      <categories>
-        <category>R</category>
-      </categories>
-      <tags>
-        <tag>R</tag>
       </tags>
   </entry>
   <entry>

@@ -2,6 +2,48 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://weijutu.github.io/2018/08/02/tools/slate-api-document/</loc>
+    
+    <lastmod>2019-02-27T03:06:01.628Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2019/02/27/tools/postman-api-tools/</loc>
+    
+    <lastmod>2019-02-27T03:05:08.452Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2018/08/02/mac/how-to-upgrade-ruby-on-mac/</loc>
+    
+    <lastmod>2019-02-26T08:15:06.286Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2018/07/05/vuejs/vuejs-deploy-on-apache/</loc>
+    
+    <lastmod>2019-02-26T08:07:38.754Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/about/index.html</loc>
+    
+    <lastmod>2019-02-17T07:57:05.949Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/404.html</loc>
+    
+    <lastmod>2019-02-17T02:57:39.840Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://weijutu.github.io/books/index.html</loc>
     
     <lastmod>2018-10-16T09:24:30.217Z</lastmod>
@@ -324,13 +366,6 @@
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/09/06/r/r-matrix-multiplication/</loc>
-    
-    <lastmod>2018-10-16T08:11:14.467Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://weijutu.github.io/2017/03/04/r/r-xy-scatter-diagram/</loc>
     
     <lastmod>2018-10-16T08:11:10.628Z</lastmod>
@@ -352,13 +387,6 @@
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2018/07/05/vuejs/vuejs-deploy-on-apache/</loc>
-    
-    <lastmod>2018-10-16T08:10:59.035Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://weijutu.github.io/2018/07/20/vuejs/vuejs-parent-child-value/</loc>
     
     <lastmod>2018-10-16T08:10:55.057Z</lastmod>
@@ -369,20 +397,6 @@
     <loc>https://weijutu.github.io/2018/07/26/web/how-to-deply-redmine-to-heroku/</loc>
     
     <lastmod>2018-10-16T08:10:29.938Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://weijutu.github.io/2018/08/02/tools/slate-api-document/</loc>
-    
-    <lastmod>2018-10-16T08:09:55.394Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://weijutu.github.io/2018/08/02/mac/how-to-upgrade-ruby-on-mac/</loc>
-    
-    <lastmod>2018-08-02T01:31:23.000Z</lastmod>
     
   </url>
   
@@ -425,13 +439,6 @@
     <loc>https://weijutu.github.io/2017/08/21/excel/excel-get-value-by-fn/</loc>
     
     <lastmod>2017-08-30T07:11:14.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://weijutu.github.io/about/index.html</loc>
-    
-    <lastmod>2017-08-21T02:25:14.000Z</lastmod>
     
   </url>
   

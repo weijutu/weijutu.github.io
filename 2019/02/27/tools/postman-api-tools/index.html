@@ -5,11 +5,11 @@
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-TW">
-<head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<html class="theme-next pisces use-motion" lang="zh-tw">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
@@ -19,8 +19,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -38,7 +38,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -46,25 +46,43 @@
   
   
   
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
   
 
   
     
     
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -72,41 +90,53 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="R," />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="噗噗。故我在" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+  <meta name="keywords" content="API,">
 
 
 
 
 
+  <link rel="alternate" href="/atom.xml" title="噗噗。故我在" type="application/atom+xml">
 
-<meta name="description" content="學習目標學習如何計算矩陣相乘以及R語言的用法 矩陣相乘法兩個矩陣必須滿足 A 矩陣的行數等於 B 矩陣的列數才可以相乘。在這邊用一個簡單的例子介紹矩陣相乘法的運算 $$A_{3*2}=\begin{bmatrix}1 &amp;amp; 2\\ 3 &amp;amp; 4\\ 5 &amp;amp; 6\end{bmatrix}$$ $$B_{2*3}=\begin{bmatrix}7 &amp;amp; 8 &amp;amp; 9\\">
-<meta name="keywords" content="R">
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+
+
+
+
+<meta name="description" content="內容大綱 Postman 簡介 安裝下載 範例：找 OpenData 來練習 GET 方法請求  Postman 簡介Postman 是一套用來測試 Restful API 的分類管理工具，管理上相當方便，可以整合應用程式上所有用到的 API。 HTTP API 是透過路徑做區分呼叫的方法，請求的方法有很多種，一般常見會用 GET 以及 POST，不過事實上也有更多種方法 (GET/POST/P">
+<meta name="keywords" content="API">
 <meta property="og:type" content="article">
-<meta property="og:title" content="R 學習日誌 - 矩陣相乘法運算 (Matrix multiplication)">
-<meta property="og:url" content="https://weijutu.github.io/2017/09/06/r/r-matrix-multiplication/index.html">
+<meta property="og:title" content="Postman - Restful API 測試管理工具">
+<meta property="og:url" content="https://weijutu.github.io/2019/02/27/tools/postman-api-tools/index.html">
 <meta property="og:site_name" content="噗噗。故我在">
-<meta property="og:description" content="學習目標學習如何計算矩陣相乘以及R語言的用法 矩陣相乘法兩個矩陣必須滿足 A 矩陣的行數等於 B 矩陣的列數才可以相乘。在這邊用一個簡單的例子介紹矩陣相乘法的運算 $$A_{3*2}=\begin{bmatrix}1 &amp;amp; 2\\ 3 &amp;amp; 4\\ 5 &amp;amp; 6\end{bmatrix}$$ $$B_{2*3}=\begin{bmatrix}7 &amp;amp; 8 &amp;amp; 9\\">
-<meta property="og:locale" content="zh-TW">
-<meta property="og:updated_time" content="2018-10-16T08:11:14.467Z">
+<meta property="og:description" content="內容大綱 Postman 簡介 安裝下載 範例：找 OpenData 來練習 GET 方法請求  Postman 簡介Postman 是一套用來測試 Restful API 的分類管理工具，管理上相當方便，可以整合應用程式上所有用到的 API。 HTTP API 是透過路徑做區分呼叫的方法，請求的方法有很多種，一般常見會用 GET 以及 POST，不過事實上也有更多種方法 (GET/POST/P">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:image" content="https://weijutu.github.io/images/tools/1_QOx_tPV5wJnhTzAGhfIiLA.png">
+<meta property="og:image" content="https://weijutu.github.io/images/tools/20190227-3.png">
+<meta property="og:image" content="https://weijutu.github.io/images/tools/20190227-1.png">
+<meta property="og:image" content="https://weijutu.github.io/images/tools/20190227-2.png">
+<meta property="og:image" content="https://weijutu.github.io/images/tools/20190227-4.png">
+<meta property="og:image" content="https://weijutu.github.io/images/tools/20190227-5.png">
+<meta property="og:image" content="https://weijutu.github.io/images/tools/20190227-6.png">
+<meta property="og:image" content="https://weijutu.github.io/images/tools/20190227-7.png">
+<meta property="og:image" content="https://weijutu.github.io/images/tools/20190227-8.png">
+<meta property="og:image" content="https://weijutu.github.io/images/tools/20190227-9.png">
+<meta property="og:image" content="https://weijutu.github.io/images/tools/20190227-10.png">
+<meta property="og:updated_time" content="2019-02-27T03:05:08.452Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="R 學習日誌 - 矩陣相乘法運算 (Matrix multiplication)">
-<meta name="twitter:description" content="學習目標學習如何計算矩陣相乘以及R語言的用法 矩陣相乘法兩個矩陣必須滿足 A 矩陣的行數等於 B 矩陣的列數才可以相乘。在這邊用一個簡單的例子介紹矩陣相乘法的運算 $$A_{3*2}=\begin{bmatrix}1 &amp;amp; 2\\ 3 &amp;amp; 4\\ 5 &amp;amp; 6\end{bmatrix}$$ $$B_{2*3}=\begin{bmatrix}7 &amp;amp; 8 &amp;amp; 9\\">
+<meta name="twitter:title" content="Postman - Restful API 測試管理工具">
+<meta name="twitter:description" content="內容大綱 Postman 簡介 安裝下載 範例：找 OpenData 來練習 GET 方法請求  Postman 簡介Postman 是一套用來測試 Restful API 的分類管理工具，管理上相當方便，可以整合應用程式上所有用到的 API。 HTTP API 是透過路徑做區分呼叫的方法，請求的方法有很多種，一般常見會用 GET 以及 POST，不過事實上也有更多種方法 (GET/POST/P">
+<meta name="twitter:image" content="https://weijutu.github.io/images/tools/1_QOx_tPV5wJnhTzAGhfIiLA.png">
 
 
 
@@ -120,7 +150,7 @@
     motion: true,
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -134,13 +164,13 @@
 
 
 
-  <link rel="canonical" href="https://weijutu.github.io/2017/09/06/r/r-matrix-multiplication/"/>
+  <link rel="canonical" href="https://weijutu.github.io/2019/02/27/tools/postman-api-tools/">
 
 
 
 
 
-  <title>R 學習日誌 - 矩陣相乘法運算 (Matrix multiplication) | 噗噗。故我在</title>
+  <title>Postman - Restful API 測試管理工具 | 噗噗。故我在</title>
   
 
 
@@ -167,7 +197,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-TW">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
 
   
   
@@ -183,7 +213,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">噗噗。故我在</span>
         <span class="logo-line-after"><i></i></span>
@@ -213,9 +243,9 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
-            Home
+            首頁
           </a>
         </li>
       
@@ -223,9 +253,9 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
-            Categories
+            分類
           </a>
         </li>
       
@@ -233,9 +263,9 @@
         <li class="menu-item menu-item-about">
           <a href="/about/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
-            About
+            關於
           </a>
         </li>
       
@@ -243,9 +273,9 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
-            Archives
+            歸檔
           </a>
         </li>
       
@@ -253,9 +283,9 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
-            Tags
+            標籤
           </a>
         </li>
       
@@ -266,9 +296,9 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
-            Search
+            檢索
           </a>
         </li>
       
@@ -287,9 +317,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="Searching..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -322,11 +350,11 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/09/06/r/r-matrix-multiplication/">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2019/02/27/tools/postman-api-tools/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Helen">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/uploads/avatar.png">
     </span>
 
@@ -339,7 +367,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">R 學習日誌 - 矩陣相乘法運算 (Matrix multiplication)</h2>
+          <h2 class="post-title" itemprop="name headline">Postman - Restful API 測試管理工具</h2>
         
 
         <div class="post-meta">
@@ -349,10 +377,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">發表於</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-06T00:34:11+08:00">
-                2017-09-06
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2019-02-27T09:47:00+08:00">
+                2019-02-27
               </time>
             
 
@@ -362,7 +390,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -370,12 +398,12 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分類於</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/R/" itemprop="url" rel="index">
-                    <span itemprop="name">R</span>
+                  <a href="/categories/工具/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
                   </a>
                 </span>
 
@@ -392,9 +420,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/09/06/r/r-matrix-multiplication/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/09/06/r/r-matrix-multiplication/" itemprop="commentCount"></span>
+                <a href="/2019/02/27/tools/postman-api-tools/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/02/27/tools/postman-api-tools/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -419,23 +446,35 @@
       
 
       
-        <h3 id="學習目標"><a href="#學習目標" class="headerlink" title="學習目標"></a>學習目標</h3><p>學習如何計算矩陣相乘以及R語言的用法</p>
-<h3 id="矩陣相乘法"><a href="#矩陣相乘法" class="headerlink" title="矩陣相乘法"></a>矩陣相乘法</h3><p>兩個矩陣必須滿足 A 矩陣的<code>行數</code>等於 B 矩陣的<code>列數</code>才可以相乘。在這邊用一個簡單的例子介紹矩陣相乘法的運算</p>
-<p>$$A_{3*2}=\begin{bmatrix}1 &amp; 2\\ 3 &amp; 4\\ 5 &amp; 6\end{bmatrix}$$</p>
-<p>$$B_{2*3}=\begin{bmatrix}7 &amp; 8 &amp; 9\\ 10 &amp; 11 &amp; 12\end{bmatrix}$$</p>
-<p>則：</p>
-<p>$A \times B = \begin{bmatrix}1 \times 7 + 2 \times 10 &amp; 1 \times 8 + 2 \times 11 &amp; 1 \times 9 + 2 \ \times 12\\3 \times 7 + 4 \times 10 &amp; 3 \times 8 + 4 \times 11 &amp; 3 \times 9 + 4 \times 12\\5 \times 7 + 6 \times 10 &amp; 5 \times 8 + 6 \times 11 &amp; 5 \times 9 + 6 \times 12\end{bmatrix} = \begin{bmatrix}27 &amp; 30 &amp; 33\\61 &amp; 68 &amp; 75\\95 &amp; 106 &amp; 117\end{bmatrix}$</p>
-<p>那麼用 R 語法又是怎麼寫呢？</p>
-<h3 id="使用-R-語言運算"><a href="#使用-R-語言運算" class="headerlink" title="使用 R 語言運算"></a>使用 R 語言運算</h3><p>已知如上述的矩陣 A 裡面的矩陣是 <code>1,3,5,2,4,6</code>, 而 B 裡面的矩陣是 <code>7,10,8,11,9,12</code>，我們運用 matrix 將矩陣建立起來</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; A&lt;-matrix(c(1,3,5,2,4,6), nrow = 3)</span><br><span class="line">&gt; B&lt;-matrix(c(7,10,8,11,9,12), nrow = 2)</span><br></pre></td></tr></table></figure>
-<p>如下所示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt; A&lt;-matrix(c(1,3,5,2,4,6), nrow = 3)</span><br><span class="line">&gt; A</span><br><span class="line">     [,1] [,2]</span><br><span class="line">[1,]    1    2</span><br><span class="line">[2,]    3    4</span><br><span class="line">[3,]    5    6</span><br><span class="line">&gt; B&lt;-matrix(c(7,10,8,11,9,12), nrow = 2)</span><br><span class="line">&gt; B</span><br><span class="line">     [,1] [,2] [,3]</span><br><span class="line">[1,]    7    8    9</span><br><span class="line">[2,]   10   11   12</span><br></pre></td></tr></table></figure>
-<p>相乘的話就用 <code>A%*%B</code> ，結果如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; A%*%B</span><br><span class="line">     [,1] [,2] [,3]</span><br><span class="line">[1,]   27   30   33</span><br><span class="line">[2,]   61   68   75</span><br><span class="line">[3,]   95  106  117</span><br></pre></td></tr></table></figure>
-<h3 id="不能只用-嗎？"><a href="#不能只用-嗎？" class="headerlink" title="不能只用 * 嗎？"></a>不能只用 <code>*</code> 嗎？</h3><p>如果你想要只有使用 <code>*</code> 的話，那麼就要兩個矩陣的行列都要一樣，否則會出現錯誤是 <code>Error in A * B : 非調和陣列</code>。要使用 <code>*</code> 我們修改一下上面的例子，在 B 的 matrix 參數將 nrow 改為 3</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt; A&lt;-matrix(c(1,3,5,2,4,6), nrow = 3)</span><br><span class="line">&gt; A</span><br><span class="line">     [,1] [,2]</span><br><span class="line">[1,]    1    2</span><br><span class="line">[2,]    3    4</span><br><span class="line">[3,]    5    6</span><br><span class="line">&gt; B&lt;-matrix(c(7,10,8,11,9,12), nrow = 3)</span><br><span class="line">&gt; B</span><br><span class="line">     [,1] [,2]</span><br><span class="line">[1,]    7   11</span><br><span class="line">[2,]   10    9</span><br><span class="line">[3,]    8   12</span><br></pre></td></tr></table></figure>
-<p>接著就可以直接相乘了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; A*B</span><br><span class="line">     [,1] [,2]</span><br><span class="line">[1,]    7   22</span><br><span class="line">[2,]   30   36</span><br><span class="line">[3,]   40   72</span><br></pre></td></tr></table></figure>
+        <p><img src="/images/tools/1_QOx_tPV5wJnhTzAGhfIiLA.png" alt></p>
+<h2 id="內容大綱"><a href="#內容大綱" class="headerlink" title="內容大綱"></a>內容大綱</h2><ol>
+<li>Postman 簡介</li>
+<li>安裝下載</li>
+<li>範例：找 OpenData 來練習 GET 方法請求</li>
+</ol>
+<h2 id="Postman-簡介"><a href="#Postman-簡介" class="headerlink" title="Postman 簡介"></a>Postman 簡介</h2><p>Postman 是一套用來測試 Restful API 的分類管理工具，管理上相當方便，可以整合應用程式上所有用到的 API。 HTTP API 是透過路徑做區分呼叫的方法，請求的方法有很多種，一般常見會用 GET 以及 POST，不過事實上也有更多種方法 (GET/POST/PUT/DELETE/HEAD/OPTIONS…)，可以依照需求做選擇。</p>
+<a id="more"></a>
+<p><img src="/images/tools/20190227-3.png" alt></p>
+<h2 id="安裝下載"><a href="#安裝下載" class="headerlink" title="安裝下載"></a>安裝下載</h2><p><img src="/images/tools/20190227-1.png" alt></p>
+<p>請到 <a href="https://www.getpostman.com/" target="_blank" rel="noopener">POSTMAN 網站</a> 進入下載，下載並且安裝之後介面如下</p>
+<p><img src="/images/tools/20190227-2.png" alt="一開始的畫面"></p>
+<p>在這個介面，左邊選單主要有 <code>History</code> (紀錄每一次請求) 以及 <code>Collections</code> (像是資料夾) 頁籤</p>
+<h2 id="範例：找-OpenData-來練習"><a href="#範例：找-OpenData-來練習" class="headerlink" title="範例：找 OpenData 來練習"></a>範例：找 OpenData 來練習</h2><p>在本篇範例我們找一個 <a href="https://data.kcg.gov.tw/" target="_blank" rel="noopener">高雄市政府資料開放</a> 網站來做練習。</p>
+<p><img src="/images/tools/20190227-4.png" alt></p>
+<p>點擊，首頁上方的資料集</p>
+<p><img src="/images/tools/20190227-5.png" alt></p>
+<p>由於一般在回傳時都會使用 <code>json</code> 格式 (易讀) ，所以一開始進入頁面時時都會先找 JSON 格式。</p>
+<p><img src="/images/tools/20190227-6.png" alt></p>
+<p>在這裡找到一個 <a href="https://data.kcg.gov.tw/dataset/open1999/resource/6e61f529-873f-4316-8675-0f64d0aa4517" target="_blank" rel="noopener">Open1999派工受理案件資料</a> 來實作，點選第一個「Open1999派工受理案件即時600筆資料」</p>
+<p><img src="/images/tools/20190227-7.png" alt></p>
+<p>進入頁面之後，可以得到一個 資料下載網址 <a href="https://soweb.kcg.gov.tw/open1999/ServiceRequestsQuery.asmx/ServiceRequestsQuery?startdate=&amp;enddate=" target="_blank" rel="noopener">https://soweb.kcg.gov.tw/open1999/ServiceRequestsQuery.asmx/ServiceRequestsQuery?startdate=&amp;enddate=</a></p>
+<p><img src="/images/tools/20190227-8.png" alt></p>
+<p>拿到資料含有 JSON 格式的網址之後，我們將它貼到 POSTMAN 內的 URL 欄位中，而在 Method 選項選擇 <code>GET</code> (從伺服器檢索資料)，資料由 URI(統一資源識別符號) 標識。確認無誤時按下 <code>Send</code></p>
+<p><img src="/images/tools/20190227-9.png" alt></p>
+<p>可以看到下方的結果顯示一個陣列形式的結果，以這個例子來說 <code>Open1999派工受理案件</code> 頁面也會提供詳細的欄位說明，那麼寫程式的您就可以測得結果後，更輕易的讀取這組 URL 給的回應有哪些欄位或是錯誤訊息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Seq(序號)</span><br><span class="line">FileNo(案號)</span><br><span class="line">Cre_Date(反映日期)</span><br><span class="line">Save_Date(通報日期)</span><br><span class="line">ReplyUnit(權責單位代碼)</span><br><span class="line">UnitName(權責單位)</span><br><span class="line">Zipcode(行政區域代碼_郵政區號)</span><br><span class="line">ZipName(行政區域)</span><br><span class="line">Address(維修地點)</span><br><span class="line">Informdesc(通報事項)</span><br><span class="line">Beforedesc(反映內容)</span><br><span class="line">Status(管制狀況代碼)</span><br><span class="line">StatusName(管制狀況)</span><br><span class="line">Close_Date(結案日期)</span><br><span class="line">Afterdesc(處理結果)</span><br><span class="line">Memo(備註)</span><br><span class="line">Lat_(緯度)</span><br><span class="line">Lng_(經度)</span><br></pre></td></tr></table></figure>
+<p>當您常使用這組 API 時，可以將它存在 POSTMAN 內，並且善用 Collection 做資料夾的管理，下次就不用在到網站苦苦尋找連結了。</p>
+<p><img src="/images/tools/20190227-10.png" alt></p>
 
       
     </div>
@@ -465,7 +504,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/R/" rel="tag"># R</a>
+            <a href="/tags/API/" rel="tag"># API</a>
           
         </div>
       
@@ -478,8 +517,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/02/stock/stock-002-company/" rel="next" title="股典閱#2 - 股市大盤指數與漲跌">
-                <i class="fa fa-chevron-left"></i> 股典閱#2 - 股市大盤指數與漲跌
+              <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" rel="next" title="在 Mac OSX 使用 RVM 升級 Ruby V2.5.1">
+                <i class="fa fa-chevron-left"></i> 在 Mac OSX 使用 RVM 升級 Ruby V2.5.1
               </a>
             
           </div>
@@ -487,10 +526,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/09/09/books/books-002-rich-dad-and-poor-dad/" rel="prev" title="丸閱讀#2 - 《富爸爸，有錢有理：神奇的現金流象限》讀後心得">
-                丸閱讀#2 - 《富爸爸，有錢有理：神奇的現金流象限》讀後心得 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -507,7 +542,7 @@
       
         <!-- Go to www.addthis.com/dashboard to customize your tools -->
 <div class="addthis_inline_share_toolbox">
-  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b5bd46496d2854b" async = "async" ></script>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b5bd46496d2854b" async="async"></script>
 </div>
 
       
@@ -552,20 +587,18 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Table of Contents
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            Overview
+            本站概覽
           </li>
         </ul>
       
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.png"
-               alt="Helen" />
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="Helen">
           <p class="site-author-name" itemprop="name">Helen</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -577,7 +610,7 @@
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
                 <span class="site-state-item-count">59</span>
-                <span class="site-state-item-name">posts</span>
+                <span class="site-state-item-name">文章</span>
               </a>
             </div>
           
@@ -587,8 +620,8 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">16</span>
-                <span class="site-state-item-name">categories</span>
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">分類</span>
               </a>
             </div>
           
@@ -598,8 +631,8 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">50</span>
-                <span class="site-state-item-name">tags</span>
+                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-name">標籤</span>
               </a>
             </div>
           
@@ -651,7 +684,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#學習目標"><span class="nav-number">1.</span> <span class="nav-text">學習目標</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#矩陣相乘法"><span class="nav-number">2.</span> <span class="nav-text">矩陣相乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-R-語言運算"><span class="nav-number">3.</span> <span class="nav-text">使用 R 語言運算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不能只用-嗎？"><span class="nav-number">4.</span> <span class="nav-text">不能只用 * 嗎？</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#內容大綱"><span class="nav-number">1.</span> <span class="nav-text">內容大綱</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Postman-簡介"><span class="nav-number">2.</span> <span class="nav-text">Postman 簡介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安裝下載"><span class="nav-number">3.</span> <span class="nav-text">安裝下載</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#範例：找-OpenData-來練習"><span class="nav-number">4.</span> <span class="nav-text">範例：找 OpenData 來練習</span></a></li></ol></div>
             
 
           </div>
@@ -671,7 +704,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <div class="copyright">
   
   &copy;  2017 - 
   <span itemprop="copyrightYear">2019</span>
@@ -686,11 +719,11 @@
 
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 強力驅動
 </div>
 
 <div class="theme-info">
-  Theme -
+  主題 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Pisces
   </a>
@@ -804,9 +837,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'https://weijutu.github.io/2017/09/06/r/r-matrix-multiplication/';
-          this.page.identifier = '2017/09/06/r/r-matrix-multiplication/';
-          this.page.title = 'R 學習日誌 - 矩陣相乘法運算 (Matrix multiplication)';
+          this.page.url = 'https://weijutu.github.io/2019/02/27/tools/postman-api-tools/';
+          this.page.identifier = '2019/02/27/tools/postman-api-tools/';
+          this.page.title = 'Postman - Restful API 測試管理工具';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://weijutugithubio.disqus.com/embed.js';
