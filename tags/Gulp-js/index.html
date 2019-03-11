@@ -88,7 +88,7 @@
 
 <link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
-<body class="is-2-column">
+<body class="is-3-column">
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar navbar-main">
     <div class="container">
         <div class="navbar-brand is-flex-center">
@@ -139,7 +139,7 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main"><div class="card">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
     <div class="card-content">
         <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
@@ -182,7 +182,7 @@
 <p>在電腦科學裡面，字串流(stream，或者串流)這個詞有很多用法。所有這一些用法都是代表一個包含資料的序列。我們可以將字串流想做是一個允許資料一個接一個，而非將資料包作一整個，來進行處理的輸送帶。</p>
 </blockquote>
 <p>用個 gulp.js 的簡單例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gulp.src(&apos;js/app.js&apos;)</span><br><span class="line">    .pipe(uglify())</span><br><span class="line">    .pipe(gulp.dest(&apos;build&apos;))</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gulp.src(&apos;js/app.js&apos;)</span><br><span class="line">    .pipe(uglify())</span><br><span class="line">    .pipe(gulp.dest(&apos;build&apos;))</span><br></pre></td></tr></table></figure>
 <p>以這個例子來說，gulp.src 方法帶了一個字串參數 js/app.js，這個是對應一個主要的 js 檔案，主要是建立物件串流來表示的文件，接這透過 .pipe 方法將所有檔案做 uglify() 的動作，而這個動作將會縮小之後回傳一個新的物件，最後將這個輸出用 gulp.dest 目標位置到 build 資料夾裡面。</p>
 <p>流程會是如下：</p>
 <p><img src="/images/javascript/6.png" alt></p>
@@ -194,7 +194,7 @@
 </ul>
 <p>Let’s start using Gulp.</p>
 <h3 id="安裝-Node-js"><a href="#安裝-Node-js" class="headerlink" title="安裝 Node.js"></a>安裝 Node.js</h3><p>這裡我不會做太多解釋如何安裝 node.js ，安裝方式請詳見之前寫的一篇文章 「<a href="http://weijutu.github.io/2017/07/24/nodejs/nodejs-02-install/">Node.js 系列學習日誌#2 - Node.js 安裝配置</a>」</p>
-<h3 id="安裝-Gulp"><a href="#安裝-Gulp" class="headerlink" title="安裝 Gulp"></a>安裝 Gulp</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sudo npm install gulp -g</span><br></pre></td></tr></table></figure>
+<h3 id="安裝-Gulp"><a href="#安裝-Gulp" class="headerlink" title="安裝 Gulp"></a>安裝 Gulp</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sudo npm install gulp -g</span><br></pre></td></tr></table></figure>
 <p>請先確認 nodejs, npm, gulp 是否有正常安裝，我們可以驗證一下版本</p>
 <p><img src="/images/javascript/7.png" alt></p>
 <h3 id="建立專案"><a href="#建立專案" class="headerlink" title="建立專案"></a>建立專案</h3><p>請先建立一個資料夾，這裡叫做 gulptest 的資料夾，這裡面包含：</p>
@@ -213,14 +213,14 @@
 </li>
 </ul>
 <p>接著我們在資料夾下安裝 Gulp 套件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm install gulp --save-dev</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm install gulp --save-dev</span><br></pre></td></tr></table></figure>
 <p>在這邊它會自動建立 node_module 永久性的資料夾，裡面包含被安裝的 gulp</p>
 <p><img src="/images/javascript/8.png" alt></p>
 <p>最後先在 gulptest 資料夾下建立空的 gulpfile.js 檔案，之後會介紹如何使用</p>
 <h3 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h3><p>我們需要安裝與配置一個套件來執行任務，在這裡做個簡單的例子就使用一套 jshint 套件，請輸入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm install gulp-jshint --save-dev</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm install gulp-jshint --save-dev</span><br></pre></td></tr></table></figure>
 <p>然後開啟剛才建立好的 gulpfile.js，建立一個名叫 imagemin 的任務。請寫以下程式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// include gulp</span><br><span class="line">var gulp = require(&apos;gulp&apos;);</span><br><span class="line"></span><br><span class="line">gulp.task(&apos;imagemin&apos;, function() &#123;</span><br><span class="line">  var imgSrc = &apos;./src/images/**/*&apos;,</span><br><span class="line">      imgDst = &apos;./build/images&apos;;</span><br><span class="line"></span><br><span class="line">  gulp.src(imgSrc)</span><br><span class="line">    .pipe(changed(imgDst))</span><br><span class="line">    .pipe(imagemin())</span><br><span class="line">    .pipe(gulp.dest(imgDst));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// include gulp</span><br><span class="line">var gulp = require(&apos;gulp&apos;);</span><br><span class="line"></span><br><span class="line">gulp.task(&apos;imagemin&apos;, function() &#123;</span><br><span class="line">  var imgSrc = &apos;./src/images/**/*&apos;,</span><br><span class="line">      imgDst = &apos;./build/images&apos;;</span><br><span class="line"></span><br><span class="line">  gulp.src(imgSrc)</span><br><span class="line">    .pipe(changed(imgDst))</span><br><span class="line">    .pipe(imagemin())</span><br><span class="line">    .pipe(gulp.dest(imgDst));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>我在 /src/images/ 放了三張圖 (隨便到 google design 抓了三張圖，暫時找不到照片就先拿很小kb數來練啦～)</p>
 <ul>
 <li><code>components-bottomsheet-for-mobile-1a_large_mdpi.png (31kb)</code></li>
@@ -229,7 +229,7 @@
 </ul>
 <p><img src="/images/javascript/9.png" alt></p>
 <p>gulpfile.js 存檔之後用以下的命令執行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$gulp imagemin</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$gulp imagemin</span><br></pre></td></tr></table></figure>
 <p><img src="/images/javascript/10.png" alt></p>
 <p>注意看執行結果的最後一行，上面寫 gulp-imagemin: Minified 3 images (saved 11.23 KB - 19.5%)，意思就是節省了 11.23KB, 總體省了 19.5%</p>
 <ul>
@@ -270,7 +270,7 @@
 
 
 
-<div class="column is-4-tablet is-4-desktop is-4-widescreen  has-order-1 column-left ">
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
     
         
 <div class="card widget">
@@ -481,6 +481,426 @@
     </div>
 </div>
     
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/03/06/vuejs/vuejs-googlesheets-api/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/vuejs/wolfe77.png" alt="Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-06T10:07:51.000Z">2019-03-06</time></div>
+                    <a href="/2019/03/06/vuejs/vuejs-googlesheets-api/" class="has-link-black-ter is-size-6">Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/02/27/tools/postman-api-tools/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/tools/1_QOx_tPV5wJnhTzAGhfIiLA.png" alt="Postman - Restful API 測試管理工具">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-27T01:47:00.000Z">2019-02-27</time></div>
+                    <a href="/2019/02/27/tools/postman-api-tools/" class="has-link-black-ter is-size-6">Postman - Restful API 測試管理工具</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在 Mac OSX 使用 RVM 升級 Ruby V2.5.1">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
+                    <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="has-link-black-ter is-size-6">在 Mac OSX 使用 RVM 升級 Ruby V2.5.1</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Ruby/">Ruby</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/08/02/tools/slate-api-document/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/tools/20180802-1.png" alt="Slate - 為你打造漂亮的 API 文件">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
+                    <a href="/2018/08/02/tools/slate-api-document/" class="has-link-black-ter is-size-6">Slate - 為你打造漂亮的 API 文件</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/07/26/web/how-to-deply-redmine-to-heroku/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="部署 Redmine 專案管理追蹤系統到 Heroku 平台">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-07-26T14:07:51.000Z">2018-07-26</time></div>
+                    <a href="/2018/07/26/web/how-to-deply-redmine-to-heroku/" class="has-link-black-ter is-size-6">部署 Redmine 專案管理追蹤系統到 Heroku 平台</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/網站/">網站</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                標籤
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/API/">
+                        <span class="tag">API</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Apache/">
+                        <span class="tag">Apache</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Google-Material-Design/">
+                        <span class="tag">Google Material Design</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Gulp-js/">
+                        <span class="tag">Gulp.js</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Heroku/">
+                        <span class="tag">Heroku</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Javascript/">
+                        <span class="tag">Javascript</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Mac/">
+                        <span class="tag">Mac</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Markdown/">
+                        <span class="tag">Markdown</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MySQL/">
+                        <span class="tag">MySQL</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Node-js/">
+                        <span class="tag">Node.js</span>
+                        <span class="tag is-grey">31</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python/">
+                        <span class="tag">Python</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/R/">
+                        <span class="tag">R</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Redmine/">
+                        <span class="tag">Redmine</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Ruby/">
+                        <span class="tag">Ruby</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Ubuntu/">
+                        <span class="tag">Ubuntu</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue/">
+                        <span class="tag">Vue</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/api/">
+                        <span class="tag">api</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/apple/">
+                        <span class="tag">apple</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/bower/">
+                        <span class="tag">bower</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/data-mining/">
+                        <span class="tag">data mining</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ejs/">
+                        <span class="tag">ejs</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/excel/">
+                        <span class="tag">excel</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/express/">
+                        <span class="tag">express</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/forever/">
+                        <span class="tag">forever</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/fs/">
+                        <span class="tag">fs</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/gitbook/">
+                        <span class="tag">gitbook</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jade/">
+                        <span class="tag">jade</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/json/">
+                        <span class="tag">json</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/macbook/">
+                        <span class="tag">macbook</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/meteor/">
+                        <span class="tag">meteor</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mongodb/">
+                        <span class="tag">mongodb</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql/">
+                        <span class="tag">mysql</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nodejs/">
+                        <span class="tag">nodejs</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nodemailer/">
+                        <span class="tag">nodemailer</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/npm/">
+                        <span class="tag">npm</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nvm/">
+                        <span class="tag">nvm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/package/">
+                        <span class="tag">package</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/socket-io/">
+                        <span class="tag">socket.io</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/丸閱讀/">
+                        <span class="tag">丸閱讀</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/投資/">
+                        <span class="tag">投資</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/鐵人賽/">
+                        <span class="tag">鐵人賽</span>
+                        <span class="tag is-grey">30</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
         
 <div class="card widget">
     <div class="card-content">
@@ -528,25 +948,6 @@
         
         <article class="media">
             
-            <a href="/2018/08/02/tools/slate-api-document/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/tools/20180802-1.png" alt="Slate - 為你打造漂亮的 API 文件">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
-                    <a href="/2018/08/02/tools/slate-api-document/" class="has-link-black-ter is-size-6">Slate - 為你打造漂亮的 API 文件</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="在 Mac OSX 使用 RVM 升級 Ruby V2.5.1">
@@ -559,6 +960,25 @@
                     <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="has-link-black-ter is-size-6">在 Mac OSX 使用 RVM 升級 Ruby V2.5.1</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Ruby/">Ruby</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/08/02/tools/slate-api-document/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/tools/20180802-1.png" alt="Slate - 為你打造漂亮的 API 文件">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
+                    <a href="/2018/08/02/tools/slate-api-document/" class="has-link-black-ter is-size-6">Slate - 為你打造漂亮的 API 文件</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
                     </p>
                 </div>
             </div>
@@ -888,13 +1308,8 @@
 </div>
     
     
-        <div class="column-right-shadow is-hidden-widescreen ">
-        
-        </div>
-    
 </div>
 
-                
             </div>
         </div>
     </section>

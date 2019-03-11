@@ -93,7 +93,7 @@
 
 <link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
-<body class="is-2-column">
+<body class="is-3-column">
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar navbar-main">
     <div class="container">
         <div class="navbar-brand is-flex-center">
@@ -144,7 +144,7 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main"><div class="card">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
     
     <div class="card-content article ">
         
@@ -174,28 +174,28 @@
         </h1>
         <div class="content">
             <p>在 Ubuntu 16.04 作業系統版本下，我們需要使用  <code>apt</code> 包管理器，在安裝 Node.js 之前先安裝 <code>npm</code> ，也就是 Node.js 包管理器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get install nodejs</span><br><span class="line">$ sudo apt-get install npm</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get install nodejs</span><br><span class="line">$ sudo apt-get install npm</span><br></pre></td></tr></table></figure>
 <p>接著使用 <code>n</code> 來管理 nodejs 版本 <a href="https://github.com/tj/n" target="_blank" rel="noopener">https://github.com/tj/n</a> ，既然有了 <code>node</code> 最簡單的安裝 n 的方式是 <code>npm</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g n</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g n</span><br></pre></td></tr></table></figure>
 <p>如果安裝出現了以下的錯誤</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g n</span><br><span class="line">npm http GET https://registry.npmjs.org/n</span><br><span class="line">npm http GET https://registry.npmjs.org/n</span><br><span class="line">npm http GET https://registry.npmjs.org/n</span><br><span class="line">npm ERR! Error: CERT_UNTRUSTED</span><br><span class="line">npm ERR!     at SecurePair.&lt;anonymous&gt; (tls.js:1370:32)</span><br><span class="line">npm ERR!     at SecurePair.EventEmitter.emit (events.js:92:17)</span><br><span class="line">npm ERR!     at SecurePair.maybeInitFinished (tls.js:982:10)</span><br><span class="line">npm ERR!     at CleartextStream.read [as _read] (tls.js:469:13)</span><br><span class="line">npm ERR!     at CleartextStream.Readable.read (_stream_readable.js:320:10)</span><br><span class="line">npm ERR!     at EncryptedStream.write [as _write] (tls.js:366:25)</span><br><span class="line">npm ERR!     at doWrite (_stream_writable.js:223:10)</span><br><span class="line">npm ERR!     at writeOrBuffer (_stream_writable.js:213:5)</span><br><span class="line">npm ERR!     at EncryptedStream.Writable.write (_stream_writable.js:180:11)</span><br><span class="line">npm ERR!     at write (_stream_readable.js:583:24)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g n</span><br><span class="line">npm http GET https://registry.npmjs.org/n</span><br><span class="line">npm http GET https://registry.npmjs.org/n</span><br><span class="line">npm http GET https://registry.npmjs.org/n</span><br><span class="line">npm ERR! Error: CERT_UNTRUSTED</span><br><span class="line">npm ERR!     at SecurePair.&lt;anonymous&gt; (tls.js:1370:32)</span><br><span class="line">npm ERR!     at SecurePair.EventEmitter.emit (events.js:92:17)</span><br><span class="line">npm ERR!     at SecurePair.maybeInitFinished (tls.js:982:10)</span><br><span class="line">npm ERR!     at CleartextStream.read [as _read] (tls.js:469:13)</span><br><span class="line">npm ERR!     at CleartextStream.Readable.read (_stream_readable.js:320:10)</span><br><span class="line">npm ERR!     at EncryptedStream.write [as _write] (tls.js:366:25)</span><br><span class="line">npm ERR!     at doWrite (_stream_writable.js:223:10)</span><br><span class="line">npm ERR!     at writeOrBuffer (_stream_writable.js:213:5)</span><br><span class="line">npm ERR!     at EncryptedStream.Writable.write (_stream_writable.js:180:11)</span><br><span class="line">npm ERR!     at write (_stream_readable.js:583:24)</span><br></pre></td></tr></table></figure>
 <p>那麼可以用以下命令繞過 <code>https</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm config set strict-ssl false</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm config set strict-ssl false</span><br></pre></td></tr></table></figure>
 <p>接著在重新安裝一次 <code>n</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo npm cache clean -f</span><br><span class="line">$ sudo npm install -g n</span><br><span class="line">$ sudo n stable</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo npm cache clean -f</span><br><span class="line">$ sudo npm install -g n</span><br><span class="line">$ sudo n stable</span><br></pre></td></tr></table></figure>
 <p>安裝完畢之後，輸入以下命令以確定安裝的版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">## 查看 n 版本</span><br><span class="line">$ n -V</span><br><span class="line"></span><br><span class="line">## Output</span><br><span class="line">2.1.7</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">## 查看 node 版本</span><br><span class="line">$ node -v</span><br><span class="line"></span><br><span class="line">## Output</span><br><span class="line">v10.0.0</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">## 查看 npm 版本</span><br><span class="line">$ npm -v</span><br><span class="line"></span><br><span class="line">## Output</span><br><span class="line">1.3.10</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">## 查看 n 版本</span><br><span class="line">$ n -V</span><br><span class="line"></span><br><span class="line">## Output</span><br><span class="line">2.1.7</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">## 查看 node 版本</span><br><span class="line">$ node -v</span><br><span class="line"></span><br><span class="line">## Output</span><br><span class="line">v10.0.0</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">## 查看 npm 版本</span><br><span class="line">$ npm -v</span><br><span class="line"></span><br><span class="line">## Output</span><br><span class="line">1.3.10</span><br></pre></td></tr></table></figure>
 <p>接著，也需要安裝 Yarn 來管理套件，它是一套 Javascript 套件管理工具，到這邊想說不是已經有 <code>npm</code>，為何還需要 <code>yarn</code> ?， 這是因為使用 <code>npm</code> 最困擾的地方就是安裝速度比較慢，Yarn 則是快速、可靠又安全的依賴管理。（用過都說讚…），那麼底下就輸入命令安裝 Yarn</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -</span><br><span class="line">$ sudo apt-get update &amp;&amp; sudo apt-get install yarn</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -</span><br><span class="line">$ sudo apt-get update &amp;&amp; sudo apt-get install yarn</span><br></pre></td></tr></table></figure>
 <p>測試 Yarn 安裝狀況</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn --version</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn --version</span><br></pre></td></tr></table></figure>
 <p>但是如果出現錯誤訊息寫 <code>The program &#39;yarn&#39; is currently not installed. To run &#39;yarn&#39; please ask your administrator to install the package &#39;cmdtest&#39;</code> 代表著需要安裝 <code>cmdtest</code> 套件</p>
 <p>輸入並且安裝 cmdtest</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install cmdtest</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install cmdtest</span><br></pre></td></tr></table></figure>
 <p>再做一次 <code>$ yarn --version</code> 確認後，就成功出現版本號碼</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">## Output:</span><br><span class="line">0.10</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">## Output:</span><br><span class="line">0.10</span><br></pre></td></tr></table></figure>
 <h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ul>
 <li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-16-04" target="_blank" rel="noopener">How To Install Node.js on Ubuntu16.04</a></li>
 <li><a href="https://stackoverflow.com/questions/21855035/ssl-error-cert-untrusted-while-using-npm-command" target="_blank" rel="noopener">SSL Error: CERT_UNTRUSTED while using npm command@stackoverflow</a></li>
@@ -274,7 +274,7 @@
 
 
 
-<div class="column is-4-tablet is-4-desktop is-4-widescreen  has-order-1 column-left ">
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
     
         
 <div class="card widget">
@@ -485,6 +485,426 @@
     </div>
 </div>
     
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/03/06/vuejs/vuejs-googlesheets-api/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/vuejs/wolfe77.png" alt="Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-06T10:07:51.000Z">2019-03-06</time></div>
+                    <a href="/2019/03/06/vuejs/vuejs-googlesheets-api/" class="has-link-black-ter is-size-6">Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/02/27/tools/postman-api-tools/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/tools/1_QOx_tPV5wJnhTzAGhfIiLA.png" alt="Postman - Restful API 測試管理工具">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-27T01:47:00.000Z">2019-02-27</time></div>
+                    <a href="/2019/02/27/tools/postman-api-tools/" class="has-link-black-ter is-size-6">Postman - Restful API 測試管理工具</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在 Mac OSX 使用 RVM 升級 Ruby V2.5.1">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
+                    <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="has-link-black-ter is-size-6">在 Mac OSX 使用 RVM 升級 Ruby V2.5.1</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Ruby/">Ruby</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/08/02/tools/slate-api-document/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/tools/20180802-1.png" alt="Slate - 為你打造漂亮的 API 文件">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
+                    <a href="/2018/08/02/tools/slate-api-document/" class="has-link-black-ter is-size-6">Slate - 為你打造漂亮的 API 文件</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/07/26/web/how-to-deply-redmine-to-heroku/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="部署 Redmine 專案管理追蹤系統到 Heroku 平台">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-07-26T14:07:51.000Z">2018-07-26</time></div>
+                    <a href="/2018/07/26/web/how-to-deply-redmine-to-heroku/" class="has-link-black-ter is-size-6">部署 Redmine 專案管理追蹤系統到 Heroku 平台</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/網站/">網站</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                標籤
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/API/">
+                        <span class="tag">API</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Apache/">
+                        <span class="tag">Apache</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Google-Material-Design/">
+                        <span class="tag">Google Material Design</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Gulp-js/">
+                        <span class="tag">Gulp.js</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Heroku/">
+                        <span class="tag">Heroku</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Javascript/">
+                        <span class="tag">Javascript</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Mac/">
+                        <span class="tag">Mac</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Markdown/">
+                        <span class="tag">Markdown</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MySQL/">
+                        <span class="tag">MySQL</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Node-js/">
+                        <span class="tag">Node.js</span>
+                        <span class="tag is-grey">31</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python/">
+                        <span class="tag">Python</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/R/">
+                        <span class="tag">R</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Redmine/">
+                        <span class="tag">Redmine</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Ruby/">
+                        <span class="tag">Ruby</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Ubuntu/">
+                        <span class="tag">Ubuntu</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue/">
+                        <span class="tag">Vue</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/api/">
+                        <span class="tag">api</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/apple/">
+                        <span class="tag">apple</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/bower/">
+                        <span class="tag">bower</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/data-mining/">
+                        <span class="tag">data mining</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ejs/">
+                        <span class="tag">ejs</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/excel/">
+                        <span class="tag">excel</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/express/">
+                        <span class="tag">express</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/forever/">
+                        <span class="tag">forever</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/fs/">
+                        <span class="tag">fs</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/gitbook/">
+                        <span class="tag">gitbook</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jade/">
+                        <span class="tag">jade</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/json/">
+                        <span class="tag">json</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/macbook/">
+                        <span class="tag">macbook</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/meteor/">
+                        <span class="tag">meteor</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mongodb/">
+                        <span class="tag">mongodb</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql/">
+                        <span class="tag">mysql</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nodejs/">
+                        <span class="tag">nodejs</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nodemailer/">
+                        <span class="tag">nodemailer</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/npm/">
+                        <span class="tag">npm</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nvm/">
+                        <span class="tag">nvm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/package/">
+                        <span class="tag">package</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/socket-io/">
+                        <span class="tag">socket.io</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/丸閱讀/">
+                        <span class="tag">丸閱讀</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/投資/">
+                        <span class="tag">投資</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/鐵人賽/">
+                        <span class="tag">鐵人賽</span>
+                        <span class="tag is-grey">30</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
         
 <div class="card widget">
     <div class="card-content">
@@ -532,25 +952,6 @@
         
         <article class="media">
             
-            <a href="/2018/08/02/tools/slate-api-document/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/tools/20180802-1.png" alt="Slate - 為你打造漂亮的 API 文件">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
-                    <a href="/2018/08/02/tools/slate-api-document/" class="has-link-black-ter is-size-6">Slate - 為你打造漂亮的 API 文件</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="在 Mac OSX 使用 RVM 升級 Ruby V2.5.1">
@@ -563,6 +964,25 @@
                     <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="has-link-black-ter is-size-6">在 Mac OSX 使用 RVM 升級 Ruby V2.5.1</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Ruby/">Ruby</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/08/02/tools/slate-api-document/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/tools/20180802-1.png" alt="Slate - 為你打造漂亮的 API 文件">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
+                    <a href="/2018/08/02/tools/slate-api-document/" class="has-link-black-ter is-size-6">Slate - 為你打造漂亮的 API 文件</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
                     </p>
                 </div>
             </div>
@@ -892,13 +1312,8 @@
 </div>
     
     
-        <div class="column-right-shadow is-hidden-widescreen ">
-        
-        </div>
-    
 </div>
 
-                
             </div>
         </div>
     </section>

@@ -88,7 +88,7 @@
 
 <link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
-<body class="is-2-column">
+<body class="is-3-column">
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar navbar-main">
     <div class="container">
         <div class="navbar-brand is-flex-center">
@@ -139,7 +139,7 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
     <div class="card">
     
     <div class="card-image">
@@ -162,7 +162,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    12 分鐘 閱讀文 (大約 1745 個字)
+                    12 分鐘 閱讀文 (大約 1751 個字)
                 </span>
                 
                 
@@ -273,6 +273,77 @@
 
     <div class="card">
     
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Ruby/">Ruby</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    1 分鐘 閱讀文 (大約 204 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/">在 Mac OSX 使用 RVM 升級 Ruby V2.5.1</a>
+            
+        </h1>
+        <div class="content">
+            <p>RVM 是一套 Ruby 版本的管理工具，這裡頭包含 Ruby 的版本管理和 Gem 庫管理。本篇裡面使用 RVM 工具進行 Ruby 的升級。</p>
+<h2 id="RVM-Ruby-Version-Manager-安裝"><a href="#RVM-Ruby-Version-Manager-安裝" class="headerlink" title="RVM (Ruby Version Manager) 安裝"></a>RVM (Ruby Version Manager) 安裝</h2><ol>
+<li>RVM安装</li>
+</ol>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> curl -L get.rvm.io | bash -s stable</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>是否有完成安裝 RVM </li>
+</ol>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> rvm -v</span></span><br></pre></td></tr></table></figure>
+<p>結果顯示</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rvm 1.29.4 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]</span><br></pre></td></tr></table></figure>
+<h2 id="使用-RVM-升級-Ruby"><a href="#使用-RVM-升級-Ruby" class="headerlink" title="使用 RVM 升級 Ruby"></a>使用 RVM 升級 Ruby</h2><ol>
+<li>顯示目前的 Ruby 版本</li>
+</ol>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> ruby -v</span></span><br></pre></td></tr></table></figure>
+<p>顯示結果</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby 2.0.0p648 (2015-12-16 revision 53162) [universal.x86_64-darwin16]</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>安装 Ruby 2.5.1</li>
+</ol>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rvm install 2.5.1</span><br></pre></td></tr></table></figure>
+<p>安裝完畢之後，再用 <code>ruby -v</code> 檢查看看，是不是已經換成下面顯示的結果一樣已完成升級。</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-darwin16]</span><br></pre></td></tr></table></figure>
+<p>結果</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Linking /usr/local/Cellar/ruby/2.5.1... 3293 symlinks created</span><br></pre></td></tr></table></figure>
+<p>那麼，這樣子就安裝完畢了。</p>
+<p>參考：<br><a href="https://flinhong.com/2017/10/26/upgrade-ruby-on-mac/" target="_blank" rel="noopener">https://flinhong.com/2017/10/26/upgrade-ruby-on-mac/</a></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
     <div class="card-image">
         <a href="/2018/08/02/tools/slate-api-document/" class="image is-7by1">
             <img class="thumbnail" src="/images/tools/20180802-1.png" alt="Slate - 為你打造漂亮的 API 文件">
@@ -340,77 +411,6 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Ruby/">Ruby</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    1 分鐘 閱讀文 (大約 204 個字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/">在 Mac OSX 使用 RVM 升級 Ruby V2.5.1</a>
-            
-        </h1>
-        <div class="content">
-            <p>RVM 是一套 Ruby 版本的管理工具，這裡頭包含 Ruby 的版本管理和 Gem 庫管理。本篇裡面使用 RVM 工具進行 Ruby 的升級。</p>
-<h2 id="RVM-Ruby-Version-Manager-安裝"><a href="#RVM-Ruby-Version-Manager-安裝" class="headerlink" title="RVM (Ruby Version Manager) 安裝"></a>RVM (Ruby Version Manager) 安裝</h2><ol>
-<li>RVM安装</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl -L get.rvm.io | bash -s stable</span></span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>是否有完成安裝 RVM </li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> rvm -v</span></span><br></pre></td></tr></table></figure>
-<p>結果顯示</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rvm 1.29.4 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]</span><br></pre></td></tr></table></figure>
-<h2 id="使用-RVM-升級-Ruby"><a href="#使用-RVM-升級-Ruby" class="headerlink" title="使用 RVM 升級 Ruby"></a>使用 RVM 升級 Ruby</h2><ol>
-<li>顯示目前的 Ruby 版本</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ruby -v</span></span><br></pre></td></tr></table></figure>
-<p>顯示結果</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby 2.0.0p648 (2015-12-16 revision 53162) [universal.x86_64-darwin16]</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>安装 Ruby 2.5.1</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rvm install 2.5.1</span><br></pre></td></tr></table></figure>
-<p>安裝完畢之後，再用 <code>ruby -v</code> 檢查看看，是不是已經換成下面顯示的結果一樣已完成升級。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-darwin16]</span><br></pre></td></tr></table></figure>
-<p>結果</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Linking /usr/local/Cellar/ruby/2.5.1... 3293 symlinks created</span><br></pre></td></tr></table></figure>
-<p>那麼，這樣子就安裝完畢了。</p>
-<p>參考：<br><a href="https://flinhong.com/2017/10/26/upgrade-ruby-on-mac/" target="_blank" rel="noopener">https://flinhong.com/2017/10/26/upgrade-ruby-on-mac/</a></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2018-07-26T14:07:51.000Z">2018-07-26</time>
                 
                 <div class="level-item">
@@ -437,31 +437,31 @@
             <p>在本篇的介紹使用 Redmine 的好工具，部署到 Heroku 平台上面，屆時就能省去不少設定網路組態，推上 Heroku 後得到的網址便能直接透過瀏覽器開啟 Redmine 應用程式。</p>
 <h2 id="Redmin-介紹"><a href="#Redmin-介紹" class="headerlink" title="Redmin 介紹"></a>Redmin 介紹</h2><p>Redmine 是一套開源的專案管理追蹤系統，大部分都是用來做系統開發的進度追蹤、問題的管理，在很多專案上的問題追蹤、通知、管理和版本管控都非常方便，替你的工作流程幫助非常大。而這套平台的操作也相當的靈活，甚至還可以設定開放 restful api 方式，可以用程式來呼叫使用，能讓使用這套平台的團隊建立一個良好的管理機制。</p>
 <h2 id="從-Github-複製-Redmine-專案"><a href="#從-Github-複製-Redmine-專案" class="headerlink" title="從 Github 複製 Redmine 專案"></a>從 Github 複製 Redmine 專案</h2><p>找一個目錄執行以下的指令，將 redmine 複製一份下來，並且找個新的版本，這裡用的是 <code>3.4-stable</code> 版本，你也可以在 Github 找其他的 Redmine 版本 <a href="https://github.com/redmine/redmine" target="_blank" rel="noopener">GitHub</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/redmine/redmine.git -b 3.4-stable</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/redmine/redmine.git -b 3.4-stable</span><br></pre></td></tr></table></figure>
 <p>複製完畢之後會多一個 <code>redmine</code> 資料夾，就直接進入資料夾內</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cd redmine</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cd redmine</span><br></pre></td></tr></table></figure>
 <h2 id="調整-移除項目設定"><a href="#調整-移除項目設定" class="headerlink" title="調整/移除項目設定"></a>調整/移除項目設定</h2><p>我們需要移除幾個項目，首先是 <code>.gitignore</code> 檔案，將以下的檔案路徑項目都註解起來</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Gemfile.lock</span><br><span class="line">Gemfile.local</span><br><span class="line">public/plugin_assets </span><br><span class="line">config/initializers/session_store.rb </span><br><span class="line">config/initializers/secret_token.rb </span><br><span class="line">config/configuration.yml </span><br><span class="line">config/email.yml</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Gemfile.lock</span><br><span class="line">Gemfile.local</span><br><span class="line">public/plugin_assets </span><br><span class="line">config/initializers/session_store.rb </span><br><span class="line">config/initializers/secret_token.rb </span><br><span class="line">config/configuration.yml </span><br><span class="line">config/email.yml</span><br></pre></td></tr></table></figure>
 <p>再來是 <code>Gemfile</code> 檔案，也把以下這段註解起來</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">database_file = File.join(File.dirname(__FILE__), &quot;config/database.yml&quot;)</span><br><span class="line">if File.exist?(database_file)</span><br><span class="line">  database_config = YAML::load(ERB.new(IO.read(database_file)).result)</span><br><span class="line">  adapters = database_config.values.map &#123;|c| c[&apos;adapter&apos;]&#125;.compact.uniq</span><br><span class="line">  if adapters.any?</span><br><span class="line">    adapters.each do |adapter|</span><br><span class="line">      case adapter</span><br><span class="line">      when &apos;mysql2&apos;</span><br><span class="line">        gem &quot;mysql2&quot;, &quot;~&gt; 0.4.6&quot;, :platforms =&gt; [:mri, :mingw, :x64_mingw]</span><br><span class="line">      when /postgresql/</span><br><span class="line">        gem &quot;pg&quot;, &quot;~&gt; 0.18.1&quot;, :platforms =&gt; [:mri, :mingw, :x64_mingw]</span><br><span class="line">      when /sqlite3/</span><br><span class="line">        gem &quot;sqlite3&quot;, (RUBY_VERSION &lt; &quot;2.0&quot; &amp;&amp; RUBY_PLATFORM =~ /mingw/ ? &quot;1.3.12&quot; : &quot;~&gt;1.3.12&quot;),</span><br><span class="line">                       :platforms =&gt; [:mri, :mingw, :x64_mingw]</span><br><span class="line">      when /sqlserver/</span><br><span class="line">        gem &quot;tiny_tds&quot;, (RUBY_VERSION &gt;= &quot;2.0&quot; ? &quot;~&gt; 1.0.5&quot; : &quot;~&gt; 0.7.0&quot;), :platforms =&gt; [:mri, :mingw, :x64_mingw]</span><br><span class="line">        gem &quot;activerecord-sqlserver-adapter&quot;, :platforms =&gt; [:mri, :mingw, :x64_mingw]</span><br><span class="line">      else</span><br><span class="line">        warn(&quot;Unknown database adapter `#&#123;adapter&#125;` found in config/database.yml, use Gemfile.local to load your own database gems&quot;)</span><br><span class="line">      end</span><br><span class="line">    end</span><br><span class="line">  else</span><br><span class="line">    warn(&quot;No adapter found in config/database.yml, please configure it first&quot;)</span><br><span class="line">  end</span><br><span class="line">else</span><br><span class="line">  warn(&quot;Please configure your config/database.yml first&quot;)</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">database_file = File.join(File.dirname(__FILE__), &quot;config/database.yml&quot;)</span><br><span class="line">if File.exist?(database_file)</span><br><span class="line">  database_config = YAML::load(ERB.new(IO.read(database_file)).result)</span><br><span class="line">  adapters = database_config.values.map &#123;|c| c[&apos;adapter&apos;]&#125;.compact.uniq</span><br><span class="line">  if adapters.any?</span><br><span class="line">    adapters.each do |adapter|</span><br><span class="line">      case adapter</span><br><span class="line">      when &apos;mysql2&apos;</span><br><span class="line">        gem &quot;mysql2&quot;, &quot;~&gt; 0.4.6&quot;, :platforms =&gt; [:mri, :mingw, :x64_mingw]</span><br><span class="line">      when /postgresql/</span><br><span class="line">        gem &quot;pg&quot;, &quot;~&gt; 0.18.1&quot;, :platforms =&gt; [:mri, :mingw, :x64_mingw]</span><br><span class="line">      when /sqlite3/</span><br><span class="line">        gem &quot;sqlite3&quot;, (RUBY_VERSION &lt; &quot;2.0&quot; &amp;&amp; RUBY_PLATFORM =~ /mingw/ ? &quot;1.3.12&quot; : &quot;~&gt;1.3.12&quot;),</span><br><span class="line">                       :platforms =&gt; [:mri, :mingw, :x64_mingw]</span><br><span class="line">      when /sqlserver/</span><br><span class="line">        gem &quot;tiny_tds&quot;, (RUBY_VERSION &gt;= &quot;2.0&quot; ? &quot;~&gt; 1.0.5&quot; : &quot;~&gt; 0.7.0&quot;), :platforms =&gt; [:mri, :mingw, :x64_mingw]</span><br><span class="line">        gem &quot;activerecord-sqlserver-adapter&quot;, :platforms =&gt; [:mri, :mingw, :x64_mingw]</span><br><span class="line">      else</span><br><span class="line">        warn(&quot;Unknown database adapter `#&#123;adapter&#125;` found in config/database.yml, use Gemfile.local to load your own database gems&quot;)</span><br><span class="line">      end</span><br><span class="line">    end</span><br><span class="line">  else</span><br><span class="line">    warn(&quot;No adapter found in config/database.yml, please configure it first&quot;)</span><br><span class="line">  end</span><br><span class="line">else</span><br><span class="line">  warn(&quot;Please configure your config/database.yml first&quot;)</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
 <p>在同樣的 <code>Gemfile</code> 的文件底下 <code>新增</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">group :development, :test do</span><br><span class="line">  gem &apos;sqlite3&apos;, &apos;1.3.8&apos;</span><br><span class="line">  gem &apos;rspec-rails&apos;, &apos;2.13.1&apos;</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">group :production do</span><br><span class="line">  gem &apos;pg&apos;, &apos;0.15.1&apos;</span><br><span class="line">  gem &apos;rails_12factor&apos;</span><br><span class="line">  gem &apos;thin&apos; # change this if you want to use other rack web server</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">group :development, :test do</span><br><span class="line">  gem &apos;sqlite3&apos;, &apos;1.3.8&apos;</span><br><span class="line">  gem &apos;rspec-rails&apos;, &apos;2.13.1&apos;</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">group :production do</span><br><span class="line">  gem &apos;pg&apos;, &apos;0.15.1&apos;</span><br><span class="line">  gem &apos;rails_12factor&apos;</span><br><span class="line">  gem &apos;thin&apos; # change this if you want to use other rack web server</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
 <p>Gemfile 的第一行的 <code>sourçe  https://www.rubygems.org</code> 改成 <code>source  http://www.rubygems.org</code></p>
 <h2 id="安裝應用程式所有依存的套件"><a href="#安裝應用程式所有依存的套件" class="headerlink" title="安裝應用程式所有依存的套件"></a>安裝應用程式所有依存的套件</h2><p>在上面的 redmine 文件的組態設定一切都改好之後，就能緊接著執行 <code>bundle install</code>，由於 Rails 用了一套 Bundler 工具可以檢查與安裝所有依存的套件，所以如果沒有 Bundler ，需要執行 <code>gem install bundler</code> 安裝。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bundle install --without production test</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bundle install --without production test</span><br></pre></td></tr></table></figure>
 <p>如果…. <code>bundle install</code> 過程中出現以下錯誤</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">The dependency tzinfo-data (&gt;= 0) will be unused by any of the platforms Bundler is installing for. Bundler is installing for ruby but the dependency is only for x86-mingw32, x64-mingw32, x86-mswin32. To add those platforms to the bundle, run `bundle lock --add-platform x86-mingw32 x64-mingw32 x86-mswin32`.</span><br><span class="line">Fetching source index from https://rubygems.org/</span><br><span class="line"></span><br><span class="line">Retrying fetcher due to error (2/4): Bundler::HTTPError Could not fetch specs from https://rubygems.org/</span><br><span class="line">Retrying fetcher due to error (3/4): Bundler::HTTPError Could not fetch specs from https://rubygems.org/</span><br><span class="line">Retrying fetcher due to error (4/4): Bundler::HTTPError Could not fetch specs from https://rubygems.org/</span><br><span class="line">Could not fetch specs from https://rubygems.org/</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">The dependency tzinfo-data (&gt;= 0) will be unused by any of the platforms Bundler is installing for. Bundler is installing for ruby but the dependency is only for x86-mingw32, x64-mingw32, x86-mswin32. To add those platforms to the bundle, run `bundle lock --add-platform x86-mingw32 x64-mingw32 x86-mswin32`.</span><br><span class="line">Fetching source index from https://rubygems.org/</span><br><span class="line"></span><br><span class="line">Retrying fetcher due to error (2/4): Bundler::HTTPError Could not fetch specs from https://rubygems.org/</span><br><span class="line">Retrying fetcher due to error (3/4): Bundler::HTTPError Could not fetch specs from https://rubygems.org/</span><br><span class="line">Retrying fetcher due to error (4/4): Bundler::HTTPError Could not fetch specs from https://rubygems.org/</span><br><span class="line">Could not fetch specs from https://rubygems.org/</span><br></pre></td></tr></table></figure>
 <p>那麼可以照錯誤訊息指示的方式解決。以下是我遇到安裝過程中有誤的時候的操作步驟。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ bundle lock --add-platform x86-mingw32 x64-mingw32 x86-mswin32</span><br><span class="line">$ sudo gem install -n /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/bin/gem</span><br><span class="line">$ bundle install --path vendor/bundle</span><br><span class="line">$ bundle config build.nokogiri --use-system-libraries</span><br><span class="line">$ brew install sqlite3</span><br><span class="line">$ brew upgrade sqlite</span><br><span class="line">$ gem install sqlite3 -v &apos;1.3.13&apos; --source &apos;http://rubygems.org/&apos;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ bundle lock --add-platform x86-mingw32 x64-mingw32 x86-mswin32</span><br><span class="line">$ sudo gem install -n /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/bin/gem</span><br><span class="line">$ bundle install --path vendor/bundle</span><br><span class="line">$ bundle config build.nokogiri --use-system-libraries</span><br><span class="line">$ brew install sqlite3</span><br><span class="line">$ brew upgrade sqlite</span><br><span class="line">$ gem install sqlite3 -v &apos;1.3.13&apos; --source &apos;http://rubygems.org/&apos;</span><br></pre></td></tr></table></figure>
 <h2 id="設定-config-application-rb"><a href="#設定-config-application-rb" class="headerlink" title="設定 config/application.rb"></a>設定 <code>config/application.rb</code></h2><p>開啟 <code>config/application.rb</code> ，新增一行內容如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">module RedmineApp</span><br><span class="line">  class Application &lt; Rails::Application</span><br><span class="line">    config.assets.initialize_on_precompile = false  # 新增這一行</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">module RedmineApp</span><br><span class="line">  class Application &lt; Rails::Application</span><br><span class="line">    config.assets.initialize_on_precompile = false  # 新增這一行</span><br></pre></td></tr></table></figure>
 <h2 id="設定-config-environment-rb"><a href="#設定-config-environment-rb" class="headerlink" title="設定 config/environment.rb"></a>設定 <code>config/environment.rb</code></h2><p>開啟 <code>config/environment.rb</code> ，將 <code>exit 1</code> 註解起來</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># Load the Rails application</span><br><span class="line">require File.expand_path(&apos;../application&apos;, __FILE__)</span><br><span class="line"></span><br><span class="line"># Make sure there&apos;s no plugin in vendor/plugin before starting</span><br><span class="line">vendor_plugins_dir = File.join(Rails.root, &quot;vendor&quot;, &quot;plugins&quot;)</span><br><span class="line">if Dir.glob(File.join(vendor_plugins_dir, &quot;*&quot;)).any?</span><br><span class="line">  $stderr.puts &quot;Plugins in vendor/plugins (#&#123;vendor_plugins_dir&#125;) are no longer allowed. &quot; +</span><br><span class="line">    &quot;Please, put your Redmine plugins in the `plugins` directory at the root of your &quot; +</span><br><span class="line">    &quot;Redmine directory (#&#123;File.join(Rails.root, &quot;plugins&quot;)&#125;)&quot;</span><br><span class="line">  # exit 1  &gt;&gt; 註解這一行</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line"># Initialize the Rails application</span><br><span class="line">Rails.application.initialize!</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># Load the Rails application</span><br><span class="line">require File.expand_path(&apos;../application&apos;, __FILE__)</span><br><span class="line"></span><br><span class="line"># Make sure there&apos;s no plugin in vendor/plugin before starting</span><br><span class="line">vendor_plugins_dir = File.join(Rails.root, &quot;vendor&quot;, &quot;plugins&quot;)</span><br><span class="line">if Dir.glob(File.join(vendor_plugins_dir, &quot;*&quot;)).any?</span><br><span class="line">  $stderr.puts &quot;Plugins in vendor/plugins (#&#123;vendor_plugins_dir&#125;) are no longer allowed. &quot; +</span><br><span class="line">    &quot;Please, put your Redmine plugins in the `plugins` directory at the root of your &quot; +</span><br><span class="line">    &quot;Redmine directory (#&#123;File.join(Rails.root, &quot;plugins&quot;)&#125;)&quot;</span><br><span class="line">  # exit 1  &gt;&gt; 註解這一行</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line"># Initialize the Rails application</span><br><span class="line">Rails.application.initialize!</span><br></pre></td></tr></table></figure>
 <p>最後，在應用程式上面需要建立一個權杖</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rake generate_secret_token</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rake generate_secret_token</span><br></pre></td></tr></table></figure>
 <h2 id="開始建立部署-Heroku"><a href="#開始建立部署-Heroku" class="headerlink" title="開始建立部署 Heroku"></a>開始建立部署 Heroku</h2><p>建立一個 heroku app 空的應用空間，在 heroku 新增 postgresql</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ heroku create &lt;&lt;YOUR_APP_NAME&gt;&gt;</span><br><span class="line">$ heroku addons:create heroku-postgresql</span><br><span class="line">$ heroku run rake db:migrate</span><br><span class="line">$ heroku run rake redmine:load_default_data</span><br></pre></td></tr></table></figure>
-<h2 id="把程式推上-Heroku"><a href="#把程式推上-Heroku" class="headerlink" title="把程式推上 Heroku"></a>把程式推上 Heroku</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git add --all</span><br><span class="line">$ git commit -am &quot;init&quot;</span><br><span class="line">$ git push heroku master</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ heroku create &lt;&lt;YOUR_APP_NAME&gt;&gt;</span><br><span class="line">$ heroku addons:create heroku-postgresql</span><br><span class="line">$ heroku run rake db:migrate</span><br><span class="line">$ heroku run rake redmine:load_default_data</span><br></pre></td></tr></table></figure>
+<h2 id="把程式推上-Heroku"><a href="#把程式推上-Heroku" class="headerlink" title="把程式推上 Heroku"></a>把程式推上 Heroku</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git add --all</span><br><span class="line">$ git commit -am &quot;init&quot;</span><br><span class="line">$ git push heroku master</span><br></pre></td></tr></table></figure>
 <h2 id="立刻看看-Redmine"><a href="#立刻看看-Redmine" class="headerlink" title="立刻看看 Redmine"></a>立刻看看 Redmine</h2><p>用瀏覽器打開或是輸入 <code>heroku open</code> 的話，就會看到 Redmine 已經被裝好了。OH YA.<br>一開始的初始帳號與密碼是 </p>
 <p>帳號：<code>admin</code><br>密碼：<code>admin</code></p>
 <p><img src="/images/web/20180727-1.png" alt></p>
@@ -521,12 +521,12 @@
         </h1>
         <div class="content">
             <h1 id="父組件傳值給子組件-使用-props-屬性"><a href="#父組件傳值給子組件-使用-props-屬性" class="headerlink" title="父組件傳值給子組件 (使用 props 屬性)"></a>父組件傳值給子組件 (使用 props 屬性)</h1><p>當需要做動態的綁定將父組件的資料傳給子組件的方式是 props，而 props 是單向傳遞<br>引入 <code>issue-create</code> 組件 (props 需要轉換相對應的 kebab-case (短橫線隔開) 方式命名</p>
-<h2 id="父組件"><a href="#父組件" class="headerlink" title="父組件"></a>父組件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;template lang=&quot;pug&quot;&gt;</span><br><span class="line">  div.dvIssue</span><br><span class="line">    issue-create(:info=&quot;info&quot;)</span><br><span class="line">&lt;/template&gt;	</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;coffee&quot;&gt;</span><br><span class="line">import IssueCreate from &apos;@/IssueCreate&apos;</span><br><span class="line">export default </span><br><span class="line">  name: &apos;IssueShow&apos;</span><br><span class="line">  components: &#123; </span><br><span class="line">    IssueCreate</span><br><span class="line">  &#125;</span><br><span class="line">  data: ()-&gt;</span><br><span class="line">    info: </span><br><span class="line">      msgVal: &apos;abc&apos;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="父組件"><a href="#父組件" class="headerlink" title="父組件"></a>父組件</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;template lang=&quot;pug&quot;&gt;</span><br><span class="line">  div.dvIssue</span><br><span class="line">    issue-create(:info=&quot;info&quot;)</span><br><span class="line">&lt;/template&gt;	</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;coffee&quot;&gt;</span><br><span class="line">import IssueCreate from &apos;@/IssueCreate&apos;</span><br><span class="line">export default </span><br><span class="line">  name: &apos;IssueShow&apos;</span><br><span class="line">  components: &#123; </span><br><span class="line">    IssueCreate</span><br><span class="line">  &#125;</span><br><span class="line">  data: ()-&gt;</span><br><span class="line">    info: </span><br><span class="line">      msgVal: &apos;abc&apos;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 <h2 id="子組件"><a href="#子組件" class="headerlink" title="子組件"></a>子組件</h2><p>接收時，就用 props 屬性</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;template lang=&quot;pug&quot;&gt;</span><br><span class="line">  div.dvIssueCreate</span><br><span class="line">    span &#123;&#123; info.msgVal &#125;&#125;</span><br><span class="line">&lt;/template&gt;	</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;coffee&quot;&gt;</span><br><span class="line">export default </span><br><span class="line">  name: &apos;IssueCreate&apos;</span><br><span class="line">  props:</span><br><span class="line">    info: </span><br><span class="line">      type: Object # 指定傳入的類型，如果類型不正確就會警告</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;template lang=&quot;pug&quot;&gt;</span><br><span class="line">  div.dvIssueCreate</span><br><span class="line">    span &#123;&#123; info.msgVal &#125;&#125;</span><br><span class="line">&lt;/template&gt;	</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;coffee&quot;&gt;</span><br><span class="line">export default </span><br><span class="line">  name: &apos;IssueCreate&apos;</span><br><span class="line">  props:</span><br><span class="line">    info: </span><br><span class="line">      type: Object # 指定傳入的類型，如果類型不正確就會警告</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 <h1 id="子組件傳值給父組件-emit"><a href="#子組件傳值給父組件-emit" class="headerlink" title="子組件傳值給父組件 ($emit)"></a>子組件傳值給父組件 ($emit)</h1><p>有因為props 是單向傳遞的，主要是為了避免子組件不小心修改父組件的狀態，造成可怕現象。所以若我們想在子組件通知父組件的話，可以透過觸發事件來通知父組件 $emit 方法。</p>
-<h2 id="父組件-1"><a href="#父組件-1" class="headerlink" title="父組件"></a>父組件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;template lang=&quot;pug&quot;&gt;</span><br><span class="line">  div.dvIssue</span><br><span class="line">    issue-create(v-on:issueState=&quot;onIssueCallback&quot;)</span><br><span class="line">&lt;/template&gt;	</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;coffee&quot;&gt;</span><br><span class="line">import IssueCreate from &apos;@/IssueCreate&apos;</span><br><span class="line">export default </span><br><span class="line">  name: &apos;Issue&apos;</span><br><span class="line">  components: &#123; </span><br><span class="line">    IssueCreate,</span><br><span class="line">  &#125;</span><br><span class="line">  methods:</span><br><span class="line">    onIssueCallback: (data)-&gt;</span><br><span class="line">      # 寫回傳後續的操作</span><br><span class="line">      console.log(data)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="子組件-1"><a href="#子組件-1" class="headerlink" title="子組件"></a>子組件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;template lang=&quot;pug&quot;&gt;</span><br><span class="line">	div.dvIssueCreate</span><br><span class="line">    v-btn(@click=&quot;onCreate()&quot;) 這是按鈕</span><br><span class="line">&lt;/template&gt;	</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;coffee&quot;&gt;</span><br><span class="line">export default </span><br><span class="line">  name: &apos;IssueCreate&apos;</span><br><span class="line">  methods:</span><br><span class="line">    onCreate: ()-&gt;</span><br><span class="line">      param = </span><br><span class="line">        data: &apos;Hello&apos;</span><br><span class="line">      @.$emit(&apos;issueState&apos;, param)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="父組件-1"><a href="#父組件-1" class="headerlink" title="父組件"></a>父組件</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;template lang=&quot;pug&quot;&gt;</span><br><span class="line">  div.dvIssue</span><br><span class="line">    issue-create(v-on:issueState=&quot;onIssueCallback&quot;)</span><br><span class="line">&lt;/template&gt;	</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;coffee&quot;&gt;</span><br><span class="line">import IssueCreate from &apos;@/IssueCreate&apos;</span><br><span class="line">export default </span><br><span class="line">  name: &apos;Issue&apos;</span><br><span class="line">  components: &#123; </span><br><span class="line">    IssueCreate,</span><br><span class="line">  &#125;</span><br><span class="line">  methods:</span><br><span class="line">    onIssueCallback: (data)-&gt;</span><br><span class="line">      # 寫回傳後續的操作</span><br><span class="line">      console.log(data)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="子組件-1"><a href="#子組件-1" class="headerlink" title="子組件"></a>子組件</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;template lang=&quot;pug&quot;&gt;</span><br><span class="line">	div.dvIssueCreate</span><br><span class="line">    v-btn(@click=&quot;onCreate()&quot;) 這是按鈕</span><br><span class="line">&lt;/template&gt;	</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;coffee&quot;&gt;</span><br><span class="line">export default </span><br><span class="line">  name: &apos;IssueCreate&apos;</span><br><span class="line">  methods:</span><br><span class="line">    onCreate: ()-&gt;</span><br><span class="line">      param = </span><br><span class="line">        data: &apos;Hello&apos;</span><br><span class="line">      @.$emit(&apos;issueState&apos;, param)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 
         </div>
         
@@ -659,25 +659,25 @@
             <p>在這邊做一個紀錄，避免每次部署的時候還要找谷歌大神。</p>
 <p>Apache Web 網站伺服器是一個相當主流的網站部署方式，它把配置很清楚的獨立開來，接下來這篇會引導你如何在 Ubuntu 設置 Apache2 網站伺服器部署。在 Apache2 部署，主要目錄會使用 apache 的 <code>sites-available</code> 與  <code>sites-enable</code>。</p>
 <h2 id="網站編譯後打包"><a href="#網站編譯後打包" class="headerlink" title="網站編譯後打包"></a>網站編譯後打包</h2><p>首先到網站進入根目錄 <code>/my_web_site</code> 之後執行以下的指令，進行打包的操作</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm run build</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm run build</span><br></pre></td></tr></table></figure>
 <p>這時候會產生 <code>dist</code> 資料夾之後，利用 <code>pwd</code>  找到這個資料夾， 顯示路徑是 <code>/home/cube/my_web_site/dist</code> </p>
 <h2 id="編輯-“sites-available”-內的設定檔"><a href="#編輯-“sites-available”-內的設定檔" class="headerlink" title="編輯 “sites-available” 內的設定檔"></a>編輯 “sites-available” 內的設定檔</h2><p>在 <code>/etc/apache2/sites-available</code>  在可用的組態檔案資料夾裡面先複製一份範本，命名為另一個檔案 <code>my_web_site.conf</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo cp 000-default.conf my_web_site.conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo cp 000-default.conf my_web_site.conf</span><br></pre></td></tr></table></figure>
 <p>多了一份設定檔之後，編輯設定檔案 <code>my_web_site.conf</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vi my_web_site.conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vi my_web_site.conf</span><br></pre></td></tr></table></figure>
 <p>修改檔案如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;VirtualHost *:8001&gt;</span><br><span class="line">        ServerAdmin webmaster@localhost</span><br><span class="line">        DocumentRoot DocumentRoot /home/cube/my_web_site/dist</span><br><span class="line">        ErrorLog $&#123;APACHE_LOG_DIR&#125;/error.log</span><br><span class="line">        CustomLog $&#123;APACHE_LOG_DIR&#125;/access.log combined</span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;VirtualHost *:8001&gt;</span><br><span class="line">        ServerAdmin webmaster@localhost</span><br><span class="line">        DocumentRoot DocumentRoot /home/cube/my_web_site/dist</span><br><span class="line">        ErrorLog $&#123;APACHE_LOG_DIR&#125;/error.log</span><br><span class="line">        CustomLog $&#123;APACHE_LOG_DIR&#125;/access.log combined</span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>改 VirtualHost 的 port，比如我改成 <code>:8001</code></li>
 <li>找到 DocumentRoot 改剛剛編譯出來的檔案路徑  <code>/home/cube/my_web_site/dist</code> </li>
 </ul>
 <p>其他項目不需要改，完成之後就把這個 conf 檔案存下來</p>
 <h2 id="從-“sites-enabled”-建立連結"><a href="#從-“sites-enabled”-建立連結" class="headerlink" title="從 “sites-enabled” 建立連結"></a>從 “sites-enabled” 建立連結</h2><p>接著到 <code>/etc/apach2/sites-enable</code>  加入快速連結，讓這份設定檔做啟用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ln -s /etc/apache2/sites-available/my_web_site.conf /etc/apache2/sites-enabled/my_web_site.conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ln -s /etc/apache2/sites-available/my_web_site.conf /etc/apache2/sites-enabled/my_web_site.conf</span><br></pre></td></tr></table></figure>
 <h2 id="重新啟動-Apache2"><a href="#重新啟動-Apache2" class="headerlink" title="重新啟動 Apache2"></a>重新啟動 Apache2</h2><p>最後改好的設定，要將網站伺服器做重啟！<br>找到在路徑底下的 <code>/etc/init.d</code> ，確定有 <code>apache2</code>  服務<br>在完成修改之後，請務必要重新啟動 Apache，那麼這樣才會把變更的組態檔案載入系統裡。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sudo service apache2 restart</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sudo service apache2 restart</span><br></pre></td></tr></table></figure>
 <p>接著會得到類似的訊息，寫了一個 [OK] ，那麼這樣設置就完成了喔。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">* Restarting web server apache2                                                             AH00558: apache2: Could not reliably determine the server&apos;s fully qualified domain name, using 127.0.0.1. Set the &apos;ServerName&apos; directive globally to suppress this message</span><br><span class="line">                                                                                     [ OK ]</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">* Restarting web server apache2                                                             AH00558: apache2: Could not reliably determine the server&apos;s fully qualified domain name, using 127.0.0.1. Set the &apos;ServerName&apos; directive globally to suppress this message</span><br><span class="line">                                                                                     [ OK ]</span><br></pre></td></tr></table></figure>
 <h2 id="測試你的結果"><a href="#測試你的結果" class="headerlink" title="測試你的結果"></a>測試你的結果</h2><p>最後剛剛網站指定端口為 8001 ，連結網址是 http://&lt;domain.name.com&gt;:8001/，就會出現你的靜態網站囉。</p>
 <h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
 <li><a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-hosts-on-ubuntu-14-04-lts" target="_blank" rel="noopener">How To Set Up Apache Virtual Hosts on Ubuntu 14.04 LTS | DigitalOcean</a></li>
@@ -728,21 +728,21 @@
         <div class="content">
             <h2 id="判斷"><a href="#判斷" class="headerlink" title="判斷"></a>判斷</h2><p>分為邏輯判斷以及條件判斷。</p>
 <h3 id="邏輯判斷"><a href="#邏輯判斷" class="headerlink" title="邏輯判斷"></a>邏輯判斷</h3><p>大於、等於、小於、大於等於、小於等於、不等於</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt; x &lt;- 20</span><br><span class="line">&gt; x &gt; 20</span><br><span class="line">[1] FALSE</span><br><span class="line">&gt; x == 20</span><br><span class="line">[1] TRUE</span><br><span class="line">&gt; x &lt; 20</span><br><span class="line">[1] FALSE</span><br><span class="line">&gt; x &gt;= 20</span><br><span class="line">[1] TRUE</span><br><span class="line">&gt; x &lt;= 20</span><br><span class="line">[1] TRUE</span><br><span class="line">&gt; x != 20</span><br><span class="line">[1] FALSE</span><br></pre></td></tr></table></figure>
-<h3 id="條件判斷"><a href="#條件判斷" class="headerlink" title="條件判斷"></a>條件判斷</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; x &lt;- 20</span><br><span class="line">&gt; if (x == 20) print (&quot;x == 20&quot;)</span><br><span class="line">[1] &quot;x == 20&quot;</span><br><span class="line"></span><br><span class="line">&gt; if (x &gt; 15) print (&quot;x &gt; 15&quot;) else print (&quot;x &lt;= 15 &quot;)</span><br><span class="line">[1] &quot;x &gt; 15&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt; x &lt;- 20</span><br><span class="line">&gt; x &gt; 20</span><br><span class="line">[1] FALSE</span><br><span class="line">&gt; x == 20</span><br><span class="line">[1] TRUE</span><br><span class="line">&gt; x &lt; 20</span><br><span class="line">[1] FALSE</span><br><span class="line">&gt; x &gt;= 20</span><br><span class="line">[1] TRUE</span><br><span class="line">&gt; x &lt;= 20</span><br><span class="line">[1] TRUE</span><br><span class="line">&gt; x != 20</span><br><span class="line">[1] FALSE</span><br></pre></td></tr></table></figure>
+<h3 id="條件判斷"><a href="#條件判斷" class="headerlink" title="條件判斷"></a>條件判斷</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; x &lt;- 20</span><br><span class="line">&gt; if (x == 20) print (&quot;x == 20&quot;)</span><br><span class="line">[1] &quot;x == 20&quot;</span><br><span class="line"></span><br><span class="line">&gt; if (x &gt; 15) print (&quot;x &gt; 15&quot;) else print (&quot;x &lt;= 15 &quot;)</span><br><span class="line">[1] &quot;x &gt; 15&quot;</span><br></pre></td></tr></table></figure>
 <p><code>switch</code> 語句的判斷結構</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt; y &lt;- 3</span><br><span class="line">&gt; switch(y, </span><br><span class="line">+        print(&quot;a&quot;),</span><br><span class="line">+        print(&quot;b&quot;),</span><br><span class="line">+        print(&quot;c&quot;),</span><br><span class="line">+        print(&quot;d&quot;)</span><br><span class="line">+ )</span><br><span class="line">[1] &quot;c&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt; y &lt;- 3</span><br><span class="line">&gt; switch(y, </span><br><span class="line">+        print(&quot;a&quot;),</span><br><span class="line">+        print(&quot;b&quot;),</span><br><span class="line">+        print(&quot;c&quot;),</span><br><span class="line">+        print(&quot;d&quot;)</span><br><span class="line">+ )</span><br><span class="line">[1] &quot;c&quot;</span><br></pre></td></tr></table></figure>
 <h2 id="函數"><a href="#函數" class="headerlink" title="函數"></a>函數</h2><p>自定義與使用函數，以下這個例子是不用傳入參數，只要呼叫 fnTest() ，就會執行方法。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; fnTest &lt;- function() &#123;</span><br><span class="line">+   print(&quot;噗噗。故我在&quot;)</span><br><span class="line">+ &#125;</span><br><span class="line">&gt; fnTest()</span><br><span class="line">[1] &quot;噗噗。故我在&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; fnTest &lt;- function() &#123;</span><br><span class="line">+   print(&quot;噗噗。故我在&quot;)</span><br><span class="line">+ &#125;</span><br><span class="line">&gt; fnTest()</span><br><span class="line">[1] &quot;噗噗。故我在&quot;</span><br></pre></td></tr></table></figure>
 <p>接著再做一個有放參數的方法，當傳入參數 x 與 y 之後，將由 x 到 y 做加總（當然 x 必須要小於 y 了，這樣才能執行迴圈，否則 x&gt;y 的話，預設會為 0），如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt; fnTest2 &lt;- function(x, y) &#123;</span><br><span class="line">+   sum &lt;- 0</span><br><span class="line">+   if (x &lt; y) &#123;</span><br><span class="line">+     for (i in x:y) &#123;</span><br><span class="line">+       sum &lt;- sum + i</span><br><span class="line">+     &#125;</span><br><span class="line">+   &#125;</span><br><span class="line">+   return(sum);</span><br><span class="line">+ &#125;</span><br><span class="line">&gt; fnTest2(2, 8)</span><br><span class="line">[1] 35</span><br><span class="line">&gt; fnTest2(12, 8)</span><br><span class="line">[1] 0</span><br></pre></td></tr></table></figure>
-<h2 id="迴圈"><a href="#迴圈" class="headerlink" title="迴圈"></a>迴圈</h2><h3 id="for-迴圈"><a href="#for-迴圈" class="headerlink" title="for 迴圈"></a>for 迴圈</h3><p>透過 x:y 產生數值 x 到 y 的向量，再利用迴圈做循環以 <code>cat</code> 函數將字串顯示出來。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt; for (i in 1:5) &#123;</span><br><span class="line">+   cat(&quot;num:&quot;, i, &quot;\n&quot;)</span><br><span class="line">+ &#125;</span><br><span class="line">num: 1 </span><br><span class="line">num: 2 </span><br><span class="line">num: 3 </span><br><span class="line">num: 4 </span><br><span class="line">num: 5</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt; fnTest2 &lt;- function(x, y) &#123;</span><br><span class="line">+   sum &lt;- 0</span><br><span class="line">+   if (x &lt; y) &#123;</span><br><span class="line">+     for (i in x:y) &#123;</span><br><span class="line">+       sum &lt;- sum + i</span><br><span class="line">+     &#125;</span><br><span class="line">+   &#125;</span><br><span class="line">+   return(sum);</span><br><span class="line">+ &#125;</span><br><span class="line">&gt; fnTest2(2, 8)</span><br><span class="line">[1] 35</span><br><span class="line">&gt; fnTest2(12, 8)</span><br><span class="line">[1] 0</span><br></pre></td></tr></table></figure>
+<h2 id="迴圈"><a href="#迴圈" class="headerlink" title="迴圈"></a>迴圈</h2><h3 id="for-迴圈"><a href="#for-迴圈" class="headerlink" title="for 迴圈"></a>for 迴圈</h3><p>透過 x:y 產生數值 x 到 y 的向量，再利用迴圈做循環以 <code>cat</code> 函數將字串顯示出來。<br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt; for (i in 1:5) &#123;</span><br><span class="line">+   cat(&quot;num:&quot;, i, &quot;\n&quot;)</span><br><span class="line">+ &#125;</span><br><span class="line">num: 1 </span><br><span class="line">num: 2 </span><br><span class="line">num: 3 </span><br><span class="line">num: 4 </span><br><span class="line">num: 5</span><br></pre></td></tr></table></figure></p>
 <h3 id="while-迴圈"><a href="#while-迴圈" class="headerlink" title="while 迴圈"></a>while 迴圈</h3><p><code>while</code> 迴圈是除了 <code>for</code> 迴圈另外一種迴圈了，差異在於 <code>while</code> <code>是透過邏輯判斷進行迴圈，for</code> 則是定義了有限的變數或向量物件來作迴圈，以下方的例子就是若判斷超過 10 的話，那麼就會跳出迴圈，跳出之後就不會再做任何的計算，是個相當容易閱讀的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt; x &lt;- 1</span><br><span class="line">&gt; while (x &lt;= 10) &#123;</span><br><span class="line">+   print(x)</span><br><span class="line">+   x &lt;- x + 1</span><br><span class="line">+ &#125;</span><br><span class="line">[1] 1</span><br><span class="line">[1] 2</span><br><span class="line">[1] 3</span><br><span class="line">[1] 4</span><br><span class="line">[1] 5</span><br><span class="line">[1] 6</span><br><span class="line">[1] 7</span><br><span class="line">[1] 8</span><br><span class="line">[1] 9</span><br><span class="line">[1] 10</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt; x &lt;- 1</span><br><span class="line">&gt; while (x &lt;= 10) &#123;</span><br><span class="line">+   print(x)</span><br><span class="line">+   x &lt;- x + 1</span><br><span class="line">+ &#125;</span><br><span class="line">[1] 1</span><br><span class="line">[1] 2</span><br><span class="line">[1] 3</span><br><span class="line">[1] 4</span><br><span class="line">[1] 5</span><br><span class="line">[1] 6</span><br><span class="line">[1] 7</span><br><span class="line">[1] 8</span><br><span class="line">[1] 9</span><br><span class="line">[1] 10</span><br></pre></td></tr></table></figure>
 <h3 id="repeat"><a href="#repeat" class="headerlink" title="repeat"></a>repeat</h3><p><code>repeat</code> 跟 <code>while</code> 相似，但是 repeat 的特性就是以無限迴圈開始建構的，除非有做判斷，否則都是繼續執行下去。以下的例子就是 y 的變數是從 1 加到 50，而 x 在 51 時跳出 (break) 迴圈。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt; x &lt;- 1</span><br><span class="line">&gt; y &lt;- 0</span><br><span class="line">&gt; repeat &#123;</span><br><span class="line">+   if (x &gt; 50) break;</span><br><span class="line">+   y &lt;- x + y</span><br><span class="line">+   x &lt;- x + 1</span><br><span class="line">+ &#125;</span><br><span class="line">&gt; x</span><br><span class="line">[1] 51</span><br><span class="line">&gt; y</span><br><span class="line">[1] 1275</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt; x &lt;- 1</span><br><span class="line">&gt; y &lt;- 0</span><br><span class="line">&gt; repeat &#123;</span><br><span class="line">+   if (x &gt; 50) break;</span><br><span class="line">+   y &lt;- x + y</span><br><span class="line">+   x &lt;- x + 1</span><br><span class="line">+ &#125;</span><br><span class="line">&gt; x</span><br><span class="line">[1] 51</span><br><span class="line">&gt; y</span><br><span class="line">[1] 1275</span><br></pre></td></tr></table></figure>
 <p><code>break</code> 表示跳出迴圈，相反的 <code>next</code> 則是跳出迴圈的某一個循環</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&gt; x &lt;- sample(1: 10)</span><br><span class="line">&gt; x</span><br><span class="line"> [1]  4  7 10  9  2  5  6  8  3  1</span><br><span class="line">&gt; for (i in x) &#123;</span><br><span class="line">+   if (i &gt; 4) &#123;</span><br><span class="line">+     print(&quot;the number &gt; 4&quot;)</span><br><span class="line">+     next;</span><br><span class="line">+   &#125;</span><br><span class="line">+   print(i)</span><br><span class="line">+ &#125;</span><br><span class="line">[1] 4</span><br><span class="line">[1] &quot;the number &gt; 4&quot;</span><br><span class="line">[1] &quot;the number &gt; 4&quot;</span><br><span class="line">[1] &quot;the number &gt; 4&quot;</span><br><span class="line">[1] 2</span><br><span class="line">[1] &quot;the number &gt; 4&quot;</span><br><span class="line">[1] &quot;the number &gt; 4&quot;</span><br><span class="line">[1] &quot;the number &gt; 4&quot;</span><br><span class="line">[1] 3</span><br><span class="line">[1] 1</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&gt; x &lt;- sample(1: 10)</span><br><span class="line">&gt; x</span><br><span class="line"> [1]  4  7 10  9  2  5  6  8  3  1</span><br><span class="line">&gt; for (i in x) &#123;</span><br><span class="line">+   if (i &gt; 4) &#123;</span><br><span class="line">+     print(&quot;the number &gt; 4&quot;)</span><br><span class="line">+     next;</span><br><span class="line">+   &#125;</span><br><span class="line">+   print(i)</span><br><span class="line">+ &#125;</span><br><span class="line">[1] 4</span><br><span class="line">[1] &quot;the number &gt; 4&quot;</span><br><span class="line">[1] &quot;the number &gt; 4&quot;</span><br><span class="line">[1] &quot;the number &gt; 4&quot;</span><br><span class="line">[1] 2</span><br><span class="line">[1] &quot;the number &gt; 4&quot;</span><br><span class="line">[1] &quot;the number &gt; 4&quot;</span><br><span class="line">[1] &quot;the number &gt; 4&quot;</span><br><span class="line">[1] 3</span><br><span class="line">[1] 1</span><br></pre></td></tr></table></figure>
         </div>
         
         
@@ -914,7 +914,7 @@
 
 
 
-<div class="column is-4-tablet is-4-desktop is-4-widescreen  has-order-1 column-left ">
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
     
         
 <div class="card widget">
@@ -1125,6 +1125,426 @@
     </div>
 </div>
     
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/03/06/vuejs/vuejs-googlesheets-api/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/vuejs/wolfe77.png" alt="Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-06T10:07:51.000Z">2019-03-06</time></div>
+                    <a href="/2019/03/06/vuejs/vuejs-googlesheets-api/" class="has-link-black-ter is-size-6">Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/02/27/tools/postman-api-tools/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/tools/1_QOx_tPV5wJnhTzAGhfIiLA.png" alt="Postman - Restful API 測試管理工具">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-27T01:47:00.000Z">2019-02-27</time></div>
+                    <a href="/2019/02/27/tools/postman-api-tools/" class="has-link-black-ter is-size-6">Postman - Restful API 測試管理工具</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在 Mac OSX 使用 RVM 升級 Ruby V2.5.1">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
+                    <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="has-link-black-ter is-size-6">在 Mac OSX 使用 RVM 升級 Ruby V2.5.1</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Ruby/">Ruby</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/08/02/tools/slate-api-document/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/tools/20180802-1.png" alt="Slate - 為你打造漂亮的 API 文件">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
+                    <a href="/2018/08/02/tools/slate-api-document/" class="has-link-black-ter is-size-6">Slate - 為你打造漂亮的 API 文件</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/07/26/web/how-to-deply-redmine-to-heroku/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="部署 Redmine 專案管理追蹤系統到 Heroku 平台">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-07-26T14:07:51.000Z">2018-07-26</time></div>
+                    <a href="/2018/07/26/web/how-to-deply-redmine-to-heroku/" class="has-link-black-ter is-size-6">部署 Redmine 專案管理追蹤系統到 Heroku 平台</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/網站/">網站</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                標籤
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/API/">
+                        <span class="tag">API</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Apache/">
+                        <span class="tag">Apache</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Google-Material-Design/">
+                        <span class="tag">Google Material Design</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Gulp-js/">
+                        <span class="tag">Gulp.js</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Heroku/">
+                        <span class="tag">Heroku</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Javascript/">
+                        <span class="tag">Javascript</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Mac/">
+                        <span class="tag">Mac</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Markdown/">
+                        <span class="tag">Markdown</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MySQL/">
+                        <span class="tag">MySQL</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Node-js/">
+                        <span class="tag">Node.js</span>
+                        <span class="tag is-grey">31</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python/">
+                        <span class="tag">Python</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/R/">
+                        <span class="tag">R</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Redmine/">
+                        <span class="tag">Redmine</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Ruby/">
+                        <span class="tag">Ruby</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Ubuntu/">
+                        <span class="tag">Ubuntu</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue/">
+                        <span class="tag">Vue</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/api/">
+                        <span class="tag">api</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/apple/">
+                        <span class="tag">apple</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/bower/">
+                        <span class="tag">bower</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/data-mining/">
+                        <span class="tag">data mining</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ejs/">
+                        <span class="tag">ejs</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/excel/">
+                        <span class="tag">excel</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/express/">
+                        <span class="tag">express</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/forever/">
+                        <span class="tag">forever</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/fs/">
+                        <span class="tag">fs</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/gitbook/">
+                        <span class="tag">gitbook</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jade/">
+                        <span class="tag">jade</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/json/">
+                        <span class="tag">json</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/macbook/">
+                        <span class="tag">macbook</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/meteor/">
+                        <span class="tag">meteor</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mongodb/">
+                        <span class="tag">mongodb</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql/">
+                        <span class="tag">mysql</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nodejs/">
+                        <span class="tag">nodejs</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nodemailer/">
+                        <span class="tag">nodemailer</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/npm/">
+                        <span class="tag">npm</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nvm/">
+                        <span class="tag">nvm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/package/">
+                        <span class="tag">package</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/socket-io/">
+                        <span class="tag">socket.io</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/丸閱讀/">
+                        <span class="tag">丸閱讀</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/投資/">
+                        <span class="tag">投資</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/鐵人賽/">
+                        <span class="tag">鐵人賽</span>
+                        <span class="tag is-grey">30</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
         
 <div class="card widget">
     <div class="card-content">
@@ -1172,25 +1592,6 @@
         
         <article class="media">
             
-            <a href="/2018/08/02/tools/slate-api-document/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/tools/20180802-1.png" alt="Slate - 為你打造漂亮的 API 文件">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
-                    <a href="/2018/08/02/tools/slate-api-document/" class="has-link-black-ter is-size-6">Slate - 為你打造漂亮的 API 文件</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="在 Mac OSX 使用 RVM 升級 Ruby V2.5.1">
@@ -1203,6 +1604,25 @@
                     <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="has-link-black-ter is-size-6">在 Mac OSX 使用 RVM 升級 Ruby V2.5.1</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Ruby/">Ruby</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/08/02/tools/slate-api-document/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/tools/20180802-1.png" alt="Slate - 為你打造漂亮的 API 文件">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
+                    <a href="/2018/08/02/tools/slate-api-document/" class="has-link-black-ter is-size-6">Slate - 為你打造漂亮的 API 文件</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
                     </p>
                 </div>
             </div>
@@ -1532,13 +1952,8 @@
 </div>
     
     
-        <div class="column-right-shadow is-hidden-widescreen ">
-        
-        </div>
-    
 </div>
 
-                
             </div>
         </div>
     </section>

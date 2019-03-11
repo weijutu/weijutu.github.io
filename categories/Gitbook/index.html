@@ -88,7 +88,7 @@
 
 <link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
-<body class="is-2-column">
+<body class="is-3-column">
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar navbar-main">
     <div class="container">
         <div class="navbar-brand is-flex-center">
@@ -139,7 +139,7 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main"><div class="card">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
     <div class="card-content">
         <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
@@ -183,10 +183,10 @@
             <p><img src="/images/gitbook/1.png" alt></p>
 <p>今天介紹這套GitBook 是用 node.js 的 npm 管理工具搭建的一種建立電子書的套件，藉由這篇文章可以清楚的瞭解如何建立電子書</p>
 <h3 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h3><p>首先是安裝的部分，安裝之前請先確定 npm 這個管理工具有被安裝起來</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sudo npm install -g gitbook</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sudo npm install -g gitbook</span><br></pre></td></tr></table></figure>
 <p><img src="/images/gitbook/2.png" alt></p>
 <p>接著，先在某一個目錄夾裏建立一個電子書的檔案庫</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$gitbook serve ./repository</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$gitbook serve ./repository</span><br></pre></td></tr></table></figure>
 <p>像這樣子</p>
 <p><img src="/images/gitbook/3.png" alt></p>
 <p>在製作這個電子書，特別要注意的是請先建立 <code>README.md</code> 和 <code>SUMMARY.md</code> 這兩個文件，因為這兩個文件代表著電子書的架構導覽</p>
@@ -206,11 +206,11 @@
 <li>source/install/2-2.md</li>
 </ul>
 <p>我們可以利用以下的指令，讓 gitbook 找到 <code>summary.md</code> 所定義的章節結構去自動地去產生對應的檔案</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$gitbook init</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$gitbook init</span><br></pre></td></tr></table></figure>
 <p>到建立 gitbook 的資料夾看，就可以看到自動建立 source 資料夾之外，在source 下層也建立 intro 及 install 這兩個資料夾，然後再進去看某個資料夾下後，可以發現 markdown 的空白檔案也已經自動建立起來，在這邊就可以隨心所欲去建置屬於自己的章節內容。</p>
 <p><img src="/images/gitbook/6.png" alt></p>
 <p>喔！等等，別忘了看看結果<br>內容寫好之後，建立一個靜態頁面，預設會開 port 4000 的網址</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$gitbook serve</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$gitbook serve</span><br></pre></td></tr></table></figure>
 <p>可依照指令指示，開啓 <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a></p>
 <p><img src="/images/gitbook/7.png" alt></p>
 <h3 id="看看樣子"><a href="#看看樣子" class="headerlink" title="看看樣子"></a>看看樣子</h3><p>這是首頁的樣子，呈現的首頁就能閱覽我們在 README.md 所寫的內容</p>
@@ -249,7 +249,7 @@
 
 
 
-<div class="column is-4-tablet is-4-desktop is-4-widescreen  has-order-1 column-left ">
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
     
         
 <div class="card widget">
@@ -460,6 +460,426 @@
     </div>
 </div>
     
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/03/06/vuejs/vuejs-googlesheets-api/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/vuejs/wolfe77.png" alt="Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-06T10:07:51.000Z">2019-03-06</time></div>
+                    <a href="/2019/03/06/vuejs/vuejs-googlesheets-api/" class="has-link-black-ter is-size-6">Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/02/27/tools/postman-api-tools/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/tools/1_QOx_tPV5wJnhTzAGhfIiLA.png" alt="Postman - Restful API 測試管理工具">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-27T01:47:00.000Z">2019-02-27</time></div>
+                    <a href="/2019/02/27/tools/postman-api-tools/" class="has-link-black-ter is-size-6">Postman - Restful API 測試管理工具</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在 Mac OSX 使用 RVM 升級 Ruby V2.5.1">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
+                    <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="has-link-black-ter is-size-6">在 Mac OSX 使用 RVM 升級 Ruby V2.5.1</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Ruby/">Ruby</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/08/02/tools/slate-api-document/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/tools/20180802-1.png" alt="Slate - 為你打造漂亮的 API 文件">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
+                    <a href="/2018/08/02/tools/slate-api-document/" class="has-link-black-ter is-size-6">Slate - 為你打造漂亮的 API 文件</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/07/26/web/how-to-deply-redmine-to-heroku/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="部署 Redmine 專案管理追蹤系統到 Heroku 平台">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-07-26T14:07:51.000Z">2018-07-26</time></div>
+                    <a href="/2018/07/26/web/how-to-deply-redmine-to-heroku/" class="has-link-black-ter is-size-6">部署 Redmine 專案管理追蹤系統到 Heroku 平台</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/網站/">網站</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                標籤
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/API/">
+                        <span class="tag">API</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Apache/">
+                        <span class="tag">Apache</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Google-Material-Design/">
+                        <span class="tag">Google Material Design</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Gulp-js/">
+                        <span class="tag">Gulp.js</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Heroku/">
+                        <span class="tag">Heroku</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Javascript/">
+                        <span class="tag">Javascript</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Mac/">
+                        <span class="tag">Mac</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Markdown/">
+                        <span class="tag">Markdown</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MySQL/">
+                        <span class="tag">MySQL</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Node-js/">
+                        <span class="tag">Node.js</span>
+                        <span class="tag is-grey">31</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python/">
+                        <span class="tag">Python</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/R/">
+                        <span class="tag">R</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Redmine/">
+                        <span class="tag">Redmine</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Ruby/">
+                        <span class="tag">Ruby</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Ubuntu/">
+                        <span class="tag">Ubuntu</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Vue/">
+                        <span class="tag">Vue</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/api/">
+                        <span class="tag">api</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/apple/">
+                        <span class="tag">apple</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/bower/">
+                        <span class="tag">bower</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/data-mining/">
+                        <span class="tag">data mining</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ejs/">
+                        <span class="tag">ejs</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/excel/">
+                        <span class="tag">excel</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/express/">
+                        <span class="tag">express</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/forever/">
+                        <span class="tag">forever</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/fs/">
+                        <span class="tag">fs</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/gitbook/">
+                        <span class="tag">gitbook</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/jade/">
+                        <span class="tag">jade</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/json/">
+                        <span class="tag">json</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/macbook/">
+                        <span class="tag">macbook</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/meteor/">
+                        <span class="tag">meteor</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mongodb/">
+                        <span class="tag">mongodb</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mysql/">
+                        <span class="tag">mysql</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nodejs/">
+                        <span class="tag">nodejs</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nodemailer/">
+                        <span class="tag">nodemailer</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/npm/">
+                        <span class="tag">npm</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/nvm/">
+                        <span class="tag">nvm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/package/">
+                        <span class="tag">package</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/socket-io/">
+                        <span class="tag">socket.io</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/丸閱讀/">
+                        <span class="tag">丸閱讀</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/投資/">
+                        <span class="tag">投資</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/鐵人賽/">
+                        <span class="tag">鐵人賽</span>
+                        <span class="tag is-grey">30</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
         
 <div class="card widget">
     <div class="card-content">
@@ -507,25 +927,6 @@
         
         <article class="media">
             
-            <a href="/2018/08/02/tools/slate-api-document/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/tools/20180802-1.png" alt="Slate - 為你打造漂亮的 API 文件">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
-                    <a href="/2018/08/02/tools/slate-api-document/" class="has-link-black-ter is-size-6">Slate - 為你打造漂亮的 API 文件</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="在 Mac OSX 使用 RVM 升級 Ruby V2.5.1">
@@ -538,6 +939,25 @@
                     <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="has-link-black-ter is-size-6">在 Mac OSX 使用 RVM 升級 Ruby V2.5.1</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Ruby/">Ruby</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/08/02/tools/slate-api-document/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/tools/20180802-1.png" alt="Slate - 為你打造漂亮的 API 文件">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
+                    <a href="/2018/08/02/tools/slate-api-document/" class="has-link-black-ter is-size-6">Slate - 為你打造漂亮的 API 文件</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
                     </p>
                 </div>
             </div>
@@ -867,13 +1287,8 @@
 </div>
     
     
-        <div class="column-right-shadow is-hidden-widescreen ">
-        
-        </div>
-    
 </div>
 
-                
             </div>
         </div>
     </section>
