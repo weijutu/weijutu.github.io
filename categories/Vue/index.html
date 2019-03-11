@@ -234,7 +234,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分鐘 閱讀文 (大約 287 個字)
+                    2 分鐘 閱讀文 (大約 288 個字)
                 </span>
                 
                 
@@ -249,14 +249,16 @@
         <div class="content">
             <h1 id="父組件傳值給子組件-使用-props-屬性"><a href="#父組件傳值給子組件-使用-props-屬性" class="headerlink" title="父組件傳值給子組件 (使用 props 屬性)"></a>父組件傳值給子組件 (使用 props 屬性)</h1><p>當需要做動態的綁定將父組件的資料傳給子組件的方式是 props，而 props 是單向傳遞<br>引入 <code>issue-create</code> 組件 (props 需要轉換相對應的 kebab-case (短橫線隔開) 方式命名</p>
 <h2 id="父組件"><a href="#父組件" class="headerlink" title="父組件"></a>父組件</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;template lang=&quot;pug&quot;&gt;</span><br><span class="line">  div.dvIssue</span><br><span class="line">    issue-create(:info=&quot;info&quot;)</span><br><span class="line">&lt;/template&gt;	</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;coffee&quot;&gt;</span><br><span class="line">import IssueCreate from &apos;@/IssueCreate&apos;</span><br><span class="line">export default </span><br><span class="line">  name: &apos;IssueShow&apos;</span><br><span class="line">  components: &#123; </span><br><span class="line">    IssueCreate</span><br><span class="line">  &#125;</span><br><span class="line">  data: ()-&gt;</span><br><span class="line">    info: </span><br><span class="line">      msgVal: &apos;abc&apos;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="子組件"><a href="#子組件" class="headerlink" title="子組件"></a>子組件</h2><p>接收時，就用 props 屬性</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;template lang=&quot;pug&quot;&gt;</span><br><span class="line">  div.dvIssueCreate</span><br><span class="line">    span &#123;&#123; info.msgVal &#125;&#125;</span><br><span class="line">&lt;/template&gt;	</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;coffee&quot;&gt;</span><br><span class="line">export default </span><br><span class="line">  name: &apos;IssueCreate&apos;</span><br><span class="line">  props:</span><br><span class="line">    info: </span><br><span class="line">      type: Object # 指定傳入的類型，如果類型不正確就會警告</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<h1 id="子組件傳值給父組件-emit"><a href="#子組件傳值給父組件-emit" class="headerlink" title="子組件傳值給父組件 ($emit)"></a>子組件傳值給父組件 ($emit)</h1><p>有因為props 是單向傳遞的，主要是為了避免子組件不小心修改父組件的狀態，造成可怕現象。所以若我們想在子組件通知父組件的話，可以透過觸發事件來通知父組件 $emit 方法。</p>
-<h2 id="父組件-1"><a href="#父組件-1" class="headerlink" title="父組件"></a>父組件</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;template lang=&quot;pug&quot;&gt;</span><br><span class="line">  div.dvIssue</span><br><span class="line">    issue-create(v-on:issueState=&quot;onIssueCallback&quot;)</span><br><span class="line">&lt;/template&gt;	</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;coffee&quot;&gt;</span><br><span class="line">import IssueCreate from &apos;@/IssueCreate&apos;</span><br><span class="line">export default </span><br><span class="line">  name: &apos;Issue&apos;</span><br><span class="line">  components: &#123; </span><br><span class="line">    IssueCreate,</span><br><span class="line">  &#125;</span><br><span class="line">  methods:</span><br><span class="line">    onIssueCallback: (data)-&gt;</span><br><span class="line">      # 寫回傳後續的操作</span><br><span class="line">      console.log(data)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="子組件-1"><a href="#子組件-1" class="headerlink" title="子組件"></a>子組件</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;template lang=&quot;pug&quot;&gt;</span><br><span class="line">	div.dvIssueCreate</span><br><span class="line">    v-btn(@click=&quot;onCreate()&quot;) 這是按鈕</span><br><span class="line">&lt;/template&gt;	</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;coffee&quot;&gt;</span><br><span class="line">export default </span><br><span class="line">  name: &apos;IssueCreate&apos;</span><br><span class="line">  methods:</span><br><span class="line">    onCreate: ()-&gt;</span><br><span class="line">      param = </span><br><span class="line">        data: &apos;Hello&apos;</span><br><span class="line">      @.$emit(&apos;issueState&apos;, param)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/07/20/vuejs/vuejs-parent-child-value/#more">繼續閱讀</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -285,7 +287,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    6 分鐘 閱讀文 (大約 914 個字)
+                    6 分鐘 閱讀文 (大約 915 個字)
                 </span>
                 
                 
@@ -303,45 +305,16 @@
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo su -</span><br></pre></td></tr></table></figure>
 <p>接著再輸入 Apache 的啟動指令</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ apachectl start</span><br></pre></td></tr></table></figure>
-<p>這時候會看到服務已經載入啟動</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;Username&gt;:~ root# apachectl start</span><br><span class="line">/System/Library/LaunchDaemons/org.apache.httpd.plist: service already loaded</span><br></pre></td></tr></table></figure>
-<p>然後看一下 <a href="http://localhost/" target="_blank" rel="noopener">http://localhost/</a> 有沒有出現 <code>It works!</code> 字眼，就代表 Apache 有正常運行，而這個網頁目錄是放在 <code>/Library/WebServer/Documents</code> </p>
-<p><img src="/images/vuejs/20180704-1.png" alt></p>
-<h2 id="Apache-參數設定"><a href="#Apache-參數設定" class="headerlink" title="Apache 參數設定"></a>Apache 參數設定</h2><h3 id="修改-httpd-conf"><a href="#修改-httpd-conf" class="headerlink" title="修改 httpd.conf"></a>修改 httpd.conf</h3><p>輸入完畢之後，在 <code>/etc/apache2/httpd.conf</code> 把以下的項目的註解 <code>#</code> 移除</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LoadModule authz_core_module libexec/apache2/mod_authz_core.so</span><br><span class="line">LoadModule authz_host_module libexec/apache2/mod_authz_host.so</span><br><span class="line">LoadModule userdir_module libexec/apache2/mod_userdir.so</span><br><span class="line">Include /private/etc/apache2/extra/httpd-userdir.conf</span><br></pre></td></tr></table></figure>
-<h3 id="修改-httpd-userdir-conf"><a href="#修改-httpd-userdir-conf" class="headerlink" title="修改 httpd-userdir.conf"></a>修改 httpd-userdir.conf</h3><p>在 <code>httpd</code> 編輯完畢之後，再修改 <code>/etc/apache2/extra/httpd-userdir.conf</code>  檔案，將以下的項目的註解 <code>#</code> 移除</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Include /private/etc/apache2/users/*.conf</span><br></pre></td></tr></table></figure>
-<p>這樣子，都編輯完畢再將 Apache 重啟。這時候進入 <code>http://localhost/</code> 就會得到以下畫面。</p>
-<p><img src="/images/vuejs/20180704-1.png" alt></p>
-<p>如果出現 <code>You don t have permission to access / on this server</code> 也就代表訪問的位置是沒有權限的。可以將資料夾調整一下權限，(如果網站放在 <code>/Projects/demo</code>)</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo chmod -R 777 /Users/&lt;Username&gt;/Projects/demo</span><br></pre></td></tr></table></figure>
-<h2 id="Vue-網站的修訂"><a href="#Vue-網站的修訂" class="headerlink" title="Vue 網站的修訂"></a>Vue 網站的修訂</h2><h3 id="修改-config-index-js"><a href="#修改-config-index-js" class="headerlink" title="修改 config/index.js"></a>修改 config/index.js</h3><p>找到 <code>build</code> 內的 <code>assetsPublicPath</code> 參數，原本預設值是 <code>/</code>，而這個路徑對靜態的資源文件是絕對路徑。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">build: &#123;</span><br><span class="line">  // Template for index.html</span><br><span class="line">  index: path.resolve(__dirname, &apos;../dist/index.html&apos;),</span><br><span class="line"></span><br><span class="line">  // Paths</span><br><span class="line">  assetsRoot: path.resolve(__dirname, &apos;../dist&apos;),</span><br><span class="line">  assetsSubDirectory: &apos;static&apos;,</span><br><span class="line">  assetsPublicPath: &apos;/&apos;,  // 預設值</span><br><span class="line">  </span><br><span class="line">... (以下省略)</span><br></pre></td></tr></table></figure>
-<p>改成相對路徑的寫法，將 <code>assetsPublicPath</code> 參數改為 <code>./</code></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">build: &#123;</span><br><span class="line">  // Template for index.html</span><br><span class="line">  index: path.resolve(__dirname, &apos;../dist/index.html&apos;),</span><br><span class="line"></span><br><span class="line">  // Paths</span><br><span class="line">  assetsRoot: path.resolve(__dirname, &apos;../dist&apos;),</span><br><span class="line">  assetsSubDirectory: &apos;static&apos;,</span><br><span class="line">  assetsPublicPath: &apos;./&apos;,  // 改相對路徑</span><br><span class="line">  </span><br><span class="line">... (以下省略)</span><br></pre></td></tr></table></figure>
-<h3 id="修改-build-utils-js"><a href="#修改-build-utils-js" class="headerlink" title="修改 build/utils.js"></a>修改 build/utils.js</h3><p>接著進入 <code>build/utils.js</code> 改 css 位置的路徑 <code>publicPath</code> </p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">  if (options.extract) &#123;</span><br><span class="line">    return ExtractTextPlugin.extract(&#123;</span><br><span class="line">      use: loaders,</span><br><span class="line">      publicPath: &apos;../../&apos;, // according to path 20180704</span><br><span class="line">      fallback: &apos;vue-style-loader&apos;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    return [&apos;vue-style-loader&apos;].concat(loaders)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="修訂-index-pug"><a href="#修訂-index-pug" class="headerlink" title="修訂 index.pug"></a>修訂 index.pug</h3><p>找到網站根目錄的 <code>index.pug</code> 檔案，修改 <code>/static/favicon.ico</code> 為 <code>./static/favicon.ico</code></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">link(rel=&apos;shortcut icon&apos;, type=&apos;image/png&apos;, href=&apos;./static/favicon.ico&apos;)</span><br></pre></td></tr></table></figure>
-<h3 id="修訂-vue-router"><a href="#修訂-vue-router" class="headerlink" title="修訂 vue-router"></a>修訂 vue-router</h3><p>由於我們希望網址是 <code>http://localhost/demo/</code> ，要在 route 配置裡面加上 <code>base</code> 參數。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export default new VueRouter(&#123;</span><br><span class="line">  base: &apos;/demo/&apos;  // 補上這一行，</span><br><span class="line">  mode: &apos;history&apos;,</span><br><span class="line">  scrollBehavior: () =&gt; (&#123; y: 0 &#125;),</span><br></pre></td></tr></table></figure>
-<h3 id="部署到伺服器"><a href="#部署到伺服器" class="headerlink" title="部署到伺服器"></a>部署到伺服器</h3><p>一切都就緒之後，進入到根目錄下執行</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm run build</span><br></pre></td></tr></table></figure>
-<p>build 出來網站會產生一個打包好的 dist 的資料夾，這時在 Apache 的網站空間內，做一個 link 指向這個位置</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ln -s /Users/&lt;Username&gt;/Projects/demo /Library/WebServer/Documents/demo</span><br></pre></td></tr></table></figure>
-<p>ps. 記得後面的 <code>/demo</code> 不要多一個斜線 <code>/demo/</code> 不然會找不到。</p>
-<p>這樣就完成大部分的設置了。</p>
-<h3 id="新增-htaccess-檔案"><a href="#新增-htaccess-檔案" class="headerlink" title="新增 .htaccess 檔案"></a>新增 .htaccess 檔案</h3><p>但是，又為什麼設置完畢之後，網站卻又一片空白？也是因為 Vue 的 history 模式概念，不會自動地發起 http 請求，解決方法將所有的請求進行轉發到 <a href="http://localhost/demo/index.html" target="_blank" rel="noopener">http://localhost/demo/index.html</a></p>
-<p>可以在網站目錄夾裡面新增 <code>.htaccess</code> 檔案，內容輸入以下</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;IfModule mod_rewrite.c&gt;</span><br><span class="line">  Options +FollowSymlinks</span><br><span class="line">  RewriteEngine On</span><br><span class="line"></span><br><span class="line">  RewriteCond %&#123;REQUEST_URI&#125; ^/(demo|demo/.*)$</span><br><span class="line">  RewriteRule ^/demo/index\.html$ - [L,NC]</span><br><span class="line"></span><br><span class="line">  RewriteCond %&#123;REQUEST_FILENAME&#125; !-d</span><br><span class="line">  RewriteCond %&#123;REQUEST_FILENAME&#125; !-f</span><br><span class="line">  RewriteRule ^(demo|demo/.*)$ demo/index.html [L]</span><br><span class="line">&lt;/IfModule&gt;</span><br></pre></td></tr></table></figure>
-<p>這樣就能用 <code>http://localhost/demo/</code> 來訪問網站了。</p>
-<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
-<li><a href="https://wmaqingbo.github.io/blog/2017/09/30/VUE-%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2/" target="_blank" rel="noopener">VUE 服务器部署路径问题</a></li>
-<li><a href="https://medium.com/@hyWang/%E5%9C%A8mac%E8%A8%AD%E5%AE%9Aapache-php-mysql-694430084d3a" target="_blank" rel="noopener">在Mac設定Apache、PHP、MySQL</a></li>
-</ul>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/07/05/vuejs/vuejs-deploy-on-apache/#more">繼續閱讀</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -621,25 +594,6 @@
         
         <article class="media">
             
-            <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在 Mac OSX 使用 RVM 升級 Ruby V2.5.1">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
-                    <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="has-link-black-ter is-size-6">在 Mac OSX 使用 RVM 升級 Ruby V2.5.1</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Ruby/">Ruby</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/2018/08/02/tools/slate-api-document/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/tools/20180802-1.png" alt="Slate - 為你打造漂亮的 API 文件">
@@ -652,6 +606,25 @@
                     <a href="/2018/08/02/tools/slate-api-document/" class="has-link-black-ter is-size-6">Slate - 為你打造漂亮的 API 文件</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/工具/">工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在 Mac OSX 使用 RVM 升級 Ruby V2.5.1">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
+                    <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="has-link-black-ter is-size-6">在 Mac OSX 使用 RVM 升級 Ruby V2.5.1</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Ruby/">Ruby</a>
                     </p>
                 </div>
             </div>
@@ -1038,25 +1011,6 @@
         
         <article class="media">
             
-            <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在 Mac OSX 使用 RVM 升級 Ruby V2.5.1">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
-                    <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="has-link-black-ter is-size-6">在 Mac OSX 使用 RVM 升級 Ruby V2.5.1</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Ruby/">Ruby</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/2018/08/02/tools/slate-api-document/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/tools/20180802-1.png" alt="Slate - 為你打造漂亮的 API 文件">
@@ -1069,6 +1023,25 @@
                     <a href="/2018/08/02/tools/slate-api-document/" class="has-link-black-ter is-size-6">Slate - 為你打造漂亮的 API 文件</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/工具/">工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在 Mac OSX 使用 RVM 升級 Ruby V2.5.1">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
+                    <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="has-link-black-ter is-size-6">在 Mac OSX 使用 RVM 升級 Ruby V2.5.1</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Ruby/">Ruby</a>
                     </p>
                 </div>
             </div>

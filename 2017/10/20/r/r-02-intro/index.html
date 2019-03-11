@@ -7,18 +7,18 @@
 
 
 
-    <meta name="description" content="R 語言可以用來處理資料、統計分析、模擬、科學運算以及圖形功能，你可以直接安裝 R Studio 軟體 (R軟體官方網站)，就可以很輕易的在 GUI 上透過許多的套件模組並搭配 R 程式來畫出許多圖形，要能夠善用這些套件之前我們要先學習基本的資料型態以及語法運用。 學習目標R 語言的基本介紹以及語法上的寫法。 常見的資料類型 原型 Raw：二進制的資料 數字 Numeric：可以是整數 Integ">
+    <meta name="description" content="R 語言可以用來處理資料、統計分析、模擬、科學運算以及圖形功能，你可以直接安裝 R Studio 軟體 (R軟體官方網站)，就可以很輕易的在 GUI 上透過許多的套件模組並搭配 R 程式來畫出許多圖形，要能夠善用這些套件之前我們要先學習基本的資料型態以及語法運用。 學習目標R 語言的基本介紹以及語法上的寫法。">
 <meta name="keywords" content="R">
 <meta property="og:type" content="article">
 <meta property="og:title" content="R 學習日誌#2 - 資料類型與套件工具函數">
 <meta property="og:url" content="https://weijutu.github.io/2017/10/20/r/r-02-intro/index.html">
 <meta property="og:site_name" content="噗噗。故我在">
-<meta property="og:description" content="R 語言可以用來處理資料、統計分析、模擬、科學運算以及圖形功能，你可以直接安裝 R Studio 軟體 (R軟體官方網站)，就可以很輕易的在 GUI 上透過許多的套件模組並搭配 R 程式來畫出許多圖形，要能夠善用這些套件之前我們要先學習基本的資料型態以及語法運用。 學習目標R 語言的基本介紹以及語法上的寫法。 常見的資料類型 原型 Raw：二進制的資料 數字 Numeric：可以是整數 Integ">
+<meta property="og:description" content="R 語言可以用來處理資料、統計分析、模擬、科學運算以及圖形功能，你可以直接安裝 R Studio 軟體 (R軟體官方網站)，就可以很輕易的在 GUI 上透過許多的套件模組並搭配 R 程式來畫出許多圖形，要能夠善用這些套件之前我們要先學習基本的資料型態以及語法運用。 學習目標R 語言的基本介紹以及語法上的寫法。">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:updated_time" content="2018-10-16T08:11:22.391Z">
+<meta property="og:updated_time" content="2019-03-11T15:46:49.395Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="R 學習日誌#2 - 資料類型與套件工具函數">
-<meta name="twitter:description" content="R 語言可以用來處理資料、統計分析、模擬、科學運算以及圖形功能，你可以直接安裝 R Studio 軟體 (R軟體官方網站)，就可以很輕易的在 GUI 上透過許多的套件模組並搭配 R 程式來畫出許多圖形，要能夠善用這些套件之前我們要先學習基本的資料型態以及語法運用。 學習目標R 語言的基本介紹以及語法上的寫法。 常見的資料類型 原型 Raw：二進制的資料 數字 Numeric：可以是整數 Integ">
+<meta name="twitter:description" content="R 語言可以用來處理資料、統計分析、模擬、科學運算以及圖形功能，你可以直接安裝 R Studio 軟體 (R軟體官方網站)，就可以很輕易的在 GUI 上透過許多的套件模組並搭配 R 程式來畫出許多圖形，要能夠善用這些套件之前我們要先學習基本的資料型態以及語法運用。 學習目標R 語言的基本介紹以及語法上的寫法。">
 
 
 
@@ -150,6 +150,12 @@
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
     
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="/images/r/cover2.png" alt="R 學習日誌#2 - 資料類型與套件工具函數">
+        </span>
+    </div>
+    
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
@@ -164,7 +170,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分鐘 閱讀文 (大約 1085 個字)
+                    7 分鐘 閱讀文 (大約 1086 個字)
                 </span>
                 
                 
@@ -179,6 +185,7 @@
         <div class="content">
             <p>R 語言可以用來處理資料、統計分析、模擬、科學運算以及圖形功能，你可以直接安裝 R Studio 軟體 (<a href="https://www.r-project.org/" target="_blank" rel="noopener">R軟體官方網站</a>)，就可以很輕易的在 GUI 上透過許多的套件模組並搭配 R 程式來畫出許多圖形，要能夠善用這些套件之前我們要先學習基本的資料型態以及語法運用。</p>
 <h2 id="學習目標"><a href="#學習目標" class="headerlink" title="學習目標"></a>學習目標</h2><p>R 語言的基本介紹以及語法上的寫法。</p>
+<a id="more"></a>
 <h2 id="常見的資料類型"><a href="#常見的資料類型" class="headerlink" title="常見的資料類型"></a>常見的資料類型</h2><ul>
 <li>原型 Raw：二進制的資料</li>
 <li>數字 Numeric：可以是整數 Integers 、小數 Decimal Fractions 、科學符號 Scientific Notation</li>
@@ -684,25 +691,6 @@
         
         <article class="media">
             
-            <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在 Mac OSX 使用 RVM 升級 Ruby V2.5.1">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
-                    <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="has-link-black-ter is-size-6">在 Mac OSX 使用 RVM 升級 Ruby V2.5.1</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Ruby/">Ruby</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/2018/08/02/tools/slate-api-document/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/tools/20180802-1.png" alt="Slate - 為你打造漂亮的 API 文件">
@@ -715,6 +703,25 @@
                     <a href="/2018/08/02/tools/slate-api-document/" class="has-link-black-ter is-size-6">Slate - 為你打造漂亮的 API 文件</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/工具/">工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在 Mac OSX 使用 RVM 升級 Ruby V2.5.1">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
+                    <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="has-link-black-ter is-size-6">在 Mac OSX 使用 RVM 升級 Ruby V2.5.1</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Ruby/">Ruby</a>
                     </p>
                 </div>
             </div>
@@ -1101,25 +1108,6 @@
         
         <article class="media">
             
-            <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在 Mac OSX 使用 RVM 升級 Ruby V2.5.1">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
-                    <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="has-link-black-ter is-size-6">在 Mac OSX 使用 RVM 升級 Ruby V2.5.1</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Ruby/">Ruby</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/2018/08/02/tools/slate-api-document/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/tools/20180802-1.png" alt="Slate - 為你打造漂亮的 API 文件">
@@ -1132,6 +1120,25 @@
                     <a href="/2018/08/02/tools/slate-api-document/" class="has-link-black-ter is-size-6">Slate - 為你打造漂亮的 API 文件</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/工具/">工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在 Mac OSX 使用 RVM 升級 Ruby V2.5.1">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
+                    <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="has-link-black-ter is-size-6">在 Mac OSX 使用 RVM 升級 Ruby V2.5.1</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Ruby/">Ruby</a>
                     </p>
                 </div>
             </div>
