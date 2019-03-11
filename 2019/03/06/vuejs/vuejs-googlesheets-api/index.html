@@ -23,7 +23,7 @@
 <meta property="og:image" content="https://weijutu.github.io/images/vuejs/20190311-3.png">
 <meta property="og:image" content="https://weijutu.github.io/images/vuejs/20190311-4.png">
 <meta property="og:image" content="https://weijutu.github.io/images/vuejs/20190311-5.png">
-<meta property="og:updated_time" content="2019-03-11T13:32:49.576Z">
+<meta property="og:updated_time" content="2019-03-11T13:41:16.576Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫">
 <meta name="twitter:description" content="本次實作是透過 Google Sheets 作為小型資料庫，然後使用Vue 前端語法做資料的讀取，而且無需透過後端程式來插手。 學習內容大綱 初始化建立 Vue 專案 建立 Google Sheets 試算表 啟動你的 Google Sheets API 存取 準備 Vue 前端 Google Sheets API 執行讀取4.1 安裝套件 VueGapi 與使用 執行結果  初始化建立 Vue">
@@ -221,7 +221,7 @@
 <li><a href="https://developers.google.com/sheets/api/guides/authorizing" target="_blank" rel="noopener">Authorize Requests@Google Sheets指南</a></li>
 <li><a href="https://medium.com/@sj82516/google-sheet-api-%E8%88%87%E6%8E%88%E6%AC%8A%E7%A0%94%E7%A9%B6-12034cb003f4" target="_blank" rel="noopener">Google Sheet API 與Google OAuth2 API授權研究</a></li>
 </ul>
-<h2 id="準備-Vue-前端-Google-Sheets-API-執行寫入"><a href="#準備-Vue-前端-Google-Sheets-API-執行寫入" class="headerlink" title="準備 Vue 前端 Google Sheets API 執行寫入"></a>準備 Vue 前端 Google Sheets API 執行寫入</h2><p>在儲存格有值了以及 Google Sheets API 授權開啟之後，我們就回到 Vue 前端的部分，還記得前面裝好的專案並且可以用瀏覽器閱覽嗎？網址是：<code>http://localhost:8080/#/</code>，在這裡我們需要編寫一些檔案</p>
+<h2 id="準備-Vue-前端-Google-Sheets-API-執行讀取"><a href="#準備-Vue-前端-Google-Sheets-API-執行讀取" class="headerlink" title="準備 Vue 前端 Google Sheets API 執行讀取"></a>準備 Vue 前端 Google Sheets API 執行讀取</h2><p>在儲存格有值了以及 Google Sheets API 授權開啟之後，我們就回到 Vue 前端的部分，還記得前面裝好的專案並且可以用瀏覽器閱覽嗎？網址是：<code>http://localhost:8080/#/</code>，在這裡我們需要編寫一些檔案</p>
 <h3 id="安裝套件-VueGapi-與使用"><a href="#安裝套件-VueGapi-與使用" class="headerlink" title="安裝套件 VueGapi 與使用"></a>安裝套件 VueGapi 與使用</h3><p>首先的是要能夠讓 Vue 讀取 Google API 的方法，就需要使用 <code>vue-gapi</code> 套件，這個可以用來實作對 google 文件的 api 套件，那麼我們在 vue 專案下將套件裝起來。</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn add vue-gapi</span><br></pre></td></tr></table></figure>
 <p>很好，裝好了對吧？接著趕緊到 <code>/src/main.js</code> 文件裡面將 <code>vue-gapi</code> 載入，讓全域環境裡面可以使用它，新增以下語法用來連線你的應用程式與 Google Sheets 服務</p>
