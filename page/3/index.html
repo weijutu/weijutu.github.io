@@ -146,6 +146,120 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-08-25T03:45:14.000Z">2017-08-25</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    8 分鐘 閱讀文 (大約 1155 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/08/25/javascript/javascript-gulpjs-minify-image/">Javascript - 介紹 Gulp.js 並實作壓縮（minify）圖片</a>
+            
+        </h1>
+        <div class="content">
+            <p><img src="/images/javascript/5.png" alt></p>
+<p>它是建立在 node.js 的一個套件。The streaming build system. 它的觀念是一套利用串流方式輔助建置系統，優化前端工程的效能（縮小js 檔案大小，編譯預處理的css, less ）加快js, css…etc 載入速度，特色在於代碼優於配置關做法讓事情變得更簡單，更直覺的方式構建系統。</p>
+<h3 id="什麼是字串流-Stream-（也可以叫串流）"><a href="#什麼是字串流-Stream-（也可以叫串流）" class="headerlink" title="什麼是字串流 Stream? （也可以叫串流）"></a>什麼是字串流 Stream? （也可以叫串流）</h3><p>谷歌一下Wiki 的「 Stream 」的意思：</p>
+<blockquote>
+<p>在電腦科學裡面，字串流(stream，或者串流)這個詞有很多用法。所有這一些用法都是代表一個包含資料的序列。我們可以將字串流想做是一個允許資料一個接一個，而非將資料包作一整個，來進行處理的輸送帶。</p>
+</blockquote>
+<p>用個 gulp.js 的簡單例子：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gulp.src(&apos;js/app.js&apos;)</span><br><span class="line">    .pipe(uglify())</span><br><span class="line">    .pipe(gulp.dest(&apos;build&apos;))</span><br></pre></td></tr></table></figure>
+<p>以這個例子來說，gulp.src 方法帶了一個字串參數 js/app.js，這個是對應一個主要的 js 檔案，主要是建立物件串流來表示的文件，接這透過 .pipe 方法將所有檔案做 uglify() 的動作，而這個動作將會縮小之後回傳一個新的物件，最後將這個輸出用 gulp.dest 目標位置到 build 資料夾裡面。</p>
+<p>流程會是如下：</p>
+<p><img src="/images/javascript/6.png" alt></p>
+<h3 id="Grunt-vs-Gulp"><a href="#Grunt-vs-Gulp" class="headerlink" title="Grunt vs Gulp"></a>Grunt vs Gulp</h3><p>Grunt.js 與 Gulp.js 都做相同的事情，都是做自動化處理，但是 Grunt 處理的方式繞了很多圈，我們可以看一下以下的比較：</p>
+<ul>
+<li>Grunt 套件執行多個任務；Gulp 只會專注做一件事情上。</li>
+<li>Grunt 需要套件的基本功能；Gulp 裡的功能已經是內建的了。</li>
+<li>Grunt 使用 JSON 方式做資料配置的文件：Gulp 使用的方式更精簡，是使用 JS 語法撰寫</li>
+</ul>
+<p>Let’s start using Gulp.</p>
+<h3 id="安裝-Node-js"><a href="#安裝-Node-js" class="headerlink" title="安裝 Node.js"></a>安裝 Node.js</h3><p>這裡我不會做太多解釋如何安裝 node.js ，安裝方式請詳見之前寫的一篇文章 「<a href="http://weijutu.github.io/2017/07/24/nodejs/nodejs-02-install/">Node.js 系列學習日誌#2 - Node.js 安裝配置</a>」</p>
+<h3 id="安裝-Gulp"><a href="#安裝-Gulp" class="headerlink" title="安裝 Gulp"></a>安裝 Gulp</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sudo npm install gulp -g</span><br></pre></td></tr></table></figure>
+<p>請先確認 nodejs, npm, gulp 是否有正常安裝，我們可以驗證一下版本</p>
+<p><img src="/images/javascript/7.png" alt></p>
+<h3 id="建立專案"><a href="#建立專案" class="headerlink" title="建立專案"></a>建立專案</h3><p>請先建立一個資料夾，這裡叫做 gulptest 的資料夾，這裡面包含：</p>
+<ul>
+<li>src — the location of pre-processed HTML source files and folders:<ul>
+<li>images — uncompressed images</li>
+<li>scripts — multiple pre-processed script files</li>
+<li>styles — multiple pre-processed CSS files</li>
+</ul>
+</li>
+<li>build — the location of production files for upload including:<ul>
+<li>images — compressed images</li>
+<li>scripts — a single minified script file</li>
+<li>styles — a single minified CSS file</li>
+</ul>
+</li>
+</ul>
+<p>接著我們在資料夾下安裝 Gulp 套件</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm install gulp --save-dev</span><br></pre></td></tr></table></figure>
+<p>在這邊它會自動建立 node_module 永久性的資料夾，裡面包含被安裝的 gulp</p>
+<p><img src="/images/javascript/8.png" alt></p>
+<p>最後先在 gulptest 資料夾下建立空的 gulpfile.js 檔案，之後會介紹如何使用</p>
+<h3 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h3><p>我們需要安裝與配置一個套件來執行任務，在這裡做個簡單的例子就使用一套 jshint 套件，請輸入：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm install gulp-jshint --save-dev</span><br></pre></td></tr></table></figure>
+<p>然後開啟剛才建立好的 gulpfile.js，建立一個名叫 imagemin 的任務。請寫以下程式：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// include gulp</span><br><span class="line">var gulp = require(&apos;gulp&apos;);</span><br><span class="line"></span><br><span class="line">gulp.task(&apos;imagemin&apos;, function() &#123;</span><br><span class="line">  var imgSrc = &apos;./src/images/**/*&apos;,</span><br><span class="line">      imgDst = &apos;./build/images&apos;;</span><br><span class="line"></span><br><span class="line">  gulp.src(imgSrc)</span><br><span class="line">    .pipe(changed(imgDst))</span><br><span class="line">    .pipe(imagemin())</span><br><span class="line">    .pipe(gulp.dest(imgDst));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>我在 /src/images/ 放了三張圖 (隨便到 google design 抓了三張圖，暫時找不到照片就先拿很小kb數來練啦～)</p>
+<ul>
+<li><code>components-bottomsheet-for-mobile-1a_large_mdpi.png (31kb)</code></li>
+<li><code>components-bottomsheet-for-mobile-1b_large_mdpi.png (18kb)</code></li>
+<li><code>components-bottomsheet-for-mobile-1b_large_mdpi.png (8kb)</code></li>
+</ul>
+<p><img src="/images/javascript/9.png" alt></p>
+<p>gulpfile.js 存檔之後用以下的命令執行：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$gulp imagemin</span><br></pre></td></tr></table></figure>
+<p><img src="/images/javascript/10.png" alt></p>
+<p>注意看執行結果的最後一行，上面寫 gulp-imagemin: Minified 3 images (saved 11.23 KB - 19.5%)，意思就是節省了 11.23KB, 總體省了 19.5%</p>
+<ul>
+<li><code>components-bottomsheet-for-mobile-1a_large_mdpi.png (29kb)</code></li>
+<li><code>components-bottomsheet-for-mobile-1b_large_mdpi.png (13kb)</code></li>
+<li><code>components-bottomsheet-for-mobile-1b_large_mdpi.png (4kb)</code></li>
+</ul>
+<p>最後請到 /build/images/<em>.</em>.png 查看被壓縮結果</p>
+<p><img src="/images/javascript/11.png" alt></p>
+<h3 id="資料參考"><a href="#資料參考" class="headerlink" title="資料參考"></a>資料參考</h3><ul>
+<li><a href="http://david.nowinsky.net/gulp-book/" target="_blank" rel="noopener">Gulp-book@Gitbook</a></li>
+<li>Wikipedia: <a href="http://zh.wikipedia.org/wiki/字串流" target="_blank" rel="noopener">http://zh.wikipedia.org/wiki/字串流</a></li>
+</ul>
+<h3 id="備註"><a href="#備註" class="headerlink" title="備註"></a>備註</h3><ul>
+<li>gulp.task(name, fn) it registers the function with a name. you can optionally specify some dependencies if other tasks need to run first</li>
+<li>gulp.run(task) runs all tasks with maximun concurrency</li>
+<li>gulp.src(glob) this returns a readable stream. takes a file system glob(like grunt) and starts emitting files that match</li>
+<li>gulp.dest(folder) this returns a writable stream, file objects piped to this are saved to the file system</li>
+</ul>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2017-08-25T03:37:25.000Z">2017-08-25</time>
                 
                 
@@ -695,73 +809,6 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分鐘 閱讀文 (大約 409 個字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/07/26/nodejs/nodejs-27-forever/">Node.js 系列學習日誌#27 - forever 讓程式保持執行狀態</a>
-            
-        </h1>
-        <div class="content">
-            <p>程式準備要部署上線時，就會面臨到執行程式的方式，伺服器的管理，是不是能有一個運行 Node.js 程式，並且有個工具處理這件事情。<br>forever 可以作為保持運行的狀態，管理 Node.js 程式服務，在 forever 進程之下，建立子進程，執行啟動與停止的命令相當簡單。<br>更特別的是，經常我們在寫 Node.js 的時候，每次更動的檔案時都需要再重新執行啟動服務的指令 (例如：node app.js)，而這個工具是當每次更新程式的時候，它會自動重新啟動服務，更方便許多了呢！</p>
-<p>這是官方的描述：（<a href="https://github.com/nodejitsu/forever）" target="_blank" rel="noopener">https://github.com/nodejitsu/forever）</a></p>
-<p>A simple CLI tool for ensuring that a given script runs continuously (i.e. forever).</p>
-<h3 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 一般建議加上 -g 將 forever 全域安裝</span><br><span class="line">$[sudo] npm install forever -g</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/118.png" alt></p>
-<p>當然若你要在某個特定目錄下安裝也是可以</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$cd /path/projects/abc</span><br><span class="line">$[sudo] npm install forever</span><br></pre></td></tr></table></figure>
-<h3 id="指令的幫助"><a href="#指令的幫助" class="headerlink" title="指令的幫助"></a>指令的幫助</h3><p>可以透過以下指令列出說明</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever —help</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/119.png" alt></p>
-<h3 id="顯示所有運行的服務"><a href="#顯示所有運行的服務" class="headerlink" title="顯示所有運行的服務"></a>顯示所有運行的服務</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever list</span><br></pre></td></tr></table></figure>
-<h3 id="啟動"><a href="#啟動" class="headerlink" title="啟動"></a>啟動</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever start app.js</span><br></pre></td></tr></table></figure>
-<h3 id="停止操作"><a href="#停止操作" class="headerlink" title="停止操作"></a>停止操作</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever stopall</span><br></pre></td></tr></table></figure>
-<h3 id="停止某一個程式專案"><a href="#停止某一個程式專案" class="headerlink" title="停止某一個程式專案"></a>停止某一個程式專案</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever stop app.js</span><br></pre></td></tr></table></figure>
-<h3 id="實作一個簡單運用"><a href="#實作一個簡單運用" class="headerlink" title="實作一個簡單運用"></a>實作一個簡單運用</h3><p>我們先用 express 這個框架建一個簡單的網站</p>
-<p><img src="/images/nodejs/120.png" alt></p>
-<h3 id="啟動程式"><a href="#啟動程式" class="headerlink" title="啟動程式"></a>啟動程式</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever start app.js</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/121.png" alt></p>
-<h3 id="forever-列表清單"><a href="#forever-列表清單" class="headerlink" title="forever  列表清單"></a>forever  列表清單</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever list</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/122.png" alt></p>
-<p>可以看到紫色部分，就是在放 log file 的路徑</p>
-<h3 id="關閉進程"><a href="#關閉進程" class="headerlink" title="關閉進程"></a>關閉進程</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever stop app.js</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/123.png" alt></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-07-25T16:27:00.000Z">2017-07-26</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
                     4 分鐘 閱讀文 (大約 556 個字)
                 </span>
                 
@@ -833,9 +880,9 @@
             
             <li><a class="pagination-link has-text-black-ter" href="/page/4/">4</a></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/5/">5</a></li>
+            <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/6/">6</a></li>
+            <li><a class="pagination-link has-text-black-ter" href="/page/7/">7</a></li>
             
         </ul>
     </nav>
@@ -883,7 +930,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        60
+                        61
                     </p>
                 </div>
             </div>
@@ -903,7 +950,7 @@
                         標籤
                     </p>
                     <p class="title has-text-weight-normal">
-                        41
+                        42
                     </p>
                 </div>
             </div>
@@ -1033,7 +1080,7 @@
                 <span class="level-item">網站</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/股典閱/">
@@ -1066,6 +1113,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/03/12/web/ubuntu-nginx-restart-fail/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/web/20190312-5.png" alt="Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-12T15:00:00.000Z">2019-03-12</time></div>
+                    <a href="/2019/03/12/web/ubuntu-nginx-restart-fail/" class="has-link-black-ter is-size-6">Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/網站/">網站</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1107,25 +1173,6 @@
         
         <article class="media">
             
-            <a href="/2018/08/02/tools/slate-api-document/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/tools/20180802-1.png" alt="Slate - 為你打造漂亮的 API 文件">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
-                    <a href="/2018/08/02/tools/slate-api-document/" class="has-link-black-ter is-size-6">Slate - 為你打造漂亮的 API 文件</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="在 Mac OSX 使用 RVM 升級 Ruby V2.5.1">
@@ -1145,18 +1192,18 @@
         
         <article class="media">
             
-            <a href="/2018/07/26/web/how-to-deply-redmine-to-heroku/" class="media-left">
+            <a href="/2018/08/02/tools/slate-api-document/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="部署 Redmine 專案管理追蹤系統到 Heroku 平台">
+                    <img class="thumbnail" src="/images/tools/20180802-1.png" alt="Slate - 為你打造漂亮的 API 文件">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-07-26T14:07:51.000Z">2018-07-26</time></div>
-                    <a href="/2018/07/26/web/how-to-deply-redmine-to-heroku/" class="has-link-black-ter is-size-6">部署 Redmine 專案管理追蹤系統到 Heroku 平台</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
+                    <a href="/2018/08/02/tools/slate-api-document/" class="has-link-black-ter is-size-6">Slate - 為你打造漂亮的 API 文件</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/網站/">網站</a>
+                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
                     </p>
                 </div>
             </div>
@@ -1238,6 +1285,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/Nginx/">
+                        <span class="tag">Nginx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/Node-js/">
                         <span class="tag">Node.js</span>
                         <span class="tag is-grey">31</span>
@@ -1275,7 +1329,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Ubuntu/">
                         <span class="tag">Ubuntu</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1486,6 +1540,25 @@
         
         <article class="media">
             
+            <a href="/2019/03/12/web/ubuntu-nginx-restart-fail/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/web/20190312-5.png" alt="Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-12T15:00:00.000Z">2019-03-12</time></div>
+                    <a href="/2019/03/12/web/ubuntu-nginx-restart-fail/" class="has-link-black-ter is-size-6">Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/網站/">網站</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/03/06/vuejs/vuejs-googlesheets-api/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/vuejs/wolfe77.png" alt="Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫">
@@ -1524,25 +1597,6 @@
         
         <article class="media">
             
-            <a href="/2018/08/02/tools/slate-api-document/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/tools/20180802-1.png" alt="Slate - 為你打造漂亮的 API 文件">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
-                    <a href="/2018/08/02/tools/slate-api-document/" class="has-link-black-ter is-size-6">Slate - 為你打造漂亮的 API 文件</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="在 Mac OSX 使用 RVM 升級 Ruby V2.5.1">
@@ -1562,18 +1616,18 @@
         
         <article class="media">
             
-            <a href="/2018/07/26/web/how-to-deply-redmine-to-heroku/" class="media-left">
+            <a href="/2018/08/02/tools/slate-api-document/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="部署 Redmine 專案管理追蹤系統到 Heroku 平台">
+                    <img class="thumbnail" src="/images/tools/20180802-1.png" alt="Slate - 為你打造漂亮的 API 文件">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-07-26T14:07:51.000Z">2018-07-26</time></div>
-                    <a href="/2018/07/26/web/how-to-deply-redmine-to-heroku/" class="has-link-black-ter is-size-6">部署 Redmine 專案管理追蹤系統到 Heroku 平台</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
+                    <a href="/2018/08/02/tools/slate-api-document/" class="has-link-black-ter is-size-6">Slate - 為你打造漂亮的 API 文件</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/網站/">網站</a>
+                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
                     </p>
                 </div>
             </div>
@@ -1655,6 +1709,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/Nginx/">
+                        <span class="tag">Nginx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/Node-js/">
                         <span class="tag">Node.js</span>
                         <span class="tag is-grey">31</span>
@@ -1692,7 +1753,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Ubuntu/">
                         <span class="tag">Ubuntu</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 

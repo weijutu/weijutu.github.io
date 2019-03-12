@@ -146,6 +146,80 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-07-23T16:07:00.000Z">2017-07-24</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 分鐘 閱讀文 (大約 490 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/07/24/nodejs/nodejs-07-mysql-start/">Node.js 系列學習日誌#7 - 連接 MySQL 並實現 CRUD 操作存取前的準備</a>
+            
+        </h1>
+        <div class="content">
+            <p>今天就來寫一個跟資料庫有關的功能，本章節介紹用 <code>node.js ＋ mysql</code>  的存取，實作新增、修改、刪除、查詢的功能，以下都是以  mac osx 來當作開發環境，因此以下步驟之前請務必安裝  <code>node.js</code> , npm，另外還有 <code>mysql</code> ，您可以透過 <a href="http://dev.mysql.com/downloads/mysql/" target="_blank" rel="noopener">http://dev.mysql.com/downloads/mysql/</a> 來安裝，mysql 安裝的步驟在此就不做介紹，專注在  node.js 與 mysql 存取的方法。</p>
+<p>首先我們先建立一個資料夾  nodejs-demo-mysql ，然後要安裝一下相依的套件使用：express, mysql</p>
+<p>建立 package.json，請輸入以下的指令按照提示問題回答</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$npm</span> init</span><br></pre></td></tr></table></figure>
+<p>安裝 express web framework 到這 nodejs-demo-mysql 應用程式專案裡面，並寫入到  package.json</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$npm</span> install express —save</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/31.png" alt></p>
+<p>完成 express 之後，再安裝 mysql 套件，在這邊安裝  mysql</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$npm</span> install mysql@2.0.0-alpha9</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/32.png" alt></p>
+<p>首先可以看到 express 套件,  node-mysql 就新增到 node_modules 裡了</p>
+<p><img src="/images/nodejs/33.png" alt></p>
+<p>資料庫的部分，假定先建立一個 demo_nodejs 的資料庫</p>
+<p><img src="/images/nodejs/34.png" alt></p>
+<p>然後新增  index.js 作為網頁開頭的起始點，宣告 mysql 後，先使用 createConnection 方法將資料庫的參數初始化</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> mysql = <span class="hljs-built_in">require</span>(<span class="hljs-string">'mysql'</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> conn = mysql.createConnection(&#123;</span><br><span class="line">    host: <span class="hljs-string">'localhost'</span>,</span><br><span class="line">    user: <span class="hljs-string">'nodejs'</span>,</span><br><span class="line">    password: <span class="hljs-string">'nodejs'</span>,</span><br><span class="line">    database:<span class="hljs-string">'demo_nodejs'</span>,</span><br><span class="line">    port: <span class="hljs-number">3306</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>將資料庫做個連線的動作</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.connect();</span><br></pre></td></tr></table></figure>
+<p>先測試一下，透過以下的 query  執行，如果有將 12 + 34 有算出來，那麼就代表有連線成功</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">conn.query(<span class="hljs-string">'SELECT 12 + 34 AS result'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, rows, fields</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">throw</span> err;</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'The result is: '</span>, rows[<span class="hljs-number">0</span>].result);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>連線成功後，查詢之後務必要將它關閉。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.end();</span><br></pre></td></tr></table></figure>
+<p>完整程式如下：</p>
+<p><img src="/images/nodejs/35.png" alt></p>
+<p>執行結果 有將 12 + 34 = 46 算出來囉</p>
+<p><img src="/images/nodejs/36.png" alt></p>
+<h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><ul>
+<li><a href="http://expressjs.com/" target="_blank" rel="noopener">http://expressjs.com/</a></li>
+<li><a href="https://github.com/redblaze/node-mysql" target="_blank" rel="noopener">https://github.com/redblaze/node-mysql</a></li>
+</ul>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2017-07-23T16:06:00.000Z">2017-07-24</time>
                 
                 <div class="level-item">
@@ -826,57 +900,6 @@
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2015-01-31T14:35:40.000Z">2015-01-31</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/macbook/">macbook</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    幾秒 閱讀文 (大約 105 個字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2015/01/31/mac/2014-10-11-mac-kill-port/">Macbook - 移除現有被佔住的 port</a>
-            
-        </h1>
-        <div class="content">
-            <p>當要啟動服務的時候，但是電腦上有執行其他服務而被佔住 port ，你可以這麼做，先查詢之後將找到的 port 移除</p>
-<p>使用 netstate 查詢某一 port</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$netstat</span> -anp tcp | grep 8080</span><br></pre></td></tr></table></figure>
-<p>如果 netstat 查不到或不支援，那麼就用以下指令查詢</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$lsof</span> -i tcp: 8080</span><br></pre></td></tr></table></figure>
-<p>最後，查到的結果就用以下方式移除即可</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$kill</span> -9 &lt;PID&gt;</span><br></pre></td></tr></table></figure>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -884,7 +907,7 @@
         <div class="pagination-previous">
             <a class="is-flex-grow has-text-black-ter" href="/page/5/">上一頁</a>
         </div>
-        <div class="pagination-next is-invisible is-hidden-mobile">
+        <div class="pagination-next">
             <a class="is-flex-grow has-text-black-ter" href="/page/7/">下一頁</a>
         </div>
         <ul class="pagination-list is-hidden-mobile">
@@ -896,6 +919,8 @@
             <li><a class="pagination-link has-text-black-ter" href="/page/5/">5</a></li>
             
             <li><a class="pagination-link is-current" href="/page/6/">6</a></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/page/7/">7</a></li>
             
         </ul>
     </nav>
@@ -943,7 +968,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        60
+                        61
                     </p>
                 </div>
             </div>
@@ -963,7 +988,7 @@
                         標籤
                     </p>
                     <p class="title has-text-weight-normal">
-                        41
+                        42
                     </p>
                 </div>
             </div>
@@ -1093,7 +1118,7 @@
                 <span class="level-item">網站</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/股典閱/">
@@ -1126,6 +1151,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/03/12/web/ubuntu-nginx-restart-fail/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/web/20190312-5.png" alt="Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-12T15:00:00.000Z">2019-03-12</time></div>
+                    <a href="/2019/03/12/web/ubuntu-nginx-restart-fail/" class="has-link-black-ter is-size-6">Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/網站/">網站</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1167,25 +1211,6 @@
         
         <article class="media">
             
-            <a href="/2018/08/02/tools/slate-api-document/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/tools/20180802-1.png" alt="Slate - 為你打造漂亮的 API 文件">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
-                    <a href="/2018/08/02/tools/slate-api-document/" class="has-link-black-ter is-size-6">Slate - 為你打造漂亮的 API 文件</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="在 Mac OSX 使用 RVM 升級 Ruby V2.5.1">
@@ -1205,18 +1230,18 @@
         
         <article class="media">
             
-            <a href="/2018/07/26/web/how-to-deply-redmine-to-heroku/" class="media-left">
+            <a href="/2018/08/02/tools/slate-api-document/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="部署 Redmine 專案管理追蹤系統到 Heroku 平台">
+                    <img class="thumbnail" src="/images/tools/20180802-1.png" alt="Slate - 為你打造漂亮的 API 文件">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-07-26T14:07:51.000Z">2018-07-26</time></div>
-                    <a href="/2018/07/26/web/how-to-deply-redmine-to-heroku/" class="has-link-black-ter is-size-6">部署 Redmine 專案管理追蹤系統到 Heroku 平台</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
+                    <a href="/2018/08/02/tools/slate-api-document/" class="has-link-black-ter is-size-6">Slate - 為你打造漂亮的 API 文件</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/網站/">網站</a>
+                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
                     </p>
                 </div>
             </div>
@@ -1298,6 +1323,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/Nginx/">
+                        <span class="tag">Nginx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/Node-js/">
                         <span class="tag">Node.js</span>
                         <span class="tag is-grey">31</span>
@@ -1335,7 +1367,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Ubuntu/">
                         <span class="tag">Ubuntu</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1546,6 +1578,25 @@
         
         <article class="media">
             
+            <a href="/2019/03/12/web/ubuntu-nginx-restart-fail/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/web/20190312-5.png" alt="Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-12T15:00:00.000Z">2019-03-12</time></div>
+                    <a href="/2019/03/12/web/ubuntu-nginx-restart-fail/" class="has-link-black-ter is-size-6">Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/網站/">網站</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/03/06/vuejs/vuejs-googlesheets-api/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/vuejs/wolfe77.png" alt="Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫">
@@ -1584,25 +1635,6 @@
         
         <article class="media">
             
-            <a href="/2018/08/02/tools/slate-api-document/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/tools/20180802-1.png" alt="Slate - 為你打造漂亮的 API 文件">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
-                    <a href="/2018/08/02/tools/slate-api-document/" class="has-link-black-ter is-size-6">Slate - 為你打造漂亮的 API 文件</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="在 Mac OSX 使用 RVM 升級 Ruby V2.5.1">
@@ -1622,18 +1654,18 @@
         
         <article class="media">
             
-            <a href="/2018/07/26/web/how-to-deply-redmine-to-heroku/" class="media-left">
+            <a href="/2018/08/02/tools/slate-api-document/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="部署 Redmine 專案管理追蹤系統到 Heroku 平台">
+                    <img class="thumbnail" src="/images/tools/20180802-1.png" alt="Slate - 為你打造漂亮的 API 文件">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-07-26T14:07:51.000Z">2018-07-26</time></div>
-                    <a href="/2018/07/26/web/how-to-deply-redmine-to-heroku/" class="has-link-black-ter is-size-6">部署 Redmine 專案管理追蹤系統到 Heroku 平台</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
+                    <a href="/2018/08/02/tools/slate-api-document/" class="has-link-black-ter is-size-6">Slate - 為你打造漂亮的 API 文件</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/網站/">網站</a>
+                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
                     </p>
                 </div>
             </div>
@@ -1715,6 +1747,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/Nginx/">
+                        <span class="tag">Nginx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/Node-js/">
                         <span class="tag">Node.js</span>
                         <span class="tag is-grey">31</span>
@@ -1752,7 +1791,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Ubuntu/">
                         <span class="tag">Ubuntu</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 

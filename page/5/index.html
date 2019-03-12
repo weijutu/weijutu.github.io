@@ -146,6 +146,72 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-07-23T16:17:00.000Z">2017-07-24</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 分鐘 閱讀文 (大約 816 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/07/24/nodejs/nodejs-17-ejs-json/">Node.js 系列學習日誌#17 - 使用 express, ejs 實作讀取靜態 JSON 格式資料</a>
+            
+        </h1>
+        <div class="content">
+            <p>今天來介紹 express, ejs 實作讀取靜態 JSON 格式資料程式</p>
+<p>本章節將會學習到：</p>
+<ul>
+<li>使用 ejs 樣板引擎建立檢視頁面</li>
+<li>建立 Json 檔案及資料，並採取 /api/posts 列出所有 json 資料</li>
+<li>採取 /post/:id 取得某一筆資料<br>首先我們先建立一個目錄叫 demo-express-json 的資料夾，然後使用指令進入到 demo-express-json 資料夾裡面，接著安裝 express 框架以及 ejs 的樣板引擎</li>
+</ul>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$npm</span> install —save express ejs</span><br></pre></td></tr></table></figure>
+<h3 id="建立-josn-檔案"><a href="#建立-josn-檔案" class="headerlink" title="建立 josn 檔案"></a>建立 josn 檔案</h3><p>建立完成之後，我們在 demo-express-json 會出現 node_module 資料夾，裡面則是有 express, ejs 套件相關檔案，接下來在根目錄下建立一個  posts.json 格式檔案，資料先假定設定為：</p>
+<p>（文字是用亂數假文產生器弄的，因此無需認真讀囉）</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">     &#123;</span><br><span class="line">       &quot;title&quot;: &quot;會濟報好大必者政下二&quot;,</span><br><span class="line">       &quot;id&quot;: &quot;fdb61c16-4bba-11e4-9e35-164230d1df67&quot;,</span><br><span class="line">       &quot;content&quot;: &quot;容有那一氣持地來於結主了友如頭……院還地入。出乎機富事的著度同禮、時在科種力事再數總源式孩？&quot;</span><br><span class="line">     &#125;,</span><br><span class="line">     &#123;</span><br><span class="line">       &quot;title&quot;: &quot;主覺問我的食什期和&quot;,</span><br><span class="line">       &quot;id&quot;: &quot;0bc365ac-4bbb-11e4-9e35-164230d1df67&quot;,</span><br><span class="line">       &quot;content&quot;: &quot;生老了險實去供考權是車子氣長不別相且員高麼也工家看&quot;</span><br><span class="line">     &#125;,</span><br><span class="line">     &#123;</span><br><span class="line">       &quot;title&quot;: &quot;是實裡在園時傳&quot;,</span><br><span class="line">       &quot;id&quot;: &quot;0ff44786-4bbb-11e4-9e35-164230d1df67&quot;,</span><br><span class="line">       &quot;content&quot;: &quot;不半過何：為濟是在制們。裡得一方出，處師取是你賣而陽&quot;</span><br><span class="line">     &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>這個 json 檔每一筆資料以 title, id, content 參數為主</p>
+<h3 id="建立-app-js"><a href="#建立-app-js" class="headerlink" title="建立 app.js"></a>建立 app.js</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">// express web framework</span><br><span class="line">var express = require(&apos;express&apos;);</span><br><span class="line">//讀取 posts.json</span><br><span class="line">var fs = require(&apos;fs&apos;);</span><br><span class="line">var app = express();</span><br><span class="line"></span><br><span class="line">//放置靜態網頁</span><br><span class="line">app.use(&apos;/public&apos;, express.static(__dirname + &apos;/public&apos;));</span><br><span class="line"></span><br><span class="line">//定義網站標題</span><br><span class="line">app.locals.title=&quot;Get json data using express web framework&quot;;</span><br><span class="line"></span><br><span class="line">app.all(&apos;*&apos;, function(req, res, next)&#123;</span><br><span class="line">  fs.readFile(&apos;posts.json&apos;, function(err, data)&#123;</span><br><span class="line">    res.locals.posts = JSON.parse(data);</span><br><span class="line">    next();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">//網頁主進入點</span><br><span class="line">app.get(&apos;/&apos;, function(req, res)&#123;</span><br><span class="line">  //指定 /views/idex.ejs</span><br><span class="line">  res.render(&apos;index.ejs&apos;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">//顯示 posts.json 資料</span><br><span class="line">app.get(&apos;/api/posts&apos;, function(req, res)&#123;</span><br><span class="line">  res.json(res.locals.posts);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">//當 url 是 /post/:id 時, 取得某一筆資料</span><br><span class="line">app.get(&apos;/post/:id&apos;, function(req, res, next)&#123;</span><br><span class="line">  //取得 post.json 資料夾</span><br><span class="line">  res.locals.posts.forEach(function(post)&#123;</span><br><span class="line">    //從 url 取得 id 參數與 posts.json 裡的 id</span><br><span class="line">    if (req.params.id === post.id)&#123;</span><br><span class="line">      //顯示參數為  url 中 id 的 post.id, 那麼顯示部分資料</span><br><span class="line">      res.render(&apos;post.ejs&apos;, &#123; post: post &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(3000);</span><br><span class="line">console.log(&apos;app is listening at localhost:3000...’);</span><br></pre></td></tr></table></figure>
+<p>再來是建立檢視資料夾 views，因為我們在 app.js 裡面設定樣板引擎是用 ejs，所以在 views 資料夾裡面新增三個檔案，分別是 header.ejs, index.ejs, footer.ejs</p>
+<p>header.ejs</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">&lt;!doctype html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">  &lt;title&gt;&lt;%= title %&gt;&lt;/title&gt;</span><br><span class="line">  &lt;link rel=&quot;stylesheet&quot; href=&quot;/public/styles.css&quot;&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;header&gt;</span><br><span class="line">  &lt;div class=&quot;container&quot;&gt;</span><br><span class="line">    &lt;h1&gt;&lt;a href=&quot;/&quot;&gt;&lt;%= title %&gt;&lt;/a&gt;&lt;/h1&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/header&gt;</span><br><span class="line"></span><br><span class="line">footer.ejs</span><br><span class="line"></span><br><span class="line">&lt;footer&gt;</span><br><span class="line">  &lt;div class=&quot;container&quot;&gt;</span><br><span class="line">    This is footer side.</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/footer&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br><span class="line">index.ejs</span><br><span class="line"></span><br><span class="line">&lt;% include header %&gt;</span><br><span class="line"></span><br><span class="line">&lt;main role=&quot;main&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;container&quot;&gt;</span><br><span class="line">    &lt;h3&gt;&lt;a href=&quot;/api/posts&quot;&gt;/api/posts&lt;/a&gt;&lt;/h3&gt;</span><br><span class="line">    &lt;% posts.forEach(function(post)&#123; %&gt;</span><br><span class="line">      &lt;h3&gt;</span><br><span class="line">        &lt;a href=&quot;/post/&lt;%= post.id %&gt;&quot;&gt;</span><br><span class="line">          &lt;%= post.title %&gt;</span><br><span class="line">        &lt;/a&gt;</span><br><span class="line">      &lt;/h3&gt;</span><br><span class="line">      &lt;div&gt;&lt;%= post.content %&gt;&lt;/div&gt;</span><br><span class="line">    &lt;% &#125;); %&gt;</span><br><span class="line">  &lt;/main&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;% include footer %&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="建立靜態資料"><a href="#建立靜態資料" class="headerlink" title="建立靜態資料"></a>建立靜態資料</h3><p>在 app.js 檔案裡有一行是</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.use(&apos;/public&apos;, express.static(__dirname + &apos;/public&apos;));</span><br></pre></td></tr></table></figure>
+<p>在做網站的過程，我們會建立 css,js 檔案，在根目錄下建立一個 public，並且在這個檔案增加一個 style.css，去定義一些樣式的方式，我這邊就不太多做 css 的解釋囉。</p>
+<h3 id="執行"><a href="#執行" class="headerlink" title="執行"></a>執行</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$node index.js</span><br></pre></td></tr></table></figure>
+<h3 id="結果"><a href="#結果" class="headerlink" title="結果"></a>結果</h3><p><img src="/images/nodejs/68.png" alt></p>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="http://expressjs.com/" target="_blank" rel="noopener">http://expressjs.com/</a><br><a href="http://expressjs.com/4x/api.html#app.locals" target="_blank" rel="noopener">http://expressjs.com/4x/api.html#app.locals</a><br><a href="http://www.richyli.com/tool/loremipsum/" target="_blank" rel="noopener">http://www.richyli.com/tool/loremipsum/</a></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2017-07-23T16:16:00.000Z">2017-07-24</time>
                 
                 <div class="level-item">
@@ -734,80 +800,6 @@
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-07-23T16:07:00.000Z">2017-07-24</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 分鐘 閱讀文 (大約 490 個字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/07/24/nodejs/nodejs-07-mysql-start/">Node.js 系列學習日誌#7 - 連接 MySQL 並實現 CRUD 操作存取前的準備</a>
-            
-        </h1>
-        <div class="content">
-            <p>今天就來寫一個跟資料庫有關的功能，本章節介紹用 <code>node.js ＋ mysql</code>  的存取，實作新增、修改、刪除、查詢的功能，以下都是以  mac osx 來當作開發環境，因此以下步驟之前請務必安裝  <code>node.js</code> , npm，另外還有 <code>mysql</code> ，您可以透過 <a href="http://dev.mysql.com/downloads/mysql/" target="_blank" rel="noopener">http://dev.mysql.com/downloads/mysql/</a> 來安裝，mysql 安裝的步驟在此就不做介紹，專注在  node.js 與 mysql 存取的方法。</p>
-<p>首先我們先建立一個資料夾  nodejs-demo-mysql ，然後要安裝一下相依的套件使用：express, mysql</p>
-<p>建立 package.json，請輸入以下的指令按照提示問題回答</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$npm</span> init</span><br></pre></td></tr></table></figure>
-<p>安裝 express web framework 到這 nodejs-demo-mysql 應用程式專案裡面，並寫入到  package.json</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$npm</span> install express —save</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/31.png" alt></p>
-<p>完成 express 之後，再安裝 mysql 套件，在這邊安裝  mysql</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$npm</span> install mysql@2.0.0-alpha9</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/32.png" alt></p>
-<p>首先可以看到 express 套件,  node-mysql 就新增到 node_modules 裡了</p>
-<p><img src="/images/nodejs/33.png" alt></p>
-<p>資料庫的部分，假定先建立一個 demo_nodejs 的資料庫</p>
-<p><img src="/images/nodejs/34.png" alt></p>
-<p>然後新增  index.js 作為網頁開頭的起始點，宣告 mysql 後，先使用 createConnection 方法將資料庫的參數初始化</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> mysql = <span class="hljs-built_in">require</span>(<span class="hljs-string">'mysql'</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> conn = mysql.createConnection(&#123;</span><br><span class="line">    host: <span class="hljs-string">'localhost'</span>,</span><br><span class="line">    user: <span class="hljs-string">'nodejs'</span>,</span><br><span class="line">    password: <span class="hljs-string">'nodejs'</span>,</span><br><span class="line">    database:<span class="hljs-string">'demo_nodejs'</span>,</span><br><span class="line">    port: <span class="hljs-number">3306</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>將資料庫做個連線的動作</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.connect();</span><br></pre></td></tr></table></figure>
-<p>先測試一下，透過以下的 query  執行，如果有將 12 + 34 有算出來，那麼就代表有連線成功</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">conn.query(<span class="hljs-string">'SELECT 12 + 34 AS result'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, rows, fields</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">throw</span> err;</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'The result is: '</span>, rows[<span class="hljs-number">0</span>].result);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>連線成功後，查詢之後務必要將它關閉。</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.end();</span><br></pre></td></tr></table></figure>
-<p>完整程式如下：</p>
-<p><img src="/images/nodejs/35.png" alt></p>
-<p>執行結果 有將 12 + 34 = 46 算出來囉</p>
-<p><img src="/images/nodejs/36.png" alt></p>
-<h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><ul>
-<li><a href="http://expressjs.com/" target="_blank" rel="noopener">http://expressjs.com/</a></li>
-<li><a href="https://github.com/redblaze/node-mysql" target="_blank" rel="noopener">https://github.com/redblaze/node-mysql</a></li>
-</ul>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -829,6 +821,8 @@
             <li><a class="pagination-link is-current" href="/page/5/">5</a></li>
             
             <li><a class="pagination-link has-text-black-ter" href="/page/6/">6</a></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/page/7/">7</a></li>
             
         </ul>
     </nav>
@@ -876,7 +870,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        60
+                        61
                     </p>
                 </div>
             </div>
@@ -896,7 +890,7 @@
                         標籤
                     </p>
                     <p class="title has-text-weight-normal">
-                        41
+                        42
                     </p>
                 </div>
             </div>
@@ -1026,7 +1020,7 @@
                 <span class="level-item">網站</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/股典閱/">
@@ -1059,6 +1053,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/03/12/web/ubuntu-nginx-restart-fail/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/web/20190312-5.png" alt="Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-12T15:00:00.000Z">2019-03-12</time></div>
+                    <a href="/2019/03/12/web/ubuntu-nginx-restart-fail/" class="has-link-black-ter is-size-6">Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/網站/">網站</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -1100,25 +1113,6 @@
         
         <article class="media">
             
-            <a href="/2018/08/02/tools/slate-api-document/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/tools/20180802-1.png" alt="Slate - 為你打造漂亮的 API 文件">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
-                    <a href="/2018/08/02/tools/slate-api-document/" class="has-link-black-ter is-size-6">Slate - 為你打造漂亮的 API 文件</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="在 Mac OSX 使用 RVM 升級 Ruby V2.5.1">
@@ -1138,18 +1132,18 @@
         
         <article class="media">
             
-            <a href="/2018/07/26/web/how-to-deply-redmine-to-heroku/" class="media-left">
+            <a href="/2018/08/02/tools/slate-api-document/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="部署 Redmine 專案管理追蹤系統到 Heroku 平台">
+                    <img class="thumbnail" src="/images/tools/20180802-1.png" alt="Slate - 為你打造漂亮的 API 文件">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-07-26T14:07:51.000Z">2018-07-26</time></div>
-                    <a href="/2018/07/26/web/how-to-deply-redmine-to-heroku/" class="has-link-black-ter is-size-6">部署 Redmine 專案管理追蹤系統到 Heroku 平台</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
+                    <a href="/2018/08/02/tools/slate-api-document/" class="has-link-black-ter is-size-6">Slate - 為你打造漂亮的 API 文件</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/網站/">網站</a>
+                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
                     </p>
                 </div>
             </div>
@@ -1231,6 +1225,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/Nginx/">
+                        <span class="tag">Nginx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/Node-js/">
                         <span class="tag">Node.js</span>
                         <span class="tag is-grey">31</span>
@@ -1268,7 +1269,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Ubuntu/">
                         <span class="tag">Ubuntu</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1479,6 +1480,25 @@
         
         <article class="media">
             
+            <a href="/2019/03/12/web/ubuntu-nginx-restart-fail/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/web/20190312-5.png" alt="Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-12T15:00:00.000Z">2019-03-12</time></div>
+                    <a href="/2019/03/12/web/ubuntu-nginx-restart-fail/" class="has-link-black-ter is-size-6">Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/網站/">網站</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/03/06/vuejs/vuejs-googlesheets-api/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/vuejs/wolfe77.png" alt="Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫">
@@ -1517,25 +1537,6 @@
         
         <article class="media">
             
-            <a href="/2018/08/02/tools/slate-api-document/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/tools/20180802-1.png" alt="Slate - 為你打造漂亮的 API 文件">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
-                    <a href="/2018/08/02/tools/slate-api-document/" class="has-link-black-ter is-size-6">Slate - 為你打造漂亮的 API 文件</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="在 Mac OSX 使用 RVM 升級 Ruby V2.5.1">
@@ -1555,18 +1556,18 @@
         
         <article class="media">
             
-            <a href="/2018/07/26/web/how-to-deply-redmine-to-heroku/" class="media-left">
+            <a href="/2018/08/02/tools/slate-api-document/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="部署 Redmine 專案管理追蹤系統到 Heroku 平台">
+                    <img class="thumbnail" src="/images/tools/20180802-1.png" alt="Slate - 為你打造漂亮的 API 文件">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-07-26T14:07:51.000Z">2018-07-26</time></div>
-                    <a href="/2018/07/26/web/how-to-deply-redmine-to-heroku/" class="has-link-black-ter is-size-6">部署 Redmine 專案管理追蹤系統到 Heroku 平台</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
+                    <a href="/2018/08/02/tools/slate-api-document/" class="has-link-black-ter is-size-6">Slate - 為你打造漂亮的 API 文件</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/網站/">網站</a>
+                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
                     </p>
                 </div>
             </div>
@@ -1648,6 +1649,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/Nginx/">
+                        <span class="tag">Nginx</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/Node-js/">
                         <span class="tag">Node.js</span>
                         <span class="tag is-grey">31</span>
@@ -1685,7 +1693,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Ubuntu/">
                         <span class="tag">Ubuntu</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 

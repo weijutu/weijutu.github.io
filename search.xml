@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題]]></title>
+    <url>%2F2019%2F03%2F12%2Fweb%2Fubuntu-nginx-restart-fail%2F</url>
+    <content type="text"><![CDATA[今天在 Ubuntu 14.04 安裝了 nginx，真沒想到執行時 sudo service nginx restart 直接顯示 fail 問題 (還沒開始就踩到坑了)。只能說 Google 是大神，能在苦惱之中找到正確的解決方法。 這個錯誤訊息也太少了，後來找到可以用 sudo nginx -t 測試配置文件的語法狀況。但是更令人驚呆的事，訊息也沒有重大錯誤，第一行寫 is ok 第二行 is successful。這….仍然沒解決到問題!! 12nginx: the configuration file /etc/nginx/nginx.conf syntax is oknginx: configuration file /etc/nginx/nginx.conf test is successful 既然語法正確，那麼就要往網站伺服器思考，試著思考 Ubuntu 預設都有 Apache 網站伺服器，預設都會是 80 Port，那麼 Nginx 既然都安裝了，那應該也是吧？ 從這個 吧？疑問詞當中，就來確定一下 Nginx 的 Port 狀況，可以試著輸入 sudo nginx 後查看 嗯嗯嗯，看起來都是被 80 Port 佔用了。 1nginx: [emerg] bind() to 0.0.0.0:80 failed (98: Address already in use) 接著我們查看一下到底有哪些佔用了 80 Port 1$ sudo netstat -lpn |grep :80 把佔用的 80 Port 刪掉 12$ sudo fuser -k 80/tcp80/tcp: 7007 7008 7009 11052 25621 25622 25623 25624 32657 32658 32659 之後就啟用一下 nginx 1234$ sudo service nginx start$ sudo service nginx restart$ sudo service nginx status * nginx is running oh, nice. nginx 已經啟動了!]]></content>
+      <categories>
+        <category>網站</category>
+      </categories>
+      <tags>
+        <tag>Ubuntu</tag>
+        <tag>Nginx</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫]]></title>
     <url>%2F2019%2F03%2F06%2Fvuejs%2Fvuejs-googlesheets-api%2F</url>
     <content type="text"><![CDATA[本次實作是透過 Google Sheets 作為小型資料庫，然後使用Vue 前端語法做資料的讀取，而且無需透過後端程式來插手。 學習內容大綱 初始化建立 Vue 專案 建立 Google Sheets 試算表 啟動你的 Google Sheets API 存取 準備 Vue 前端 Google Sheets API 執行讀取4.1 安裝套件 VueGapi 與使用 執行結果 初始化建立 Vue 專案首先一開始我們先建立 webpack Vue 專案，指令如下： 1$ vue init webpack vue-googlesheets-api 初始化過程中會詢問一些問題，在這裏我沒有全部安裝，因為做基本的練習，有些就選澤 No 就可以了。 12345678910111213141516171819 A newer version of vue-cli is available. latest: 2.9.6 installed: 2.9.5? Project name vue-googlesheets-api? Project description A Vue.js project? Author XXXXXX &lt;XXXXXXX@gmail.com&gt;? Vue build standalone? Install vue-router? Yes? Use ESLint to lint your code? No? Set up unit tests No? Setup e2e tests with Nightwatch? No? Should we run `npm install` for you after the project has been created? (recommended) yarn vue-cli · Generated &quot;vue-googlesheets-api&quot;.# Installing project dependencies ...# ======================== 安裝了一兩分鐘過後，前往目錄夾並且執行 12345$ cd vue-googlesheets-api$ npm startDONE Compiled successfully in 8371msI Your application is running here: http://localhost:8080 完成編譯之後，請打開瀏覽器進入 http://localhost:8080 就會看到以下畫面。 好的，此時 Vue 專案基本的就完成了。 建立 Google Sheets 記帳本試算表我們先暫時將專案擱著一下，先前往 Google Drive 建立一個 Google Sheets 試算表檔案 由於要實作的目的是讓程式來讀取儲存格的值，因此我們可以在 A1 這個欄位填入標題欄，假設我們以簡單的記帳本為例，可以知道就以 日期、付款方式、項目、收支、備註 這五個基本欄位做依序的填入。 接著，我們任意的先填入記帳本的紀錄，在這裡輸入兩筆紀錄 啟動你的 Google Sheets API 存取有了試算表的檔案是不夠的，還需要一個能夠讓程式做讀取的權限，也就是說程式會透過 API 的形式向 Google Sheets 取得資源，啟動權限的方式務必到 Google APIs 網站做設定。 我們將 Google Sheets API 權限打開，那麼在應用程式專案裡就能夠使用金鑰 (key)、Client ID 的搭配獲得服務上的請求喔。 (不過在這裡就不贅述如何啟用 sheets api …) 我在網路上找了幾篇相關文章都寫得滿好的，可以參考看看 Authorize Requests@Google Sheets指南 Google Sheet API 與Google OAuth2 API授權研究 準備 Vue 前端 Google Sheets API 執行讀取在儲存格有值了以及 Google Sheets API 授權開啟之後，我們就回到 Vue 前端的部分，還記得前面裝好的專案並且可以用瀏覽器閱覽嗎？網址是：http://localhost:8080/#/，在這裡我們需要編寫一些檔案 安裝套件 VueGapi 與使用首先的是要能夠讓 Vue 讀取 Google API 的方法，就需要使用 vue-gapi 套件，這個可以用來實作對 google 文件的 api 套件，那麼我們在 vue 專案下將套件裝起來。 1$ yarn add vue-gapi 很好，裝好了對吧？接著趕緊到 /src/main.js 文件裡面將 vue-gapi 載入，讓全域環境裡面可以使用它，新增以下語法用來連線你的應用程式與 Google Sheets 服務 123456789101112import VueGAPI from "vue-gapi"const apiConfig = &#123; apiKey: "在這裡輸入 api key (請到 google apis 服務查詢)", clientId: "在這裡輸入 client id (請到 google apis 服務查詢).apps.googleusercontent.com", discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"], scope: "https://www.googleapis.com/auth/spreadsheets" // See, edit, create, and delete your spreadsheets in Google Drive // see all available scopes here: https://developers.google.com/identity/protocols/googlescopes'&#125;; // Use the plugin and pass along the configurationVue.use(VueGAPI, apiConfig); main.js 檔案完整內容如下： 123456789101112131415161718192021222324252627// The Vue build version to load with the `import` command// (runtime-only or standalone) has been set in webpack.base.conf with an alias.import Vue from 'vue'import App from './App'import router from './router'// import the pluginimport VueGAPI from "vue-gapi"const apiConfig = &#123; apiKey: "在這裡輸入 api key (請到 google apis 服務查詢)", clientId: "在這裡輸入 client id (請到 google apis 服務查詢).apps.googleusercontent.com", discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"], scope: "https://www.googleapis.com/auth/spreadsheets" // See, edit, create, and delete your spreadsheets in Google Drive // see all available scopes here: https://developers.google.com/identity/protocols/googlescopes'&#125;; // Use the plugin and pass along the configurationVue.use(VueGAPI, apiConfig);Vue.config.productionTip = false/* eslint-disable no-new */new Vue(&#123; el: '#app', router, components: &#123; App &#125;, template: '&lt;App/&gt;'&#125;) 設定好之後，再到前端的部分 /src/components/HelloWorld.vue 檔案內修改內容 12345678910111213&lt;template&gt; &lt;div class="hello"&gt; &lt;h2&gt;Vue Google Sheets api 實作&lt;/h2&gt; &lt;button @click="login"&gt;讀取 Google Sheets 檔案&lt;/button&gt; &lt;br /&gt; &lt;br /&gt; &lt;table align="center"&gt; &lt;tr v-for="record in records"&gt; &lt;td v-for="r in record"&gt;&#123;&#123; r &#125;&#125;&lt;/td&gt; &lt;/tr&gt; &lt;/table&gt; &lt;/div&gt;&lt;/template&gt; 前面我們透過 api key 以及 client id 確立了可以授權存取，接著我們要對剛剛建立好的 sheets 做讀取時，要先知道這個檔案的 ID，這樣才能讓程式知道要讀取的檔案是哪一個，而尋找 ID 的方法也很簡單，打開 Google Sheets 檔案，找到網址上面的一串亂碼的字，如下圖框起來的部分就是 SpreadsheetId 了 接著是 script 的部分，這邊要特別注意的是，參數的部分可以到 Google Sheets 指南找到參數必要項目 12345678910111213141516171819202122232425262728293031323334353637383940414243&lt;script&gt;export default &#123; name: &apos;HelloWorld&apos;, data () &#123; return &#123; records: [], &#125; &#125;, mounted () &#123; let vm = this; vm.login(); &#125;, methods: &#123; login () &#123; let vm = this; this.$getGapiClient() .then(gapi =&gt; &#123; var params = &#123; spreadsheetId: &apos;1GnvjCutd-z8iYb3LrsOruRopNS7Lf2VVQ_4zBcK84TQ&apos;, range: &apos;A1:E100&apos;, valueRenderOption: &apos;FORMATTED_VALUE&apos;, dateTimeRenderOption: &apos;FORMATTED_STRING&apos;, &#125;; var request = gapi.client.sheets.spreadsheets.values.get(params) request.then(function(response) &#123; var result = response.result; vm.records = result.values; for(var i = 0; i &lt;= vm.records.length; i++) &#123; // title var title = vm.records[0]; var objTitle = &#123;&#125;; for(var j = 0; j&lt;= title.length; j++) &#123; objTitle = title[j] &#125; &#125; &#125;, function(reason)&#123; console.error(&apos;error:&apos;, reason) &#125;); &#125;) &#125; &#125;&#125;&lt;/script&gt; 執行結果太好了，做到這裡就差不多語法都完成了，接下來就看看結果吧，前往 http://localhost:8080/#/，是一個簡易畫面，裡面放了一個按鈕 讀取 Google Sheets 檔案 按下按鈕之後，就會讀取指定的 Google Sheets 檔案了喔 是不是很美妙呀，若你只是單純的想要有資料庫做讀取，那麼你可以用利用這個方式讓 Google Sheets 作為儲存資料使用，在網站前端的部分就可以有更多的發揮，專注於前端上的開發，也無需苦惱要裝哪一套結構化資料庫 (ex: MySQL, MSSQL) 或是非結構化資料庫 (MongoDB) 之類的，這方式絕對是最棒的解決方案了。 參考 建立Vue專案 Google Apps Scripts Spreadsheet Service VUE vue-gapi 套件]]></content>
@@ -23,6 +35,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[在 Mac OSX 使用 RVM 升級 Ruby V2.5.1]]></title>
+    <url>%2F2018%2F08%2F02%2Fmac%2Fhow-to-upgrade-ruby-on-mac%2F</url>
+    <content type="text"><![CDATA[RVM 是一套 Ruby 版本的管理工具，這裡頭包含 Ruby 的版本管理和 Gem 庫管理。本篇裡面使用 RVM 工具進行 Ruby 的升級。 RVM (Ruby Version Manager) 安裝 RVM安装 1$ curl -L get.rvm.io | bash -s stable 是否有完成安裝 RVM 1$ rvm -v 結果顯示 1rvm 1.29.4 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io] 使用 RVM 升級 Ruby 顯示目前的 Ruby 版本 1$ ruby -v 顯示結果 1ruby 2.0.0p648 (2015-12-16 revision 53162) [universal.x86_64-darwin16] 安装 Ruby 2.5.1 1rvm install 2.5.1 安裝完畢之後，再用 ruby -v 檢查看看，是不是已經換成下面顯示的結果一樣已完成升級。 1ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-darwin16] 結果 1Linking /usr/local/Cellar/ruby/2.5.1... 3293 symlinks created 那麼，這樣子就安裝完畢了。 參考：https://flinhong.com/2017/10/26/upgrade-ruby-on-mac/]]></content>
+      <categories>
+        <category>Ruby</category>
+      </categories>
+      <tags>
+        <tag>Ruby</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Slate - 為你打造漂亮的 API 文件]]></title>
     <url>%2F2018%2F08%2F02%2Ftools%2Fslate-api-document%2F</url>
     <content type="text"><![CDATA[這陣子在找一種工具可以將 Restful API 彙整起來能用網頁的方式執行讀取，上網找了不少工具，例如下方三套是常見的 API 文檔工具，在本篇則是介紹 Slate。 swagger：相當標準的 API 文件化工具，從設計、建置、撰寫、測試、各式各樣的技巧環環包圍。 apidoc： 這套也不錯，寫的方式是將所有 API 的註記放在原始碼的方法(function)的上方，但小缺點也在這了，如果參數值過多、回傳值也好幾行，這樣就一直在滑鼠捲軸了。不過資料不多的話，是滿適合的。 slate : 輕量化的寫法，允許你使用 markdown 撰寫 API 文件，並且是 ruby 語法執行 bundle 套件安裝，打包之後預設是用靜態的 html ，甚至你可以推上 github pages 進行託管。 先決條件務必要有 Ruby 1.9.2 或更高的版本。並且還需要 bundler gem，可以透過命令來做安裝 gem install bundler，安裝或升級可以參考以下連結。 安裝 Ruby 升級 Ruby 安裝 Slate先進入到 slate github https://github.com/lord/slate 首先按右上角的 Fork slate 的 repo fork 的 repo 已經複製一份到你自己的 repo 了https://github.com/&lt;&lt;YOURUSERNAME&gt;&gt;/slate，將它 clone 下來到你的本地端的資料夾 git clone https://github.com/weijutu/slate.git 進入 slate 資料夾 cd slate 初始化 Slate 將套件都裝起來，使用以下的指令進行安裝 1$ bundle install 過程中就會進行安裝套件 12345678910Fetching gem metadata from https://rubygems.org/............Fetching concurrent-ruby 1.0.5Installing concurrent-ruby 1.0.5Fetching i18n 0.7.0Installing i18n 0.7.0Fetching minitest 5.10.1Installing minitest 5.10.1Fetching thread_safe 0.3.5Installing thread_safe 0.3.5Fetching tzinfo 1.2.2 接著將 slate 執行起來 1$ bundle exec middleman server 執行之後，就可以打開瀏覽器開啟 http://localhost:4567，這樣一下子就開了一個全新的 slate api 靜態文件!! 12345 ~/Projects/slate $ bundle exec middleman server== The Middleman is loading== View your site at &quot;http://localhost:4567&quot;== Inspect your site configuration at &quot;http://localhost:4567/__middleman&quot; 是不是看起來很不賴呢？ 開始寫 API 文件大致上是 markdown 寫法的，若有不了解 markdown 語言的人，可以參考這篇文章 Markdown 語法說明。 標題123# Level 1 Header## Level 2 Header### Level 3 Header 段落文字1This is some paragraph text. Exciting, no? 程式碼範本1234const kittn = require('kittn');let api = kittn.authorize('meowmeowmeow');let max = api.kittens.delete(2); 語法註解1&gt; This is a code annotation. 表格1234Table Header 1 | Table Header 2 | Table Header 3-------------- | -------------- | --------------Row 1 col 1 | Row 1 col 2 | Row 1 col 3Row 2 col 1 | Row 2 col 2 | Row 2 col 3 文字格式1This text is **bold**, this is *italic*, this is an `inline code block`. 列表12345671. This2. Is3. An* This* Is* A 連結1This is an [internal link](#error-code-definitions) 產生靜態網頁修改完之後，我們將他產生靜態網站，可以使用以下的命令 1$ bundle exec middleman build --clean 部署過程中 1234567891011121314create build/stylesheets/print.csscreate build/stylesheets/screen.csscreate build/images/navbar.pngcreate build/images/logo.pngcreate build/fonts/slate.woffcreate build/fonts/slate.woff2create build/fonts/slate.ttfcreate build/fonts/slate.eotcreate build/fonts/slate.svgcreate build/index.html.tmpcreate build/javascripts/all_nosearch.jscreate build/javascripts/all.jscreate build/index.htmlProject built successfully. 你會發現會新增了一個 build 資料夾，裡面包含了許多被編譯出來的檔案 打開 index.html 就可以看到建置的結果囉。 提供一個實際範本在 /slate/source/index.html.md 檔案做修改在這裡提供一個實際範本可以做點參考。 語法範本在這裡：範例 顯示如下圖： 參考 https://github.com/lord/slate https://github.com/lord/slate/wiki https://www.sitepoint.com/writing-api-documentation-slate/]]></content>
@@ -32,17 +55,6 @@
       <tags>
         <tag>Ruby</tag>
         <tag>API</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[在 Mac OSX 使用 RVM 升級 Ruby V2.5.1]]></title>
-    <url>%2F2018%2F08%2F02%2Fmac%2Fhow-to-upgrade-ruby-on-mac%2F</url>
-    <content type="text"><![CDATA[RVM 是一套 Ruby 版本的管理工具，這裡頭包含 Ruby 的版本管理和 Gem 庫管理。本篇裡面使用 RVM 工具進行 Ruby 的升級。 RVM (Ruby Version Manager) 安裝 RVM安装 1$ curl -L get.rvm.io | bash -s stable 是否有完成安裝 RVM 1$ rvm -v 結果顯示 1rvm 1.29.4 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io] 使用 RVM 升級 Ruby 顯示目前的 Ruby 版本 1$ ruby -v 顯示結果 1ruby 2.0.0p648 (2015-12-16 revision 53162) [universal.x86_64-darwin16] 安装 Ruby 2.5.1 1rvm install 2.5.1 安裝完畢之後，再用 ruby -v 檢查看看，是不是已經換成下面顯示的結果一樣已完成升級。 1ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-darwin16] 結果 1Linking /usr/local/Cellar/ruby/2.5.1... 3293 symlinks created 那麼，這樣子就安裝完畢了。 參考：https://flinhong.com/2017/10/26/upgrade-ruby-on-mac/]]></content>
-      <categories>
-        <category>Ruby</category>
-      </categories>
-      <tags>
-        <tag>Ruby</tag>
       </tags>
   </entry>
   <entry>
@@ -76,9 +88,9 @@
         <category>Vue</category>
       </categories>
       <tags>
+        <tag>Vue</tag>
         <tag>Apache</tag>
         <tag>Mac</tag>
-        <tag>Vue</tag>
       </tags>
   </entry>
   <entry>
@@ -309,6 +321,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[Node.js 系列學習日誌#28 - REST 路由規則]]></title>
+    <url>%2F2017%2F07%2F26%2Fnodejs%2Fnodejs-28-rest%2F</url>
+    <content type="text"><![CDATA[今天我們使用 express 框架介紹一下 REST 路由規則，REST 是一種 http 協定的網路應用，http 提供了八種方法使用： OPTIONS：這個方法可使伺服器傳回該資源所支援的所有HTTP請求方法。用*來代替資源名稱，向Web伺服器傳送OPTIONS請求，可以測試伺服器功能是否正常運作。 HEAD：與GET方法一樣，都是向伺服器發出指定資源的請求。只不過伺服器將不傳回資源的本文部份。它的好處在於，使用這個方法可以在不必傳輸全部內容的情況下，就可以獲取其中「關於該資源的資訊」（元資訊或稱元資料）。 GET：向指定的資源發出「顯示」請求。使用GET方法應該只用在讀取資料，而不應當被用於產生「副作用」的操作中，例如在Web Application中。其中一個原因是GET可能會被網路蜘蛛等隨意存取。參見安全方法 POST：向指定資源提交資料，請求伺服器進行處理（例如提交表單或者上傳檔案）。資料被包含在請求本文中。這個請求可能會建立新的資源或修改現有資源，或二者皆有。 PUT：向指定資源位置上傳其最新內容。 DELETE：請求伺服器刪除Request-URI所標識的資源。 TRACE：回顯伺服器收到的請求，主要用於測試或診斷。 CONNECT：HTTP/1.1協定中預留給能夠將連線改為管道方式的代理伺服器。通常用於SSL加密伺服器的連結（經由非加密的HTTP代理伺服器） 而 express 網頁框架也針對 http 請求方法設計路由的函數： 通常在設計 rest 時，常用的是 get (取得), post (新增), put (更新), delete (刪除) 參考資料http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE]]></content>
+      <categories>
+        <category>Node.js</category>
+      </categories>
+      <tags>
+        <tag>Node.js</tag>
+        <tag>鐵人賽</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Node.js 系列學習日誌#27 - forever 讓程式保持執行狀態]]></title>
     <url>%2F2017%2F07%2F26%2Fnodejs%2Fnodejs-27-forever%2F</url>
     <content type="text"><![CDATA[程式準備要部署上線時，就會面臨到執行程式的方式，伺服器的管理，是不是能有一個運行 Node.js 程式，並且有個工具處理這件事情。forever 可以作為保持運行的狀態，管理 Node.js 程式服務，在 forever 進程之下，建立子進程，執行啟動與停止的命令相當簡單。更特別的是，經常我們在寫 Node.js 的時候，每次更動的檔案時都需要再重新執行啟動服務的指令 (例如：node app.js)，而這個工具是當每次更新程式的時候，它會自動重新啟動服務，更方便許多了呢！ 這是官方的描述：（https://github.com/nodejitsu/forever） A simple CLI tool for ensuring that a given script runs continuously (i.e. forever). 安裝12// 一般建議加上 -g 將 forever 全域安裝$[sudo] npm install forever -g 當然若你要在某個特定目錄下安裝也是可以 12$cd /path/projects/abc$[sudo] npm install forever 指令的幫助可以透過以下指令列出說明 1$forever —help 顯示所有運行的服務1$forever list 啟動1$forever start app.js 停止操作1$forever stopall 停止某一個程式專案1$forever stop app.js 實作一個簡單運用我們先用 express 這個框架建一個簡單的網站 啟動程式1$forever start app.js forever 列表清單1$forever list 可以看到紫色部分，就是在放 log file 的路徑 關閉進程1$forever stop app.js]]></content>
@@ -319,18 +343,6 @@
         <tag>Node.js</tag>
         <tag>鐵人賽</tag>
         <tag>forever</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Node.js 系列學習日誌#28 - REST 路由規則]]></title>
-    <url>%2F2017%2F07%2F26%2Fnodejs%2Fnodejs-28-rest%2F</url>
-    <content type="text"><![CDATA[今天我們使用 express 框架介紹一下 REST 路由規則，REST 是一種 http 協定的網路應用，http 提供了八種方法使用： OPTIONS：這個方法可使伺服器傳回該資源所支援的所有HTTP請求方法。用*來代替資源名稱，向Web伺服器傳送OPTIONS請求，可以測試伺服器功能是否正常運作。 HEAD：與GET方法一樣，都是向伺服器發出指定資源的請求。只不過伺服器將不傳回資源的本文部份。它的好處在於，使用這個方法可以在不必傳輸全部內容的情況下，就可以獲取其中「關於該資源的資訊」（元資訊或稱元資料）。 GET：向指定的資源發出「顯示」請求。使用GET方法應該只用在讀取資料，而不應當被用於產生「副作用」的操作中，例如在Web Application中。其中一個原因是GET可能會被網路蜘蛛等隨意存取。參見安全方法 POST：向指定資源提交資料，請求伺服器進行處理（例如提交表單或者上傳檔案）。資料被包含在請求本文中。這個請求可能會建立新的資源或修改現有資源，或二者皆有。 PUT：向指定資源位置上傳其最新內容。 DELETE：請求伺服器刪除Request-URI所標識的資源。 TRACE：回顯伺服器收到的請求，主要用於測試或診斷。 CONNECT：HTTP/1.1協定中預留給能夠將連線改為管道方式的代理伺服器。通常用於SSL加密伺服器的連結（經由非加密的HTTP代理伺服器） 而 express 網頁框架也針對 http 請求方法設計路由的函數： 通常在設計 rest 時，常用的是 get (取得), post (新增), put (更新), delete (刪除) 參考資料http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE]]></content>
-      <categories>
-        <category>Node.js</category>
-      </categories>
-      <tags>
-        <tag>Node.js</tag>
-        <tag>鐵人賽</tag>
       </tags>
   </entry>
   <entry>
