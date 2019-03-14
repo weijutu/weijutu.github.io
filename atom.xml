@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://weijutu.github.io/"/>
-  <updated>2019-03-14T08:04:38.960Z</updated>
+  <updated>2019-03-14T08:08:00.609Z</updated>
   <id>https://weijutu.github.io/</id>
   
   <author>
@@ -21,17 +21,20 @@
     <link href="https://weijutu.github.io/2019/03/14/vuejs/vuejs-google-analysis/"/>
     <id>https://weijutu.github.io/2019/03/14/vuejs/vuejs-google-analysis/</id>
     <published>2019-03-14T10:07:51.000Z</published>
-    <updated>2019-03-14T08:04:38.960Z</updated>
+    <updated>2019-03-14T08:08:00.609Z</updated>
     
-    <content type="html"><![CDATA[<p>Vue 前端使用 Google  Analytics (GA) 追蹤診斷工具，就可以使用 <code>vue-analytics</code> 套件來做設定。</p><h2 id="學習大綱"><a href="#學習大綱" class="headerlink" title="學習大綱"></a>學習大綱</h2><ol><li>安裝 vue-analytics</li><li>開始使用</li><li>檢查是否正常運作</li></ol><h3 id="安裝-vue-analytics"><a href="#安裝-vue-analytics" class="headerlink" title="安裝 vue-analytics"></a>安裝 vue-analytics</h3><p>安裝的步驟，就直接在 Vue 專案的根目錄輸入</p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn add vue-analytics</span><br></pre></td></tr></table></figure><h3 id="開始使用"><a href="#開始使用" class="headerlink" title="開始使用"></a>開始使用</h3><p>開始使用你的應用程式，接著在 <code>src/main.js</code> 文件中，在應用程式安裝前使用 Vue.use() 方法，就像以下這樣</p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import VueAnalytics from &apos;vue-analytics&apos;</span><br><span class="line"></span><br><span class="line"># 放在這裡</span><br><span class="line">Vue.use(VueAnalytics, &#123;</span><br><span class="line">  id: &apos;UA-128XXXXXXX-X&apos;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">export default new Vue(</span><br><span class="line">  el: &apos;#app&apos;</span><br><span class="line">  router: router</span><br><span class="line">  store: store</span><br><span class="line">  template: &apos;&lt;App/&gt;&apos;</span><br><span class="line">  components:</span><br><span class="line">    App: App</span><br><span class="line">)</span><br></pre></td></tr></table></figure><p>基本的安裝之後呢，通常會在新增多個選項，尤其是 router 的部分需要自動的追蹤所有的路由，記錄所有活動與行為。</p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Vue.use(VueAnalytics, &#123;</span><br><span class="line">  id: &apos;UA-128XXXXXXX-X&apos;,</span><br><span class="line">  router,</span><br><span class="line">  autoTracking: &#123;</span><br><span class="line">    pageviewOnLoad: false</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><p>若你希望在開發環境上可以不要被追蹤時，可以新增 <code>debug</code> 這組參數，讓正式環境才做分析偵測</p><p>開發端時，設定 <code>NODE_ENV=develop</code>，設定如下：</p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ export NODE_ENV=develop</span><br></pre></td></tr></table></figure><p>接下來再多補充一些參數，設定如下：</p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const isProd = process.env.NODE_ENV == &apos;production&apos;</span><br><span class="line">Vue.use(VueAnalytics, &#123;</span><br><span class="line">  id: &apos;UA-128XXXXXXX-X&apos;,</span><br><span class="line">  router,</span><br><span class="line">  debug: &#123;</span><br><span class="line">    enabled: !isProd,</span><br><span class="line">    sendHitTask: isPord</span><br><span class="line">  &#125;,</span><br><span class="line">  autoTracking: &#123;</span><br><span class="line">    pageviewOnLoad: false</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><h3 id="檢查是否正常運作"><a href="#檢查是否正常運作" class="headerlink" title="檢查是否正常運作"></a>檢查是否正常運作</h3><p>若環境上有開放偵測時，那麼回到 google analysis 分析控制台裡，你就會看到即時的狀況了喔！<br>基本上確定 ga 的正常工作是</p><ol><li>有在 ga 平台設定初始化，取得追蹤碼</li><li>頁面加載時 pageView 有發出</li><li>路由切換時 pageView 有發出</li></ol><p><img src="/images/vuejs/20190314-1.png" alt></p><p>那麼就介紹到這裡，下回見。</p><h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ol><li><a href="https://github.com/MatteoGabriele/vue-analytics" target="_blank" rel="noopener">vue-analytics 套件說明</a></li><li><a href="https://analytics.google.com/analytics" target="_blank" rel="noopener">Google Analytics 分析網站</a></li><li><a href="https://medium.com/dailyjs/tips-tricks-for-vue-analytics-87a9d2838915" target="_blank" rel="noopener">Tips &amp; Tricks for vue-analytics</a></li></ol>]]></content>
+    <content type="html"><![CDATA[<p>Vue 前端使用 Google  Analytics (GA) 追蹤診斷工具，就可以使用 <code>vue-analytics</code> 套件來做設定。</p><h2 id="學習大綱"><a href="#學習大綱" class="headerlink" title="學習大綱"></a>學習大綱</h2><ol><li>安裝 vue-analytics</li><li>開始使用</li><li>檢查是否正常運作</li></ol><h3 id="安裝-vue-analytics"><a href="#安裝-vue-analytics" class="headerlink" title="安裝 vue-analytics"></a>安裝 vue-analytics</h3><p>安裝的步驟，就直接在 Vue 專案的根目錄輸入</p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn add vue-analytics</span><br></pre></td></tr></table></figure><a id="more"></a><h3 id="開始使用"><a href="#開始使用" class="headerlink" title="開始使用"></a>開始使用</h3><p>開始使用你的應用程式，接著在 <code>src/main.js</code> 文件中，在應用程式安裝前使用 Vue.use() 方法，就像以下這樣</p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import VueAnalytics from &apos;vue-analytics&apos;</span><br><span class="line"></span><br><span class="line"># 放在這裡</span><br><span class="line">Vue.use(VueAnalytics, &#123;</span><br><span class="line">  id: &apos;UA-128XXXXXXX-X&apos;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">export default new Vue(</span><br><span class="line">  el: &apos;#app&apos;</span><br><span class="line">  router: router</span><br><span class="line">  store: store</span><br><span class="line">  template: &apos;&lt;App/&gt;&apos;</span><br><span class="line">  components:</span><br><span class="line">    App: App</span><br><span class="line">)</span><br></pre></td></tr></table></figure><p>基本的安裝之後呢，通常會在新增多個選項，尤其是 router 的部分需要自動的追蹤所有的路由，記錄所有活動與行為。</p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Vue.use(VueAnalytics, &#123;</span><br><span class="line">  id: &apos;UA-128XXXXXXX-X&apos;,</span><br><span class="line">  router,</span><br><span class="line">  autoTracking: &#123;</span><br><span class="line">    pageviewOnLoad: false</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><p>若你希望在開發環境上可以不要被追蹤時，可以新增 <code>debug</code> 這組參數，讓正式環境才做分析偵測</p><p>開發端時，設定 <code>NODE_ENV=develop</code>，設定如下：</p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ export NODE_ENV=develop</span><br></pre></td></tr></table></figure><p>接下來再多補充一些參數，設定如下：</p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const isProd = process.env.NODE_ENV == &apos;production&apos;</span><br><span class="line">Vue.use(VueAnalytics, &#123;</span><br><span class="line">  id: &apos;UA-128XXXXXXX-X&apos;,</span><br><span class="line">  router,</span><br><span class="line">  debug: &#123;</span><br><span class="line">    enabled: !isProd,</span><br><span class="line">    sendHitTask: isPord</span><br><span class="line">  &#125;,</span><br><span class="line">  autoTracking: &#123;</span><br><span class="line">    pageviewOnLoad: false</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><h3 id="檢查是否正常運作"><a href="#檢查是否正常運作" class="headerlink" title="檢查是否正常運作"></a>檢查是否正常運作</h3><p>若環境上有開放偵測時，那麼回到 google analysis 分析控制台裡，你就會看到即時的狀況了喔！<br>基本上確定 ga 的正常工作是</p><ol><li>有在 ga 平台設定初始化，取得追蹤碼</li><li>頁面加載時 pageView 有發出</li><li>路由切換時 pageView 有發出</li></ol><p><img src="/images/vuejs/20190314-1.png" alt></p><p>那麼就介紹到這裡，下回見。</p><h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ol><li><a href="https://github.com/MatteoGabriele/vue-analytics" target="_blank" rel="noopener">vue-analytics 套件說明</a></li><li><a href="https://analytics.google.com/analytics" target="_blank" rel="noopener">Google Analytics 分析網站</a></li><li><a href="https://medium.com/dailyjs/tips-tricks-for-vue-analytics-87a9d2838915" target="_blank" rel="noopener">Tips &amp; Tricks for vue-analytics</a></li></ol>]]></content>
     
     <summary type="html">
     
-      
-      
-        &lt;p&gt;Vue 前端使用 Google  Analytics (GA) 追蹤診斷工具，就可以使用 &lt;code&gt;vue-analytics&lt;/code&gt; 套件來做設定。&lt;/p&gt;
-&lt;h2 id=&quot;學習大綱&quot;&gt;&lt;a href=&quot;#學習大綱&quot; class=&quot;headerlink&quot; titl
-      
+      &lt;p&gt;Vue 前端使用 Google  Analytics (GA) 追蹤診斷工具，就可以使用 &lt;code&gt;vue-analytics&lt;/code&gt; 套件來做設定。&lt;/p&gt;
+&lt;h2 id=&quot;學習大綱&quot;&gt;&lt;a href=&quot;#學習大綱&quot; class=&quot;headerlink&quot; title=&quot;學習大綱&quot;&gt;&lt;/a&gt;學習大綱&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;安裝 vue-analytics&lt;/li&gt;
+&lt;li&gt;開始使用&lt;/li&gt;
+&lt;li&gt;檢查是否正常運作&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;安裝-vue-analytics&quot;&gt;&lt;a href=&quot;#安裝-vue-analytics&quot; class=&quot;headerlink&quot; title=&quot;安裝 vue-analytics&quot;&gt;&lt;/a&gt;安裝 vue-analytics&lt;/h3&gt;&lt;p&gt;安裝的步驟，就直接在 Vue 專案的根目錄輸入&lt;/p&gt;
+&lt;figure class=&quot;highlight plain hljs&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ yarn add vue-analytics&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
     
     </summary>
     
@@ -128,32 +131,6 @@
   </entry>
   
   <entry>
-    <title>在 Mac OSX 使用 RVM 升級 Ruby V2.5.1</title>
-    <link href="https://weijutu.github.io/2018/08/02/mac/how-to-upgrade-ruby-on-mac/"/>
-    <id>https://weijutu.github.io/2018/08/02/mac/how-to-upgrade-ruby-on-mac/</id>
-    <published>2018-08-02T01:47:00.000Z</published>
-    <updated>2019-02-26T08:15:06.286Z</updated>
-    
-    <content type="html"><![CDATA[<p>RVM 是一套 Ruby 版本的管理工具，這裡頭包含 Ruby 的版本管理和 Gem 庫管理。本篇裡面使用 RVM 工具進行 Ruby 的升級。</p><h2 id="RVM-Ruby-Version-Manager-安裝"><a href="#RVM-Ruby-Version-Manager-安裝" class="headerlink" title="RVM (Ruby Version Manager) 安裝"></a>RVM (Ruby Version Manager) 安裝</h2><ol><li>RVM安装</li></ol><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> curl -L get.rvm.io | bash -s stable</span></span><br></pre></td></tr></table></figure><ol start="2"><li>是否有完成安裝 RVM </li></ol><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> rvm -v</span></span><br></pre></td></tr></table></figure><p>結果顯示</p><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rvm 1.29.4 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]</span><br></pre></td></tr></table></figure><h2 id="使用-RVM-升級-Ruby"><a href="#使用-RVM-升級-Ruby" class="headerlink" title="使用 RVM 升級 Ruby"></a>使用 RVM 升級 Ruby</h2><ol><li>顯示目前的 Ruby 版本</li></ol><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> ruby -v</span></span><br></pre></td></tr></table></figure><p>顯示結果</p><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby 2.0.0p648 (2015-12-16 revision 53162) [universal.x86_64-darwin16]</span><br></pre></td></tr></table></figure><ol start="2"><li>安装 Ruby 2.5.1</li></ol><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rvm install 2.5.1</span><br></pre></td></tr></table></figure><p>安裝完畢之後，再用 <code>ruby -v</code> 檢查看看，是不是已經換成下面顯示的結果一樣已完成升級。</p><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-darwin16]</span><br></pre></td></tr></table></figure><p>結果</p><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Linking /usr/local/Cellar/ruby/2.5.1... 3293 symlinks created</span><br></pre></td></tr></table></figure><p>那麼，這樣子就安裝完畢了。</p><p>參考：<br><a href="https://flinhong.com/2017/10/26/upgrade-ruby-on-mac/" target="_blank" rel="noopener">https://flinhong.com/2017/10/26/upgrade-ruby-on-mac/</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;RVM 是一套 Ruby 版本的管理工具，這裡頭包含 Ruby 的版本管理和 Gem 庫管理。本篇裡面使用 RVM 工具進行 Ruby 的升級。&lt;/p&gt;
-&lt;h2 id=&quot;RVM-Ruby-Version-Manager-安裝&quot;&gt;&lt;a href=&quot;#RVM-Ruby-Vers
-      
-    
-    </summary>
-    
-      <category term="Ruby" scheme="https://weijutu.github.io/categories/Ruby/"/>
-    
-    
-      <category term="Ruby" scheme="https://weijutu.github.io/tags/Ruby/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Slate - 為你打造漂亮的 API 文件</title>
     <link href="https://weijutu.github.io/2018/08/02/tools/slate-api-document/"/>
     <id>https://weijutu.github.io/2018/08/02/tools/slate-api-document/</id>
@@ -179,6 +156,32 @@
       <category term="Ruby" scheme="https://weijutu.github.io/tags/Ruby/"/>
     
       <category term="API" scheme="https://weijutu.github.io/tags/API/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在 Mac OSX 使用 RVM 升級 Ruby V2.5.1</title>
+    <link href="https://weijutu.github.io/2018/08/02/mac/how-to-upgrade-ruby-on-mac/"/>
+    <id>https://weijutu.github.io/2018/08/02/mac/how-to-upgrade-ruby-on-mac/</id>
+    <published>2018-08-02T01:47:00.000Z</published>
+    <updated>2019-02-26T08:15:06.286Z</updated>
+    
+    <content type="html"><![CDATA[<p>RVM 是一套 Ruby 版本的管理工具，這裡頭包含 Ruby 的版本管理和 Gem 庫管理。本篇裡面使用 RVM 工具進行 Ruby 的升級。</p><h2 id="RVM-Ruby-Version-Manager-安裝"><a href="#RVM-Ruby-Version-Manager-安裝" class="headerlink" title="RVM (Ruby Version Manager) 安裝"></a>RVM (Ruby Version Manager) 安裝</h2><ol><li>RVM安装</li></ol><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> curl -L get.rvm.io | bash -s stable</span></span><br></pre></td></tr></table></figure><ol start="2"><li>是否有完成安裝 RVM </li></ol><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> rvm -v</span></span><br></pre></td></tr></table></figure><p>結果顯示</p><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rvm 1.29.4 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]</span><br></pre></td></tr></table></figure><h2 id="使用-RVM-升級-Ruby"><a href="#使用-RVM-升級-Ruby" class="headerlink" title="使用 RVM 升級 Ruby"></a>使用 RVM 升級 Ruby</h2><ol><li>顯示目前的 Ruby 版本</li></ol><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> ruby -v</span></span><br></pre></td></tr></table></figure><p>顯示結果</p><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby 2.0.0p648 (2015-12-16 revision 53162) [universal.x86_64-darwin16]</span><br></pre></td></tr></table></figure><ol start="2"><li>安装 Ruby 2.5.1</li></ol><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rvm install 2.5.1</span><br></pre></td></tr></table></figure><p>安裝完畢之後，再用 <code>ruby -v</code> 檢查看看，是不是已經換成下面顯示的結果一樣已完成升級。</p><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-darwin16]</span><br></pre></td></tr></table></figure><p>結果</p><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Linking /usr/local/Cellar/ruby/2.5.1... 3293 symlinks created</span><br></pre></td></tr></table></figure><p>那麼，這樣子就安裝完畢了。</p><p>參考：<br><a href="https://flinhong.com/2017/10/26/upgrade-ruby-on-mac/" target="_blank" rel="noopener">https://flinhong.com/2017/10/26/upgrade-ruby-on-mac/</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;RVM 是一套 Ruby 版本的管理工具，這裡頭包含 Ruby 的版本管理和 Gem 庫管理。本篇裡面使用 RVM 工具進行 Ruby 的升級。&lt;/p&gt;
+&lt;h2 id=&quot;RVM-Ruby-Version-Manager-安裝&quot;&gt;&lt;a href=&quot;#RVM-Ruby-Vers
+      
+    
+    </summary>
+    
+      <category term="Ruby" scheme="https://weijutu.github.io/categories/Ruby/"/>
+    
+    
+      <category term="Ruby" scheme="https://weijutu.github.io/tags/Ruby/"/>
     
   </entry>
   
@@ -252,11 +255,11 @@
       <category term="Vue" scheme="https://weijutu.github.io/categories/Vue/"/>
     
     
-      <category term="Vue" scheme="https://weijutu.github.io/tags/Vue/"/>
-    
       <category term="Apache" scheme="https://weijutu.github.io/tags/Apache/"/>
     
       <category term="Mac" scheme="https://weijutu.github.io/tags/Mac/"/>
+    
+      <category term="Vue" scheme="https://weijutu.github.io/tags/Vue/"/>
     
   </entry>
   

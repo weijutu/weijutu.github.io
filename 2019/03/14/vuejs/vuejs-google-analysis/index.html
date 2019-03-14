@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="Vue 前端使用 Google  Analytics (GA) 追蹤診斷工具，就可以使用 vue-analytics 套件來做設定。 學習大綱 安裝 vue-analytics 開始使用 檢查是否正常運作  安裝 vue-analytics安裝的步驟，就直接在 Vue 專案的根目錄輸入 1$ yarn add vue-analytics 開始使用開始使用你的應用程式，接著在 src/main.js">
+    <meta name="description" content="Vue 前端使用 Google  Analytics (GA) 追蹤診斷工具，就可以使用 vue-analytics 套件來做設定。 學習大綱 安裝 vue-analytics 開始使用 檢查是否正常運作  安裝 vue-analytics安裝的步驟，就直接在 Vue 專案的根目錄輸入 1$ yarn add vue-analytics">
 <meta name="keywords" content="Vue">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在 Vue 使用 vue-analytics 套件設定 Google Analytics (GA) 追蹤診斷工具">
 <meta property="og:url" content="https://weijutu.github.io/2019/03/14/vuejs/vuejs-google-analysis/index.html">
 <meta property="og:site_name" content="噗噗。故我在">
-<meta property="og:description" content="Vue 前端使用 Google  Analytics (GA) 追蹤診斷工具，就可以使用 vue-analytics 套件來做設定。 學習大綱 安裝 vue-analytics 開始使用 檢查是否正常運作  安裝 vue-analytics安裝的步驟，就直接在 Vue 專案的根目錄輸入 1$ yarn add vue-analytics 開始使用開始使用你的應用程式，接著在 src/main.js">
+<meta property="og:description" content="Vue 前端使用 Google  Analytics (GA) 追蹤診斷工具，就可以使用 vue-analytics 套件來做設定。 學習大綱 安裝 vue-analytics 開始使用 檢查是否正常運作  安裝 vue-analytics安裝的步驟，就直接在 Vue 專案的根目錄輸入 1$ yarn add vue-analytics">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https://weijutu.github.io/images/vuejs/20190314-1.png">
-<meta property="og:updated_time" content="2019-03-14T08:04:38.960Z">
+<meta property="og:updated_time" content="2019-03-14T08:08:00.609Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在 Vue 使用 vue-analytics 套件設定 Google Analytics (GA) 追蹤診斷工具">
-<meta name="twitter:description" content="Vue 前端使用 Google  Analytics (GA) 追蹤診斷工具，就可以使用 vue-analytics 套件來做設定。 學習大綱 安裝 vue-analytics 開始使用 檢查是否正常運作  安裝 vue-analytics安裝的步驟，就直接在 Vue 專案的根目錄輸入 1$ yarn add vue-analytics 開始使用開始使用你的應用程式，接著在 src/main.js">
+<meta name="twitter:description" content="Vue 前端使用 Google  Analytics (GA) 追蹤診斷工具，就可以使用 vue-analytics 套件來做設定。 學習大綱 安裝 vue-analytics 開始使用 檢查是否正常運作  安裝 vue-analytics安裝的步驟，就直接在 Vue 專案的根目錄輸入 1$ yarn add vue-analytics">
 <meta name="twitter:image" content="https://weijutu.github.io/images/vuejs/20190314-1.png">
 
 
@@ -176,7 +176,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分鐘 閱讀文 (大約 461 個字)
+                    3 分鐘 閱讀文 (大約 462 個字)
                 </span>
                 
                 
@@ -197,6 +197,7 @@
 </ol>
 <h3 id="安裝-vue-analytics"><a href="#安裝-vue-analytics" class="headerlink" title="安裝 vue-analytics"></a>安裝 vue-analytics</h3><p>安裝的步驟，就直接在 Vue 專案的根目錄輸入</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn add vue-analytics</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <h3 id="開始使用"><a href="#開始使用" class="headerlink" title="開始使用"></a>開始使用</h3><p>開始使用你的應用程式，接著在 <code>src/main.js</code> 文件中，在應用程式安裝前使用 Vue.use() 方法，就像以下這樣</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import VueAnalytics from &apos;vue-analytics&apos;</span><br><span class="line"></span><br><span class="line"># 放在這裡</span><br><span class="line">Vue.use(VueAnalytics, &#123;</span><br><span class="line">  id: &apos;UA-128XXXXXXX-X&apos;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">export default new Vue(</span><br><span class="line">  el: &apos;#app&apos;</span><br><span class="line">  router: router</span><br><span class="line">  store: store</span><br><span class="line">  template: &apos;&lt;App/&gt;&apos;</span><br><span class="line">  components:</span><br><span class="line">    App: App</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <p>基本的安裝之後呢，通常會在新增多個選項，尤其是 router 的部分需要自動的追蹤所有的路由，記錄所有活動與行為。</p>
@@ -590,18 +591,18 @@
         
         <article class="media">
             
-            <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="media-left">
+            <a href="/2018/08/02/tools/slate-api-document/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在 Mac OSX 使用 RVM 升級 Ruby V2.5.1">
+                    <img class="thumbnail" src="/images/tools/20180802-1.png" alt="Slate - 為你打造漂亮的 API 文件">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
-                    <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="has-link-black-ter is-size-6">在 Mac OSX 使用 RVM 升級 Ruby V2.5.1</a>
+                    <a href="/2018/08/02/tools/slate-api-document/" class="has-link-black-ter is-size-6">Slate - 為你打造漂亮的 API 文件</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Ruby/">Ruby</a>
+                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
                     </p>
                 </div>
             </div>
@@ -1014,18 +1015,18 @@
         
         <article class="media">
             
-            <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="media-left">
+            <a href="/2018/08/02/tools/slate-api-document/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在 Mac OSX 使用 RVM 升級 Ruby V2.5.1">
+                    <img class="thumbnail" src="/images/tools/20180802-1.png" alt="Slate - 為你打造漂亮的 API 文件">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
-                    <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="has-link-black-ter is-size-6">在 Mac OSX 使用 RVM 升級 Ruby V2.5.1</a>
+                    <a href="/2018/08/02/tools/slate-api-document/" class="has-link-black-ter is-size-6">Slate - 為你打造漂亮的 API 文件</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Ruby/">Ruby</a>
+                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
                     </p>
                 </div>
             </div>
