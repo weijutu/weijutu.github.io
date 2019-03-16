@@ -217,11 +217,16 @@
 </ul>
 
 
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-format="fluid"
+                data-ad-layout-key="-fb+5w+4e-db+86"
+                data-ad-client="ca-pub-9431433815329544"
+                data-ad-slot="4946157775"></ins>
             <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+            </script> -->
         </div>
         
         
@@ -293,11 +298,16 @@
 <h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="https://www.npmjs.org/package/node-rest-client" target="_blank" rel="noopener">https://www.npmjs.org/package/node-rest-client</a></p>
 
 
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-format="fluid"
+                data-ad-layout-key="-fb+5w+4e-db+86"
+                data-ad-client="ca-pub-9431433815329544"
+                data-ad-slot="4946157775"></ins>
             <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+            </script> -->
         </div>
         
         
@@ -367,84 +377,16 @@
 </ol>
 
 
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-format="fluid"
+                data-ad-layout-key="-fb+5w+4e-db+86"
+                data-ad-client="ca-pub-9431433815329544"
+                data-ad-slot="4946157775"></ins>
             <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-07-25T16:27:00.000Z">2017-07-26</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 分鐘 閱讀文 (大約 556 個字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/07/26/nodejs/nodejs-28-rest/">Node.js 系列學習日誌#28 - REST 路由規則</a>
-            
-        </h1>
-        <div class="content">
-            <p>今天我們使用 express 框架介紹一下 REST  路由規則，REST 是一種  http 協定的網路應用，http 提供了八種方法使用：</p>
-<ul>
-<li><p>OPTIONS：這個方法可使伺服器傳回該資源所支援的所有HTTP請求方法。用<code>*</code>來代替資源名稱，向Web伺服器傳送OPTIONS請求，可以測試伺服器功能是否正常運作。</p>
-</li>
-<li><p>HEAD：與GET方法一樣，都是向伺服器發出指定資源的請求。只不過伺服器將不傳回資源的本文部份。它的好處在於，使用這個方法可以在不必傳輸全部內容的情況下，就可以獲取其中「關於該資源的資訊」（元資訊或稱元資料）。</p>
-</li>
-<li><p>GET：向指定的資源發出「顯示」請求。使用GET方法應該只用在讀取資料，而不應當被用於產生「副作用」的操作中，例如在Web Application中。其中一個原因是GET可能會被網路蜘蛛等隨意存取。參見安全方法</p>
-</li>
-<li><p>POST：向指定資源提交資料，請求伺服器進行處理（例如提交表單或者上傳檔案）。資料被包含在請求本文中。這個請求可能會建立新的資源或修改現有資源，或二者皆有。</p>
-</li>
-<li><p>PUT：向指定資源位置上傳其最新內容。</p>
-</li>
-<li><p>DELETE：請求伺服器刪除Request-URI所標識的資源。</p>
-</li>
-<li><p>TRACE：回顯伺服器收到的請求，主要用於測試或診斷。</p>
-</li>
-<li><p>CONNECT：HTTP/1.1協定中預留給能夠將連線改為管道方式的代理伺服器。通常用於SSL加密伺服器的連結（經由非加密的HTTP代理伺服器）</p>
-</li>
-</ul>
-<p>而 express 網頁框架也針對 http 請求方法設計路由的函數：</p>
-<p><img src="/images/nodejs/124.png" alt></p>
-<p>通常在設計 rest 時，常用的是 get (取得), post (新增), put (更新), delete (刪除)</p>
-<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE" target="_blank" rel="noopener">http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE</a></p>
-
-
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+            </script> -->
         </div>
         
         
@@ -513,11 +455,94 @@
 <p><img src="/images/nodejs/123.png" alt></p>
 
 
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-format="fluid"
+                data-ad-layout-key="-fb+5w+4e-db+86"
+                data-ad-client="ca-pub-9431433815329544"
+                data-ad-slot="4946157775"></ins>
             <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+            </script> -->
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-07-25T16:27:00.000Z">2017-07-26</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分鐘 閱讀文 (大約 556 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/07/26/nodejs/nodejs-28-rest/">Node.js 系列學習日誌#28 - REST 路由規則</a>
+            
+        </h1>
+        <div class="content">
+            <p>今天我們使用 express 框架介紹一下 REST  路由規則，REST 是一種  http 協定的網路應用，http 提供了八種方法使用：</p>
+<ul>
+<li><p>OPTIONS：這個方法可使伺服器傳回該資源所支援的所有HTTP請求方法。用<code>*</code>來代替資源名稱，向Web伺服器傳送OPTIONS請求，可以測試伺服器功能是否正常運作。</p>
+</li>
+<li><p>HEAD：與GET方法一樣，都是向伺服器發出指定資源的請求。只不過伺服器將不傳回資源的本文部份。它的好處在於，使用這個方法可以在不必傳輸全部內容的情況下，就可以獲取其中「關於該資源的資訊」（元資訊或稱元資料）。</p>
+</li>
+<li><p>GET：向指定的資源發出「顯示」請求。使用GET方法應該只用在讀取資料，而不應當被用於產生「副作用」的操作中，例如在Web Application中。其中一個原因是GET可能會被網路蜘蛛等隨意存取。參見安全方法</p>
+</li>
+<li><p>POST：向指定資源提交資料，請求伺服器進行處理（例如提交表單或者上傳檔案）。資料被包含在請求本文中。這個請求可能會建立新的資源或修改現有資源，或二者皆有。</p>
+</li>
+<li><p>PUT：向指定資源位置上傳其最新內容。</p>
+</li>
+<li><p>DELETE：請求伺服器刪除Request-URI所標識的資源。</p>
+</li>
+<li><p>TRACE：回顯伺服器收到的請求，主要用於測試或診斷。</p>
+</li>
+<li><p>CONNECT：HTTP/1.1協定中預留給能夠將連線改為管道方式的代理伺服器。通常用於SSL加密伺服器的連結（經由非加密的HTTP代理伺服器）</p>
+</li>
+</ul>
+<p>而 express 網頁框架也針對 http 請求方法設計路由的函數：</p>
+<p><img src="/images/nodejs/124.png" alt></p>
+<p>通常在設計 rest 時，常用的是 get (取得), post (新增), put (更新), delete (刪除)</p>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE" target="_blank" rel="noopener">http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE</a></p>
+
+
+            <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-format="fluid"
+                data-ad-layout-key="-fb+5w+4e-db+86"
+                data-ad-client="ca-pub-9431433815329544"
+                data-ad-slot="4946157775"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script> -->
         </div>
         
         
@@ -590,11 +615,16 @@
 </ol>
 
 
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-format="fluid"
+                data-ad-layout-key="-fb+5w+4e-db+86"
+                data-ad-client="ca-pub-9431433815329544"
+                data-ad-slot="4946157775"></ins>
             <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+            </script> -->
         </div>
         
         
@@ -717,11 +747,16 @@
 </ol>
 
 
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-format="fluid"
+                data-ad-layout-key="-fb+5w+4e-db+86"
+                data-ad-client="ca-pub-9431433815329544"
+                data-ad-slot="4946157775"></ins>
             <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+            </script> -->
         </div>
         
         
@@ -818,11 +853,16 @@
 </ol>
 
 
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-format="fluid"
+                data-ad-layout-key="-fb+5w+4e-db+86"
+                data-ad-client="ca-pub-9431433815329544"
+                data-ad-slot="4946157775"></ins>
             <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+            </script> -->
         </div>
         
         
@@ -897,11 +937,16 @@
 <h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction" target="_blank" rel="noopener">https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction</a></p>
 
 
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-format="fluid"
+                data-ad-layout-key="-fb+5w+4e-db+86"
+                data-ad-client="ca-pub-9431433815329544"
+                data-ad-slot="4946157775"></ins>
             <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+            </script> -->
         </div>
         
         
@@ -959,11 +1004,16 @@
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var express = require(&apos;express&apos;),</span><br><span class="line">     router = express.Router();</span><br><span class="line"></span><br><span class="line">router.get(&apos;/&apos;, function(req, res) &#123;</span><br><span class="line">  req.session.destroy();</span><br><span class="line">  res.redirect(&apos;/login&apos;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">module.exports = router;</span><br></pre></td></tr></table></figure>
 
 
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-format="fluid"
+                data-ad-layout-key="-fb+5w+4e-db+86"
+                data-ad-client="ca-pub-9431433815329544"
+                data-ad-slot="4946157775"></ins>
             <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+            </script> -->
         </div>
         
         
