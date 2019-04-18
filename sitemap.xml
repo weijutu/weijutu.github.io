@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://weijutu.github.io/2019/04/17/r/r-textmining-01-ch01-1/</loc>
+    
+    <lastmod>2019-04-18T17:39:43.705Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://weijutu.github.io/2019/04/19/r/r-textmining-01-ch01-2/</loc>
     
     <lastmod>2019-04-18T17:31:19.727Z</lastmod>
@@ -9,9 +16,9 @@
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2019/04/17/r/r-textmining-01-ch01-1/</loc>
+    <loc>https://weijutu.github.io/2017/10/20/r/r-01-start/</loc>
     
-    <lastmod>2019-04-18T17:30:46.551Z</lastmod>
+    <lastmod>2019-04-16T16:05:07.211Z</lastmod>
     
   </url>
   
@@ -19,13 +26,6 @@
     <loc>https://weijutu.github.io/2017/10/20/r/r-03-data-structure/</loc>
     
     <lastmod>2019-04-15T06:18:13.250Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://weijutu.github.io/2017/10/20/r/r-01-start/</loc>
-    
-    <lastmod>2019-04-15T06:13:50.262Z</lastmod>
     
   </url>
   
