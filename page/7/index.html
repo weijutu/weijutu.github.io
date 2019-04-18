@@ -156,13 +156,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-03-02T11:49:42.000Z">2017-03-02</time>
+                <time class="level-item has-text-grey" datetime="2017-07-25T16:30:00.000Z">2017-07-26</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分鐘 閱讀文 (大約 581 個字)
+                    5 分鐘 閱讀文 (大約 760 個字)
                 </span>
                 
                 
@@ -171,29 +175,36 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2017/03/02/metero/metero-intro/">Meteor - 開始第一個 Meteor 應用程式專案</a>
+                <a class="has-link-black-ter" href="/2017/07/26/nodejs/nodejs-30-kp-api/">Node.js 系列學習日誌#30 - 取得野生柯P相簿 API範例</a>
             
         </h1>
         <div class="content">
-            <p>Meteor 是架構在 Node.js 上的平台，用來開發 real-time 的網頁程式。Client/Server 都是 Javascript 開發，Meteor 程式都能夠在前後端共用。而且這套框架非常容易學習，短時間內就能夠開發出應用程式出來的唷</p>
-<h2 id="學習目標"><a href="#學習目標" class="headerlink" title="學習目標"></a>學習目標</h2><p>逐一步驟介紹建置 Meteor 初始化應用程式專案。</p>
-<h2 id="安裝-Meteor"><a href="#安裝-Meteor" class="headerlink" title="安裝 Meteor"></a>安裝 Meteor</h2><p>安裝 Meteor 的方式在 terminal 輸入以下命令：</p>
-<p><code>curl https://install.meteor.com | sh</code></p>
-<p>安裝完之後你可以再次輸入 <code>meteor</code> 後，執行會說明目前不是在 meteor 專案下，所以目前還只能確認 Meteor 安裝成功並且還會指引你建立 Meteor 專案的指令</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> meteor</span></span><br><span class="line">  run: You\'re not in a Meteor project directory.</span><br><span class="line"></span><br><span class="line">  To create a new Meteor project:</span><br><span class="line">    meteor create &lt;project name&gt;</span><br><span class="line">  For example:</span><br><span class="line">    meteor create myapp</span><br><span class="line"></span><br><span class="line">  For more help, see 'meteor --help'.</span><br></pre></td></tr></table></figure>
-<h2 id="建立新的專案"><a href="#建立新的專案" class="headerlink" title="建立新的專案"></a>建立新的專案</h2><p>裝好 meteor 後，我們建立一個新的專案，建立時使用 meteor 的工具</p>
-<p><code>meteor create meteor_demo</code></p>
-<p>按照命令就會把 meteor 建立基礎的檔案結構，建立完成後就會有一個 <code>meteor_demo</code> 的資料夾，並且說明如何執行應用程式</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> meteor create meteor_demo</span></span><br><span class="line">  Created a new Meteor app in 'meteor_demo'.</span><br><span class="line"></span><br><span class="line">  To run your new app:</span><br><span class="line">    cd meteor_demo</span><br><span class="line">    meteor npm install</span><br><span class="line">    meteor</span><br><span class="line"></span><br><span class="line">  If you are new to Meteor, try some of the learning resources here:</span><br><span class="line">    https://www.meteor.com/learn</span><br><span class="line"></span><br><span class="line">  meteor create --bare to create an empty app.</span><br><span class="line">  meteor create --full to create a scaffolded app.</span><br></pre></td></tr></table></figure>
-<p>也包含以下的檔案與資料夾</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">drwxr-xr-x   7 User  staff   238 Feb 12 08:40 .</span><br><span class="line">drwxr-xr-x  49 User  staff  1666 Feb 12 08:40 ..</span><br><span class="line">drwxr-xr-x  10 User  staff   340 Feb 12 08:40 .meteor</span><br><span class="line">drwxr-xr-x   5 User  staff   170 Feb 12 08:40 client</span><br><span class="line">-rw-r--r--   1 User  staff   183 Feb 12 08:40 package.json</span><br><span class="line">drwxr-xr-x   3 User  staff   102 Feb 12 08:40 server</span><br></pre></td></tr></table></figure>
-<p>接著，我們就依照他的指引安裝一些套件</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd meteor_demo</span><br><span class="line">$ meteor npm install</span><br><span class="line">$ meteor</span><br></pre></td></tr></table></figure>
-<p>在輸入第三行的 <code>meteor</code> 時，是否有發現先前我們在一開始介紹時已經有輸入過了，而這次的執行 <code>meteor</code> 確實是有專案，現在就馬上打開瀏覽器，檢視 <code>http://localhost:3000/</code> 或是 ( <code>http://0.0.0.0:3000/</code> )</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ meteor</span><br><span class="line">[[[[[ ~/Projects/demo/meteor_demo ]]]]]</span><br><span class="line"></span><br><span class="line">=&gt; Started proxy.</span><br><span class="line">=&gt; Started MongoDB.</span><br><span class="line">=&gt; Started your app.</span><br><span class="line"></span><br><span class="line">=&gt; App running at: http://localhost:3000/</span><br></pre></td></tr></table></figure>
-<h3 id="執行成功畫面"><a href="#執行成功畫面" class="headerlink" title="執行成功畫面"></a>執行成功畫面</h3><p><img src="/images/meteor/meteor_1.png" alt="執行成功畫面"></p>
-<p>這樣子順利運行，若想停止運行應用程式的話只要在執行的 terminal 按下 <code>ctrl+c</code> 就可以了喔！</p>
-<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><p><a href="https://www.meteor.com/" target="_blank" rel="noopener">Meteor: Build Apps with JavaScript</a></p>
+            <p>本篇將介紹用野生柯P API來製作 api 的呼叫，但是api 網站已經失效，僅能提供概念說明。這是透過 node-rest-client 的套件製作</p>
+<p>首先先建立一個 express web framework 框架，請在 terminal  上輸入：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$express -e nodejs-kp-albums-sample</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/130.png" alt></p>
+<p>接著按照只是安裝相依套件</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$cd nodejs-kp-albums-sample &amp;&amp; npm install</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/131.png" alt></p>
+<p>接著由於我們要使用到柯 p 官網提供的相簿 api ，在開發前我們需要安裝一個可以支援 restful api 的套件 node-rest-client，接著請在 terminal 輸入</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm install node-rest-client —save</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/132.png" alt></p>
+<p>一切安裝完成之後，就開始來撰寫程式的部分，請先打開 app.js 檔案，在這邊我們要引用裝好的 node-rest-client 套件，將以下語法填入</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var Client = require(&apos;node-rest-client&apos;).Client;</span><br><span class="line">client = new Client();</span><br></pre></td></tr></table></figure>
+<p>先宣告 node-rest-client 之後，我們預計將相簿列表印在主首頁 (index)，可以在 app.js 裡面找到var routes = require(‘./routes/index’); 與 app.use(‘/‘, routes); 這一段，也就是說根目錄的位置會指引到 /routes/index.js 檔案裡面，接著就打開  /routes/index.js ，由於我們在 app.js  完成了宣告，在 index.js 撰寫如下：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">var express = require(&apos;express&apos;);</span><br><span class="line">var router = express.Router();</span><br><span class="line"></span><br><span class="line">/* GET home page. */</span><br><span class="line">router.get(&apos;/&apos;, function(req, resp) &#123;</span><br><span class="line"></span><br><span class="line">    //取得 KP albums 相簿清單列表</span><br><span class="line">     client.get(&quot;http://api.kptaipei.tw/v1/albums&quot;, &#123; author: ‘xxx&apos; &#125;, function(data, res)&#123;</span><br><span class="line">        var config = JSON.parse(data.toString());</span><br><span class="line">        console.log(config.data);</span><br><span class="line"></span><br><span class="line">        //將資料寫在 locals</span><br><span class="line">        resp.locals.posts = config.data;</span><br><span class="line"></span><br><span class="line">        var renderData = &#123;</span><br><span class="line">             title: &apos;柯 p 野生 API&apos;,</span><br><span class="line">             data: config.data</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        // 將取得到的 json 格式渲染到畫面上</span><br><span class="line">        resp.render(&apos;index&apos;, renderData);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">module.exports = router;</span><br></pre></td></tr></table></figure>
+<p>可以看到用了 client.get 方法，其有三個參數，第一個參數請到 <a href="http://unlimited.kptaipei.tw/docs/#api-ch3" target="_blank" rel="noopener">http://unlimited.kptaipei.tw/docs/#api-ch3</a> 得到相簿清單的 api ：<a href="http://api.kptaipei.tw/v1/albums/" target="_blank" rel="noopener">http://api.kptaipei.tw/v1/albums/</a>  ，預期會知道 api 結果會是如下</p>
+<p><img src="/images/nodejs/133.png" alt></p>
+<p><img src="/images/nodejs/134.png" alt></p>
+<p>第二參數由於本篇只做列表，就保持為空 {}，第三個參數就 function callback 操作，在取得  json 格式的資料之後，經過 json.parse 由字串轉換 json  ，並且我們已知要抓  data 的陣列，透過物件 renderData 將資料存放，最後就將得到的資料渲染到畫面上 ，也就是 resp.render(‘index’, renderData);</p>
+<p>接著到了 views 的部分，就請開啓  /views/index.ejs 檔案</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;title&gt;&lt;%= title %&gt;&lt;/title&gt;</span><br><span class="line">    &lt;link rel=&apos;stylesheet&apos; href=&apos;/stylesheets/style.css&apos; /&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">    &lt;%</span><br><span class="line">         posts.forEach(function(post) &#123;</span><br><span class="line">              var thumb = post.thumbnails;</span><br><span class="line">              var t_small = thumb.small_square;</span><br><span class="line">    %&gt;</span><br><span class="line">          &lt;img src=&apos;&lt;%= t_small %&gt;&apos; alt=&apos;&lt;%=post.title %&gt;&apos; /&gt;</span><br><span class="line">    &lt;% &#125;);%&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>在這邊我只需要顯示柯p相簿的小張圖，也就是 thumbnails.small_square ，由於已經轉成  json  格式，那麼就當做物件找到 thumbnails.small_square  位置，將取得到的圖片網址塞到 img tag 裡的 src 屬性。那麼，一切的一切準備好之後，就請執行應用程式吧！輸入：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm start</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/135.png" alt></p>
+<p>網站預設為 3000 port ，請開啓 localhost:3000，結果如下圖顯示</p>
+<p><img src="/images/nodejs/136.png" alt></p>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="https://www.npmjs.org/package/node-rest-client" target="_blank" rel="noopener">https://www.npmjs.org/package/node-rest-client</a></p>
 
 
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -221,17 +232,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2015-01-31T14:35:40.000Z">2015-01-31</time>
+                <time class="level-item has-text-grey" datetime="2017-07-25T16:29:00.000Z">2017-07-26</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/macbook/">macbook</a>
+                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    幾秒 閱讀文 (大約 105 個字)
+                    4 分鐘 閱讀文 (大約 653 個字)
                 </span>
                 
                 
@@ -240,17 +251,257 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2015/01/31/mac/2014-10-11-mac-kill-port/">Macbook - 移除現有被佔住的 port</a>
+                <a class="has-link-black-ter" href="/2017/07/26/nodejs/nodejs-29-package/">Node.js 系列學習日誌#29 - 使用 package.json 安裝、管理模組</a>
             
         </h1>
         <div class="content">
-            <p>當要啟動服務的時候，但是電腦上有執行其他服務而被佔住 port ，你可以這麼做，先查詢之後將找到的 port 移除</p>
-<p>使用 netstate 查詢某一 port</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$netstat</span> -anp tcp | grep 8080</span><br></pre></td></tr></table></figure>
-<p>如果 netstat 查不到或不支援，那麼就用以下指令查詢</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$lsof</span> -i tcp: 8080</span><br></pre></td></tr></table></figure>
-<p>最後，查到的結果就用以下方式移除即可</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$kill</span> -9 &lt;PID&gt;</span><br></pre></td></tr></table></figure>
+            <p>npm 包管理器是 Node.js 的模組管理工具，npm 的包就像 java 的類別庫，將功能獨立封裝起來，目前已經有相當多的工具可以運用，因此首先我們看一下 npm 的指令有哪些，而 npm 的命令會與  package.json 這個檔案息息相關，是接下來會說明到的。</p>
+<p>package.json</p>
+<p>它是一種 CommonJS 規定用來描述包的文件，是一個包含 json 格式的說明文件，裡面可以定義相依的相關套件以及應用程式的資訊，我們從 <a href="http://wiki.commonjs.org/wiki/Packages/1.1" target="_blank" rel="noopener">http://wiki.commonjs.org/wiki/Packages/1.1</a> Wiki 網頁了解到，他基本可以定義 應用程式名稱、版本、描述、關鍵字、授權、貢獻者、維護者、腳本等其他，還有更令 Node.js 最重要的就相依套件將是會在開發過程中會經常遇到的，它是以套件名稱和版本號組成的。</p>
+<p>你可能心想說這邊該不會要用手刻吧…答案是不全然！可以透過指令的指引可以將它完成基本操作。一開始請先建立一個資料夾 demo-nodejs ，然後在目錄裡面執行</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm init</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/125.png" alt></p>
+<p>輸入完他所指示的資料之後，在資料夾裡面他就會自動產生 package.json 檔案，是不是很簡單方便呢？（對了，用 npm init 指令，當他指示到 version 的時候，務必要三階的版本號，也就是 x.x.x，否則會出錯呢！) 接著我們定義我們需要用到的相依套件，假定我們要安裝一個 socket.io 及 express 框架，這時候在 package.json 補上 dependencies 物件，像下圖的紅框處</p>
+<p><img src="/images/nodejs/126.png" alt></p>
+<p>然後，你可能又發出一個疑問，我如何知道個別的套件版本要寫哪一個版本？你可以採用</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm info &#123;套件名稱&#125; version</span><br></pre></td></tr></table></figure>
+<p>來取得最新版本號</p>
+<p><img src="/images/nodejs/127.png" alt></p>
+<p>輸入完成之後存檔，這時候我們只是定義相依套件，但還沒有安裝，因此在 demo-nodejs 這個目錄下，輸入：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm install</span><br></pre></td></tr></table></figure>
+<p>指令來安裝這兩個套件，結果將會在這個目錄夾底下多了一個 node_module 資料夾，如下：</p>
+<p><img src="/images/nodejs/128.png" alt></p>
+<p>若需要移除套件的話，也相當容易</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm uninstall socket.io</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/129.png" alt></p>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ol>
+<li><a href="https://www.npmjs.org/" target="_blank" rel="noopener">https://www.npmjs.org/</a></li>
+<li><a href="http://wiki.commonjs.org/wiki/Packages/1.1" target="_blank" rel="noopener">http://wiki.commonjs.org/wiki/Packages/1.1</a></li>
+<li><a href="http://semver.org/lang/zh-TW/" target="_blank" rel="noopener">http://semver.org/lang/zh-TW/</a></li>
+</ol>
+
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-07-25T16:27:00.000Z">2017-07-26</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 分鐘 閱讀文 (大約 409 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/07/26/nodejs/nodejs-27-forever/">Node.js 系列學習日誌#27 - forever 讓程式保持執行狀態</a>
+            
+        </h1>
+        <div class="content">
+            <p>程式準備要部署上線時，就會面臨到執行程式的方式，伺服器的管理，是不是能有一個運行 Node.js 程式，並且有個工具處理這件事情。<br>forever 可以作為保持運行的狀態，管理 Node.js 程式服務，在 forever 進程之下，建立子進程，執行啟動與停止的命令相當簡單。<br>更特別的是，經常我們在寫 Node.js 的時候，每次更動的檔案時都需要再重新執行啟動服務的指令 (例如：node app.js)，而這個工具是當每次更新程式的時候，它會自動重新啟動服務，更方便許多了呢！</p>
+<p>這是官方的描述：（<a href="https://github.com/nodejitsu/forever）" target="_blank" rel="noopener">https://github.com/nodejitsu/forever）</a></p>
+<p>A simple CLI tool for ensuring that a given script runs continuously (i.e. forever).</p>
+<h3 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 一般建議加上 -g 將 forever 全域安裝</span><br><span class="line">$[sudo] npm install forever -g</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/118.png" alt></p>
+<p>當然若你要在某個特定目錄下安裝也是可以</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$cd /path/projects/abc</span><br><span class="line">$[sudo] npm install forever</span><br></pre></td></tr></table></figure>
+<h3 id="指令的幫助"><a href="#指令的幫助" class="headerlink" title="指令的幫助"></a>指令的幫助</h3><p>可以透過以下指令列出說明</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever —help</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/119.png" alt></p>
+<h3 id="顯示所有運行的服務"><a href="#顯示所有運行的服務" class="headerlink" title="顯示所有運行的服務"></a>顯示所有運行的服務</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever list</span><br></pre></td></tr></table></figure>
+<h3 id="啟動"><a href="#啟動" class="headerlink" title="啟動"></a>啟動</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever start app.js</span><br></pre></td></tr></table></figure>
+<h3 id="停止操作"><a href="#停止操作" class="headerlink" title="停止操作"></a>停止操作</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever stopall</span><br></pre></td></tr></table></figure>
+<h3 id="停止某一個程式專案"><a href="#停止某一個程式專案" class="headerlink" title="停止某一個程式專案"></a>停止某一個程式專案</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever stop app.js</span><br></pre></td></tr></table></figure>
+<h3 id="實作一個簡單運用"><a href="#實作一個簡單運用" class="headerlink" title="實作一個簡單運用"></a>實作一個簡單運用</h3><p>我們先用 express 這個框架建一個簡單的網站</p>
+<p><img src="/images/nodejs/120.png" alt></p>
+<h3 id="啟動程式"><a href="#啟動程式" class="headerlink" title="啟動程式"></a>啟動程式</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever start app.js</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/121.png" alt></p>
+<h3 id="forever-列表清單"><a href="#forever-列表清單" class="headerlink" title="forever  列表清單"></a>forever  列表清單</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever list</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/122.png" alt></p>
+<p>可以看到紫色部分，就是在放 log file 的路徑</p>
+<h3 id="關閉進程"><a href="#關閉進程" class="headerlink" title="關閉進程"></a>關閉進程</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever stop app.js</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/123.png" alt></p>
+
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-07-25T16:27:00.000Z">2017-07-26</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分鐘 閱讀文 (大約 556 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/07/26/nodejs/nodejs-28-rest/">Node.js 系列學習日誌#28 - REST 路由規則</a>
+            
+        </h1>
+        <div class="content">
+            <p>今天我們使用 express 框架介紹一下 REST  路由規則，REST 是一種  http 協定的網路應用，http 提供了八種方法使用：</p>
+<ul>
+<li><p>OPTIONS：這個方法可使伺服器傳回該資源所支援的所有HTTP請求方法。用<code>*</code>來代替資源名稱，向Web伺服器傳送OPTIONS請求，可以測試伺服器功能是否正常運作。</p>
+</li>
+<li><p>HEAD：與GET方法一樣，都是向伺服器發出指定資源的請求。只不過伺服器將不傳回資源的本文部份。它的好處在於，使用這個方法可以在不必傳輸全部內容的情況下，就可以獲取其中「關於該資源的資訊」（元資訊或稱元資料）。</p>
+</li>
+<li><p>GET：向指定的資源發出「顯示」請求。使用GET方法應該只用在讀取資料，而不應當被用於產生「副作用」的操作中，例如在Web Application中。其中一個原因是GET可能會被網路蜘蛛等隨意存取。參見安全方法</p>
+</li>
+<li><p>POST：向指定資源提交資料，請求伺服器進行處理（例如提交表單或者上傳檔案）。資料被包含在請求本文中。這個請求可能會建立新的資源或修改現有資源，或二者皆有。</p>
+</li>
+<li><p>PUT：向指定資源位置上傳其最新內容。</p>
+</li>
+<li><p>DELETE：請求伺服器刪除Request-URI所標識的資源。</p>
+</li>
+<li><p>TRACE：回顯伺服器收到的請求，主要用於測試或診斷。</p>
+</li>
+<li><p>CONNECT：HTTP/1.1協定中預留給能夠將連線改為管道方式的代理伺服器。通常用於SSL加密伺服器的連結（經由非加密的HTTP代理伺服器）</p>
+</li>
+</ul>
+<p>而 express 網頁框架也針對 http 請求方法設計路由的函數：</p>
+<p><img src="/images/nodejs/124.png" alt></p>
+<p>通常在設計 rest 時，常用的是 get (取得), post (新增), put (更新), delete (刪除)</p>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE" target="_blank" rel="noopener">http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE</a></p>
+
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-07-25T16:26:00.000Z">2017-07-26</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 分鐘 閱讀文 (大約 735 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/07/26/nodejs/nodejs-26-jade-2/">Node.js 系列學習日誌#26 - 介紹 Jade  Template Engine 模板引擎 (下)</a>
+            
+        </h1>
+        <div class="content">
+            <p>繼上一篇 （<a href="http://ithelp.ithome.com.tw/ironman7/app/article/dev/recent/10157760）上集介紹了" target="_blank" rel="noopener">http://ithelp.ithome.com.tw/ironman7/app/article/dev/recent/10157760）上集介紹了</a> 標籤、條件、迴圈、語法，本章節繼續介紹 Jade 的用法<br>分別是</p>
+<ul>
+<li>comments</li>
+<li>mixins</li>
+<li>case</li>
+<li>使用 Jade 撰寫註冊表單</li>
+</ul>
+<p>繼續使用 <a href="http://codepen.io/" target="_blank" rel="noopener">http://codepen.io/</a> 作為線上編輯做以下實作的測試編輯器</p>
+<p><img src="/images/nodejs/113.png" alt></p>
+<h3 id="comments-註解"><a href="#comments-註解" class="headerlink" title="comments 註解"></a>comments 註解</h3><p>這是註解的寫法，註解的寫法就像 javascript 的方式一樣兩個斜線。若你想要把註解寫的方式不想要呈現在原始碼的話，那麼可以試著用  //- 的方式撰寫，這是滿好的手法之一。以下是單行註解跟多行註解的示範：</p>
+<p><img src="/images/nodejs/114.png" alt></p>
+<h3 id="mixins"><a href="#mixins" class="headerlink" title="mixins"></a>mixins</h3><p>mixin 的用途是用在當某一段程式重複性高的時候，可以將它抽出來做  mixins，作為重複使用的區塊，mixin 可以將她當作 javascript 的 function 的概念</p>
+<p>寫法</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mixin 方法名稱(參數)</span><br><span class="line">     呈現資料</span><br></pre></td></tr></table></figure>
+<p>下圖的範例，我們將ul li 的 li 部分做 mixin，在第一行的地方，我們假定 li 裡面的內容要擺放 name = &gt; price ，這就代表需要將參數放到方法的括弧裡面，因此，就如果有參數的話，就在方法名稱括號內，並以逗號分隔的方式擺參數，最後在 li 的地方就將參數值以 #{參數名} 帶入。在第五、第六行得地方呼叫的方式就用  + 號，後面接方法名稱，就像 js 呼叫的方式相同，寫為 +book(“name”, “price”)</p>
+<p><img src="/images/nodejs/115.png" alt></p>
+<h3 id="case-條件式判斷"><a href="#case-條件式判斷" class="headerlink" title="case 條件式判斷"></a>case 條件式判斷</h3><p>case 是一種類似 if else 的判斷方式，從下圖的語法來看，一開始建立一個變數為 book ，然後使用 case 後面再接變數，再第二行取到變數值之後，程式就會開始與 when 所設定的字串做比對，如果有符合，那麼就進行以下的陳述句，如果都沒有符合，那麼就會跑預設值  default，然而 default 可以不一定需要，這點可以省去</p>
+<p><img src="/images/nodejs/116.png" alt></p>
+<h3 id="使用-Jade-撰寫註冊表單"><a href="#使用-Jade-撰寫註冊表單" class="headerlink" title="使用 Jade 撰寫註冊表單"></a>使用 Jade 撰寫註冊表單</h3><p>從上一篇也是 jade 的學習到本篇的延續，大致上的語言都簡略的描述過一遍，接著我們需要來做個實際點的應用，我這邊使用的範例是經常網頁開發會使用到的註冊表單。簡單寫一些表單，那就用帳號、密碼、再加一個註冊的按鈕，如下圖所示：</p>
+<p><img src="/images/nodejs/117.png" alt></p>
+<p>Jade 課程就到這裡</p>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ol>
+<li><a href="http://jade-lang.com/" target="_blank" rel="noopener">http://jade-lang.com/</a></li>
+<li><a href="http://naltatis.github.io/jade-syntax-docs/" target="_blank" rel="noopener">http://naltatis.github.io/jade-syntax-docs/</a></li>
+<li><a href="http://naltatis.github.io/jade-syntax-docs/#basics" target="_blank" rel="noopener">http://naltatis.github.io/jade-syntax-docs/#basics</a></li>
+<li><a href="http://blog.kerash.tw/2013/04/nodejs-jade-template-engine/" target="_blank" rel="noopener">http://blog.kerash.tw/2013/04/nodejs-jade-template-engine/</a></li>
+</ol>
 
 
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -279,7 +530,7 @@
         <div class="pagination-previous">
             <a class="is-flex-grow has-text-black-ter" href="/page/6/">上一頁</a>
         </div>
-        <div class="pagination-next is-invisible is-hidden-mobile">
+        <div class="pagination-next">
             <a class="is-flex-grow has-text-black-ter" href="/page/8/">下一頁</a>
         </div>
         <ul class="pagination-list is-hidden-mobile">
@@ -291,6 +542,12 @@
             <li><a class="pagination-link has-text-black-ter" href="/page/6/">6</a></li>
             
             <li><a class="pagination-link is-current" href="/page/7/">7</a></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/page/8/">8</a></li>
+            
+            <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/page/13/">13</a></li>
             
         </ul>
     </nav>
@@ -310,7 +567,9 @@
             <div class="level-item has-text-centered">
                 <div>
                     
-                        <img class="image is-128x128 has-mb-6" src="/uploads/avatar.png" alt="Helen">
+                        <figure class="image container is-128x128 has-mb-6">
+                            <img class="is-rounded" src="/uploads/avatar.png" alt="Helen">
+                        </figure>
                     
                     
                     <p class="is-size-4 is-block">
@@ -338,7 +597,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        62
+                        64
                     </p>
                 </div>
             </div>
@@ -397,6 +656,115 @@
         
 <div class="card widget">
     <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/04/19/r/r-textmining-01-ch01-2/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/r/cover7.png" alt="R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (2)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-19T15:34:00.000Z">2019-04-19</time></div>
+                    <a href="/2019/04/19/r/r-textmining-01-ch01-2/" class="has-link-black-ter is-size-6">R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (2)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/R/">R</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/17/r/r-textmining-01-ch01-1/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/r/cover6.png" alt="R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (1)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-17T15:34:00.000Z">2019-04-17</time></div>
+                    <a href="/2019/04/17/r/r-textmining-01-ch01-1/" class="has-link-black-ter is-size-6">R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (1)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/R/">R</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/03/14/vuejs/vuejs-google-analysis/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/vuejs/cover1.png" alt="在 Vue 使用 vue-analytics 套件設定 Google Analytics (GA) 追蹤診斷工具">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-14T10:07:51.000Z">2019-03-14</time></div>
+                    <a href="/2019/03/14/vuejs/vuejs-google-analysis/" class="has-link-black-ter is-size-6">在 Vue 使用 vue-analytics 套件設定 Google Analytics (GA) 追蹤診斷工具</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/03/12/web/ubuntu-nginx-restart-fail/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/web/20190312-5.png" alt="Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-12T15:00:00.000Z">2019-03-12</time></div>
+                    <a href="/2019/03/12/web/ubuntu-nginx-restart-fail/" class="has-link-black-ter is-size-6">Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/網站/">網站</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/03/06/vuejs/vuejs-googlesheets-api/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/vuejs/wolfe77.png" alt="Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-06T10:07:51.000Z">2019-03-06</time></div>
+                    <a href="/2019/03/06/vuejs/vuejs-googlesheets-api/" class="has-link-black-ter is-size-6">Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
                 分類
@@ -440,7 +808,7 @@
                 <span class="level-item">R</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">6</span>
+                <span class="level-item tag">8</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Ruby/">
@@ -511,115 +879,6 @@
         </div>
     </div>
 </div>
-    
-    
-        <div class="column-right-shadow is-hidden-widescreen ">
-        
-            
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="menu-label">
-            最新文章
-        </h3>
-        
-        <article class="media">
-            
-            <a href="/2019/03/14/vuejs/vuejs-google-analysis/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/vuejs/cover1.png" alt="在 Vue 使用 vue-analytics 套件設定 Google Analytics (GA) 追蹤診斷工具">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-14T10:07:51.000Z">2019-03-14</time></div>
-                    <a href="/2019/03/14/vuejs/vuejs-google-analysis/" class="has-link-black-ter is-size-6">在 Vue 使用 vue-analytics 套件設定 Google Analytics (GA) 追蹤診斷工具</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/03/12/web/ubuntu-nginx-restart-fail/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/web/20190312-5.png" alt="Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-12T15:00:00.000Z">2019-03-12</time></div>
-                    <a href="/2019/03/12/web/ubuntu-nginx-restart-fail/" class="has-link-black-ter is-size-6">Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/網站/">網站</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/03/06/vuejs/vuejs-googlesheets-api/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/vuejs/wolfe77.png" alt="Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-06T10:07:51.000Z">2019-03-06</time></div>
-                    <a href="/2019/03/06/vuejs/vuejs-googlesheets-api/" class="has-link-black-ter is-size-6">Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/02/27/tools/postman-api-tools/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/tools/1_QOx_tPV5wJnhTzAGhfIiLA.png" alt="Postman - Restful API 測試管理工具">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-27T01:47:00.000Z">2019-02-27</time></div>
-                    <a href="/2019/02/27/tools/postman-api-tools/" class="has-link-black-ter is-size-6">Postman - Restful API 測試管理工具</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在 Mac OSX 使用 RVM 升級 Ruby V2.5.1">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
-                    <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="has-link-black-ter is-size-6">在 Mac OSX 使用 RVM 升級 Ruby V2.5.1</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Ruby/">Ruby</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-    </div>
-</div>
-
         
             <div class="card widget">
     <div class="card-content">
@@ -716,7 +975,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/R/">
                         <span class="tag">R</span>
-                        <span class="tag is-grey">6</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
@@ -942,108 +1201,120 @@
         
 <div class="card widget">
     <div class="card-content">
-        <h3 class="menu-label">
-            最新文章
-        </h3>
-        
-        <article class="media">
-            
-            <a href="/2019/03/14/vuejs/vuejs-google-analysis/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/vuejs/cover1.png" alt="在 Vue 使用 vue-analytics 套件設定 Google Analytics (GA) 追蹤診斷工具">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-14T10:07:51.000Z">2019-03-14</time></div>
-                    <a href="/2019/03/14/vuejs/vuejs-google-analysis/" class="has-link-black-ter is-size-6">在 Vue 使用 vue-analytics 套件設定 Google Analytics (GA) 追蹤診斷工具</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/03/12/web/ubuntu-nginx-restart-fail/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/web/20190312-5.png" alt="Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-12T15:00:00.000Z">2019-03-12</time></div>
-                    <a href="/2019/03/12/web/ubuntu-nginx-restart-fail/" class="has-link-black-ter is-size-6">Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/網站/">網站</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/03/06/vuejs/vuejs-googlesheets-api/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/vuejs/wolfe77.png" alt="Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-06T10:07:51.000Z">2019-03-06</time></div>
-                    <a href="/2019/03/06/vuejs/vuejs-googlesheets-api/" class="has-link-black-ter is-size-6">Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/02/27/tools/postman-api-tools/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/tools/1_QOx_tPV5wJnhTzAGhfIiLA.png" alt="Postman - Restful API 測試管理工具">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-27T01:47:00.000Z">2019-02-27</time></div>
-                    <a href="/2019/02/27/tools/postman-api-tools/" class="has-link-black-ter is-size-6">Postman - Restful API 測試管理工具</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在 Mac OSX 使用 RVM 升級 Ruby V2.5.1">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
-                    <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="has-link-black-ter is-size-6">在 Mac OSX 使用 RVM 升級 Ruby V2.5.1</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Ruby/">Ruby</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
+        <div class="menu">
+            <h3 class="menu-label">
+                分類
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Excel/">
+            <span class="level-start">
+                <span class="level-item">Excel</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Gitbook/">
+            <span class="level-start">
+                <span class="level-item">Gitbook</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Node-js/">
+            <span class="level-start">
+                <span class="level-item">Node.js</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">31</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Python/">
+            <span class="level-start">
+                <span class="level-item">Python</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/R/">
+            <span class="level-start">
+                <span class="level-item">R</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Ruby/">
+            <span class="level-start">
+                <span class="level-item">Ruby</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Vue/">
+            <span class="level-start">
+                <span class="level-item">Vue</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/macbook/">
+            <span class="level-start">
+                <span class="level-item">macbook</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/丸閱讀/">
+            <span class="level-start">
+                <span class="level-item">丸閱讀</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/工具/">
+            <span class="level-start">
+                <span class="level-item">工具</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/網站/">
+            <span class="level-start">
+                <span class="level-item">網站</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/股典閱/">
+            <span class="level-start">
+                <span class="level-item">股典閱</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/資料探勘/">
+            <span class="level-start">
+                <span class="level-item">資料探勘</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
     </div>
 </div>
-
     
         <div class="card widget">
     <div class="card-content">
@@ -1140,7 +1411,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/R/">
                         <span class="tag">R</span>
-                        <span class="tag is-grey">6</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 

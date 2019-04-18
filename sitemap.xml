@@ -2,6 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://weijutu.github.io/2019/04/19/r/r-textmining-01-ch01-2/</loc>
+    
+    <lastmod>2019-04-18T17:31:19.727Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2019/04/17/r/r-textmining-01-ch01-1/</loc>
+    
+    <lastmod>2019-04-18T17:30:46.551Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2017/10/20/r/r-03-data-structure/</loc>
+    
+    <lastmod>2019-04-15T06:18:13.250Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2017/10/20/r/r-01-start/</loc>
+    
+    <lastmod>2019-04-15T06:13:50.262Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://weijutu.github.io/2017/03/04/r/r-xy-scatter-diagram/</loc>
+    
+    <lastmod>2019-04-04T05:59:22.281Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://weijutu.github.io/2019/03/14/vuejs/vuejs-google-analysis/</loc>
     
     <lastmod>2019-03-14T08:08:00.609Z</lastmod>
@@ -44,13 +79,6 @@
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/03/04/r/r-xy-scatter-diagram/</loc>
-    
-    <lastmod>2019-03-11T15:47:15.009Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://weijutu.github.io/2018/05/04/r/r-05-foreach/</loc>
     
     <lastmod>2019-03-11T15:47:08.395Z</lastmod>
@@ -58,23 +86,9 @@
   </url>
   
   <url>
-    <loc>https://weijutu.github.io/2017/10/20/r/r-03-data-structure/</loc>
-    
-    <lastmod>2019-03-11T15:46:56.286Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://weijutu.github.io/2017/10/20/r/r-02-intro/</loc>
     
     <lastmod>2019-03-11T15:46:49.395Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://weijutu.github.io/2017/10/20/r/r-01-start/</loc>
-    
-    <lastmod>2019-03-11T15:46:40.761Z</lastmod>
     
   </url>
   

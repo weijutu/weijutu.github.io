@@ -534,452 +534,6 @@
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-07-25T16:26:00.000Z">2017-07-26</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    5 分鐘 閱讀文 (大約 735 個字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/07/26/nodejs/nodejs-26-jade-2/">Node.js 系列學習日誌#26 - 介紹 Jade  Template Engine 模板引擎 (下)</a>
-            
-        </h1>
-        <div class="content">
-            <p>繼上一篇 （<a href="http://ithelp.ithome.com.tw/ironman7/app/article/dev/recent/10157760）上集介紹了" target="_blank" rel="noopener">http://ithelp.ithome.com.tw/ironman7/app/article/dev/recent/10157760）上集介紹了</a> 標籤、條件、迴圈、語法，本章節繼續介紹 Jade 的用法<br>分別是</p>
-<ul>
-<li>comments</li>
-<li>mixins</li>
-<li>case</li>
-<li>使用 Jade 撰寫註冊表單</li>
-</ul>
-<p>繼續使用 <a href="http://codepen.io/" target="_blank" rel="noopener">http://codepen.io/</a> 作為線上編輯做以下實作的測試編輯器</p>
-<p><img src="/images/nodejs/113.png" alt></p>
-<h3 id="comments-註解"><a href="#comments-註解" class="headerlink" title="comments 註解"></a>comments 註解</h3><p>這是註解的寫法，註解的寫法就像 javascript 的方式一樣兩個斜線。若你想要把註解寫的方式不想要呈現在原始碼的話，那麼可以試著用  //- 的方式撰寫，這是滿好的手法之一。以下是單行註解跟多行註解的示範：</p>
-<p><img src="/images/nodejs/114.png" alt></p>
-<h3 id="mixins"><a href="#mixins" class="headerlink" title="mixins"></a>mixins</h3><p>mixin 的用途是用在當某一段程式重複性高的時候，可以將它抽出來做  mixins，作為重複使用的區塊，mixin 可以將她當作 javascript 的 function 的概念</p>
-<p>寫法</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mixin 方法名稱(參數)</span><br><span class="line">     呈現資料</span><br></pre></td></tr></table></figure>
-<p>下圖的範例，我們將ul li 的 li 部分做 mixin，在第一行的地方，我們假定 li 裡面的內容要擺放 name = &gt; price ，這就代表需要將參數放到方法的括弧裡面，因此，就如果有參數的話，就在方法名稱括號內，並以逗號分隔的方式擺參數，最後在 li 的地方就將參數值以 #{參數名} 帶入。在第五、第六行得地方呼叫的方式就用  + 號，後面接方法名稱，就像 js 呼叫的方式相同，寫為 +book(“name”, “price”)</p>
-<p><img src="/images/nodejs/115.png" alt></p>
-<h3 id="case-條件式判斷"><a href="#case-條件式判斷" class="headerlink" title="case 條件式判斷"></a>case 條件式判斷</h3><p>case 是一種類似 if else 的判斷方式，從下圖的語法來看，一開始建立一個變數為 book ，然後使用 case 後面再接變數，再第二行取到變數值之後，程式就會開始與 when 所設定的字串做比對，如果有符合，那麼就進行以下的陳述句，如果都沒有符合，那麼就會跑預設值  default，然而 default 可以不一定需要，這點可以省去</p>
-<p><img src="/images/nodejs/116.png" alt></p>
-<h3 id="使用-Jade-撰寫註冊表單"><a href="#使用-Jade-撰寫註冊表單" class="headerlink" title="使用 Jade 撰寫註冊表單"></a>使用 Jade 撰寫註冊表單</h3><p>從上一篇也是 jade 的學習到本篇的延續，大致上的語言都簡略的描述過一遍，接著我們需要來做個實際點的應用，我這邊使用的範例是經常網頁開發會使用到的註冊表單。簡單寫一些表單，那就用帳號、密碼、再加一個註冊的按鈕，如下圖所示：</p>
-<p><img src="/images/nodejs/117.png" alt></p>
-<p>Jade 課程就到這裡</p>
-<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ol>
-<li><a href="http://jade-lang.com/" target="_blank" rel="noopener">http://jade-lang.com/</a></li>
-<li><a href="http://naltatis.github.io/jade-syntax-docs/" target="_blank" rel="noopener">http://naltatis.github.io/jade-syntax-docs/</a></li>
-<li><a href="http://naltatis.github.io/jade-syntax-docs/#basics" target="_blank" rel="noopener">http://naltatis.github.io/jade-syntax-docs/#basics</a></li>
-<li><a href="http://blog.kerash.tw/2013/04/nodejs-jade-template-engine/" target="_blank" rel="noopener">http://blog.kerash.tw/2013/04/nodejs-jade-template-engine/</a></li>
-</ol>
-
-
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-07-24T16:25:00.000Z">2017-07-25</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 分鐘 閱讀文 (大約 642 個字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/07/25/nodejs/nodejs-25-jade-1/">Node.js 系列學習日誌#25 - 介紹 Jade  Template Engine 模板引擎 (上)</a>
-            
-        </h1>
-        <div class="content">
-            <p><img src="/images/nodejs/107.png" alt></p>
-<p>Node.js 開發網頁它有許多的樣板引擎可以使用，例如常見的 Jade, EJS。樣板引擎也可以稱為樣板處理器 （Template Processor）或者叫過濾器 （Filter）。其他的語言也有個別使用的樣板引擎，像是 PHP 的 Smarty、 Ruby 的 ERB，本章節會以 jade 作為基礎的介紹如何透過樣板引擎實作 Node.js 網頁。</p>
-<p>官方網站：<a href="http://jade-lang.com/" target="_blank" rel="noopener">http://jade-lang.com/</a></p>
-<p>今天會介紹的內容有</p>
-<ul>
-<li>Jade 特點</li>
-<li>Jade 語法<ul>
-<li>屬性</li>
-</ul>
-</li>
-<li>Jade 輸出資料<ul>
-<li>迴圈</li>
-<li>條件</li>
-</ul>
-</li>
-</ul>
-<p>接下來您可以使用：<a href="http://codepen.io/" target="_blank" rel="noopener">http://codepen.io/</a> 作為線上編輯做以下實作的測試編輯器</p>
-<p><img src="/images/nodejs/108.png" alt></p>
-<p>首先，我們先來比較一下 HTML  跟 Jade 的表示方式</p>
-<p>===== HTML =====</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;wrap&quot;&gt;</span><br><span class="line">  &lt;h1&gt;Lorem Ipsum&lt;/h1&gt;</span><br><span class="line">  &lt;p&gt;Contrary to popular belief, Lorem Ipsum is not simply random text. &lt;/p&gt;</span><br><span class="line"> &lt;a href=“http://www.google.com&quot;&gt;Google&lt;/a&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-<p>===== Jade =====</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.wrap</span><br><span class="line">  h1 Lorem Ipsum</span><br><span class="line">  p Contrary to popular belief, Lorem Ipsum is not simply random text.</span><br><span class="line">  a(href=&apos;http://www.google.com&apos;) Google</span><br></pre></td></tr></table></figure>
-<h3 id="Jade-特點"><a href="#Jade-特點" class="headerlink" title="Jade 特點"></a>Jade 特點</h3><ul>
-<li>Jade 用縮排來定義 HTML 的階層結構</li>
-<li>Jade  比 HTML 寫起來更簡潔</li>
-<li>Jade 在編譯後，會將 HTML  的補上結束標籤</li>
-<li>Jade 不需要寫小於大於的符號</li>
-</ul>
-<h3 id="Jade-語法"><a href="#Jade-語法" class="headerlink" title="Jade 語法"></a>Jade 語法</h3><p>因為 Jade 是利用縮排的方式來定義 HTML 的階層結構，也就是說，下一行的縮排的話，就是上一行的子節點。</p>
-<p>撰寫</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">html</span><br></pre></td></tr></table></figure>
-<p>編譯後</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-<hr>
-<p>撰寫</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">div#wrap</span><br></pre></td></tr></table></figure>
-<p>編譯後</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;wrap&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-<hr>
-<p>撰寫</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p.article.a1.a2.a3</span><br></pre></td></tr></table></figure>
-<p>編譯後</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p class=&quot;article a1 a2 a3&quot;&gt;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
-<hr>
-<p>撰寫</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p</span><br><span class="line">     span</span><br></pre></td></tr></table></figure>
-<p>編譯後</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;&lt;span&gt;&lt;/span&gt;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
-<hr>
-<p>撰寫</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">p</span><br><span class="line">     | Contrary to popular belief</span><br><span class="line">     | Lorem Ipsum is simply dummy text of the printing</span><br><span class="line">     | It has survived not only five centuries</span><br></pre></td></tr></table></figure>
-<p>編譯後</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;Contrary to popular belief Lorem Ipsum is simply dummy text of the printing It has survived not only five centuries &lt;/p&gt;</span><br></pre></td></tr></table></figure>
-<hr>
-<p>標籤屬性：屬性部分就用括號的方式括弧起來，有多個屬性時就用逗點分隔或者段行來分隔</p>
-<p>方法一</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">input(type=&quot;text&quot;, placeholder=&quot;hello&quot;)</span><br></pre></td></tr></table></figure>
-<p>方法二</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">input(</span><br><span class="line">     type=&apos;text&apos;</span><br><span class="line">     name=&apos;age&apos;</span><br><span class="line">     placeholder=&apos;typing your age&apos;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>方法三：也可以用 javascript 的判斷控制屬性資料</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- var isFemale = true</span><br><span class="line">input(type=&apos;text&apos; value=isFemale ? &apos;Female&apos; : &apos;Male&apos;)</span><br></pre></td></tr></table></figure>
-<h3 id="Jade-輸出資料"><a href="#Jade-輸出資料" class="headerlink" title="Jade 輸出資料"></a>Jade 輸出資料</h3><h4 id="迴圈"><a href="#迴圈" class="headerlink" title="迴圈"></a>迴圈</h4><p>試著寫迴圈</p>
-<p><img src="/images/nodejs/109.png" alt></p>
-<p>輸出結果</p>
-<p><img src="/images/nodejs/110.png" alt></p>
-<h4 id="條件"><a href="#條件" class="headerlink" title="條件"></a>條件</h4><p>條件是指當判斷為真或否時，各別出現不同的結果，什麼意思呢？直接看範例好了</p>
-<p><img src="/images/nodejs/111.png" alt></p>
-<p>結果</p>
-<p><img src="/images/nodejs/112.png" alt></p>
-<p>Jade 就先寫到這裡，下集待續..</p>
-<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ol>
-<li><a href="http://jade-lang.com/" target="_blank" rel="noopener">http://jade-lang.com/</a></li>
-<li><a href="http://naltatis.github.io/jade-syntax-docs/" target="_blank" rel="noopener">http://naltatis.github.io/jade-syntax-docs/</a></li>
-<li><a href="http://naltatis.github.io/jade-syntax-docs/#basics" target="_blank" rel="noopener">http://naltatis.github.io/jade-syntax-docs/#basics</a></li>
-<li><a href="http://blog.kerash.tw/2013/04/nodejs-jade-template-engine/" target="_blank" rel="noopener">http://blog.kerash.tw/2013/04/nodejs-jade-template-engine/</a></li>
-</ol>
-
-
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-07-23T16:24:00.000Z">2017-07-24</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 分鐘 閱讀文 (大約 590 個字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/07/24/nodejs/nodejs-24-npm-version/">Node.js 系列學習日誌#24 - npm 相依套件指定版本與自動更新 package.json</a>
-            
-        </h1>
-        <div class="content">
-            <p><img src="/images/nodejs/101.png" alt></p>
-<p>在管理套件工具的版本時，在 package.json  檔案裡面有一個 dependencies 的部分，裡面包含著套件的名稱與版本號，今天要談的是版本號的指定。</p>
-<p>而這個版本號的指定是有個規範，它是語意化版本 <a href="http://semver.org/lang/zh-TW/" target="_blank" rel="noopener">http://semver.org/lang/zh-TW/</a> 根據它作為版號的規則</p>
-<p>版本格式：主版號.次版號.修訂號  也就是  Major.Minor.Path 的形式</p>
-<ol>
-<li>主版號：當你做了不相容的 API 修改，</li>
-<li>次版號：當你做了向下相容的功能性新增，</li>
-<li>修訂號：當你做了向下相容的問題修正。<br>那麼在 package.json 檔案裡面的相依套件的版本要怎麼填呢？版本號的範圍？</li>
-</ol>
-<ul>
-<li>1.2.3, = 1.2.3 : 指定版本 1.2.3</li>
-<li><blockquote>
-<p>1.2.3 ：大於 1.2.3</p>
-</blockquote>
-</li>
-<li>&lt;1.2.3 ：小於 1.2.3</li>
-<li><blockquote>
-<p>=1.2.3 ：大於 1.2.3</p>
-</blockquote>
-</li>
-<li>&lt;=1.2.3：小於 1.2.3</li>
-<li>1.2.3 - 2.3.4 ：大於 1.2.3 且小於 2.3.4</li>
-<li>~1.2.3 ：合理接近 1.2.3 版本， 等價 &gt;=1.2.3-0 &lt;1.3.0-0</li>
-<li>~1.2 ：等價  &gt;1.2.0-0 &lt;1.3.0-0，也就是 1.2 版本的同樣等價於 1.2.x 版本奧</li>
-<li>~1：等價於 &gt;1.0.0-0 &lt;2.0.0-0 ，也就是 1 開頭的版本等價於 1.x 版本號</li>
-<li><ul>
-<li>：任意版本</li>
-</ul>
-</li>
-</ul>
-<p>最上面的圖，使用了好幾種定義版本的方式，就以 * 的寫法風險也比較大一點，因為無法保證 npm 安裝的版本是最新的版本，最保守一點的就是直接指定版本號，而如何得知版本號，可以透過</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm info &#123;套件名稱&#125; version</span><br></pre></td></tr></table></figure>
-<p>方式去做查詢。</p>
-<hr>
-<h3 id="介紹-autod"><a href="#介紹-autod" class="headerlink" title="介紹 autod"></a>介紹 autod</h3><p><a href="https://github.com/node-modules/autod" target="_blank" rel="noopener">https://github.com/node-modules/autod</a></p>
-<p>這是一個自動分析所有的文件，引入的模組不需要手動更新 package.json ，並且它會同時自動更新 package.json</p>
-<p><img src="/images/nodejs/102.png" alt></p>
-<p>先看一下有哪些的  help 可以使用</p>
-<p><img src="/images/nodejs/103.png" alt></p>
-<p>接著開始執行 autod 的指令，在這邊我下了一個 -e  把 public, view 忽略，另外 -w 讓這份 package.json 能夠自動更新寫入</p>
-<p><img src="/images/nodejs/104.png" alt></p>
-<p>原始的 package.json</p>
-<p><img src="/images/nodejs/105.png" alt></p>
-<p>自動修正後的  package.json</p>
-<p><img src="/images/nodejs/106.png" alt></p>
-<p>是不是有很大的不同呢，而且又能夠自動更新，試試看囉  </p>
-<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ol>
-<li><a href="http://semver.org/lang/zh-TW/" target="_blank" rel="noopener">http://semver.org/lang/zh-TW/</a></li>
-<li><a href="http://blog.eisneim.com/articles/2014-7-5-meaning-of-npm-bower-version-prefix.html" target="_blank" rel="noopener">http://blog.eisneim.com/articles/2014-7-5-meaning-of-npm-bower-version-prefix.html</a></li>
-<li><a href="https://cnodejs.org/topic/52dcc0a578990b04112e2f09" target="_blank" rel="noopener">https://cnodejs.org/topic/52dcc0a578990b04112e2f09</a></li>
-</ol>
-
-
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-07-23T16:23:00.000Z">2017-07-24</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 分鐘 閱讀文 (大約 618 個字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/07/24/nodejs/nodejs-23-heroku/">Node.js 系列學習日誌#23 - 部署上線至 Heroku 雲端平台環境</a>
-            
-        </h1>
-        <div class="content">
-            <p><img src="/images/nodejs/88.png" alt></p>
-<p>Heroku 是雲端運算的平台，您可以將您的應用程式放到雲端空間上面</p>
-<h3 id="註冊-Heroku-帳號"><a href="#註冊-Heroku-帳號" class="headerlink" title="註冊 Heroku 帳號"></a>註冊 Heroku 帳號</h3><p>請先註冊一個  Heroku  帳號，<a href="https://www.heroku.com/，由於我們要部署上線的語法是" target="_blank" rel="noopener">https://www.heroku.com/，由於我們要部署上線的語法是</a>  Node.js 語言，因此也確認您的  Node.js, npm 已安裝至您的電腦裡面。</p>
-<h3 id="安裝-Heroku-Toolbelt-工具"><a href="#安裝-Heroku-Toolbelt-工具" class="headerlink" title="安裝 Heroku Toolbelt 工具"></a>安裝 Heroku Toolbelt 工具</h3><p>這個工具將提供您 Command Line 的工具以及 git 版控工具，透過這個工具將輔助您接下來後續的超過指令，工具請至 <a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up" target="_blank" rel="noopener">https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up</a> 下載，在這邊可以選擇您的作業系統環境。而我這邊將用 mac 做介紹</p>
-<p><img src="/images/nodejs/89.png" alt></p>
-<p>安裝首頁畫面，安裝過程基本上就是都下一步，偶爾出現可以自定的選項。</p>
-<p><img src="/images/nodejs/90.png" alt></p>
-<h4 id="安裝進度"><a href="#安裝進度" class="headerlink" title="安裝進度"></a>安裝進度</h4><p><img src="/images/nodejs/91.png" alt></p>
-<p>安裝後的檢查，請到命令字元輸入 heroku，如果出現以下訊息就代表安裝成功噢！</p>
-<p><img src="/images/nodejs/92.png" alt></p>
-<p>用指令登入 heroku ， $heroku login ，按照指令輸入 email 與密碼</p>
-<p><img src="/images/nodejs/93.png" alt></p>
-<p>在這邊還需要建立一個  key ，請繼續輸入  $heroku keys ，如果沒有 key的存在，請手動建立 $heroku keys:add  (<a href="https://devcenter.heroku.com/articles/keys)，建立完成後會像以下結果：" target="_blank" rel="noopener">https://devcenter.heroku.com/articles/keys)，建立完成後會像以下結果：</a></p>
-<p><img src="/images/nodejs/94.png" alt></p>
-<p>部署程式到 Heroku，本章節選用來 <a href="http://ithelp.ithome.com.tw/ironman7/app/article/all/recent/10159261" target="_blank" rel="noopener">http://ithelp.ithome.com.tw/ironman7/app/article/all/recent/10159261</a> 專案進行初始化的建立，請先輸入</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$heroku create</span><br></pre></td></tr></table></figure>
-<p>建立完成後可以看到訊息提到，配了一組 aqueous-dawn-4266 的名字，馬上轉到 heroku 上的 dashboard ，立即就看到上面多了一個名為 aqueous-dawn-4266 專案，但這時候程式還並沒有部署到  heroku ，目前已經建立遠端的檔案庫在上面。</p>
-<p><img src="/images/nodejs/95.png" alt></p>
-<p>您也許覺得 aqueous-dawn-4266 好難記，在 heroku 也提供了更名的指令，請輸入 $heroku apps:rename newname<br>我將專案名稱改成 nodejs-express-bower ，而 heroku 的 dashboard 專案列表也會跟著改噢</p>
-<p><img src="/images/nodejs/96.png" alt></p>
-<p><img src="/images/nodejs/97.png" alt></p>
-<p>接下來就部署程式，請輸入</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$git push heroku master</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/98.png" alt></p>
-<p>這時候進到 heroku dashboard ，選擇 nodejs-express-bower 專案，點選上方標題右邊的 icon</p>
-<p><img src="/images/nodejs/99.png" alt></p>
-<p>觀察結果顯示如下：</p>
-<p><img src="/images/nodejs/100.png" alt></p>
-<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction" target="_blank" rel="noopener">https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction</a></p>
-
-
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-07-23T16:22:00.000Z">2017-07-24</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 分鐘 閱讀文 (大約 630 個字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/07/24/nodejs/nodejs-22-express-login/">Node.js 系列學習日誌#22 - 使用 express, mysql, ejs 實作登入/登出功能</a>
-            
-        </h1>
-        <div class="content">
-            <p>上篇介紹了註冊，相對的就一定要來介紹登入的功能。在資料庫上定義了 username, userpass 的欄位，登入的時候就在頁面上擺上兩個輸入框，以及登入的按鈕。</p>
-<p><img src="/images/nodejs/86.png" alt></p>
-<p>在上一篇已經有建立好 models 的部分，在登入的操作也需要透過  models 向資料庫做存取，請打開 /models/user.js</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">//檢查是否為會員</span><br><span class="line">User.getUserNumByName = function getUserNumByName(username, callback) &#123;</span><br><span class="line">       //使用username 來檢查是否有資料</span><br><span class="line">        var cmd = “select COUNT(1) AS num from user info where username = ?&quot;;</span><br><span class="line">        connection.query(cmd, [username], function (err, result) &#123;</span><br><span class="line">            if (err) &#123;</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line">            connection.release();</span><br><span class="line">            //查詢結果使用 callback 呼叫，並將 err, result 參數帶入</span><br><span class="line">            callback(err,result);                    </span><br><span class="line">        &#125;);       </span><br><span class="line">&#125;;</span><br><span class="line">//透過帳號取得使用者資料</span><br><span class="line">User.getUserByUserName = function getUserNumByName(username, callback) &#123;</span><br><span class="line">        var cmd = “select * from userinfo where username = ?&quot;;</span><br><span class="line">        connection.query(cmd, [username], function (err, result) &#123;</span><br><span class="line">            if (err) &#123;</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line">            connection.release();</span><br><span class="line">            callback(err,result);                    </span><br><span class="line">        &#125;);       </span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
-<p>然後請在  routes/ 資料夾 （如果沒有請自行建立）新增  login.js 檔案，在這檔案要特別注意的是，當登入表單送出的時候，如果是會員的話，那麼在登入進到主頁時，將使用者帳號寫到 session 上面</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">var express = require(&apos;express&apos;),</span><br><span class="line">    User = require(&apos;../models/user.js&apos;),</span><br><span class="line">    router = express.Router(),</span><br><span class="line">    crypto = require(&apos;crypto&apos;),</span><br><span class="line">    title = &apos;登入&apos;;</span><br><span class="line"></span><br><span class="line">router.get(&apos;/&apos;, function(req, res) &#123;</span><br><span class="line">    res.render(&apos;login&apos;, &#123;title:title&#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">router.post(&apos;/&apos;, function(req, res) &#123;</span><br><span class="line">    var userName = req.body[&apos;txtUserName&apos;],</span><br><span class="line">        userPwd = req.body[&apos;txtUserPwd&apos;],</span><br><span class="line">        md5 = crypto.createHash(&apos;md5&apos;);</span><br><span class="line"></span><br><span class="line">    User.getUserByUserName(userName, function (err, results) &#123;                           </span><br><span class="line">        if(results == &apos;&apos;) &#123;</span><br><span class="line">            res.locals.error = &apos;使用者不存在&apos;;</span><br><span class="line">            res.render(&apos;login&apos;,&#123;title:title&#125;);</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        userPwd = md5.update(userPwd).digest(&apos;hex&apos;);</span><br><span class="line">        if(results[0].UserName != userName || results[0].UserPass != userPwd) &#123;</span><br><span class="line">            res.locals.error = &apos;使用者帳號或密碼錯誤&apos;;</span><br><span class="line">            res.render(&apos;login&apos;,&#123;title:title&#125;);</span><br><span class="line">            return;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            res.locals.username = userName;</span><br><span class="line">            //設定session</span><br><span class="line">            req.session.username = res.locals.username;</span><br><span class="line">            console.log(req.session.username);                       </span><br><span class="line">            res.redirect(&apos;/&apos;);</span><br><span class="line">            return;</span><br><span class="line">        &#125;    </span><br><span class="line">    &#125;);             </span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">module.exports = router;</span><br></pre></td></tr></table></figure>
-<p>一切基本動作準備好之後，接著就打開 app.js 新增 login 的 router 路由，而這個路由將真的表單的請求作處理，在以下的兩行程式所代表的是指定載入路由的寫法。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">var login = require(&apos;./routes/login’);</span><br><span class="line">app.use(&apos;/login&apos;, login);</span><br><span class="line"></span><br><span class="line">view 檢視 請在 /views/ 建立 index.ejs</span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;          </span><br><span class="line">      &lt;title&gt;&lt;%= title %&gt;&lt;/title&gt;</span><br><span class="line">    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/stylesheets/bootstrap.min.css&quot; /&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">     &lt;div class=&quot;container&quot;&gt;</span><br><span class="line">        &lt;% if (locals.username) &#123; %&gt;</span><br><span class="line">          &lt;h1&gt;您好, &lt;%= username %&gt;&lt;/h1&gt;  </span><br><span class="line">          &lt;a href=&quot;/logout&quot;&gt;登出&lt;/a&gt;</span><br><span class="line">        &lt;% &#125; %&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-<p>已知註冊的帳號密碼是 test / 123456</p>
-<p><img src="/images/nodejs/87.png" alt></p>
-<h3 id="登出"><a href="#登出" class="headerlink" title="登出"></a>登出</h3><p>有了登入之後，也別忘了登出，登出的寫法也相當容易，由於本章節是將註冊的帳號用 session 保存，而登出只需要將 session 銷毀即可，銷毀之後，再退到登入頁面。程式如下：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var express = require(&apos;express&apos;),</span><br><span class="line">     router = express.Router();</span><br><span class="line"></span><br><span class="line">router.get(&apos;/&apos;, function(req, res) &#123;</span><br><span class="line">  req.session.destroy();</span><br><span class="line">  res.redirect(&apos;/login&apos;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">module.exports = router;</span><br></pre></td></tr></table></figure>
-
-
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -996,9 +550,9 @@
             
             <li><a class="pagination-link has-text-black-ter" href="/tags/Node-js/page/2/">2</a></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/tags/Node-js/page/3/">3</a></li>
+            <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/tags/Node-js/page/4/">4</a></li>
+            <li><a class="pagination-link has-text-black-ter" href="/tags/Node-js/page/7/">7</a></li>
             
         </ul>
     </nav>
@@ -1018,7 +572,9 @@
             <div class="level-item has-text-centered">
                 <div>
                     
-                        <img class="image is-128x128 has-mb-6" src="/uploads/avatar.png" alt="Helen">
+                        <figure class="image container is-128x128 has-mb-6">
+                            <img class="is-rounded" src="/uploads/avatar.png" alt="Helen">
+                        </figure>
                     
                     
                     <p class="is-size-4 is-block">
@@ -1046,7 +602,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        62
+                        64
                     </p>
                 </div>
             </div>
@@ -1105,6 +661,115 @@
         
 <div class="card widget">
     <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/04/19/r/r-textmining-01-ch01-2/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/r/cover7.png" alt="R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (2)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-19T15:34:00.000Z">2019-04-19</time></div>
+                    <a href="/2019/04/19/r/r-textmining-01-ch01-2/" class="has-link-black-ter is-size-6">R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (2)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/R/">R</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/17/r/r-textmining-01-ch01-1/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/r/cover6.png" alt="R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (1)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-17T15:34:00.000Z">2019-04-17</time></div>
+                    <a href="/2019/04/17/r/r-textmining-01-ch01-1/" class="has-link-black-ter is-size-6">R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (1)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/R/">R</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/03/14/vuejs/vuejs-google-analysis/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/vuejs/cover1.png" alt="在 Vue 使用 vue-analytics 套件設定 Google Analytics (GA) 追蹤診斷工具">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-14T10:07:51.000Z">2019-03-14</time></div>
+                    <a href="/2019/03/14/vuejs/vuejs-google-analysis/" class="has-link-black-ter is-size-6">在 Vue 使用 vue-analytics 套件設定 Google Analytics (GA) 追蹤診斷工具</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/03/12/web/ubuntu-nginx-restart-fail/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/web/20190312-5.png" alt="Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-12T15:00:00.000Z">2019-03-12</time></div>
+                    <a href="/2019/03/12/web/ubuntu-nginx-restart-fail/" class="has-link-black-ter is-size-6">Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/網站/">網站</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/03/06/vuejs/vuejs-googlesheets-api/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/vuejs/wolfe77.png" alt="Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-06T10:07:51.000Z">2019-03-06</time></div>
+                    <a href="/2019/03/06/vuejs/vuejs-googlesheets-api/" class="has-link-black-ter is-size-6">Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
                 分類
@@ -1148,7 +813,7 @@
                 <span class="level-item">R</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">6</span>
+                <span class="level-item tag">8</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Ruby/">
@@ -1219,115 +884,6 @@
         </div>
     </div>
 </div>
-    
-    
-        <div class="column-right-shadow is-hidden-widescreen ">
-        
-            
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="menu-label">
-            最新文章
-        </h3>
-        
-        <article class="media">
-            
-            <a href="/2019/03/14/vuejs/vuejs-google-analysis/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/vuejs/cover1.png" alt="在 Vue 使用 vue-analytics 套件設定 Google Analytics (GA) 追蹤診斷工具">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-14T10:07:51.000Z">2019-03-14</time></div>
-                    <a href="/2019/03/14/vuejs/vuejs-google-analysis/" class="has-link-black-ter is-size-6">在 Vue 使用 vue-analytics 套件設定 Google Analytics (GA) 追蹤診斷工具</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/03/12/web/ubuntu-nginx-restart-fail/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/web/20190312-5.png" alt="Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-12T15:00:00.000Z">2019-03-12</time></div>
-                    <a href="/2019/03/12/web/ubuntu-nginx-restart-fail/" class="has-link-black-ter is-size-6">Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/網站/">網站</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/03/06/vuejs/vuejs-googlesheets-api/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/vuejs/wolfe77.png" alt="Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-06T10:07:51.000Z">2019-03-06</time></div>
-                    <a href="/2019/03/06/vuejs/vuejs-googlesheets-api/" class="has-link-black-ter is-size-6">Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/02/27/tools/postman-api-tools/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/tools/1_QOx_tPV5wJnhTzAGhfIiLA.png" alt="Postman - Restful API 測試管理工具">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-27T01:47:00.000Z">2019-02-27</time></div>
-                    <a href="/2019/02/27/tools/postman-api-tools/" class="has-link-black-ter is-size-6">Postman - Restful API 測試管理工具</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在 Mac OSX 使用 RVM 升級 Ruby V2.5.1">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
-                    <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="has-link-black-ter is-size-6">在 Mac OSX 使用 RVM 升級 Ruby V2.5.1</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Ruby/">Ruby</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-    </div>
-</div>
-
         
             <div class="card widget">
     <div class="card-content">
@@ -1424,7 +980,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/R/">
                         <span class="tag">R</span>
-                        <span class="tag is-grey">6</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
@@ -1650,108 +1206,120 @@
         
 <div class="card widget">
     <div class="card-content">
-        <h3 class="menu-label">
-            最新文章
-        </h3>
-        
-        <article class="media">
-            
-            <a href="/2019/03/14/vuejs/vuejs-google-analysis/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/vuejs/cover1.png" alt="在 Vue 使用 vue-analytics 套件設定 Google Analytics (GA) 追蹤診斷工具">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-14T10:07:51.000Z">2019-03-14</time></div>
-                    <a href="/2019/03/14/vuejs/vuejs-google-analysis/" class="has-link-black-ter is-size-6">在 Vue 使用 vue-analytics 套件設定 Google Analytics (GA) 追蹤診斷工具</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/03/12/web/ubuntu-nginx-restart-fail/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/web/20190312-5.png" alt="Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-12T15:00:00.000Z">2019-03-12</time></div>
-                    <a href="/2019/03/12/web/ubuntu-nginx-restart-fail/" class="has-link-black-ter is-size-6">Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/網站/">網站</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/03/06/vuejs/vuejs-googlesheets-api/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/vuejs/wolfe77.png" alt="Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-06T10:07:51.000Z">2019-03-06</time></div>
-                    <a href="/2019/03/06/vuejs/vuejs-googlesheets-api/" class="has-link-black-ter is-size-6">Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/02/27/tools/postman-api-tools/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/tools/1_QOx_tPV5wJnhTzAGhfIiLA.png" alt="Postman - Restful API 測試管理工具">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-02-27T01:47:00.000Z">2019-02-27</time></div>
-                    <a href="/2019/02/27/tools/postman-api-tools/" class="has-link-black-ter is-size-6">Postman - Restful API 測試管理工具</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="在 Mac OSX 使用 RVM 升級 Ruby V2.5.1">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time></div>
-                    <a href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/" class="has-link-black-ter is-size-6">在 Mac OSX 使用 RVM 升級 Ruby V2.5.1</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Ruby/">Ruby</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
+        <div class="menu">
+            <h3 class="menu-label">
+                分類
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Excel/">
+            <span class="level-start">
+                <span class="level-item">Excel</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Gitbook/">
+            <span class="level-start">
+                <span class="level-item">Gitbook</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Node-js/">
+            <span class="level-start">
+                <span class="level-item">Node.js</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">31</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Python/">
+            <span class="level-start">
+                <span class="level-item">Python</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/R/">
+            <span class="level-start">
+                <span class="level-item">R</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Ruby/">
+            <span class="level-start">
+                <span class="level-item">Ruby</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Vue/">
+            <span class="level-start">
+                <span class="level-item">Vue</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/macbook/">
+            <span class="level-start">
+                <span class="level-item">macbook</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/丸閱讀/">
+            <span class="level-start">
+                <span class="level-item">丸閱讀</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/工具/">
+            <span class="level-start">
+                <span class="level-item">工具</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/網站/">
+            <span class="level-start">
+                <span class="level-item">網站</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/股典閱/">
+            <span class="level-start">
+                <span class="level-item">股典閱</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/資料探勘/">
+            <span class="level-start">
+                <span class="level-item">資料探勘</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
     </div>
 </div>
-
     
         <div class="card widget">
     <div class="card-content">
@@ -1848,7 +1416,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/R/">
                         <span class="tag">R</span>
-                        <span class="tag is-grey">6</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
