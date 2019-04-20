@@ -156,6 +156,146 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-07-23T16:17:00.000Z">2017-07-24</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 分鐘 閱讀文 (大約 816 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/07/24/nodejs/nodejs-17-ejs-json/">Node.js 系列學習日誌#17 - 使用 express, ejs 實作讀取靜態 JSON 格式資料</a>
+            
+        </h1>
+        <div class="content">
+            <p>今天來介紹 express, ejs 實作讀取靜態 JSON 格式資料程式</p>
+<p>本章節將會學習到：</p>
+<ul>
+<li>使用 ejs 樣板引擎建立檢視頁面</li>
+<li>建立 Json 檔案及資料，並採取 /api/posts 列出所有 json 資料</li>
+<li>採取 /post/:id 取得某一筆資料<br>首先我們先建立一個目錄叫 demo-express-json 的資料夾，然後使用指令進入到 demo-express-json 資料夾裡面，接著安裝 express 框架以及 ejs 的樣板引擎</li>
+</ul>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$npm</span> install —save express ejs</span><br></pre></td></tr></table></figure>
+<h3 id="建立-josn-檔案"><a href="#建立-josn-檔案" class="headerlink" title="建立 josn 檔案"></a>建立 josn 檔案</h3><p>建立完成之後，我們在 demo-express-json 會出現 node_module 資料夾，裡面則是有 express, ejs 套件相關檔案，接下來在根目錄下建立一個  posts.json 格式檔案，資料先假定設定為：</p>
+<p>（文字是用亂數假文產生器弄的，因此無需認真讀囉）</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">     &#123;</span><br><span class="line">       &quot;title&quot;: &quot;會濟報好大必者政下二&quot;,</span><br><span class="line">       &quot;id&quot;: &quot;fdb61c16-4bba-11e4-9e35-164230d1df67&quot;,</span><br><span class="line">       &quot;content&quot;: &quot;容有那一氣持地來於結主了友如頭……院還地入。出乎機富事的著度同禮、時在科種力事再數總源式孩？&quot;</span><br><span class="line">     &#125;,</span><br><span class="line">     &#123;</span><br><span class="line">       &quot;title&quot;: &quot;主覺問我的食什期和&quot;,</span><br><span class="line">       &quot;id&quot;: &quot;0bc365ac-4bbb-11e4-9e35-164230d1df67&quot;,</span><br><span class="line">       &quot;content&quot;: &quot;生老了險實去供考權是車子氣長不別相且員高麼也工家看&quot;</span><br><span class="line">     &#125;,</span><br><span class="line">     &#123;</span><br><span class="line">       &quot;title&quot;: &quot;是實裡在園時傳&quot;,</span><br><span class="line">       &quot;id&quot;: &quot;0ff44786-4bbb-11e4-9e35-164230d1df67&quot;,</span><br><span class="line">       &quot;content&quot;: &quot;不半過何：為濟是在制們。裡得一方出，處師取是你賣而陽&quot;</span><br><span class="line">     &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>這個 json 檔每一筆資料以 title, id, content 參數為主</p>
+<h3 id="建立-app-js"><a href="#建立-app-js" class="headerlink" title="建立 app.js"></a>建立 app.js</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">// express web framework</span><br><span class="line">var express = require(&apos;express&apos;);</span><br><span class="line">//讀取 posts.json</span><br><span class="line">var fs = require(&apos;fs&apos;);</span><br><span class="line">var app = express();</span><br><span class="line"></span><br><span class="line">//放置靜態網頁</span><br><span class="line">app.use(&apos;/public&apos;, express.static(__dirname + &apos;/public&apos;));</span><br><span class="line"></span><br><span class="line">//定義網站標題</span><br><span class="line">app.locals.title=&quot;Get json data using express web framework&quot;;</span><br><span class="line"></span><br><span class="line">app.all(&apos;*&apos;, function(req, res, next)&#123;</span><br><span class="line">  fs.readFile(&apos;posts.json&apos;, function(err, data)&#123;</span><br><span class="line">    res.locals.posts = JSON.parse(data);</span><br><span class="line">    next();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">//網頁主進入點</span><br><span class="line">app.get(&apos;/&apos;, function(req, res)&#123;</span><br><span class="line">  //指定 /views/idex.ejs</span><br><span class="line">  res.render(&apos;index.ejs&apos;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">//顯示 posts.json 資料</span><br><span class="line">app.get(&apos;/api/posts&apos;, function(req, res)&#123;</span><br><span class="line">  res.json(res.locals.posts);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">//當 url 是 /post/:id 時, 取得某一筆資料</span><br><span class="line">app.get(&apos;/post/:id&apos;, function(req, res, next)&#123;</span><br><span class="line">  //取得 post.json 資料夾</span><br><span class="line">  res.locals.posts.forEach(function(post)&#123;</span><br><span class="line">    //從 url 取得 id 參數與 posts.json 裡的 id</span><br><span class="line">    if (req.params.id === post.id)&#123;</span><br><span class="line">      //顯示參數為  url 中 id 的 post.id, 那麼顯示部分資料</span><br><span class="line">      res.render(&apos;post.ejs&apos;, &#123; post: post &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(3000);</span><br><span class="line">console.log(&apos;app is listening at localhost:3000...’);</span><br></pre></td></tr></table></figure>
+<p>再來是建立檢視資料夾 views，因為我們在 app.js 裡面設定樣板引擎是用 ejs，所以在 views 資料夾裡面新增三個檔案，分別是 header.ejs, index.ejs, footer.ejs</p>
+<p>header.ejs</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">&lt;!doctype html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">  &lt;title&gt;&lt;%= title %&gt;&lt;/title&gt;</span><br><span class="line">  &lt;link rel=&quot;stylesheet&quot; href=&quot;/public/styles.css&quot;&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;header&gt;</span><br><span class="line">  &lt;div class=&quot;container&quot;&gt;</span><br><span class="line">    &lt;h1&gt;&lt;a href=&quot;/&quot;&gt;&lt;%= title %&gt;&lt;/a&gt;&lt;/h1&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/header&gt;</span><br><span class="line"></span><br><span class="line">footer.ejs</span><br><span class="line"></span><br><span class="line">&lt;footer&gt;</span><br><span class="line">  &lt;div class=&quot;container&quot;&gt;</span><br><span class="line">    This is footer side.</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/footer&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br><span class="line">index.ejs</span><br><span class="line"></span><br><span class="line">&lt;% include header %&gt;</span><br><span class="line"></span><br><span class="line">&lt;main role=&quot;main&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;container&quot;&gt;</span><br><span class="line">    &lt;h3&gt;&lt;a href=&quot;/api/posts&quot;&gt;/api/posts&lt;/a&gt;&lt;/h3&gt;</span><br><span class="line">    &lt;% posts.forEach(function(post)&#123; %&gt;</span><br><span class="line">      &lt;h3&gt;</span><br><span class="line">        &lt;a href=&quot;/post/&lt;%= post.id %&gt;&quot;&gt;</span><br><span class="line">          &lt;%= post.title %&gt;</span><br><span class="line">        &lt;/a&gt;</span><br><span class="line">      &lt;/h3&gt;</span><br><span class="line">      &lt;div&gt;&lt;%= post.content %&gt;&lt;/div&gt;</span><br><span class="line">    &lt;% &#125;); %&gt;</span><br><span class="line">  &lt;/main&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;% include footer %&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="建立靜態資料"><a href="#建立靜態資料" class="headerlink" title="建立靜態資料"></a>建立靜態資料</h3><p>在 app.js 檔案裡有一行是</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.use(&apos;/public&apos;, express.static(__dirname + &apos;/public&apos;));</span><br></pre></td></tr></table></figure>
+<p>在做網站的過程，我們會建立 css,js 檔案，在根目錄下建立一個 public，並且在這個檔案增加一個 style.css，去定義一些樣式的方式，我這邊就不太多做 css 的解釋囉。</p>
+<h3 id="執行"><a href="#執行" class="headerlink" title="執行"></a>執行</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$node index.js</span><br></pre></td></tr></table></figure>
+<h3 id="結果"><a href="#結果" class="headerlink" title="結果"></a>結果</h3><p><img src="/images/nodejs/68.png" alt></p>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="http://expressjs.com/" target="_blank" rel="noopener">http://expressjs.com/</a><br><a href="http://expressjs.com/4x/api.html#app.locals" target="_blank" rel="noopener">http://expressjs.com/4x/api.html#app.locals</a><br><a href="http://www.richyli.com/tool/loremipsum/" target="_blank" rel="noopener">http://www.richyli.com/tool/loremipsum/</a></p>
+
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-07-23T16:16:00.000Z">2017-07-24</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分鐘 閱讀文 (大約 617 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/07/24/nodejs/nodejs-16-util-inherits/">Node.js 系列學習日誌#16 - 基礎工具核心模組 util.inherits 實現原型繼承</a>
+            
+        </h1>
+        <div class="content">
+            <p>在 js 的內建功能裡面如果有些不適合或無法滿足需求的時候，多半都要動手刻程式然後做到自己要的模組來呼叫方法。而 Node.js 提供了一個函數的集合，能夠比 js 更多的一些基本的處理，我們可以看到以下官方網站所提供 util 可用的方法。在本章節將介紹比較重要關注的方法</p>
+<p><img src="/images/nodejs/64.png" alt></p>
+<h1 id="util-inherits-實現原型繼承"><a href="#util-inherits-實現原型繼承" class="headerlink" title="util.inherits 實現原型繼承"></a>util.inherits 實現原型繼承</h1><p>引用內建基礎工具  util，請在程式第一行寫 var util = require(‘util’);  方可使用工具的方法。在這邊我們介紹繼承的功能，也就是  util.inherits(constructor, superConstructor)，在參數的第一個作為建構子，而第二參數為父建構子，直接來看程式的部分</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fnBase</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">     <span class="hljs-keyword">this</span>.name = <span class="hljs-string">'java'</span>;</span><br><span class="line">     <span class="hljs-keyword">this</span>.price = <span class="hljs-number">250</span>;</span><br><span class="line"></span><br><span class="line">     <span class="hljs-keyword">this</span>.getBookName = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">          <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"getBookName: the book name is "</span> + <span class="hljs-keyword">this</span>.name);</span><br><span class="line">     &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fnBase.prototype.showName = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"showName: "</span> + <span class="hljs-keyword">this</span>.name);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">fnBase.prototype.showPrice = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"showPrice: "</span> + <span class="hljs-keyword">this</span>.price);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>在這邊開始先建立了一個 fnBase 的物件，包含 name, price 屬性並且給予初始化值以及 getBookName 方法，而這個取得 book 的名稱。另外再多兩個 prototype 的原型方法，一個是 showName 以及 showPrice 方法，接著我們在建立一個物件</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Book</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">     <span class="hljs-keyword">this</span>.name = <span class="hljs-string">"nodejs"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我們定義好基礎對象為 fnBase 之後，以及繼承 fnBook  的 Book 建構子的屬性 name 為 nodejs，我們在透過以下方法來塑造繼承關係</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">util.inherits(Book, fnBase);</span><br></pre></td></tr></table></figure>
+<p>接下來呼叫一下看看會有什麼變化，首先我們先建立 fnBase  的物件，在呼叫內部包含的方法，showName 及 getBookName</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> obj = <span class="hljs-keyword">new</span> fnBase();</span><br><span class="line">obj.showName();</span><br><span class="line">obj.getBookName();</span><br><span class="line"><span class="hljs-built_in">console</span>.log(obj);</span><br></pre></td></tr></table></figure>
+<p>其結果如下，可以看到呼叫的兩個方法皆有顯示答案</p>
+<p><img src="/images/nodejs/65.png" alt></p>
+<p>最後將 new fnBase() 換成  new Book() 看看，程式如下：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> book = <span class="hljs-keyword">new</span> Book();</span><br><span class="line">book.showName();</span><br><span class="line">book.getBookName();</span><br><span class="line"><span class="hljs-built_in">console</span>.log(book);</span><br></pre></td></tr></table></figure>
+<p>Oops! 為什麼會出錯？結果居然只呼叫得到 showName, 卻無法取得  getBookName.</p>
+<p><img src="/images/nodejs/66.png" alt></p>
+<p>原因是因為 Book  只會繼承 fnBase 在原型 prototype 的函數，其建立的屬性與 getBookName 並不會被 Book 繼承。因此在繼承上的觀念則要特別注意了</p>
+<p>參考資料：<br><a href="http://nodejs.org/api/util.html" target="_blank" rel="noopener">http://nodejs.org/api/util.html</a><br><a href="http://www.w3schools.com/js/js_object_prototypes.asp" target="_blank" rel="noopener">http://www.w3schools.com/js/js_object_prototypes.asp</a></p>
+
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2017-07-23T16:15:00.000Z">2017-07-24</time>
                 
                 <div class="level-item">
@@ -359,155 +499,6 @@
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-07-23T16:12:00.000Z">2017-07-24</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    7 分鐘 閱讀文 (大約 998 個字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/07/24/nodejs/nodejs-12-nodemailer/">Node.js 系列學習日誌#12 - 使用 nodemailer 套件透過 gmail 發送電子信箱</a>
-            
-        </h1>
-        <div class="content">
-            <p>在上幾篇完成了 mysql  的 CRUD 的四大操作，本篇就來個輕鬆一點的應用，在這篇介紹使用 nodemailer 套件透過  gmail 來發送電子信箱，在安裝跟實作上也相當容易，我們透過 <a href="https://github.com/andris9/Nodemailer" target="_blank" rel="noopener">https://github.com/andris9/Nodemailer</a> 來講解，在運用上也無需再重新打造輪子，學習如何使用即可。</p>
-<p>在這邊先建立一個目錄夾 nodejs-nodemailer ，接著再指令將 package.json 建立起來 （本篇不著重在如何建立 package.json ，如需安裝操作請見 <a href="http://ithelp.ithome.com.tw/ironman7/app/article/all/recent/10158140" target="_blank" rel="noopener">http://ithelp.ithome.com.tw/ironman7/app/article/all/recent/10158140</a> ）。由於我們要安裝 nodemailer 套件，因此下指令</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$npm</span> install —save node mailer</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/52.png" alt></p>
-<p>其中 —save 會將 nodemailer 相依套件新增到 package.json 檔案裡的 dependencies 項目裡， 如下圖所示：</p>
-<p><img src="/images/nodejs/53.png" alt></p>
-<p>安裝完成之後，我們就可以來寫程式的部分了，可以看到上圖寫的 “start”: “node email” ，在這邊我預定起始點是用 email.js ，因此請在根目錄下建立 email.js 檔案。我們初步的思考是這樣：</p>
-<ul>
-<li>引入 nodemailer 套件</li>
-<li>宣告發信的物件 （服務採用 gmail）</li>
-<li>基本參數設定 (包含內文)</li>
-<li>送出發信事件</li>
-</ul>
-<p>我們直接看一下程式的部分：</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//引用 nodemailer</span></span><br><span class="line"><span class="hljs-keyword">var</span> nodemailer = <span class="hljs-built_in">require</span>(<span class="hljs-string">'nodemailer'</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//宣告發信物件</span></span><br><span class="line"><span class="hljs-keyword">var</span> transporter = nodemailer.createTransport(&#123;</span><br><span class="line">    service: <span class="hljs-string">'Gmail'</span>,</span><br><span class="line">    auth: &#123;</span><br><span class="line">        user: ‘account@gmail.com<span class="hljs-string">',</span></span><br><span class="line"><span class="hljs-string">        pass: ‘yourpassword'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">var</span> options = &#123;</span><br><span class="line">    <span class="hljs-comment">//寄件者</span></span><br><span class="line">    <span class="hljs-keyword">from</span>: <span class="hljs-string">'account1@gmail.com '</span>,</span><br><span class="line">    <span class="hljs-comment">//收件者</span></span><br><span class="line">    to: <span class="hljs-string">'account2@gmail.com'</span>,</span><br><span class="line">    <span class="hljs-comment">//副本</span></span><br><span class="line">    cc: <span class="hljs-string">'account3@gmail.com'</span>,</span><br><span class="line">    <span class="hljs-comment">//密件副本</span></span><br><span class="line">    bcc: <span class="hljs-string">'account4@gmail.com'</span>,</span><br><span class="line">    <span class="hljs-comment">//主旨</span></span><br><span class="line">    subject: <span class="hljs-string">'這是 node.js 發送的測試信件'</span>, <span class="hljs-comment">// Subject line</span></span><br><span class="line">    <span class="hljs-comment">//純文字</span></span><br><span class="line">    text: <span class="hljs-string">'Hello world2'</span>, <span class="hljs-comment">// plaintext body</span></span><br><span class="line">    <span class="hljs-comment">//嵌入 html 的內文</span></span><br><span class="line">    html: <span class="hljs-string">'&lt;h2&gt;Why and How&lt;/h2&gt; &lt;p&gt;The &lt;a href="http://en.wikipedia.org/wiki/Lorem_ipsum" title="Lorem ipsum - Wikipedia, the free encyclopedia"&gt;Lorem ipsum&lt;/a&gt; text is typically composed of pseudo-Latin words. It is commonly used as placeholder text to examine or demonstrate the visual effects of various graphic design. Since the text itself is meaningless, the viewers are therefore able to focus on the overall layout without being attracted to the text.&lt;/p&gt;'</span>,</span><br><span class="line">    <span class="hljs-comment">//附件檔案</span></span><br><span class="line">    attachments: [ &#123;</span><br><span class="line">        filename: <span class="hljs-string">'text01.txt'</span>,</span><br><span class="line">        content: <span class="hljs-string">'聯候家上去工的調她者壓工，我笑它外有現，血有到同，民由快的重觀在保導然安作但。護見中城備長結現給都看面家銷先然非會生東一無中；內他的下來最書的從人聲觀說的用去生我，生節他活古視心放十壓心急我我們朋吃，毒素一要溫市歷很爾的房用聽調就層樹院少了紀苦客查標地主務所轉，職計急印形。團著先參那害沒造下至算活現興質美是為使！色社影；得良灣……克卻人過朋天點招？不族落過空出著樣家男，去細大如心發有出離問歡馬找事'</span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        filename: <span class="hljs-string">'unnamed.jpg'</span>,</span><br><span class="line">        path: <span class="hljs-string">'/Users/Weiju/Pictures/unnamed.jpg'</span></span><br><span class="line">    &#125;]</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//發送信件方法</span></span><br><span class="line">transporter.sendMail(options, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">error, info</span>)</span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span>(error)&#123;</span><br><span class="line">        <span class="hljs-built_in">console</span>.log(error);</span><br><span class="line">    &#125;<span class="hljs-keyword">else</span>&#123;</span><br><span class="line">        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'訊息發送: '</span> + info.response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>可以看到引入的 nodemailer 的是使用 nodemailer.createTransport 物件先建立好發信的服務 service 為 Gmail，並且透過 auth 建立 gmail 登入的帳號密碼，接著宣告一下收件者 （to）、副本（cc）、密件副本（bcc）、寄件者（from），當然還有主旨 (Subject)、內文(text, html)、附件檔案（attachments）</p>
-<p>最後發信結果，就如   package.json 上的 scripts.start 指令，下：</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$node email</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/54.png" alt></p>
-<p>此時，發送結果會如訊息所說，我們再看看信件收到的樣子，由於附件傳送了兩筆，可以看到  unnamed.jpg  及 text01.txt  已經接收到了</p>
-<p><img src="/images/nodejs/55.png" alt></p>
-<p>其中 text01.txt  是直接在程式上面輸入純文字，我們來看看是否有真的寫入：</p>
-<p><img src="/images/nodejs/56.png" alt></p>
-<p>更多應用，稍等回來～</p>
-<h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><p><a href="http://www.richyli.com/tool/loremipsum/" target="_blank" rel="noopener">http://www.richyli.com/tool/loremipsum/</a><br><a href="https://github.com/andris9/Nodemailer" target="_blank" rel="noopener">https://github.com/andris9/Nodemailer</a></p>
-
-
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-07-23T16:11:00.000Z">2017-07-24</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    5 分鐘 閱讀文 (大約 694 個字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/07/24/nodejs/nodejs-11-mysql-crud-update/">Node.js 系列學習日誌#11 - MySQL 操作: 更新</a>
-            
-        </h1>
-        <div class="content">
-            <p>上一篇完成了建立資料，本篇就來介紹更新的部分，我們在上一篇的使用者列表頁面上，每一筆資料的功能建立了一個『更新』的按鈕，如下：</p>
-<p>在這使用者列表的部分，表格列出的語法是：</p>
-<p><img src="/images/nodejs/67.png" alt></p>
-<p>其中也就是在跑 each 時，每筆資料塞入按鈕語法，在這邊我們設定點選的時候連結 /update 而後面再接一個編號參數 /#{user.id}：</p>
-<figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a(href='/update/#&#123;user.id&#125;', class='btn btn-warning') 更新</span><br></pre></td></tr></table></figure>
-<p>我們簡單看一下表格佈局如下：</p>
-<p><img src="/images/nodejs/47.png" alt></p>
-<p>並且繼續打開 app.js 檔案，放上 update 的操作</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="hljs-string">'/update/:id'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res</span>) </span>&#123;</span><br><span class="line">    pool.getConnection(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, connection</span>) </span>&#123;</span><br><span class="line">        connection.query(<span class="hljs-string">'SELECT * from users where id=?'</span>,[req.params.id],<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, rows, fields</span>) </span>&#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (err)</span><br><span class="line">                <span class="hljs-keyword">throw</span> err;</span><br><span class="line">            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'search is success.'</span>);</span><br><span class="line">            res.render(<span class="hljs-string">'create'</span>, &#123;</span><br><span class="line">                title : <span class="hljs-string">'Update user'</span>,</span><br><span class="line">                user : rows[<span class="hljs-number">0</span>]</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">        connection.release();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>在這邊先進入到 /update 頁面，預定在打開 update 時，會列出某一筆資料，因此在這邊會先用 sql 語法來查詢某一筆資料，而 id 的部分由網址列的參數取得，也就是 connection.query 的方法的第二參數，是取得網址的參數 [req.params.id] ，完成取得動作之後，顯示在 create 的頁面 （由於上一篇新增的頁面跟本篇的更新頁面欄位相同，所以用的是一樣的頁面）</p>
-<p>另外在 render 的參數多了一個 user: rows[0], 主要是用來判別是不是更新的資料，若有資料則是更新、若沒資料就是新增</p>
-<p><img src="/images/nodejs/48.png" alt></p>
-<p>每項  input 就用 user.[欄位] 將值帶入，顯示部分是：</p>
-<p><img src="/images/nodejs/49.png" alt></p>
-<p>我們按下儲存之後，將表單送到 /update，因此這邊要做  update 的操作，再度打開 app.js 新增</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">app.post(<span class="hljs-string">'/update'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res</span>) </span>&#123;</span><br><span class="line">    pool.getConnection(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, connection</span>) </span>&#123;</span><br><span class="line">        connection.query(<span class="hljs-string">'update users set ? where id = ?'</span>, [&#123;</span><br><span class="line">            id : req.body.user.id,</span><br><span class="line">            name : req.body.user.name,</span><br><span class="line">            description : req.body.user.description</span><br><span class="line">        &#125;,req.body.user.id], <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, fields</span>) </span>&#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (err)</span><br><span class="line">                <span class="hljs-keyword">throw</span> err;</span><br><span class="line">        &#125;);</span><br><span class="line">        connection.query(<span class="hljs-string">'SELECT * from users'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, rows, fields</span>) </span>&#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (err)</span><br><span class="line">                <span class="hljs-keyword">throw</span> err;</span><br><span class="line">            res.render(<span class="hljs-string">'user'</span>, &#123;</span><br><span class="line">                title : <span class="hljs-string">'使用者列表'</span>,</span><br><span class="line">                user : rows</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">        connection.release();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>其中以</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">connection.query(<span class="hljs-string">'update users set ? where id = ?'</span>, [&#123;</span><br><span class="line">    id : req.body.user.id,</span><br><span class="line">    name : req.body.user.name,</span><br><span class="line">    description : req.body.user.description</span><br><span class="line">&#125;,req.body.user.id], <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, fields</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (err)</span><br><span class="line">        <span class="hljs-keyword">throw</span> err;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>作為 update 的操作，在第二參數時，就是從表單傳送過來的資料，以陣列來表示，裏面每個欄位再以 key/value 呈現，然後最後再</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">connection.query(<span class="hljs-string">'SELECT * from users'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, rows, fields</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (err)</span><br><span class="line">        <span class="hljs-keyword">throw</span> err;</span><br><span class="line">    res.render(<span class="hljs-string">'user'</span>, &#123;</span><br><span class="line">        title : <span class="hljs-string">'使用者列表'</span>,</span><br><span class="line">        user : rows</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>新增完成後顯示最後的結果列到使用者列表</p>
-<p><img src="/images/nodejs/50.png" alt></p>
-<p>結果退到使用者列表：</p>
-<p><img src="/images/nodejs/51.png" alt></p>
-
-
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -530,9 +521,9 @@
             
             <li><a class="pagination-link has-text-black-ter" href="/page/11/">11</a></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/12/">12</a></li>
+            <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/13/">13</a></li>
+            <li><a class="pagination-link has-text-black-ter" href="/page/14/">14</a></li>
             
         </ul>
     </nav>
@@ -582,7 +573,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        64
+                        66
                     </p>
                 </div>
             </div>
@@ -647,7 +638,45 @@
         
         <article class="media">
             
-            <a href="/2019/04/19/r/r-textmining-01-ch01-2/" class="media-left">
+            <a href="/2019/04/20/r/r-textmining-02-ch02-2/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/r/cover7.png" alt="R語言文字探勘好好玩 - Ch2_採 Tidy 資料做情感分析 (2)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-20T08:32:00.000Z">2019-04-20</time></div>
+                    <a href="/2019/04/20/r/r-textmining-02-ch02-2/" class="has-link-black-ter is-size-6">R語言文字探勘好好玩 - Ch2_採 Tidy 資料做情感分析 (2)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/R/">R</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/19/r/r-textmining-02-ch02-1/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/r/cover7.png" alt="R語言文字探勘好好玩 - Ch2_採 Tidy 資料做情感分析 (1)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-19T12:24:00.000Z">2019-04-19</time></div>
+                    <a href="/2019/04/19/r/r-textmining-02-ch02-1/" class="has-link-black-ter is-size-6">R語言文字探勘好好玩 - Ch2_採 Tidy 資料做情感分析 (1)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/R/">R</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/18/r/r-textmining-01-ch01-2/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/r/cover6-1.png" alt="R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (2)">
                 </p>
@@ -655,8 +684,8 @@
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-19T15:34:00.000Z">2019-04-19</time></div>
-                    <a href="/2019/04/19/r/r-textmining-01-ch01-2/" class="has-link-black-ter is-size-6">R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (2)</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-18T15:34:00.000Z">2019-04-18</time></div>
+                    <a href="/2019/04/18/r/r-textmining-01-ch01-2/" class="has-link-black-ter is-size-6">R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (2)</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/R/">R</a>
                     </p>
@@ -695,44 +724,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-14T10:07:51.000Z">2019-03-14</time></div>
                     <a href="/2019/03/14/vuejs/vuejs-google-analysis/" class="has-link-black-ter is-size-6">在 Vue 使用 vue-analytics 套件設定 Google Analytics (GA) 追蹤診斷工具</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/03/12/web/ubuntu-nginx-restart-fail/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/web/20190312-5.png" alt="Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-12T15:00:00.000Z">2019-03-12</time></div>
-                    <a href="/2019/03/12/web/ubuntu-nginx-restart-fail/" class="has-link-black-ter is-size-6">Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/網站/">網站</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/03/06/vuejs/vuejs-googlesheets-api/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/vuejs/wolfe77.png" alt="Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-06T10:07:51.000Z">2019-03-06</time></div>
-                    <a href="/2019/03/06/vuejs/vuejs-googlesheets-api/" class="has-link-black-ter is-size-6">Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
                     </p>
@@ -793,7 +784,7 @@
                 <span class="level-item">R</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">8</span>
+                <span class="level-item tag">10</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Ruby/">
@@ -960,7 +951,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/R/">
                         <span class="tag">R</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">10</span>
                     </a>
                 </div>
                 
@@ -1229,7 +1220,7 @@
                 <span class="level-item">R</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">8</span>
+                <span class="level-item tag">10</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Ruby/">
@@ -1396,7 +1387,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/R/">
                         <span class="tag">R</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">10</span>
                     </a>
                 </div>
                 

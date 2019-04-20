@@ -156,6 +156,191 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-07-23T16:02:00.000Z">2017-07-24</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 分鐘 閱讀文 (大約 728 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/07/24/nodejs/nodejs-02-install/">Node.js 系列學習日誌#2 - Node.js 安裝配置</a>
+            
+        </h1>
+        <div class="content">
+            <p>Node.js 是一套使用了 Google V8 虛擬機來解釋 Javascript 語法，允許在後端運行 Javascript 的語法，發生在把頁面發送給 browser 之前的服務器上，所以要實現後台運行的 Javascript 語法，那麼語法要先被編譯後才可以正確執行。</p>
+<p>本章節會學習到</p>
+<ul>
+<li>安裝 Node.js</li>
+<li>驗證  Node.js 是否正確安裝</li>
+<li>建立基本 Node.js 程式</li>
+<li>啟動基本 Node.js 程式</li>
+<li>安全警示</li>
+<li>查看 npm 是否有安裝</li>
+</ul>
+<h2 id="安裝系統："><a href="#安裝系統：" class="headerlink" title="安裝系統："></a>安裝系統：</h2><p>首先，簡單的來安裝一下 Node.js ，在這裡示範的系統環境是 Windows XP 32bit，可以到 <a href="http://nodejs.org/" target="_blank" rel="noopener">http://nodejs.org/</a> 的首頁上下載安裝軟體</p>
+<ul>
+<li>進入 node.js 官方網站 <a href="http://nodejs.org/" target="_blank" rel="noopener">http://nodejs.org/</a> 點選 install 後, 會下載一個 node-v0.10.25-x86.msi 安裝檔案</li>
+</ul>
+<p><img src="/images/nodejs/2.png" alt></p>
+<ul>
+<li>點選安裝檔案後, 開始進行安裝</li>
+</ul>
+<p><img src="/images/nodejs/3.png" alt></p>
+<ul>
+<li>End-User License Agreement 的頁面, 勾選 “I accept the terms in the License Agreement” 核選方塊後, 點選 Next 進行下一步</li>
+</ul>
+<p><img src="/images/nodejs/4.png" alt></p>
+<ul>
+<li>可指定安裝路徑, 這裡就保持預設就行了, 確認後點選 Next (當然，要改變存放位置也是可以)</li>
+</ul>
+<p><img src="/images/nodejs/5.png" alt></p>
+<ul>
+<li>自訂安裝 Select the way you want features to be installed</li>
+</ul>
+<p><img src="/images/nodejs/6.png" alt></p>
+<ul>
+<li>安裝前的提醒</li>
+</ul>
+<p><img src="/images/nodejs/7.png" alt></p>
+<ul>
+<li>開始進行安裝 Node.js</li>
+</ul>
+<p><img src="/images/nodejs/8.png" alt></p>
+<ul>
+<li>完成安裝</li>
+</ul>
+<p><img src="/images/nodejs/9.png" alt></p>
+<h2 id="驗證-Node-js-正確安裝"><a href="#驗證-Node-js-正確安裝" class="headerlink" title="驗證 Node.js 正確安裝"></a>驗證 Node.js 正確安裝</h2><p>學習新的一套語言，就是要先學會將程式呈現一個簡單的文字顯示，因此不免俗的還是來一個萬年測試，先來看看安裝是否有成功。</p>
+<ul>
+<li>開啟命令提示字元，輸入 node</li>
+<li>輸入 12 + 34 ，檢查是否有回應 46 的答案，若有就代表成功囉。</li>
+</ul>
+<p><img src="/images/nodejs/10.png" alt></p>
+<h2 id="建立-Hello-world-的-Node-js-程式"><a href="#建立-Hello-world-的-Node-js-程式" class="headerlink" title="建立 Hello world 的 Node.js 程式"></a>建立 Hello world 的 Node.js 程式</h2><p>不管利用記事本或是會善用 IDE 做為開發的工具，建立一個 <code>my.js</code> 的檔案，輸入以下的語法</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">'http'</span>);</span><br><span class="line">http.createServer(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res</span>)</span>&#123;</span><br><span class="line">  res.writeHead(<span class="hljs-number">200</span>, &#123; <span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'text/html'</span> &#125;);</span><br><span class="line">  res.write(<span class="hljs-string">'&lt;h1&gt; Hello Helen, this is Node.js &lt;/h1&gt;'</span>);</span><br><span class="line">  res.end(<span class="hljs-string">'Hello world'</span>);</span><br><span class="line">&#125;).listen(<span class="hljs-number">3232</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">"HTTP Server is listening at port 3232"</span>);</span><br><span class="line"><span class="hljs-string">`</span></span><br></pre></td></tr></table></figure>
+<h3 id="開始執行啟動"><a href="#開始執行啟動" class="headerlink" title="開始執行啟動"></a>開始執行啟動</h3><p>接著打開命令提示字元，輸入 <code>node my.js</code><br>之後就會看到 <code>Http Server is listening at port 3232</code>，這就代表有成功啟動</p>
+<p><img src="/images/nodejs/11.png" alt></p>
+<h2 id="安全警示"><a href="#安全警示" class="headerlink" title="安全警示"></a>安全警示</h2><p>由於 node.js 是利用 google chrome v8 引擎執行, 會出現以下安全性警示，按下解除封鎖按鈕</p>
+<p><img src="/images/nodejs/12.png" alt></p>
+<p>馬上開起 browser，有出現以下的呈現結果，就是正常運行服務端的 javascript 喔！</p>
+<p><img src="/images/nodejs/13.png" alt></p>
+<p>如果想停止這個服務的話，在命令提示字元按下 CTRL + C 就將這個 port 停止服務就好了。</p>
+<p>Good，這樣就完成簡單的示範，接下來就可以慢慢建立比較複雜的應用程序囉。</p>
+
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-07-23T16:01:00.000Z">2017-07-24</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 分鐘 閱讀文 (大約 717 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/07/24/nodejs/nodejs-01-start/">Node.js 系列學習日誌#1 - 開始的開始，Node.js 簡介</a>
+            
+        </h1>
+        <div class="content">
+            <p>最近看了些書籍、電子書、網路爬文，一直都想寫個文章做個記錄，以免忘記，彙整一下所看、所聞、所實作的 Node.js 技術，如果有寫不好的地方也請多多指教囉</p>
+<p>這些年，Node.js 的議題越來越熱門了，而且快速的開發中，版本的升級也相當快，Node.js 是一個使用當前速度較快的 Javascript 引擎， 運行在服務端的開發平台。它使用了 Google 的 V8 虛擬機（Google Chrome 瀏覽器使用的 Javascript 執行環境），解析與執行 Javascript 語法，你可以想像是在運行 PHP, Puby, Python 一樣的服務端模式，只是根據 Node.js 的做法它不用像 PHP, Python, Ruby on rails 一樣安裝 Apache, Nginx 的 Http 服務器，因為它本身內建就有 Web server 支援。</p>
+<p>Node.js 它可以實現 Javascript 沒有完善的功能，比如說實現 Javascript 沒有的模組觀念、操作系統 API、網路通訊的功能。</p>
+<p>到底，Node.js 技術現在趨勢如何？我們可以看以下用 Google Trend 網頁分析 Node.js, ruby on rails, angular.js  的熱門搜尋變化，由這張圖看起來，大概是在 2013 年的時候，出現了交叉變化，Node.js 漸漸得越來越多人去了解它。由此圖看得出來，ruby on rails 有著驚人的表現，到這幾年趨於平緩，但我覺得每個語言都有它表現不凡的技術與能力，其他語言也互相學習技術上優點避掉缺點。本系列將學習  Node.js 的應用，一起來探討探討。</p>
+<p><img src="/images/nodejs/1.PNG" alt="趨勢圖"></p>
+<p>網址在此：</p>
+<p><a href="https://www.google.com.tw/trends/explore#q=node.js%2C%20ruby%20on%20rails%2C%20angular.js&amp;cmpt=q" target="_blank" rel="noopener">https://www.google.com.tw/trends/explore#q=node.js%2C%20ruby%20on%20rails%2C%20angular.js&amp;cmpt=q</a></p>
+<h3 id="Node-js-它不是"><a href="#Node-js-它不是" class="headerlink" title="Node.js 它不是"></a>Node.js 它不是</h3><p>我們都知道學習一套語言會需要知道是什麼樣的一套語言，或是能達到什麼樣的處理，但是更需要反向思考瞭解的是，它不是哪些領域的，或者它不能做到的範圍</p>
+<ul>
+<li>Node.js 不是一種獨立語言</li>
+<li>Node.js 不是一個 Javascript 框架 (eg. Rails, Django, CakePHP)</li>
+<li>Node.js 不是 Client-Side (eg. jQuery, YUI, Extjs)</li>
+<li>Node.js 不是多執行緒</li>
+</ul>
+<h3 id="Node-js-能做些什麼"><a href="#Node-js-能做些什麼" class="headerlink" title="Node.js 能做些什麼"></a>Node.js 能做些什麼</h3><h4 id="Node-js-不只是能做一個網站，它可以開發一些："><a href="#Node-js-不只是能做一個網站，它可以開發一些：" class="headerlink" title="Node.js 不只是能做一個網站，它可以開發一些："></a>Node.js 不只是能做一個網站，它可以開發一些：</h4><ul>
+<li>檔案上傳工具</li>
+<li>社群網路的大規模網站</li>
+<li>Websocket 服務器 (例如：聊天室)</li>
+<li>可以處理複雜邏輯的網站</li>
+<li>命令行工具</li>
+<li>交互式終端程式</li>
+<li>JSON 的 API</li>
+<li>Javascript 編輯器</li>
+<li>單元測試工具</li>
+</ul>
+<p>今天就介紹到這裡，待續…</p>
+
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2017-04-09T11:41:38.000Z">2017-04-09</time>
                 
                 <div class="level-item">
@@ -335,11 +520,11 @@
 <h2 id="安裝-Meteor"><a href="#安裝-Meteor" class="headerlink" title="安裝 Meteor"></a>安裝 Meteor</h2><p>安裝 Meteor 的方式在 terminal 輸入以下命令：</p>
 <p><code>curl https://install.meteor.com | sh</code></p>
 <p>安裝完之後你可以再次輸入 <code>meteor</code> 後，執行會說明目前不是在 meteor 專案下，所以目前還只能確認 Meteor 安裝成功並且還會指引你建立 Meteor 專案的指令</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span> meteor</span><br><span class="line">  run: You\'re not in a Meteor project directory.</span><br><span class="line"></span><br><span class="line">  To create a new Meteor project:</span><br><span class="line">    meteor create &lt;project name&gt;</span><br><span class="line">  For example:</span><br><span class="line">    meteor create myapp</span><br><span class="line"></span><br><span class="line">  For more help, see 'meteor --help'.</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> meteor</span></span><br><span class="line">  run: You\'re not in a Meteor project directory.</span><br><span class="line"></span><br><span class="line">  To create a new Meteor project:</span><br><span class="line">    meteor create &lt;project name&gt;</span><br><span class="line">  For example:</span><br><span class="line">    meteor create myapp</span><br><span class="line"></span><br><span class="line">  For more help, see 'meteor --help'.</span><br></pre></td></tr></table></figure>
 <h2 id="建立新的專案"><a href="#建立新的專案" class="headerlink" title="建立新的專案"></a>建立新的專案</h2><p>裝好 meteor 後，我們建立一個新的專案，建立時使用 meteor 的工具</p>
 <p><code>meteor create meteor_demo</code></p>
 <p>按照命令就會把 meteor 建立基礎的檔案結構，建立完成後就會有一個 <code>meteor_demo</code> 的資料夾，並且說明如何執行應用程式</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span> meteor create meteor_demo</span><br><span class="line">  Created a new Meteor app in 'meteor_demo'.</span><br><span class="line"></span><br><span class="line">  To run your new app:</span><br><span class="line">    cd meteor_demo</span><br><span class="line">    meteor npm install</span><br><span class="line">    meteor</span><br><span class="line"></span><br><span class="line">  If you are new to Meteor, try some of the learning resources here:</span><br><span class="line">    https://www.meteor.com/learn</span><br><span class="line"></span><br><span class="line">  meteor create --bare to create an empty app.</span><br><span class="line">  meteor create --full to create a scaffolded app.</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> meteor create meteor_demo</span></span><br><span class="line">  Created a new Meteor app in 'meteor_demo'.</span><br><span class="line"></span><br><span class="line">  To run your new app:</span><br><span class="line">    cd meteor_demo</span><br><span class="line">    meteor npm install</span><br><span class="line">    meteor</span><br><span class="line"></span><br><span class="line">  If you are new to Meteor, try some of the learning resources here:</span><br><span class="line">    https://www.meteor.com/learn</span><br><span class="line"></span><br><span class="line">  meteor create --bare to create an empty app.</span><br><span class="line">  meteor create --full to create a scaffolded app.</span><br></pre></td></tr></table></figure>
 <p>也包含以下的檔案與資料夾</p>
 <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">drwxr-xr-x   7 User  staff   238 Feb 12 08:40 .</span><br><span class="line">drwxr-xr-x  49 User  staff  1666 Feb 12 08:40 ..</span><br><span class="line">drwxr-xr-x  10 User  staff   340 Feb 12 08:40 .meteor</span><br><span class="line">drwxr-xr-x   5 User  staff   170 Feb 12 08:40 client</span><br><span class="line">-rw-r--r--   1 User  staff   183 Feb 12 08:40 package.json</span><br><span class="line">drwxr-xr-x   3 User  staff   102 Feb 12 08:40 server</span><br></pre></td></tr></table></figure>
 <p>接著，我們就依照他的指引安裝一些套件</p>
@@ -370,63 +555,6 @@
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2015-01-31T14:35:40.000Z">2015-01-31</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/macbook/">macbook</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    幾秒 閱讀文 (大約 105 個字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2015/01/31/mac/2014-10-11-mac-kill-port/">Macbook - 移除現有被佔住的 port</a>
-            
-        </h1>
-        <div class="content">
-            <p>當要啟動服務的時候，但是電腦上有執行其他服務而被佔住 port ，你可以這麼做，先查詢之後將找到的 port 移除</p>
-<p>使用 netstate 查詢某一 port</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$netstat</span> -anp tcp | grep 8080</span><br></pre></td></tr></table></figure>
-<p>如果 netstat 查不到或不支援，那麼就用以下指令查詢</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$lsof</span> -i tcp: 8080</span><br></pre></td></tr></table></figure>
-<p>最後，查到的結果就用以下方式移除即可</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$kill</span> -9 &lt;PID&gt;</span><br></pre></td></tr></table></figure>
-
-
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -434,7 +562,7 @@
         <div class="pagination-previous">
             <a class="is-flex-grow has-text-black-ter" href="/page/12/">上一頁</a>
         </div>
-        <div class="pagination-next is-invisible is-hidden-mobile">
+        <div class="pagination-next">
             <a class="is-flex-grow has-text-black-ter" href="/page/14/">下一頁</a>
         </div>
         <ul class="pagination-list is-hidden-mobile">
@@ -446,6 +574,8 @@
             <li><a class="pagination-link has-text-black-ter" href="/page/12/">12</a></li>
             
             <li><a class="pagination-link is-current" href="/page/13/">13</a></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/page/14/">14</a></li>
             
         </ul>
     </nav>
@@ -495,7 +625,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        64
+                        66
                     </p>
                 </div>
             </div>
@@ -560,7 +690,45 @@
         
         <article class="media">
             
-            <a href="/2019/04/19/r/r-textmining-01-ch01-2/" class="media-left">
+            <a href="/2019/04/20/r/r-textmining-02-ch02-2/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/r/cover7.png" alt="R語言文字探勘好好玩 - Ch2_採 Tidy 資料做情感分析 (2)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-20T08:32:00.000Z">2019-04-20</time></div>
+                    <a href="/2019/04/20/r/r-textmining-02-ch02-2/" class="has-link-black-ter is-size-6">R語言文字探勘好好玩 - Ch2_採 Tidy 資料做情感分析 (2)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/R/">R</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/19/r/r-textmining-02-ch02-1/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/r/cover7.png" alt="R語言文字探勘好好玩 - Ch2_採 Tidy 資料做情感分析 (1)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-19T12:24:00.000Z">2019-04-19</time></div>
+                    <a href="/2019/04/19/r/r-textmining-02-ch02-1/" class="has-link-black-ter is-size-6">R語言文字探勘好好玩 - Ch2_採 Tidy 資料做情感分析 (1)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/R/">R</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/18/r/r-textmining-01-ch01-2/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/r/cover6-1.png" alt="R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (2)">
                 </p>
@@ -568,8 +736,8 @@
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-19T15:34:00.000Z">2019-04-19</time></div>
-                    <a href="/2019/04/19/r/r-textmining-01-ch01-2/" class="has-link-black-ter is-size-6">R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (2)</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-18T15:34:00.000Z">2019-04-18</time></div>
+                    <a href="/2019/04/18/r/r-textmining-01-ch01-2/" class="has-link-black-ter is-size-6">R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (2)</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/R/">R</a>
                     </p>
@@ -608,44 +776,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-14T10:07:51.000Z">2019-03-14</time></div>
                     <a href="/2019/03/14/vuejs/vuejs-google-analysis/" class="has-link-black-ter is-size-6">在 Vue 使用 vue-analytics 套件設定 Google Analytics (GA) 追蹤診斷工具</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/03/12/web/ubuntu-nginx-restart-fail/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/web/20190312-5.png" alt="Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-12T15:00:00.000Z">2019-03-12</time></div>
-                    <a href="/2019/03/12/web/ubuntu-nginx-restart-fail/" class="has-link-black-ter is-size-6">Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/網站/">網站</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/03/06/vuejs/vuejs-googlesheets-api/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/vuejs/wolfe77.png" alt="Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-06T10:07:51.000Z">2019-03-06</time></div>
-                    <a href="/2019/03/06/vuejs/vuejs-googlesheets-api/" class="has-link-black-ter is-size-6">Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
                     </p>
@@ -706,7 +836,7 @@
                 <span class="level-item">R</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">8</span>
+                <span class="level-item tag">10</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Ruby/">
@@ -873,7 +1003,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/R/">
                         <span class="tag">R</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">10</span>
                     </a>
                 </div>
                 
@@ -1142,7 +1272,7 @@
                 <span class="level-item">R</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">8</span>
+                <span class="level-item tag">10</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Ruby/">
@@ -1309,7 +1439,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/R/">
                         <span class="tag">R</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">10</span>
                     </a>
                 </div>
                 

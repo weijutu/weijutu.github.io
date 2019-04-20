@@ -153,6 +153,145 @@
     <div class="card">
     
     <div class="card-image">
+        <a href="/2019/03/12/web/ubuntu-nginx-restart-fail/" class="image is-7by1">
+            <img class="thumbnail" src="/images/web/20190312-5.png" alt="Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-03-12T15:00:00.000Z">2019-03-12</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/網站/">網站</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 分鐘 閱讀文 (大約 351 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/03/12/web/ubuntu-nginx-restart-fail/">Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題</a>
+            
+        </h1>
+        <div class="content">
+            <p>今天在 Ubuntu 14.04 安裝了 nginx，真沒想到執行時 <code>sudo service nginx restart</code> 直接顯示 fail 問題 (還沒開始就踩到坑了)。只能說 Google 是大神，能在苦惱之中找到正確的解決方法。</p>
+<p><img src="/images/web/20190312-1.png" alt></p>
+<p>這個錯誤訊息也太少了，後來找到可以用 <code>sudo nginx -t</code> 測試配置文件的語法狀況。但是更令人驚呆的事，訊息也沒有重大錯誤，第一行寫 <code>is ok</code> 第二行 <code>is successful</code>。這….仍然沒解決到問題!! </p>
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/03/12/web/ubuntu-nginx-restart-fail/#more">繼續閱讀</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-image">
+        <a href="/2019/03/06/vuejs/vuejs-googlesheets-api/" class="image is-7by1">
+            <img class="thumbnail" src="/images/vuejs/wolfe77.png" alt="Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-03-06T10:07:51.000Z">2019-03-06</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    12 分鐘 閱讀文 (大約 1751 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/03/06/vuejs/vuejs-googlesheets-api/">Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫</a>
+            
+        </h1>
+        <div class="content">
+            <p>本次實作是透過 Google Sheets 作為小型資料庫，然後使用Vue 前端語法做資料的讀取，而且無需透過後端程式來插手。</p>
+<h2 id="學習內容大綱"><a href="#學習內容大綱" class="headerlink" title="學習內容大綱"></a>學習內容大綱</h2><ol>
+<li>初始化建立 Vue 專案</li>
+<li>建立 Google Sheets 試算表</li>
+<li>啟動你的 Google Sheets API 存取</li>
+<li>準備 Vue 前端 Google Sheets API 執行讀取<br>4.1 安裝套件 VueGapi 與使用</li>
+<li>執行結果</li>
+</ol>
+<h2 id="初始化建立-Vue-專案"><a href="#初始化建立-Vue-專案" class="headerlink" title="初始化建立 Vue 專案"></a>初始化建立 Vue 專案</h2><p>首先一開始我們先建立 webpack Vue 專案，指令如下：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vue init webpack vue-googlesheets-api</span><br></pre></td></tr></table></figure>
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/03/06/vuejs/vuejs-googlesheets-api/#more">繼續閱讀</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-image">
         <a href="/2019/02/27/tools/postman-api-tools/" class="image is-7by1">
             <img class="thumbnail" src="/images/tools/1_QOx_tPV5wJnhTzAGhfIiLA.png" alt="Postman - Restful API 測試管理工具">
         </a>
@@ -208,83 +347,6 @@
                 </div>
             </div>
         </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Ruby/">Ruby</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    1 分鐘 閱讀文 (大約 204 個字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/">在 Mac OSX 使用 RVM 升級 Ruby V2.5.1</a>
-            
-        </h1>
-        <div class="content">
-            <p>RVM 是一套 Ruby 版本的管理工具，這裡頭包含 Ruby 的版本管理和 Gem 庫管理。本篇裡面使用 RVM 工具進行 Ruby 的升級。</p>
-<h2 id="RVM-Ruby-Version-Manager-安裝"><a href="#RVM-Ruby-Version-Manager-安裝" class="headerlink" title="RVM (Ruby Version Manager) 安裝"></a>RVM (Ruby Version Manager) 安裝</h2><ol>
-<li>RVM安装</li>
-</ol>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span> curl -L get.rvm.io | bash -s stable</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>是否有完成安裝 RVM </li>
-</ol>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span> rvm -v</span><br></pre></td></tr></table></figure>
-<p>結果顯示</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rvm 1.29.4 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]</span><br></pre></td></tr></table></figure>
-<h2 id="使用-RVM-升級-Ruby"><a href="#使用-RVM-升級-Ruby" class="headerlink" title="使用 RVM 升級 Ruby"></a>使用 RVM 升級 Ruby</h2><ol>
-<li>顯示目前的 Ruby 版本</li>
-</ol>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span> ruby -v</span><br></pre></td></tr></table></figure>
-<p>顯示結果</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby 2.0.0p648 (2015-12-16 revision 53162) [universal.x86_64-darwin16]</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>安装 Ruby 2.5.1</li>
-</ol>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rvm install 2.5.1</span><br></pre></td></tr></table></figure>
-<p>安裝完畢之後，再用 <code>ruby -v</code> 檢查看看，是不是已經換成下面顯示的結果一樣已完成升級。</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-darwin16]</span><br></pre></td></tr></table></figure>
-<p>結果</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Linking /usr/local/Cellar/ruby/2.5.1... 3293 symlinks created</span><br></pre></td></tr></table></figure>
-<p>那麼，這樣子就安裝完畢了。</p>
-<p>參考：<br><a href="https://flinhong.com/2017/10/26/upgrade-ruby-on-mac/" target="_blank" rel="noopener">https://flinhong.com/2017/10/26/upgrade-ruby-on-mac/</a></p>
-
-
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        
         
         
     </div>
@@ -372,17 +434,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-07-26T14:07:51.000Z">2018-07-26</time>
+                <time class="level-item has-text-grey" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/網站/">網站</a>
+                <a class="has-link-grey -link" href="/categories/Ruby/">Ruby</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    9 分鐘 閱讀文 (大約 1360 個字)
+                    1 分鐘 閱讀文 (大約 204 個字)
                 </span>
                 
                 
@@ -391,12 +453,38 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2018/07/26/web/how-to-deply-redmine-to-heroku/">部署 Redmine 專案管理追蹤系統到 Heroku 平台</a>
+                <a class="has-link-black-ter" href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/">在 Mac OSX 使用 RVM 升級 Ruby V2.5.1</a>
             
         </h1>
         <div class="content">
-            <p>在本篇的介紹使用 Redmine 的好工具，部署到 Heroku 平台上面，屆時就能省去不少設定網路組態，推上 Heroku 後得到的網址便能直接透過瀏覽器開啟 Redmine 應用程式。</p>
-<h2 id="Redmin-介紹"><a href="#Redmin-介紹" class="headerlink" title="Redmin 介紹"></a>Redmin 介紹</h2><p>Redmine 是一套開源的專案管理追蹤系統，大部分都是用來做系統開發的進度追蹤、問題的管理，在很多專案上的問題追蹤、通知、管理和版本管控都非常方便，替你的工作流程幫助非常大。而這套平台的操作也相當的靈活，甚至還可以設定開放 restful api 方式，可以用程式來呼叫使用，能讓使用這套平台的團隊建立一個良好的管理機制。</p>
+            <p>RVM 是一套 Ruby 版本的管理工具，這裡頭包含 Ruby 的版本管理和 Gem 庫管理。本篇裡面使用 RVM 工具進行 Ruby 的升級。</p>
+<h2 id="RVM-Ruby-Version-Manager-安裝"><a href="#RVM-Ruby-Version-Manager-安裝" class="headerlink" title="RVM (Ruby Version Manager) 安裝"></a>RVM (Ruby Version Manager) 安裝</h2><ol>
+<li>RVM安装</li>
+</ol>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> curl -L get.rvm.io | bash -s stable</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>是否有完成安裝 RVM </li>
+</ol>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> rvm -v</span></span><br></pre></td></tr></table></figure>
+<p>結果顯示</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rvm 1.29.4 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]</span><br></pre></td></tr></table></figure>
+<h2 id="使用-RVM-升級-Ruby"><a href="#使用-RVM-升級-Ruby" class="headerlink" title="使用 RVM 升級 Ruby"></a>使用 RVM 升級 Ruby</h2><ol>
+<li>顯示目前的 Ruby 版本</li>
+</ol>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> ruby -v</span></span><br></pre></td></tr></table></figure>
+<p>顯示結果</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby 2.0.0p648 (2015-12-16 revision 53162) [universal.x86_64-darwin16]</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>安装 Ruby 2.5.1</li>
+</ol>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rvm install 2.5.1</span><br></pre></td></tr></table></figure>
+<p>安裝完畢之後，再用 <code>ruby -v</code> 檢查看看，是不是已經換成下面顯示的結果一樣已完成升級。</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-darwin16]</span><br></pre></td></tr></table></figure>
+<p>結果</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Linking /usr/local/Cellar/ruby/2.5.1... 3293 symlinks created</span><br></pre></td></tr></table></figure>
+<p>那麼，這樣子就安裝完畢了。</p>
+<p>參考：<br><a href="https://flinhong.com/2017/10/26/upgrade-ruby-on-mac/" target="_blank" rel="noopener">https://flinhong.com/2017/10/26/upgrade-ruby-on-mac/</a></p>
+
 
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
@@ -405,73 +493,6 @@
             </script>
         </div>
         
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/07/26/web/how-to-deply-redmine-to-heroku/#more">繼續閱讀</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-07-20T10:07:51.000Z">2018-07-20</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分鐘 閱讀文 (大約 288 個字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/07/20/vuejs/vuejs-parent-child-value/">Vue 父組件與子組件之間的資料傳值方法</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="父組件傳值給子組件-使用-props-屬性"><a href="#父組件傳值給子組件-使用-props-屬性" class="headerlink" title="父組件傳值給子組件 (使用 props 屬性)"></a>父組件傳值給子組件 (使用 props 屬性)</h1><p>當需要做動態的綁定將父組件的資料傳給子組件的方式是 props，而 props 是單向傳遞<br>引入 <code>issue-create</code> 組件 (props 需要轉換相對應的 kebab-case (短橫線隔開) 方式命名</p>
-<h2 id="父組件"><a href="#父組件" class="headerlink" title="父組件"></a>父組件</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;template lang=&quot;pug&quot;&gt;</span><br><span class="line">  div.dvIssue</span><br><span class="line">    issue-create(:info=&quot;info&quot;)</span><br><span class="line">&lt;/template&gt;	</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;coffee&quot;&gt;</span><br><span class="line">import IssueCreate from &apos;@/IssueCreate&apos;</span><br><span class="line">export default </span><br><span class="line">  name: &apos;IssueShow&apos;</span><br><span class="line">  components: &#123; </span><br><span class="line">    IssueCreate</span><br><span class="line">  &#125;</span><br><span class="line">  data: ()-&gt;</span><br><span class="line">    info: </span><br><span class="line">      msgVal: &apos;abc&apos;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/07/20/vuejs/vuejs-parent-child-value/#more">繼續閱讀</a>
-                </div>
-            </div>
-        </div>
         
         
     </div>
@@ -504,7 +525,7 @@
             
             <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/13/">13</a></li>
+            <li><a class="pagination-link has-text-black-ter" href="/page/14/">14</a></li>
             
         </ul>
     </nav>
@@ -554,7 +575,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        64
+                        66
                     </p>
                 </div>
             </div>
@@ -619,7 +640,45 @@
         
         <article class="media">
             
-            <a href="/2019/04/19/r/r-textmining-01-ch01-2/" class="media-left">
+            <a href="/2019/04/20/r/r-textmining-02-ch02-2/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/r/cover7.png" alt="R語言文字探勘好好玩 - Ch2_採 Tidy 資料做情感分析 (2)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-20T08:32:00.000Z">2019-04-20</time></div>
+                    <a href="/2019/04/20/r/r-textmining-02-ch02-2/" class="has-link-black-ter is-size-6">R語言文字探勘好好玩 - Ch2_採 Tidy 資料做情感分析 (2)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/R/">R</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/19/r/r-textmining-02-ch02-1/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/r/cover7.png" alt="R語言文字探勘好好玩 - Ch2_採 Tidy 資料做情感分析 (1)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-19T12:24:00.000Z">2019-04-19</time></div>
+                    <a href="/2019/04/19/r/r-textmining-02-ch02-1/" class="has-link-black-ter is-size-6">R語言文字探勘好好玩 - Ch2_採 Tidy 資料做情感分析 (1)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/R/">R</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/18/r/r-textmining-01-ch01-2/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/r/cover6-1.png" alt="R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (2)">
                 </p>
@@ -627,8 +686,8 @@
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-19T15:34:00.000Z">2019-04-19</time></div>
-                    <a href="/2019/04/19/r/r-textmining-01-ch01-2/" class="has-link-black-ter is-size-6">R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (2)</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-18T15:34:00.000Z">2019-04-18</time></div>
+                    <a href="/2019/04/18/r/r-textmining-01-ch01-2/" class="has-link-black-ter is-size-6">R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (2)</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/R/">R</a>
                     </p>
@@ -667,44 +726,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-14T10:07:51.000Z">2019-03-14</time></div>
                     <a href="/2019/03/14/vuejs/vuejs-google-analysis/" class="has-link-black-ter is-size-6">在 Vue 使用 vue-analytics 套件設定 Google Analytics (GA) 追蹤診斷工具</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/03/12/web/ubuntu-nginx-restart-fail/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/web/20190312-5.png" alt="Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-12T15:00:00.000Z">2019-03-12</time></div>
-                    <a href="/2019/03/12/web/ubuntu-nginx-restart-fail/" class="has-link-black-ter is-size-6">Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/網站/">網站</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/03/06/vuejs/vuejs-googlesheets-api/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/vuejs/wolfe77.png" alt="Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-06T10:07:51.000Z">2019-03-06</time></div>
-                    <a href="/2019/03/06/vuejs/vuejs-googlesheets-api/" class="has-link-black-ter is-size-6">Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
                     </p>
@@ -765,7 +786,7 @@
                 <span class="level-item">R</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">8</span>
+                <span class="level-item tag">10</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Ruby/">
@@ -932,7 +953,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/R/">
                         <span class="tag">R</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">10</span>
                     </a>
                 </div>
                 
@@ -1201,7 +1222,7 @@
                 <span class="level-item">R</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">8</span>
+                <span class="level-item tag">10</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Ruby/">
@@ -1368,7 +1389,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/R/">
                         <span class="tag">R</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">10</span>
                     </a>
                 </div>
                 

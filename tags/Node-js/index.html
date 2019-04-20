@@ -404,7 +404,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分鐘 閱讀文 (大約 409 個字)
+                    4 分鐘 閱讀文 (大約 556 個字)
                 </span>
                 
                 
@@ -413,33 +413,33 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2017/07/26/nodejs/nodejs-27-forever/">Node.js 系列學習日誌#27 - forever 讓程式保持執行狀態</a>
+                <a class="has-link-black-ter" href="/2017/07/26/nodejs/nodejs-28-rest/">Node.js 系列學習日誌#28 - REST 路由規則</a>
             
         </h1>
         <div class="content">
-            <p>程式準備要部署上線時，就會面臨到執行程式的方式，伺服器的管理，是不是能有一個運行 Node.js 程式，並且有個工具處理這件事情。<br>forever 可以作為保持運行的狀態，管理 Node.js 程式服務，在 forever 進程之下，建立子進程，執行啟動與停止的命令相當簡單。<br>更特別的是，經常我們在寫 Node.js 的時候，每次更動的檔案時都需要再重新執行啟動服務的指令 (例如：node app.js)，而這個工具是當每次更新程式的時候，它會自動重新啟動服務，更方便許多了呢！</p>
-<p>這是官方的描述：（<a href="https://github.com/nodejitsu/forever）" target="_blank" rel="noopener">https://github.com/nodejitsu/forever）</a></p>
-<p>A simple CLI tool for ensuring that a given script runs continuously (i.e. forever).</p>
-<h3 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 一般建議加上 -g 將 forever 全域安裝</span><br><span class="line">$[sudo] npm install forever -g</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/118.png" alt></p>
-<p>當然若你要在某個特定目錄下安裝也是可以</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$cd /path/projects/abc</span><br><span class="line">$[sudo] npm install forever</span><br></pre></td></tr></table></figure>
-<h3 id="指令的幫助"><a href="#指令的幫助" class="headerlink" title="指令的幫助"></a>指令的幫助</h3><p>可以透過以下指令列出說明</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever —help</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/119.png" alt></p>
-<h3 id="顯示所有運行的服務"><a href="#顯示所有運行的服務" class="headerlink" title="顯示所有運行的服務"></a>顯示所有運行的服務</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever list</span><br></pre></td></tr></table></figure>
-<h3 id="啟動"><a href="#啟動" class="headerlink" title="啟動"></a>啟動</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever start app.js</span><br></pre></td></tr></table></figure>
-<h3 id="停止操作"><a href="#停止操作" class="headerlink" title="停止操作"></a>停止操作</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever stopall</span><br></pre></td></tr></table></figure>
-<h3 id="停止某一個程式專案"><a href="#停止某一個程式專案" class="headerlink" title="停止某一個程式專案"></a>停止某一個程式專案</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever stop app.js</span><br></pre></td></tr></table></figure>
-<h3 id="實作一個簡單運用"><a href="#實作一個簡單運用" class="headerlink" title="實作一個簡單運用"></a>實作一個簡單運用</h3><p>我們先用 express 這個框架建一個簡單的網站</p>
-<p><img src="/images/nodejs/120.png" alt></p>
-<h3 id="啟動程式"><a href="#啟動程式" class="headerlink" title="啟動程式"></a>啟動程式</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever start app.js</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/121.png" alt></p>
-<h3 id="forever-列表清單"><a href="#forever-列表清單" class="headerlink" title="forever  列表清單"></a>forever  列表清單</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever list</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/122.png" alt></p>
-<p>可以看到紫色部分，就是在放 log file 的路徑</p>
-<h3 id="關閉進程"><a href="#關閉進程" class="headerlink" title="關閉進程"></a>關閉進程</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever stop app.js</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/123.png" alt></p>
+            <p>今天我們使用 express 框架介紹一下 REST  路由規則，REST 是一種  http 協定的網路應用，http 提供了八種方法使用：</p>
+<ul>
+<li><p>OPTIONS：這個方法可使伺服器傳回該資源所支援的所有HTTP請求方法。用<code>*</code>來代替資源名稱，向Web伺服器傳送OPTIONS請求，可以測試伺服器功能是否正常運作。</p>
+</li>
+<li><p>HEAD：與GET方法一樣，都是向伺服器發出指定資源的請求。只不過伺服器將不傳回資源的本文部份。它的好處在於，使用這個方法可以在不必傳輸全部內容的情況下，就可以獲取其中「關於該資源的資訊」（元資訊或稱元資料）。</p>
+</li>
+<li><p>GET：向指定的資源發出「顯示」請求。使用GET方法應該只用在讀取資料，而不應當被用於產生「副作用」的操作中，例如在Web Application中。其中一個原因是GET可能會被網路蜘蛛等隨意存取。參見安全方法</p>
+</li>
+<li><p>POST：向指定資源提交資料，請求伺服器進行處理（例如提交表單或者上傳檔案）。資料被包含在請求本文中。這個請求可能會建立新的資源或修改現有資源，或二者皆有。</p>
+</li>
+<li><p>PUT：向指定資源位置上傳其最新內容。</p>
+</li>
+<li><p>DELETE：請求伺服器刪除Request-URI所標識的資源。</p>
+</li>
+<li><p>TRACE：回顯伺服器收到的請求，主要用於測試或診斷。</p>
+</li>
+<li><p>CONNECT：HTTP/1.1協定中預留給能夠將連線改為管道方式的代理伺服器。通常用於SSL加密伺服器的連結（經由非加密的HTTP代理伺服器）</p>
+</li>
+</ul>
+<p>而 express 網頁框架也針對 http 請求方法設計路由的函數：</p>
+<p><img src="/images/nodejs/124.png" alt></p>
+<p>通常在設計 rest 時，常用的是 get (取得), post (新增), put (更新), delete (刪除)</p>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE" target="_blank" rel="noopener">http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE</a></p>
 
 
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -477,7 +477,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分鐘 閱讀文 (大約 556 個字)
+                    3 分鐘 閱讀文 (大約 409 個字)
                 </span>
                 
                 
@@ -486,33 +486,33 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2017/07/26/nodejs/nodejs-28-rest/">Node.js 系列學習日誌#28 - REST 路由規則</a>
+                <a class="has-link-black-ter" href="/2017/07/26/nodejs/nodejs-27-forever/">Node.js 系列學習日誌#27 - forever 讓程式保持執行狀態</a>
             
         </h1>
         <div class="content">
-            <p>今天我們使用 express 框架介紹一下 REST  路由規則，REST 是一種  http 協定的網路應用，http 提供了八種方法使用：</p>
-<ul>
-<li><p>OPTIONS：這個方法可使伺服器傳回該資源所支援的所有HTTP請求方法。用<code>*</code>來代替資源名稱，向Web伺服器傳送OPTIONS請求，可以測試伺服器功能是否正常運作。</p>
-</li>
-<li><p>HEAD：與GET方法一樣，都是向伺服器發出指定資源的請求。只不過伺服器將不傳回資源的本文部份。它的好處在於，使用這個方法可以在不必傳輸全部內容的情況下，就可以獲取其中「關於該資源的資訊」（元資訊或稱元資料）。</p>
-</li>
-<li><p>GET：向指定的資源發出「顯示」請求。使用GET方法應該只用在讀取資料，而不應當被用於產生「副作用」的操作中，例如在Web Application中。其中一個原因是GET可能會被網路蜘蛛等隨意存取。參見安全方法</p>
-</li>
-<li><p>POST：向指定資源提交資料，請求伺服器進行處理（例如提交表單或者上傳檔案）。資料被包含在請求本文中。這個請求可能會建立新的資源或修改現有資源，或二者皆有。</p>
-</li>
-<li><p>PUT：向指定資源位置上傳其最新內容。</p>
-</li>
-<li><p>DELETE：請求伺服器刪除Request-URI所標識的資源。</p>
-</li>
-<li><p>TRACE：回顯伺服器收到的請求，主要用於測試或診斷。</p>
-</li>
-<li><p>CONNECT：HTTP/1.1協定中預留給能夠將連線改為管道方式的代理伺服器。通常用於SSL加密伺服器的連結（經由非加密的HTTP代理伺服器）</p>
-</li>
-</ul>
-<p>而 express 網頁框架也針對 http 請求方法設計路由的函數：</p>
-<p><img src="/images/nodejs/124.png" alt></p>
-<p>通常在設計 rest 時，常用的是 get (取得), post (新增), put (更新), delete (刪除)</p>
-<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE" target="_blank" rel="noopener">http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE</a></p>
+            <p>程式準備要部署上線時，就會面臨到執行程式的方式，伺服器的管理，是不是能有一個運行 Node.js 程式，並且有個工具處理這件事情。<br>forever 可以作為保持運行的狀態，管理 Node.js 程式服務，在 forever 進程之下，建立子進程，執行啟動與停止的命令相當簡單。<br>更特別的是，經常我們在寫 Node.js 的時候，每次更動的檔案時都需要再重新執行啟動服務的指令 (例如：node app.js)，而這個工具是當每次更新程式的時候，它會自動重新啟動服務，更方便許多了呢！</p>
+<p>這是官方的描述：（<a href="https://github.com/nodejitsu/forever）" target="_blank" rel="noopener">https://github.com/nodejitsu/forever）</a></p>
+<p>A simple CLI tool for ensuring that a given script runs continuously (i.e. forever).</p>
+<h3 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 一般建議加上 -g 將 forever 全域安裝</span><br><span class="line">$[sudo] npm install forever -g</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/118.png" alt></p>
+<p>當然若你要在某個特定目錄下安裝也是可以</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$cd /path/projects/abc</span><br><span class="line">$[sudo] npm install forever</span><br></pre></td></tr></table></figure>
+<h3 id="指令的幫助"><a href="#指令的幫助" class="headerlink" title="指令的幫助"></a>指令的幫助</h3><p>可以透過以下指令列出說明</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever —help</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/119.png" alt></p>
+<h3 id="顯示所有運行的服務"><a href="#顯示所有運行的服務" class="headerlink" title="顯示所有運行的服務"></a>顯示所有運行的服務</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever list</span><br></pre></td></tr></table></figure>
+<h3 id="啟動"><a href="#啟動" class="headerlink" title="啟動"></a>啟動</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever start app.js</span><br></pre></td></tr></table></figure>
+<h3 id="停止操作"><a href="#停止操作" class="headerlink" title="停止操作"></a>停止操作</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever stopall</span><br></pre></td></tr></table></figure>
+<h3 id="停止某一個程式專案"><a href="#停止某一個程式專案" class="headerlink" title="停止某一個程式專案"></a>停止某一個程式專案</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever stop app.js</span><br></pre></td></tr></table></figure>
+<h3 id="實作一個簡單運用"><a href="#實作一個簡單運用" class="headerlink" title="實作一個簡單運用"></a>實作一個簡單運用</h3><p>我們先用 express 這個框架建一個簡單的網站</p>
+<p><img src="/images/nodejs/120.png" alt></p>
+<h3 id="啟動程式"><a href="#啟動程式" class="headerlink" title="啟動程式"></a>啟動程式</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever start app.js</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/121.png" alt></p>
+<h3 id="forever-列表清單"><a href="#forever-列表清單" class="headerlink" title="forever  列表清單"></a>forever  列表清單</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever list</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/122.png" alt></p>
+<p>可以看到紫色部分，就是在放 log file 的路徑</p>
+<h3 id="關閉進程"><a href="#關閉進程" class="headerlink" title="關閉進程"></a>關閉進程</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$forever stop app.js</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/123.png" alt></p>
 
 
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -602,7 +602,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        64
+                        66
                     </p>
                 </div>
             </div>
@@ -667,7 +667,45 @@
         
         <article class="media">
             
-            <a href="/2019/04/19/r/r-textmining-01-ch01-2/" class="media-left">
+            <a href="/2019/04/20/r/r-textmining-02-ch02-2/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/r/cover7.png" alt="R語言文字探勘好好玩 - Ch2_採 Tidy 資料做情感分析 (2)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-20T08:32:00.000Z">2019-04-20</time></div>
+                    <a href="/2019/04/20/r/r-textmining-02-ch02-2/" class="has-link-black-ter is-size-6">R語言文字探勘好好玩 - Ch2_採 Tidy 資料做情感分析 (2)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/R/">R</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/19/r/r-textmining-02-ch02-1/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/r/cover7.png" alt="R語言文字探勘好好玩 - Ch2_採 Tidy 資料做情感分析 (1)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-19T12:24:00.000Z">2019-04-19</time></div>
+                    <a href="/2019/04/19/r/r-textmining-02-ch02-1/" class="has-link-black-ter is-size-6">R語言文字探勘好好玩 - Ch2_採 Tidy 資料做情感分析 (1)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/R/">R</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/18/r/r-textmining-01-ch01-2/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/r/cover6-1.png" alt="R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (2)">
                 </p>
@@ -675,8 +713,8 @@
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-19T15:34:00.000Z">2019-04-19</time></div>
-                    <a href="/2019/04/19/r/r-textmining-01-ch01-2/" class="has-link-black-ter is-size-6">R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (2)</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-18T15:34:00.000Z">2019-04-18</time></div>
+                    <a href="/2019/04/18/r/r-textmining-01-ch01-2/" class="has-link-black-ter is-size-6">R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (2)</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/R/">R</a>
                     </p>
@@ -715,44 +753,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-14T10:07:51.000Z">2019-03-14</time></div>
                     <a href="/2019/03/14/vuejs/vuejs-google-analysis/" class="has-link-black-ter is-size-6">在 Vue 使用 vue-analytics 套件設定 Google Analytics (GA) 追蹤診斷工具</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/03/12/web/ubuntu-nginx-restart-fail/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/web/20190312-5.png" alt="Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-12T15:00:00.000Z">2019-03-12</time></div>
-                    <a href="/2019/03/12/web/ubuntu-nginx-restart-fail/" class="has-link-black-ter is-size-6">Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/網站/">網站</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/03/06/vuejs/vuejs-googlesheets-api/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/vuejs/wolfe77.png" alt="Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-06T10:07:51.000Z">2019-03-06</time></div>
-                    <a href="/2019/03/06/vuejs/vuejs-googlesheets-api/" class="has-link-black-ter is-size-6">Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
                     </p>
@@ -813,7 +813,7 @@
                 <span class="level-item">R</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">8</span>
+                <span class="level-item tag">10</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Ruby/">
@@ -980,7 +980,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/R/">
                         <span class="tag">R</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">10</span>
                     </a>
                 </div>
                 
@@ -1249,7 +1249,7 @@
                 <span class="level-item">R</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">8</span>
+                <span class="level-item tag">10</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Ruby/">
@@ -1416,7 +1416,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/R/">
                         <span class="tag">R</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">10</span>
                     </a>
                 </div>
                 
