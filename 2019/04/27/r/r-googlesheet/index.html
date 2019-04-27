@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://weijutu.github.io/images/r/10.png">
 <meta property="og:image" content="https://weijutu.github.io/images/r/11.png">
 <meta property="og:image" content="https://weijutu.github.io/images/r/12.png">
-<meta property="og:updated_time" content="2019-04-27T16:29:38.434Z">
+<meta property="og:updated_time" content="2019-04-27T16:33:31.795Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="R 學習日誌#6 - 如何使用 R 語言存取 Google Sheets">
 <meta name="twitter:description" content="通常想要將資料放在一個資料庫方便做存取，一般所知道的資料庫都是常見的 MySQL, MSSQL 或是非結構化的 mongodb 等等的資料庫應用程式。不過有些時候就只是不多的資料，其實也不需要特別去裝這些資料庫，只要使用 Google Sheets 也可以做得到輕量型資料的喔。 學習內容大綱 套件安裝 連接 Google 帳戶 查詢 Google Sheets 試算表 讀取 Google Shee">
@@ -185,7 +185,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分鐘 閱讀文 (大約 1118 個字)
+                    7 分鐘 閱讀文 (大約 1109 個字)
                 </span>
                 
                 
@@ -204,7 +204,6 @@
 <li>連接 Google 帳戶</li>
 <li>查詢 Google Sheets 試算表</li>
 <li>讀取 Google Sheets 試算表</li>
-<li>寫入 Google Sheets 試算表</li>
 </ol>
 <a id="more"></a>
 <h2 id="套件安裝"><a href="#套件安裝" class="headerlink" title="套件安裝"></a>套件安裝</h2><p>使用 <code>googlesheets</code> 套件可以在之後串接 Google 試算表。</p>
@@ -258,7 +257,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="讀取-Google-Sheets-試算表-檔案"><a href="#讀取-Google-Sheets-試算表-檔案" class="headerlink" title="讀取 Google Sheets 試算表 (檔案)"></a>讀取 Google Sheets 試算表 (檔案)</h2><p>就讀取一個檔案來試試，在我們已知 sheet_title 這欄位之後，透過 <code>gs_title()</code> 函數來查詢</p>
+<h2 id="讀取-Google-Sheets-試算表"><a href="#讀取-Google-Sheets-試算表" class="headerlink" title="讀取 Google Sheets 試算表"></a>讀取 Google Sheets 試算表</h2><p>就讀取一個檔案來試試，在我們已知 sheet_title 這欄位之後，透過 <code>gs_title()</code> 函數來查詢</p>
 <figure class="highlight r hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gs &lt;- gs_title(<span class="hljs-string">'Amazoncom Inc (AMZN) price history'</span>)</span><br><span class="line">aws_data &lt;- gs_read(ss=gs, ws = <span class="hljs-string">"工作表1"</span>, skip=<span class="hljs-number">0</span>)</span><br></pre></td></tr></table></figure>
 <p>結果如下：</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&gt; gs &lt;- gs_title(&apos;Amazoncom Inc (AMZN) price history&apos;)</span><br><span class="line">Sheet successfully identified: &quot;Amazoncom Inc (AMZN) price history&quot;</span><br><span class="line"></span><br><span class="line">&gt; aws_data &lt;- gs_read(ss=gs, ws = &quot;工作表1&quot;, skip=0)</span><br><span class="line">Accessing worksheet titled &apos;工作表1&apos;.</span><br><span class="line">Downloading: 470 B     Parsed with column specification:</span><br><span class="line">cols(</span><br><span class="line">  `2019-03-08` = col_date(format = &quot;&quot;),</span><br><span class="line">  `Amazoncom Inc` = col_character(),</span><br><span class="line">  AMZN = col_character(),</span><br><span class="line">  `1620.8` = col_double(),</span><br><span class="line">  `https://finance.yahoo.com/q?s=AMZN` = col_character(),</span><br><span class="line">  `2019-03-08_1` = col_date(format = &quot;&quot;)</span><br><span class="line">)</span><br><span class="line">Warning message:</span><br><span class="line">Duplicated column names deduplicated: &apos;2019-03-08&apos; =&gt; &apos;2019-03-08_1&apos; [6]</span><br></pre></td></tr></table></figure>
@@ -469,9 +468,9 @@
         <span class="has-mr-6">4</span>
         <span>查詢 Google Sheets 試算表</span>
         </a></li><li>
-        <a class="is-flex" href="#讀取-Google-Sheets-試算表-檔案">
+        <a class="is-flex" href="#讀取-Google-Sheets-試算表">
         <span class="has-mr-6">5</span>
-        <span>讀取 Google Sheets 試算表 (檔案)</span>
+        <span>讀取 Google Sheets 試算表</span>
         </a></li><li>
         <a class="is-flex" href="#參考">
         <span class="has-mr-6">6</span>
