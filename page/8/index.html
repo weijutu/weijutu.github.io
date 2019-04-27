@@ -166,6 +166,79 @@
                 <span class="level-item has-text-grey">
                     
                     
+                    4 分鐘 閱讀文 (大約 556 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/07/26/nodejs/nodejs-28-rest/">Node.js 系列學習日誌#28 - REST 路由規則</a>
+            
+        </h1>
+        <div class="content">
+            <p>今天我們使用 express 框架介紹一下 REST  路由規則，REST 是一種  http 協定的網路應用，http 提供了八種方法使用：</p>
+<ul>
+<li><p>OPTIONS：這個方法可使伺服器傳回該資源所支援的所有HTTP請求方法。用<code>*</code>來代替資源名稱，向Web伺服器傳送OPTIONS請求，可以測試伺服器功能是否正常運作。</p>
+</li>
+<li><p>HEAD：與GET方法一樣，都是向伺服器發出指定資源的請求。只不過伺服器將不傳回資源的本文部份。它的好處在於，使用這個方法可以在不必傳輸全部內容的情況下，就可以獲取其中「關於該資源的資訊」（元資訊或稱元資料）。</p>
+</li>
+<li><p>GET：向指定的資源發出「顯示」請求。使用GET方法應該只用在讀取資料，而不應當被用於產生「副作用」的操作中，例如在Web Application中。其中一個原因是GET可能會被網路蜘蛛等隨意存取。參見安全方法</p>
+</li>
+<li><p>POST：向指定資源提交資料，請求伺服器進行處理（例如提交表單或者上傳檔案）。資料被包含在請求本文中。這個請求可能會建立新的資源或修改現有資源，或二者皆有。</p>
+</li>
+<li><p>PUT：向指定資源位置上傳其最新內容。</p>
+</li>
+<li><p>DELETE：請求伺服器刪除Request-URI所標識的資源。</p>
+</li>
+<li><p>TRACE：回顯伺服器收到的請求，主要用於測試或診斷。</p>
+</li>
+<li><p>CONNECT：HTTP/1.1協定中預留給能夠將連線改為管道方式的代理伺服器。通常用於SSL加密伺服器的連結（經由非加密的HTTP代理伺服器）</p>
+</li>
+</ul>
+<p>而 express 網頁框架也針對 http 請求方法設計路由的函數：</p>
+<p><img src="/images/nodejs/124.png" alt></p>
+<p>通常在設計 rest 時，常用的是 get (取得), post (新增), put (更新), delete (刪除)</p>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE" target="_blank" rel="noopener">http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE</a></p>
+
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-07-25T16:27:00.000Z">2017-07-26</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
                     3 分鐘 閱讀文 (大約 409 個字)
                 </span>
                 
@@ -528,85 +601,6 @@
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-07-23T16:23:00.000Z">2017-07-24</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 分鐘 閱讀文 (大約 618 個字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/07/24/nodejs/nodejs-23-heroku/">Node.js 系列學習日誌#23 - 部署上線至 Heroku 雲端平台環境</a>
-            
-        </h1>
-        <div class="content">
-            <p><img src="/images/nodejs/88.png" alt></p>
-<p>Heroku 是雲端運算的平台，您可以將您的應用程式放到雲端空間上面</p>
-<h3 id="註冊-Heroku-帳號"><a href="#註冊-Heroku-帳號" class="headerlink" title="註冊 Heroku 帳號"></a>註冊 Heroku 帳號</h3><p>請先註冊一個  Heroku  帳號，<a href="https://www.heroku.com/，由於我們要部署上線的語法是" target="_blank" rel="noopener">https://www.heroku.com/，由於我們要部署上線的語法是</a>  Node.js 語言，因此也確認您的  Node.js, npm 已安裝至您的電腦裡面。</p>
-<h3 id="安裝-Heroku-Toolbelt-工具"><a href="#安裝-Heroku-Toolbelt-工具" class="headerlink" title="安裝 Heroku Toolbelt 工具"></a>安裝 Heroku Toolbelt 工具</h3><p>這個工具將提供您 Command Line 的工具以及 git 版控工具，透過這個工具將輔助您接下來後續的超過指令，工具請至 <a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up" target="_blank" rel="noopener">https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up</a> 下載，在這邊可以選擇您的作業系統環境。而我這邊將用 mac 做介紹</p>
-<p><img src="/images/nodejs/89.png" alt></p>
-<p>安裝首頁畫面，安裝過程基本上就是都下一步，偶爾出現可以自定的選項。</p>
-<p><img src="/images/nodejs/90.png" alt></p>
-<h4 id="安裝進度"><a href="#安裝進度" class="headerlink" title="安裝進度"></a>安裝進度</h4><p><img src="/images/nodejs/91.png" alt></p>
-<p>安裝後的檢查，請到命令字元輸入 heroku，如果出現以下訊息就代表安裝成功噢！</p>
-<p><img src="/images/nodejs/92.png" alt></p>
-<p>用指令登入 heroku ， $heroku login ，按照指令輸入 email 與密碼</p>
-<p><img src="/images/nodejs/93.png" alt></p>
-<p>在這邊還需要建立一個  key ，請繼續輸入  $heroku keys ，如果沒有 key的存在，請手動建立 $heroku keys:add  (<a href="https://devcenter.heroku.com/articles/keys)，建立完成後會像以下結果：" target="_blank" rel="noopener">https://devcenter.heroku.com/articles/keys)，建立完成後會像以下結果：</a></p>
-<p><img src="/images/nodejs/94.png" alt></p>
-<p>部署程式到 Heroku，本章節選用來 <a href="http://ithelp.ithome.com.tw/ironman7/app/article/all/recent/10159261" target="_blank" rel="noopener">http://ithelp.ithome.com.tw/ironman7/app/article/all/recent/10159261</a> 專案進行初始化的建立，請先輸入</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$heroku create</span><br></pre></td></tr></table></figure>
-<p>建立完成後可以看到訊息提到，配了一組 aqueous-dawn-4266 的名字，馬上轉到 heroku 上的 dashboard ，立即就看到上面多了一個名為 aqueous-dawn-4266 專案，但這時候程式還並沒有部署到  heroku ，目前已經建立遠端的檔案庫在上面。</p>
-<p><img src="/images/nodejs/95.png" alt></p>
-<p>您也許覺得 aqueous-dawn-4266 好難記，在 heroku 也提供了更名的指令，請輸入 $heroku apps:rename newname<br>我將專案名稱改成 nodejs-express-bower ，而 heroku 的 dashboard 專案列表也會跟著改噢</p>
-<p><img src="/images/nodejs/96.png" alt></p>
-<p><img src="/images/nodejs/97.png" alt></p>
-<p>接下來就部署程式，請輸入</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$git push heroku master</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/98.png" alt></p>
-<p>這時候進到 heroku dashboard ，選擇 nodejs-express-bower 專案，點選上方標題右邊的 icon</p>
-<p><img src="/images/nodejs/99.png" alt></p>
-<p>觀察結果顯示如下：</p>
-<p><img src="/images/nodejs/100.png" alt></p>
-<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction" target="_blank" rel="noopener">https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction</a></p>
-
-
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -681,7 +675,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        66
+                        67
                     </p>
                 </div>
             </div>
@@ -701,7 +695,7 @@
                         標籤
                     </p>
                     <p class="title has-text-weight-normal">
-                        42
+                        43
                     </p>
                 </div>
             </div>
@@ -743,6 +737,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/04/27/r/r-googlesheet/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/r/cover8.png" alt="R 學習日誌#6 - 如何使用 R 語言存取 Google Sheets">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-27T12:24:00.000Z">2019-04-27</time></div>
+                    <a href="/2019/04/27/r/r-googlesheet/" class="has-link-black-ter is-size-6">R 學習日誌#6 - 如何使用 R 語言存取 Google Sheets</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/R/">R</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -820,25 +833,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/03/14/vuejs/vuejs-google-analysis/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/vuejs/cover1.png" alt="在 Vue 使用 vue-analytics 套件設定 Google Analytics (GA) 追蹤診斷工具">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-14T10:07:51.000Z">2019-03-14</time></div>
-                    <a href="/2019/03/14/vuejs/vuejs-google-analysis/" class="has-link-black-ter is-size-6">在 Vue 使用 vue-analytics 套件設定 Google Analytics (GA) 追蹤診斷工具</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -892,7 +886,7 @@
                 <span class="level-item">R</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">10</span>
+                <span class="level-item tag">11</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Ruby/">
@@ -1059,7 +1053,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/R/">
                         <span class="tag">R</span>
-                        <span class="tag is-grey">10</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -1260,6 +1254,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/文字探勘/">
+                        <span class="tag">文字探勘</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/鐵人賽/">
                         <span class="tag">鐵人賽</span>
                         <span class="tag is-grey">30</span>
@@ -1328,7 +1329,7 @@
                 <span class="level-item">R</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">10</span>
+                <span class="level-item tag">11</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Ruby/">
@@ -1495,7 +1496,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/R/">
                         <span class="tag">R</span>
-                        <span class="tag is-grey">10</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -1692,6 +1693,13 @@
                     <a class="tags has-addons" href="/tags/投資/">
                         <span class="tag">投資</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/文字探勘/">
+                        <span class="tag">文字探勘</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 

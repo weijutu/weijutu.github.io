@@ -156,6 +156,79 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-07-23T16:13:00.000Z">2017-07-24</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分鐘 閱讀文 (大約 531 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/07/24/nodejs/nodejs-13-fs/">Node.js 系列學習日誌#13 - 核心模組檔案系統 fs</a>
+            
+        </h1>
+        <div class="content">
+            <p>node.js  提供了檔案操作的模組，包含讀取、刪除、寫入、更名等等的檔案操作。其中 fs 模組他還提供了同步與非同步的方法來使用。他的方法名稱也相當好懂，如果是非同步那麼就 fs.readFile() ，同步的話就是 fs.readFileSync()，相當好區別。本章節將會介紹檔案系統的基本操作，如：</p>
+<ul>
+<li>讀取檔案 fs.readFile</li>
+<li>寫入檔案 fs.writeFile</li>
+<li>附加檔案內容 fs.appendFile</li>
+<li>更名檔案 fs.rename</li>
+<li>刪除檔案 fs.unlink</li>
+</ul>
+<p>首先我們先建立一個 nodejs-fs 目錄夾，預設檔案結構如下：</p>
+<p><img src="/images/nodejs/57.png" alt></p>
+<p>content.txt , test.txt 簡單預設寫一些內文，就可以進行以下的檔案系統相關操作：</p>
+<p>在操作的宣告裡面，在 index.js 檔案，首先務必要檔案檔案系統模組</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>);</span><br></pre></td></tr></table></figure>
+<p>接著我們就可以使用 fs 所提供的方法，方法可參考 <a href="http://nodejs.org/api/fs.html" target="_blank" rel="noopener">http://nodejs.org/api/fs.html</a>：</p>
+<h1 id="讀取檔案-fs-readFile"><a href="#讀取檔案-fs-readFile" class="headerlink" title="讀取檔案 fs.readFile"></a>讀取檔案 fs.readFile</h1><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>); <span class="hljs-comment">//載入檔案系統模組</span></span><br><span class="line"><span class="hljs-comment">//讀取  content.txt 檔案內容</span></span><br><span class="line">fs.readFile(<span class="hljs-string">'content.txt'</span>, <span class="hljs-string">'utf-8'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, data</span>)</span>&#123;</span><br><span class="line">     <span class="hljs-comment">//若有錯誤就列印訊息</span></span><br><span class="line">     <span class="hljs-keyword">if</span> (err) &#123;</span><br><span class="line">          <span class="hljs-built_in">console</span>.error(err);</span><br><span class="line">     &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">          <span class="hljs-comment">//將檔案內容輸入</span></span><br><span class="line">          <span class="hljs-built_in">console</span>.log(data);</span><br><span class="line">     &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h1 id="寫入檔案-fs-writeFile"><a href="#寫入檔案-fs-writeFile" class="headerlink" title="寫入檔案 fs.writeFile"></a>寫入檔案 fs.writeFile</h1><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> data1 = <span class="hljs-string">"hello, ithome 鐵人賽"</span>;</span><br><span class="line">fs.writeFile(__dirname + <span class="hljs-string">'/content.txt'</span>, data1, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>)</span>&#123;</span><br><span class="line">     <span class="hljs-keyword">if</span> (err) &#123;</span><br><span class="line">          <span class="hljs-built_in">console</span>.error(err)</span><br><span class="line">     &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h1 id="附加檔案內容-fs-appendFile"><a href="#附加檔案內容-fs-appendFile" class="headerlink" title="附加檔案內容 fs.appendFile"></a>附加檔案內容 fs.appendFile</h1><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> data2 = <span class="hljs-string">"的主計林車修該自是"</span>;</span><br><span class="line">fs.appendFile(__dirname + <span class="hljs-string">'/content.txt'</span>, data2, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>)</span>&#123;</span><br><span class="line">     <span class="hljs-keyword">if</span> (err) &#123;</span><br><span class="line">          <span class="hljs-built_in">console</span>.error(err)</span><br><span class="line">     &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h1 id="更名檔案-fs-rename"><a href="#更名檔案-fs-rename" class="headerlink" title="更名檔案 fs.rename"></a>更名檔案 fs.rename</h1><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> oldpath = <span class="hljs-string">"content2.txt"</span>;</span><br><span class="line"><span class="hljs-keyword">var</span> newpath = <span class="hljs-string">"content.txt"</span>;</span><br><span class="line">fs.rename(oldpath, newpath, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>)</span>&#123;</span><br><span class="line">     <span class="hljs-keyword">if</span> (err)</span><br><span class="line">          <span class="hljs-keyword">throw</span> err;</span><br><span class="line"></span><br><span class="line">       fs.stat(<span class="hljs-string">'content.txt'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, stats</span>) </span>&#123;</span><br><span class="line">         <span class="hljs-keyword">if</span> (err)</span><br><span class="line">              <span class="hljs-keyword">throw</span> err;</span><br><span class="line"></span><br><span class="line">         <span class="hljs-comment">//將檔案的狀態顯示出來</span></span><br><span class="line">          <span class="hljs-comment">// stats: &#123;"dev":16777218,</span></span><br><span class="line">         <span class="hljs-comment">//      "mode":33204,</span></span><br><span class="line">         <span class="hljs-comment">//      "nlink":1,</span></span><br><span class="line">         <span class="hljs-comment">//      "uid":501,</span></span><br><span class="line">         <span class="hljs-comment">//      "gid":20,</span></span><br><span class="line">         <span class="hljs-comment">//      "rdev":0,"blksize":4096,</span></span><br><span class="line">         <span class="hljs-comment">//      "ino":33307834,</span></span><br><span class="line">         <span class="hljs-comment">//      "size":1254,</span></span><br><span class="line">         <span class="hljs-comment">//      "blocks":8,</span></span><br><span class="line">         <span class="hljs-comment">//      "atime":"2014-10-21T14:25:18.000Z",</span></span><br><span class="line">         <span class="hljs-comment">//      "mtime":"2014-10-21T14:24:56.000Z",</span></span><br><span class="line">         <span class="hljs-comment">//      "ctime":"2014-10-21T14:24:56.000Z"</span></span><br><span class="line">         <span class="hljs-comment">// &#125;</span></span><br><span class="line"></span><br><span class="line">         <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'stats: '</span> + <span class="hljs-built_in">JSON</span>.stringify(stats));</span><br><span class="line">       &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h1 id="刪除檔案-fs-unlink"><a href="#刪除檔案-fs-unlink" class="headerlink" title="刪除檔案 fs.unlink"></a>刪除檔案 fs.unlink</h1><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fs.unlink(<span class="hljs-string">'test.txt'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">throw</span> err;</span><br><span class="line">  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'successfully deleted test.txt'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>事實上檔案系統操作還有很多方法可以使用，可以看到我們</p>
+<h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><ul>
+<li><a href="http://nodejs.org/api/fs.html" target="_blank" rel="noopener">http://nodejs.org/api/fs.html</a></li>
+</ul>
+
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2017-07-23T16:12:00.000Z">2017-07-24</time>
                 
                 <div class="level-item">
@@ -435,92 +508,6 @@
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-07-23T16:08:00.000Z">2017-07-24</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 分鐘 閱讀文 (大約 465 個字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/07/24/nodejs/nodejs-08-mysql-crud-create/">Node.js 系列學習日誌#8 - MySQL 操作 -建立</a>
-            
-        </h1>
-        <div class="content">
-            <p>延續上一篇的連接 mysql  實現 crud 的操作，本篇將介紹新增資料的操作。之後的兩篇文，將會介紹更新、刪除的操作。首先我們在上一篇已經有將資料列出來，在此做一些畫面的調整，使用 bootstrap 的前端框架套件去使用。</p>
-<p>本章節主要使用的套件有：</p>
-<ul>
-<li>express web framework</li>
-<li>mysql</li>
-<li>jade</li>
-</ul>
-<p>首先我們先建立一個資料夾  nodejs-demo-mysql ，然後要安裝一下相依的套件使用：express, mysql</p>
-<p>建立 package.json，請輸入以下的指令按照提示問題回答</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$npm</span> init</span><br></pre></td></tr></table></figure>
-<p>安裝 express web framework 到這 nodejs-demo-mysql 應用程式專案裡面，並寫入到  package.json</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$npm</span> install express —save</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/31.png" alt></p>
-<p>完成 express 之後，再安裝 mysql 套件，在這邊安裝  mysql</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$npm</span> install mysql@2.0.0-alpha9</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/32.png" alt></p>
-<p>首先可以看到 express 套件,  node-mysql 就新增到 node_modules 裡了</p>
-<p><img src="/images/nodejs/33.png" alt></p>
-<p>資料庫的部分，假定先建立一個 demo_nodejs 的資料庫</p>
-<p><img src="/images/nodejs/34.png" alt></p>
-<p>然後新增  index.js 作為網頁開頭的起始點，宣告 mysql 後，先使用 createConnection 方法將資料庫的參數初始化</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> mysql = <span class="hljs-built_in">require</span>(<span class="hljs-string">'mysql'</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> conn = mysql.createConnection(&#123;</span><br><span class="line">    host: <span class="hljs-string">'localhost'</span>,</span><br><span class="line">    user: <span class="hljs-string">'nodejs'</span>,</span><br><span class="line">    password: <span class="hljs-string">'nodejs'</span>,</span><br><span class="line">    database:<span class="hljs-string">'demo_nodejs'</span>,</span><br><span class="line">    port: <span class="hljs-number">3306</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>將資料庫做個連線的動作</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.connect();</span><br></pre></td></tr></table></figure>
-<p>先測試一下，透過以下的 query  執行，如果有將 12 + 34 有算出來，那麼就代表有連線成功</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">conn.query(<span class="hljs-string">'SELECT 12 + 34 AS result'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, rows, fields</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">throw</span> err;</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'The result is: '</span>, rows[<span class="hljs-number">0</span>].result);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>連線成功後，查詢之後務必要將它關閉。</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.end();</span><br></pre></td></tr></table></figure>
-<p>完整程式如下：</p>
-<p><img src="/images/nodejs/35.png" alt></p>
-<p>執行結果 有將 12 + 34 = 46 算出來囉</p>
-<p><img src="/images/nodejs/36.png" alt></p>
-<h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><ul>
-<li><a href="http://expressjs.com/" target="_blank" rel="noopener">http://expressjs.com/</a></li>
-<li><a href="https://github.com/redblaze/node-mysql" target="_blank" rel="noopener">https://github.com/redblaze/node-mysql</a></li>
-</ul>
-
-
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -595,7 +582,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        66
+                        67
                     </p>
                 </div>
             </div>
@@ -615,7 +602,7 @@
                         標籤
                     </p>
                     <p class="title has-text-weight-normal">
-                        42
+                        43
                     </p>
                 </div>
             </div>
@@ -657,6 +644,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/04/27/r/r-googlesheet/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/r/cover8.png" alt="R 學習日誌#6 - 如何使用 R 語言存取 Google Sheets">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-27T12:24:00.000Z">2019-04-27</time></div>
+                    <a href="/2019/04/27/r/r-googlesheet/" class="has-link-black-ter is-size-6">R 學習日誌#6 - 如何使用 R 語言存取 Google Sheets</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/R/">R</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -734,25 +740,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/03/14/vuejs/vuejs-google-analysis/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/vuejs/cover1.png" alt="在 Vue 使用 vue-analytics 套件設定 Google Analytics (GA) 追蹤診斷工具">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-14T10:07:51.000Z">2019-03-14</time></div>
-                    <a href="/2019/03/14/vuejs/vuejs-google-analysis/" class="has-link-black-ter is-size-6">在 Vue 使用 vue-analytics 套件設定 Google Analytics (GA) 追蹤診斷工具</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -806,7 +793,7 @@
                 <span class="level-item">R</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">10</span>
+                <span class="level-item tag">11</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Ruby/">
@@ -973,7 +960,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/R/">
                         <span class="tag">R</span>
-                        <span class="tag is-grey">10</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -1174,6 +1161,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/文字探勘/">
+                        <span class="tag">文字探勘</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/鐵人賽/">
                         <span class="tag">鐵人賽</span>
                         <span class="tag is-grey">30</span>
@@ -1242,7 +1236,7 @@
                 <span class="level-item">R</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">10</span>
+                <span class="level-item tag">11</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Ruby/">
@@ -1409,7 +1403,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/R/">
                         <span class="tag">R</span>
-                        <span class="tag is-grey">10</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -1606,6 +1600,13 @@
                     <a class="tags has-addons" href="/tags/投資/">
                         <span class="tag">投資</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/文字探勘/">
+                        <span class="tag">文字探勘</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 

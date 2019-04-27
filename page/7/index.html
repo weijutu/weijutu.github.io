@@ -156,6 +156,75 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-08-25T01:38:54.000Z">2017-08-25</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 分鐘 閱讀文 (大約 320 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/08/25/mongodb/mongodb-install-on-osx/">Mongodb - 在 OS X 上透過手動安裝與設定</a>
+            
+        </h1>
+        <div class="content">
+            <p><img src="/images/mongodb/MongoDB-logo.png" alt></p>
+<h3 id="下載-MongoDB"><a href="#下載-MongoDB" class="headerlink" title="下載 MongoDB"></a>下載 MongoDB</h3><p>我的環境是用 mac osx 10.9.4，到官方網站 <a href="http://www.mongodb.org/downloads" target="_blank" rel="noopener">http://www.mongodb.org/downloads</a> 找到 Mac OX 64bit 區塊，下載 <code>mongodb-osx-x86_64-2.6.4.tgz</code> 檔案，接著我們用指令進行安裝，解壓縮 tgz 檔案</p>
+<p>解壓縮之後，把它挪到 <code>/usr/local/mongodb</code> 資料夾</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$cd ~/Download</span><br><span class="line">$tar xzf mongodb-osx-x86_64-2.2.3.tgz</span><br><span class="line">$sudo mv mongodb-osx-x86_64-2.2.3 /usr/local/mongodb</span><br></pre></td></tr></table></figure>
+<p><img src="/images/mongodb/1.png" alt></p>
+<h3 id="MongoDB-資料"><a href="#MongoDB-資料" class="headerlink" title="MongoDB 資料"></a>MongoDB 資料</h3><p>預設時，資料會寫到 /data/db/ 資料夾，在這裏手動建立儲存位置，去建立 /data/db</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$sudo mkdir -p /data/db</span><br><span class="line">$whoami</span><br><span class="line"> /User/Weiju</span><br><span class="line">$sudo chown /User/Weiju /data/db</span><br></pre></td></tr></table></figure>
+<h3 id="建立-bash-profile-參數設定環境變數"><a href="#建立-bash-profile-參數設定環境變數" class="headerlink" title="建立 ~/.bash_profile 參數設定環境變數"></a>建立 ~/.bash_profile 參數設定環境變數</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$cd ~</span><br><span class="line">$pwd</span><br><span class="line">/User/Weiju</span><br><span class="line">$touch .bash_profile</span><br><span class="line">$vim .bash_profile</span><br></pre></td></tr></table></figure>
+<h3 id="編輯-bash-profile-檔案"><a href="#編輯-bash-profile-檔案" class="headerlink" title="編輯 .bash_profile 檔案"></a>編輯 .bash_profile 檔案</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export MONGO_PATH=/usr/local/mongodb</span><br><span class="line">export PATH=$PATH:$MONGO_PATH/bin</span><br></pre></td></tr></table></figure>
+<h3 id="檢視版本"><a href="#檢視版本" class="headerlink" title="檢視版本"></a>檢視版本</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$mongo -version</span><br></pre></td></tr></table></figure>
+<p><img src="/images/mongodb/2.png" alt></p>
+<p>預設之下，mongodb 安裝完之後，下一次開機又要重新啟動。在這邊設定一下自動啟動方法：</p>
+<p>找到</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sudo vim /Library/LaunchDaemons/</span><br></pre></td></tr></table></figure>
+<p>新增 mongodb.plist，並且建立以下參數</p>
+<p><img src="/images/mongodb/3.png" alt></p>
+<h3 id="載入系統排程"><a href="#載入系統排程" class="headerlink" title="載入系統排程"></a>載入系統排程</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$sudo launchctl load /Library/LaunchDaemons/mongodb.plist</span><br><span class="line">ps -ef | grep mongo</span><br></pre></td></tr></table></figure>
+<p><img src="/images/mongodb/4.png" alt></p>
+<h3 id="馬上來試看看"><a href="#馬上來試看看" class="headerlink" title="馬上來試看看"></a>馬上來試看看</h3><p>第一種：試試新增一筆資料</p>
+<p><img src="/images/mongodb/5.png" alt></p>
+<p>第二種：跑個廻圈＋寫入好了</p>
+<p><img src="/images/mongodb/6.png" alt></p>
+<p>good, got it.</p>
+
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2017-08-21T01:58:00.000Z">2017-08-21</time>
                 
                 <div class="level-item">
@@ -432,79 +501,6 @@
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-07-25T16:27:00.000Z">2017-07-26</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 分鐘 閱讀文 (大約 556 個字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/07/26/nodejs/nodejs-28-rest/">Node.js 系列學習日誌#28 - REST 路由規則</a>
-            
-        </h1>
-        <div class="content">
-            <p>今天我們使用 express 框架介紹一下 REST  路由規則，REST 是一種  http 協定的網路應用，http 提供了八種方法使用：</p>
-<ul>
-<li><p>OPTIONS：這個方法可使伺服器傳回該資源所支援的所有HTTP請求方法。用<code>*</code>來代替資源名稱，向Web伺服器傳送OPTIONS請求，可以測試伺服器功能是否正常運作。</p>
-</li>
-<li><p>HEAD：與GET方法一樣，都是向伺服器發出指定資源的請求。只不過伺服器將不傳回資源的本文部份。它的好處在於，使用這個方法可以在不必傳輸全部內容的情況下，就可以獲取其中「關於該資源的資訊」（元資訊或稱元資料）。</p>
-</li>
-<li><p>GET：向指定的資源發出「顯示」請求。使用GET方法應該只用在讀取資料，而不應當被用於產生「副作用」的操作中，例如在Web Application中。其中一個原因是GET可能會被網路蜘蛛等隨意存取。參見安全方法</p>
-</li>
-<li><p>POST：向指定資源提交資料，請求伺服器進行處理（例如提交表單或者上傳檔案）。資料被包含在請求本文中。這個請求可能會建立新的資源或修改現有資源，或二者皆有。</p>
-</li>
-<li><p>PUT：向指定資源位置上傳其最新內容。</p>
-</li>
-<li><p>DELETE：請求伺服器刪除Request-URI所標識的資源。</p>
-</li>
-<li><p>TRACE：回顯伺服器收到的請求，主要用於測試或診斷。</p>
-</li>
-<li><p>CONNECT：HTTP/1.1協定中預留給能夠將連線改為管道方式的代理伺服器。通常用於SSL加密伺服器的連結（經由非加密的HTTP代理伺服器）</p>
-</li>
-</ul>
-<p>而 express 網頁框架也針對 http 請求方法設計路由的函數：</p>
-<p><img src="/images/nodejs/124.png" alt></p>
-<p>通常在設計 rest 時，常用的是 get (取得), post (新增), put (更新), delete (刪除)</p>
-<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE" target="_blank" rel="noopener">http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE</a></p>
-
-
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -579,7 +575,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        66
+                        67
                     </p>
                 </div>
             </div>
@@ -599,7 +595,7 @@
                         標籤
                     </p>
                     <p class="title has-text-weight-normal">
-                        42
+                        43
                     </p>
                 </div>
             </div>
@@ -641,6 +637,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/04/27/r/r-googlesheet/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/r/cover8.png" alt="R 學習日誌#6 - 如何使用 R 語言存取 Google Sheets">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-27T12:24:00.000Z">2019-04-27</time></div>
+                    <a href="/2019/04/27/r/r-googlesheet/" class="has-link-black-ter is-size-6">R 學習日誌#6 - 如何使用 R 語言存取 Google Sheets</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/R/">R</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -718,25 +733,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/03/14/vuejs/vuejs-google-analysis/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/vuejs/cover1.png" alt="在 Vue 使用 vue-analytics 套件設定 Google Analytics (GA) 追蹤診斷工具">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-03-14T10:07:51.000Z">2019-03-14</time></div>
-                    <a href="/2019/03/14/vuejs/vuejs-google-analysis/" class="has-link-black-ter is-size-6">在 Vue 使用 vue-analytics 套件設定 Google Analytics (GA) 追蹤診斷工具</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Vue/">Vue</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -790,7 +786,7 @@
                 <span class="level-item">R</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">10</span>
+                <span class="level-item tag">11</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Ruby/">
@@ -957,7 +953,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/R/">
                         <span class="tag">R</span>
-                        <span class="tag is-grey">10</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -1158,6 +1154,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/文字探勘/">
+                        <span class="tag">文字探勘</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/鐵人賽/">
                         <span class="tag">鐵人賽</span>
                         <span class="tag is-grey">30</span>
@@ -1226,7 +1229,7 @@
                 <span class="level-item">R</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">10</span>
+                <span class="level-item tag">11</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Ruby/">
@@ -1393,7 +1396,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/R/">
                         <span class="tag">R</span>
-                        <span class="tag is-grey">10</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -1590,6 +1593,13 @@
                     <a class="tags has-addons" href="/tags/投資/">
                         <span class="tag">投資</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/文字探勘/">
+                        <span class="tag">文字探勘</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
