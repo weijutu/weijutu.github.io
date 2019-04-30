@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[用 Hubot 打造聊天機器人#2 - hubot 專案部署到 heroku 連接 slack 聊天通訊軟體]]></title>
+    <url>%2F2019%2F04%2F30%2Fbot%2Fhubot-02-heroku-slack%2F</url>
+    <content type="text"><![CDATA[在這篇文章內，開始介紹 heroku 上部署 hubot 專案並且連接 slack 聊天通訊軟體。 學習內容大綱 slack 的準備 hubot 的準備 部署到 Heroku 哈囉機器人來跟我對話吧 注意事項 參考 slack 的準備在這裡假設你已經有 slack 頻道，我們從 https://my.slack.com/services/new/hubot slack 網站內的指定頻道申請 hubot 註冊 輸入機器人的名稱在這個頁面將機器人的組態設定，Username 輸入：cube-hubot，當然你也可以自訂名稱，接著按下「Add Hubot Integration」按鈕 查看 slack token 或自訂圖標在這一頁面，可以取得環境變數 HUBOT_SLACK_TOKEN 確認之後，就可以儲存，但務必要將 HUBOT_SLACK_TOKEN 的值複製起來，方便之後在程式上的使用。 本機端測試安裝 hubot-slack 套件 1$ yarn add hubot-slack 然後我們再拿剛剛建立出來的 HUBOT_SLACK_TOKEN 令牌將這組 token 放在全域，啟動看看 hubot 12$ export HUBOT_SLACK_TOKEN=xoxb-*********$ ./bin/hubot --adapter slack 輸入以下的指令，將 hubot 透過 adapter 串接起 slack 執行程序 1$ HUBOT_SLACK_TOKEN=xoxb-********* ./bin/hubot --adapter slack 然後可以打開 slack 的 hubot 對話看看，請輸入 ping，這時候機器人回你 PONG 時就代表成功了。 部署到 Heroku我們完成了在本機端的成功測試，因為我們不太可能一直在本機端一直開著服務，在這個步驟則是將專案程式推送到 heroku 雲端服務器上，也比較方便使用，首先在 heroku 登入之後新增一個 app 使用 heroku cli 登入 123456heroku login › Warning: heroku update available from 7.22.4 to 7.24.1.heroku: Press any key to open up the browser to login or q to exit:Opening browser to https://cli-auth.heroku.com/auth/browser/4b02d9c9-2e5d-4b84-9b93-4bd8dc64eb46...Logging in... doneLogged in as xxxxxxx@gmail.com 將程式推上 heroku 123456$ cd cube-hubot$ git init$ heroku git:remote -a cube-hubot$ git add .$ git commit -am &quot;hubot init&quot;$ git push heroku master heroku 設定 HUBOT_SLACK_TOKEN 環境變數 1234$ heroku config:add HUBOT_SLACK_TOKEN=xoxb-*********$ heroku config:add HEROKU_URL=https://cube-hubot.herokuapp.com$ heroku config:set HUBOT_HEROKU_KEEPALIVE_URL=$(heroku apps:info -s | grep web_url | cut -d= -f2)$ heroku config 此時你就可以發現你的 slack 上的 hubot 已經上線了，那麼你就可以照著剛剛本機端測試一樣的方式看看。打開 slack 的 hubot 對話輸入 ping，這時候機器人回你 PONG 時就代表成功了。 由於 ping 與 PONG 的一來一回的對話是預設的，不免俗的希望機器人有更多豐富的內容通知。 所以，有了這麼棒的聊天機器人環境，我們就可以在專案上的 scripts 資料夾裡寫點程式讓機器人回應一下 哈囉機器人來跟我對話吧由於 hubot 的預設程式是用 coffeescript 語法，而這個語言可以到 這裡學習Coffeescript，相信你也可以學習很快。那麼接下來請在 scripts 資料夾新增一個 hello.coffee 檔案，內容輸入 123module.exports = (robot) -&gt; robot.respond /hello/i, (msg) -&gt; msg.send "world!" 這個意思是全域的讓 hubot 等待監聽用戶輸入 hello，確認跟文字相符之後，就回傳一個叫 world! 的字眼。將檔案存檔之後，請將它推上 heroku 123$ git add .$ git commit -am &quot;add hello file&quot;$ git push heroku master 輸入 hello 就會回傳 world!。 good. 大功告成喔，如此一來，在這環境之下，可以撰寫一些希望機器人幫你做事的服務，比如查氣象、查股價、查youtube影片、查照片 等等，聽起來很美妙對吧！ 注意事項 如果在創建 hubot 沒有將 adapter 適配器裝上 slack 的話，請修改專案的 Procfile 檔案填入：web: bin/hubot -a slack ，這個更改之後在推到 heroku git push heroku master heroku 的免費方案是每 24 小時就會停機 6 小時，我們可以使用 hubot-heroku-keepalive 套件讓他維持 keep alive 維持活著狀態。 參考 Hubot on github Hubot を Heroku で動かして Slack から話す 使用Hubot與鬆弛]]></content>
+      <categories>
+        <category>hubot</category>
+      </categories>
+      <tags>
+        <tag>hubot</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[用 Hubot 打造聊天機器人#1 - 基礎介紹與安裝]]></title>
+    <url>%2F2019%2F04%2F29%2Fbot%2Fhubot-01-install%2F</url>
+    <content type="text"><![CDATA[現在市面上超多種聊天機器人的工具，最近發現了這套 Hubot，Hubot 是 Github 所開發的，原本是用來自動化的管理公司各項任務項目的聊天機器人，比如部署網站、翻譯等等的，這套工具開源之後，我們可以基於它來開發各式各樣的超實用的機器人服務。官方網站 的文檔裡有詳細的步驟介紹，在本篇逐一的步驟是介紹說明。 學習內容大綱 安裝 hubot 建立 hubot 專案 運行 hubot 下載安裝首先 Hubot 的安裝需要必要套件 node.js redis coffeescript yeoman generator-hubot 進入命令提示字元輸入 1$ sudo npm install -g yo generator-hubot 建立 hubot 專案建立資料夾 123$ mkdir cube-hubot$ cd cube-hubot$ yo hubot --adapter=slack 使用了 yo 會開始初始化專案 12345? ==========================================================================We&apos;re constantly looking for ways to make yo better!May we anonymously report usage statistics to improve the tool over time?More info: https://github.com/yeoman/insight &amp; http://yeoman.io (Y/n) 輸入 Y 之後，就會繼續陸續詢問項目 Owner: 名字 Bot name: cube-hubot Description: 描述 Bot adapter: 預設 compfire 另外，hubot 是採用 coffeescript 做開發，所以務必也需要安裝 coffee-script 1$ sudo npm install -g coffee-script 以上完成之後，就可以在資料夾獲得一些檔案，如下： 12345678910111213total 32drwxr-xr-x 12 staff staff 384 Apr 29 23:38 .drwxr-xr-x 28 staff staff 896 Apr 29 23:35 ..-rw-r--r-- 1 staff staff 197 May 20 2016 .editorconfig-rw-r--r-- 1 staff staff 39 May 20 2016 .gitignore-rw-r--r-- 1 staff staff 27 Apr 29 23:38 Procfile-rw-r--r-- 1 staff staff 7880 Apr 29 23:38 README.mddrwxr-xr-x 4 staff staff 128 Apr 29 23:38 bin-rw-r--r-- 1 staff staff 213 Apr 29 23:38 external-scripts.json-rw-r--r-- 1 staff staff 2 Apr 29 23:38 hubot-scripts.jsondrwxr-xr-x 87 staff staff 2784 Apr 29 23:38 node_modules-rw-r--r-- 1 staff staff 599 Apr 29 23:38 package.jsondrwxr-xr-x 3 staff staff 96 Apr 29 23:38 scripts 資料夾結構： bin: 運行 hubot 腳本 node_modules: 套件文件 scripts: 自定義的腳本 external_scripts.json: 外部應用的腳本 hubot-scripts.json: 沒有在使用了 package.json: 全域配置資訊 接著便可以輸入 1$ bin/hubot 如果你有出現以下的問題時 123[Mon Apr 29 2019 23:48:00 GMT+0800 (CST)] ERROR ReplyError: MISCONF Redis is configured to save RDB snapshots, but is currently not able to persist on disk. Commands that may modify the data set are disabled. Please check Redis logs for details about the error. at parseError (/cube-hubot/node_modules/redis-parser/lib/parser.js:193:12) at parseType (/cube-hubot/node_modules/redis-parser/lib/parser.js:303:14) 請在另一個命令提示字元輸入 12345$ redis-cli並輸入config set stop-writes-on-bgsave-error no 接著我們打開 package.json 檔案內看看，預設有一些套件可以安裝 123456789101112131415161718192021222324&#123; &quot;name&quot;: &quot;cube-hubot&quot;, &quot;version&quot;: &quot;0.0.0&quot;, &quot;private&quot;: true, &quot;author&quot;: &quot;xxxxxx&quot;, &quot;description&quot;: &quot;A simple helpful robot for your Company&quot;, &quot;dependencies&quot;: &#123; &quot;hubot&quot;: &quot;^3.3.2&quot;, &quot;hubot-diagnostics&quot;: &quot;^1.0.0&quot;, &quot;hubot-google-images&quot;: &quot;^0.2.7&quot;, &quot;hubot-google-translate&quot;: &quot;^0.2.1&quot;, &quot;hubot-help&quot;: &quot;^1.0.1&quot;, &quot;hubot-heroku-keepalive&quot;: &quot;^1.0.3&quot;, &quot;hubot-maps&quot;: &quot;0.0.3&quot;, &quot;hubot-pugme&quot;: &quot;^0.1.1&quot;, &quot;hubot-redis-brain&quot;: &quot;^1.0.0&quot;, &quot;hubot-rules&quot;: &quot;^1.0.0&quot;, &quot;hubot-scripts&quot;: &quot;^2.17.2&quot;, &quot;hubot-shipit&quot;: &quot;^0.2.1&quot; &#125;, &quot;engines&quot;: &#123; &quot;node&quot;: &quot;0.10.x&quot; &#125;&#125; 輸入 yarn install 就可以將這些套件安裝起來 1$ yarn install 運行 hubot安裝完畢之後，再檢查一下是不是可以運行 1$ bin/hubot -h 如果可以出現以下的結果，就代表有成功囉 123456789101112Usage hubot [options]Available options: -a, --adapter ADAPTER The Adapter to use -c, --create PATH Create a deployable hubot -d, --disable-httpd Disable the HTTP server -h, --help Display the help information -l, --alias ALIAS Enable replacing the robot&apos;s name with alias -n, --name NAME The name of the robot in chat -r, --require PATH Alternative scripts path -t, --config-check Test hubot&apos;s config to make sure it won&apos;t fail at startup -v, --version Displays the version of hubot installed 完成之後，下一篇介紹 [hubot 專案部署到 heroku 連接 slack 聊天通訊軟體] 參考 Hubot Documentation]]></content>
+      <categories>
+        <category>hubot</category>
+      </categories>
+      <tags>
+        <tag>hubot</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[R 學習日誌#6 - 如何使用 R 語言存取 Google Sheets]]></title>
     <url>%2F2019%2F04%2F27%2Fr%2Fr-googlesheet%2F</url>
     <content type="text"><![CDATA[通常想要將資料放在一個資料庫方便做存取，一般所知道的資料庫都是常見的 MySQL, MSSQL 或是非結構化的 mongodb 等等的資料庫應用程式。不過有些時候就只是不多的資料，其實也不需要特別去裝這些資料庫，只要使用 Google Sheets 也可以做得到輕量型資料的喔。 學習內容大綱 套件安裝 連接 Google 帳戶 查詢 Google Sheets 試算表 讀取 Google Sheets 試算表 套件安裝使用 googlesheets 套件可以在之後串接 Google 試算表。 12install.packages('googlesheets')library(googlesheets) 連接 Google 帳戶在安裝套件好之後，第一件事情就是要連接你的 google 帳戶，輸入以下的指令之後，就會開始與帳戶建立一個新的授權，讓你可以透過 R 語言的方式做新增、修改、刪除、查詢等操作。 1gs_auth(new_user = TRUE) 這個時候會彈出一個視窗開啟瀏覽器，你需要登入你的 google 帳號，以下這個畫面所彈出來的資訊，便是讓你選擇你要登入的帳號。 選好某一個帳戶之後，此時會 google 會向你確認這組套件將會存取 google sheets 的查詢、編輯、建立、刪除所有的雲端應用檔案的授權，若沒什麼問題，就可以按下「允許」。 允許之後，下一個畫面會出現一組授權碼 登入成功之後，你就可以回到 R 語言的環境，這時有顯示一個 Enter authorization code: 要你輸入的驗證碼，就將 google 提供給你的授權碼貼到 R 環境這裏。 12345&gt; gs_auth(new_user = TRUE)Disabling .httr-oauth by renaming to .httr-oauth-SUSPENDEDNo token currently in force.httpuv not installed, defaulting to out-of-band authenticationEnter authorization code: 在你的目錄夾裡面，多了一個 .httr-oauth 檔案 你可以使用 gs_user() 的函數，看看你登入的帳戶資訊 1gs_user() 登入的帳號資訊如下： 1234567&gt; gs_user()Auto-refreshing stale OAuth token. displayName: xxxxxxx emailAddress: xxxxxxx@gmail.com date: 2019-04-27 15:51:28 GMT permissionId: 1344xxxxxxxxx4887 rootFolderId: 0AHxxxxxxxxxx9PVA 確認資訊無誤之後，接著就可以做接下來的存取囉 查詢 Google Sheets 試算表gs_ls() 使用這組函數可以查看帳號內可以使用的試算表 12library(knitr)kable(gs_ls()[, 1:6]) 顯示呈現如下： sheet_title author perm version updated sheet_key Amazoncom Inc (AMZN) price history xxxxxx rw new 2019-04-26 21:05:18 1Nx6Yflk-xxxxxxxx47VgbimS Apple Inc (AAPL) price history xxxxxx rw new 2019-04-26 21:01:33 1c-xxxxxxxx68HWrH9SPJ 讀取 Google Sheets 試算表就讀取一個檔案來試試，在我們已知 sheet_title 這欄位之後，透過 gs_title() 函數來查詢 12gs &lt;- gs_title('Amazoncom Inc (AMZN) price history')aws_data &lt;- gs_read(ss=gs, ws = "工作表1", skip=0) 結果如下： 12345678910111213141516&gt; gs &lt;- gs_title(&apos;Amazoncom Inc (AMZN) price history&apos;)Sheet successfully identified: &quot;Amazoncom Inc (AMZN) price history&quot;&gt; aws_data &lt;- gs_read(ss=gs, ws = &quot;工作表1&quot;, skip=0)Accessing worksheet titled &apos;工作表1&apos;.Downloading: 470 B Parsed with column specification:cols( `2019-03-08` = col_date(format = &quot;&quot;), `Amazoncom Inc` = col_character(), AMZN = col_character(), `1620.8` = col_double(), `https://finance.yahoo.com/q?s=AMZN` = col_character(), `2019-03-08_1` = col_date(format = &quot;&quot;))Warning message:Duplicated column names deduplicated: &apos;2019-03-08&apos; =&gt; &apos;2019-03-08_1&apos; [6] 如此一來，就可以讀取到試算表的值了。 參考想要了解更多關於 googlesheets 套件的函數方法，請上查詢 googlesheets: Manage Google Spreadsheets from R 說明文件]]></content>
@@ -105,6 +127,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[在 Mac OSX 使用 RVM 升級 Ruby V2.5.1]]></title>
+    <url>%2F2018%2F08%2F02%2Fmac%2Fhow-to-upgrade-ruby-on-mac%2F</url>
+    <content type="text"><![CDATA[RVM 是一套 Ruby 版本的管理工具，這裡頭包含 Ruby 的版本管理和 Gem 庫管理。本篇裡面使用 RVM 工具進行 Ruby 的升級。 RVM (Ruby Version Manager) 安裝 RVM安装 1$ curl -L get.rvm.io | bash -s stable 是否有完成安裝 RVM 1$ rvm -v 結果顯示 1rvm 1.29.4 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io] 使用 RVM 升級 Ruby 顯示目前的 Ruby 版本 1$ ruby -v 顯示結果 1ruby 2.0.0p648 (2015-12-16 revision 53162) [universal.x86_64-darwin16] 安装 Ruby 2.5.1 1rvm install 2.5.1 安裝完畢之後，再用 ruby -v 檢查看看，是不是已經換成下面顯示的結果一樣已完成升級。 1ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-darwin16] 結果 1Linking /usr/local/Cellar/ruby/2.5.1... 3293 symlinks created 那麼，這樣子就安裝完畢了。 參考：https://flinhong.com/2017/10/26/upgrade-ruby-on-mac/]]></content>
+      <categories>
+        <category>Ruby</category>
+      </categories>
+      <tags>
+        <tag>Ruby</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Slate - 為你打造漂亮的 API 文件]]></title>
     <url>%2F2018%2F08%2F02%2Ftools%2Fslate-api-document%2F</url>
     <content type="text"><![CDATA[這陣子在找一種工具可以將 Restful API 彙整起來能用網頁的方式執行讀取，上網找了不少工具，例如下方三套是常見的 API 文檔工具，在本篇則是介紹 Slate。 swagger：相當標準的 API 文件化工具，從設計、建置、撰寫、測試、各式各樣的技巧環環包圍。 apidoc： 這套也不錯，寫的方式是將所有 API 的註記放在原始碼的方法(function)的上方，但小缺點也在這了，如果參數值過多、回傳值也好幾行，這樣就一直在滑鼠捲軸了。不過資料不多的話，是滿適合的。 slate : 輕量化的寫法，允許你使用 markdown 撰寫 API 文件，並且是 ruby 語法執行 bundle 套件安裝，打包之後預設是用靜態的 html ，甚至你可以推上 github pages 進行託管。 先決條件務必要有 Ruby 1.9.2 或更高的版本。並且還需要 bundler gem，可以透過命令來做安裝 gem install bundler，安裝或升級可以參考以下連結。 安裝 Ruby 升級 Ruby 安裝 Slate先進入到 slate github https://github.com/lord/slate 首先按右上角的 Fork slate 的 repo fork 的 repo 已經複製一份到你自己的 repo 了https://github.com/&lt;&lt;YOURUSERNAME&gt;&gt;/slate，將它 clone 下來到你的本地端的資料夾 git clone https://github.com/weijutu/slate.git 進入 slate 資料夾 cd slate 初始化 Slate 將套件都裝起來，使用以下的指令進行安裝 1$ bundle install 過程中就會進行安裝套件 12345678910Fetching gem metadata from https://rubygems.org/............Fetching concurrent-ruby 1.0.5Installing concurrent-ruby 1.0.5Fetching i18n 0.7.0Installing i18n 0.7.0Fetching minitest 5.10.1Installing minitest 5.10.1Fetching thread_safe 0.3.5Installing thread_safe 0.3.5Fetching tzinfo 1.2.2 接著將 slate 執行起來 1$ bundle exec middleman server 執行之後，就可以打開瀏覽器開啟 http://localhost:4567，這樣一下子就開了一個全新的 slate api 靜態文件!! 12345 ~/Projects/slate $ bundle exec middleman server== The Middleman is loading== View your site at &quot;http://localhost:4567&quot;== Inspect your site configuration at &quot;http://localhost:4567/__middleman&quot; 是不是看起來很不賴呢？ 開始寫 API 文件大致上是 markdown 寫法的，若有不了解 markdown 語言的人，可以參考這篇文章 Markdown 語法說明。 標題123# Level 1 Header## Level 2 Header### Level 3 Header 段落文字1This is some paragraph text. Exciting, no? 程式碼範本1234const kittn = require('kittn');let api = kittn.authorize('meowmeowmeow');let max = api.kittens.delete(2); 語法註解1&gt; This is a code annotation. 表格1234Table Header 1 | Table Header 2 | Table Header 3-------------- | -------------- | --------------Row 1 col 1 | Row 1 col 2 | Row 1 col 3Row 2 col 1 | Row 2 col 2 | Row 2 col 3 文字格式1This text is **bold**, this is *italic*, this is an `inline code block`. 列表12345671. This2. Is3. An* This* Is* A 連結1This is an [internal link](#error-code-definitions) 產生靜態網頁修改完之後，我們將他產生靜態網站，可以使用以下的命令 1$ bundle exec middleman build --clean 部署過程中 1234567891011121314create build/stylesheets/print.csscreate build/stylesheets/screen.csscreate build/images/navbar.pngcreate build/images/logo.pngcreate build/fonts/slate.woffcreate build/fonts/slate.woff2create build/fonts/slate.ttfcreate build/fonts/slate.eotcreate build/fonts/slate.svgcreate build/index.html.tmpcreate build/javascripts/all_nosearch.jscreate build/javascripts/all.jscreate build/index.htmlProject built successfully. 你會發現會新增了一個 build 資料夾，裡面包含了許多被編譯出來的檔案 打開 index.html 就可以看到建置的結果囉。 提供一個實際範本在 /slate/source/index.html.md 檔案做修改在這裡提供一個實際範本可以做點參考。 語法範本在這裡：範例 顯示如下圖： 參考 https://github.com/lord/slate https://github.com/lord/slate/wiki https://www.sitepoint.com/writing-api-documentation-slate/]]></content>
@@ -114,17 +147,6 @@
       <tags>
         <tag>Ruby</tag>
         <tag>API</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[在 Mac OSX 使用 RVM 升級 Ruby V2.5.1]]></title>
-    <url>%2F2018%2F08%2F02%2Fmac%2Fhow-to-upgrade-ruby-on-mac%2F</url>
-    <content type="text"><![CDATA[RVM 是一套 Ruby 版本的管理工具，這裡頭包含 Ruby 的版本管理和 Gem 庫管理。本篇裡面使用 RVM 工具進行 Ruby 的升級。 RVM (Ruby Version Manager) 安裝 RVM安装 1$ curl -L get.rvm.io | bash -s stable 是否有完成安裝 RVM 1$ rvm -v 結果顯示 1rvm 1.29.4 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io] 使用 RVM 升級 Ruby 顯示目前的 Ruby 版本 1$ ruby -v 顯示結果 1ruby 2.0.0p648 (2015-12-16 revision 53162) [universal.x86_64-darwin16] 安装 Ruby 2.5.1 1rvm install 2.5.1 安裝完畢之後，再用 ruby -v 檢查看看，是不是已經換成下面顯示的結果一樣已完成升級。 1ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-darwin16] 結果 1Linking /usr/local/Cellar/ruby/2.5.1... 3293 symlinks created 那麼，這樣子就安裝完畢了。 參考：https://flinhong.com/2017/10/26/upgrade-ruby-on-mac/]]></content>
-      <categories>
-        <category>Ruby</category>
-      </categories>
-      <tags>
-        <tag>Ruby</tag>
       </tags>
   </entry>
   <entry>
@@ -391,6 +413,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[Node.js 系列學習日誌#28 - REST 路由規則]]></title>
+    <url>%2F2017%2F07%2F26%2Fnodejs%2Fnodejs-28-rest%2F</url>
+    <content type="text"><![CDATA[今天我們使用 express 框架介紹一下 REST 路由規則，REST 是一種 http 協定的網路應用，http 提供了八種方法使用： OPTIONS：這個方法可使伺服器傳回該資源所支援的所有HTTP請求方法。用*來代替資源名稱，向Web伺服器傳送OPTIONS請求，可以測試伺服器功能是否正常運作。 HEAD：與GET方法一樣，都是向伺服器發出指定資源的請求。只不過伺服器將不傳回資源的本文部份。它的好處在於，使用這個方法可以在不必傳輸全部內容的情況下，就可以獲取其中「關於該資源的資訊」（元資訊或稱元資料）。 GET：向指定的資源發出「顯示」請求。使用GET方法應該只用在讀取資料，而不應當被用於產生「副作用」的操作中，例如在Web Application中。其中一個原因是GET可能會被網路蜘蛛等隨意存取。參見安全方法 POST：向指定資源提交資料，請求伺服器進行處理（例如提交表單或者上傳檔案）。資料被包含在請求本文中。這個請求可能會建立新的資源或修改現有資源，或二者皆有。 PUT：向指定資源位置上傳其最新內容。 DELETE：請求伺服器刪除Request-URI所標識的資源。 TRACE：回顯伺服器收到的請求，主要用於測試或診斷。 CONNECT：HTTP/1.1協定中預留給能夠將連線改為管道方式的代理伺服器。通常用於SSL加密伺服器的連結（經由非加密的HTTP代理伺服器） 而 express 網頁框架也針對 http 請求方法設計路由的函數： 通常在設計 rest 時，常用的是 get (取得), post (新增), put (更新), delete (刪除) 參考資料http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE]]></content>
+      <categories>
+        <category>Node.js</category>
+      </categories>
+      <tags>
+        <tag>Node.js</tag>
+        <tag>鐵人賽</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Node.js 系列學習日誌#27 - forever 讓程式保持執行狀態]]></title>
     <url>%2F2017%2F07%2F26%2Fnodejs%2Fnodejs-27-forever%2F</url>
     <content type="text"><![CDATA[程式準備要部署上線時，就會面臨到執行程式的方式，伺服器的管理，是不是能有一個運行 Node.js 程式，並且有個工具處理這件事情。forever 可以作為保持運行的狀態，管理 Node.js 程式服務，在 forever 進程之下，建立子進程，執行啟動與停止的命令相當簡單。更特別的是，經常我們在寫 Node.js 的時候，每次更動的檔案時都需要再重新執行啟動服務的指令 (例如：node app.js)，而這個工具是當每次更新程式的時候，它會自動重新啟動服務，更方便許多了呢！ 這是官方的描述：（https://github.com/nodejitsu/forever） A simple CLI tool for ensuring that a given script runs continuously (i.e. forever). 安裝12// 一般建議加上 -g 將 forever 全域安裝$[sudo] npm install forever -g 當然若你要在某個特定目錄下安裝也是可以 12$cd /path/projects/abc$[sudo] npm install forever 指令的幫助可以透過以下指令列出說明 1$forever —help 顯示所有運行的服務1$forever list 啟動1$forever start app.js 停止操作1$forever stopall 停止某一個程式專案1$forever stop app.js 實作一個簡單運用我們先用 express 這個框架建一個簡單的網站 啟動程式1$forever start app.js forever 列表清單1$forever list 可以看到紫色部分，就是在放 log file 的路徑 關閉進程1$forever stop app.js]]></content>
@@ -401,18 +435,6 @@
         <tag>Node.js</tag>
         <tag>鐵人賽</tag>
         <tag>forever</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Node.js 系列學習日誌#28 - REST 路由規則]]></title>
-    <url>%2F2017%2F07%2F26%2Fnodejs%2Fnodejs-28-rest%2F</url>
-    <content type="text"><![CDATA[今天我們使用 express 框架介紹一下 REST 路由規則，REST 是一種 http 協定的網路應用，http 提供了八種方法使用： OPTIONS：這個方法可使伺服器傳回該資源所支援的所有HTTP請求方法。用*來代替資源名稱，向Web伺服器傳送OPTIONS請求，可以測試伺服器功能是否正常運作。 HEAD：與GET方法一樣，都是向伺服器發出指定資源的請求。只不過伺服器將不傳回資源的本文部份。它的好處在於，使用這個方法可以在不必傳輸全部內容的情況下，就可以獲取其中「關於該資源的資訊」（元資訊或稱元資料）。 GET：向指定的資源發出「顯示」請求。使用GET方法應該只用在讀取資料，而不應當被用於產生「副作用」的操作中，例如在Web Application中。其中一個原因是GET可能會被網路蜘蛛等隨意存取。參見安全方法 POST：向指定資源提交資料，請求伺服器進行處理（例如提交表單或者上傳檔案）。資料被包含在請求本文中。這個請求可能會建立新的資源或修改現有資源，或二者皆有。 PUT：向指定資源位置上傳其最新內容。 DELETE：請求伺服器刪除Request-URI所標識的資源。 TRACE：回顯伺服器收到的請求，主要用於測試或診斷。 CONNECT：HTTP/1.1協定中預留給能夠將連線改為管道方式的代理伺服器。通常用於SSL加密伺服器的連結（經由非加密的HTTP代理伺服器） 而 express 網頁框架也針對 http 請求方法設計路由的函數： 通常在設計 rest 時，常用的是 get (取得), post (新增), put (更新), delete (刪除) 參考資料http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE]]></content>
-      <categories>
-        <category>Node.js</category>
-      </categories>
-      <tags>
-        <tag>Node.js</tag>
-        <tag>鐵人賽</tag>
       </tags>
   </entry>
   <entry>

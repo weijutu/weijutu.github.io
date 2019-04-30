@@ -156,6 +156,142 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-07-23T16:15:00.000Z">2017-07-24</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分鐘 閱讀文 (大約 588 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/07/24/nodejs/nodejs-15-markdown/">Node.js 系列學習日誌#15 - 讀取 markdown 檔案內容顯示在頁面上</a>
+            
+        </h1>
+        <div class="content">
+            <p>繼上一篇完成讀取檔案的操作之後，本篇將介紹讀取  markdown 檔案內容顯示在頁面上面。</p>
+<h1 id="話說前頭，什麼是-markdown"><a href="#話說前頭，什麼是-markdown" class="headerlink" title="話說前頭，什麼是 markdown?"></a>話說前頭，什麼是 markdown?</h1><p>從 wiki 網站所說的，它是一種輕量級的標記語言，允許使用容易讀也容易寫的純文字的格式，最後轉換 xhtml, html 檔案，就有點像是一般電子郵件純文本的特性。可以從這個網址來 <a href="http://markdown.tw/" target="_blank" rel="noopener">http://markdown.tw/</a> 學習每個元素的寫法。</p>
+<h1 id="node-markdown-實作"><a href="#node-markdown-實作" class="headerlink" title="node-markdown 實作"></a>node-markdown 實作</h1><p>首先我們建立一個 express web framework 的專案，在這邊的樣板引擎是用 ejs ，因此下的指令是</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$express -e nodejs-fs-markdown</span><br></pre></td></tr></table></figure>
+<p>在根目錄底下建立一個 markdown 檔案，名為 book.md 的檔案，開啓 book.md 檔案後，我們任意打一些 markdown 的格式預備要來轉換  html 格式</p>
+<p><img src="/images/nodejs/61.png" alt></p>
+<p>接著重要我們要採用  node-markdown 的套件來安裝，詳見 <a href="https://www.npmjs.org/package/node-markdown" target="_blank" rel="noopener">https://www.npmjs.org/package/node-markdown</a> ，安裝方式可使用</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$npm</span> install node-markdown</span><br></pre></td></tr></table></figure>
+<p>其檔案結構會是：</p>
+<p><img src="/images/nodejs/62.png" alt></p>
+<p>請打開 app.js 檔案，我們要將 node-markdown 引入，因此宣告方式為：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> md = <span class="hljs-built_in">require</span>(<span class="hljs-string">"node-markdown"</span>).Markdown;</span><br></pre></td></tr></table></figure>
+<p>並且在 app.js 檔案裡面安插以下這段</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="hljs-string">'/markdown'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res</span>)</span>&#123;</span><br><span class="line">    fs.readFile(<span class="hljs-string">"./book.md"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, data</span>) </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (err) &#123;</span><br><span class="line">            <span class="hljs-keyword">throw</span> err;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">       <span class="hljs-comment">//使用  md 方法將檔案內容轉行為 html 格式</span></span><br><span class="line">        str = md(data.toString());</span><br><span class="line">        <span class="hljs-built_in">console</span>.log(str);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">//回應結果顯示在頁面上</span></span><br><span class="line">        res.send(str)</span><br><span class="line">        res.end();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>在這邊使用了 /markdown 作為進入的網址，而這個網址主要是去解析 markdown 的檔案，在這個 function 下，我們還需要利用  fs 核心模組來讀取 book.md 檔案，請務必在宣告的地方加入  var fs = require(“fs”);</p>
+<p>讀取的方式就使用  fs.readFile 方法，接著更重要的是再使用 md 方法將檔案內容轉換成  html 格式，最後，看一下結果如下，將會依照 markdown 的格式轉換</p>
+<p><img src="/images/nodejs/63.png" alt></p>
+<p>學習了這個工具，之後再撰寫 html 的檔案時，可以利用 markdown 的格式來寫，寫起來又輕鬆又好懂喔！<br>下集待續…</p>
+<h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><ul>
+<li><a href="http://markdown.tw/" target="_blank" rel="noopener">http://markdown.tw/</a></li>
+<li><a href="http://www.wikiwand.com/zh-tw/Markdown" target="_blank" rel="noopener">http://www.wikiwand.com/zh-tw/Markdown </a></li>
+</ul>
+
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-07-23T16:14:00.000Z">2017-07-24</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分鐘 閱讀文 (大約 658 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/07/24/nodejs/nodejs-14-middleware/">Node.js 系列學習日誌#14 - middleware 應用與開發</a>
+            
+        </h1>
+        <div class="content">
+            <p>從我們前幾篇用到 express web framework 框架的時候，express 就已經內建啟用 middleware 的概念，可以利用中間層的這個部分做一些效果，接下來本章節就來介紹  middleware 。首先我們先建立好一個 express web framework 框架</p>
+<p>建立 express 的指令是：</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$express</span> -e nodejs-middleware</span><br></pre></td></tr></table></figure>
+<p>並且打開 app.js 檔案</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">'express'</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> favicon = <span class="hljs-built_in">require</span>(<span class="hljs-string">'static-favicon'</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> logger = <span class="hljs-built_in">require</span>(<span class="hljs-string">'morgan'</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> cookieParser = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cookie-parser'</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> bodyParser = <span class="hljs-built_in">require</span>(<span class="hljs-string">'body-parser'</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">var</span> routes = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./routes/index'</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> users = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./routes/users'</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">var</span> app = express();</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// view engine setup</span></span><br><span class="line">app.set(<span class="hljs-string">'views'</span>, path.join(__dirname, <span class="hljs-string">'views'</span>));</span><br><span class="line">app.set(<span class="hljs-string">'view engine'</span>, <span class="hljs-string">'ejs'</span>);</span><br><span class="line"></span><br><span class="line">app.use(favicon());</span><br><span class="line">app.use(logger(<span class="hljs-string">'dev'</span>));</span><br><span class="line">app.use(bodyParser.json());</span><br><span class="line">app.use(bodyParser.urlencoded());</span><br><span class="line">app.use(cookieParser());</span><br><span class="line">app.use(express.static(path.join(__dirname, <span class="hljs-string">'public'</span>)));</span><br><span class="line"></span><br><span class="line">app.use(<span class="hljs-string">'/'</span>, routes);</span><br><span class="line">app.use(<span class="hljs-string">'/users'</span>, users);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/// catch 404 and forward to error handler</span></span><br><span class="line">app.use(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res, next</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">var</span> err = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'Not Found'</span>);</span><br><span class="line">    err.status = <span class="hljs-number">404</span>;</span><br><span class="line">    next(err);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/// error handlers</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// development error handler</span></span><br><span class="line"><span class="hljs-comment">// will print stacktrace</span></span><br><span class="line"><span class="hljs-keyword">if</span> (app.get(<span class="hljs-string">'env'</span>) === <span class="hljs-string">'development'</span>) &#123;</span><br><span class="line">    app.use(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, req, res, next</span>) </span>&#123;</span><br><span class="line">        res.status(err.status || <span class="hljs-number">500</span>);</span><br><span class="line">        res.render(<span class="hljs-string">'error'</span>, &#123;</span><br><span class="line">            message: err.message,</span><br><span class="line">            error: err</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// production error handler</span></span><br><span class="line"><span class="hljs-comment">// no stacktraces leaked to user</span></span><br><span class="line">app.use(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, req, res, next</span>) </span>&#123;</span><br><span class="line">    res.status(err.status || <span class="hljs-number">500</span>);</span><br><span class="line">    res.render(<span class="hljs-string">'error'</span>, &#123;</span><br><span class="line">        message: err.message,</span><br><span class="line">        error: &#123;&#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">module</span>.exports = app;</span><br></pre></td></tr></table></figure>
+<p>從上面建立的  express 框架可以看到這裡用了許多的 app.use 的方法，包含靜態檔案、body 解析器、路由機制。當預設 middleware 之後，每當瀏覽器收到連線要求的時候，middleware 就會被呼叫啟用。簡單來講 middleware 就像一個薄薄的一層過濾網</p>
+<h1 id="建立-middleware"><a href="#建立-middleware" class="headerlink" title="建立 middleware"></a>建立 middleware</h1><p>由於基本設定接已經有提供高效能的套件，其 express  所建立好的 middleware 設定之外，也可以自定撰寫 middleware 安排到基本設定流程當中，我們建立一個簡單的 middleware 功能，請在 app.js 安插以下程式：</p>
+<p><img src="/images/nodejs/58.png" alt></p>
+<p>一開始先建立一個 middleHandler ，其基本參數有  request, response, next，而  next方法 是代表交給下一個 middleware 繼續作處理，接著在建立 app.get ，我們預期要從瀏覽器  /test ㄙㄟ來做請求，第二個參數為 middleHandler function ，以及第三個 callback 函式</p>
+<p><img src="/images/nodejs/59.png" alt></p>
+<p>一開始從瀏覽器 localhost:3000/test 發送出去之後，會先進到 middleHandler ，所以會先顯示 <strong>start</strong> :: middle handler function ，然後遇到  next(); 之後再回到 app.get  繼續作處理，因此再將 <strong>end</strong> :: middle handler function 顯示，最後用了一個 res.send 方法將一個小字串文字直接輸出到瀏覽器上面。</p>
+<h1 id="下圖可看結果："><a href="#下圖可看結果：" class="headerlink" title="下圖可看結果："></a>下圖可看結果：</h1><p><img src="/images/nodejs/60.png" alt></p>
+<p>更多應用，下回待續…</p>
+<p>參考資料：<br><a href="http://stephensugden.com/middleware_guide/" target="_blank" rel="noopener">http://stephensugden.com/middleware_guide/</a><br><a href="http://www.hacksparrow.com/how-to-write-midddleware-for-connect-express-js.html" target="_blank" rel="noopener">http://www.hacksparrow.com/how-to-write-midddleware-for-connect-express-js.html</a></p>
+
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2017-07-23T16:13:00.000Z">2017-07-24</time>
                 
                 <div class="level-item">
@@ -372,142 +508,6 @@
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-07-23T16:10:00.000Z">2017-07-24</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 分鐘 閱讀文 (大約 610 個字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/07/24/nodejs/nodejs-10-mysql-crud-read/">Node.js 系列學習日誌#10 - MySQL 操作: 查詢</a>
-            
-        </h1>
-        <div class="content">
-            <p>上一篇介紹了資料庫連線的方式，接著我們就來實作從資料庫讀取資料出來的做法。資料庫的部分，假定先建立一個 demo_nodejs 的資料庫，並且建立 users 的資料表，其資料表有  id, name, description 欄位</p>
-<p>我們用了 express web framework ＋ jade 來當作網站的框架，安裝 express 方式可以依照這篇 『使用 Express 實作網頁開發框架』 <a href="http://ithelp.ithome.com.tw/ironman7/app/article/all/recent/10158306" target="_blank" rel="noopener">http://ithelp.ithome.com.tw/ironman7/app/article/all/recent/10158306</a> ，不過在這篇範例當中，不使用 els 引擎，建立的時候直接下</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$express</span> [專案名稱]</span><br></pre></td></tr></table></figure>
-<p>主要我們要安裝的是  mysql ，因此就下</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$npm</span> install mysql</span><br></pre></td></tr></table></figure>
-<p>接著請開啟  routes/index.js 檔案，在這邊我們需要修改一下，讓這個 index 首頁，直接顯示資料庫的列表清單，首先是將剛裝好的 mysql 引用進來，並且用 db_option 物件來設定一下連線 mysql  參數，包含 host, user, password, database, port</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> mysql = <span class="hljs-built_in">require</span>(<span class="hljs-string">'mysql'</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> db_option = &#123;</span><br><span class="line">    host: <span class="hljs-string">'localhost'</span>,</span><br><span class="line">    user: <span class="hljs-string">'nodejs'</span>,</span><br><span class="line">    password: <span class="hljs-string">'nodejs'</span>,</span><br><span class="line">    database:<span class="hljs-string">'demo_nodejs'</span>,</span><br><span class="line">    port: <span class="hljs-number">3306</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>之後，在放一個 exports.index 函式來取得資料庫的資料</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">exports.index = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res</span>)</span>&#123;</span><br><span class="line">     <span class="hljs-keyword">var</span> connection = mysql.createConnection(db_option);</span><br><span class="line">     <span class="hljs-keyword">var</span> query =<span class="hljs-string">'SELECT * FROM users'</span>;</span><br><span class="line">    connection.query(query, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, rows, fields</span>)</span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span>(err) <span class="hljs-keyword">throw</span> err;</span><br><span class="line">        res.render(<span class="hljs-string">'index'</span>, &#123; <span class="hljs-attr">title</span>: <span class="hljs-string">'這是 mysql + node.js 示範版本'</span>, <span class="hljs-string">'items'</span>: rows &#125;);   </span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可以看到從 connection.query 方法取出來的結果，利用 callback function 的方式將查詢結果物件放在 rows，最後在 render index 的畫面時，把傳遞的物件放在自訂  json  格式的  items 裡</p>
-<p><img src="/images/nodejs/44.png" alt></p>
-<p>我們可以知道我們要傳遞的 view 位置是在  index ，因此進到  /views/index.jade 將畫面做一個簡單的呈現，在這邊是用了 bootstrap 的前端畫面。我預想著上面要有個  header，然後簡單的標頭文字，中間在擺放重要的表格資料，因此佈局上要有  navbar, 中間的  container，下圖為標頭部分</p>
-<p><img src="/images/nodejs/45.png" alt></p>
-<p>接這最重要的就是內文，在這邊用個  table 來佈局</p>
-<p><img src="/images/nodejs/46.png" alt></p>
-<p>接資料的部分，就是剛剛從 routes/index.js 傳過來的 json 物件，其中有  items ，請使用 each 的方式跑迴圈</p>
-<figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-each user in items</span><br><span class="line">    tr</span><br><span class="line">        td(style="padding:20px")=user.id</span><br><span class="line">        td(style="padding:20px")=user.name</span><br><span class="line">        td(style="padding:20px")=user.description</span><br></pre></td></tr></table></figure>
-
-
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-07-23T16:09:00.000Z">2017-07-24</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 分鐘 閱讀文 (大約 527 個字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/07/24/nodejs/nodejs-09-mysql-crud-delete/">Node.js 系列學習日誌#9 - MySQL 操作: 刪除</a>
-            
-        </h1>
-        <div class="content">
-            <p>前幾篇完成了 Create, Read, Update, 本篇將介紹 Delete 的操作，一樣的我們在使用者列表上面，每筆資料的功能加入『刪除』按鈕，在頁面上表格列出的語法是：</p>
-<figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">mixin users(users)</span><br><span class="line">  h1= title</span><br><span class="line">  fieldset</span><br><span class="line">   legend 以下是從 mysql 取出的使用者列表</span><br><span class="line">   a(href='/create', class='btn btn-primary') 新增使用者</span><br><span class="line">   table.mytable.table</span><br><span class="line">    th 編輯</span><br><span class="line">    th 名稱</span><br><span class="line">    th 描述</span><br><span class="line">    th 功能</span><br><span class="line">     each user in users</span><br><span class="line">      tr</span><br><span class="line">       td= user.id</span><br><span class="line">       td #&#123;user.name&#125;</span><br><span class="line">       td #&#123;user.description&#125;</span><br><span class="line">       td</span><br><span class="line">         a(href='/update/#&#123;user.id&#125;', class='btn btn-warning') 更新</span><br><span class="line">         a(href='/delete/#&#123;user.id&#125;', class='btn btn-danger') 刪除</span><br><span class="line"></span><br><span class="line"> - users = user</span><br><span class="line"> .container</span><br><span class="line">      mixin users(users)</span><br></pre></td></tr></table></figure>
-<p>刪除部分的語法就是在按鈕點選的時候，連到 /delete ，後面我們指定資料使用者的編號作為參數  /#{user.id}</p>
-<figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a(href='/delete/#&#123;user.id&#125;', class='btn btn-danger') 刪除</span><br></pre></td></tr></table></figure>
-<p>佈局如下：</p>
-<p><img src="/images/nodejs/41.png" alt></p>
-<p>開啓 app.js 補上 delete 的操作</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="hljs-string">'/delete/:id'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res</span>) </span>&#123;</span><br><span class="line">    pool.getConnection(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, connection</span>) </span>&#123;</span><br><span class="line">        connection.query(<span class="hljs-string">'delete from users  where id = ?'</span>, [req.params.id], <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, fields</span>) </span>&#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (err)</span><br><span class="line">                <span class="hljs-keyword">throw</span> err;</span><br><span class="line">        &#125;);</span><br><span class="line">        connection.query(<span class="hljs-string">'SELECT * from users'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, rows, fields</span>) </span>&#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (err)</span><br><span class="line">                <span class="hljs-keyword">throw</span> err;</span><br><span class="line">            res.render(<span class="hljs-string">'user'</span>, &#123;</span><br><span class="line">                title : <span class="hljs-string">'使用者列表'</span>,</span><br><span class="line">                user : rows</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">        connection.release();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>其中在程式的部分，在點選按鈕 /delete 的時候，後面接 :id 也就是預定在網址列上面取得使用者編號的參數，然後再此刪除的部分以以下語法呈現：</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">connection.query(<span class="hljs-string">'delete from users  where id = ?'</span>, [req.params.id], <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, fields</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (err)</span><br><span class="line">        <span class="hljs-keyword">throw</span> err;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>在 connection.query 方法裡的第二參數  [req.params.id]帶入網址列的參數，最後刪除完成後，再度顯示取得最新的使用者列表</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">connection.query(<span class="hljs-string">'SELECT * from users'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, rows, fields</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (err)</span><br><span class="line">        <span class="hljs-keyword">throw</span> err;</span><br><span class="line">    res.render(<span class="hljs-string">'user'</span>, &#123;</span><br><span class="line">        title : <span class="hljs-string">'使用者列表'</span>,</span><br><span class="line">        user : rows</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>在這邊我們刪掉第四筆資料</p>
-<p><img src="/images/nodejs/42.png" alt></p>
-<p>結果如下：</p>
-<p><img src="/images/nodejs/43.png" alt></p>
-<p>我們終於完成了 Create, Read, Update ,Delete 的 mysql 存取操作 ，完整的程式歡迎到這裡 fork 囉</p>
-<p><a href="https://github.com/weijutu/nodejs-mysql-crud" target="_blank" rel="noopener">https://github.com/weijutu/nodejs-mysql-crud</a></p>
-<p>那麼資料庫存取就先到這裡，接下來還有更多應用，敬請期待  ：）</p>
-
-
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -582,7 +582,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        67
+                        69
                     </p>
                 </div>
             </div>
@@ -592,7 +592,7 @@
                         分類
                     </p>
                     <p class="title has-text-weight-normal">
-                        13
+                        14
                     </p>
                 </div>
             </div>
@@ -602,7 +602,7 @@
                         標籤
                     </p>
                     <p class="title has-text-weight-normal">
-                        43
+                        44
                     </p>
                 </div>
             </div>
@@ -644,6 +644,44 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/04/30/bot/hubot-02-heroku-slack/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/bot/cover2.png" alt="用 Hubot 打造聊天機器人#2 - hubot 專案部署到 heroku 連接 slack 聊天通訊軟體">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-30T15:07:00.000Z">2019-04-30</time></div>
+                    <a href="/2019/04/30/bot/hubot-02-heroku-slack/" class="has-link-black-ter is-size-6">用 Hubot 打造聊天機器人#2 - hubot 專案部署到 heroku 連接 slack 聊天通訊軟體</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/hubot/">hubot</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/29/bot/hubot-01-install/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/bot/cover1.png" alt="用 Hubot 打造聊天機器人#1 - 基礎介紹與安裝">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-29T15:07:00.000Z">2019-04-29</time></div>
+                    <a href="/2019/04/29/bot/hubot-01-install/" class="has-link-black-ter is-size-6">用 Hubot 打造聊天機器人#1 - 基礎介紹與安裝</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/hubot/">hubot</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -695,44 +733,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-19T12:24:00.000Z">2019-04-19</time></div>
                     <a href="/2019/04/19/r/r-textmining-02-ch02-1/" class="has-link-black-ter is-size-6">R語言文字探勘好好玩 - Ch2_採 Tidy 資料做情感分析 (1)</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/R/">R</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/04/18/r/r-textmining-01-ch01-2/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/r/cover6-1.png" alt="R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (2)">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-18T15:34:00.000Z">2019-04-18</time></div>
-                    <a href="/2019/04/18/r/r-textmining-01-ch01-2/" class="has-link-black-ter is-size-6">R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (2)</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/R/">R</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/04/17/r/r-textmining-01-ch01-1/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/r/cover6-1.png" alt="R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (1)">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-17T15:34:00.000Z">2019-04-17</time></div>
-                    <a href="/2019/04/17/r/r-textmining-01-ch01-1/" class="has-link-black-ter is-size-6">R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (1)</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/R/">R</a>
                     </p>
@@ -810,6 +810,14 @@
             </span>
             <span class="level-end">
                 <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/hubot/">
+            <span class="level-start">
+                <span class="level-item">hubot</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/macbook/">
@@ -1063,6 +1071,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/hubot/">
+                        <span class="tag">hubot</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/jade/">
                         <span class="tag">jade</span>
                         <span class="tag is-grey">2</span>
@@ -1253,6 +1268,14 @@
             </span>
             <span class="level-end">
                 <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/hubot/">
+            <span class="level-start">
+                <span class="level-item">hubot</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/macbook/">
@@ -1501,6 +1524,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/gitbook/">
                         <span class="tag">gitbook</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hubot/">
+                        <span class="tag">hubot</span>
                         <span class="tag is-grey">2</span>
                     </a>
                 </div>

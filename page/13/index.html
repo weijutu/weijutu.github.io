@@ -156,6 +156,178 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-07-23T16:05:00.000Z">2017-07-24</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分鐘 閱讀文 (大約 618 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/07/24/nodejs/nodejs-05-bower/">Node.js 系列學習日誌#5 - bower 管理相依套件工具</a>
+            
+        </h1>
+        <div class="content">
+            <p><img src="/images/nodejs/23.png" alt></p>
+<p>『A package manager for the web』瀏覽器套件管理工具</p>
+<p>一般在寫網頁時，多半會引入套件來使用，而 bower 就是用來管理相依套件工具，bower 是 twitter 研發，透過這樣的管理工具下載安裝 css, js 套件，讓開發者跟隨著這樣的工具，讓 web 套件 (例如： bootstrap, jquery… etc) 方面更好管理，更簡單的方式更新最新版本的套件。</p>
+<p>當沒有管理的時候，你也許是…</p>
+<ol>
+<li>直接去官方網站抓檔案，還需要記得要下載 dev 版跟 min  壓縮過的版本 (例如：<a href="https://code.jquery.com/jquery/" target="_blank" rel="noopener">https://code.jquery.com/jquery/</a>)</li>
+<li>找 cdn 檔案 (例如：<a href="https://developers.google.com/speed/libraries/devguide?hl=zh-tw" target="_blank" rel="noopener">https://developers.google.com/speed/libraries/devguide?hl=zh-tw</a>)</li>
+<li>乾脆用現有的 (舊版本繼續沿用)</li>
+</ol>
+<p>以上的行為，多半會花一些時間一直找，而這套工具就是解決這樣的問題，只要用指令操作，效率高多囉！</p>
+<p>本章節將學習到：</p>
+<ul>
+<li>安裝 bower</li>
+<li>使用方法</li>
+<li>使用 express, bower 建立 bootstrap 套件的前端頁面</li>
+</ul>
+<h1 id="安裝-bower"><a href="#安裝-bower" class="headerlink" title="安裝 bower"></a>安裝 bower</h1><p>(安裝之前務必要有 node.js, npm, 建議儲存在 global)</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$npm</span> install bower -g</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/24.png" alt></p>
+<p>可以利用 Search Bower packages 頁面搜尋需要的套件：<a href="http://bower.io/search/" target="_blank" rel="noopener">http://bower.io/search/</a> ，或者用指令搜尋</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$bower</span> search bootstrap</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/25.png" alt></p>
+<p>使用方法：</p>
+<p>請先安裝 express 作為網頁框架，然後安裝套件的方式，在這邊安裝一下 bootstrap</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$bower</span> install bootstrap</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/26.png" alt></p>
+<p>指令安裝之後就會看到 bootstrap 出現在 bower_components/bootstrap/<em>.</em> , bower_components/jquery/<em>.</em></p>
+<p>透過 bower init 指令，安裝 bower.json，您可以在 dependencies 的部分輸入套件名稱與版本號</p>
+<p><img src="/images/nodejs/27.png" alt></p>
+<p>我們在建立好的 express 框架下的  app.js ，把剛才建立好的  bower_components  資料夾，綁進去基本靜態套件的路徑</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.use(express.static(path.join(__dirname, <span class="hljs-string">'bower_components/bootstrap/dist/'</span>)));</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/28.png" alt></p>
+<p>接著用引入檔案的方法，請打開 ./views/layout.jade ，在 head 的子節點的地方新增</p>
+<figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">link(rel='stylesheet', href='/css/bootstrap.min.css')</span><br><span class="line">script(src='/js/bootstrap.min.js')</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/29.png" alt></p>
+<p>引入成功之後，就可以建立一個 bootstrap 的頁面，下圖是用透過 bower 匯入 bootstrap 套件建立一個簡單前端頁面：</p>
+<p><img src="/images/nodejs/30.png" alt></p>
+<h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><ul>
+<li><a href="http://bower.io/" target="_blank" rel="noopener">http://bower.io/</a></li>
+<li><a href="http://jade-lang.com/tutorial/" target="_blank" rel="noopener">http://jade-lang.com/tutorial/</a></li>
+<li><a href="http://getbootstrap.com/" target="_blank" rel="noopener">http://getbootstrap.com/</a></li>
+</ul>
+
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-07-23T16:04:00.000Z">2017-07-24</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 分鐘 閱讀文 (大約 465 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/07/24/nodejs/nodejs-04-nvm/">Node.js 系列學習日誌#4 - nvm (Node Version Manager) 管理多個版本</a>
+            
+        </h1>
+        <div class="content">
+            <p>nvm 是一種在管理多個 Node.js 版本的套件，當你預計採用不同版本執行Node.js 的時候，可以採用這個套件，那麼我們可以先進到這個網址裡面找到安裝指令</p>
+<p><a href="https://github.com/creationix/nvm" target="_blank" rel="noopener">https://github.com/creationix/nvm</a></p>
+<p>安裝指令請在下方找到：</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://raw.githubusercontent.com/creationix/nvm/v0.17.2/install.sh | bash</span><br></pre></td></tr></table></figure>
+<p>或者用 wget 方式下載</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.17.2/install.sh | bash</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/16.png" alt></p>
+<p>將這個指令貼到命令提示字元</p>
+<p>安裝完之後，請先將命令提示字元關閉，再重新開啟以使用 nvm 指令<br>接著重啟之後，輸入</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$nvm</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/17.png" alt></p>
+<p>確定有  nvm 之後，可以輸入 $nvm ls-remote 指令看有哪些版本可以安裝，在命令提示字元會看到落落長的版本號</p>
+<p><img src="/images/nodejs/18.png" alt></p>
+<h1 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h1><p>依照 nvm help 指令的說明上，請使用  $nvm install 安裝 node.js  版本，這些版本會實際放在 /usr/local/n/資料夾，例如：</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$nvm</span> install v0.10.32</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/19.png" alt></p>
+<p>再裝一個不同版本的 node，那麼就安裝 v0.11.14 (版本前面的 v 可以不用寫)</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$nvm</span> install v0.11.14</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/20.png" alt></p>
+<p>這時候下一個  $nvm ls 指令，這時候安裝最後的版本，將會當做是當前的版本，可以下 $nvm current ，此時，綠色箭頭就是目前的版本號 v0.11.14</p>
+<p><img src="/images/nodejs/21.png" alt></p>
+<p>接下來我們可以用簡單的指令切換 Node.js 版本，這時候綠色箭頭就換成 v0.10.32</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$nvm</span> use 0.10.32</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/22.png" alt></p>
+<h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><ul>
+<li><a href="http://nodejs.org/" target="_blank" rel="noopener">http://nodejs.org/</a></li>
+<li><a href="https://github.com/creationix/nvm" target="_blank" rel="noopener">https://github.com/creationix/nvm</a></li>
+<li><a href="https://github.com/Gizra/KnowledgeBase/wiki/How-to-install-nvm-(Node-Version-Manager" target="_blank" rel="noopener">https://github.com/Gizra/KnowledgeBase/wiki/How-to-install-nvm-(Node-Version-Manager)</a>)</li>
+<li><a href="https://www.npmjs.org/package/nvm" target="_blank" rel="noopener">https://www.npmjs.org/package/nvm</a></li>
+</ul>
+
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2017-07-23T16:03:00.000Z">2017-07-24</time>
                 
                 <div class="level-item">
@@ -408,161 +580,6 @@
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-04-09T11:41:38.000Z">2017-04-09</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Python/">Python</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 分鐘 閱讀文 (大約 426 個字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/04/09/python/python-install-for-windows/">Python - 在 Windows 安裝 Python 環境</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>以下我將示範在 Windows 上面安裝 python 語言的環境</p>
-<h3 id="下載與安裝-python"><a href="#下載與安裝-python" class="headerlink" title="下載與安裝 python"></a>下載與安裝 python</h3><ol>
-<li>進入到 python 官方網站 <a href="https://www.python.org/" target="_blank" rel="noopener">https://www.python.org/</a> ，點選上面的 Download 後，選擇 python 2.7.13 版本來下載，至於為甚麼不選擇左邊的 python 3.6.1 呢? 是因為 2.7.x 的版本有比較多 library 使用，之後的文章大致上都會以 2.7.x 的版本來作介紹</li>
-</ol>
-<p><img src="/images/python/1.png" alt></p>
-<ol start="2">
-<li>點選剛下載的執行檔案，可以選擇 Install for all users 或 Install just for me (not available on Windows Vista)，在這邊我選擇 Install for all users，之後就按一下 Next</li>
-</ol>
-<p><img src="/images/python/2.png" alt></p>
-<ol start="3">
-<li>選擇安裝路徑，保持預設就可以了，之後就按下 Next</li>
-</ol>
-<p><img src="/images/python/3.png" alt></p>
-<ol start="4">
-<li>自訂安裝內容，保持預設就可以了，之後就按下 Next</li>
-</ol>
-<p><img src="/images/python/4.png" alt></p>
-<ol start="5">
-<li>進入安裝程序，保持預設就可以了，之後就按下 Next</li>
-</ol>
-<p><img src="/images/python/5.png" alt></p>
-<ol start="6">
-<li>安裝完畢就點選，Finish</li>
-</ol>
-<p><img src="/images/python/6.png" alt></p>
-<h3 id="設定環境變數"><a href="#設定環境變數" class="headerlink" title="設定環境變數"></a>設定環境變數</h3><p>安裝完成之後，這時候在命令提示字元還不能執行 python</p>
-<p><img src="/images/python/7.png" alt></p>
-<p>因此要讓 python 在環境變數上面作個設定，我們打開環境變數，在系統變數區塊選擇 <code>Path</code>，編輯變數值</p>
-<p><img src="/images/python/8.png" alt></p>
-<p>在數值的後面加入 python 安裝的目錄跟 script 目錄的位置 <code>;C:\Python27;C:\Python27\Scripts</code></p>
-<p><img src="/images/python/9.png" alt></p>
-<p>我們重新打開命令提示字元，輸入 <code>python</code>，這時候就可以發現 python 可以真正的被執行了</p>
-<p><img src="/images/python/10.png" alt></p>
-<p>也可以在 python 2.7.13 Shell 那邊輸入 <code>print(&#39;This is a book.&#39;)</code> ，也正常回應 <code>This is a book.</code> 也代表成功喔!</p>
-<p><img src="/images/python/11.png" alt></p>
-
-
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2017/03/04/r/r-xy-scatter-diagram/" class="image is-7by1">
-            <img class="thumbnail" src="/images/r/cover0.png" alt="R 學習日誌 - 模擬身高體重並繪製 X-Y 散佈圖">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-03-03T16:28:51.000Z">2017-03-04</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/R/">R</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分鐘 閱讀文 (大約 273 個字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/03/04/r/r-xy-scatter-diagram/">R 學習日誌 - 模擬身高體重並繪製 X-Y 散佈圖</a>
-            
-        </h1>
-        <div class="content">
-            <p>試做：使用 N(172, 5)模擬 100人身高、使用 N(58, 5)模擬 100 人，繪製  X-Y 散佈圖</p>
-<p>XY 散佈圖是指：</p>
-<blockquote>
-<p>XY 圖的基本形式是以一個資料數列為基礎，而這個資料數列包含名稱、X 軸值清單以及 Y 軸值清單。每個值配對 (x|y) 在座標系統中都會顯示為一點。</p>
-</blockquote>
-<h2 id="學習目標"><a href="#學習目標" class="headerlink" title="學習目標"></a>學習目標</h2><p>透過 R 軟體畫出 XY 散佈圖。</p>
-<h2 id="語法"><a href="#語法" class="headerlink" title="語法"></a>語法</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; weight &lt;- rnorm(100, 58, 5)</span><br><span class="line">&gt; height &lt;- rnorm(100, 172, 5)</span><br></pre></td></tr></table></figure>
-
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2017/03/04/r/r-xy-scatter-diagram/#more">繼續閱讀</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -633,7 +650,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        67
+                        69
                     </p>
                 </div>
             </div>
@@ -643,7 +660,7 @@
                         分類
                     </p>
                     <p class="title has-text-weight-normal">
-                        13
+                        14
                     </p>
                 </div>
             </div>
@@ -653,7 +670,7 @@
                         標籤
                     </p>
                     <p class="title has-text-weight-normal">
-                        43
+                        44
                     </p>
                 </div>
             </div>
@@ -695,6 +712,44 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/04/30/bot/hubot-02-heroku-slack/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/bot/cover2.png" alt="用 Hubot 打造聊天機器人#2 - hubot 專案部署到 heroku 連接 slack 聊天通訊軟體">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-30T15:07:00.000Z">2019-04-30</time></div>
+                    <a href="/2019/04/30/bot/hubot-02-heroku-slack/" class="has-link-black-ter is-size-6">用 Hubot 打造聊天機器人#2 - hubot 專案部署到 heroku 連接 slack 聊天通訊軟體</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/hubot/">hubot</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/29/bot/hubot-01-install/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/bot/cover1.png" alt="用 Hubot 打造聊天機器人#1 - 基礎介紹與安裝">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-29T15:07:00.000Z">2019-04-29</time></div>
+                    <a href="/2019/04/29/bot/hubot-01-install/" class="has-link-black-ter is-size-6">用 Hubot 打造聊天機器人#1 - 基礎介紹與安裝</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/hubot/">hubot</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -746,44 +801,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-19T12:24:00.000Z">2019-04-19</time></div>
                     <a href="/2019/04/19/r/r-textmining-02-ch02-1/" class="has-link-black-ter is-size-6">R語言文字探勘好好玩 - Ch2_採 Tidy 資料做情感分析 (1)</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/R/">R</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/04/18/r/r-textmining-01-ch01-2/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/r/cover6-1.png" alt="R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (2)">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-18T15:34:00.000Z">2019-04-18</time></div>
-                    <a href="/2019/04/18/r/r-textmining-01-ch01-2/" class="has-link-black-ter is-size-6">R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (2)</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/R/">R</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/04/17/r/r-textmining-01-ch01-1/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/r/cover6-1.png" alt="R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (1)">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-17T15:34:00.000Z">2019-04-17</time></div>
-                    <a href="/2019/04/17/r/r-textmining-01-ch01-1/" class="has-link-black-ter is-size-6">R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (1)</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/R/">R</a>
                     </p>
@@ -861,6 +878,14 @@
             </span>
             <span class="level-end">
                 <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/hubot/">
+            <span class="level-start">
+                <span class="level-item">hubot</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/macbook/">
@@ -1114,6 +1139,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/hubot/">
+                        <span class="tag">hubot</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/jade/">
                         <span class="tag">jade</span>
                         <span class="tag is-grey">2</span>
@@ -1304,6 +1336,14 @@
             </span>
             <span class="level-end">
                 <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/hubot/">
+            <span class="level-start">
+                <span class="level-item">hubot</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/macbook/">
@@ -1552,6 +1592,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/gitbook/">
                         <span class="tag">gitbook</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hubot/">
+                        <span class="tag">hubot</span>
                         <span class="tag is-grey">2</span>
                     </a>
                 </div>
