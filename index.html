@@ -153,6 +153,139 @@
     <div class="card">
     
     <div class="card-image">
+        <a href="/2020/01/26/docker/docker-02-start-nginx/" class="image is-7by1">
+            <img class="thumbnail" src="/images/docker/docker/docker.png" alt="Docker#2 - 啟動 Nginx Web 伺服器">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-01-26T11:07:51.000Z">2020-01-26</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/docker/">docker</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 分鐘 閱讀文 (大約 336 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/01/26/docker/docker-02-start-nginx/">Docker#2 - 啟動 Nginx Web 伺服器</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Nginx 是一套  Web 伺服器程式，處理並行處理能力著稱的軟體，反向代理的方式指定程式執行，可以透過非同步的方式處理提高效率。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d -p 8010:80 --name webserver nginx</span><br></pre></td></tr></table></figure>
+<p>服務運行之後，可以到瀏覽器上訪問 <a href="http://localhost:8010" target="_blank" rel="noopener">http://localhost:8010</a> ，當畫面顯示 Welcome to nginx! 時，就代表有執行成功</p>
+<p><img src="/images/docker/9-1.png" alt></p>
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/01/26/docker/docker-02-start-nginx/#more">繼續閱讀</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-image">
+        <a href="/2020/01/26/docker/docker-03-command/" class="image is-7by1">
+            <img class="thumbnail" src="/images/docker/docker/docker.png" alt="Docker#3 - Dockerfile 指令解說">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-01-26T10:07:51.000Z">2020-01-26</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/docker/">docker</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    9 分鐘 閱讀文 (大約 1310 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/01/26/docker/docker-03-command/">Docker#3 - Dockerfile 指令解說</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>當我們採取 docker run 啟動一個容器，若要移轉到另一台機器時，會使用 <code>docker export</code> 和 <code>docker import</code> 這兩個指令做匯出、匯入容易，但是喔半遇到龐大的匯出資料或映像的時候，可能會發生不預期的事情發生。</p>
+<p>此時利用 Docker 客製化的方式將製作映像的過程都寫在一個檔案上，讓過程可以獨立一點，放到其他機器上時，能夠根據組態建立對應的映像，就會是一個相當不錯的解決方案了。</p>
+<h2 id="關於-Dockerfile-檔案"><a href="#關於-Dockerfile-檔案" class="headerlink" title="關於 Dockerfile 檔案"></a>關於 Dockerfile 檔案</h2><p> 是用來做自動化建構映像的設定檔案，可以知道所有映像檔的組成，檔案小，容易分享，也方便實現映像的移植。這個檔案沒有副檔名，但卻是由每一行指令組成的文字檔案，命令不分大小寫。</p>
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/01/26/docker/docker-03-command/#more">繼續閱讀</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-image">
         <a href="/2020/01/26/docker/docker-01-start/" class="image is-7by1">
             <img class="thumbnail" src="/images/docker/docker.png" alt="Docker#1 - 初識 Docker">
         </a>
@@ -361,144 +494,6 @@
 
 
 
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2019/04/27/r/r-googlesheet/" class="image is-7by1">
-            <img class="thumbnail" src="/images/r/cover8.png" alt="R 學習日誌#6 - 如何使用 R 語言存取 Google Sheets">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-04-27T12:24:00.000Z">2019-04-27</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/R/">R</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    7 分鐘 閱讀文 (大約 1109 個字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/04/27/r/r-googlesheet/">R 學習日誌#6 - 如何使用 R 語言存取 Google Sheets</a>
-            
-        </h1>
-        <div class="content">
-            <p>通常想要將資料放在一個資料庫方便做存取，一般所知道的資料庫都是常見的 MySQL, MSSQL 或是非結構化的 mongodb 等等的資料庫應用程式。不過有些時候就只是不多的資料，其實也不需要特別去裝這些資料庫，只要使用 Google Sheets 也可以做得到輕量型資料的喔。</p>
-<h2 id="學習內容大綱"><a href="#學習內容大綱" class="headerlink" title="學習內容大綱"></a>學習內容大綱</h2><ol>
-<li>套件安裝</li>
-<li>連接 Google 帳戶</li>
-<li>查詢 Google Sheets 試算表</li>
-<li>讀取 Google Sheets 試算表</li>
-</ol>
-
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/04/27/r/r-googlesheet/#more">繼續閱讀</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2019/04/20/r/r-textmining-02-ch02-2/" class="image is-7by1">
-            <img class="thumbnail" src="/images/r/cover7.png" alt="R語言文字探勘好好玩 - Ch2_採 Tidy 資料做情感分析 (2)">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-04-20T08:32:00.000Z">2019-04-20</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/R/">R</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 分鐘 閱讀文 (大約 572 個字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/04/20/r/r-textmining-02-ch02-2/">R語言文字探勘好好玩 - Ch2_採 Tidy 資料做情感分析 (2)</a>
-            
-        </h1>
-        <div class="content">
-            <p><a href="http://weijutu.github.io/2019/04/17/r/r-textmining-02-ch02-2/">前面一章</a>是解釋說明什麼是 怎麼運用詞典來看出小說的情緒分析，本篇就延續下去介紹詞雲的圖形的視覺化，在本篇的介紹大綱裡面包含如下：</p>
-<h2 id="學習內容大綱"><a href="#學習內容大綱" class="headerlink" title="學習內容大綱"></a>學習內容大綱</h2><ol>
-<li>最常見的正面詞和負面詞</li>
-<li>詞雲</li>
-</ol>
-
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/04/20/r/r-textmining-02-ch02-2/#more">繼續閱讀</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -517,7 +512,7 @@
             
             <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/14/">14</a></li>
+            <li><a class="pagination-link has-text-black-ter" href="/page/15/">15</a></li>
             
         </ul>
     </nav>
@@ -567,7 +562,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        70
+                        72
                     </p>
                 </div>
             </div>
@@ -632,6 +627,44 @@
         
         <article class="media">
             
+            <a href="/2020/01/26/docker/docker-02-start-nginx/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/docker/docker/docker.png" alt="Docker#2 - 啟動 Nginx Web 伺服器">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-26T11:07:51.000Z">2020-01-26</time></div>
+                    <a href="/2020/01/26/docker/docker-02-start-nginx/" class="has-link-black-ter is-size-6">Docker#2 - 啟動 Nginx Web 伺服器</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/docker/">docker</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/01/26/docker/docker-03-command/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/docker/docker/docker.png" alt="Docker#3 - Dockerfile 指令解說">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-26T10:07:51.000Z">2020-01-26</time></div>
+                    <a href="/2020/01/26/docker/docker-03-command/" class="has-link-black-ter is-size-6">Docker#3 - Dockerfile 指令解說</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/docker/">docker</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/01/26/docker/docker-01-start/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/docker/docker.png" alt="Docker#1 - 初識 Docker">
@@ -682,44 +715,6 @@
                     <a href="/2019/04/29/bot/hubot-01-install/" class="has-link-black-ter is-size-6">用 Hubot 打造聊天機器人#1 - 基礎介紹與安裝</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/hubot/">hubot</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/04/27/r/r-googlesheet/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/r/cover8.png" alt="R 學習日誌#6 - 如何使用 R 語言存取 Google Sheets">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-27T12:24:00.000Z">2019-04-27</time></div>
-                    <a href="/2019/04/27/r/r-googlesheet/" class="has-link-black-ter is-size-6">R 學習日誌#6 - 如何使用 R 語言存取 Google Sheets</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/R/">R</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/04/20/r/r-textmining-02-ch02-2/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/r/cover7.png" alt="R語言文字探勘好好玩 - Ch2_採 Tidy 資料做情感分析 (2)">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-20T08:32:00.000Z">2019-04-20</time></div>
-                    <a href="/2019/04/20/r/r-textmining-02-ch02-2/" class="has-link-black-ter is-size-6">R語言文字探勘好好玩 - Ch2_採 Tidy 資料做情感分析 (2)</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/R/">R</a>
                     </p>
                 </div>
             </div>
@@ -802,7 +797,7 @@
                 <span class="level-item">docker</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/hubot/">
@@ -1024,7 +1019,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/docker/">
                         <span class="tag">docker</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1275,7 +1270,7 @@
                 <span class="level-item">docker</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/hubot/">
@@ -1497,7 +1492,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/docker/">
                         <span class="tag">docker</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
