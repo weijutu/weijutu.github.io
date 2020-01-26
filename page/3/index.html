@@ -432,12 +432,6 @@
 
     <div class="card">
     
-    <div class="card-image">
-        <a href="/2018/08/02/tools/slate-api-document/" class="image is-7by1">
-            <img class="thumbnail" src="/images/tools/20180802-1.png" alt="Slate - 為你打造漂亮的 API 文件">
-        </a>
-    </div>
-    
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
@@ -445,14 +439,14 @@
                 <time class="level-item has-text-grey" datetime="2018-08-02T01:47:00.000Z">2018-08-02</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/工具/">工具</a>
+                <a class="has-link-grey -link" href="/categories/Ruby/">Ruby</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分鐘 閱讀文 (大約 986 個字)
+                    1 分鐘 閱讀文 (大約 204 個字)
                 </span>
                 
                 
@@ -461,16 +455,38 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2018/08/02/tools/slate-api-document/">Slate - 為你打造漂亮的 API 文件</a>
+                <a class="has-link-black-ter" href="/2018/08/02/mac/how-to-upgrade-ruby-on-mac/">在 Mac OSX 使用 RVM 升級 Ruby V2.5.1</a>
             
         </h1>
         <div class="content">
-            <p>這陣子在找一種工具可以將 Restful API 彙整起來能用網頁的方式執行讀取，上網找了不少工具，例如下方三套是常見的 API 文檔工具，在本篇則是介紹 Slate。 </p>
-<ul>
-<li><a href="https://swagger.io/" target="_blank" rel="noopener">swagger</a>：相當標準的 API 文件化工具，從設計、建置、撰寫、測試、各式各樣的技巧環環包圍。</li>
-<li><a href="http://apidocjs.com/" target="_blank" rel="noopener">apidoc</a>： 這套也不錯，寫的方式是將所有 API 的註記放在原始碼的方法(function)的上方，但小缺點也在這了，如果參數值過多、回傳值也好幾行，這樣就一直在滑鼠捲軸了。不過資料不多的話，是滿適合的。</li>
-<li><a href="https://github.com/lord/slate" target="_blank" rel="noopener">slate</a> : 輕量化的寫法，允許你使用 markdown 撰寫 API 文件，並且是 ruby 語法執行 bundle 套件安裝，打包之後預設是用靜態的 html ，甚至你可以推上 github pages 進行託管。</li>
-</ul>
+            <p>RVM 是一套 Ruby 版本的管理工具，這裡頭包含 Ruby 的版本管理和 Gem 庫管理。本篇裡面使用 RVM 工具進行 Ruby 的升級。</p>
+<h2 id="RVM-Ruby-Version-Manager-安裝"><a href="#RVM-Ruby-Version-Manager-安裝" class="headerlink" title="RVM (Ruby Version Manager) 安裝"></a>RVM (Ruby Version Manager) 安裝</h2><ol>
+<li>RVM安装</li>
+</ol>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> curl -L get.rvm.io | bash -s stable</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>是否有完成安裝 RVM </li>
+</ol>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> rvm -v</span></span><br></pre></td></tr></table></figure>
+<p>結果顯示</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rvm 1.29.4 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]</span><br></pre></td></tr></table></figure>
+<h2 id="使用-RVM-升級-Ruby"><a href="#使用-RVM-升級-Ruby" class="headerlink" title="使用 RVM 升級 Ruby"></a>使用 RVM 升級 Ruby</h2><ol>
+<li>顯示目前的 Ruby 版本</li>
+</ol>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> ruby -v</span></span><br></pre></td></tr></table></figure>
+<p>顯示結果</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby 2.0.0p648 (2015-12-16 revision 53162) [universal.x86_64-darwin16]</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>安装 Ruby 2.5.1</li>
+</ol>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rvm install 2.5.1</span><br></pre></td></tr></table></figure>
+<p>安裝完畢之後，再用 <code>ruby -v</code> 檢查看看，是不是已經換成下面顯示的結果一樣已完成升級。</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-darwin16]</span><br></pre></td></tr></table></figure>
+<p>結果</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Linking /usr/local/Cellar/ruby/2.5.1... 3293 symlinks created</span><br></pre></td></tr></table></figure>
+<p>那麼，這樣子就安裝完畢了。</p>
+<p>參考：<br><a href="https://flinhong.com/2017/10/26/upgrade-ruby-on-mac/" target="_blank" rel="noopener">https://flinhong.com/2017/10/26/upgrade-ruby-on-mac/</a></p>
+
 
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
@@ -479,14 +495,6 @@
             </script>
         </div>
         
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/08/02/tools/slate-api-document/#more">繼續閱讀</a>
-                </div>
-            </div>
-        </div>
         
         
     </div>
@@ -636,16 +644,16 @@
         
         <article class="media">
             
-            <a href="/2020/01/26/docker/docker-02-start-nginx/" class="media-left">
+            <a href="/2020/01/26/docker/docker-03-command/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/docker/docker/docker.png" alt="Docker#2 - 啟動 Nginx Web 伺服器">
+                    <img class="thumbnail" src="/images/docker/docker.png" alt="Docker#3 - Dockerfile 指令解說">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-26T11:07:51.000Z">2020-01-26</time></div>
-                    <a href="/2020/01/26/docker/docker-02-start-nginx/" class="has-link-black-ter is-size-6">Docker#2 - 啟動 Nginx Web 伺服器</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-26T12:07:51.000Z">2020-01-26</time></div>
+                    <a href="/2020/01/26/docker/docker-03-command/" class="has-link-black-ter is-size-6">Docker#3 - Dockerfile 指令解說</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/docker/">docker</a>
                     </p>
@@ -655,16 +663,16 @@
         
         <article class="media">
             
-            <a href="/2020/01/26/docker/docker-03-command/" class="media-left">
+            <a href="/2020/01/26/docker/docker-02-start-nginx/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/docker/docker/docker.png" alt="Docker#3 - Dockerfile 指令解說">
+                    <img class="thumbnail" src="/images/docker/docker.png" alt="Docker#2 - 啟動 Nginx Web 伺服器">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-26T10:07:51.000Z">2020-01-26</time></div>
-                    <a href="/2020/01/26/docker/docker-03-command/" class="has-link-black-ter is-size-6">Docker#3 - Dockerfile 指令解說</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-26T11:07:51.000Z">2020-01-26</time></div>
+                    <a href="/2020/01/26/docker/docker-02-start-nginx/" class="has-link-black-ter is-size-6">Docker#2 - 啟動 Nginx Web 伺服器</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/docker/">docker</a>
                     </p>

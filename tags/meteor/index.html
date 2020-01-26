@@ -190,11 +190,11 @@
 <h2 id="安裝-Meteor"><a href="#安裝-Meteor" class="headerlink" title="安裝 Meteor"></a>安裝 Meteor</h2><p>安裝 Meteor 的方式在 terminal 輸入以下命令：</p>
 <p><code>curl https://install.meteor.com | sh</code></p>
 <p>安裝完之後你可以再次輸入 <code>meteor</code> 後，執行會說明目前不是在 meteor 專案下，所以目前還只能確認 Meteor 安裝成功並且還會指引你建立 Meteor 專案的指令</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> meteor</span></span><br><span class="line">  run: You\'re not in a Meteor project directory.</span><br><span class="line"></span><br><span class="line">  To create a new Meteor project:</span><br><span class="line">    meteor create &lt;project name&gt;</span><br><span class="line">  For example:</span><br><span class="line">    meteor create myapp</span><br><span class="line"></span><br><span class="line">  For more help, see 'meteor --help'.</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span> meteor</span><br><span class="line">  run: You\'re not in a Meteor project directory.</span><br><span class="line"></span><br><span class="line">  To create a new Meteor project:</span><br><span class="line">    meteor create &lt;project name&gt;</span><br><span class="line">  For example:</span><br><span class="line">    meteor create myapp</span><br><span class="line"></span><br><span class="line">  For more help, see 'meteor --help'.</span><br></pre></td></tr></table></figure>
 <h2 id="建立新的專案"><a href="#建立新的專案" class="headerlink" title="建立新的專案"></a>建立新的專案</h2><p>裝好 meteor 後，我們建立一個新的專案，建立時使用 meteor 的工具</p>
 <p><code>meteor create meteor_demo</code></p>
 <p>按照命令就會把 meteor 建立基礎的檔案結構，建立完成後就會有一個 <code>meteor_demo</code> 的資料夾，並且說明如何執行應用程式</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> meteor create meteor_demo</span></span><br><span class="line">  Created a new Meteor app in 'meteor_demo'.</span><br><span class="line"></span><br><span class="line">  To run your new app:</span><br><span class="line">    cd meteor_demo</span><br><span class="line">    meteor npm install</span><br><span class="line">    meteor</span><br><span class="line"></span><br><span class="line">  If you are new to Meteor, try some of the learning resources here:</span><br><span class="line">    https://www.meteor.com/learn</span><br><span class="line"></span><br><span class="line">  meteor create --bare to create an empty app.</span><br><span class="line">  meteor create --full to create a scaffolded app.</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span> meteor create meteor_demo</span><br><span class="line">  Created a new Meteor app in 'meteor_demo'.</span><br><span class="line"></span><br><span class="line">  To run your new app:</span><br><span class="line">    cd meteor_demo</span><br><span class="line">    meteor npm install</span><br><span class="line">    meteor</span><br><span class="line"></span><br><span class="line">  If you are new to Meteor, try some of the learning resources here:</span><br><span class="line">    https://www.meteor.com/learn</span><br><span class="line"></span><br><span class="line">  meteor create --bare to create an empty app.</span><br><span class="line">  meteor create --full to create a scaffolded app.</span><br></pre></td></tr></table></figure>
 <p>也包含以下的檔案與資料夾</p>
 <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">drwxr-xr-x   7 User  staff   238 Feb 12 08:40 .</span><br><span class="line">drwxr-xr-x  49 User  staff  1666 Feb 12 08:40 ..</span><br><span class="line">drwxr-xr-x  10 User  staff   340 Feb 12 08:40 .meteor</span><br><span class="line">drwxr-xr-x   5 User  staff   170 Feb 12 08:40 client</span><br><span class="line">-rw-r--r--   1 User  staff   183 Feb 12 08:40 package.json</span><br><span class="line">drwxr-xr-x   3 User  staff   102 Feb 12 08:40 server</span><br></pre></td></tr></table></figure>
 <p>接著，我們就依照他的指引安裝一些套件</p>
@@ -335,16 +335,16 @@
         
         <article class="media">
             
-            <a href="/2020/01/26/docker/docker-02-start-nginx/" class="media-left">
+            <a href="/2020/01/26/docker/docker-03-command/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/docker/docker/docker.png" alt="Docker#2 - 啟動 Nginx Web 伺服器">
+                    <img class="thumbnail" src="/images/docker/docker.png" alt="Docker#3 - Dockerfile 指令解說">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-26T11:07:51.000Z">2020-01-26</time></div>
-                    <a href="/2020/01/26/docker/docker-02-start-nginx/" class="has-link-black-ter is-size-6">Docker#2 - 啟動 Nginx Web 伺服器</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-26T12:07:51.000Z">2020-01-26</time></div>
+                    <a href="/2020/01/26/docker/docker-03-command/" class="has-link-black-ter is-size-6">Docker#3 - Dockerfile 指令解說</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/docker/">docker</a>
                     </p>
@@ -354,16 +354,16 @@
         
         <article class="media">
             
-            <a href="/2020/01/26/docker/docker-03-command/" class="media-left">
+            <a href="/2020/01/26/docker/docker-02-start-nginx/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/docker/docker/docker.png" alt="Docker#3 - Dockerfile 指令解說">
+                    <img class="thumbnail" src="/images/docker/docker.png" alt="Docker#2 - 啟動 Nginx Web 伺服器">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-26T10:07:51.000Z">2020-01-26</time></div>
-                    <a href="/2020/01/26/docker/docker-03-command/" class="has-link-black-ter is-size-6">Docker#3 - Dockerfile 指令解說</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-26T11:07:51.000Z">2020-01-26</time></div>
+                    <a href="/2020/01/26/docker/docker-02-start-nginx/" class="has-link-black-ter is-size-6">Docker#2 - 啟動 Nginx Web 伺服器</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/docker/">docker</a>
                     </p>
