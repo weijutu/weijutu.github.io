@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="噗噗。故我在">
 <meta property="og:description" content="前言當我們採取 docker run 啟動一個容器，若要移轉到另一台機器時，會使用 docker export 和 docker import 這兩個指令做匯出、匯入容易，但是喔半遇到龐大的匯出資料或映像的時候，可能會發生不預期的事情發生。 此時利用 Docker 客製化的方式將製作映像的過程都寫在一個檔案上，讓過程可以獨立一點，放到其他機器上時，能夠根據組態建立對應的映像，就會是一個相當不錯的解">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:updated_time" content="2020-01-26T12:01:45.609Z">
+<meta property="og:updated_time" content="2020-01-26T15:42:32.307Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker#3 - Dockerfile 指令解說">
 <meta name="twitter:description" content="前言當我們採取 docker run 啟動一個容器，若要移轉到另一台機器時，會使用 docker export 和 docker import 這兩個指令做匯出、匯入容易，但是喔半遇到龐大的匯出資料或映像的時候，可能會發生不預期的事情發生。 此時利用 Docker 客製化的方式將製作映像的過程都寫在一個檔案上，讓過程可以獨立一點，放到其他機器上時，能夠根據組態建立對應的映像，就會是一個相當不錯的解">
@@ -176,7 +176,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    9 分鐘 閱讀文 (大約 1310 個字)
+                    9 分鐘 閱讀文 (大約 1307 個字)
                 </span>
                 
                 
@@ -193,7 +193,7 @@
 <p>此時利用 Docker 客製化的方式將製作映像的過程都寫在一個檔案上，讓過程可以獨立一點，放到其他機器上時，能夠根據組態建立對應的映像，就會是一個相當不錯的解決方案了。</p>
 <h2 id="關於-Dockerfile-檔案"><a href="#關於-Dockerfile-檔案" class="headerlink" title="關於 Dockerfile 檔案"></a>關於 Dockerfile 檔案</h2><p> 是用來做自動化建構映像的設定檔案，可以知道所有映像檔的組成，檔案小，容易分享，也方便實現映像的移植。這個檔案沒有副檔名，但卻是由每一行指令組成的文字檔案，命令不分大小寫。</p>
 <a id="more"></a>
-<h2 id="基礎指令"><a href="#基礎指令" class="headerlink" title="基礎指令"></a>基礎指令</h2><h3 id="開頭吧文字為註解"><a href="#開頭吧文字為註解" class="headerlink" title="# 開頭吧文字為註解"></a># 開頭吧文字為註解</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># test comment</span><br></pre></td></tr></table></figure>
+<h2 id="基礎指令"><a href="#基礎指令" class="headerlink" title="基礎指令"></a>基礎指令</h2><h3 id="開頭為註解"><a href="#開頭為註解" class="headerlink" title="# 開頭為註解"></a># 開頭為註解</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># test comment</span><br></pre></td></tr></table></figure>
 <h3 id="FROM"><a href="#FROM" class="headerlink" title="FROM"></a>FROM</h3><p>通常第一行指令行，指定哪一個 image 作為基底來建構，它允許多個 FROM  指令</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FROM &lt;images&gt;</span><br><span class="line">FROM ubuntu</span><br><span class="line">FROM ubuntu:16.04</span><br></pre></td></tr></table></figure>
 <h3 id="MAINTAINER"><a href="#MAINTAINER" class="headerlink" title="MAINTAINER"></a>MAINTAINER</h3><p>此指令用途是提供映像檔的作者資訊</p>
@@ -274,6 +274,13 @@
 
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/01/26/docker/docker-04-data-volume/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Docker#4 - 資料卷</span>
+            </a>
+        </div>
         
         
         <div class="level-end">
@@ -356,7 +363,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        72
+                        73
                     </p>
                 </div>
             </div>
@@ -418,6 +425,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/01/26/docker/docker-04-data-volume/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/docker/docker.png" alt="Docker#4 - 資料卷">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-26T15:42:51.000Z">2020-01-26</time></div>
+                    <a href="/2020/01/26/docker/docker-04-data-volume/" class="has-link-black-ter is-size-6">Docker#4 - 資料卷</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/docker/">docker</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -488,25 +514,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-30T15:07:00.000Z">2019-04-30</time></div>
                     <a href="/2019/04/30/bot/hubot-02-heroku-slack/" class="has-link-black-ter is-size-6">用 Hubot 打造聊天機器人#2 - hubot 專案部署到 heroku 連接 slack 聊天通訊軟體</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/hubot/">hubot</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/04/29/bot/hubot-01-install/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/bot/cover1.png" alt="用 Hubot 打造聊天機器人#1 - 基礎介紹與安裝">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-29T15:07:00.000Z">2019-04-29</time></div>
-                    <a href="/2019/04/29/bot/hubot-01-install/" class="has-link-black-ter is-size-6">用 Hubot 打造聊天機器人#1 - 基礎介紹與安裝</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/hubot/">hubot</a>
                     </p>
@@ -591,7 +598,7 @@
                 <span class="level-item">docker</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/hubot/">
@@ -813,7 +820,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/docker/">
                         <span class="tag">docker</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1064,7 +1071,7 @@
                 <span class="level-item">docker</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/hubot/">
@@ -1286,7 +1293,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/docker/">
                         <span class="tag">docker</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 

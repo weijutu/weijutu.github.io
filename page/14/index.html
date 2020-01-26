@@ -156,6 +156,86 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-07-23T16:04:00.000Z">2017-07-24</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 分鐘 閱讀文 (大約 465 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/07/24/nodejs/nodejs-04-nvm/">Node.js 系列學習日誌#4 - nvm (Node Version Manager) 管理多個版本</a>
+            
+        </h1>
+        <div class="content">
+            <p>nvm 是一種在管理多個 Node.js 版本的套件，當你預計採用不同版本執行Node.js 的時候，可以採用這個套件，那麼我們可以先進到這個網址裡面找到安裝指令</p>
+<p><a href="https://github.com/creationix/nvm" target="_blank" rel="noopener">https://github.com/creationix/nvm</a></p>
+<p>安裝指令請在下方找到：</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://raw.githubusercontent.com/creationix/nvm/v0.17.2/install.sh | bash</span><br></pre></td></tr></table></figure>
+<p>或者用 wget 方式下載</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.17.2/install.sh | bash</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/16.png" alt></p>
+<p>將這個指令貼到命令提示字元</p>
+<p>安裝完之後，請先將命令提示字元關閉，再重新開啟以使用 nvm 指令<br>接著重啟之後，輸入</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$nvm</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/17.png" alt></p>
+<p>確定有  nvm 之後，可以輸入 $nvm ls-remote 指令看有哪些版本可以安裝，在命令提示字元會看到落落長的版本號</p>
+<p><img src="/images/nodejs/18.png" alt></p>
+<h1 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h1><p>依照 nvm help 指令的說明上，請使用  $nvm install 安裝 node.js  版本，這些版本會實際放在 /usr/local/n/資料夾，例如：</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$nvm</span> install v0.10.32</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/19.png" alt></p>
+<p>再裝一個不同版本的 node，那麼就安裝 v0.11.14 (版本前面的 v 可以不用寫)</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$nvm</span> install v0.11.14</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/20.png" alt></p>
+<p>這時候下一個  $nvm ls 指令，這時候安裝最後的版本，將會當做是當前的版本，可以下 $nvm current ，此時，綠色箭頭就是目前的版本號 v0.11.14</p>
+<p><img src="/images/nodejs/21.png" alt></p>
+<p>接下來我們可以用簡單的指令切換 Node.js 版本，這時候綠色箭頭就換成 v0.10.32</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$nvm</span> use 0.10.32</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/22.png" alt></p>
+<h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><ul>
+<li><a href="http://nodejs.org/" target="_blank" rel="noopener">http://nodejs.org/</a></li>
+<li><a href="https://github.com/creationix/nvm" target="_blank" rel="noopener">https://github.com/creationix/nvm</a></li>
+<li><a href="https://github.com/Gizra/KnowledgeBase/wiki/How-to-install-nvm-(Node-Version-Manager" target="_blank" rel="noopener">https://github.com/Gizra/KnowledgeBase/wiki/How-to-install-nvm-(Node-Version-Manager)</a>)</li>
+<li><a href="https://www.npmjs.org/package/nvm" target="_blank" rel="noopener">https://www.npmjs.org/package/nvm</a></li>
+</ul>
+
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2017-07-23T16:03:00.000Z">2017-07-24</time>
                 
                 <div class="level-item">
@@ -493,76 +573,6 @@
 
 
 
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2017/03/04/r/r-xy-scatter-diagram/" class="image is-7by1">
-            <img class="thumbnail" src="/images/r/cover0.png" alt="R 學習日誌 - 模擬身高體重並繪製 X-Y 散佈圖">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-03-03T16:28:51.000Z">2017-03-04</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/R/">R</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分鐘 閱讀文 (大約 273 個字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/03/04/r/r-xy-scatter-diagram/">R 學習日誌 - 模擬身高體重並繪製 X-Y 散佈圖</a>
-            
-        </h1>
-        <div class="content">
-            <p>試做：使用 N(172, 5)模擬 100人身高、使用 N(58, 5)模擬 100 人，繪製  X-Y 散佈圖</p>
-<p>XY 散佈圖是指：</p>
-<blockquote>
-<p>XY 圖的基本形式是以一個資料數列為基礎，而這個資料數列包含名稱、X 軸值清單以及 Y 軸值清單。每個值配對 (x|y) 在座標系統中都會顯示為一點。</p>
-</blockquote>
-<h2 id="學習目標"><a href="#學習目標" class="headerlink" title="學習目標"></a>學習目標</h2><p>透過 R 軟體畫出 XY 散佈圖。</p>
-<h2 id="語法"><a href="#語法" class="headerlink" title="語法"></a>語法</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; weight &lt;- rnorm(100, 58, 5)</span><br><span class="line">&gt; height &lt;- rnorm(100, 172, 5)</span><br></pre></td></tr></table></figure>
-
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2017/03/04/r/r-xy-scatter-diagram/#more">繼續閱讀</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -633,7 +643,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        72
+                        73
                     </p>
                 </div>
             </div>
@@ -695,6 +705,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/01/26/docker/docker-04-data-volume/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/docker/docker.png" alt="Docker#4 - 資料卷">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-26T15:42:51.000Z">2020-01-26</time></div>
+                    <a href="/2020/01/26/docker/docker-04-data-volume/" class="has-link-black-ter is-size-6">Docker#4 - 資料卷</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/docker/">docker</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -765,25 +794,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-30T15:07:00.000Z">2019-04-30</time></div>
                     <a href="/2019/04/30/bot/hubot-02-heroku-slack/" class="has-link-black-ter is-size-6">用 Hubot 打造聊天機器人#2 - hubot 專案部署到 heroku 連接 slack 聊天通訊軟體</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/hubot/">hubot</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/04/29/bot/hubot-01-install/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/bot/cover1.png" alt="用 Hubot 打造聊天機器人#1 - 基礎介紹與安裝">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-29T15:07:00.000Z">2019-04-29</time></div>
-                    <a href="/2019/04/29/bot/hubot-01-install/" class="has-link-black-ter is-size-6">用 Hubot 打造聊天機器人#1 - 基礎介紹與安裝</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/hubot/">hubot</a>
                     </p>
@@ -868,7 +878,7 @@
                 <span class="level-item">docker</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/hubot/">
@@ -1090,7 +1100,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/docker/">
                         <span class="tag">docker</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1341,7 +1351,7 @@
                 <span class="level-item">docker</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/hubot/">
@@ -1563,7 +1573,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/docker/">
                         <span class="tag">docker</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 

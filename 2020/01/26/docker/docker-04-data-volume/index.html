@@ -2,18 +2,23 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-<title>彙整: 2017/3 - 噗噗。故我在</title>
+<title>Docker#4 - 資料卷 - 噗噗。故我在</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="噗噗。故我在">
-<meta property="og:url" content="https://weijutu.github.io/archives/2017/03/index.html">
+    <meta name="description" content="前言容器內部檔案是隔離的特性，如果要與外部的程式溝通，要用網路通訊以及檔案存取方式處理，如何做到內部與容器之間的資料管理，有分資料卷 (Data Volumes) 以及資料卷容器 (Data Volume Containers) 資料卷 (Data Volumes)簡單來說就是從外界掛載在容器中的檔案或目錄，由於是掛載的，所以不會因為容器被刪除之後而有受到影響。  資料卷的使用類似 linux 對">
+<meta name="keywords" content="docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker#4 - 資料卷">
+<meta property="og:url" content="https://weijutu.github.io/2020/01/26/docker/docker-04-data-volume/index.html">
 <meta property="og:site_name" content="噗噗。故我在">
+<meta property="og:description" content="前言容器內部檔案是隔離的特性，如果要與外部的程式溝通，要用網路通訊以及檔案存取方式處理，如何做到內部與容器之間的資料管理，有分資料卷 (Data Volumes) 以及資料卷容器 (Data Volume Containers) 資料卷 (Data Volumes)簡單來說就是從外界掛載在容器中的檔案或目錄，由於是掛載的，所以不會因為容器被刪除之後而有受到影響。  資料卷的使用類似 linux 對">
 <meta property="og:locale" content="zh-TW">
+<meta property="og:updated_time" content="2020-01-26T15:43:09.049Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="噗噗。故我在">
+<meta name="twitter:title" content="Docker#4 - 資料卷">
+<meta name="twitter:description" content="前言容器內部檔案是隔離的特性，如果要與外部的程式溝通，要用網路通訊以及檔案存取方式處理，如何做到內部與容器之間的資料管理，有分資料卷 (Data Volumes) 以及資料卷容器 (Data Volume Containers) 資料卷 (Data Volumes)簡單來說就是從外界掛載在容器中的檔案或目錄，由於是掛載的，所以不會因為容器被刪除之後而有受到影響。  資料卷的使用類似 linux 對">
 
 
 
@@ -149,60 +154,124 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
-
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="tag is-link">
-        三月 2017
-        </h3>
-        <div class="timeline">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="/images/docker/docker.png" alt="Docker#4 - 資料卷">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
         
-            <article class="media">
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-01-26T15:42:51.000Z">2020-01-26</time>
                 
-                <a href="/2017/03/04/r/r-xy-scatter-diagram/" class="media-left">
-                    <p class="image is-64x64">
-                        <img class="thumbnail" src="/images/r/cover0.png" alt="R 學習日誌 - 模擬身高體重並繪製 X-Y 散佈圖">
-                    </p>
-                </a>
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2017-03-03T16:28:51.000Z">2017-03-04</time>
-                        <a href="/2017/03/04/r/r-xy-scatter-diagram/" class="has-link-black-ter is-size-6">R 學習日誌 - 模擬身高體重並繪製 X-Y 散佈圖</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/R/">R</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/docker/">docker</a>
                 </div>
-            </article>
-        
-            <article class="media">
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2017-03-02T11:49:42.000Z">2017-03-02</time>
-                        <a href="/2017/03/02/metero/metero-intro/" class="has-link-black-ter is-size-6">Meteor - 開始第一個 Meteor 應用程式專案</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 分鐘 閱讀文 (大約 410 個字)
+                </span>
+                
+                
+            </div>
         </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Docker#4 - 資料卷
+            
+        </h1>
+        <div class="content">
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>容器內部檔案是隔離的特性，如果要與外部的程式溝通，要用網路通訊以及檔案存取方式處理，如何做到內部與容器之間的資料管理，有分資料卷 (Data Volumes) 以及資料卷容器 (Data Volume Containers)</p>
+<h2 id="資料卷-Data-Volumes"><a href="#資料卷-Data-Volumes" class="headerlink" title="資料卷 (Data Volumes)"></a>資料卷 (Data Volumes)</h2><p>簡單來說就是從外界掛載在容器中的檔案或目錄，由於是掛載的，所以不會因為容器被刪除之後而有受到影響。</p>
+<blockquote>
+<p>資料卷的使用類似 linux 對目錄或文件的 mount</p>
+</blockquote>
+<h3 id="列出資料卷"><a href="#列出資料卷" class="headerlink" title="列出資料卷"></a>列出資料卷</h3><p>可以列出主機上的資料卷，這也包含未被使用的資料卷以及正在使用的資料卷</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker volume list</span><br></pre></td></tr></table></figure>
+<h3 id="建立資料卷"><a href="#建立資料卷" class="headerlink" title="建立資料卷"></a>建立資料卷</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker volume create testvol</span><br></pre></td></tr></table></figure>
+<p>可以輸入以下指令查看指定的資料卷資訊</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ docker volume inspect testvol</span><br><span class="line"></span><br><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        &quot;CreatedAt&quot;: &quot;2020-01-26T15:10:25Z&quot;,</span><br><span class="line">        &quot;Driver&quot;: &quot;local&quot;,</span><br><span class="line">        &quot;Labels&quot;: &#123;&#125;,</span><br><span class="line">        &quot;Mountpoint&quot;: &quot;/var/lib/docker/volumes/testvol/_data&quot;,</span><br><span class="line">        &quot;Name&quot;: &quot;testvol&quot;,</span><br><span class="line">        &quot;Options&quot;: &#123;&#125;,</span><br><span class="line">        &quot;Scope&quot;: &quot;local&quot;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h2 id="啟動一個掛載資料卷的容器"><a href="#啟動一個掛載資料卷的容器" class="headerlink" title="啟動一個掛載資料卷的容器"></a>啟動一個掛載資料卷的容器</h2><p>一個 docker run 可以掛載多個容器</p>
+ <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d -P --name webapp --mount source=testvol,target=/webapp maruko/nginx</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ docker inspect webapp</span><br><span class="line"></span><br><span class="line"># 可以從 webapp 容器資訊內的 Mounts 的 key 值看到已經有 mount 一組 testvol 資料卷</span><br><span class="line">        </span><br><span class="line">        &quot;Mounts&quot;: [</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;Type&quot;: &quot;volume&quot;,</span><br><span class="line">                &quot;Name&quot;: &quot;testvol&quot;,</span><br><span class="line">                &quot;Source&quot;: &quot;/var/lib/docker/volumes/testvol/_data&quot;,</span><br><span class="line">                &quot;Destination&quot;: &quot;/webapp&quot;,</span><br><span class="line">                &quot;Driver&quot;: &quot;local&quot;,</span><br><span class="line">                &quot;Mode&quot;: &quot;z&quot;,</span><br><span class="line">                &quot;RW&quot;: true,</span><br><span class="line">                &quot;Propagation&quot;: &quot;&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        ],</span><br></pre></td></tr></table></figure>
+<h3 id="刪除資料卷"><a href="#刪除資料卷" class="headerlink" title="刪除資料卷"></a>刪除資料卷</h3><p>使用 rm 指令要特別小心，可以加上 -v 參數一起刪除使用的資料卷</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker volume rm -v testvol</span><br></pre></td></tr></table></figure>
+<p>或者使用 volume id 方式，這組的 ID 必須使用 64 位元，無法使用簡寫輸入</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker volume rm e4f09874fe24bed49af733a74237487a43bdace89cc138291b9e34e754d623be</span><br></pre></td></tr></table></figure>
+
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/docker/">docker</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
     </div>
 </div>
 
 
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/01/26/docker/docker-03-command/">
+                <span class="level-item">Docker#3 - Dockerfile 指令解說</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">評論</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://weijutu.github.io/2020/01/26/docker/docker-04-data-volume/';
+        this.page.identifier = '2020/01/26/docker/docker-04-data-volume/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'weijutugithubio' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
 </div>
                 
 

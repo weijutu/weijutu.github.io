@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://weijutu.github.io/2020/01/26/docker/docker-04-data-volume/</loc>
+    
+    <lastmod>2020-01-26T15:43:09.049Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://weijutu.github.io/2020/01/26/docker/docker-03-command/</loc>
     
-    <lastmod>2020-01-26T12:01:45.609Z</lastmod>
+    <lastmod>2020-01-26T15:42:32.307Z</lastmod>
     
   </url>
   
