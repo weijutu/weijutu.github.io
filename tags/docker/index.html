@@ -182,7 +182,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    10 分鐘 閱讀文 (大約 1573 個字)
+                    10 分鐘 閱讀文 (大約 1574 個字)
                 </span>
                 
                 
@@ -202,158 +202,6 @@
 <li>容器 Container</li>
 <li>倉庫 Repository</li>
 </ul>
-<h2 id="映像檔"><a href="#映像檔" class="headerlink" title="映像檔"></a>映像檔</h2><p>這個是 Docker 運行虛擬環境時的基礎，是包含應用程式與相關依賴庫的檔案，映像檔可以用來建立容器，會以唯讀的方式建立容器運行的基礎環境，可以把它當作持久化副本。</p>
-<p>映像檔名稱指主要分為三個部分，組好之後每一個映像都會有一個獨立的 Image ID</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker/ssh:latest</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Namespace：命名空間，主要是用來辨識建構的組織或個人名稱</li>
-<li>Repository：檔案名稱，通常用應用程式或服務名稱</li>
-<li>Tag：類似 git 的 Tag，通常用 Tag 來區分版本</li>
-</ul>
-<p>管理映像的方式有提供簡單的指令就能對映像做建構、管理、查詢的操作。</p>
-<h3 id="常見的指令操作"><a href="#常見的指令操作" class="headerlink" title="常見的指令操作"></a>常見的指令操作</h3><table>
-<thead>
-<tr>
-<th>指令</th>
-<th>說明</th>
-<th>範例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>search</td>
-<td>搜尋</td>
-<td>docker search ubuntu</td>
-</tr>
-<tr>
-<td>pull</td>
-<td>下載</td>
-<td>docker pull ubuntu</td>
-</tr>
-<tr>
-<td>images</td>
-<td>列表</td>
-<td>docker images</td>
-</tr>
-<tr>
-<td>run</td>
-<td>執行</td>
-<td>docker run -it ubuntu /bin/bash</td>
-</tr>
-<tr>
-<td>rmi [Image ID]</td>
-<td>刪除</td>
-<td>docker rmi <abcdefgg></abcdefgg></td>
-</tr>
-<tr>
-<td>build</td>
-<td>建立</td>
-<td>docker build -t member:1 .</td>
-</tr>
-<tr>
-<td>login</td>
-<td>登入</td>
-<td>docker login</td>
-</tr>
-<tr>
-<td>push</td>
-<td>上傳</td>
-<td>docker push</td>
-</tr>
-</tbody>
-</table>
-<p>透過 search 可以先查找現有的映像檔，由於這裡我們沒有指定映像標籤，所以會自動的使用 <code>latest</code> 的預設標籤</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker search ubuntu</span><br></pre></td></tr></table></figure>
-<p><img src="/images/docker/1.png" alt></p>
-<p>列出的訊息可以看到</p>
-<ul>
-<li>NAME 映像檔名稱</li>
-<li>DESCRIPTION 描述</li>
-<li>STARTS 星星數，越多的話代表越多人使用</li>
-<li>OFFICIAL 是否為官方的映像檔</li>
-<li>AUTOMATED 自動化</li>
-</ul>
-<p>如果你使用指定比較明確的版本，可以使用 ubuntu:16.04 映像檔來啟動一個容器</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -t -i ubuntu:16.04 /bin/bash</span><br></pre></td></tr></table></figure>
-<p>如果後面沒有填上 <code>TAG</code> (是用來標記同一個倉庫不同的映像檔)</p>
-<h3 id="抓取-Image"><a href="#抓取-Image" class="headerlink" title="抓取 Image"></a>抓取 Image</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull ubuntu</span><br><span class="line">$ docker pull ubuntu:16.04 # 只會抓 Ubuntu 16.04</span><br></pre></td></tr></table></figure>
-<h3 id="列出-Local-端的映像檔"><a href="#列出-Local-端的映像檔" class="headerlink" title="列出 Local 端的映像檔"></a>列出 Local 端的映像檔</h3><p>一般在操作 Docker 的時候，會先確定本地端有哪些映像檔</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ docker images</span><br><span class="line"></span><br><span class="line">-- 如果映像檔比較多還可以使用 * 萬用字元來篩選符合條件</span><br><span class="line">$ docker images ph*</span><br></pre></td></tr></table></figure>
-<h3 id="啟動-start-Images-產生-Container"><a href="#啟動-start-Images-產生-Container" class="headerlink" title="啟動(start) Images 產生 Container"></a>啟動(start) Images 產生 Container</h3> <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker start &lt;hash-id&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="暫停-stop-Images-產生-Container"><a href="#暫停-stop-Images-產生-Container" class="headerlink" title="暫停(stop) Images 產生 Container"></a>暫停(stop) Images 產生 Container</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker stop &lt;hash-id&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="刪除映像"><a href="#刪除映像" class="headerlink" title="刪除映像"></a>刪除映像</h3><p>後方直接帶上 images id </p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker rmi 3tjdhdlw0</span><br></pre></td></tr></table></figure>
-<h2 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h2><p>Container 可以執行 run、 啟動 start、停止 stop、刪除 rm，每一個 container 都是分離的。</p>
-<h3 id="建立容器"><a href="#建立容器" class="headerlink" title="建立容器"></a>建立容器</h3><p>使用以下命令，就可以建立且運行一個終端交互的 Ubuntu 容器：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -i -t --name cube ubuntu bash</span><br></pre></td></tr></table></figure>
-<p>命令參數解釋：</p>
-<table>
-<thead>
-<tr>
-<th>參數</th>
-<th>值</th>
-<th>說明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>-i</td>
-<td>n/a</td>
-<td>可以輸入進行交互</td>
-</tr>
-<tr>
-<td>-t</td>
-<td>n/a</td>
-<td>終端交互</td>
-</tr>
-<tr>
-<td>-name</td>
-<td>cube</td>
-<td>指定容器名稱 cube</td>
-</tr>
-<tr>
-<td>ubuntu</td>
-<td>n/a</td>
-<td>指定使用映像檔</td>
-</tr>
-<tr>
-<td>bash</td>
-<td>n/a</td>
-<td>指定容器啟用使用的應用</td>
-</tr>
-</tbody>
-</table>
-<p>執行之後，就會立刻登入 ubuntu 容器的 bash 裡了。</p>
-<h3 id="查看-Container-訊息"><a href="#查看-Container-訊息" class="headerlink" title="查看 Container 訊息"></a>查看 Container 訊息</h3><p>一但已有建立 Container 之後，可以使用 <code>ps</code> 指令來查詢 container 資訊，會列出正在執行的容器</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker ps</span><br></pre></td></tr></table></figure>
-<p>但如果想要查詢所有容器的狀態，後面補上  <code>-a</code></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker ps -a</span><br></pre></td></tr></table></figure>
-<p>執行結果會像下面這樣：</p>
-<p><img src="/images/docker/2.png" alt></p>
-<h3 id="刪除-Container"><a href="#刪除-Container" class="headerlink" title="刪除 Container"></a>刪除 Container</h3><p>刪除的方式有兩種</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ docker rm &lt;NAMES&gt;</span><br><span class="line">$ docker rm &lt;CONTAINER ID&gt;</span><br></pre></td></tr></table></figure>
-<p>假設我想刪除 <code>funny_ptolemy</code> 那麼，就輸入 <code>docker rm funny_ptolemy</code></p>
-<p>執行結果如下：</p>
-<p><img src="/images/docker/3.png" alt></p>
-<h2 id="倉庫"><a href="#倉庫" class="headerlink" title="倉庫"></a>倉庫</h2><p>顧名思義就是集中擺放 images 的地方。倉庫也分為 Public 和 Private 形式，公開的倉庫是 Docker Hub，裡頭放了許多映像檔讓使用者下載。這個有點像是 git 觀念一樣，也是一種託管服務。也就是說當使用者建立好自己的映像檔之後，就可以使用 push 命令上傳到倉庫，之後在另一台機器就可以使用映像檔使用 pull 命令下載下來。</p>
-<p>所以，映像管理系統就是提供類似程式庫刑事的映像存取和管理方式，如果是用遠端的方式要求登入與授權操作的話，需要透過 docker login 登入指定的倉庫伺服器</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker login -u &lt;username&gt; -p &lt;password&gt; &lt;server&gt;</span><br></pre></td></tr></table></figure>
-<p>如果不加上 <server> ，預設就會是使用  docker hub</server></p>
-<h3 id="Public-公開倉庫"><a href="#Public-公開倉庫" class="headerlink" title="Public  公開倉庫"></a>Public  公開倉庫</h3><p>全球最大的映像倉庫就是官方提供的 <a href="https://hub.docker.com/" target="_blank" rel="noopener">https://hub.docker.com/</a> ，使用服務前先註冊一個 Docker Hub 帳號</p>
-<p><img src="/images/docker/4.png" alt></p>
-<p>註冊完登入後，就可以看到託管的 Docker Hub 映像，一般是以本地 docker login 到 Docker Hub 中，在使用 docker push  發布到 Hub 上</p>
-<p><img src="/images/docker/5.png" alt></p>
-<p>到右上角搜尋匡輸入 mysql 的話，就可以搜尋您想要的服務</p>
-<p><img src="/images/docker/6.png" alt></p>
-<p>在搜尋結果有顯示官方的 image 以及星星數，找到所需要的映像之後就可以用 docker pull 命令下載了</p>
-<p><img src="/images/docker/7.png" alt></p>
-<h3 id="Private-私有倉庫"><a href="#Private-私有倉庫" class="headerlink" title="Private 私有倉庫"></a>Private 私有倉庫</h3><p>除了用 Docker Hub 官方提供的倉庫之外，當然也可以自己建構私有的倉庫 (也有點像 gitlab)。其名稱用了一個映像分發工具 <code>Docker Registry</code> 目的是儲存與分發映像，也提供 HTTP API 模組操作。</p>
-<p>建立與執行映像檔倉庫</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d -p 5000:5000 registry</span><br></pre></td></tr></table></figure>
-<p><img src="/images/docker/8.png" alt></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d -p 5000:5000 -v &lt;上傳映像檔的目錄&gt;:/tmp/registry registry</span><br></pre></td></tr></table></figure>
-<p>之後就可以對這組 registry 做 push 與 pull</p>
-
 
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
@@ -362,6 +210,14 @@
             </script>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/01/26/docker/docker-01-start/#more">繼續閱讀</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
