@@ -152,6 +152,109 @@
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
     <div class="card">
     
+    <div class="card-image">
+        <a href="/2017/08/25/gitbook/gitbook-install/" class="image is-7by1">
+            <img class="thumbnail" src="/images/gitbook/1.png" alt="Gitbook - 用 Gitbook 寫一個教學的電子書">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-08-25T03:26:07.000Z">2017-08-25</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Gitbook/">Gitbook</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分鐘 閱讀文 (大約 655 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/08/25/gitbook/gitbook-install/">Gitbook - 用 Gitbook 寫一個教學的電子書</a>
+            
+        </h1>
+        <div class="content">
+            <p>今天介紹這套GitBook 是用 node.js 的 npm 管理工具搭建的一種建立電子書的套件，藉由這篇文章可以清楚的瞭解如何建立電子書</p>
+<h3 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h3><p>首先是安裝的部分，安裝之前請先確定 npm 這個管理工具有被安裝起來</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sudo npm install -g gitbook</span><br></pre></td></tr></table></figure>
+<p><img src="/images/gitbook/2.png" alt></p>
+<p>接著，先在某一個目錄夾裏建立一個電子書的檔案庫</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$gitbook serve ./repository</span><br></pre></td></tr></table></figure>
+<p>像這樣子</p>
+<p><img src="/images/gitbook/3.png" alt></p>
+<p>在製作這個電子書，特別要注意的是請先建立 <code>README.md</code> 和 <code>SUMMARY.md</code> 這兩個文件，因為這兩個文件代表著電子書的架構導覽</p>
+<ul>
+<li>README.md   &gt;&gt;&gt; 代表這本電子書的簡介</li>
+</ul>
+<p><img src="/images/gitbook/4.png" alt></p>
+<ul>
+<li>SUMMARY.md  &gt;&gt;&gt; 定義這本電子書的章節結構</li>
+</ul>
+<p><img src="/images/gitbook/5.png" alt></p>
+<h3 id="實作該怎麼做"><a href="#實作該怎麼做" class="headerlink" title="實作該怎麼做"></a>實作該怎麼做</h3><p>在我們定義好 readme.md, summary.md 之後呢，可以看到我在 SUMMARY.md 檔案，建立了四個連結，分別是：</p>
+<ul>
+<li>source/intro/first.md</li>
+<li>source/install/secode.md</li>
+<li>source/install/2-1.md</li>
+<li>source/install/2-2.md</li>
+</ul>
+<p>我們可以利用以下的指令，讓 gitbook 找到 <code>summary.md</code> 所定義的章節結構去自動地去產生對應的檔案</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$gitbook init</span><br></pre></td></tr></table></figure>
+<p>到建立 gitbook 的資料夾看，就可以看到自動建立 source 資料夾之外，在source 下層也建立 intro 及 install 這兩個資料夾，然後再進去看某個資料夾下後，可以發現 markdown 的空白檔案也已經自動建立起來，在這邊就可以隨心所欲去建置屬於自己的章節內容。</p>
+<p><img src="/images/gitbook/6.png" alt></p>
+<p>喔！等等，別忘了看看結果<br>內容寫好之後，建立一個靜態頁面，預設會開 port 4000 的網址</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$gitbook serve</span><br></pre></td></tr></table></figure>
+<p>可依照指令指示，開啓 <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a></p>
+<p><img src="/images/gitbook/7.png" alt></p>
+<h3 id="看看樣子"><a href="#看看樣子" class="headerlink" title="看看樣子"></a>看看樣子</h3><p>這是首頁的樣子，呈現的首頁就能閱覽我們在 README.md 所寫的內容</p>
+<p><img src="/images/gitbook/8.png" alt></p>
+<p>自定義的第一章節，在頁面上有個左右兩邊的箭頭，可以點選後翻到下一個章節</p>
+<p><img src="/images/gitbook/9.png" alt></p>
+<p>自定義的第二章節</p>
+<p><img src="/images/gitbook/10.png" alt></p>
+<h3 id="BTW"><a href="#BTW" class="headerlink" title="BTW,"></a>BTW,</h3><p>Gitbook 支援多種檔案格式：</p>
+<ul>
+<li>靜態網頁：這個是 Gitbook 預設的輸入格式</li>
+<li>PDF : 需要安裝 gitbook-pdf 套件</li>
+<li>eBook: 需要安裝 ebook-convert</li>
+<li>單一 HTML 網頁，支援將內容輸出成一個單頁的 html (但我沒用過，不知道＠＠)</li>
+<li>JSON: 用在資料取得</li>
+</ul>
+<p>ps. 在編寫 markdown 文件時，再存檔的時候會有 live reload 效果，即時更新頁面喔！酷耶～</p>
+
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
@@ -406,82 +509,6 @@
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-07-25T16:30:00.000Z">2017-07-26</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    5 分鐘 閱讀文 (大約 760 個字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/07/26/nodejs/nodejs-30-kp-api/">Node.js 系列學習日誌#30 - 取得野生柯P相簿 API範例</a>
-            
-        </h1>
-        <div class="content">
-            <p>本篇將介紹用野生柯P API來製作 api 的呼叫，但是api 網站已經失效，僅能提供概念說明。這是透過 node-rest-client 的套件製作</p>
-<p>首先先建立一個 express web framework 框架，請在 terminal  上輸入：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$express -e nodejs-kp-albums-sample</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/130.png" alt></p>
-<p>接著按照只是安裝相依套件</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$cd nodejs-kp-albums-sample &amp;&amp; npm install</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/131.png" alt></p>
-<p>接著由於我們要使用到柯 p 官網提供的相簿 api ，在開發前我們需要安裝一個可以支援 restful api 的套件 node-rest-client，接著請在 terminal 輸入</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm install node-rest-client —save</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/132.png" alt></p>
-<p>一切安裝完成之後，就開始來撰寫程式的部分，請先打開 app.js 檔案，在這邊我們要引用裝好的 node-rest-client 套件，將以下語法填入</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var Client = require(&apos;node-rest-client&apos;).Client;</span><br><span class="line">client = new Client();</span><br></pre></td></tr></table></figure>
-<p>先宣告 node-rest-client 之後，我們預計將相簿列表印在主首頁 (index)，可以在 app.js 裡面找到var routes = require(‘./routes/index’); 與 app.use(‘/‘, routes); 這一段，也就是說根目錄的位置會指引到 /routes/index.js 檔案裡面，接著就打開  /routes/index.js ，由於我們在 app.js  完成了宣告，在 index.js 撰寫如下：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">var express = require(&apos;express&apos;);</span><br><span class="line">var router = express.Router();</span><br><span class="line"></span><br><span class="line">/* GET home page. */</span><br><span class="line">router.get(&apos;/&apos;, function(req, resp) &#123;</span><br><span class="line"></span><br><span class="line">    //取得 KP albums 相簿清單列表</span><br><span class="line">     client.get(&quot;http://api.kptaipei.tw/v1/albums&quot;, &#123; author: ‘xxx&apos; &#125;, function(data, res)&#123;</span><br><span class="line">        var config = JSON.parse(data.toString());</span><br><span class="line">        console.log(config.data);</span><br><span class="line"></span><br><span class="line">        //將資料寫在 locals</span><br><span class="line">        resp.locals.posts = config.data;</span><br><span class="line"></span><br><span class="line">        var renderData = &#123;</span><br><span class="line">             title: &apos;柯 p 野生 API&apos;,</span><br><span class="line">             data: config.data</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        // 將取得到的 json 格式渲染到畫面上</span><br><span class="line">        resp.render(&apos;index&apos;, renderData);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">module.exports = router;</span><br></pre></td></tr></table></figure>
-<p>可以看到用了 client.get 方法，其有三個參數，第一個參數請到 <a href="http://unlimited.kptaipei.tw/docs/#api-ch3" target="_blank" rel="noopener">http://unlimited.kptaipei.tw/docs/#api-ch3</a> 得到相簿清單的 api ：<a href="http://api.kptaipei.tw/v1/albums/" target="_blank" rel="noopener">http://api.kptaipei.tw/v1/albums/</a>  ，預期會知道 api 結果會是如下</p>
-<p><img src="/images/nodejs/133.png" alt></p>
-<p><img src="/images/nodejs/134.png" alt></p>
-<p>第二參數由於本篇只做列表，就保持為空 {}，第三個參數就 function callback 操作，在取得  json 格式的資料之後，經過 json.parse 由字串轉換 json  ，並且我們已知要抓  data 的陣列，透過物件 renderData 將資料存放，最後就將得到的資料渲染到畫面上 ，也就是 resp.render(‘index’, renderData);</p>
-<p>接著到了 views 的部分，就請開啓  /views/index.ejs 檔案</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;title&gt;&lt;%= title %&gt;&lt;/title&gt;</span><br><span class="line">    &lt;link rel=&apos;stylesheet&apos; href=&apos;/stylesheets/style.css&apos; /&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">    &lt;%</span><br><span class="line">         posts.forEach(function(post) &#123;</span><br><span class="line">              var thumb = post.thumbnails;</span><br><span class="line">              var t_small = thumb.small_square;</span><br><span class="line">    %&gt;</span><br><span class="line">          &lt;img src=&apos;&lt;%= t_small %&gt;&apos; alt=&apos;&lt;%=post.title %&gt;&apos; /&gt;</span><br><span class="line">    &lt;% &#125;);%&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-<p>在這邊我只需要顯示柯p相簿的小張圖，也就是 thumbnails.small_square ，由於已經轉成  json  格式，那麼就當做物件找到 thumbnails.small_square  位置，將取得到的圖片網址塞到 img tag 裡的 src 屬性。那麼，一切的一切準備好之後，就請執行應用程式吧！輸入：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm start</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/135.png" alt></p>
-<p>網站預設為 3000 port ，請開啓 localhost:3000，結果如下圖顯示</p>
-<p><img src="/images/nodejs/136.png" alt></p>
-<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="https://www.npmjs.org/package/node-rest-client" target="_blank" rel="noopener">https://www.npmjs.org/package/node-rest-client</a></p>
-
-
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -556,7 +583,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        73
+                        74
                     </p>
                 </div>
             </div>
@@ -576,7 +603,7 @@
                         標籤
                     </p>
                     <p class="title has-text-weight-normal">
-                        45
+                        47
                     </p>
                 </div>
             </div>
@@ -618,6 +645,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/03/21/web/ubuntu-docker-wordpress/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/web/20200321-1.png" alt="在 Ubuntu 16.04 使用 Docker 快速架設 Wordpress 的簡易指南">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-21T13:10:00.000Z">2020-03-21</time></div>
+                    <a href="/2020/03/21/web/ubuntu-docker-wordpress/" class="has-link-black-ter is-size-6">在 Ubuntu 16.04 使用 Docker 快速架設 Wordpress 的簡易指南</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/網站/">網站</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -690,25 +736,6 @@
                     <a href="/2020/01/26/docker/docker-01-start/" class="has-link-black-ter is-size-6">Docker#1 - 初識 Docker</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/docker/">docker</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/04/30/bot/hubot-02-heroku-slack/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/bot/cover2.png" alt="用 Hubot 打造聊天機器人#2 - hubot 專案部署到 heroku 連接 slack 聊天通訊軟體">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-30T15:07:00.000Z">2019-04-30</time></div>
-                    <a href="/2019/04/30/bot/hubot-02-heroku-slack/" class="has-link-black-ter is-size-6">用 Hubot 打造聊天機器人#2 - hubot 專案部署到 heroku 連接 slack 聊天通訊軟體</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/hubot/">hubot</a>
                     </p>
                 </div>
             </div>
@@ -831,7 +858,7 @@
                 <span class="level-item">網站</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/股典閱/">
@@ -874,6 +901,13 @@
                     <a class="tags has-addons" href="/tags/Apache/">
                         <span class="tag">Apache</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Docker/">
+                        <span class="tag">Docker</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -929,7 +963,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Nginx/">
                         <span class="tag">Nginx</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -971,7 +1005,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Ubuntu/">
                         <span class="tag">Ubuntu</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1146,6 +1180,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/socket-io/">
                         <span class="tag">socket.io</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/wordpress/">
+                        <span class="tag">wordpress</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1304,7 +1345,7 @@
                 <span class="level-item">網站</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/股典閱/">
@@ -1347,6 +1388,13 @@
                     <a class="tags has-addons" href="/tags/Apache/">
                         <span class="tag">Apache</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Docker/">
+                        <span class="tag">Docker</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1402,7 +1450,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Nginx/">
                         <span class="tag">Nginx</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1444,7 +1492,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Ubuntu/">
                         <span class="tag">Ubuntu</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1619,6 +1667,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/socket-io/">
                         <span class="tag">socket.io</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/wordpress/">
+                        <span class="tag">wordpress</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>

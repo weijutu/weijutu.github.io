@@ -156,6 +156,133 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-07-24T16:25:00.000Z">2017-07-25</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分鐘 閱讀文 (大約 642 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/07/25/nodejs/nodejs-25-jade-1/">Node.js 系列學習日誌#25 - 介紹 Jade  Template Engine 模板引擎 (上)</a>
+            
+        </h1>
+        <div class="content">
+            <p><img src="/images/nodejs/107.png" alt></p>
+<p>Node.js 開發網頁它有許多的樣板引擎可以使用，例如常見的 Jade, EJS。樣板引擎也可以稱為樣板處理器 （Template Processor）或者叫過濾器 （Filter）。其他的語言也有個別使用的樣板引擎，像是 PHP 的 Smarty、 Ruby 的 ERB，本章節會以 jade 作為基礎的介紹如何透過樣板引擎實作 Node.js 網頁。</p>
+<p>官方網站：<a href="http://jade-lang.com/" target="_blank" rel="noopener">http://jade-lang.com/</a></p>
+<p>今天會介紹的內容有</p>
+<ul>
+<li>Jade 特點</li>
+<li>Jade 語法<ul>
+<li>屬性</li>
+</ul>
+</li>
+<li>Jade 輸出資料<ul>
+<li>迴圈</li>
+<li>條件</li>
+</ul>
+</li>
+</ul>
+<p>接下來您可以使用：<a href="http://codepen.io/" target="_blank" rel="noopener">http://codepen.io/</a> 作為線上編輯做以下實作的測試編輯器</p>
+<p><img src="/images/nodejs/108.png" alt></p>
+<p>首先，我們先來比較一下 HTML  跟 Jade 的表示方式</p>
+<p>===== HTML =====</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;wrap&quot;&gt;</span><br><span class="line">  &lt;h1&gt;Lorem Ipsum&lt;/h1&gt;</span><br><span class="line">  &lt;p&gt;Contrary to popular belief, Lorem Ipsum is not simply random text. &lt;/p&gt;</span><br><span class="line"> &lt;a href=“http://www.google.com&quot;&gt;Google&lt;/a&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>===== Jade =====</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.wrap</span><br><span class="line">  h1 Lorem Ipsum</span><br><span class="line">  p Contrary to popular belief, Lorem Ipsum is not simply random text.</span><br><span class="line">  a(href=&apos;http://www.google.com&apos;) Google</span><br></pre></td></tr></table></figure>
+<h3 id="Jade-特點"><a href="#Jade-特點" class="headerlink" title="Jade 特點"></a>Jade 特點</h3><ul>
+<li>Jade 用縮排來定義 HTML 的階層結構</li>
+<li>Jade  比 HTML 寫起來更簡潔</li>
+<li>Jade 在編譯後，會將 HTML  的補上結束標籤</li>
+<li>Jade 不需要寫小於大於的符號</li>
+</ul>
+<h3 id="Jade-語法"><a href="#Jade-語法" class="headerlink" title="Jade 語法"></a>Jade 語法</h3><p>因為 Jade 是利用縮排的方式來定義 HTML 的階層結構，也就是說，下一行的縮排的話，就是上一行的子節點。</p>
+<p>撰寫</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">html</span><br></pre></td></tr></table></figure>
+<p>編譯後</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>撰寫</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">div#wrap</span><br></pre></td></tr></table></figure>
+<p>編譯後</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;wrap&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>撰寫</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p.article.a1.a2.a3</span><br></pre></td></tr></table></figure>
+<p>編譯後</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p class=&quot;article a1 a2 a3&quot;&gt;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>撰寫</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p</span><br><span class="line">     span</span><br></pre></td></tr></table></figure>
+<p>編譯後</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;&lt;span&gt;&lt;/span&gt;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>撰寫</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">p</span><br><span class="line">     | Contrary to popular belief</span><br><span class="line">     | Lorem Ipsum is simply dummy text of the printing</span><br><span class="line">     | It has survived not only five centuries</span><br></pre></td></tr></table></figure>
+<p>編譯後</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;Contrary to popular belief Lorem Ipsum is simply dummy text of the printing It has survived not only five centuries &lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>標籤屬性：屬性部分就用括號的方式括弧起來，有多個屬性時就用逗點分隔或者段行來分隔</p>
+<p>方法一</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">input(type=&quot;text&quot;, placeholder=&quot;hello&quot;)</span><br></pre></td></tr></table></figure>
+<p>方法二</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">input(</span><br><span class="line">     type=&apos;text&apos;</span><br><span class="line">     name=&apos;age&apos;</span><br><span class="line">     placeholder=&apos;typing your age&apos;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>方法三：也可以用 javascript 的判斷控制屬性資料</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- var isFemale = true</span><br><span class="line">input(type=&apos;text&apos; value=isFemale ? &apos;Female&apos; : &apos;Male&apos;)</span><br></pre></td></tr></table></figure>
+<h3 id="Jade-輸出資料"><a href="#Jade-輸出資料" class="headerlink" title="Jade 輸出資料"></a>Jade 輸出資料</h3><h4 id="迴圈"><a href="#迴圈" class="headerlink" title="迴圈"></a>迴圈</h4><p>試著寫迴圈</p>
+<p><img src="/images/nodejs/109.png" alt></p>
+<p>輸出結果</p>
+<p><img src="/images/nodejs/110.png" alt></p>
+<h4 id="條件"><a href="#條件" class="headerlink" title="條件"></a>條件</h4><p>條件是指當判斷為真或否時，各別出現不同的結果，什麼意思呢？直接看範例好了</p>
+<p><img src="/images/nodejs/111.png" alt></p>
+<p>結果</p>
+<p><img src="/images/nodejs/112.png" alt></p>
+<p>Jade 就先寫到這裡，下集待續..</p>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ol>
+<li><a href="http://jade-lang.com/" target="_blank" rel="noopener">http://jade-lang.com/</a></li>
+<li><a href="http://naltatis.github.io/jade-syntax-docs/" target="_blank" rel="noopener">http://naltatis.github.io/jade-syntax-docs/</a></li>
+<li><a href="http://naltatis.github.io/jade-syntax-docs/#basics" target="_blank" rel="noopener">http://naltatis.github.io/jade-syntax-docs/#basics</a></li>
+<li><a href="http://blog.kerash.tw/2013/04/nodejs-jade-template-engine/" target="_blank" rel="noopener">http://blog.kerash.tw/2013/04/nodejs-jade-template-engine/</a></li>
+</ol>
+
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2017-07-23T16:24:00.000Z">2017-07-24</time>
                 
                 <div class="level-item">
@@ -463,74 +590,6 @@
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-07-23T16:20:00.000Z">2017-07-24</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 分鐘 閱讀文 (大約 456 個字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/07/24/nodejs/nodejs-20-node-inspector/">Node.js 系列學習日誌#20 - 調校 Debug 工具 node-inspector</a>
-            
-        </h1>
-        <div class="content">
-            <p>開發過程所撰寫的程式，總是要跟 bugs 打交道，本篇文章介紹一套官方推薦的 Node.js Debug 調校工具 node-inspector，而Node.js 是可以透過  command 命令列方式除錯，不過 node-inspector 則是透過 Web 網頁的方式來操作，讓開發者在調校更美觀方便一些。在這 node-inspector 安裝之前，我們必須要有一個 webkit 的瀏覽器，比如許多人使用的 chrome。接著我們就可以進行安裝 node-inspector</p>
-<h3 id="安裝指令"><a href="#安裝指令" class="headerlink" title="安裝指令"></a>安裝指令</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm install -g node-inspector</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/76.png" alt></p>
-<h3 id="調校"><a href="#調校" class="headerlink" title="調校"></a>調校</h3><p>執行時會預設 5858 port 口。我們使用前一個聊天室專案來示範 ，使進行  debug 動作時請下指令：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node —debug app.js</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/77.png" alt></p>
-<p>這時候會開始做  5858 port 的監聽，接著我們在打開另一個命令提示字元的視窗，在執行</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$node-inspector &amp;</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/78.png" alt></p>
-<p>上面會提示說請造訪 <a href="http://127.0.0.1:8080/debug?port=5858" target="_blank" rel="noopener">http://127.0.0.1:8080/debug?port=5858</a> 路徑去啟動  debugging 模式</p>
-<p><img src="/images/nodejs/79.png" alt></p>
-<p>打開之後，可以看到調校的工具載入程式碼，您可以在行號下中斷點，右手邊的   breakpoints 就會顯示下中斷點的位置</p>
-<p><img src="/images/nodejs/80.png" alt></p>
-<p>在這邊我下了一個 建立新的使用者的中斷點，也就是新的使用者進到聊天室裡面，可以看到調校的頁面就立刻監測到，如下所示：</p>
-<p><img src="/images/nodejs/81.png" alt></p>
-<p>您可以將滑鼠指向  socket 的位置，可以看到 socket 相關的屬性及方法</p>
-<p><img src="/images/nodejs/82.png" alt></p>
-<p>以上的基本操作就可以很方便的調校 node.js 的程式，也不用一直在程式上面插旗子 （console.log 的方法）可以透過這個工具可以進行 debugging 囉</p>
-
-
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -605,7 +664,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        73
+                        74
                     </p>
                 </div>
             </div>
@@ -625,7 +684,7 @@
                         標籤
                     </p>
                     <p class="title has-text-weight-normal">
-                        45
+                        47
                     </p>
                 </div>
             </div>
@@ -667,6 +726,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/03/21/web/ubuntu-docker-wordpress/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/web/20200321-1.png" alt="在 Ubuntu 16.04 使用 Docker 快速架設 Wordpress 的簡易指南">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-21T13:10:00.000Z">2020-03-21</time></div>
+                    <a href="/2020/03/21/web/ubuntu-docker-wordpress/" class="has-link-black-ter is-size-6">在 Ubuntu 16.04 使用 Docker 快速架設 Wordpress 的簡易指南</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/網站/">網站</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -739,25 +817,6 @@
                     <a href="/2020/01/26/docker/docker-01-start/" class="has-link-black-ter is-size-6">Docker#1 - 初識 Docker</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/docker/">docker</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/04/30/bot/hubot-02-heroku-slack/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/bot/cover2.png" alt="用 Hubot 打造聊天機器人#2 - hubot 專案部署到 heroku 連接 slack 聊天通訊軟體">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-30T15:07:00.000Z">2019-04-30</time></div>
-                    <a href="/2019/04/30/bot/hubot-02-heroku-slack/" class="has-link-black-ter is-size-6">用 Hubot 打造聊天機器人#2 - hubot 專案部署到 heroku 連接 slack 聊天通訊軟體</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/hubot/">hubot</a>
                     </p>
                 </div>
             </div>
@@ -880,7 +939,7 @@
                 <span class="level-item">網站</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/股典閱/">
@@ -923,6 +982,13 @@
                     <a class="tags has-addons" href="/tags/Apache/">
                         <span class="tag">Apache</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Docker/">
+                        <span class="tag">Docker</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -978,7 +1044,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Nginx/">
                         <span class="tag">Nginx</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1020,7 +1086,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Ubuntu/">
                         <span class="tag">Ubuntu</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1195,6 +1261,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/socket-io/">
                         <span class="tag">socket.io</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/wordpress/">
+                        <span class="tag">wordpress</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1353,7 +1426,7 @@
                 <span class="level-item">網站</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/股典閱/">
@@ -1396,6 +1469,13 @@
                     <a class="tags has-addons" href="/tags/Apache/">
                         <span class="tag">Apache</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Docker/">
+                        <span class="tag">Docker</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1451,7 +1531,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Nginx/">
                         <span class="tag">Nginx</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1493,7 +1573,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Ubuntu/">
                         <span class="tag">Ubuntu</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1668,6 +1748,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/socket-io/">
                         <span class="tag">socket.io</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/wordpress/">
+                        <span class="tag">wordpress</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>

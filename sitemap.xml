@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://weijutu.github.io/2020/03/21/web/ubuntu-docker-wordpress/</loc>
+    
+    <lastmod>2020-03-21T16:09:30.485Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://weijutu.github.io/2020/01/26/docker/docker-04-data-volume/</loc>
     
     <lastmod>2020-01-26T15:43:09.049Z</lastmod>

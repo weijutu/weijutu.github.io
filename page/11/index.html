@@ -156,6 +156,74 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-07-23T16:20:00.000Z">2017-07-24</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 分鐘 閱讀文 (大約 456 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/07/24/nodejs/nodejs-20-node-inspector/">Node.js 系列學習日誌#20 - 調校 Debug 工具 node-inspector</a>
+            
+        </h1>
+        <div class="content">
+            <p>開發過程所撰寫的程式，總是要跟 bugs 打交道，本篇文章介紹一套官方推薦的 Node.js Debug 調校工具 node-inspector，而Node.js 是可以透過  command 命令列方式除錯，不過 node-inspector 則是透過 Web 網頁的方式來操作，讓開發者在調校更美觀方便一些。在這 node-inspector 安裝之前，我們必須要有一個 webkit 的瀏覽器，比如許多人使用的 chrome。接著我們就可以進行安裝 node-inspector</p>
+<h3 id="安裝指令"><a href="#安裝指令" class="headerlink" title="安裝指令"></a>安裝指令</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm install -g node-inspector</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/76.png" alt></p>
+<h3 id="調校"><a href="#調校" class="headerlink" title="調校"></a>調校</h3><p>執行時會預設 5858 port 口。我們使用前一個聊天室專案來示範 ，使進行  debug 動作時請下指令：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node —debug app.js</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/77.png" alt></p>
+<p>這時候會開始做  5858 port 的監聽，接著我們在打開另一個命令提示字元的視窗，在執行</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$node-inspector &amp;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/78.png" alt></p>
+<p>上面會提示說請造訪 <a href="http://127.0.0.1:8080/debug?port=5858" target="_blank" rel="noopener">http://127.0.0.1:8080/debug?port=5858</a> 路徑去啟動  debugging 模式</p>
+<p><img src="/images/nodejs/79.png" alt></p>
+<p>打開之後，可以看到調校的工具載入程式碼，您可以在行號下中斷點，右手邊的   breakpoints 就會顯示下中斷點的位置</p>
+<p><img src="/images/nodejs/80.png" alt></p>
+<p>在這邊我下了一個 建立新的使用者的中斷點，也就是新的使用者進到聊天室裡面，可以看到調校的頁面就立刻監測到，如下所示：</p>
+<p><img src="/images/nodejs/81.png" alt></p>
+<p>您可以將滑鼠指向  socket 的位置，可以看到 socket 相關的屬性及方法</p>
+<p><img src="/images/nodejs/82.png" alt></p>
+<p>以上的基本操作就可以很方便的調校 node.js 的程式，也不用一直在程式上面插旗子 （console.log 的方法）可以透過這個工具可以進行 debugging 囉</p>
+
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2017-07-23T16:19:00.000Z">2017-07-24</time>
                 
                 <div class="level-item">
@@ -434,78 +502,6 @@
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-07-23T16:15:00.000Z">2017-07-24</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 分鐘 閱讀文 (大約 588 個字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/07/24/nodejs/nodejs-15-markdown/">Node.js 系列學習日誌#15 - 讀取 markdown 檔案內容顯示在頁面上</a>
-            
-        </h1>
-        <div class="content">
-            <p>繼上一篇完成讀取檔案的操作之後，本篇將介紹讀取  markdown 檔案內容顯示在頁面上面。</p>
-<h1 id="話說前頭，什麼是-markdown"><a href="#話說前頭，什麼是-markdown" class="headerlink" title="話說前頭，什麼是 markdown?"></a>話說前頭，什麼是 markdown?</h1><p>從 wiki 網站所說的，它是一種輕量級的標記語言，允許使用容易讀也容易寫的純文字的格式，最後轉換 xhtml, html 檔案，就有點像是一般電子郵件純文本的特性。可以從這個網址來 <a href="http://markdown.tw/" target="_blank" rel="noopener">http://markdown.tw/</a> 學習每個元素的寫法。</p>
-<h1 id="node-markdown-實作"><a href="#node-markdown-實作" class="headerlink" title="node-markdown 實作"></a>node-markdown 實作</h1><p>首先我們建立一個 express web framework 的專案，在這邊的樣板引擎是用 ejs ，因此下的指令是</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$express -e nodejs-fs-markdown</span><br></pre></td></tr></table></figure>
-<p>在根目錄底下建立一個 markdown 檔案，名為 book.md 的檔案，開啓 book.md 檔案後，我們任意打一些 markdown 的格式預備要來轉換  html 格式</p>
-<p><img src="/images/nodejs/61.png" alt></p>
-<p>接著重要我們要採用  node-markdown 的套件來安裝，詳見 <a href="https://www.npmjs.org/package/node-markdown" target="_blank" rel="noopener">https://www.npmjs.org/package/node-markdown</a> ，安裝方式可使用</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$npm</span> install node-markdown</span><br></pre></td></tr></table></figure>
-<p>其檔案結構會是：</p>
-<p><img src="/images/nodejs/62.png" alt></p>
-<p>請打開 app.js 檔案，我們要將 node-markdown 引入，因此宣告方式為：</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> md = <span class="hljs-built_in">require</span>(<span class="hljs-string">"node-markdown"</span>).Markdown;</span><br></pre></td></tr></table></figure>
-<p>並且在 app.js 檔案裡面安插以下這段</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="hljs-string">'/markdown'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res</span>)</span>&#123;</span><br><span class="line">    fs.readFile(<span class="hljs-string">"./book.md"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, data</span>) </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (err) &#123;</span><br><span class="line">            <span class="hljs-keyword">throw</span> err;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">       <span class="hljs-comment">//使用  md 方法將檔案內容轉行為 html 格式</span></span><br><span class="line">        str = md(data.toString());</span><br><span class="line">        <span class="hljs-built_in">console</span>.log(str);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">//回應結果顯示在頁面上</span></span><br><span class="line">        res.send(str)</span><br><span class="line">        res.end();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>在這邊使用了 /markdown 作為進入的網址，而這個網址主要是去解析 markdown 的檔案，在這個 function 下，我們還需要利用  fs 核心模組來讀取 book.md 檔案，請務必在宣告的地方加入  var fs = require(“fs”);</p>
-<p>讀取的方式就使用  fs.readFile 方法，接著更重要的是再使用 md 方法將檔案內容轉換成  html 格式，最後，看一下結果如下，將會依照 markdown 的格式轉換</p>
-<p><img src="/images/nodejs/63.png" alt></p>
-<p>學習了這個工具，之後再撰寫 html 的檔案時，可以利用 markdown 的格式來寫，寫起來又輕鬆又好懂喔！<br>下集待續…</p>
-<h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><ul>
-<li><a href="http://markdown.tw/" target="_blank" rel="noopener">http://markdown.tw/</a></li>
-<li><a href="http://www.wikiwand.com/zh-tw/Markdown" target="_blank" rel="noopener">http://www.wikiwand.com/zh-tw/Markdown </a></li>
-</ul>
-
-
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -580,7 +576,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        73
+                        74
                     </p>
                 </div>
             </div>
@@ -600,7 +596,7 @@
                         標籤
                     </p>
                     <p class="title has-text-weight-normal">
-                        45
+                        47
                     </p>
                 </div>
             </div>
@@ -642,6 +638,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/03/21/web/ubuntu-docker-wordpress/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/web/20200321-1.png" alt="在 Ubuntu 16.04 使用 Docker 快速架設 Wordpress 的簡易指南">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-21T13:10:00.000Z">2020-03-21</time></div>
+                    <a href="/2020/03/21/web/ubuntu-docker-wordpress/" class="has-link-black-ter is-size-6">在 Ubuntu 16.04 使用 Docker 快速架設 Wordpress 的簡易指南</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/網站/">網站</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -714,25 +729,6 @@
                     <a href="/2020/01/26/docker/docker-01-start/" class="has-link-black-ter is-size-6">Docker#1 - 初識 Docker</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/docker/">docker</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/04/30/bot/hubot-02-heroku-slack/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/bot/cover2.png" alt="用 Hubot 打造聊天機器人#2 - hubot 專案部署到 heroku 連接 slack 聊天通訊軟體">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-30T15:07:00.000Z">2019-04-30</time></div>
-                    <a href="/2019/04/30/bot/hubot-02-heroku-slack/" class="has-link-black-ter is-size-6">用 Hubot 打造聊天機器人#2 - hubot 專案部署到 heroku 連接 slack 聊天通訊軟體</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/hubot/">hubot</a>
                     </p>
                 </div>
             </div>
@@ -855,7 +851,7 @@
                 <span class="level-item">網站</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/股典閱/">
@@ -898,6 +894,13 @@
                     <a class="tags has-addons" href="/tags/Apache/">
                         <span class="tag">Apache</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Docker/">
+                        <span class="tag">Docker</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -953,7 +956,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Nginx/">
                         <span class="tag">Nginx</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -995,7 +998,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Ubuntu/">
                         <span class="tag">Ubuntu</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1170,6 +1173,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/socket-io/">
                         <span class="tag">socket.io</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/wordpress/">
+                        <span class="tag">wordpress</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1328,7 +1338,7 @@
                 <span class="level-item">網站</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/股典閱/">
@@ -1371,6 +1381,13 @@
                     <a class="tags has-addons" href="/tags/Apache/">
                         <span class="tag">Apache</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Docker/">
+                        <span class="tag">Docker</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1426,7 +1443,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Nginx/">
                         <span class="tag">Nginx</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1468,7 +1485,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Ubuntu/">
                         <span class="tag">Ubuntu</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1643,6 +1660,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/socket-io/">
                         <span class="tag">socket.io</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/wordpress/">
+                        <span class="tag">wordpress</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
