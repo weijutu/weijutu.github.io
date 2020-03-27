@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh">
-<head><meta name="generator" content="Hexo 3.8.0">
+<html  lang="zh">
+<head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
 <title>在 Ubuntu 16.04 使用 Docker 快速架設 Wordpress 的簡易指南 - 噗噗。故我在</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
 
 
@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://weijutu.github.io/images/web/20200321-6.png">
 <meta property="og:image" content="https://weijutu.github.io/images/web/20200321-7.png">
 <meta property="og:image" content="https://weijutu.github.io/images/web/20200321-8.png">
-<meta property="og:updated_time" content="2020-03-21T16:09:30.485Z">
+<meta property="og:updated_time" content="2020-03-27T16:03:21.941Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在 Ubuntu 16.04 使用 Docker 快速架設 Wordpress 的簡易指南">
 <meta name="twitter:description" content="Docker 是一種可以創建容器的工具，而 Wordpress 是一個免費且開源的 php 與 mysql 的內容管理系統以及部落格工具，非常多人用它來進行網站架設、電子商務等等，本篇將幫助你在 Ubuntu 系統使用 docker 方式進行在 nginx 網站伺服器安裝 wordpress。 使用 Docker 的好處一般來說，要進行安裝 Wordpress 系統，需要相關的服務 lamp (L">
@@ -108,8 +108,10 @@
     enable_page_level_ads: true
   });
 </script>
-<script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
-</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<script async custom-element="amp-auto-ads"
+src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+</script>
+    <script data-ad-client="ca-pub-9431433815329544" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 <body class="is-3-column">
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar navbar-main">
@@ -117,23 +119,28 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <h4 style="font-size: 180%; font-weight: blod">噗噗。故我在
+                <h4 style="font-size: 180%; font-weight: blod">噗噗。故我在</<h4>
             
-            </h4></a>
+            </a>
         </div>
         <div class="navbar-menu">
             
             <div class="navbar-start">
                 
-                <a class="navbar-item" href="/">Home</a>
+                <a class="navbar-item"
+                href="/">Home</a>
                 
-                <a class="navbar-item" href="/archives">Archives</a>
+                <a class="navbar-item"
+                href="/archives">Archives</a>
                 
-                <a class="navbar-item" href="/categories">Categories</a>
+                <a class="navbar-item"
+                href="/categories">Categories</a>
                 
-                <a class="navbar-item" href="/tags">Tags</a>
+                <a class="navbar-item"
+                href="/tags">Tags</a>
                 
-                <a class="navbar-item" href="/about">About</a>
+                <a class="navbar-item"
+                href="/about">About</a>
                 
             </div>
             
@@ -148,6 +155,10 @@
                     </a>
                     
                  -->
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="文章目錄" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
                 
                 
                 <a class="navbar-item search" title="搜尋" href="javascript:;">
@@ -165,7 +176,7 @@
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
     
     <div class="card-image">
-        <span class="image is-7by1">
+        <span  class="image is-7by1">
             <img class="thumbnail" src="/images/web/20200321-1.png" alt="在 Ubuntu 16.04 使用 Docker 快速架設 Wordpress 的簡易指南">
         </span>
     </div>
@@ -206,7 +217,7 @@
 <li>Ubuntu 16.04</li>
 <li>Root Privileges</li>
 </ul>
-<h3 id="安裝-Docker"><a href="#安裝-Docker" class="headerlink" title="安裝 Docker"></a>安裝 Docker</h3><p>當你拿到一台全新的 Ubuntu 16.04 的虛擬主機時，我們將重頭開始安裝 Docker。在開始之前請先更新 Ubuntu 以及更新到最新。</p>
+<h2 id="安裝-Docker"><a href="#安裝-Docker" class="headerlink" title="安裝 Docker"></a>安裝 Docker</h2><p>當你拿到一台全新的 Ubuntu 16.04 的虛擬主機時，我們將重頭開始安裝 Docker。在開始之前請先更新 Ubuntu 以及更新到最新。</p>
 <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>注意：你在執行 <code>sudo apt-get update</code> 時，出現 <code>sudo: unable to resolve host localhost.localdomain</code> 錯誤時。</p>
@@ -221,7 +232,7 @@
 <p>在執行之後，你可以看到你的 docker 已經啟動 hello-world 程序</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ root@localhost:~# docker images</span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">hello-world         latest              fce289e99eb9        14 months ago       1.84kB</span><br></pre></td></tr></table></figure>
 <p>就可以看到有印象檔抓下來，代表 docker 有正常執行。</p>
-<h3 id="安裝-Docker-Compose"><a href="#安裝-Docker-Compose" class="headerlink" title="安裝 Docker-Compose"></a>安裝 Docker-Compose</h3><p>Docker-compose 是一個採用 python 的腳本撰寫的。我們需要先安裝 python, python-pip 套件</p>
+<h2 id="安裝-Docker-Compose"><a href="#安裝-Docker-Compose" class="headerlink" title="安裝 Docker-Compose"></a>安裝 Docker-Compose</h2><p>Docker-compose 是一個採用 python 的腳本撰寫的。我們需要先安裝 python, python-pip 套件</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install -y python python-pip</span><br><span class="line">$ pip install --upgrade pip</span><br></pre></td></tr></table></figure>
 <p>接下一步是，要安裝 docker-compose </p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip install docker-compose</span><br></pre></td></tr></table></figure>
@@ -229,7 +240,7 @@
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose -v</span><br></pre></td></tr></table></figure>
 <p>顯示</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@localhost:~# docker-compose -v</span><br><span class="line">docker-compose version 1.25.4, build unknown</span><br></pre></td></tr></table></figure>
-<h3 id="安裝-Wordpress"><a href="#安裝-Wordpress" class="headerlink" title="安裝 Wordpress"></a>安裝 Wordpress</h3><p>這樣子的話，已經將 docker 和 docker-compose 安裝到系統上了。在這步驟中，將進行 wordpress 建立以及  docker-compose 環境。在這裡我們透過 docker-compose 方式進行管理將 nginx 作為 web 部署的網站伺服器、MariaDB 作為 MySQL 資料庫，每一個服務都有自己的容器。</p>
+<h2 id="安裝-Wordpress"><a href="#安裝-Wordpress" class="headerlink" title="安裝 Wordpress"></a>安裝 Wordpress</h2><p>這樣子的話，已經將 docker 和 docker-compose 安裝到系統上了。在這步驟中，將進行 wordpress 建立以及  docker-compose 環境。在這裡我們透過 docker-compose 方式進行管理將 nginx 作為 web 部署的網站伺服器、MariaDB 作為 MySQL 資料庫，每一個服務都有自己的容器。</p>
 <ul>
 <li>Nginx: 使用最新版 <code>nginx: latest</code></li>
 <li>Wordpress: 在 odcker-hub 有提供了 docker 印象黨，我們要使用 wordpress 4.7 版本以及 php-fpm 7.0 版本</li>
@@ -256,12 +267,12 @@
 <p>貼上以下的組態內容</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name wp-hakase.co;</span><br><span class="line"> </span><br><span class="line">    root /var/www/html;</span><br><span class="line">    index index.php;</span><br><span class="line"> </span><br><span class="line">    access_log /var/log/nginx/hakase-access.log;</span><br><span class="line">    error_log /var/log/nginx/hakase-error.log;</span><br><span class="line"> </span><br><span class="line">    location / &#123;</span><br><span class="line">        try_files $uri $uri/ /index.php?$args;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    location ~ \.php$ &#123;</span><br><span class="line">        try_files $uri =404;</span><br><span class="line">        fastcgi_split_path_info ^(.+\.php)(/.+)$;</span><br><span class="line">        fastcgi_pass wordpress:9000;</span><br><span class="line">        fastcgi_index index.php;</span><br><span class="line">        include fastcgi_params;</span><br><span class="line">        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</span><br><span class="line">        fastcgi_param PATH_INFO $fastcgi_path_info;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>完成後，存檔。</p>
-<h3 id="組態設定-Docker-Compose"><a href="#組態設定-Docker-Compose" class="headerlink" title="組態設定 Docker-Compose"></a>組態設定 Docker-Compose</h3><p>在這個步驟裡，我們編輯 <code>docker-compose.yml</code> 文件。請編輯 nginx, mysql, wordpress</p>
+<h2 id="組態設定-Docker-Compose"><a href="#組態設定-Docker-Compose" class="headerlink" title="組態設定 Docker-Compose"></a>組態設定 Docker-Compose</h2><p>在這個步驟裡，我們編輯 <code>docker-compose.yml</code> 文件。請編輯 nginx, mysql, wordpress</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim docker-compose.yml</span><br></pre></td></tr></table></figure>
 <p>貼上以下的組態內容:</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">nginx:</span><br><span class="line">  image: nginx:latest</span><br><span class="line">  ports:</span><br><span class="line">      - &apos;80:80&apos;</span><br><span class="line">  volumes:</span><br><span class="line">      - ./nginx:/etc/nginx/conf.d</span><br><span class="line">      - ./logs/nginx:/var/log/nginx</span><br><span class="line">      - ./wordpress:/var/www/html</span><br><span class="line">  links:</span><br><span class="line">      - wordpress</span><br><span class="line">  restart: always</span><br><span class="line">mysql:</span><br><span class="line">  image: mariadb</span><br><span class="line">  ports:</span><br><span class="line">      - &apos;3306:3306&apos;</span><br><span class="line">  volumes:</span><br><span class="line">      - ./db-data:/var/lib/mysql</span><br><span class="line">  environment:</span><br><span class="line">      - MYSQL_ROOT_PASSWORD=yourpassword</span><br><span class="line">  restart: always</span><br><span class="line">wordpress:</span><br><span class="line">  image: wordpress:4.7.1-php7.0-fpm</span><br><span class="line">  ports:</span><br><span class="line">      - &apos;9000:9000&apos;</span><br><span class="line">  volumes:</span><br><span class="line">      - ./wordpress:/var/www/html</span><br><span class="line">  environment:</span><br><span class="line">      - WORDPRESS_DB_NAME=wpdb</span><br><span class="line">      - WORDPRESS_TABLE_PREFIX=wp_</span><br><span class="line">      - WORDPRESS_DB_HOST=mysql</span><br><span class="line">      - WORDPRESS_DB_PASSWORD=yourpassword</span><br><span class="line">  links:</span><br><span class="line">      - mysql</span><br><span class="line">  restart: always</span><br></pre></td></tr></table></figure>
 <p>那麼，docker-compose 組態設定就完成了。</p>
-<h3 id="執行-Docker-Compose"><a href="#執行-Docker-Compose" class="headerlink" title="執行 Docker-Compose"></a>執行 Docker-Compose</h3><p>在這一步驟要開始用 docker-compose 建立容器，請先到 <code>wordpress-compose</code> 資料夾</p>
+<h2 id="執行-Docker-Compose"><a href="#執行-Docker-Compose" class="headerlink" title="執行 Docker-Compose"></a>執行 Docker-Compose</h2><p>在這一步驟要開始用 docker-compose 建立容器，請先到 <code>wordpress-compose</code> 資料夾</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~/wordpress-compose/</span><br><span class="line">$ docker-compose up -d</span><br></pre></td></tr></table></figure>
 <p>執行過程顯示</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">... (以下省略)</span><br><span class="line">Digest: sha256:2539d4344dd18e1df02be842ffc435f8e1f699cfc55516e2cf2cb16b7a9aea0b</span><br><span class="line">Status: Downloaded newer image for nginx:latest</span><br><span class="line">Creating wordpress-compose_mysql_1 ... done</span><br><span class="line">Creating wordpress-compose_wordpress_1 ... done</span><br><span class="line">Creating wordpress-compose_nginx_1     ... done</span><br></pre></td></tr></table></figure>
@@ -271,21 +282,21 @@
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docadmin@localhost:~/wordpress-compose$ docker-compose ps</span><br><span class="line">            Name                          Command              State           Ports         </span><br><span class="line">---------------------------------------------------------------------------------------------</span><br><span class="line">wordpress-compose_mysql_1       docker-entrypoint.sh mysqld    Up      0.0.0.0:3306-&gt;3306/tcp</span><br><span class="line">wordpress-compose_nginx_1       nginx -g daemon off;           Up      0.0.0.0:80-&gt;80/tcp    </span><br><span class="line">wordpress-compose_wordpress_1   docker-entrypoint.sh php-fpm   Up      0.0.0.0:9000-&gt;9000/tcp</span><br></pre></td></tr></table></figure>
 <p>你可以使用 <code>logs</code> 指令顯示出容器的執行結果。</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose logs nginx</span><br><span class="line">$ docker-compose logs mysql</span><br><span class="line">$ docker-compose logs wordpress</span><br></pre></td></tr></table></figure>
-<h3 id="啟動-Wordpress"><a href="#啟動-Wordpress" class="headerlink" title="啟動 Wordpress"></a>啟動 Wordpress</h3><p>在這步驟之前，我們檢查系統上可用的端口是 80, 3306, 9000</p>
+<h2 id="啟動-Wordpress"><a href="#啟動-Wordpress" class="headerlink" title="啟動 Wordpress"></a>啟動 Wordpress</h2><p>在這步驟之前，我們檢查系統上可用的端口是 80, 3306, 9000</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ netstat -plntu</span><br></pre></td></tr></table></figure>
 <p>顯示結果</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">docadmin@localhost:~/wordpress-compose$ netstat -plntu</span><br><span class="line">(No info could be read for &quot;-p&quot;: geteuid()=1000 but you should be root.)</span><br><span class="line">Active Internet connections (only servers)</span><br><span class="line">Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name</span><br><span class="line">tcp        0      0 127.0.0.1:39989         0.0.0.0:*               LISTEN      -               </span><br><span class="line">tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      -               </span><br><span class="line">tcp6       0      0 :::9000                 :::*                    LISTEN      -               </span><br><span class="line">tcp6       0      0 :::3306                 :::*                    LISTEN      -               </span><br><span class="line">tcp6       0      0 :::80                   :::*                    LISTEN      -               </span><br><span class="line">tcp6       0      0 :::22                   :::*                    LISTEN      -               </span><br><span class="line">udp        0      0 0.0.0.0:68              0.0.0.0:*                           -</span><br></pre></td></tr></table></figure>
 <p>現在你可以打開瀏覽器輸入服務器的 ip 位置</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://yourserverIP/</span><br></pre></td></tr></table></figure>
 <p>你可以看到 wordpress 安裝頁面。選擇你的語言，請點選繼續</p>
-<p><img src="/images/web/20200321-2.png" alt></p>
+<p><img src="/images/web/20200321-2.png" alt=""></p>
 <p>填入網站的詳細資訊，填寫完畢之後，就按下「安裝」</p>
-<p><img src="/images/web/20200321-3.png" alt></p>
+<p><img src="/images/web/20200321-3.png" alt=""></p>
 <p>安裝完畢後，就會被導向到 wordpress 控制台</p>
-<p><img src="/images/web/20200321-4.png" alt></p>
+<p><img src="/images/web/20200321-4.png" alt=""></p>
 <p>也可以造訪 wordpress 畫面，就完成安裝 wordpress 囉！</p>
-<p><img src="/images/web/20200321-5.png" alt></p>
-<h3 id="檢查-Docker-Container"><a href="#檢查-Docker-Container" class="headerlink" title="檢查 Docker Container"></a>檢查 Docker Container</h3><p>這個步驟是瞭解如何使用 docker-compose 容器的狀態</p>
+<p><img src="/images/web/20200321-5.png" alt=""></p>
+<h2 id="檢查-Docker-Container"><a href="#檢查-Docker-Container" class="headerlink" title="檢查 Docker Container"></a>檢查 Docker Container</h2><p>這個步驟是瞭解如何使用 docker-compose 容器的狀態</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose ps</span><br></pre></td></tr></table></figure>
 <p>我們知道我們建立了三個容器，可以試著登入某一個容器，比如 nginx</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose exec nginx bash</span><br></pre></td></tr></table></figure>
@@ -298,16 +309,16 @@
 <p>現在我們檢查一下 wordpress 虛擬主機的配置</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat /etc/nginx/conf.d/wordpress.conf</span><br></pre></td></tr></table></figure>
 <p>顯示結果</p>
-<p><img src="/images/web/20200321-6.png" alt></p>
+<p><img src="/images/web/20200321-6.png" alt=""></p>
 <p>確認之後，結束時，輸入 <code>exit</code> 退出容器。</p>
 <p>那麼繼續登入 mysql 容器</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose exec mysql bash</span><br><span class="line">$ mysql -u root -p</span><br></pre></td></tr></table></figure>
 <p>查詢資料庫列表</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ show databases;</span><br></pre></td></tr></table></figure>
-<p><img src="/images/web/20200321-7.png" alt></p>
+<p><img src="/images/web/20200321-7.png" alt=""></p>
 <p>最後在檢視 wordpress 容器</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose exec wordpress bash</span><br><span class="line">$ ls -lah</span><br></pre></td></tr></table></figure>
-<p><img src="/images/web/20200321-8.png" alt></p>
+<p><img src="/images/web/20200321-8.png" alt=""></p>
 <p>Done! </p>
 <p>參考資料：</p>
 <ul>
@@ -317,7 +328,12 @@
 
 
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-format="fluid"
+                data-ad-layout-key="-fb+5w+4e-db+86"
+                data-ad-client="ca-pub-9431433815329544"
+                data-ad-slot="4946157775"></ins>
             <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
@@ -458,13 +474,15 @@
         
         <div class="level is-mobile">
             
-            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="http://github.com/weijutu">
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="http://github.com/weijutu">
                 
                 <i class="fab fa-github"></i>
                 
             </a>
             
-            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="RSS" href="/">
                 
                 <i class="fas fa-rss"></i>
                 
@@ -476,6 +494,49 @@
 </div>
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                文章目錄
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#使用-Docker-的好處">
+        <span class="has-mr-6">1</span>
+        <span>使用 Docker 的好處</span>
+        </a></li><li>
+        <a class="is-flex" href="#安裝-Docker">
+        <span class="has-mr-6">2</span>
+        <span>安裝 Docker</span>
+        </a></li><li>
+        <a class="is-flex" href="#安裝-Docker-Compose">
+        <span class="has-mr-6">3</span>
+        <span>安裝 Docker-Compose</span>
+        </a></li><li>
+        <a class="is-flex" href="#安裝-Wordpress">
+        <span class="has-mr-6">4</span>
+        <span>安裝 Wordpress</span>
+        </a></li><li>
+        <a class="is-flex" href="#組態設定-Docker-Compose">
+        <span class="has-mr-6">5</span>
+        <span>組態設定 Docker-Compose</span>
+        </a></li><li>
+        <a class="is-flex" href="#執行-Docker-Compose">
+        <span class="has-mr-6">6</span>
+        <span>執行 Docker-Compose</span>
+        </a></li><li>
+        <a class="is-flex" href="#啟動-Wordpress">
+        <span class="has-mr-6">7</span>
+        <span>啟動 Wordpress</span>
+        </a></li><li>
+        <a class="is-flex" href="#檢查-Docker-Container">
+        <span class="has-mr-6">8</span>
+        <span>檢查 Docker Container</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 
@@ -720,6 +781,206 @@
             </span>
         </a></li>
             </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            彙整
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">30</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
         </div>
     </div>
 </div>
@@ -1214,6 +1475,206 @@
         <div class="card widget">
     <div class="card-content">
         <div class="menu">
+        <h3 class="menu-label">
+            彙整
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">30</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
             <h3 class="menu-label">
                 標籤
             </h3>
@@ -1570,7 +2031,8 @@
                 </a>
                 <p class="is-size-7">
                 &copy; 2020 Helen&nbsp;
-                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
                 
                 </p>
             </div>
@@ -1703,7 +2165,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <div class="searchbox ins-search">
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="請輸入關鍵字...">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="請輸入關鍵字..." />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -1731,7 +2193,8 @@ document.addEventListener('DOMContentLoaded', function () {
 <link rel="stylesheet" href="/css/insight.css">
     
 
-    <amp-auto-ads type="adsense" data-ad-client="ca-pub-9431433815329544">
+    <amp-auto-ads type="adsense"
+        data-ad-client="ca-pub-9431433815329544">
     </amp-auto-ads><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});

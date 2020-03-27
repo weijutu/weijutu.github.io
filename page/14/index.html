@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh">
-<head><meta name="generator" content="Hexo 3.8.0">
+<html  lang="zh">
+<head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
 <title>噗噗。故我在</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
 
 
@@ -95,8 +95,10 @@
     enable_page_level_ads: true
   });
 </script>
-<script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
-</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<script async custom-element="amp-auto-ads"
+src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+</script>
+    <script data-ad-client="ca-pub-9431433815329544" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 <body class="is-3-column">
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar navbar-main">
@@ -104,23 +106,28 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <h4 style="font-size: 180%; font-weight: blod">噗噗。故我在
+                <h4 style="font-size: 180%; font-weight: blod">噗噗。故我在</<h4>
             
-            </h4></a>
+            </a>
         </div>
         <div class="navbar-menu">
             
             <div class="navbar-start">
                 
-                <a class="navbar-item" href="/">Home</a>
+                <a class="navbar-item"
+                href="/">Home</a>
                 
-                <a class="navbar-item" href="/archives">Archives</a>
+                <a class="navbar-item"
+                href="/archives">Archives</a>
                 
-                <a class="navbar-item" href="/categories">Categories</a>
+                <a class="navbar-item"
+                href="/categories">Categories</a>
                 
-                <a class="navbar-item" href="/tags">Tags</a>
+                <a class="navbar-item"
+                href="/tags">Tags</a>
                 
-                <a class="navbar-item" href="/about">About</a>
+                <a class="navbar-item"
+                href="/about">About</a>
                 
             </div>
             
@@ -179,7 +186,7 @@
             
         </h1>
         <div class="content">
-            <p><img src="/images/nodejs/23.png" alt></p>
+            <p><img src="/images/nodejs/23.png" alt=""></p>
 <p>『A package manager for the web』瀏覽器套件管理工具</p>
 <p>一般在寫網頁時，多半會引入套件來使用，而 bower 就是用來管理相依套件工具，bower 是 twitter 研發，透過這樣的管理工具下載安裝 css, js 套件，讓開發者跟隨著這樣的工具，讓 web 套件 (例如： bootstrap, jquery… etc) 方面更好管理，更簡單的方式更新最新版本的套件。</p>
 <p>當沒有管理的時候，你也許是…</p>
@@ -197,25 +204,25 @@
 </ul>
 <h1 id="安裝-bower"><a href="#安裝-bower" class="headerlink" title="安裝 bower"></a>安裝 bower</h1><p>(安裝之前務必要有 node.js, npm, 建議儲存在 global)</p>
 <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$npm</span> install bower -g</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/24.png" alt></p>
+<p><img src="/images/nodejs/24.png" alt=""></p>
 <p>可以利用 Search Bower packages 頁面搜尋需要的套件：<a href="http://bower.io/search/" target="_blank" rel="noopener">http://bower.io/search/</a> ，或者用指令搜尋</p>
 <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$bower</span> search bootstrap</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/25.png" alt></p>
+<p><img src="/images/nodejs/25.png" alt=""></p>
 <p>使用方法：</p>
 <p>請先安裝 express 作為網頁框架，然後安裝套件的方式，在這邊安裝一下 bootstrap</p>
 <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$bower</span> install bootstrap</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/26.png" alt></p>
+<p><img src="/images/nodejs/26.png" alt=""></p>
 <p>指令安裝之後就會看到 bootstrap 出現在 bower_components/bootstrap/<em>.</em> , bower_components/jquery/<em>.</em></p>
 <p>透過 bower init 指令，安裝 bower.json，您可以在 dependencies 的部分輸入套件名稱與版本號</p>
-<p><img src="/images/nodejs/27.png" alt></p>
+<p><img src="/images/nodejs/27.png" alt=""></p>
 <p>我們在建立好的 express 框架下的  app.js ，把剛才建立好的  bower_components  資料夾，綁進去基本靜態套件的路徑</p>
 <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.use(express.static(path.join(__dirname, <span class="hljs-string">'bower_components/bootstrap/dist/'</span>)));</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/28.png" alt></p>
+<p><img src="/images/nodejs/28.png" alt=""></p>
 <p>接著用引入檔案的方法，請打開 ./views/layout.jade ，在 head 的子節點的地方新增</p>
 <figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">link(rel='stylesheet', href='/css/bootstrap.min.css')</span><br><span class="line">script(src='/js/bootstrap.min.js')</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/29.png" alt></p>
+<p><img src="/images/nodejs/29.png" alt=""></p>
 <p>引入成功之後，就可以建立一個 bootstrap 的頁面，下圖是用透過 bower 匯入 bootstrap 套件建立一個簡單前端頁面：</p>
-<p><img src="/images/nodejs/30.png" alt></p>
+<p><img src="/images/nodejs/30.png" alt=""></p>
 <h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><ul>
 <li><a href="http://bower.io/" target="_blank" rel="noopener">http://bower.io/</a></li>
 <li><a href="http://jade-lang.com/tutorial/" target="_blank" rel="noopener">http://jade-lang.com/tutorial/</a></li>
@@ -224,7 +231,12 @@
 
 
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-format="fluid"
+                data-ad-layout-key="-fb+5w+4e-db+86"
+                data-ad-client="ca-pub-9431433815329544"
+                data-ad-slot="4946157775"></ins>
             <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
@@ -277,24 +289,24 @@
 <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://raw.githubusercontent.com/creationix/nvm/v0.17.2/install.sh | bash</span><br></pre></td></tr></table></figure>
 <p>或者用 wget 方式下載</p>
 <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.17.2/install.sh | bash</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/16.png" alt></p>
+<p><img src="/images/nodejs/16.png" alt=""></p>
 <p>將這個指令貼到命令提示字元</p>
 <p>安裝完之後，請先將命令提示字元關閉，再重新開啟以使用 nvm 指令<br>接著重啟之後，輸入</p>
 <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$nvm</span></span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/17.png" alt></p>
+<p><img src="/images/nodejs/17.png" alt=""></p>
 <p>確定有  nvm 之後，可以輸入 $nvm ls-remote 指令看有哪些版本可以安裝，在命令提示字元會看到落落長的版本號</p>
-<p><img src="/images/nodejs/18.png" alt></p>
+<p><img src="/images/nodejs/18.png" alt=""></p>
 <h1 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h1><p>依照 nvm help 指令的說明上，請使用  $nvm install 安裝 node.js  版本，這些版本會實際放在 /usr/local/n/資料夾，例如：</p>
 <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$nvm</span> install v0.10.32</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/19.png" alt></p>
+<p><img src="/images/nodejs/19.png" alt=""></p>
 <p>再裝一個不同版本的 node，那麼就安裝 v0.11.14 (版本前面的 v 可以不用寫)</p>
 <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$nvm</span> install v0.11.14</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/20.png" alt></p>
+<p><img src="/images/nodejs/20.png" alt=""></p>
 <p>這時候下一個  $nvm ls 指令，這時候安裝最後的版本，將會當做是當前的版本，可以下 $nvm current ，此時，綠色箭頭就是目前的版本號 v0.11.14</p>
-<p><img src="/images/nodejs/21.png" alt></p>
+<p><img src="/images/nodejs/21.png" alt=""></p>
 <p>接下來我們可以用簡單的指令切換 Node.js 版本，這時候綠色箭頭就換成 v0.10.32</p>
 <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$nvm</span> use 0.10.32</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/22.png" alt></p>
+<p><img src="/images/nodejs/22.png" alt=""></p>
 <h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><ul>
 <li><a href="http://nodejs.org/" target="_blank" rel="noopener">http://nodejs.org/</a></li>
 <li><a href="https://github.com/creationix/nvm" target="_blank" rel="noopener">https://github.com/creationix/nvm</a></li>
@@ -304,7 +316,12 @@
 
 
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-format="fluid"
+                data-ad-layout-key="-fb+5w+4e-db+86"
+                data-ad-client="ca-pub-9431433815329544"
+                data-ad-slot="4946157775"></ins>
             <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
@@ -351,10 +368,10 @@
             
         </h1>
         <div class="content">
-            <p><img src="/images/nodejs/14.png" alt></p>
+            <p><img src="/images/nodejs/14.png" alt=""></p>
 <p>npm，主要是 node.js 應用程式的建立、共享、重覆使用模組。在上一篇 Node.js 安裝並且建立簡單的 Hello World 程式 是來自於使用 node.js.org 的安裝軟體安裝，那麼其實 npm 就已經裝好哩。</p>
 <h2 id="查看-npm-是否有安裝"><a href="#查看-npm-是否有安裝" class="headerlink" title="查看 npm 是否有安裝"></a>查看 npm 是否有安裝</h2><p>我們從命令提示字元看一下 npm 是否有安裝成功呢？有出現以下呈現就代表有 npm 了</p>
-<p><img src="/images/nodejs/15.png" alt></p>
+<p><img src="/images/nodejs/15.png" alt=""></p>
 <h2 id="安裝模組"><a href="#安裝模組" class="headerlink" title="安裝模組"></a>安裝模組</h2><p>安裝模組的時候，可以在命令提示字元輸入：</p>
 <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install [module_name]</span><br></pre></td></tr></table></figure>
 <h2 id="試著使用看看"><a href="#試著使用看看" class="headerlink" title="試著使用看看"></a>試著使用看看</h2><p>現在我們來使用一款 underscore 的這個模組來介紹如何安裝模組，如何使用模組，首先先來看這個模組可以使用哪些 function，詳情可以查閱官方網站</p>
@@ -377,7 +394,12 @@
 
 
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-format="fluid"
+                data-ad-layout-key="-fb+5w+4e-db+86"
+                data-ad-client="ca-pub-9431433815329544"
+                data-ad-slot="4946157775"></ins>
             <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
@@ -438,55 +460,60 @@
 <ul>
 <li>進入 node.js 官方網站 <a href="http://nodejs.org/" target="_blank" rel="noopener">http://nodejs.org/</a> 點選 install 後, 會下載一個 node-v0.10.25-x86.msi 安裝檔案</li>
 </ul>
-<p><img src="/images/nodejs/2.png" alt></p>
+<p><img src="/images/nodejs/2.png" alt=""></p>
 <ul>
 <li>點選安裝檔案後, 開始進行安裝</li>
 </ul>
-<p><img src="/images/nodejs/3.png" alt></p>
+<p><img src="/images/nodejs/3.png" alt=""></p>
 <ul>
 <li>End-User License Agreement 的頁面, 勾選 “I accept the terms in the License Agreement” 核選方塊後, 點選 Next 進行下一步</li>
 </ul>
-<p><img src="/images/nodejs/4.png" alt></p>
+<p><img src="/images/nodejs/4.png" alt=""></p>
 <ul>
 <li>可指定安裝路徑, 這裡就保持預設就行了, 確認後點選 Next (當然，要改變存放位置也是可以)</li>
 </ul>
-<p><img src="/images/nodejs/5.png" alt></p>
+<p><img src="/images/nodejs/5.png" alt=""></p>
 <ul>
 <li>自訂安裝 Select the way you want features to be installed</li>
 </ul>
-<p><img src="/images/nodejs/6.png" alt></p>
+<p><img src="/images/nodejs/6.png" alt=""></p>
 <ul>
 <li>安裝前的提醒</li>
 </ul>
-<p><img src="/images/nodejs/7.png" alt></p>
+<p><img src="/images/nodejs/7.png" alt=""></p>
 <ul>
 <li>開始進行安裝 Node.js</li>
 </ul>
-<p><img src="/images/nodejs/8.png" alt></p>
+<p><img src="/images/nodejs/8.png" alt=""></p>
 <ul>
 <li>完成安裝</li>
 </ul>
-<p><img src="/images/nodejs/9.png" alt></p>
+<p><img src="/images/nodejs/9.png" alt=""></p>
 <h2 id="驗證-Node-js-正確安裝"><a href="#驗證-Node-js-正確安裝" class="headerlink" title="驗證 Node.js 正確安裝"></a>驗證 Node.js 正確安裝</h2><p>學習新的一套語言，就是要先學會將程式呈現一個簡單的文字顯示，因此不免俗的還是來一個萬年測試，先來看看安裝是否有成功。</p>
 <ul>
 <li>開啟命令提示字元，輸入 node</li>
 <li>輸入 12 + 34 ，檢查是否有回應 46 的答案，若有就代表成功囉。</li>
 </ul>
-<p><img src="/images/nodejs/10.png" alt></p>
+<p><img src="/images/nodejs/10.png" alt=""></p>
 <h2 id="建立-Hello-world-的-Node-js-程式"><a href="#建立-Hello-world-的-Node-js-程式" class="headerlink" title="建立 Hello world 的 Node.js 程式"></a>建立 Hello world 的 Node.js 程式</h2><p>不管利用記事本或是會善用 IDE 做為開發的工具，建立一個 <code>my.js</code> 的檔案，輸入以下的語法</p>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">'http'</span>);</span><br><span class="line">http.createServer(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res</span>)</span>&#123;</span><br><span class="line">  res.writeHead(<span class="hljs-number">200</span>, &#123; <span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'text/html'</span> &#125;);</span><br><span class="line">  res.write(<span class="hljs-string">'&lt;h1&gt; Hello Helen, this is Node.js &lt;/h1&gt;'</span>);</span><br><span class="line">  res.end(<span class="hljs-string">'Hello world'</span>);</span><br><span class="line">&#125;).listen(<span class="hljs-number">3232</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">"HTTP Server is listening at port 3232"</span>);</span><br><span class="line"><span class="hljs-string">`</span></span><br></pre></td></tr></table></figure>
 <h3 id="開始執行啟動"><a href="#開始執行啟動" class="headerlink" title="開始執行啟動"></a>開始執行啟動</h3><p>接著打開命令提示字元，輸入 <code>node my.js</code><br>之後就會看到 <code>Http Server is listening at port 3232</code>，這就代表有成功啟動</p>
-<p><img src="/images/nodejs/11.png" alt></p>
+<p><img src="/images/nodejs/11.png" alt=""></p>
 <h2 id="安全警示"><a href="#安全警示" class="headerlink" title="安全警示"></a>安全警示</h2><p>由於 node.js 是利用 google chrome v8 引擎執行, 會出現以下安全性警示，按下解除封鎖按鈕</p>
-<p><img src="/images/nodejs/12.png" alt></p>
+<p><img src="/images/nodejs/12.png" alt=""></p>
 <p>馬上開起 browser，有出現以下的呈現結果，就是正常運行服務端的 javascript 喔！</p>
-<p><img src="/images/nodejs/13.png" alt></p>
+<p><img src="/images/nodejs/13.png" alt=""></p>
 <p>如果想停止這個服務的話，在命令提示字元按下 CTRL + C 就將這個 port 停止服務就好了。</p>
 <p>Good，這樣就完成簡單的示範，接下來就可以慢慢建立比較複雜的應用程序囉。</p>
 
 
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-format="fluid"
+                data-ad-layout-key="-fb+5w+4e-db+86"
+                data-ad-client="ca-pub-9431433815329544"
+                data-ad-slot="4946157775"></ins>
             <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
@@ -562,7 +589,12 @@
 
 
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-format="fluid"
+                data-ad-layout-key="-fb+5w+4e-db+86"
+                data-ad-client="ca-pub-9431433815329544"
+                data-ad-slot="4946157775"></ins>
             <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
@@ -683,13 +715,15 @@
         
         <div class="level is-mobile">
             
-            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="http://github.com/weijutu">
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="http://github.com/weijutu">
                 
                 <i class="fab fa-github"></i>
                 
             </a>
             
-            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="RSS" href="/">
                 
                 <i class="fas fa-rss"></i>
                 
@@ -945,6 +979,206 @@
             </span>
         </a></li>
             </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            彙整
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">30</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
         </div>
     </div>
 </div>
@@ -1439,6 +1673,206 @@
         <div class="card widget">
     <div class="card-content">
         <div class="menu">
+        <h3 class="menu-label">
+            彙整
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">30</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
             <h3 class="menu-label">
                 標籤
             </h3>
@@ -1795,7 +2229,8 @@
                 </a>
                 <p class="is-size-7">
                 &copy; 2020 Helen&nbsp;
-                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
                 
                 </p>
             </div>
@@ -1928,7 +2363,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <div class="searchbox ins-search">
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="請輸入關鍵字...">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="請輸入關鍵字..." />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -1956,7 +2391,8 @@ document.addEventListener('DOMContentLoaded', function () {
 <link rel="stylesheet" href="/css/insight.css">
     
 
-    <amp-auto-ads type="adsense" data-ad-client="ca-pub-9431433815329544">
+    <amp-auto-ads type="adsense"
+        data-ad-client="ca-pub-9431433815329544">
     </amp-auto-ads><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});

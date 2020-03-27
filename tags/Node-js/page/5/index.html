@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh">
-<head><meta name="generator" content="Hexo 3.8.0">
+<html  lang="zh">
+<head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
 <title>標籤: Node.js - 噗噗。故我在</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
 
 
@@ -95,8 +95,10 @@
     enable_page_level_ads: true
   });
 </script>
-<script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
-</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<script async custom-element="amp-auto-ads"
+src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+</script>
+    <script data-ad-client="ca-pub-9431433815329544" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 <body class="is-3-column">
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar navbar-main">
@@ -104,23 +106,28 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <h4 style="font-size: 180%; font-weight: blod">噗噗。故我在
+                <h4 style="font-size: 180%; font-weight: blod">噗噗。故我在</<h4>
             
-            </h4></a>
+            </a>
         </div>
         <div class="navbar-menu">
             
             <div class="navbar-start">
                 
-                <a class="navbar-item" href="/">Home</a>
+                <a class="navbar-item"
+                href="/">Home</a>
                 
-                <a class="navbar-item" href="/archives">Archives</a>
+                <a class="navbar-item"
+                href="/archives">Archives</a>
                 
-                <a class="navbar-item" href="/categories">Categories</a>
+                <a class="navbar-item"
+                href="/categories">Categories</a>
                 
-                <a class="navbar-item" href="/tags">Tags</a>
+                <a class="navbar-item"
+                href="/tags">Tags</a>
                 
-                <a class="navbar-item" href="/about">About</a>
+                <a class="navbar-item"
+                href="/about">About</a>
                 
             </div>
             
@@ -191,18 +198,18 @@
         <div class="content">
             <p>上一篇完成了建立資料，本篇就來介紹更新的部分，我們在上一篇的使用者列表頁面上，每一筆資料的功能建立了一個『更新』的按鈕，如下：</p>
 <p>在這使用者列表的部分，表格列出的語法是：</p>
-<p><img src="/images/nodejs/67.png" alt></p>
+<p><img src="/images/nodejs/67.png" alt=""></p>
 <p>其中也就是在跑 each 時，每筆資料塞入按鈕語法，在這邊我們設定點選的時候連結 /update 而後面再接一個編號參數 /#{user.id}：</p>
 <figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a(href='/update/#&#123;user.id&#125;', class='btn btn-warning') 更新</span><br></pre></td></tr></table></figure>
 <p>我們簡單看一下表格佈局如下：</p>
-<p><img src="/images/nodejs/47.png" alt></p>
+<p><img src="/images/nodejs/47.png" alt=""></p>
 <p>並且繼續打開 app.js 檔案，放上 update 的操作</p>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="hljs-string">'/update/:id'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res</span>) </span>&#123;</span><br><span class="line">    pool.getConnection(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, connection</span>) </span>&#123;</span><br><span class="line">        connection.query(<span class="hljs-string">'SELECT * from users where id=?'</span>,[req.params.id],<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, rows, fields</span>) </span>&#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (err)</span><br><span class="line">                <span class="hljs-keyword">throw</span> err;</span><br><span class="line">            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'search is success.'</span>);</span><br><span class="line">            res.render(<span class="hljs-string">'create'</span>, &#123;</span><br><span class="line">                title : <span class="hljs-string">'Update user'</span>,</span><br><span class="line">                user : rows[<span class="hljs-number">0</span>]</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">        connection.release();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>在這邊先進入到 /update 頁面，預定在打開 update 時，會列出某一筆資料，因此在這邊會先用 sql 語法來查詢某一筆資料，而 id 的部分由網址列的參數取得，也就是 connection.query 的方法的第二參數，是取得網址的參數 [req.params.id] ，完成取得動作之後，顯示在 create 的頁面 （由於上一篇新增的頁面跟本篇的更新頁面欄位相同，所以用的是一樣的頁面）</p>
 <p>另外在 render 的參數多了一個 user: rows[0], 主要是用來判別是不是更新的資料，若有資料則是更新、若沒資料就是新增</p>
-<p><img src="/images/nodejs/48.png" alt></p>
+<p><img src="/images/nodejs/48.png" alt=""></p>
 <p>每項  input 就用 user.[欄位] 將值帶入，顯示部分是：</p>
-<p><img src="/images/nodejs/49.png" alt></p>
+<p><img src="/images/nodejs/49.png" alt=""></p>
 <p>我們按下儲存之後，將表單送到 /update，因此這邊要做  update 的操作，再度打開 app.js 新增</p>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">app.post(<span class="hljs-string">'/update'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res</span>) </span>&#123;</span><br><span class="line">    pool.getConnection(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, connection</span>) </span>&#123;</span><br><span class="line">        connection.query(<span class="hljs-string">'update users set ? where id = ?'</span>, [&#123;</span><br><span class="line">            id : req.body.user.id,</span><br><span class="line">            name : req.body.user.name,</span><br><span class="line">            description : req.body.user.description</span><br><span class="line">        &#125;,req.body.user.id], <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, fields</span>) </span>&#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (err)</span><br><span class="line">                <span class="hljs-keyword">throw</span> err;</span><br><span class="line">        &#125;);</span><br><span class="line">        connection.query(<span class="hljs-string">'SELECT * from users'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, rows, fields</span>) </span>&#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (err)</span><br><span class="line">                <span class="hljs-keyword">throw</span> err;</span><br><span class="line">            res.render(<span class="hljs-string">'user'</span>, &#123;</span><br><span class="line">                title : <span class="hljs-string">'使用者列表'</span>,</span><br><span class="line">                user : rows</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">        connection.release();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>其中以</p>
@@ -210,13 +217,18 @@
 <p>作為 update 的操作，在第二參數時，就是從表單傳送過來的資料，以陣列來表示，裏面每個欄位再以 key/value 呈現，然後最後再</p>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">connection.query(<span class="hljs-string">'SELECT * from users'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, rows, fields</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (err)</span><br><span class="line">        <span class="hljs-keyword">throw</span> err;</span><br><span class="line">    res.render(<span class="hljs-string">'user'</span>, &#123;</span><br><span class="line">        title : <span class="hljs-string">'使用者列表'</span>,</span><br><span class="line">        user : rows</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>新增完成後顯示最後的結果列到使用者列表</p>
-<p><img src="/images/nodejs/50.png" alt></p>
+<p><img src="/images/nodejs/50.png" alt=""></p>
 <p>結果退到使用者列表：</p>
-<p><img src="/images/nodejs/51.png" alt></p>
+<p><img src="/images/nodejs/51.png" alt=""></p>
 
 
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-format="fluid"
+                data-ad-layout-key="-fb+5w+4e-db+86"
+                data-ad-client="ca-pub-9431433815329544"
+                data-ad-slot="4946157775"></ins>
             <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
@@ -273,17 +285,22 @@
 <p>之後，在放一個 exports.index 函式來取得資料庫的資料</p>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">exports.index = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res</span>)</span>&#123;</span><br><span class="line">     <span class="hljs-keyword">var</span> connection = mysql.createConnection(db_option);</span><br><span class="line">     <span class="hljs-keyword">var</span> query =<span class="hljs-string">'SELECT * FROM users'</span>;</span><br><span class="line">    connection.query(query, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, rows, fields</span>)</span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span>(err) <span class="hljs-keyword">throw</span> err;</span><br><span class="line">        res.render(<span class="hljs-string">'index'</span>, &#123; <span class="hljs-attr">title</span>: <span class="hljs-string">'這是 mysql + node.js 示範版本'</span>, <span class="hljs-string">'items'</span>: rows &#125;);   </span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>可以看到從 connection.query 方法取出來的結果，利用 callback function 的方式將查詢結果物件放在 rows，最後在 render index 的畫面時，把傳遞的物件放在自訂  json  格式的  items 裡</p>
-<p><img src="/images/nodejs/44.png" alt></p>
+<p><img src="/images/nodejs/44.png" alt=""></p>
 <p>我們可以知道我們要傳遞的 view 位置是在  index ，因此進到  /views/index.jade 將畫面做一個簡單的呈現，在這邊是用了 bootstrap 的前端畫面。我預想著上面要有個  header，然後簡單的標頭文字，中間在擺放重要的表格資料，因此佈局上要有  navbar, 中間的  container，下圖為標頭部分</p>
-<p><img src="/images/nodejs/45.png" alt></p>
+<p><img src="/images/nodejs/45.png" alt=""></p>
 <p>接這最重要的就是內文，在這邊用個  table 來佈局</p>
-<p><img src="/images/nodejs/46.png" alt></p>
+<p><img src="/images/nodejs/46.png" alt=""></p>
 <p>接資料的部分，就是剛剛從 routes/index.js 傳過來的 json 物件，其中有  items ，請使用 each 的方式跑迴圈</p>
 <figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-each user in items</span><br><span class="line">    tr</span><br><span class="line">        td(style="padding:20px")=user.id</span><br><span class="line">        td(style="padding:20px")=user.name</span><br><span class="line">        td(style="padding:20px")=user.description</span><br></pre></td></tr></table></figure>
 
 
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-format="fluid"
+                data-ad-layout-key="-fb+5w+4e-db+86"
+                data-ad-client="ca-pub-9431433815329544"
+                data-ad-slot="4946157775"></ins>
             <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
@@ -335,7 +352,7 @@
 <p>刪除部分的語法就是在按鈕點選的時候，連到 /delete ，後面我們指定資料使用者的編號作為參數  /#{user.id}</p>
 <figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a(href='/delete/#&#123;user.id&#125;', class='btn btn-danger') 刪除</span><br></pre></td></tr></table></figure>
 <p>佈局如下：</p>
-<p><img src="/images/nodejs/41.png" alt></p>
+<p><img src="/images/nodejs/41.png" alt=""></p>
 <p>開啓 app.js 補上 delete 的操作</p>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="hljs-string">'/delete/:id'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res</span>) </span>&#123;</span><br><span class="line">    pool.getConnection(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, connection</span>) </span>&#123;</span><br><span class="line">        connection.query(<span class="hljs-string">'delete from users  where id = ?'</span>, [req.params.id], <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, fields</span>) </span>&#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (err)</span><br><span class="line">                <span class="hljs-keyword">throw</span> err;</span><br><span class="line">        &#125;);</span><br><span class="line">        connection.query(<span class="hljs-string">'SELECT * from users'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, rows, fields</span>) </span>&#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (err)</span><br><span class="line">                <span class="hljs-keyword">throw</span> err;</span><br><span class="line">            res.render(<span class="hljs-string">'user'</span>, &#123;</span><br><span class="line">                title : <span class="hljs-string">'使用者列表'</span>,</span><br><span class="line">                user : rows</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">        connection.release();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>其中在程式的部分，在點選按鈕 /delete 的時候，後面接 :id 也就是預定在網址列上面取得使用者編號的參數，然後再此刪除的部分以以下語法呈現：</p>
@@ -343,16 +360,21 @@
 <p>在 connection.query 方法裡的第二參數  [req.params.id]帶入網址列的參數，最後刪除完成後，再度顯示取得最新的使用者列表</p>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">connection.query(<span class="hljs-string">'SELECT * from users'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, rows, fields</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (err)</span><br><span class="line">        <span class="hljs-keyword">throw</span> err;</span><br><span class="line">    res.render(<span class="hljs-string">'user'</span>, &#123;</span><br><span class="line">        title : <span class="hljs-string">'使用者列表'</span>,</span><br><span class="line">        user : rows</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>在這邊我們刪掉第四筆資料</p>
-<p><img src="/images/nodejs/42.png" alt></p>
+<p><img src="/images/nodejs/42.png" alt=""></p>
 <p>結果如下：</p>
-<p><img src="/images/nodejs/43.png" alt></p>
+<p><img src="/images/nodejs/43.png" alt=""></p>
 <p>我們終於完成了 Create, Read, Update ,Delete 的 mysql 存取操作 ，完整的程式歡迎到這裡 fork 囉</p>
 <p><a href="https://github.com/weijutu/nodejs-mysql-crud" target="_blank" rel="noopener">https://github.com/weijutu/nodejs-mysql-crud</a></p>
 <p>那麼資料庫存取就先到這裡，接下來還有更多應用，敬請期待  ：）</p>
 
 
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-format="fluid"
+                data-ad-layout-key="-fb+5w+4e-db+86"
+                data-ad-client="ca-pub-9431433815329544"
+                data-ad-slot="4946157775"></ins>
             <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
@@ -411,14 +433,14 @@
 <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$npm</span> init</span><br></pre></td></tr></table></figure>
 <p>安裝 express web framework 到這 nodejs-demo-mysql 應用程式專案裡面，並寫入到  package.json</p>
 <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$npm</span> install express —save</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/31.png" alt></p>
+<p><img src="/images/nodejs/31.png" alt=""></p>
 <p>完成 express 之後，再安裝 mysql 套件，在這邊安裝  mysql</p>
 <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$npm</span> install mysql@2.0.0-alpha9</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/32.png" alt></p>
+<p><img src="/images/nodejs/32.png" alt=""></p>
 <p>首先可以看到 express 套件,  node-mysql 就新增到 node_modules 裡了</p>
-<p><img src="/images/nodejs/33.png" alt></p>
+<p><img src="/images/nodejs/33.png" alt=""></p>
 <p>資料庫的部分，假定先建立一個 demo_nodejs 的資料庫</p>
-<p><img src="/images/nodejs/34.png" alt></p>
+<p><img src="/images/nodejs/34.png" alt=""></p>
 <p>然後新增  index.js 作為網頁開頭的起始點，宣告 mysql 後，先使用 createConnection 方法將資料庫的參數初始化</p>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> mysql = <span class="hljs-built_in">require</span>(<span class="hljs-string">'mysql'</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> conn = mysql.createConnection(&#123;</span><br><span class="line">    host: <span class="hljs-string">'localhost'</span>,</span><br><span class="line">    user: <span class="hljs-string">'nodejs'</span>,</span><br><span class="line">    password: <span class="hljs-string">'nodejs'</span>,</span><br><span class="line">    database:<span class="hljs-string">'demo_nodejs'</span>,</span><br><span class="line">    port: <span class="hljs-number">3306</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>將資料庫做個連線的動作</p>
@@ -428,9 +450,9 @@
 <p>連線成功後，查詢之後務必要將它關閉。</p>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.end();</span><br></pre></td></tr></table></figure>
 <p>完整程式如下：</p>
-<p><img src="/images/nodejs/35.png" alt></p>
+<p><img src="/images/nodejs/35.png" alt=""></p>
 <p>執行結果 有將 12 + 34 = 46 算出來囉</p>
-<p><img src="/images/nodejs/36.png" alt></p>
+<p><img src="/images/nodejs/36.png" alt=""></p>
 <h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><ul>
 <li><a href="http://expressjs.com/" target="_blank" rel="noopener">http://expressjs.com/</a></li>
 <li><a href="https://github.com/redblaze/node-mysql" target="_blank" rel="noopener">https://github.com/redblaze/node-mysql</a></li>
@@ -438,7 +460,12 @@
 
 
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-format="fluid"
+                data-ad-layout-key="-fb+5w+4e-db+86"
+                data-ad-client="ca-pub-9431433815329544"
+                data-ad-slot="4946157775"></ins>
             <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
@@ -491,14 +518,14 @@
 <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$npm</span> init</span><br></pre></td></tr></table></figure>
 <p>安裝 express web framework 到這 nodejs-demo-mysql 應用程式專案裡面，並寫入到  package.json</p>
 <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$npm</span> install express —save</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/31.png" alt></p>
+<p><img src="/images/nodejs/31.png" alt=""></p>
 <p>完成 express 之後，再安裝 mysql 套件，在這邊安裝  mysql</p>
 <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$npm</span> install mysql@2.0.0-alpha9</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/32.png" alt></p>
+<p><img src="/images/nodejs/32.png" alt=""></p>
 <p>首先可以看到 express 套件,  node-mysql 就新增到 node_modules 裡了</p>
-<p><img src="/images/nodejs/33.png" alt></p>
+<p><img src="/images/nodejs/33.png" alt=""></p>
 <p>資料庫的部分，假定先建立一個 demo_nodejs 的資料庫</p>
-<p><img src="/images/nodejs/34.png" alt></p>
+<p><img src="/images/nodejs/34.png" alt=""></p>
 <p>然後新增  index.js 作為網頁開頭的起始點，宣告 mysql 後，先使用 createConnection 方法將資料庫的參數初始化</p>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> mysql = <span class="hljs-built_in">require</span>(<span class="hljs-string">'mysql'</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> conn = mysql.createConnection(&#123;</span><br><span class="line">    host: <span class="hljs-string">'localhost'</span>,</span><br><span class="line">    user: <span class="hljs-string">'nodejs'</span>,</span><br><span class="line">    password: <span class="hljs-string">'nodejs'</span>,</span><br><span class="line">    database:<span class="hljs-string">'demo_nodejs'</span>,</span><br><span class="line">    port: <span class="hljs-number">3306</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>將資料庫做個連線的動作</p>
@@ -508,9 +535,9 @@
 <p>連線成功後，查詢之後務必要將它關閉。</p>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.end();</span><br></pre></td></tr></table></figure>
 <p>完整程式如下：</p>
-<p><img src="/images/nodejs/35.png" alt></p>
+<p><img src="/images/nodejs/35.png" alt=""></p>
 <p>執行結果 有將 12 + 34 = 46 算出來囉</p>
-<p><img src="/images/nodejs/36.png" alt></p>
+<p><img src="/images/nodejs/36.png" alt=""></p>
 <h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><ul>
 <li><a href="http://expressjs.com/" target="_blank" rel="noopener">http://expressjs.com/</a></li>
 <li><a href="https://github.com/redblaze/node-mysql" target="_blank" rel="noopener">https://github.com/redblaze/node-mysql</a></li>
@@ -518,7 +545,12 @@
 
 
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-9431433815329544" data-ad-slot="4946157775"></ins>
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-format="fluid"
+                data-ad-layout-key="-fb+5w+4e-db+86"
+                data-ad-client="ca-pub-9431433815329544"
+                data-ad-slot="4946157775"></ins>
             <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
@@ -641,13 +673,15 @@
         
         <div class="level is-mobile">
             
-            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="http://github.com/weijutu">
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="http://github.com/weijutu">
                 
                 <i class="fab fa-github"></i>
                 
             </a>
             
-            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="RSS" href="/">
                 
                 <i class="fas fa-rss"></i>
                 
@@ -903,6 +937,206 @@
             </span>
         </a></li>
             </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            彙整
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">30</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
         </div>
     </div>
 </div>
@@ -1397,6 +1631,206 @@
         <div class="card widget">
     <div class="card-content">
         <div class="menu">
+        <h3 class="menu-label">
+            彙整
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">30</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
             <h3 class="menu-label">
                 標籤
             </h3>
@@ -1753,7 +2187,8 @@
                 </a>
                 <p class="is-size-7">
                 &copy; 2020 Helen&nbsp;
-                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
                 
                 </p>
             </div>
@@ -1886,7 +2321,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <div class="searchbox ins-search">
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="請輸入關鍵字...">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="請輸入關鍵字..." />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -1914,7 +2349,8 @@ document.addEventListener('DOMContentLoaded', function () {
 <link rel="stylesheet" href="/css/insight.css">
     
 
-    <amp-auto-ads type="adsense" data-ad-client="ca-pub-9431433815329544">
+    <amp-auto-ads type="adsense"
+        data-ad-client="ca-pub-9431433815329544">
     </amp-auto-ads><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
