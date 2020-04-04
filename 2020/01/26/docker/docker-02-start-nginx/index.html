@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://weijutu.github.io/images/docker/10.png">
 <meta property="og:image" content="https://weijutu.github.io/images/docker/11.png">
 <meta property="og:image" content="https://weijutu.github.io/images/docker/12.png">
-<meta property="og:updated_time" content="2020-01-26T12:01:42.377Z">
+<meta property="og:updated_time" content="2020-04-04T15:29:41.506Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker#2 - 啟動 Nginx Web 伺服器">
 <meta name="twitter:description" content="前言Nginx 是一套  Web 伺服器程式，處理並行處理能力著稱的軟體，反向代理的方式指定程式執行，可以透過非同步的方式處理提高效率。 1$ docker run -d -p 8010:80 --name webserver nginx 服務運行之後，可以到瀏覽器上訪問 http://localhost:8010 ，當畫面顯示 Welcome to nginx! 時，就代表有執行成功">
@@ -125,19 +125,22 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
             <div class="navbar-start">
                 
                 <a class="navbar-item"
-                href="/">Home</a>
+                href="/">主頁</a>
                 
                 <a class="navbar-item"
-                href="/archives">Archives</a>
+                href="/archives">彙整</a>
                 
                 <a class="navbar-item"
-                href="/categories">Categories</a>
+                href="/categories">分類</a>
                 
                 <a class="navbar-item"
-                href="/tags">Tags</a>
+                href="/tags">標籤</a>
                 
                 <a class="navbar-item"
-                href="/about">About</a>
+                href="/about">關於</a>
+                
+                <a class="navbar-item"
+                href="/resources">資源</a>
                 
             </div>
             
@@ -211,7 +214,7 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
 <p>此時你再用 <code>exec</code> 命令後，就進入了容器</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it 2f4a8269cbbe bash</span><br></pre></td></tr></table></figure>
 <p>而另一種方法是用 Dockerfile 方式建構出映像檔，找到一個目錄下建立一個 <code>Dockerfile</code> 檔案，用 <code>docker build</code> 命令建構出 nginx 映像</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">VERSION 0.0.1</span><br><span class="line"></span><br><span class="line">FROM debian:jessie</span><br><span class="line"></span><br><span class="line"># 維護者</span><br><span class="line">MAINTAINER maruko &lt;weiju516@gmail.com&gt;</span><br><span class="line"></span><br><span class="line"># 安裝 nginx</span><br><span class="line">RUN apt-get update &amp;&amp; apt-get install --no-install-recommends --no-install-suggests -y ca-certificates nginx</span><br><span class="line"></span><br><span class="line"># 對外開放 http, https</span><br><span class="line">EXPOSE 80 443</span><br><span class="line"></span><br><span class="line">CMD [&quot;nginx&quot;, &quot;-g&quot;, &quot;daemon off;&quot;]</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">VERSION 0.0.1</span><br><span class="line"></span><br><span class="line">FROM debian:jessie</span><br><span class="line"></span><br><span class="line"># 維護者</span><br><span class="line">MAINTAINER pupu &lt;testtesttest@gmail.com&gt;</span><br><span class="line"></span><br><span class="line"># 安裝 nginx</span><br><span class="line">RUN apt-get update &amp;&amp; apt-get install --no-install-recommends --no-install-suggests -y ca-certificates nginx</span><br><span class="line"></span><br><span class="line"># 對外開放 http, https</span><br><span class="line">EXPOSE 80 443</span><br><span class="line"></span><br><span class="line">CMD [&quot;nginx&quot;, &quot;-g&quot;, &quot;daemon off;&quot;]</span><br></pre></td></tr></table></figure>
 <p>執行建構 nginx 映像檔</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker build -t maruko/nginx .</span><br></pre></td></tr></table></figure>
 <p>建構之後就可以用 <code>docker images</code> 命令看到建立好的映像檔了</p>

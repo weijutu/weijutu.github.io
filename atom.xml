@@ -100,9 +100,9 @@
     <link href="https://weijutu.github.io/2020/01/26/docker/docker-02-start-nginx/"/>
     <id>https://weijutu.github.io/2020/01/26/docker/docker-02-start-nginx/</id>
     <published>2020-01-26T11:07:51.000Z</published>
-    <updated>2020-01-26T12:01:42.377Z</updated>
+    <updated>2020-04-04T15:29:41.506Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Nginx 是一套  Web 伺服器程式，處理並行處理能力著稱的軟體，反向代理的方式指定程式執行，可以透過非同步的方式處理提高效率。</p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d -p 8010:80 --name webserver nginx</span><br></pre></td></tr></table></figure><p>服務運行之後，可以到瀏覽器上訪問 <a href="http://localhost:8010" target="_blank" rel="noopener">http://localhost:8010</a> ，當畫面顯示 Welcome to nginx! 時，就代表有執行成功</p><p><img src="/images/docker/9-1.png" alt=""></p><a id="more"></a><p>當您執行之後，輸入 docker ps 命令，就會有一組容器建立起來了</p><p><img src="/images/docker/10.png" alt=""></p><p>此時你再用 <code>exec</code> 命令後，就進入了容器</p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it 2f4a8269cbbe bash</span><br></pre></td></tr></table></figure><p>而另一種方法是用 Dockerfile 方式建構出映像檔，找到一個目錄下建立一個 <code>Dockerfile</code> 檔案，用 <code>docker build</code> 命令建構出 nginx 映像</p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">VERSION 0.0.1</span><br><span class="line"></span><br><span class="line">FROM debian:jessie</span><br><span class="line"></span><br><span class="line"># 維護者</span><br><span class="line">MAINTAINER maruko &lt;weiju516@gmail.com&gt;</span><br><span class="line"></span><br><span class="line"># 安裝 nginx</span><br><span class="line">RUN apt-get update &amp;&amp; apt-get install --no-install-recommends --no-install-suggests -y ca-certificates nginx</span><br><span class="line"></span><br><span class="line"># 對外開放 http, https</span><br><span class="line">EXPOSE 80 443</span><br><span class="line"></span><br><span class="line">CMD [&quot;nginx&quot;, &quot;-g&quot;, &quot;daemon off;&quot;]</span><br></pre></td></tr></table></figure><p>執行建構 nginx 映像檔</p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker build -t maruko/nginx .</span><br></pre></td></tr></table></figure><p>建構之後就可以用 <code>docker images</code> 命令看到建立好的映像檔了</p><p><img src="/images/docker/11.png" alt=""></p><p>測試 nginx 映像，可以輸入</p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d --name nginx -P maruko/nginx</span><br></pre></td></tr></table></figure><p>以瀏覽器連接本地端網址，可以看到的首頁如下，這樣就代表可正常運行</p><p><img src="/images/docker/12.png" alt=""></p>]]></content>
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Nginx 是一套  Web 伺服器程式，處理並行處理能力著稱的軟體，反向代理的方式指定程式執行，可以透過非同步的方式處理提高效率。</p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d -p 8010:80 --name webserver nginx</span><br></pre></td></tr></table></figure><p>服務運行之後，可以到瀏覽器上訪問 <a href="http://localhost:8010" target="_blank" rel="noopener">http://localhost:8010</a> ，當畫面顯示 Welcome to nginx! 時，就代表有執行成功</p><p><img src="/images/docker/9-1.png" alt=""></p><a id="more"></a><p>當您執行之後，輸入 docker ps 命令，就會有一組容器建立起來了</p><p><img src="/images/docker/10.png" alt=""></p><p>此時你再用 <code>exec</code> 命令後，就進入了容器</p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it 2f4a8269cbbe bash</span><br></pre></td></tr></table></figure><p>而另一種方法是用 Dockerfile 方式建構出映像檔，找到一個目錄下建立一個 <code>Dockerfile</code> 檔案，用 <code>docker build</code> 命令建構出 nginx 映像</p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">VERSION 0.0.1</span><br><span class="line"></span><br><span class="line">FROM debian:jessie</span><br><span class="line"></span><br><span class="line"># 維護者</span><br><span class="line">MAINTAINER pupu &lt;testtesttest@gmail.com&gt;</span><br><span class="line"></span><br><span class="line"># 安裝 nginx</span><br><span class="line">RUN apt-get update &amp;&amp; apt-get install --no-install-recommends --no-install-suggests -y ca-certificates nginx</span><br><span class="line"></span><br><span class="line"># 對外開放 http, https</span><br><span class="line">EXPOSE 80 443</span><br><span class="line"></span><br><span class="line">CMD [&quot;nginx&quot;, &quot;-g&quot;, &quot;daemon off;&quot;]</span><br></pre></td></tr></table></figure><p>執行建構 nginx 映像檔</p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker build -t maruko/nginx .</span><br></pre></td></tr></table></figure><p>建構之後就可以用 <code>docker images</code> 命令看到建立好的映像檔了</p><p><img src="/images/docker/11.png" alt=""></p><p>測試 nginx 映像，可以輸入</p><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d --name nginx -P maruko/nginx</span><br></pre></td></tr></table></figure><p>以瀏覽器連接本地端網址，可以看到的首頁如下，這樣就代表可正常運行</p><p><img src="/images/docker/12.png" alt=""></p>]]></content>
     
     <summary type="html">
     
@@ -469,6 +469,32 @@
   </entry>
   
   <entry>
+    <title>在 Mac OSX 使用 RVM 升級 Ruby V2.5.1</title>
+    <link href="https://weijutu.github.io/2018/08/02/mac/how-to-upgrade-ruby-on-mac/"/>
+    <id>https://weijutu.github.io/2018/08/02/mac/how-to-upgrade-ruby-on-mac/</id>
+    <published>2018-08-02T01:47:00.000Z</published>
+    <updated>2019-02-26T08:15:06.286Z</updated>
+    
+    <content type="html"><![CDATA[<p>RVM 是一套 Ruby 版本的管理工具，這裡頭包含 Ruby 的版本管理和 Gem 庫管理。本篇裡面使用 RVM 工具進行 Ruby 的升級。</p><h2 id="RVM-Ruby-Version-Manager-安裝"><a href="#RVM-Ruby-Version-Manager-安裝" class="headerlink" title="RVM (Ruby Version Manager) 安裝"></a>RVM (Ruby Version Manager) 安裝</h2><ol><li>RVM安装</li></ol><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> curl -L get.rvm.io | bash -s stable</span></span><br></pre></td></tr></table></figure><ol start="2"><li>是否有完成安裝 RVM </li></ol><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> rvm -v</span></span><br></pre></td></tr></table></figure><p>結果顯示</p><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rvm 1.29.4 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]</span><br></pre></td></tr></table></figure><h2 id="使用-RVM-升級-Ruby"><a href="#使用-RVM-升級-Ruby" class="headerlink" title="使用 RVM 升級 Ruby"></a>使用 RVM 升級 Ruby</h2><ol><li>顯示目前的 Ruby 版本</li></ol><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> ruby -v</span></span><br></pre></td></tr></table></figure><p>顯示結果</p><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby 2.0.0p648 (2015-12-16 revision 53162) [universal.x86_64-darwin16]</span><br></pre></td></tr></table></figure><ol start="2"><li>安装 Ruby 2.5.1</li></ol><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rvm install 2.5.1</span><br></pre></td></tr></table></figure><p>安裝完畢之後，再用 <code>ruby -v</code> 檢查看看，是不是已經換成下面顯示的結果一樣已完成升級。</p><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-darwin16]</span><br></pre></td></tr></table></figure><p>結果</p><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Linking /usr/local/Cellar/ruby/2.5.1... 3293 symlinks created</span><br></pre></td></tr></table></figure><p>那麼，這樣子就安裝完畢了。</p><p>參考：<br><a href="https://flinhong.com/2017/10/26/upgrade-ruby-on-mac/" target="_blank" rel="noopener">https://flinhong.com/2017/10/26/upgrade-ruby-on-mac/</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;RVM 是一套 Ruby 版本的管理工具，這裡頭包含 Ruby 的版本管理和 Gem 庫管理。本篇裡面使用 RVM 工具進行 Ruby 的升級。&lt;/p&gt;
+&lt;h2 id=&quot;RVM-Ruby-Version-Manager-安裝&quot;&gt;&lt;a href=&quot;#RVM-Ruby-Vers
+      
+    
+    </summary>
+    
+      <category term="Ruby" scheme="https://weijutu.github.io/categories/Ruby/"/>
+    
+    
+      <category term="Ruby" scheme="https://weijutu.github.io/tags/Ruby/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Slate - 為你打造漂亮的 API 文件</title>
     <link href="https://weijutu.github.io/2018/08/02/tools/slate-api-document/"/>
     <id>https://weijutu.github.io/2018/08/02/tools/slate-api-document/</id>
@@ -494,32 +520,6 @@
       <category term="Ruby" scheme="https://weijutu.github.io/tags/Ruby/"/>
     
       <category term="API" scheme="https://weijutu.github.io/tags/API/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>在 Mac OSX 使用 RVM 升級 Ruby V2.5.1</title>
-    <link href="https://weijutu.github.io/2018/08/02/mac/how-to-upgrade-ruby-on-mac/"/>
-    <id>https://weijutu.github.io/2018/08/02/mac/how-to-upgrade-ruby-on-mac/</id>
-    <published>2018-08-02T01:47:00.000Z</published>
-    <updated>2019-02-26T08:15:06.286Z</updated>
-    
-    <content type="html"><![CDATA[<p>RVM 是一套 Ruby 版本的管理工具，這裡頭包含 Ruby 的版本管理和 Gem 庫管理。本篇裡面使用 RVM 工具進行 Ruby 的升級。</p><h2 id="RVM-Ruby-Version-Manager-安裝"><a href="#RVM-Ruby-Version-Manager-安裝" class="headerlink" title="RVM (Ruby Version Manager) 安裝"></a>RVM (Ruby Version Manager) 安裝</h2><ol><li>RVM安装</li></ol><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> curl -L get.rvm.io | bash -s stable</span></span><br></pre></td></tr></table></figure><ol start="2"><li>是否有完成安裝 RVM </li></ol><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> rvm -v</span></span><br></pre></td></tr></table></figure><p>結果顯示</p><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rvm 1.29.4 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]</span><br></pre></td></tr></table></figure><h2 id="使用-RVM-升級-Ruby"><a href="#使用-RVM-升級-Ruby" class="headerlink" title="使用 RVM 升級 Ruby"></a>使用 RVM 升級 Ruby</h2><ol><li>顯示目前的 Ruby 版本</li></ol><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> ruby -v</span></span><br></pre></td></tr></table></figure><p>顯示結果</p><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby 2.0.0p648 (2015-12-16 revision 53162) [universal.x86_64-darwin16]</span><br></pre></td></tr></table></figure><ol start="2"><li>安装 Ruby 2.5.1</li></ol><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rvm install 2.5.1</span><br></pre></td></tr></table></figure><p>安裝完畢之後，再用 <code>ruby -v</code> 檢查看看，是不是已經換成下面顯示的結果一樣已完成升級。</p><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-darwin16]</span><br></pre></td></tr></table></figure><p>結果</p><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Linking /usr/local/Cellar/ruby/2.5.1... 3293 symlinks created</span><br></pre></td></tr></table></figure><p>那麼，這樣子就安裝完畢了。</p><p>參考：<br><a href="https://flinhong.com/2017/10/26/upgrade-ruby-on-mac/" target="_blank" rel="noopener">https://flinhong.com/2017/10/26/upgrade-ruby-on-mac/</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;RVM 是一套 Ruby 版本的管理工具，這裡頭包含 Ruby 的版本管理和 Gem 庫管理。本篇裡面使用 RVM 工具進行 Ruby 的升級。&lt;/p&gt;
-&lt;h2 id=&quot;RVM-Ruby-Version-Manager-安裝&quot;&gt;&lt;a href=&quot;#RVM-Ruby-Vers
-      
-    
-    </summary>
-    
-      <category term="Ruby" scheme="https://weijutu.github.io/categories/Ruby/"/>
-    
-    
-      <category term="Ruby" scheme="https://weijutu.github.io/tags/Ruby/"/>
     
   </entry>
   
