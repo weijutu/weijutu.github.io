@@ -166,6 +166,79 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-07-23T16:16:00.000Z">2017-07-24</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分鐘 閱讀文 (大約 617 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/07/24/nodejs/nodejs-16-util-inherits/">Node.js 系列學習日誌#16 - 基礎工具核心模組 util.inherits 實現原型繼承</a>
+            
+        </h1>
+        <div class="content">
+            <p>在 js 的內建功能裡面如果有些不適合或無法滿足需求的時候，多半都要動手刻程式然後做到自己要的模組來呼叫方法。而 Node.js 提供了一個函數的集合，能夠比 js 更多的一些基本的處理，我們可以看到以下官方網站所提供 util 可用的方法。在本章節將介紹比較重要關注的方法</p>
+<p><img src="/images/nodejs/64.png" alt=""></p>
+<h1 id="util-inherits-實現原型繼承"><a href="#util-inherits-實現原型繼承" class="headerlink" title="util.inherits 實現原型繼承"></a>util.inherits 實現原型繼承</h1><p>引用內建基礎工具  util，請在程式第一行寫 var util = require(‘util’);  方可使用工具的方法。在這邊我們介紹繼承的功能，也就是  util.inherits(constructor, superConstructor)，在參數的第一個作為建構子，而第二參數為父建構子，直接來看程式的部分</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fnBase</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">     <span class="hljs-keyword">this</span>.name = <span class="hljs-string">'java'</span>;</span><br><span class="line">     <span class="hljs-keyword">this</span>.price = <span class="hljs-number">250</span>;</span><br><span class="line"></span><br><span class="line">     <span class="hljs-keyword">this</span>.getBookName = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">          <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"getBookName: the book name is "</span> + <span class="hljs-keyword">this</span>.name);</span><br><span class="line">     &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fnBase.prototype.showName = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"showName: "</span> + <span class="hljs-keyword">this</span>.name);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">fnBase.prototype.showPrice = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"showPrice: "</span> + <span class="hljs-keyword">this</span>.price);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>在這邊開始先建立了一個 fnBase 的物件，包含 name, price 屬性並且給予初始化值以及 getBookName 方法，而這個取得 book 的名稱。另外再多兩個 prototype 的原型方法，一個是 showName 以及 showPrice 方法，接著我們在建立一個物件</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Book</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">     <span class="hljs-keyword">this</span>.name = <span class="hljs-string">"nodejs"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我們定義好基礎對象為 fnBase 之後，以及繼承 fnBook  的 Book 建構子的屬性 name 為 nodejs，我們在透過以下方法來塑造繼承關係</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">util.inherits(Book, fnBase);</span><br></pre></td></tr></table></figure>
+<p>接下來呼叫一下看看會有什麼變化，首先我們先建立 fnBase  的物件，在呼叫內部包含的方法，showName 及 getBookName</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> obj = <span class="hljs-keyword">new</span> fnBase();</span><br><span class="line">obj.showName();</span><br><span class="line">obj.getBookName();</span><br><span class="line"><span class="hljs-built_in">console</span>.log(obj);</span><br></pre></td></tr></table></figure>
+<p>其結果如下，可以看到呼叫的兩個方法皆有顯示答案</p>
+<p><img src="/images/nodejs/65.png" alt=""></p>
+<p>最後將 new fnBase() 換成  new Book() 看看，程式如下：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> book = <span class="hljs-keyword">new</span> Book();</span><br><span class="line">book.showName();</span><br><span class="line">book.getBookName();</span><br><span class="line"><span class="hljs-built_in">console</span>.log(book);</span><br></pre></td></tr></table></figure>
+<p>Oops! 為什麼會出錯？結果居然只呼叫得到 showName, 卻無法取得  getBookName.</p>
+<p><img src="/images/nodejs/66.png" alt=""></p>
+<p>原因是因為 Book  只會繼承 fnBase 在原型 prototype 的函數，其建立的屬性與 getBookName 並不會被 Book 繼承。因此在繼承上的觀念則要特別注意了</p>
+<p>參考資料：<br><a href="http://nodejs.org/api/util.html" target="_blank" rel="noopener">http://nodejs.org/api/util.html</a><br><a href="http://www.w3schools.com/js/js_object_prototypes.asp" target="_blank" rel="noopener">http://www.w3schools.com/js/js_object_prototypes.asp</a></p>
+
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-format="fluid"
+                data-ad-layout-key="-fb+5w+4e-db+86"
+                data-ad-client="ca-pub-9431433815329544"
+                data-ad-slot="4946157775"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2017-07-23T16:15:00.000Z">2017-07-24</time>
                 
                 <div class="level-item">
@@ -464,85 +537,6 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-07-23T16:11:00.000Z">2017-07-24</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    5 分鐘 閱讀文 (大約 694 個字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/07/24/nodejs/nodejs-11-mysql-crud-update/">Node.js 系列學習日誌#11 - MySQL 操作: 更新</a>
-            
-        </h1>
-        <div class="content">
-            <p>上一篇完成了建立資料，本篇就來介紹更新的部分，我們在上一篇的使用者列表頁面上，每一筆資料的功能建立了一個『更新』的按鈕，如下：</p>
-<p>在這使用者列表的部分，表格列出的語法是：</p>
-<p><img src="/images/nodejs/67.png" alt=""></p>
-<p>其中也就是在跑 each 時，每筆資料塞入按鈕語法，在這邊我們設定點選的時候連結 /update 而後面再接一個編號參數 /#{user.id}：</p>
-<figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a(href='/update/#&#123;user.id&#125;', class='btn btn-warning') 更新</span><br></pre></td></tr></table></figure>
-<p>我們簡單看一下表格佈局如下：</p>
-<p><img src="/images/nodejs/47.png" alt=""></p>
-<p>並且繼續打開 app.js 檔案，放上 update 的操作</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="hljs-string">'/update/:id'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res</span>) </span>&#123;</span><br><span class="line">    pool.getConnection(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, connection</span>) </span>&#123;</span><br><span class="line">        connection.query(<span class="hljs-string">'SELECT * from users where id=?'</span>,[req.params.id],<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, rows, fields</span>) </span>&#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (err)</span><br><span class="line">                <span class="hljs-keyword">throw</span> err;</span><br><span class="line">            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'search is success.'</span>);</span><br><span class="line">            res.render(<span class="hljs-string">'create'</span>, &#123;</span><br><span class="line">                title : <span class="hljs-string">'Update user'</span>,</span><br><span class="line">                user : rows[<span class="hljs-number">0</span>]</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">        connection.release();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>在這邊先進入到 /update 頁面，預定在打開 update 時，會列出某一筆資料，因此在這邊會先用 sql 語法來查詢某一筆資料，而 id 的部分由網址列的參數取得，也就是 connection.query 的方法的第二參數，是取得網址的參數 [req.params.id] ，完成取得動作之後，顯示在 create 的頁面 （由於上一篇新增的頁面跟本篇的更新頁面欄位相同，所以用的是一樣的頁面）</p>
-<p>另外在 render 的參數多了一個 user: rows[0], 主要是用來判別是不是更新的資料，若有資料則是更新、若沒資料就是新增</p>
-<p><img src="/images/nodejs/48.png" alt=""></p>
-<p>每項  input 就用 user.[欄位] 將值帶入，顯示部分是：</p>
-<p><img src="/images/nodejs/49.png" alt=""></p>
-<p>我們按下儲存之後，將表單送到 /update，因此這邊要做  update 的操作，再度打開 app.js 新增</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">app.post(<span class="hljs-string">'/update'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res</span>) </span>&#123;</span><br><span class="line">    pool.getConnection(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, connection</span>) </span>&#123;</span><br><span class="line">        connection.query(<span class="hljs-string">'update users set ? where id = ?'</span>, [&#123;</span><br><span class="line">            id : req.body.user.id,</span><br><span class="line">            name : req.body.user.name,</span><br><span class="line">            description : req.body.user.description</span><br><span class="line">        &#125;,req.body.user.id], <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, fields</span>) </span>&#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (err)</span><br><span class="line">                <span class="hljs-keyword">throw</span> err;</span><br><span class="line">        &#125;);</span><br><span class="line">        connection.query(<span class="hljs-string">'SELECT * from users'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, rows, fields</span>) </span>&#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (err)</span><br><span class="line">                <span class="hljs-keyword">throw</span> err;</span><br><span class="line">            res.render(<span class="hljs-string">'user'</span>, &#123;</span><br><span class="line">                title : <span class="hljs-string">'使用者列表'</span>,</span><br><span class="line">                user : rows</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">        connection.release();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>其中以</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">connection.query(<span class="hljs-string">'update users set ? where id = ?'</span>, [&#123;</span><br><span class="line">    id : req.body.user.id,</span><br><span class="line">    name : req.body.user.name,</span><br><span class="line">    description : req.body.user.description</span><br><span class="line">&#125;,req.body.user.id], <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, fields</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (err)</span><br><span class="line">        <span class="hljs-keyword">throw</span> err;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>作為 update 的操作，在第二參數時，就是從表單傳送過來的資料，以陣列來表示，裏面每個欄位再以 key/value 呈現，然後最後再</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">connection.query(<span class="hljs-string">'SELECT * from users'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, rows, fields</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (err)</span><br><span class="line">        <span class="hljs-keyword">throw</span> err;</span><br><span class="line">    res.render(<span class="hljs-string">'user'</span>, &#123;</span><br><span class="line">        title : <span class="hljs-string">'使用者列表'</span>,</span><br><span class="line">        user : rows</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>新增完成後顯示最後的結果列到使用者列表</p>
-<p><img src="/images/nodejs/50.png" alt=""></p>
-<p>結果退到使用者列表：</p>
-<p><img src="/images/nodejs/51.png" alt=""></p>
-
-
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle"
-                style="display:block"
-                data-ad-format="fluid"
-                data-ad-layout-key="-fb+5w+4e-db+86"
-                data-ad-client="ca-pub-9431433815329544"
-                data-ad-slot="4946157775"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -617,7 +611,7 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        74
+                        75
                     </p>
                 </div>
             </div>
@@ -637,7 +631,7 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                         標籤
                     </p>
                     <p class="title has-text-weight-normal">
-                        47
+                        48
                     </p>
                 </div>
             </div>
@@ -681,6 +675,25 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/04/13/javascript/calendar-line-notify/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/linenotify/cover.png" alt="Google 行事曆的行程用 Line Notify 通知">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-13T13:29:00.000Z">2020-04-13</time></div>
+                    <a href="/2020/04/13/javascript/calendar-line-notify/" class="has-link-black-ter is-size-6">Google 行事曆的行程用 Line Notify 通知</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -751,25 +764,6 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-26T11:07:51.000Z">2020-01-26</time></div>
                     <a href="/2020/01/26/docker/docker-02-start-nginx/" class="has-link-black-ter is-size-6">Docker#2 - 啟動 Nginx Web 伺服器</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/docker/">docker</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/01/26/docker/docker-01-start/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/docker/docker.png" alt="Docker#1 - 初識 Docker">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-26T03:07:51.000Z">2020-01-26</time></div>
-                    <a href="/2020/01/26/docker/docker-01-start/" class="has-link-black-ter is-size-6">Docker#1 - 初識 Docker</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/docker/">docker</a>
                     </p>
@@ -886,7 +880,7 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                 <span class="level-item">工具</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/網站/">
@@ -925,6 +919,17 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
             彙整
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/03/">
@@ -1172,6 +1177,13 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                     <a class="tags has-addons" href="/tags/Javascript/">
                         <span class="tag">Javascript</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Line-Notify/">
+                        <span class="tag">Line Notify</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1573,7 +1585,7 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                 <span class="level-item">工具</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/網站/">
@@ -1612,6 +1624,17 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
             彙整
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/03/">
@@ -1859,6 +1882,13 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                     <a class="tags has-addons" href="/tags/Javascript/">
                         <span class="tag">Javascript</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Line-Notify/">
+                        <span class="tag">Line Notify</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
