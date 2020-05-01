@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[gitea - 在 Mac 自己架設一套私有的版本控管伺服器 (Homebrew)]]></title>
+    <url>%2F2020%2F05%2F01%2Ftools%2Fgitea-install%2F</url>
+    <content type="text"><![CDATA[簡介GitHub 與 Bitbucket 服務，對於開發者而言是可以將自己開發的應用程式存放的地方，但是它們是屬於其他公司營運的，也許會需要考慮運行自己的託管 git server。Gitea 是一套輕量級的託管解決方案，四大特色是易安裝、跨平台、輕量級、開源化，幾乎跟 github 方式很相似，若有實作過 github 時，那這套工具也會讓你滿意。 安裝Gitea 作為私有的 Git，如果是使用 Mac 而且有裝 Homebrew 時，就可以透過 Homebrew 來完成安裝。 12$ brew tap go-gitea/gitea$ brew install gitea 很快地就會完成安裝，那麼你可以輸入以下指令，確認哪些命令可以做執行 1$ gitea -h 當你要使用 gitea 時，請輸入 1$ gitea web 進行運行，那麼就開始啟動。它會告訴你訪問的服務器的 URL 是什麼，就可以透過瀏覽器訪問 http://localhost:3000/ 一開始都會初始設定，分為資料庫設定、一般設定、可選設定，資料庫需要先建立，也請使用 InnoDB 儲存引擎和 “utf8_general_ci” 字元集。 一切都裝好之後，再回到控制面板上，看到以下畫面就代表安裝完畢囉 建立一組 repo 儲存庫讓我們再次回到 http://localhost:3000/ 控制面板，點選 儲存庫 旁的「+」，建立一組叫 hello-world 的儲存庫 我們將這組儲存庫設定為私有 好的，完成建立儲存庫了 如果你是用 HTTP 方式 clone 儲存庫的時候，就會需要輸入帳密 1234$ git clone http://localhost:3000/marukotu/hello-world.gitCloning into &apos;hello-world&apos;...Username for &apos;http://localhost:3000&apos;: 將儲存庫 hello-world clone 下來之後，進到這個資料夾建立一個新的文件 12345678910$ cd hello-world$ touch test.txt$ vi test.txt$ git add .$ git commit -am &quot;added a new file&quot;[master 07b6e46] added a new file 1 file changed, 2 insertions(+) create mode 100644 test.txt 最後再 git push 做推送。再回到我們的控制面板，也會顯示最後推上的檔案與版控資訊 也可以看到提交的歷史紀錄 看到這裡是不是躍躍欲試了呢？快來建立自己的版控世界吧 ：）]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>gitea</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Google 行事曆的行程用 Line Notify 通知]]></title>
     <url>%2F2020%2F04%2F13%2Fjavascript%2Fcalendar-line-notify%2F</url>
     <content type="text"><![CDATA[Google 行事曆是個讓自己有條理的走在行程上，定期使用 Google 日曆的朋友一定也對設置的事件通知相當熟悉，今天要來使用另一種透過 Line Notify 通知每天的活動來通知成員的方式，我們將使用 Apps Script 撰寫腳本方式進行連接，這樣我們每次在 Google Calendar 新增的時候，就用 Line 通知我們！讓我們開始吧！ 使用的工具 Line Notify Google Calendar Google Apps Script Line Notify 的發行權仗Line Notify 只要取得一組權杖就可以發送訊息 請先進入 Line Notify 的網站 ，點選右上角的「登入」 輸入自己的 Line 登入的帳號密碼 登入之後點選「個人頁面」，滑到最下方有一個「發行存取權杖」的區塊，按下「發行權杖」，這時候就會彈出一個發行權仗小視窗 在這裏要輸入權杖名稱，這個欄位可以自己自訂，如果只要提醒個人的話，那就選擇「透過 1對1 聊天接收 Line Notify 的通知」，就像下方 選擇好之後，就按下「發行」，這時候就會看到，發行了一組權杖給你，這時候要按下複製按鈕將鑰匙存下來，關閉之後就不會再出現 1YBK21nyX1reV2zRKBTF0xxxCQGSOMkkuSTWs Google Apps Script 寫腳本接著我們進入 Google App Scripts 頁面裡，點選 Google Apps Script ，進到頁面之後，點選左上角的「新專案」 一開始先填上專案的名稱「行事曆使用 Line Notify 通知」 先修改時區的設定，請在「檔案」&gt; 「專案屬性」，改成台北時間，修訂完成後按下儲存 接著我們將以下的程式碼，貼到程式碼輸入的區塊 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647var GoogleCalendarID = "xxxxxxxxxxxxxx@gmail.com"; // 日曆 IDvar LineNotifyEndPoint = "https://notify-api.line.me/api/notify";var AccessToken = "YBK21nyX1reVxxxxxxxrCQGSOMkkuSTWs"; // 發行的權杖const Now = new Date();const Start = new Date(Now.getFullYear(), Now.getMonth(),Now.getDate(), 0, 0, 0, 0);const End = new Date(Now.getFullYear(), Now.getMonth(), Now.getDate(), 23, 59, 59, 999);const GoogleCalendar = CalendarApp.getCalendarById(GoogleCalendarID).getEvents(Start, End); // 監聽觸發條件所設置的// 彙整行事曆資訊function postMessage() &#123; var message = ""; //新增 NotifyContents 存取通知內容 GoogleCalendar.forEach(item=&gt; &#123; if (item.getStartTime() &lt;= Now &amp;&amp; item.getTag("Confirmed") != "Yes") &#123; message += (item.getTitle() != "") ? ("\n\n" + item.getTitle() + "\n") : ("\n\n空標題\n"); message += (item.getDescription() != "") ? item.getDescription() : ""; item.setTag("Confirmed", "Yes"); &#125; &#125; ) sendMessage(message);&#125;// 發出訊息function sendMessage(message) &#123; var formData = &#123; "message": message &#125;; var options = &#123; "headers" : &#123;"Authorization" : "Bearer " + AccessToken&#125;, "method" : 'post', "payload" : formData &#125;; try &#123; var response = UrlFetchApp.fetch(LineNotifyEndPoint, options); &#125; catch (error) &#123; Logger.log(error.name + "：" + error.message); return; &#125; if (response.getResponseCode() !== 200) &#123; Logger.log("送出失敗"); &#125; &#125; 要記得修改一下兩個地方，「發行的權杖」、「日曆 ID」 12var GoogleCalendarID = "xxxxxxxxxxxxxx@gmail.com"; // 日曆 IDvar AccessToken = "YBK21nyX1reVxxxxxxxrCQGSOMkkuSTWs"; // 發行的權杖 查詢日曆 ID至於日曆的 ID，就到你的行事曆裡頭，選擇你要觀察的哪一個行事曆，選擇「設定和共用」 那麼你就可以在整合日曆內，看到你的日曆 ID 複製之後，貼到程式碼的 GoogleCalendarID 這組變數值 然後，一切就緒之後，先將 Script 存下來，在按下小時鐘 之後會回到觸發條件畫面，點選右下角的「新增觸發條件」，然後你可以選擇你想到被通知的設定 最後按下觸發條件的儲存，那麼之後有任何的行程都會通知了，在你按下確認之後， Google 會需要通過允許通知的權限， Line Notify 通知我了！我們在 Google 行事曆建立一個未來行程，假設是設定 21:01 分的「這是開發時間」的行程，那麼接下來就等待 Google Apps Scripts 觸發動作，過了幾秒鐘之後，就可以確認一下是否有接下來的 Google 行事曆行程在 Line Notify 通知你了 快來試試看吧！ 參考 Google Calendar Service https://developers.google.com/apps-script/reference/calendar/ https://developers.google.com/apps-script/reference/url-fetch/url-fetch-app https://developers.google.com/apps-script/reference/url-fetch/http-response https://developers.google.com/apps-script/reference/calendar/calendar-event]]></content>
@@ -203,8 +215,8 @@
         <category>工具</category>
       </categories>
       <tags>
-        <tag>Ruby</tag>
         <tag>API</tag>
+        <tag>Ruby</tag>
       </tags>
   </entry>
   <entry>
@@ -482,18 +494,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Node.js 系列學習日誌#28 - REST 路由規則]]></title>
-    <url>%2F2017%2F07%2F26%2Fnodejs%2Fnodejs-28-rest%2F</url>
-    <content type="text"><![CDATA[今天我們使用 express 框架介紹一下 REST 路由規則，REST 是一種 http 協定的網路應用，http 提供了八種方法使用： OPTIONS：這個方法可使伺服器傳回該資源所支援的所有HTTP請求方法。用*來代替資源名稱，向Web伺服器傳送OPTIONS請求，可以測試伺服器功能是否正常運作。 HEAD：與GET方法一樣，都是向伺服器發出指定資源的請求。只不過伺服器將不傳回資源的本文部份。它的好處在於，使用這個方法可以在不必傳輸全部內容的情況下，就可以獲取其中「關於該資源的資訊」（元資訊或稱元資料）。 GET：向指定的資源發出「顯示」請求。使用GET方法應該只用在讀取資料，而不應當被用於產生「副作用」的操作中，例如在Web Application中。其中一個原因是GET可能會被網路蜘蛛等隨意存取。參見安全方法 POST：向指定資源提交資料，請求伺服器進行處理（例如提交表單或者上傳檔案）。資料被包含在請求本文中。這個請求可能會建立新的資源或修改現有資源，或二者皆有。 PUT：向指定資源位置上傳其最新內容。 DELETE：請求伺服器刪除Request-URI所標識的資源。 TRACE：回顯伺服器收到的請求，主要用於測試或診斷。 CONNECT：HTTP/1.1協定中預留給能夠將連線改為管道方式的代理伺服器。通常用於SSL加密伺服器的連結（經由非加密的HTTP代理伺服器） 而 express 網頁框架也針對 http 請求方法設計路由的函數： 通常在設計 rest 時，常用的是 get (取得), post (新增), put (更新), delete (刪除) 參考資料http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE]]></content>
-      <categories>
-        <category>Node.js</category>
-      </categories>
-      <tags>
-        <tag>Node.js</tag>
-        <tag>鐵人賽</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Node.js 系列學習日誌#27 - forever 讓程式保持執行狀態]]></title>
     <url>%2F2017%2F07%2F26%2Fnodejs%2Fnodejs-27-forever%2F</url>
     <content type="text"><![CDATA[程式準備要部署上線時，就會面臨到執行程式的方式，伺服器的管理，是不是能有一個運行 Node.js 程式，並且有個工具處理這件事情。forever 可以作為保持運行的狀態，管理 Node.js 程式服務，在 forever 進程之下，建立子進程，執行啟動與停止的命令相當簡單。更特別的是，經常我們在寫 Node.js 的時候，每次更動的檔案時都需要再重新執行啟動服務的指令 (例如：node app.js)，而這個工具是當每次更新程式的時候，它會自動重新啟動服務，更方便許多了呢！ 這是官方的描述：（https://github.com/nodejitsu/forever） A simple CLI tool for ensuring that a given script runs continuously (i.e. forever). 安裝12// 一般建議加上 -g 將 forever 全域安裝$[sudo] npm install forever -g 當然若你要在某個特定目錄下安裝也是可以 12$cd /path/projects/abc$[sudo] npm install forever 指令的幫助可以透過以下指令列出說明 1$forever —help 顯示所有運行的服務1$forever list 啟動1$forever start app.js 停止操作1$forever stopall 停止某一個程式專案1$forever stop app.js 實作一個簡單運用我們先用 express 這個框架建一個簡單的網站 啟動程式1$forever start app.js forever 列表清單1$forever list 可以看到紫色部分，就是在放 log file 的路徑 關閉進程1$forever stop app.js]]></content>
@@ -504,6 +504,18 @@
         <tag>Node.js</tag>
         <tag>鐵人賽</tag>
         <tag>forever</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Node.js 系列學習日誌#28 - REST 路由規則]]></title>
+    <url>%2F2017%2F07%2F26%2Fnodejs%2Fnodejs-28-rest%2F</url>
+    <content type="text"><![CDATA[今天我們使用 express 框架介紹一下 REST 路由規則，REST 是一種 http 協定的網路應用，http 提供了八種方法使用： OPTIONS：這個方法可使伺服器傳回該資源所支援的所有HTTP請求方法。用*來代替資源名稱，向Web伺服器傳送OPTIONS請求，可以測試伺服器功能是否正常運作。 HEAD：與GET方法一樣，都是向伺服器發出指定資源的請求。只不過伺服器將不傳回資源的本文部份。它的好處在於，使用這個方法可以在不必傳輸全部內容的情況下，就可以獲取其中「關於該資源的資訊」（元資訊或稱元資料）。 GET：向指定的資源發出「顯示」請求。使用GET方法應該只用在讀取資料，而不應當被用於產生「副作用」的操作中，例如在Web Application中。其中一個原因是GET可能會被網路蜘蛛等隨意存取。參見安全方法 POST：向指定資源提交資料，請求伺服器進行處理（例如提交表單或者上傳檔案）。資料被包含在請求本文中。這個請求可能會建立新的資源或修改現有資源，或二者皆有。 PUT：向指定資源位置上傳其最新內容。 DELETE：請求伺服器刪除Request-URI所標識的資源。 TRACE：回顯伺服器收到的請求，主要用於測試或診斷。 CONNECT：HTTP/1.1協定中預留給能夠將連線改為管道方式的代理伺服器。通常用於SSL加密伺服器的連結（經由非加密的HTTP代理伺服器） 而 express 網頁框架也針對 http 請求方法設計路由的函數： 通常在設計 rest 時，常用的是 get (取得), post (新增), put (更新), delete (刪除) 參考資料http://www.wikiwand.com/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE]]></content>
+      <categories>
+        <category>Node.js</category>
+      </categories>
+      <tags>
+        <tag>Node.js</tag>
+        <tag>鐵人賽</tag>
       </tags>
   </entry>
   <entry>

@@ -166,6 +166,131 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-08-25T03:45:14.000Z">2017-08-25</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    8 分鐘 閱讀文 (大約 1155 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/08/25/javascript/javascript-gulpjs-minify-image/">Javascript - 介紹 Gulp.js 並實作壓縮（minify）圖片</a>
+            
+        </h1>
+        <div class="content">
+            <p><img src="/images/javascript/5.png" alt=""></p>
+<p>它是建立在 node.js 的一個套件。The streaming build system. 它的觀念是一套利用串流方式輔助建置系統，優化前端工程的效能（縮小js 檔案大小，編譯預處理的css, less ）加快js, css…etc 載入速度，特色在於代碼優於配置關做法讓事情變得更簡單，更直覺的方式構建系統。</p>
+<h3 id="什麼是字串流-Stream-（也可以叫串流）"><a href="#什麼是字串流-Stream-（也可以叫串流）" class="headerlink" title="什麼是字串流 Stream? （也可以叫串流）"></a>什麼是字串流 Stream? （也可以叫串流）</h3><p>谷歌一下Wiki 的「 Stream 」的意思：</p>
+<blockquote>
+<p>在電腦科學裡面，字串流(stream，或者串流)這個詞有很多用法。所有這一些用法都是代表一個包含資料的序列。我們可以將字串流想做是一個允許資料一個接一個，而非將資料包作一整個，來進行處理的輸送帶。</p>
+</blockquote>
+<p>用個 gulp.js 的簡單例子：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gulp.src(&apos;js/app.js&apos;)</span><br><span class="line">    .pipe(uglify())</span><br><span class="line">    .pipe(gulp.dest(&apos;build&apos;))</span><br></pre></td></tr></table></figure>
+<p>以這個例子來說，gulp.src 方法帶了一個字串參數 js/app.js，這個是對應一個主要的 js 檔案，主要是建立物件串流來表示的文件，接這透過 .pipe 方法將所有檔案做 uglify() 的動作，而這個動作將會縮小之後回傳一個新的物件，最後將這個輸出用 gulp.dest 目標位置到 build 資料夾裡面。</p>
+<p>流程會是如下：</p>
+<p><img src="/images/javascript/6.png" alt=""></p>
+<h3 id="Grunt-vs-Gulp"><a href="#Grunt-vs-Gulp" class="headerlink" title="Grunt vs Gulp"></a>Grunt vs Gulp</h3><p>Grunt.js 與 Gulp.js 都做相同的事情，都是做自動化處理，但是 Grunt 處理的方式繞了很多圈，我們可以看一下以下的比較：</p>
+<ul>
+<li>Grunt 套件執行多個任務；Gulp 只會專注做一件事情上。</li>
+<li>Grunt 需要套件的基本功能；Gulp 裡的功能已經是內建的了。</li>
+<li>Grunt 使用 JSON 方式做資料配置的文件：Gulp 使用的方式更精簡，是使用 JS 語法撰寫</li>
+</ul>
+<p>Let’s start using Gulp.</p>
+<h3 id="安裝-Node-js"><a href="#安裝-Node-js" class="headerlink" title="安裝 Node.js"></a>安裝 Node.js</h3><p>這裡我不會做太多解釋如何安裝 node.js ，安裝方式請詳見之前寫的一篇文章 「<a href="http://weijutu.github.io/2017/07/24/nodejs/nodejs-02-install/">Node.js 系列學習日誌#2 - Node.js 安裝配置</a>」</p>
+<h3 id="安裝-Gulp"><a href="#安裝-Gulp" class="headerlink" title="安裝 Gulp"></a>安裝 Gulp</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sudo npm install gulp -g</span><br></pre></td></tr></table></figure>
+<p>請先確認 nodejs, npm, gulp 是否有正常安裝，我們可以驗證一下版本</p>
+<p><img src="/images/javascript/7.png" alt=""></p>
+<h3 id="建立專案"><a href="#建立專案" class="headerlink" title="建立專案"></a>建立專案</h3><p>請先建立一個資料夾，這裡叫做 gulptest 的資料夾，這裡面包含：</p>
+<ul>
+<li>src — the location of pre-processed HTML source files and folders:<ul>
+<li>images — uncompressed images</li>
+<li>scripts — multiple pre-processed script files</li>
+<li>styles — multiple pre-processed CSS files</li>
+</ul>
+</li>
+<li>build — the location of production files for upload including:<ul>
+<li>images — compressed images</li>
+<li>scripts — a single minified script file</li>
+<li>styles — a single minified CSS file</li>
+</ul>
+</li>
+</ul>
+<p>接著我們在資料夾下安裝 Gulp 套件</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm install gulp --save-dev</span><br></pre></td></tr></table></figure>
+<p>在這邊它會自動建立 node_module 永久性的資料夾，裡面包含被安裝的 gulp</p>
+<p><img src="/images/javascript/8.png" alt=""></p>
+<p>最後先在 gulptest 資料夾下建立空的 gulpfile.js 檔案，之後會介紹如何使用</p>
+<h3 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h3><p>我們需要安裝與配置一個套件來執行任務，在這裡做個簡單的例子就使用一套 jshint 套件，請輸入：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm install gulp-jshint --save-dev</span><br></pre></td></tr></table></figure>
+<p>然後開啟剛才建立好的 gulpfile.js，建立一個名叫 imagemin 的任務。請寫以下程式：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// include gulp</span><br><span class="line">var gulp = require(&apos;gulp&apos;);</span><br><span class="line"></span><br><span class="line">gulp.task(&apos;imagemin&apos;, function() &#123;</span><br><span class="line">  var imgSrc = &apos;./src/images/**/*&apos;,</span><br><span class="line">      imgDst = &apos;./build/images&apos;;</span><br><span class="line"></span><br><span class="line">  gulp.src(imgSrc)</span><br><span class="line">    .pipe(changed(imgDst))</span><br><span class="line">    .pipe(imagemin())</span><br><span class="line">    .pipe(gulp.dest(imgDst));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>我在 /src/images/ 放了三張圖 (隨便到 google design 抓了三張圖，暫時找不到照片就先拿很小kb數來練啦～)</p>
+<ul>
+<li><code>components-bottomsheet-for-mobile-1a_large_mdpi.png (31kb)</code></li>
+<li><code>components-bottomsheet-for-mobile-1b_large_mdpi.png (18kb)</code></li>
+<li><code>components-bottomsheet-for-mobile-1b_large_mdpi.png (8kb)</code></li>
+</ul>
+<p><img src="/images/javascript/9.png" alt=""></p>
+<p>gulpfile.js 存檔之後用以下的命令執行：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$gulp imagemin</span><br></pre></td></tr></table></figure>
+<p><img src="/images/javascript/10.png" alt=""></p>
+<p>注意看執行結果的最後一行，上面寫 gulp-imagemin: Minified 3 images (saved 11.23 KB - 19.5%)，意思就是節省了 11.23KB, 總體省了 19.5%</p>
+<ul>
+<li><code>components-bottomsheet-for-mobile-1a_large_mdpi.png (29kb)</code></li>
+<li><code>components-bottomsheet-for-mobile-1b_large_mdpi.png (13kb)</code></li>
+<li><code>components-bottomsheet-for-mobile-1b_large_mdpi.png (4kb)</code></li>
+</ul>
+<p>最後請到 /build/images/<em>.</em>.png 查看被壓縮結果</p>
+<p><img src="/images/javascript/11.png" alt=""></p>
+<h3 id="資料參考"><a href="#資料參考" class="headerlink" title="資料參考"></a>資料參考</h3><ul>
+<li><a href="http://david.nowinsky.net/gulp-book/" target="_blank" rel="noopener">Gulp-book@Gitbook</a></li>
+<li>Wikipedia: <a href="http://zh.wikipedia.org/wiki/字串流" target="_blank" rel="noopener">http://zh.wikipedia.org/wiki/字串流</a></li>
+</ul>
+<h3 id="備註"><a href="#備註" class="headerlink" title="備註"></a>備註</h3><ul>
+<li>gulp.task(name, fn) it registers the function with a name. you can optionally specify some dependencies if other tasks need to run first</li>
+<li>gulp.run(task) runs all tasks with maximun concurrency</li>
+<li>gulp.src(glob) this returns a readable stream. takes a file system glob(like grunt) and starts emitting files that match</li>
+<li>gulp.dest(folder) this returns a writable stream, file objects piped to this are saved to the file system</li>
+</ul>
+
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-format="fluid"
+                data-ad-layout-key="-fb+5w+4e-db+86"
+                data-ad-client="ca-pub-9431433815329544"
+                data-ad-slot="4946157775"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2017-08-25T03:37:25.000Z">2017-08-25</time>
                 
                 
@@ -485,75 +610,6 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-08-21T01:58:00.000Z">2017-08-21</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Excel/">Excel</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    5 分鐘 閱讀文 (大約 754 個字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/08/21/excel/excel-get-value-by-fn/">Excel - 使用函數取得不重複值並計算總計</a>
-            
-        </h1>
-        <div class="content">
-            <p>有沒有使用 Excel 輸入資料後，想要把某一列的資料做不重複的篩選？若您剛好有這個疑問，來到這裡算是走對地方了～ 我們有很簡單的例子一步一步的說明</p>
-<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>不採取樞扭分析表，請利用函數實作</p>
-<h3 id="說明"><a href="#說明" class="headerlink" title="說明"></a>說明</h3><p>今天有一個資料表欄位有「類型」、「數量」、「名稱」，需要做一些統計，並且在一般資料區塊下方，當有輸入時，必須同時同步計算以下兩項區域</p>
-<ol>
-<li>依照類型將名稱分類，表格呈現上方列為「類型」、左方為「名稱」</li>
-<li>取得不重複的「名稱」，計算各類型的名稱的總數</li>
-</ol>
-
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle"
-                style="display:block"
-                data-ad-format="fluid"
-                data-ad-layout-key="-fb+5w+4e-db+86"
-                data-ad-client="ca-pub-9431433815329544"
-                data-ad-slot="4946157775"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2017/08/21/excel/excel-get-value-by-fn/#more">繼續閱讀</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -578,7 +634,7 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
             
             <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/15/">15</a></li>
+            <li><a class="pagination-link has-text-black-ter" href="/page/16/">16</a></li>
             
         </ul>
     </nav>
@@ -628,7 +684,7 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        75
+                        76
                     </p>
                 </div>
             </div>
@@ -648,7 +704,7 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                         標籤
                     </p>
                     <p class="title has-text-weight-normal">
-                        48
+                        49
                     </p>
                 </div>
             </div>
@@ -692,6 +748,25 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/05/01/tools/gitea-install/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/tools/20200501-0.png" alt="gitea - 在 Mac 自己架設一套私有的版本控管伺服器 (Homebrew)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-01T09:58:27.000Z">2020-05-01</time></div>
+                    <a href="/2020/05/01/tools/gitea-install/" class="has-link-black-ter is-size-6">gitea - 在 Mac 自己架設一套私有的版本控管伺服器 (Homebrew)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -762,25 +837,6 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-26T12:07:51.000Z">2020-01-26</time></div>
                     <a href="/2020/01/26/docker/docker-03-command/" class="has-link-black-ter is-size-6">Docker#3 - Dockerfile 指令解說</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/docker/">docker</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/01/26/docker/docker-02-start-nginx/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/docker/docker.png" alt="Docker#2 - 啟動 Nginx Web 伺服器">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-26T11:07:51.000Z">2020-01-26</time></div>
-                    <a href="/2020/01/26/docker/docker-02-start-nginx/" class="has-link-black-ter is-size-6">Docker#2 - 啟動 Nginx Web 伺服器</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/docker/">docker</a>
                     </p>
@@ -897,7 +953,7 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                 <span class="level-item">工具</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/網站/">
@@ -936,6 +992,17 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
             彙整
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/04/">
@@ -1312,7 +1379,7 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                 <div class="control">
                     <a class="tags has-addons" href="/tags/docker/">
                         <span class="tag">docker</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">5</span>
                     </a>
                 </div>
                 
@@ -1355,6 +1422,13 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                     <a class="tags has-addons" href="/tags/gitbook/">
                         <span class="tag">gitbook</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/gitea/">
+                        <span class="tag">gitea</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1602,7 +1676,7 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                 <span class="level-item">工具</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/網站/">
@@ -1641,6 +1715,17 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
             彙整
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/04/">
@@ -2017,7 +2102,7 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                 <div class="control">
                     <a class="tags has-addons" href="/tags/docker/">
                         <span class="tag">docker</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">5</span>
                     </a>
                 </div>
                 
@@ -2060,6 +2145,13 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                     <a class="tags has-addons" href="/tags/gitbook/">
                         <span class="tag">gitbook</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/gitea/">
+                        <span class="tag">gitea</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

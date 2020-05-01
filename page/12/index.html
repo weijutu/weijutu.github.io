@@ -166,6 +166,83 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-07-23T16:17:00.000Z">2017-07-24</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 分鐘 閱讀文 (大約 816 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/07/24/nodejs/nodejs-17-ejs-json/">Node.js 系列學習日誌#17 - 使用 express, ejs 實作讀取靜態 JSON 格式資料</a>
+            
+        </h1>
+        <div class="content">
+            <p>今天來介紹 express, ejs 實作讀取靜態 JSON 格式資料程式</p>
+<p>本章節將會學習到：</p>
+<ul>
+<li>使用 ejs 樣板引擎建立檢視頁面</li>
+<li>建立 Json 檔案及資料，並採取 /api/posts 列出所有 json 資料</li>
+<li>採取 /post/:id 取得某一筆資料<br>首先我們先建立一個目錄叫 demo-express-json 的資料夾，然後使用指令進入到 demo-express-json 資料夾裡面，接著安裝 express 框架以及 ejs 的樣板引擎</li>
+</ul>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$npm</span> install —save express ejs</span><br></pre></td></tr></table></figure>
+<h3 id="建立-josn-檔案"><a href="#建立-josn-檔案" class="headerlink" title="建立 josn 檔案"></a>建立 josn 檔案</h3><p>建立完成之後，我們在 demo-express-json 會出現 node_module 資料夾，裡面則是有 express, ejs 套件相關檔案，接下來在根目錄下建立一個  posts.json 格式檔案，資料先假定設定為：</p>
+<p>（文字是用亂數假文產生器弄的，因此無需認真讀囉）</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">     &#123;</span><br><span class="line">       &quot;title&quot;: &quot;會濟報好大必者政下二&quot;,</span><br><span class="line">       &quot;id&quot;: &quot;fdb61c16-4bba-11e4-9e35-164230d1df67&quot;,</span><br><span class="line">       &quot;content&quot;: &quot;容有那一氣持地來於結主了友如頭……院還地入。出乎機富事的著度同禮、時在科種力事再數總源式孩？&quot;</span><br><span class="line">     &#125;,</span><br><span class="line">     &#123;</span><br><span class="line">       &quot;title&quot;: &quot;主覺問我的食什期和&quot;,</span><br><span class="line">       &quot;id&quot;: &quot;0bc365ac-4bbb-11e4-9e35-164230d1df67&quot;,</span><br><span class="line">       &quot;content&quot;: &quot;生老了險實去供考權是車子氣長不別相且員高麼也工家看&quot;</span><br><span class="line">     &#125;,</span><br><span class="line">     &#123;</span><br><span class="line">       &quot;title&quot;: &quot;是實裡在園時傳&quot;,</span><br><span class="line">       &quot;id&quot;: &quot;0ff44786-4bbb-11e4-9e35-164230d1df67&quot;,</span><br><span class="line">       &quot;content&quot;: &quot;不半過何：為濟是在制們。裡得一方出，處師取是你賣而陽&quot;</span><br><span class="line">     &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>這個 json 檔每一筆資料以 title, id, content 參數為主</p>
+<h3 id="建立-app-js"><a href="#建立-app-js" class="headerlink" title="建立 app.js"></a>建立 app.js</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">// express web framework</span><br><span class="line">var express = require(&apos;express&apos;);</span><br><span class="line">//讀取 posts.json</span><br><span class="line">var fs = require(&apos;fs&apos;);</span><br><span class="line">var app = express();</span><br><span class="line"></span><br><span class="line">//放置靜態網頁</span><br><span class="line">app.use(&apos;/public&apos;, express.static(__dirname + &apos;/public&apos;));</span><br><span class="line"></span><br><span class="line">//定義網站標題</span><br><span class="line">app.locals.title=&quot;Get json data using express web framework&quot;;</span><br><span class="line"></span><br><span class="line">app.all(&apos;*&apos;, function(req, res, next)&#123;</span><br><span class="line">  fs.readFile(&apos;posts.json&apos;, function(err, data)&#123;</span><br><span class="line">    res.locals.posts = JSON.parse(data);</span><br><span class="line">    next();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">//網頁主進入點</span><br><span class="line">app.get(&apos;/&apos;, function(req, res)&#123;</span><br><span class="line">  //指定 /views/idex.ejs</span><br><span class="line">  res.render(&apos;index.ejs&apos;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">//顯示 posts.json 資料</span><br><span class="line">app.get(&apos;/api/posts&apos;, function(req, res)&#123;</span><br><span class="line">  res.json(res.locals.posts);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">//當 url 是 /post/:id 時, 取得某一筆資料</span><br><span class="line">app.get(&apos;/post/:id&apos;, function(req, res, next)&#123;</span><br><span class="line">  //取得 post.json 資料夾</span><br><span class="line">  res.locals.posts.forEach(function(post)&#123;</span><br><span class="line">    //從 url 取得 id 參數與 posts.json 裡的 id</span><br><span class="line">    if (req.params.id === post.id)&#123;</span><br><span class="line">      //顯示參數為  url 中 id 的 post.id, 那麼顯示部分資料</span><br><span class="line">      res.render(&apos;post.ejs&apos;, &#123; post: post &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(3000);</span><br><span class="line">console.log(&apos;app is listening at localhost:3000...’);</span><br></pre></td></tr></table></figure>
+<p>再來是建立檢視資料夾 views，因為我們在 app.js 裡面設定樣板引擎是用 ejs，所以在 views 資料夾裡面新增三個檔案，分別是 header.ejs, index.ejs, footer.ejs</p>
+<p>header.ejs</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">&lt;!doctype html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">  &lt;title&gt;&lt;%= title %&gt;&lt;/title&gt;</span><br><span class="line">  &lt;link rel=&quot;stylesheet&quot; href=&quot;/public/styles.css&quot;&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;header&gt;</span><br><span class="line">  &lt;div class=&quot;container&quot;&gt;</span><br><span class="line">    &lt;h1&gt;&lt;a href=&quot;/&quot;&gt;&lt;%= title %&gt;&lt;/a&gt;&lt;/h1&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/header&gt;</span><br><span class="line"></span><br><span class="line">footer.ejs</span><br><span class="line"></span><br><span class="line">&lt;footer&gt;</span><br><span class="line">  &lt;div class=&quot;container&quot;&gt;</span><br><span class="line">    This is footer side.</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/footer&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br><span class="line">index.ejs</span><br><span class="line"></span><br><span class="line">&lt;% include header %&gt;</span><br><span class="line"></span><br><span class="line">&lt;main role=&quot;main&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;container&quot;&gt;</span><br><span class="line">    &lt;h3&gt;&lt;a href=&quot;/api/posts&quot;&gt;/api/posts&lt;/a&gt;&lt;/h3&gt;</span><br><span class="line">    &lt;% posts.forEach(function(post)&#123; %&gt;</span><br><span class="line">      &lt;h3&gt;</span><br><span class="line">        &lt;a href=&quot;/post/&lt;%= post.id %&gt;&quot;&gt;</span><br><span class="line">          &lt;%= post.title %&gt;</span><br><span class="line">        &lt;/a&gt;</span><br><span class="line">      &lt;/h3&gt;</span><br><span class="line">      &lt;div&gt;&lt;%= post.content %&gt;&lt;/div&gt;</span><br><span class="line">    &lt;% &#125;); %&gt;</span><br><span class="line">  &lt;/main&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;% include footer %&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="建立靜態資料"><a href="#建立靜態資料" class="headerlink" title="建立靜態資料"></a>建立靜態資料</h3><p>在 app.js 檔案裡有一行是</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.use(&apos;/public&apos;, express.static(__dirname + &apos;/public&apos;));</span><br></pre></td></tr></table></figure>
+<p>在做網站的過程，我們會建立 css,js 檔案，在根目錄下建立一個 public，並且在這個檔案增加一個 style.css，去定義一些樣式的方式，我這邊就不太多做 css 的解釋囉。</p>
+<h3 id="執行"><a href="#執行" class="headerlink" title="執行"></a>執行</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$node index.js</span><br></pre></td></tr></table></figure>
+<h3 id="結果"><a href="#結果" class="headerlink" title="結果"></a>結果</h3><p><img src="/images/nodejs/68.png" alt=""></p>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="http://expressjs.com/" target="_blank" rel="noopener">http://expressjs.com/</a><br><a href="http://expressjs.com/4x/api.html#app.locals" target="_blank" rel="noopener">http://expressjs.com/4x/api.html#app.locals</a><br><a href="http://www.richyli.com/tool/loremipsum/" target="_blank" rel="noopener">http://www.richyli.com/tool/loremipsum/</a></p>
+
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-format="fluid"
+                data-ad-layout-key="-fb+5w+4e-db+86"
+                data-ad-client="ca-pub-9431433815329544"
+                data-ad-slot="4946157775"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2017-07-23T16:16:00.000Z">2017-07-24</time>
                 
                 <div class="level-item">
@@ -457,86 +534,6 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-07-23T16:12:00.000Z">2017-07-24</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    7 分鐘 閱讀文 (大約 998 個字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/07/24/nodejs/nodejs-12-nodemailer/">Node.js 系列學習日誌#12 - 使用 nodemailer 套件透過 gmail 發送電子信箱</a>
-            
-        </h1>
-        <div class="content">
-            <p>在上幾篇完成了 mysql  的 CRUD 的四大操作，本篇就來個輕鬆一點的應用，在這篇介紹使用 nodemailer 套件透過  gmail 來發送電子信箱，在安裝跟實作上也相當容易，我們透過 <a href="https://github.com/andris9/Nodemailer" target="_blank" rel="noopener">https://github.com/andris9/Nodemailer</a> 來講解，在運用上也無需再重新打造輪子，學習如何使用即可。</p>
-<p>在這邊先建立一個目錄夾 nodejs-nodemailer ，接著再指令將 package.json 建立起來 （本篇不著重在如何建立 package.json ，如需安裝操作請見 <a href="http://ithelp.ithome.com.tw/ironman7/app/article/all/recent/10158140" target="_blank" rel="noopener">http://ithelp.ithome.com.tw/ironman7/app/article/all/recent/10158140</a> ）。由於我們要安裝 nodemailer 套件，因此下指令</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$npm</span> install —save node mailer</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/52.png" alt=""></p>
-<p>其中 —save 會將 nodemailer 相依套件新增到 package.json 檔案裡的 dependencies 項目裡， 如下圖所示：</p>
-<p><img src="/images/nodejs/53.png" alt=""></p>
-<p>安裝完成之後，我們就可以來寫程式的部分了，可以看到上圖寫的 “start”: “node email” ，在這邊我預定起始點是用 email.js ，因此請在根目錄下建立 email.js 檔案。我們初步的思考是這樣：</p>
-<ul>
-<li>引入 nodemailer 套件</li>
-<li>宣告發信的物件 （服務採用 gmail）</li>
-<li>基本參數設定 (包含內文)</li>
-<li>送出發信事件</li>
-</ul>
-<p>我們直接看一下程式的部分：</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//引用 nodemailer</span></span><br><span class="line"><span class="hljs-keyword">var</span> nodemailer = <span class="hljs-built_in">require</span>(<span class="hljs-string">'nodemailer'</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//宣告發信物件</span></span><br><span class="line"><span class="hljs-keyword">var</span> transporter = nodemailer.createTransport(&#123;</span><br><span class="line">    service: <span class="hljs-string">'Gmail'</span>,</span><br><span class="line">    auth: &#123;</span><br><span class="line">        user: ‘account@gmail.com<span class="hljs-string">',</span></span><br><span class="line"><span class="hljs-string">        pass: ‘yourpassword'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">var</span> options = &#123;</span><br><span class="line">    <span class="hljs-comment">//寄件者</span></span><br><span class="line">    <span class="hljs-keyword">from</span>: <span class="hljs-string">'account1@gmail.com '</span>,</span><br><span class="line">    <span class="hljs-comment">//收件者</span></span><br><span class="line">    to: <span class="hljs-string">'account2@gmail.com'</span>,</span><br><span class="line">    <span class="hljs-comment">//副本</span></span><br><span class="line">    cc: <span class="hljs-string">'account3@gmail.com'</span>,</span><br><span class="line">    <span class="hljs-comment">//密件副本</span></span><br><span class="line">    bcc: <span class="hljs-string">'account4@gmail.com'</span>,</span><br><span class="line">    <span class="hljs-comment">//主旨</span></span><br><span class="line">    subject: <span class="hljs-string">'這是 node.js 發送的測試信件'</span>, <span class="hljs-comment">// Subject line</span></span><br><span class="line">    <span class="hljs-comment">//純文字</span></span><br><span class="line">    text: <span class="hljs-string">'Hello world2'</span>, <span class="hljs-comment">// plaintext body</span></span><br><span class="line">    <span class="hljs-comment">//嵌入 html 的內文</span></span><br><span class="line">    html: <span class="hljs-string">'&lt;h2&gt;Why and How&lt;/h2&gt; &lt;p&gt;The &lt;a href="http://en.wikipedia.org/wiki/Lorem_ipsum" title="Lorem ipsum - Wikipedia, the free encyclopedia"&gt;Lorem ipsum&lt;/a&gt; text is typically composed of pseudo-Latin words. It is commonly used as placeholder text to examine or demonstrate the visual effects of various graphic design. Since the text itself is meaningless, the viewers are therefore able to focus on the overall layout without being attracted to the text.&lt;/p&gt;'</span>,</span><br><span class="line">    <span class="hljs-comment">//附件檔案</span></span><br><span class="line">    attachments: [ &#123;</span><br><span class="line">        filename: <span class="hljs-string">'text01.txt'</span>,</span><br><span class="line">        content: <span class="hljs-string">'聯候家上去工的調她者壓工，我笑它外有現，血有到同，民由快的重觀在保導然安作但。護見中城備長結現給都看面家銷先然非會生東一無中；內他的下來最書的從人聲觀說的用去生我，生節他活古視心放十壓心急我我們朋吃，毒素一要溫市歷很爾的房用聽調就層樹院少了紀苦客查標地主務所轉，職計急印形。團著先參那害沒造下至算活現興質美是為使！色社影；得良灣……克卻人過朋天點招？不族落過空出著樣家男，去細大如心發有出離問歡馬找事'</span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        filename: <span class="hljs-string">'unnamed.jpg'</span>,</span><br><span class="line">        path: <span class="hljs-string">'/Users/Weiju/Pictures/unnamed.jpg'</span></span><br><span class="line">    &#125;]</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">//發送信件方法</span></span><br><span class="line">transporter.sendMail(options, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">error, info</span>)</span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span>(error)&#123;</span><br><span class="line">        <span class="hljs-built_in">console</span>.log(error);</span><br><span class="line">    &#125;<span class="hljs-keyword">else</span>&#123;</span><br><span class="line">        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'訊息發送: '</span> + info.response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>可以看到引入的 nodemailer 的是使用 nodemailer.createTransport 物件先建立好發信的服務 service 為 Gmail，並且透過 auth 建立 gmail 登入的帳號密碼，接著宣告一下收件者 （to）、副本（cc）、密件副本（bcc）、寄件者（from），當然還有主旨 (Subject)、內文(text, html)、附件檔案（attachments）</p>
-<p>最後發信結果，就如   package.json 上的 scripts.start 指令，下：</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$node email</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/54.png" alt=""></p>
-<p>此時，發送結果會如訊息所說，我們再看看信件收到的樣子，由於附件傳送了兩筆，可以看到  unnamed.jpg  及 text01.txt  已經接收到了</p>
-<p><img src="/images/nodejs/55.png" alt=""></p>
-<p>其中 text01.txt  是直接在程式上面輸入純文字，我們來看看是否有真的寫入：</p>
-<p><img src="/images/nodejs/56.png" alt=""></p>
-<p>更多應用，稍等回來～</p>
-<h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><p><a href="http://www.richyli.com/tool/loremipsum/" target="_blank" rel="noopener">http://www.richyli.com/tool/loremipsum/</a><br><a href="https://github.com/andris9/Nodemailer" target="_blank" rel="noopener">https://github.com/andris9/Nodemailer</a></p>
-
-
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle"
-                style="display:block"
-                data-ad-format="fluid"
-                data-ad-layout-key="-fb+5w+4e-db+86"
-                data-ad-client="ca-pub-9431433815329544"
-                data-ad-slot="4946157775"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -559,9 +556,9 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
             
             <li><a class="pagination-link has-text-black-ter" href="/page/13/">13</a></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/14/">14</a></li>
+            <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/15/">15</a></li>
+            <li><a class="pagination-link has-text-black-ter" href="/page/16/">16</a></li>
             
         </ul>
     </nav>
@@ -611,7 +608,7 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        75
+                        76
                     </p>
                 </div>
             </div>
@@ -631,7 +628,7 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                         標籤
                     </p>
                     <p class="title has-text-weight-normal">
-                        48
+                        49
                     </p>
                 </div>
             </div>
@@ -675,6 +672,25 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/05/01/tools/gitea-install/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/tools/20200501-0.png" alt="gitea - 在 Mac 自己架設一套私有的版本控管伺服器 (Homebrew)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-01T09:58:27.000Z">2020-05-01</time></div>
+                    <a href="/2020/05/01/tools/gitea-install/" class="has-link-black-ter is-size-6">gitea - 在 Mac 自己架設一套私有的版本控管伺服器 (Homebrew)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -745,25 +761,6 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-26T12:07:51.000Z">2020-01-26</time></div>
                     <a href="/2020/01/26/docker/docker-03-command/" class="has-link-black-ter is-size-6">Docker#3 - Dockerfile 指令解說</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/docker/">docker</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/01/26/docker/docker-02-start-nginx/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/docker/docker.png" alt="Docker#2 - 啟動 Nginx Web 伺服器">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-26T11:07:51.000Z">2020-01-26</time></div>
-                    <a href="/2020/01/26/docker/docker-02-start-nginx/" class="has-link-black-ter is-size-6">Docker#2 - 啟動 Nginx Web 伺服器</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/docker/">docker</a>
                     </p>
@@ -880,7 +877,7 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                 <span class="level-item">工具</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/網站/">
@@ -919,6 +916,17 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
             彙整
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/04/">
@@ -1295,7 +1303,7 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                 <div class="control">
                     <a class="tags has-addons" href="/tags/docker/">
                         <span class="tag">docker</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">5</span>
                     </a>
                 </div>
                 
@@ -1338,6 +1346,13 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                     <a class="tags has-addons" href="/tags/gitbook/">
                         <span class="tag">gitbook</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/gitea/">
+                        <span class="tag">gitea</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1585,7 +1600,7 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                 <span class="level-item">工具</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/網站/">
@@ -1624,6 +1639,17 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
             彙整
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/04/">
@@ -2000,7 +2026,7 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                 <div class="control">
                     <a class="tags has-addons" href="/tags/docker/">
                         <span class="tag">docker</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">5</span>
                     </a>
                 </div>
                 
@@ -2043,6 +2069,13 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                     <a class="tags has-addons" href="/tags/gitbook/">
                         <span class="tag">gitbook</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/gitea/">
+                        <span class="tag">gitea</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

@@ -166,6 +166,120 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-07-23T16:02:00.000Z">2017-07-24</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 分鐘 閱讀文 (大約 728 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/07/24/nodejs/nodejs-02-install/">Node.js 系列學習日誌#2 - Node.js 安裝配置</a>
+            
+        </h1>
+        <div class="content">
+            <p>Node.js 是一套使用了 Google V8 虛擬機來解釋 Javascript 語法，允許在後端運行 Javascript 的語法，發生在把頁面發送給 browser 之前的服務器上，所以要實現後台運行的 Javascript 語法，那麼語法要先被編譯後才可以正確執行。</p>
+<p>本章節會學習到</p>
+<ul>
+<li>安裝 Node.js</li>
+<li>驗證  Node.js 是否正確安裝</li>
+<li>建立基本 Node.js 程式</li>
+<li>啟動基本 Node.js 程式</li>
+<li>安全警示</li>
+<li>查看 npm 是否有安裝</li>
+</ul>
+<h2 id="安裝系統："><a href="#安裝系統：" class="headerlink" title="安裝系統："></a>安裝系統：</h2><p>首先，簡單的來安裝一下 Node.js ，在這裡示範的系統環境是 Windows XP 32bit，可以到 <a href="http://nodejs.org/" target="_blank" rel="noopener">http://nodejs.org/</a> 的首頁上下載安裝軟體</p>
+<ul>
+<li>進入 node.js 官方網站 <a href="http://nodejs.org/" target="_blank" rel="noopener">http://nodejs.org/</a> 點選 install 後, 會下載一個 node-v0.10.25-x86.msi 安裝檔案</li>
+</ul>
+<p><img src="/images/nodejs/2.png" alt=""></p>
+<ul>
+<li>點選安裝檔案後, 開始進行安裝</li>
+</ul>
+<p><img src="/images/nodejs/3.png" alt=""></p>
+<ul>
+<li>End-User License Agreement 的頁面, 勾選 “I accept the terms in the License Agreement” 核選方塊後, 點選 Next 進行下一步</li>
+</ul>
+<p><img src="/images/nodejs/4.png" alt=""></p>
+<ul>
+<li>可指定安裝路徑, 這裡就保持預設就行了, 確認後點選 Next (當然，要改變存放位置也是可以)</li>
+</ul>
+<p><img src="/images/nodejs/5.png" alt=""></p>
+<ul>
+<li>自訂安裝 Select the way you want features to be installed</li>
+</ul>
+<p><img src="/images/nodejs/6.png" alt=""></p>
+<ul>
+<li>安裝前的提醒</li>
+</ul>
+<p><img src="/images/nodejs/7.png" alt=""></p>
+<ul>
+<li>開始進行安裝 Node.js</li>
+</ul>
+<p><img src="/images/nodejs/8.png" alt=""></p>
+<ul>
+<li>完成安裝</li>
+</ul>
+<p><img src="/images/nodejs/9.png" alt=""></p>
+<h2 id="驗證-Node-js-正確安裝"><a href="#驗證-Node-js-正確安裝" class="headerlink" title="驗證 Node.js 正確安裝"></a>驗證 Node.js 正確安裝</h2><p>學習新的一套語言，就是要先學會將程式呈現一個簡單的文字顯示，因此不免俗的還是來一個萬年測試，先來看看安裝是否有成功。</p>
+<ul>
+<li>開啟命令提示字元，輸入 node</li>
+<li>輸入 12 + 34 ，檢查是否有回應 46 的答案，若有就代表成功囉。</li>
+</ul>
+<p><img src="/images/nodejs/10.png" alt=""></p>
+<h2 id="建立-Hello-world-的-Node-js-程式"><a href="#建立-Hello-world-的-Node-js-程式" class="headerlink" title="建立 Hello world 的 Node.js 程式"></a>建立 Hello world 的 Node.js 程式</h2><p>不管利用記事本或是會善用 IDE 做為開發的工具，建立一個 <code>my.js</code> 的檔案，輸入以下的語法</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">'http'</span>);</span><br><span class="line">http.createServer(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res</span>)</span>&#123;</span><br><span class="line">  res.writeHead(<span class="hljs-number">200</span>, &#123; <span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'text/html'</span> &#125;);</span><br><span class="line">  res.write(<span class="hljs-string">'&lt;h1&gt; Hello Helen, this is Node.js &lt;/h1&gt;'</span>);</span><br><span class="line">  res.end(<span class="hljs-string">'Hello world'</span>);</span><br><span class="line">&#125;).listen(<span class="hljs-number">3232</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">"HTTP Server is listening at port 3232"</span>);</span><br><span class="line"><span class="hljs-string">`</span></span><br></pre></td></tr></table></figure>
+<h3 id="開始執行啟動"><a href="#開始執行啟動" class="headerlink" title="開始執行啟動"></a>開始執行啟動</h3><p>接著打開命令提示字元，輸入 <code>node my.js</code><br>之後就會看到 <code>Http Server is listening at port 3232</code>，這就代表有成功啟動</p>
+<p><img src="/images/nodejs/11.png" alt=""></p>
+<h2 id="安全警示"><a href="#安全警示" class="headerlink" title="安全警示"></a>安全警示</h2><p>由於 node.js 是利用 google chrome v8 引擎執行, 會出現以下安全性警示，按下解除封鎖按鈕</p>
+<p><img src="/images/nodejs/12.png" alt=""></p>
+<p>馬上開起 browser，有出現以下的呈現結果，就是正常運行服務端的 javascript 喔！</p>
+<p><img src="/images/nodejs/13.png" alt=""></p>
+<p>如果想停止這個服務的話，在命令提示字元按下 CTRL + C 就將這個 port 停止服務就好了。</p>
+<p>Good，這樣就完成簡單的示範，接下來就可以慢慢建立比較複雜的應用程序囉。</p>
+
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-format="fluid"
+                data-ad-layout-key="-fb+5w+4e-db+86"
+                data-ad-client="ca-pub-9431433815329544"
+                data-ad-slot="4946157775"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2017-07-23T16:01:00.000Z">2017-07-24</time>
                 
                 <div class="level-item">
@@ -476,68 +590,6 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2015-01-31T14:35:40.000Z">2015-01-31</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/macbook/">macbook</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    幾秒 閱讀文 (大約 105 個字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2015/01/31/mac/2014-10-11-mac-kill-port/">Macbook - 移除現有被佔住的 port</a>
-            
-        </h1>
-        <div class="content">
-            <p>當要啟動服務的時候，但是電腦上有執行其他服務而被佔住 port ，你可以這麼做，先查詢之後將找到的 port 移除</p>
-<p>使用 netstate 查詢某一 port</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$netstat</span> -anp tcp | grep 8080</span><br></pre></td></tr></table></figure>
-<p>如果 netstat 查不到或不支援，那麼就用以下指令查詢</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$lsof</span> -i tcp: 8080</span><br></pre></td></tr></table></figure>
-<p>最後，查到的結果就用以下方式移除即可</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$kill</span> -9 &lt;PID&gt;</span><br></pre></td></tr></table></figure>
-
-
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle"
-                style="display:block"
-                data-ad-format="fluid"
-                data-ad-layout-key="-fb+5w+4e-db+86"
-                data-ad-client="ca-pub-9431433815329544"
-                data-ad-slot="4946157775"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -545,7 +597,7 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
         <div class="pagination-previous">
             <a class="is-flex-grow has-text-black-ter" href="/page/14/">上一頁</a>
         </div>
-        <div class="pagination-next is-invisible is-hidden-mobile">
+        <div class="pagination-next">
             <a class="is-flex-grow has-text-black-ter" href="/page/16/">下一頁</a>
         </div>
         <ul class="pagination-list is-hidden-mobile">
@@ -557,6 +609,8 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
             <li><a class="pagination-link has-text-black-ter" href="/page/14/">14</a></li>
             
             <li><a class="pagination-link is-current" href="/page/15/">15</a></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/page/16/">16</a></li>
             
         </ul>
     </nav>
@@ -606,7 +660,7 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        75
+                        76
                     </p>
                 </div>
             </div>
@@ -626,7 +680,7 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                         標籤
                     </p>
                     <p class="title has-text-weight-normal">
-                        48
+                        49
                     </p>
                 </div>
             </div>
@@ -670,6 +724,25 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/05/01/tools/gitea-install/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/tools/20200501-0.png" alt="gitea - 在 Mac 自己架設一套私有的版本控管伺服器 (Homebrew)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-01T09:58:27.000Z">2020-05-01</time></div>
+                    <a href="/2020/05/01/tools/gitea-install/" class="has-link-black-ter is-size-6">gitea - 在 Mac 自己架設一套私有的版本控管伺服器 (Homebrew)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -740,25 +813,6 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-26T12:07:51.000Z">2020-01-26</time></div>
                     <a href="/2020/01/26/docker/docker-03-command/" class="has-link-black-ter is-size-6">Docker#3 - Dockerfile 指令解說</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/docker/">docker</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/01/26/docker/docker-02-start-nginx/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/docker/docker.png" alt="Docker#2 - 啟動 Nginx Web 伺服器">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-26T11:07:51.000Z">2020-01-26</time></div>
-                    <a href="/2020/01/26/docker/docker-02-start-nginx/" class="has-link-black-ter is-size-6">Docker#2 - 啟動 Nginx Web 伺服器</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/docker/">docker</a>
                     </p>
@@ -875,7 +929,7 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                 <span class="level-item">工具</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/網站/">
@@ -914,6 +968,17 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
             彙整
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/04/">
@@ -1290,7 +1355,7 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                 <div class="control">
                     <a class="tags has-addons" href="/tags/docker/">
                         <span class="tag">docker</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">5</span>
                     </a>
                 </div>
                 
@@ -1333,6 +1398,13 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                     <a class="tags has-addons" href="/tags/gitbook/">
                         <span class="tag">gitbook</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/gitea/">
+                        <span class="tag">gitea</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1580,7 +1652,7 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                 <span class="level-item">工具</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/網站/">
@@ -1619,6 +1691,17 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
             彙整
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/04/">
@@ -1995,7 +2078,7 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                 <div class="control">
                     <a class="tags has-addons" href="/tags/docker/">
                         <span class="tag">docker</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">5</span>
                     </a>
                 </div>
                 
@@ -2038,6 +2121,13 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                     <a class="tags has-addons" href="/tags/gitbook/">
                         <span class="tag">gitbook</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/gitea/">
+                        <span class="tag">gitea</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
