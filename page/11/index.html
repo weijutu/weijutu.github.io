@@ -166,6 +166,90 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-07-23T16:23:00.000Z">2017-07-24</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分鐘 閱讀文 (大約 618 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/07/24/nodejs/nodejs-23-heroku/">Node.js 系列學習日誌#23 - 部署上線至 Heroku 雲端平台環境</a>
+            
+        </h1>
+        <div class="content">
+            <p><img src="/images/nodejs/88.png" alt=""></p>
+<p>Heroku 是雲端運算的平台，您可以將您的應用程式放到雲端空間上面</p>
+<h3 id="註冊-Heroku-帳號"><a href="#註冊-Heroku-帳號" class="headerlink" title="註冊 Heroku 帳號"></a>註冊 Heroku 帳號</h3><p>請先註冊一個  Heroku  帳號，<a href="https://www.heroku.com/，由於我們要部署上線的語法是" target="_blank" rel="noopener">https://www.heroku.com/，由於我們要部署上線的語法是</a>  Node.js 語言，因此也確認您的  Node.js, npm 已安裝至您的電腦裡面。</p>
+<h3 id="安裝-Heroku-Toolbelt-工具"><a href="#安裝-Heroku-Toolbelt-工具" class="headerlink" title="安裝 Heroku Toolbelt 工具"></a>安裝 Heroku Toolbelt 工具</h3><p>這個工具將提供您 Command Line 的工具以及 git 版控工具，透過這個工具將輔助您接下來後續的超過指令，工具請至 <a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up" target="_blank" rel="noopener">https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up</a> 下載，在這邊可以選擇您的作業系統環境。而我這邊將用 mac 做介紹</p>
+<p><img src="/images/nodejs/89.png" alt=""></p>
+<p>安裝首頁畫面，安裝過程基本上就是都下一步，偶爾出現可以自定的選項。</p>
+<p><img src="/images/nodejs/90.png" alt=""></p>
+<h4 id="安裝進度"><a href="#安裝進度" class="headerlink" title="安裝進度"></a>安裝進度</h4><p><img src="/images/nodejs/91.png" alt=""></p>
+<p>安裝後的檢查，請到命令字元輸入 heroku，如果出現以下訊息就代表安裝成功噢！</p>
+<p><img src="/images/nodejs/92.png" alt=""></p>
+<p>用指令登入 heroku ， $heroku login ，按照指令輸入 email 與密碼</p>
+<p><img src="/images/nodejs/93.png" alt=""></p>
+<p>在這邊還需要建立一個  key ，請繼續輸入  $heroku keys ，如果沒有 key的存在，請手動建立 $heroku keys:add  (<a href="https://devcenter.heroku.com/articles/keys)，建立完成後會像以下結果：" target="_blank" rel="noopener">https://devcenter.heroku.com/articles/keys)，建立完成後會像以下結果：</a></p>
+<p><img src="/images/nodejs/94.png" alt=""></p>
+<p>部署程式到 Heroku，本章節選用來 <a href="http://ithelp.ithome.com.tw/ironman7/app/article/all/recent/10159261" target="_blank" rel="noopener">http://ithelp.ithome.com.tw/ironman7/app/article/all/recent/10159261</a> 專案進行初始化的建立，請先輸入</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$heroku create</span><br></pre></td></tr></table></figure>
+<p>建立完成後可以看到訊息提到，配了一組 aqueous-dawn-4266 的名字，馬上轉到 heroku 上的 dashboard ，立即就看到上面多了一個名為 aqueous-dawn-4266 專案，但這時候程式還並沒有部署到  heroku ，目前已經建立遠端的檔案庫在上面。</p>
+<p><img src="/images/nodejs/95.png" alt=""></p>
+<p>您也許覺得 aqueous-dawn-4266 好難記，在 heroku 也提供了更名的指令，請輸入 $heroku apps:rename newname<br>我將專案名稱改成 nodejs-express-bower ，而 heroku 的 dashboard 專案列表也會跟著改噢</p>
+<p><img src="/images/nodejs/96.png" alt=""></p>
+<p><img src="/images/nodejs/97.png" alt=""></p>
+<p>接下來就部署程式，請輸入</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$git push heroku master</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/98.png" alt=""></p>
+<p>這時候進到 heroku dashboard ，選擇 nodejs-express-bower 專案，點選上方標題右邊的 icon</p>
+<p><img src="/images/nodejs/99.png" alt=""></p>
+<p>觀察結果顯示如下：</p>
+<p><img src="/images/nodejs/100.png" alt=""></p>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction" target="_blank" rel="noopener">https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction</a></p>
+
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-format="fluid"
+                data-ad-layout-key="-fb+5w+4e-db+86"
+                data-ad-client="ca-pub-9431433815329544"
+                data-ad-slot="4946157775"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2017-07-23T16:22:00.000Z">2017-07-24</time>
                 
                 <div class="level-item">
@@ -460,76 +544,6 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-07-23T16:18:00.000Z">2017-07-24</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分鐘 閱讀文 (大約 329 個字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/07/24/nodejs/nodejs-18-express/">Node.js 系列學習日誌#18 - 使用 Express 實作網頁開發框架</a>
-            
-        </h1>
-        <div class="content">
-            <p>Node.js 有許多網頁的框架，其中以 Express 的框架最為流行，也是滿多人才討論使用。在本篇將介紹這個工具具有快速建立網站框架的方法。</p>
-<p><img src="/images/nodejs/69.png" alt=""></p>
-<p>我們用全域模式安裝  express （ <code>$npm install -g express</code> ）之後就看一下 help 怎麼寫。</p>
-<p><img src="/images/nodejs/70.png" alt=""></p>
-<p>在下圖的地方，可以大概可以看到 express 的預設樣板引擎是 jade，若需要安裝為 ejs 的樣板時，那麼建立 express 的命令下</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$express -e demo-express2</span><br></pre></td></tr></table></figure>
-<p><img src="/images/nodejs/71.png" alt=""></p>
-<p>在這邊將自動的安裝相依套件 express, ejs ，接著我們打開 sublime 編輯器，看到 package.json ，你可以看到 dependencies 的物件裡面自動安裝了許多相依項目。</p>
-<p><img src="/images/nodejs/72.png" alt=""></p>
-<p>我們透過 express 指令建立好網站之後呢，可以看到他的提示指示</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd demo-express2 &amp;&amp; npm install</span><br></pre></td></tr></table></figure>
-<p>將相依套件安裝起來，此時才會自動有 node_module 資料夾放置套件的位置，依照指令安裝好之後，我們就執行一下網站，請輸入：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$npm start</span><br></pre></td></tr></table></figure>
-<h3 id="結果"><a href="#結果" class="headerlink" title="結果"></a>結果</h3><p><img src="/images/nodejs/73.png" alt=""></p>
-<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a href="http://expressjs.com/" target="_blank" rel="noopener">http://expressjs.com/</a><br><a href="http://expressjs.com/4x/api.html#application" target="_blank" rel="noopener">http://expressjs.com/4x/api.html#application</a><br><a href="http://nodeframework.com/index.html" target="_blank" rel="noopener">http://nodeframework.com/index.html</a></p>
-
-
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle"
-                style="display:block"
-                data-ad-format="fluid"
-                data-ad-layout-key="-fb+5w+4e-db+86"
-                data-ad-client="ca-pub-9431433815329544"
-                data-ad-slot="4946157775"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -604,7 +618,7 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        76
+                        77
                     </p>
                 </div>
             </div>
@@ -624,7 +638,7 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                         標籤
                     </p>
                     <p class="title has-text-weight-normal">
-                        49
+                        51
                     </p>
                 </div>
             </div>
@@ -668,6 +682,25 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/09/01/tools/rent-vps/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/tools/linode.png" alt="租用專屬自己的 Linode VPS 虛擬主機">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-09-01T09:58:27.000Z">2020-09-01</time></div>
+                    <a href="/2020/09/01/tools/rent-vps/" class="has-link-black-ter is-size-6">租用專屬自己的 Linode VPS 虛擬主機</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -738,25 +771,6 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-26T15:42:51.000Z">2020-01-26</time></div>
                     <a href="/2020/01/26/docker/docker-04-data-volume/" class="has-link-black-ter is-size-6">Docker#4 - 資料卷</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/docker/">docker</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/01/26/docker/docker-03-command/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/docker/docker.png" alt="Docker#3 - Dockerfile 指令解說">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-26T12:07:51.000Z">2020-01-26</time></div>
-                    <a href="/2020/01/26/docker/docker-03-command/" class="has-link-black-ter is-size-6">Docker#3 - Dockerfile 指令解說</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/docker/">docker</a>
                     </p>
@@ -873,7 +887,7 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                 <span class="level-item">工具</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">4</span>
+                <span class="level-item tag">5</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/網站/">
@@ -912,6 +926,17 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
             彙整
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/05/">
@@ -1374,6 +1399,13 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/linode/">
+                        <span class="tag">linode</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/macbook/">
                         <span class="tag">macbook</span>
                         <span class="tag is-grey">1</span>
@@ -1439,6 +1471,13 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                 <div class="control">
                     <a class="tags has-addons" href="/tags/socket-io/">
                         <span class="tag">socket.io</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/vps/">
+                        <span class="tag">vps</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1596,7 +1635,7 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                 <span class="level-item">工具</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">4</span>
+                <span class="level-item tag">5</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/網站/">
@@ -1635,6 +1674,17 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
             彙整
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/05/">
@@ -2097,6 +2147,13 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/linode/">
+                        <span class="tag">linode</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/macbook/">
                         <span class="tag">macbook</span>
                         <span class="tag is-grey">1</span>
@@ -2162,6 +2219,13 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                 <div class="control">
                     <a class="tags has-addons" href="/tags/socket-io/">
                         <span class="tag">socket.io</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/vps/">
+                        <span class="tag">vps</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>

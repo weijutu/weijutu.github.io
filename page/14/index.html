@@ -166,6 +166,97 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-07-23T16:08:00.000Z">2017-07-24</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 分鐘 閱讀文 (大約 465 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/07/24/nodejs/nodejs-08-mysql-crud-create/">Node.js 系列學習日誌#8 - MySQL 操作 -建立</a>
+            
+        </h1>
+        <div class="content">
+            <p>延續上一篇的連接 mysql  實現 crud 的操作，本篇將介紹新增資料的操作。之後的兩篇文，將會介紹更新、刪除的操作。首先我們在上一篇已經有將資料列出來，在此做一些畫面的調整，使用 bootstrap 的前端框架套件去使用。</p>
+<p>本章節主要使用的套件有：</p>
+<ul>
+<li>express web framework</li>
+<li>mysql</li>
+<li>jade</li>
+</ul>
+<p>首先我們先建立一個資料夾  nodejs-demo-mysql ，然後要安裝一下相依的套件使用：express, mysql</p>
+<p>建立 package.json，請輸入以下的指令按照提示問題回答</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$npm</span> init</span><br></pre></td></tr></table></figure>
+<p>安裝 express web framework 到這 nodejs-demo-mysql 應用程式專案裡面，並寫入到  package.json</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$npm</span> install express —save</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/31.png" alt=""></p>
+<p>完成 express 之後，再安裝 mysql 套件，在這邊安裝  mysql</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-variable">$npm</span> install mysql@2.0.0-alpha9</span><br></pre></td></tr></table></figure>
+<p><img src="/images/nodejs/32.png" alt=""></p>
+<p>首先可以看到 express 套件,  node-mysql 就新增到 node_modules 裡了</p>
+<p><img src="/images/nodejs/33.png" alt=""></p>
+<p>資料庫的部分，假定先建立一個 demo_nodejs 的資料庫</p>
+<p><img src="/images/nodejs/34.png" alt=""></p>
+<p>然後新增  index.js 作為網頁開頭的起始點，宣告 mysql 後，先使用 createConnection 方法將資料庫的參數初始化</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> mysql = <span class="hljs-built_in">require</span>(<span class="hljs-string">'mysql'</span>);</span><br><span class="line"><span class="hljs-keyword">var</span> conn = mysql.createConnection(&#123;</span><br><span class="line">    host: <span class="hljs-string">'localhost'</span>,</span><br><span class="line">    user: <span class="hljs-string">'nodejs'</span>,</span><br><span class="line">    password: <span class="hljs-string">'nodejs'</span>,</span><br><span class="line">    database:<span class="hljs-string">'demo_nodejs'</span>,</span><br><span class="line">    port: <span class="hljs-number">3306</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>將資料庫做個連線的動作</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.connect();</span><br></pre></td></tr></table></figure>
+<p>先測試一下，透過以下的 query  執行，如果有將 12 + 34 有算出來，那麼就代表有連線成功</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">conn.query(<span class="hljs-string">'SELECT 12 + 34 AS result'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, rows, fields</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">throw</span> err;</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'The result is: '</span>, rows[<span class="hljs-number">0</span>].result);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>連線成功後，查詢之後務必要將它關閉。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn.end();</span><br></pre></td></tr></table></figure>
+<p>完整程式如下：</p>
+<p><img src="/images/nodejs/35.png" alt=""></p>
+<p>執行結果 有將 12 + 34 = 46 算出來囉</p>
+<p><img src="/images/nodejs/36.png" alt=""></p>
+<h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><ul>
+<li><a href="http://expressjs.com/" target="_blank" rel="noopener">http://expressjs.com/</a></li>
+<li><a href="https://github.com/redblaze/node-mysql" target="_blank" rel="noopener">https://github.com/redblaze/node-mysql</a></li>
+</ul>
+
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-format="fluid"
+                data-ad-layout-key="-fb+5w+4e-db+86"
+                data-ad-client="ca-pub-9431433815329544"
+                data-ad-slot="4946157775"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2017-07-23T16:07:00.000Z">2017-07-24</time>
                 
                 <div class="level-item">
@@ -522,84 +613,6 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-07-23T16:03:00.000Z">2017-07-24</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Node-js/">Node.js</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分鐘 閱讀文 (大約 299 個字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/07/24/nodejs/nodejs-03-npm/">Node.js 系列學習日誌#3 - npm 包管理器</a>
-            
-        </h1>
-        <div class="content">
-            <p><img src="/images/nodejs/14.png" alt=""></p>
-<p>npm，主要是 node.js 應用程式的建立、共享、重覆使用模組。在上一篇 Node.js 安裝並且建立簡單的 Hello World 程式 是來自於使用 node.js.org 的安裝軟體安裝，那麼其實 npm 就已經裝好哩。</p>
-<h2 id="查看-npm-是否有安裝"><a href="#查看-npm-是否有安裝" class="headerlink" title="查看 npm 是否有安裝"></a>查看 npm 是否有安裝</h2><p>我們從命令提示字元看一下 npm 是否有安裝成功呢？有出現以下呈現就代表有 npm 了</p>
-<p><img src="/images/nodejs/15.png" alt=""></p>
-<h2 id="安裝模組"><a href="#安裝模組" class="headerlink" title="安裝模組"></a>安裝模組</h2><p>安裝模組的時候，可以在命令提示字元輸入：</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install [module_name]</span><br></pre></td></tr></table></figure>
-<h2 id="試著使用看看"><a href="#試著使用看看" class="headerlink" title="試著使用看看"></a>試著使用看看</h2><p>現在我們來使用一款 underscore 的這個模組來介紹如何安裝模組，如何使用模組，首先先來看這個模組可以使用哪些 function，詳情可以查閱官方網站</p>
-<blockquote>
-<p>Underscore is a JavaScript library that provides a whole mess of useful functional<br>programming helpers without extending any built-in objects. <a href="http://underscorejs.org/" target="_blank" rel="noopener">http://underscorejs.org/</a></p>
-</blockquote>
-<p>裡頭有很多種物件可以使用，像是</p>
-<ul>
-<li>Collections</li>
-<li>Arrays</li>
-<li>Functions</li>
-<li>Objects</li>
-<li>Utility</li>
-</ul>
-<p>之後文章再介紹常用的方法或屬性，敬請期待。</p>
-<h2 id="參考網址"><a href="#參考網址" class="headerlink" title="參考網址:"></a>參考網址:</h2><ul>
-<li>npm 官方網站</li>
-<li>node包管理器 @維基百科</li>
-</ul>
-
-
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle"
-                style="display:block"
-                data-ad-format="fluid"
-                data-ad-layout-key="-fb+5w+4e-db+86"
-                data-ad-client="ca-pub-9431433815329544"
-                data-ad-slot="4946157775"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -672,7 +685,7 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        76
+                        77
                     </p>
                 </div>
             </div>
@@ -692,7 +705,7 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                         標籤
                     </p>
                     <p class="title has-text-weight-normal">
-                        49
+                        51
                     </p>
                 </div>
             </div>
@@ -736,6 +749,25 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/09/01/tools/rent-vps/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/tools/linode.png" alt="租用專屬自己的 Linode VPS 虛擬主機">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-09-01T09:58:27.000Z">2020-09-01</time></div>
+                    <a href="/2020/09/01/tools/rent-vps/" class="has-link-black-ter is-size-6">租用專屬自己的 Linode VPS 虛擬主機</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/工具/">工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -806,25 +838,6 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-26T15:42:51.000Z">2020-01-26</time></div>
                     <a href="/2020/01/26/docker/docker-04-data-volume/" class="has-link-black-ter is-size-6">Docker#4 - 資料卷</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/docker/">docker</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/01/26/docker/docker-03-command/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/docker/docker.png" alt="Docker#3 - Dockerfile 指令解說">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-26T12:07:51.000Z">2020-01-26</time></div>
-                    <a href="/2020/01/26/docker/docker-03-command/" class="has-link-black-ter is-size-6">Docker#3 - Dockerfile 指令解說</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/docker/">docker</a>
                     </p>
@@ -941,7 +954,7 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                 <span class="level-item">工具</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">4</span>
+                <span class="level-item tag">5</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/網站/">
@@ -980,6 +993,17 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
             彙整
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/05/">
@@ -1442,6 +1466,13 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/linode/">
+                        <span class="tag">linode</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/macbook/">
                         <span class="tag">macbook</span>
                         <span class="tag is-grey">1</span>
@@ -1507,6 +1538,13 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                 <div class="control">
                     <a class="tags has-addons" href="/tags/socket-io/">
                         <span class="tag">socket.io</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/vps/">
+                        <span class="tag">vps</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1664,7 +1702,7 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                 <span class="level-item">工具</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">4</span>
+                <span class="level-item tag">5</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/網站/">
@@ -1703,6 +1741,17 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
             彙整
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/05/">
@@ -2165,6 +2214,13 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/linode/">
+                        <span class="tag">linode</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/macbook/">
                         <span class="tag">macbook</span>
                         <span class="tag is-grey">1</span>
@@ -2230,6 +2286,13 @@ src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
                 <div class="control">
                     <a class="tags has-addons" href="/tags/socket-io/">
                         <span class="tag">socket.io</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/vps/">
+                        <span class="tag">vps</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
