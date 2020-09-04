@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://weijutu.github.io/"/>
-  <updated>2020-09-01T15:30:35.716Z</updated>
+  <updated>2020-09-04T16:32:32.368Z</updated>
   <id>https://weijutu.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>三分鐘建立 Docker 視覺化管理工具 Portainer</title>
+    <link href="https://weijutu.github.io/2020/09/04/docker/docker-05-portainer/"/>
+    <id>https://weijutu.github.io/2020/09/04/docker/docker-05-portainer/</id>
+    <published>2020-09-04T10:52:00.000Z</published>
+    <updated>2020-09-04T16:32:32.368Z</updated>
+    
+    <content type="html"><![CDATA[<p>一開始學習 Docker 都是透過指令方式來操作，但這個方式已經很滿意了，但是如果又透過 GUI 來進行管理容器的話，一目瞭然的方式也是滿不錯的，最近發現了 Portainer.io 可以用來管理 Docker 服務，以下就直接做介紹。</p><h2 id="什麼是-Portainer"><a href="#什麼是-Portainer" class="headerlink" title="什麼是 Portainer"></a>什麼是 Portainer</h2><p>Portainer 是一個 open-source 視覺化的 GUI 管理工具，可以管理映像檔、網路、儲存。Portainer 本身也是一個 Docker 容器，提供了一個很棒的服務</p><a id="more"></a><h2 id="如何安裝-Portainer"><a href="#如何安裝-Portainer" class="headerlink" title="如何安裝 Portainer"></a>如何安裝 Portainer</h2><p>Portainer 相當容易安裝，因為他本身也是 Docker 容器，首先假設您已經裝好 Docker 服務，那麼先建立一個 <code>volume</code></p><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker volume create portainer_data</span><br></pre></td></tr></table></figure><p>再運行 <code>portainer</code> 容器</p><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d -p 80:9000 --name portainer --restart always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer</span><br></pre></td></tr></table></figure><p>由於端口的部分有改成 80 ，那麼你可以在 <code>http://yourip</code> 訪問 GUI ，以下就會看到顯示的 GUI 介面，一開始就需要先初始化管理者的帳密建立起來</p><p><img src="/images/docker/20200904-2.png" alt=""></p><p>填上帳密之後，會將管理者建立，那麼繼續往下的畫面時，需要開始將 Portainer 服務連結有 Docker 環境才能進行管理，在這裡我們只需要對當下的 Local Docker 做管理，哪麼就選 <code>Local</code> 就可以了，確認沒問題就按下 <code>Connect</code> 按鈕</p><p><img src="/images/docker/20200904-3.png" alt=""></p><p>隨後很快的就會看到以下的畫面，並且你的 local docker 有一個列表呈現</p><p><img src="/images/docker/20200904-4.png" alt=""></p><h2 id="Portainer-可以做哪些事情"><a href="#Portainer-可以做哪些事情" class="headerlink" title="Portainer 可以做哪些事情"></a>Portainer 可以做哪些事情</h2><ul><li>啟動、停止、刪除容器</li><li>控制台以使用容器可直接做命令列操作</li><li>管理映像檔</li><li>查看容器日誌</li><li>查詢記憶體使用量、程序的使用率等統計資訊</li></ul><p><img src="/images/docker/20200904-5.png" alt=""></p><p>我們可以切換到 dashboard 的畫面，一目瞭然呈現目前映像檔、容器、網路等統計數據</p><p><img src="/images/docker/20200904-7.png" alt=""></p><p>在不同頁面如 Container 運行與資源配置的狀況，也可以對於某一 Container 做開啟、關閉、重啟、釋放等功能</p><p><img src="/images/docker/20200904-8.png" alt=""></p><p>或者你可以查看下載的  images、或是用介面方式在指定的 Registry 下載映像檔</p><p><img src="/images/docker/20200904-9.png" alt=""></p><h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a href="https://www.portainer.io/documentation/" target="_blank" rel="noopener">Portainer.io Document</a></p><p><a href="https://hometechhacker.com/portainer-docker-containers/" target="_blank" rel="noopener">Portainer: Manging Docker Containers Made Easy</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一開始學習 Docker 都是透過指令方式來操作，但這個方式已經很滿意了，但是如果又透過 GUI 來進行管理容器的話，一目瞭然的方式也是滿不錯的，最近發現了 Portainer.io 可以用來管理 Docker 服務，以下就直接做介紹。&lt;/p&gt;
+&lt;h2 id=&quot;什麼是-Portainer&quot;&gt;&lt;a href=&quot;#什麼是-Portainer&quot; class=&quot;headerlink&quot; title=&quot;什麼是 Portainer&quot;&gt;&lt;/a&gt;什麼是 Portainer&lt;/h2&gt;&lt;p&gt;Portainer 是一個 open-source 視覺化的 GUI 管理工具，可以管理映像檔、網路、儲存。Portainer 本身也是一個 Docker 容器，提供了一個很棒的服務&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="docker" scheme="https://weijutu.github.io/categories/docker/"/>
+    
+    
+      <category term="docker" scheme="https://weijutu.github.io/tags/docker/"/>
+    
+  </entry>
   
   <entry>
     <title>租用專屬自己的 Linode VPS 虛擬主機</title>
@@ -550,32 +573,6 @@
     
     
       <category term="API" scheme="https://weijutu.github.io/tags/API/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>在 Mac OSX 使用 RVM 升級 Ruby V2.5.1</title>
-    <link href="https://weijutu.github.io/2018/08/02/mac/how-to-upgrade-ruby-on-mac/"/>
-    <id>https://weijutu.github.io/2018/08/02/mac/how-to-upgrade-ruby-on-mac/</id>
-    <published>2018-08-02T01:47:00.000Z</published>
-    <updated>2019-02-26T08:15:06.286Z</updated>
-    
-    <content type="html"><![CDATA[<p>RVM 是一套 Ruby 版本的管理工具，這裡頭包含 Ruby 的版本管理和 Gem 庫管理。本篇裡面使用 RVM 工具進行 Ruby 的升級。</p><h2 id="RVM-Ruby-Version-Manager-安裝"><a href="#RVM-Ruby-Version-Manager-安裝" class="headerlink" title="RVM (Ruby Version Manager) 安裝"></a>RVM (Ruby Version Manager) 安裝</h2><ol><li>RVM安装</li></ol><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> curl -L get.rvm.io | bash -s stable</span></span><br></pre></td></tr></table></figure><ol start="2"><li>是否有完成安裝 RVM </li></ol><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> rvm -v</span></span><br></pre></td></tr></table></figure><p>結果顯示</p><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rvm 1.29.4 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]</span><br></pre></td></tr></table></figure><h2 id="使用-RVM-升級-Ruby"><a href="#使用-RVM-升級-Ruby" class="headerlink" title="使用 RVM 升級 Ruby"></a>使用 RVM 升級 Ruby</h2><ol><li>顯示目前的 Ruby 版本</li></ol><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">$</span><span class="hljs-bash"> ruby -v</span></span><br></pre></td></tr></table></figure><p>顯示結果</p><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby 2.0.0p648 (2015-12-16 revision 53162) [universal.x86_64-darwin16]</span><br></pre></td></tr></table></figure><ol start="2"><li>安装 Ruby 2.5.1</li></ol><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rvm install 2.5.1</span><br></pre></td></tr></table></figure><p>安裝完畢之後，再用 <code>ruby -v</code> 檢查看看，是不是已經換成下面顯示的結果一樣已完成升級。</p><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-darwin16]</span><br></pre></td></tr></table></figure><p>結果</p><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Linking /usr/local/Cellar/ruby/2.5.1... 3293 symlinks created</span><br></pre></td></tr></table></figure><p>那麼，這樣子就安裝完畢了。</p><p>參考：<br><a href="https://flinhong.com/2017/10/26/upgrade-ruby-on-mac/" target="_blank" rel="noopener">https://flinhong.com/2017/10/26/upgrade-ruby-on-mac/</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;RVM 是一套 Ruby 版本的管理工具，這裡頭包含 Ruby 的版本管理和 Gem 庫管理。本篇裡面使用 RVM 工具進行 Ruby 的升級。&lt;/p&gt;
-&lt;h2 id=&quot;RVM-Ruby-Version-Manager-安裝&quot;&gt;&lt;a href=&quot;#RVM-Ruby-Vers
-      
-    
-    </summary>
-    
-      <category term="Ruby" scheme="https://weijutu.github.io/categories/Ruby/"/>
-    
-    
-      <category term="Ruby" scheme="https://weijutu.github.io/tags/Ruby/"/>
     
   </entry>
   
