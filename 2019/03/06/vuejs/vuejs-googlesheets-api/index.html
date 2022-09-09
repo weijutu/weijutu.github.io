@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/cube_logo_v2.png">
+  <link rel="mask-icon" href="/images/cube_logo_v2.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/yellow/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"weijutu.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本次實作是透過 Google Sheets 作為小型資料庫，然後使用Vue 前端語法做資料的讀取，而且無需透過後端程式來插手。 學習內容大綱 初始化建立 Vue 專案 建立 Google Sheets 試算表 啟動你的 Google Sheets API 存取 準備 Vue 前端 Google Sheets API 執行讀取4.1 安裝套件 VueGapi 與使用 執行結果  初始化建立 Vue">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫">
+<meta property="og:url" content="https://weijutu.github.io/2019/03/06/vuejs/vuejs-googlesheets-api/index.html">
+<meta property="og:site_name" content="丸匠筆記">
+<meta property="og:description" content="本次實作是透過 Google Sheets 作為小型資料庫，然後使用Vue 前端語法做資料的讀取，而且無需透過後端程式來插手。 學習內容大綱 初始化建立 Vue 專案 建立 Google Sheets 試算表 啟動你的 Google Sheets API 存取 準備 Vue 前端 Google Sheets API 執行讀取4.1 安裝套件 VueGapi 與使用 執行結果  初始化建立 Vue">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://weijutu.github.io/images/vuejs/20190306-1.png">
+<meta property="og:image" content="https://weijutu.github.io/images/vuejs/20190306-2.png">
+<meta property="og:image" content="https://weijutu.github.io/images/vuejs/20190306-3.png">
+<meta property="og:image" content="https://weijutu.github.io/images/vuejs/20190311-1.png">
+<meta property="og:image" content="https://weijutu.github.io/images/vuejs/20190311-2.png">
+<meta property="og:image" content="https://weijutu.github.io/images/vuejs/20190311-3.png">
+<meta property="og:image" content="https://weijutu.github.io/images/vuejs/20190311-4.png">
+<meta property="og:image" content="https://weijutu.github.io/images/vuejs/20190311-5.png">
+<meta property="article:published_time" content="2019-03-06T10:07:51.000Z">
+<meta property="article:modified_time" content="2022-09-04T01:16:48.956Z">
+<meta property="article:author" content="Helen">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://weijutu.github.io/images/vuejs/20190306-1.png">
+
+
+<link rel="canonical" href="https://weijutu.github.io/2019/03/06/vuejs/vuejs-googlesheets-api/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://weijutu.github.io/2019/03/06/vuejs/vuejs-googlesheets-api/","path":"2019/03/06/vuejs/vuejs-googlesheets-api/","title":"Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫 | 丸匠筆記</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72890173-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-72890173-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">丸匠筆記</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">a > 1, a ^ n = ∞</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%B8%E7%BF%92%E5%85%A7%E5%AE%B9%E5%A4%A7%E7%B6%B1"><span class="nav-number">1.</span> <span class="nav-text">學習內容大綱</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%BB%BA%E7%AB%8B-Vue-%E5%B0%88%E6%A1%88"><span class="nav-number">2.</span> <span class="nav-text">初始化建立 Vue 專案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B-Google-Sheets-%E8%A8%98%E5%B8%B3%E6%9C%AC%E8%A9%A6%E7%AE%97%E8%A1%A8"><span class="nav-number">3.</span> <span class="nav-text">建立 Google Sheets 記帳本試算表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%95%9F%E5%8B%95%E4%BD%A0%E7%9A%84-Google-Sheets-API-%E5%AD%98%E5%8F%96"><span class="nav-number">4.</span> <span class="nav-text">啟動你的 Google Sheets API 存取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BA%96%E5%82%99-Vue-%E5%89%8D%E7%AB%AF-Google-Sheets-API-%E5%9F%B7%E8%A1%8C%E8%AE%80%E5%8F%96"><span class="nav-number">5.</span> <span class="nav-text">準備 Vue 前端 Google Sheets API 執行讀取</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D%E5%A5%97%E4%BB%B6-VueGapi-%E8%88%87%E4%BD%BF%E7%94%A8"><span class="nav-number">5.1.</span> <span class="nav-text">安裝套件 VueGapi 與使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%B7%E8%A1%8C%E7%B5%90%E6%9E%9C"><span class="nav-number">6.</span> <span class="nav-text">執行結果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83"><span class="nav-number">7.</span> <span class="nav-text">參考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Helen"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">Helen</p>
+  <div class="site-description" itemprop="description">天天吃番茄，天天有進步</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/weijutu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;weijutu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2019/03/06/vuejs/vuejs-googlesheets-api/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="Helen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="丸匠筆記">
+      <meta itemprop="description" content="天天吃番茄，天天有進步">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫 | 丸匠筆記">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        
+        <h1 class="post-title" itemprop="name headline">
+          Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2019-03-06 18:07:51" itemprop="dateCreated datePublished" datetime="2019-03-06T18:07:51+08:00">2019-03-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-09-04 09:16:48" itemprop="dateModified" datetime="2022-09-04T09:16:48+08:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+
+        
+
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>本次實作是透過 Google Sheets 作為小型資料庫，然後使用Vue 前端語法做資料的讀取，而且無需透過後端程式來插手。</p>
+<h2 id="學習內容大綱"><a href="#學習內容大綱" class="headerlink" title="學習內容大綱"></a>學習內容大綱</h2><ol>
+<li>初始化建立 Vue 專案</li>
+<li>建立 Google Sheets 試算表</li>
+<li>啟動你的 Google Sheets API 存取</li>
+<li>準備 Vue 前端 Google Sheets API 執行讀取<br>4.1 安裝套件 VueGapi 與使用</li>
+<li>執行結果</li>
+</ol>
+<h2 id="初始化建立-Vue-專案"><a href="#初始化建立-Vue-專案" class="headerlink" title="初始化建立 Vue 專案"></a>初始化建立 Vue 專案</h2><p>首先一開始我們先建立 webpack Vue 專案，指令如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vue init webpack vue-googlesheets-api</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p>初始化過程中會詢問一些問題，在這裏我沒有全部安裝，因為做基本的練習，有些就選澤 No 就可以了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">  A newer version of vue-cli is available.</span><br><span class="line"></span><br><span class="line">  latest:    2.9.6</span><br><span class="line">  installed: 2.9.5</span><br><span class="line"></span><br><span class="line">? Project name vue-googlesheets-api</span><br><span class="line">? Project description A Vue.js project</span><br><span class="line">? Author XXXXXX &lt;XXXXXXX@gmail.com&gt;</span><br><span class="line">? Vue build standalone</span><br><span class="line">? Install vue-router? Yes</span><br><span class="line">? Use ESLint to lint your code? No</span><br><span class="line">? Set up unit tests No</span><br><span class="line">? Setup e2e tests with Nightwatch? No</span><br><span class="line">? Should we run `npm install` for you after the project has been created? (recommended) yarn</span><br><span class="line">   vue-cli · Generated &quot;vue-googlesheets-api&quot;.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Installing project dependencies ...</span><br><span class="line"># ========================</span><br></pre></td></tr></table></figure>
+
+<p>安裝了一兩分鐘過後，前往目錄夾並且執行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ cd vue-googlesheets-api</span><br><span class="line">$ npm start</span><br><span class="line"></span><br><span class="line">DONE  Compiled successfully in 8371ms</span><br><span class="line">I  Your application is running here: http://localhost:8080</span><br></pre></td></tr></table></figure>
+
+<p>完成編譯之後，請打開瀏覽器進入 <code>http://localhost:8080</code> 就會看到以下畫面。</p>
+<p><img data-src="/images/vuejs/20190306-1.png"></p>
+<p>好的，此時 Vue 專案基本的就完成了。</p>
+<h2 id="建立-Google-Sheets-記帳本試算表"><a href="#建立-Google-Sheets-記帳本試算表" class="headerlink" title="建立 Google Sheets 記帳本試算表"></a>建立 Google Sheets 記帳本試算表</h2><p>我們先暫時將專案擱著一下，先前往 Google Drive 建立一個 Google Sheets 試算表檔案</p>
+<p><img data-src="/images/vuejs/20190306-2.png"></p>
+<p>由於要實作的目的是讓程式來讀取儲存格的值，因此我們可以在 <code>A1</code> 這個欄位填入標題欄，假設我們以簡單的記帳本為例，可以知道就以 <code>日期</code>、<code>付款方式</code>、<code>項目</code>、<code>收支</code>、<code>備註</code> 這五個基本欄位做依序的填入。</p>
+<p><img data-src="/images/vuejs/20190306-3.png"></p>
+<p>接著，我們任意的先填入記帳本的紀錄，在這裡輸入兩筆紀錄</p>
+<p><img data-src="/images/vuejs/20190311-1.png"></p>
+<h2 id="啟動你的-Google-Sheets-API-存取"><a href="#啟動你的-Google-Sheets-API-存取" class="headerlink" title="啟動你的 Google Sheets API 存取"></a>啟動你的 Google Sheets API 存取</h2><p>有了試算表的檔案是不夠的，還需要一個能夠讓程式做讀取的權限，也就是說程式會透過 API 的形式向 Google Sheets 取得資源，啟動權限的方式務必到 <a target="_blank" rel="noopener" href="https://console.developers.google.com/">Google APIs</a> 網站做設定。</p>
+<p>我們將 Google Sheets API 權限打開，那麼在應用程式專案裡就能夠使用金鑰 (key)、Client ID 的搭配獲得服務上的請求喔。</p>
+<p><img data-src="/images/vuejs/20190311-2.png"></p>
+<p>(不過在這裡就不贅述如何啟用 sheets api …)</p>
+<p>我在網路上找了幾篇相關文章都寫得滿好的，可以參考看看</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://developers.google.com/sheets/api/guides/authorizing">Authorize Requests@Google Sheets指南</a></li>
+<li><a target="_blank" rel="noopener" href="https://medium.com/@sj82516/google-sheet-api-%E8%88%87%E6%8E%88%E6%AC%8A%E7%A0%94%E7%A9%B6-12034cb003f4">Google Sheet API 與Google OAuth2 API授權研究</a></li>
+</ul>
+<h2 id="準備-Vue-前端-Google-Sheets-API-執行讀取"><a href="#準備-Vue-前端-Google-Sheets-API-執行讀取" class="headerlink" title="準備 Vue 前端 Google Sheets API 執行讀取"></a>準備 Vue 前端 Google Sheets API 執行讀取</h2><p>在儲存格有值了以及 Google Sheets API 授權開啟之後，我們就回到 Vue 前端的部分，還記得前面裝好的專案並且可以用瀏覽器閱覽嗎？網址是：<code>http://localhost:8080/#/</code>，在這裡我們需要編寫一些檔案</p>
+<h3 id="安裝套件-VueGapi-與使用"><a href="#安裝套件-VueGapi-與使用" class="headerlink" title="安裝套件 VueGapi 與使用"></a>安裝套件 VueGapi 與使用</h3><p>首先的是要能夠讓 Vue 讀取 Google API 的方法，就需要使用 <code>vue-gapi</code> 套件，這個可以用來實作對 google 文件的 api 套件，那麼我們在 vue 專案下將套件裝起來。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn add vue-gapi</span><br></pre></td></tr></table></figure>
+
+<p>很好，裝好了對吧？接著趕緊到 <code>/src/main.js</code> 文件裡面將 <code>vue-gapi</code> 載入，讓全域環境裡面可以使用它，新增以下語法用來連線你的應用程式與 Google Sheets 服務</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">VueGAPI</span> <span class="keyword">from</span> <span class="string">&quot;vue-gapi&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> apiConfig = &#123;</span><br><span class="line">  <span class="attr">apiKey</span>: <span class="string">&quot;在這裡輸入 api key (請到 google apis 服務查詢)&quot;</span>,</span><br><span class="line">  <span class="attr">clientId</span>: <span class="string">&quot;在這裡輸入 client id (請到 google apis 服務查詢).apps.googleusercontent.com&quot;</span>,</span><br><span class="line">  <span class="attr">discoveryDocs</span>: [<span class="string">&quot;https://sheets.googleapis.com/$discovery/rest?version=v4&quot;</span>],</span><br><span class="line">  <span class="attr">scope</span>: <span class="string">&quot;https://www.googleapis.com/auth/spreadsheets&quot;</span> <span class="comment">// See, edit, create, and delete your spreadsheets in Google Drive</span></span><br><span class="line">  <span class="comment">// see all available scopes here: https://developers.google.com/identity/protocols/googlescopes&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// Use the plugin and pass along the configuration</span></span><br><span class="line"><span class="title class_">Vue</span>.<span class="title function_">use</span>(<span class="title class_">VueGAPI</span>, apiConfig);</span><br></pre></td></tr></table></figure>
+
+<p><code>main.js</code> 檔案完整內容如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// The Vue build version to load with the `import` command</span></span><br><span class="line"><span class="comment">// (runtime-only or standalone) has been set in webpack.base.conf with an alias.</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Vue</span> <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">App</span> <span class="keyword">from</span> <span class="string">&#x27;./App&#x27;</span></span><br><span class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">&#x27;./router&#x27;</span></span><br><span class="line"><span class="comment">// import the plugin</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">VueGAPI</span> <span class="keyword">from</span> <span class="string">&quot;vue-gapi&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> apiConfig = &#123;</span><br><span class="line">  <span class="attr">apiKey</span>: <span class="string">&quot;在這裡輸入 api key (請到 google apis 服務查詢)&quot;</span>,</span><br><span class="line">  <span class="attr">clientId</span>: <span class="string">&quot;在這裡輸入 client id (請到 google apis 服務查詢).apps.googleusercontent.com&quot;</span>,</span><br><span class="line">  <span class="attr">discoveryDocs</span>: [<span class="string">&quot;https://sheets.googleapis.com/$discovery/rest?version=v4&quot;</span>],</span><br><span class="line">  <span class="attr">scope</span>: <span class="string">&quot;https://www.googleapis.com/auth/spreadsheets&quot;</span> <span class="comment">// See, edit, create, and delete your spreadsheets in Google Drive</span></span><br><span class="line">  <span class="comment">// see all available scopes here: https://developers.google.com/identity/protocols/googlescopes&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// Use the plugin and pass along the configuration</span></span><br><span class="line"><span class="title class_">Vue</span>.<span class="title function_">use</span>(<span class="title class_">VueGAPI</span>, apiConfig);</span><br><span class="line"><span class="title class_">Vue</span>.<span class="property">config</span>.<span class="property">productionTip</span> = <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* eslint-disable no-new */</span></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span><br><span class="line">  <span class="attr">el</span>: <span class="string">&#x27;#app&#x27;</span>,</span><br><span class="line">  router,</span><br><span class="line">  <span class="attr">components</span>: &#123; <span class="title class_">App</span> &#125;,</span><br><span class="line">  <span class="attr">template</span>: <span class="string">&#x27;&lt;App/&gt;&#x27;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>設定好之後，再到前端的部分 <code>/src/components/HelloWorld.vue</code> 檔案內修改內容</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;hello&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Vue Google Sheets api 實作<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;login&quot;</span>&gt;</span>讀取 Google Sheets 檔案<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">table</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">tr</span> <span class="attr">v-for</span>=<span class="string">&quot;record in records&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span> <span class="attr">v-for</span>=<span class="string">&quot;r in record&quot;</span>&gt;</span>&#123;&#123; r &#125;&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">tr</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>前面我們透過 api key 以及 client id 確立了可以授權存取，接著我們要對剛剛建立好的 sheets 做讀取時，要先知道這個檔案的 ID，這樣才能讓程式知道要讀取的檔案是哪一個，而尋找 ID 的方法也很簡單，打開 Google Sheets 檔案，找到網址上面的一串亂碼的字，如下圖框起來的部分就是 SpreadsheetId 了</p>
+<p><img data-src="/images/vuejs/20190311-3.png"></p>
+<p>接著是 script 的部分，這邊要特別注意的是，參數的部分可以到 <a target="_blank" rel="noopener" href="https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/get">Google Sheets 指南找到參數必要項目</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#x27;HelloWorld&#x27;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      records: [],</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  mounted () &#123;</span><br><span class="line">    let vm = this;</span><br><span class="line">    vm.login();</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    login () &#123;</span><br><span class="line">      let vm = this;</span><br><span class="line">      this.$getGapiClient()</span><br><span class="line">      .then(gapi =&gt; &#123;</span><br><span class="line">        var params = &#123;</span><br><span class="line">          spreadsheetId: &#x27;1GnvjCutd-z8iYb3LrsOruRopNS7Lf2VVQ_4zBcK84TQ&#x27;,</span><br><span class="line">          range: &#x27;A1:E100&#x27;,</span><br><span class="line">          valueRenderOption: &#x27;FORMATTED_VALUE&#x27;,</span><br><span class="line">          dateTimeRenderOption: &#x27;FORMATTED_STRING&#x27;,</span><br><span class="line">        &#125;;</span><br><span class="line">        var request = gapi.client.sheets.spreadsheets.values.get(params)</span><br><span class="line">        request.then(function(response) &#123;</span><br><span class="line">          var result = response.result;</span><br><span class="line">          vm.records = result.values;</span><br><span class="line">          for(var i = 0; i &lt;= vm.records.length; i++) &#123;</span><br><span class="line">            // title</span><br><span class="line">            var title = vm.records[0];</span><br><span class="line">            var objTitle = &#123;&#125;;</span><br><span class="line">            for(var j = 0; j&lt;= title.length; j++) &#123;</span><br><span class="line">              objTitle = title[j]</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;, function(reason)&#123;</span><br><span class="line">          console.error(&#x27;error:&#x27;, reason)</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="執行結果"><a href="#執行結果" class="headerlink" title="執行結果"></a>執行結果</h2><p>太好了，做到這裡就差不多語法都完成了，接下來就看看結果吧，前往 <code>http://localhost:8080/#/</code>，是一個簡易畫面，裡面放了一個按鈕 <code>讀取 Google Sheets 檔案</code></p>
+<p><img data-src="/images/vuejs/20190311-4.png"></p>
+<p>按下按鈕之後，就會讀取指定的 Google Sheets 檔案了喔</p>
+<p><img data-src="/images/vuejs/20190311-5.png"></p>
+<p>是不是很美妙呀，若你只是單純的想要有資料庫做讀取，那麼你可以用利用這個方式讓 Google Sheets 作為儲存資料使用，在網站前端的部分就可以有更多的發揮，專注於前端上的開發，也無需苦惱要裝哪一套結構化資料庫 (ex: MySQL, MSSQL) 或是非結構化資料庫 (MongoDB) 之類的，這方式絕對是最棒的解決方案了。</p>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://cli.vuejs.org/guide/creating-a-project.html#vue-create">建立Vue專案</a></li>
+<li><a target="_blank" rel="noopener" href="https://developers.google.com/apps-script/guides/web">Google Apps Scripts</a></li>
+<li><a target="_blank" rel="noopener" href="https://developers.google.com/apps-script/reference/spreadsheet/">Spreadsheet Service</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/cedpoilly/vue-gapi">VUE vue-gapi 套件</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>作者： </strong>Helen
+  </li>
+  <li class="post-copyright-link">
+      <strong>文章連結：</strong>
+      <a href="https://weijutu.github.io/2019/03/06/vuejs/vuejs-googlesheets-api/" title="Vue 前端語法讀取 Google Sheets 試算表作為小型資料庫">https://weijutu.github.io/2019/03/06/vuejs/vuejs-googlesheets-api/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Vue/" rel="tag"># Vue</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/02/27/tools/postman-api-tools/" rel="prev" title="Postman - Restful API 測試管理工具">
+                  <i class="fa fa-chevron-left"></i> Postman - Restful API 測試管理工具
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/03/12/web/ubuntu-nginx-restart-fail/" rel="next" title="Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題">
+                  Ubuntu 14.04 - sudo service nginx restart 執行出現 fail 問題 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Helen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

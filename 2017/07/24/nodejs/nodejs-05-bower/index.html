@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/cube_logo_v2.png">
+  <link rel="mask-icon" href="/images/cube_logo_v2.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/yellow/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"weijutu.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="『A package manager for the web』瀏覽器套件管理工具 一般在寫網頁時，多半會引入套件來使用，而 bower 就是用來管理相依套件工具，bower 是 twitter 研發，透過這樣的管理工具下載安裝 css, js 套件，讓開發者跟隨著這樣的工具，讓 web 套件 (例如： bootstrap, jquery… etc) 方面更好管理，更簡單的方式更新最新版本的套件。">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Node.js 系列學習日誌#5 - bower 管理相依套件工具">
+<meta property="og:url" content="https://weijutu.github.io/2017/07/24/nodejs/nodejs-05-bower/index.html">
+<meta property="og:site_name" content="丸匠筆記">
+<meta property="og:description" content="『A package manager for the web』瀏覽器套件管理工具 一般在寫網頁時，多半會引入套件來使用，而 bower 就是用來管理相依套件工具，bower 是 twitter 研發，透過這樣的管理工具下載安裝 css, js 套件，讓開發者跟隨著這樣的工具，讓 web 套件 (例如： bootstrap, jquery… etc) 方面更好管理，更簡單的方式更新最新版本的套件。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/23.png">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/24.png">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/25.png">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/26.png">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/27.png">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/28.png">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/29.png">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/30.png">
+<meta property="article:published_time" content="2017-07-23T16:05:00.000Z">
+<meta property="article:modified_time" content="2022-09-04T01:16:48.893Z">
+<meta property="article:author" content="Helen">
+<meta property="article:tag" content="Node.js">
+<meta property="article:tag" content="鐵人賽">
+<meta property="article:tag" content="npm">
+<meta property="article:tag" content="bower">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://weijutu.github.io/images/nodejs/23.png">
+
+
+<link rel="canonical" href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-05-bower/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://weijutu.github.io/2017/07/24/nodejs/nodejs-05-bower/","path":"2017/07/24/nodejs/nodejs-05-bower/","title":"Node.js 系列學習日誌#5 - bower 管理相依套件工具"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Node.js 系列學習日誌#5 - bower 管理相依套件工具 | 丸匠筆記</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72890173-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-72890173-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">丸匠筆記</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">a > 1, a ^ n = ∞</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D-bower"><span class="nav-number">1.</span> <span class="nav-text">安裝 bower</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">參考資料：</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Helen"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">Helen</p>
+  <div class="site-description" itemprop="description">天天吃番茄，天天有進步</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/weijutu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;weijutu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-05-bower/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="Helen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="丸匠筆記">
+      <meta itemprop="description" content="天天吃番茄，天天有進步">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Node.js 系列學習日誌#5 - bower 管理相依套件工具 | 丸匠筆記">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        
+        <h1 class="post-title" itemprop="name headline">
+          Node.js 系列學習日誌#5 - bower 管理相依套件工具
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2017-07-24 00:05:00" itemprop="dateCreated datePublished" datetime="2017-07-24T00:05:00+08:00">2017-07-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-09-04 09:16:48" itemprop="dateModified" datetime="2022-09-04T09:16:48+08:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Node-js/" itemprop="url" rel="index"><span itemprop="name">Node.js</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+
+        
+
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><img data-src="/images/nodejs/23.png"></p>
+<p>『A package manager for the web』瀏覽器套件管理工具</p>
+<p>一般在寫網頁時，多半會引入套件來使用，而 bower 就是用來管理相依套件工具，bower 是 twitter 研發，透過這樣的管理工具下載安裝 css, js 套件，讓開發者跟隨著這樣的工具，讓 web 套件 (例如： bootstrap, jquery… etc) 方面更好管理，更簡單的方式更新最新版本的套件。</p>
+<p>當沒有管理的時候，你也許是…</p>
+<ol>
+<li>直接去官方網站抓檔案，還需要記得要下載 dev 版跟 min  壓縮過的版本 (例如：<a target="_blank" rel="noopener" href="https://code.jquery.com/jquery/">https://code.jquery.com/jquery/</a>)</li>
+<li>找 cdn 檔案 (例如：<a target="_blank" rel="noopener" href="https://developers.google.com/speed/libraries/devguide?hl=zh-tw">https://developers.google.com/speed/libraries/devguide?hl=zh-tw</a>)</li>
+<li>乾脆用現有的 (舊版本繼續沿用)</li>
+</ol>
+<p>以上的行為，多半會花一些時間一直找，而這套工具就是解決這樣的問題，只要用指令操作，效率高多囉！</p>
+<p>本章節將學習到：</p>
+<ul>
+<li>安裝 bower</li>
+<li>使用方法</li>
+<li>使用 express, bower 建立 bootstrap 套件的前端頁面</li>
+</ul>
+<h1 id="安裝-bower"><a href="#安裝-bower" class="headerlink" title="安裝 bower"></a>安裝 bower</h1><p>(安裝之前務必要有 node.js, npm, 建議儲存在 global)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$npm</span> install bower -g</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="/images/nodejs/24.png"></p>
+<p>可以利用 Search Bower packages 頁面搜尋需要的套件：<a target="_blank" rel="noopener" href="http://bower.io/search/">http://bower.io/search/</a> ，或者用指令搜尋</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$bower</span> search bootstrap</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="/images/nodejs/25.png"></p>
+<p>使用方法：</p>
+<p>請先安裝 express 作為網頁框架，然後安裝套件的方式，在這邊安裝一下 bootstrap</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$bower</span> install bootstrap</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="/images/nodejs/26.png"></p>
+<p>指令安裝之後就會看到 bootstrap 出現在 bower_components&#x2F;bootstrap&#x2F;<em>.</em> , bower_components&#x2F;jquery&#x2F;<em>.</em></p>
+<p>透過 bower init 指令，安裝 bower.json，您可以在 dependencies 的部分輸入套件名稱與版本號</p>
+<p><img data-src="/images/nodejs/27.png"></p>
+<p>我們在建立好的 express 框架下的  app.js ，把剛才建立好的  bower_components  資料夾，綁進去基本靜態套件的路徑</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.use(express.static(path.join(__dirname, <span class="string">&#x27;bower_components/bootstrap/dist/&#x27;</span>)));</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="/images/nodejs/28.png"></p>
+<p>接著用引入檔案的方法，請打開 .&#x2F;views&#x2F;layout.jade ，在 head 的子節點的地方新增</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">link(rel=&#x27;stylesheet&#x27;, href=&#x27;/css/bootstrap.min.css&#x27;)</span><br><span class="line">script(src=&#x27;/js/bootstrap.min.js&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="/images/nodejs/29.png"></p>
+<p>引入成功之後，就可以建立一個 bootstrap 的頁面，下圖是用透過 bower 匯入 bootstrap 套件建立一個簡單前端頁面：</p>
+<p><img data-src="/images/nodejs/30.png"></p>
+<h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><ul>
+<li><a target="_blank" rel="noopener" href="http://bower.io/">http://bower.io/</a></li>
+<li><a target="_blank" rel="noopener" href="http://jade-lang.com/tutorial/">http://jade-lang.com/tutorial/</a></li>
+<li><a target="_blank" rel="noopener" href="http://getbootstrap.com/">http://getbootstrap.com/</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>作者： </strong>Helen
+  </li>
+  <li class="post-copyright-link">
+      <strong>文章連結：</strong>
+      <a href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-05-bower/" title="Node.js 系列學習日誌#5 - bower 管理相依套件工具">https://weijutu.github.io/2017/07/24/nodejs/nodejs-05-bower/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Node-js/" rel="tag"># Node.js</a>
+              <a href="/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/" rel="tag"># 鐵人賽</a>
+              <a href="/tags/npm/" rel="tag"># npm</a>
+              <a href="/tags/bower/" rel="tag"># bower</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/07/24/nodejs/nodejs-04-nvm/" rel="prev" title="Node.js 系列學習日誌#4 - nvm (Node Version Manager) 管理多個版本">
+                  <i class="fa fa-chevron-left"></i> Node.js 系列學習日誌#4 - nvm (Node Version Manager) 管理多個版本
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/07/24/nodejs/nodejs-06-style-guide/" rel="next" title="Node.js 系列學習日誌#6 - 撰寫程式的風格指南 (Style Guide)">
+                  Node.js 系列學習日誌#6 - 撰寫程式的風格指南 (Style Guide) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Helen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

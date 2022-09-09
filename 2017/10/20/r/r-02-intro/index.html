@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/cube_logo_v2.png">
+  <link rel="mask-icon" href="/images/cube_logo_v2.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/yellow/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"weijutu.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="R 語言可以用來處理資料、統計分析、模擬、科學運算以及圖形功能，你可以直接安裝 R Studio 軟體 (R軟體官方網站)，就可以很輕易的在 GUI 上透過許多的套件模組並搭配 R 程式來畫出許多圖形，要能夠善用這些套件之前我們要先學習基本的資料型態以及語法運用。 學習目標R 語言的基本介紹以及語法上的寫法。">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="R 學習日誌#2 - 資料類型與套件工具函數">
+<meta property="og:url" content="https://weijutu.github.io/2017/10/20/r/r-02-intro/index.html">
+<meta property="og:site_name" content="丸匠筆記">
+<meta property="og:description" content="R 語言可以用來處理資料、統計分析、模擬、科學運算以及圖形功能，你可以直接安裝 R Studio 軟體 (R軟體官方網站)，就可以很輕易的在 GUI 上透過許多的套件模組並搭配 R 程式來畫出許多圖形，要能夠善用這些套件之前我們要先學習基本的資料型態以及語法運用。 學習目標R 語言的基本介紹以及語法上的寫法。">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2017-10-20T06:02:00.000Z">
+<meta property="article:modified_time" content="2022-09-04T01:16:48.914Z">
+<meta property="article:author" content="Helen">
+<meta property="article:tag" content="R">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://weijutu.github.io/2017/10/20/r/r-02-intro/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://weijutu.github.io/2017/10/20/r/r-02-intro/","path":"2017/10/20/r/r-02-intro/","title":"R 學習日誌#2 - 資料類型與套件工具函數"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>R 學習日誌#2 - 資料類型與套件工具函數 | 丸匠筆記</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72890173-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-72890173-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">丸匠筆記</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">a > 1, a ^ n = ∞</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%B8%E7%BF%92%E7%9B%AE%E6%A8%99"><span class="nav-number">1.</span> <span class="nav-text">學習目標</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A6%8B%E7%9A%84%E8%B3%87%E6%96%99%E9%A1%9E%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">常見的資料類型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B3%A6%E5%80%BC"><span class="nav-number">3.</span> <span class="nav-text">賦值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B3%87%E6%96%99%E9%A1%9E%E5%9E%8B%E7%9A%84%E5%88%A4%E6%96%B7-is-%E7%B3%BB%E5%88%97%E5%87%BD%E6%95%B8"><span class="nav-number">4.</span> <span class="nav-text">資料類型的判斷 :: is 系列函數</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B3%87%E6%96%99%E9%A1%9E%E5%9E%8B%E7%9A%84%E8%BD%89%E6%8F%9B-as-%E7%B3%BB%E5%88%97%E5%87%BD%E6%95%B8"><span class="nav-number">4.1.</span> <span class="nav-text">資料類型的轉換 :: as 系列函數</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E8%A6%8B%E7%9A%84%E8%BD%89%E6%8F%9B%E5%87%BD%E6%95%B8%E8%A1%A8"><span class="nav-number">4.1.1.</span> <span class="nav-text">常見的轉換函數表</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A5%97%E4%BB%B6%E6%9C%89%E9%97%9C%E7%9A%84%E5%B7%A5%E5%85%B7%E5%87%BD%E6%95%B8"><span class="nav-number">5.</span> <span class="nav-text">套件有關的工具函數</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83"><span class="nav-number">6.</span> <span class="nav-text">參考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Helen"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">Helen</p>
+  <div class="site-description" itemprop="description">天天吃番茄，天天有進步</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/weijutu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;weijutu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/10/20/r/r-02-intro/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="Helen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="丸匠筆記">
+      <meta itemprop="description" content="天天吃番茄，天天有進步">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="R 學習日誌#2 - 資料類型與套件工具函數 | 丸匠筆記">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        
+        <h1 class="post-title" itemprop="name headline">
+          R 學習日誌#2 - 資料類型與套件工具函數
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2017-10-20 14:02:00" itemprop="dateCreated datePublished" datetime="2017-10-20T14:02:00+08:00">2017-10-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-09-04 09:16:48" itemprop="dateModified" datetime="2022-09-04T09:16:48+08:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/R/" itemprop="url" rel="index"><span itemprop="name">R</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+
+        
+
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>R 語言可以用來處理資料、統計分析、模擬、科學運算以及圖形功能，你可以直接安裝 R Studio 軟體 (<a target="_blank" rel="noopener" href="https://www.r-project.org/">R軟體官方網站</a>)，就可以很輕易的在 GUI 上透過許多的套件模組並搭配 R 程式來畫出許多圖形，要能夠善用這些套件之前我們要先學習基本的資料型態以及語法運用。</p>
+<h2 id="學習目標"><a href="#學習目標" class="headerlink" title="學習目標"></a>學習目標</h2><p>R 語言的基本介紹以及語法上的寫法。</p>
+<span id="more"></span>
+
+<h2 id="常見的資料類型"><a href="#常見的資料類型" class="headerlink" title="常見的資料類型"></a>常見的資料類型</h2><ul>
+<li>原型 Raw：二進制的資料</li>
+<li>數字 Numeric：可以是整數 Integers 、小數 Decimal Fractions 、科學符號 Scientific Notation</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; a&lt;-3</span><br><span class="line">&gt; class(a)</span><br><span class="line">[1] &quot;numeric&quot;</span><br><span class="line"></span><br><span class="line">&gt; b&lt;-3.14</span><br><span class="line">&gt; class(b)</span><br><span class="line">[1] &quot;numeric&quot;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>字串 Character</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; c&lt;-&quot;3&quot;</span><br><span class="line">&gt; class(c)</span><br><span class="line">[1] &quot;character&quot;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>邏輯 Logical：TRUE &#x2F; FALSE 兩種值</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt; d&lt;-T</span><br><span class="line">&gt; class(d)</span><br><span class="line">[1] &quot;logical&quot;</span><br><span class="line"></span><br><span class="line">&gt; e&lt;-TRUE</span><br><span class="line">&gt; class(e)</span><br><span class="line">[1] &quot;logical&quot;</span><br><span class="line"></span><br><span class="line">&gt; f&lt;-FALSE</span><br><span class="line">&gt; class(f)</span><br><span class="line">[1] &quot;logical&quot;</span><br><span class="line"></span><br><span class="line">這裡的 T 就代表 TRUE, 如果輸入 F 就代表  FALSE</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>複數 Complex：包含虛數</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; 3+2i</span><br><span class="line">[1] 3+2i</span><br><span class="line">&gt; class(3+2i)</span><br><span class="line">[1] &quot;complex&quot;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="賦值"><a href="#賦值" class="headerlink" title="賦值"></a>賦值</h2><p>我們先看一個例子，在控制台輸入以下程式，假設有五個人的成績分別是 <code>53</code>, <code>65</code>, <code>98</code>, <code>42</code>, <code>62</code>，那麼我們用 <code>c()</code>  Concatenate 代表連結成一個向量，把這個向量賦值給 x，而 x 就是向量的名稱。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; x &lt;- c(53, 65, 98, 42, 62)</span><br><span class="line">&gt; x</span><br><span class="line">[1] 53 65 98 42 62</span><br></pre></td></tr></table></figure>
+
+<p>R 語言的賦值運算符號是用 <code>&lt;-</code> 而非 <code>=</code>，雖然也是可以用 <code>=</code> 但不建議使用，可能會在環境下產生衝突，所以如果遇到給值的變數，就使用 <code>&lt;-</code> 方式。另外 R 語言有一些內建函數，可以對這個向量做一些簡單的運算</p>
+<ul>
+<li>找出最大值</li>
+<li>找出最小值</li>
+<li>算出平均數</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt; # 找出最大值</span><br><span class="line">&gt; max(x)</span><br><span class="line">[1] 98</span><br><span class="line">&gt; # 找出最小值</span><br><span class="line">&gt; min(x)</span><br><span class="line">[1] 42</span><br><span class="line">&gt; # 算出平均數</span><br><span class="line">&gt; mean(x)</span><br><span class="line">[1] 64</span><br></pre></td></tr></table></figure>
+
+<p>是不是很簡單呢？</p>
+<h2 id="資料類型的判斷-is-系列函數"><a href="#資料類型的判斷-is-系列函數" class="headerlink" title="資料類型的判斷 :: is 系列函數"></a>資料類型的判斷 :: is 系列函數</h2><p>用來檢查某一個物件是否具有查詢的屬性，回傳會是 true or false，包含：</p>
+<ul>
+<li>is.numeric</li>
+<li>is.list</li>
+<li>is.function</li>
+<li>is.character</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&gt; data &lt;- &#x27;example&#x27;</span><br><span class="line">&gt; # 檢查是否為數字類型</span><br><span class="line">&gt; is.numeric(data)</span><br><span class="line">[1] FALSE</span><br><span class="line"></span><br><span class="line">&gt; # 檢查是否為串列類型</span><br><span class="line">&gt; is.list(data)</span><br><span class="line">[1] FALSE</span><br><span class="line"></span><br><span class="line">&gt; # 檢查是否為函數類型</span><br><span class="line">&gt; is.function(data)</span><br><span class="line">[1] FALSE</span><br><span class="line"></span><br><span class="line">&gt; # 檢查是否為字串類型</span><br><span class="line">&gt; is.character(data)</span><br><span class="line">[1] TRUE</span><br></pre></td></tr></table></figure>
+
+<h3 id="資料類型的轉換-as-系列函數"><a href="#資料類型的轉換-as-系列函數" class="headerlink" title="資料類型的轉換 :: as 系列函數"></a>資料類型的轉換 :: as 系列函數</h3><p>用來將變數強迫轉換，包含：</p>
+<ul>
+<li>as.vector</li>
+<li>as factor</li>
+<li>as.matrix</li>
+<li>as.numeric</li>
+<li>as.double</li>
+<li>as.data.frame</li>
+<li>as.list</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; data &lt;- &#x27;example&#x27;</span><br><span class="line">&gt; as.vector(data)</span><br><span class="line">[1] &quot;example&quot;</span><br><span class="line">&gt; data2 &lt;- 2345</span><br><span class="line"></span><br><span class="line">&gt; as.character(data2)</span><br><span class="line">[1] &quot;2345&quot;</span><br></pre></td></tr></table></figure>
+
+<h4 id="常見的轉換函數表"><a href="#常見的轉換函數表" class="headerlink" title="常見的轉換函數表"></a>常見的轉換函數表</h4><table>
+<thead>
+<tr>
+<th>資料類型</th>
+<th>中文</th>
+<th>判斷函數</th>
+<th>轉換函數</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>character</td>
+<td>字串</td>
+<td>is.character()</td>
+<td>as.character()</td>
+</tr>
+<tr>
+<td>numeric</td>
+<td>數字</td>
+<td>is.numeric()</td>
+<td>as.numeric()</td>
+</tr>
+<tr>
+<td>logical</td>
+<td>邏輯</td>
+<td>is.logical()</td>
+<td>as.logical()</td>
+</tr>
+<tr>
+<td>complex</td>
+<td>複數</td>
+<td>is.complex()</td>
+<td>as.complex()</td>
+</tr>
+<tr>
+<td>NA</td>
+<td>缺少</td>
+<td>is.na()</td>
+<td>as.na()</td>
+</tr>
+</tbody></table>
+<h2 id="套件有關的工具函數"><a href="#套件有關的工具函數" class="headerlink" title="套件有關的工具函數"></a>套件有關的工具函數</h2><ul>
+<li>在 console 輸入指令下載安裝套件，括號內是套件的名字，一般來說要加雙引號</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; install.packages(&quot;car&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>然而有些套件會隨著功能的更新，需要定期的更新套件，使用更新套件的指令是</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; update.packages()</span><br></pre></td></tr></table></figure>
+
+<p>若想知道安裝了哪些套件，那麼可以使用指令是</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; installed.packages()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用套件的函數，先載入套件方法有二：library, require</li>
+</ul>
+<p>library 和 require 都是載入 package，但是最大的差別在於 library 如果是載入的 package 不存在，是會發生 error 程式停止，但是 require 卻不會，而且 require 會回傳 true or false</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; libaray(套件名稱)</span><br><span class="line">&gt; require(套件名稱)</span><br></pre></td></tr></table></figure>
+
+<p>範例</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; libaray(quantmod)</span><br><span class="line">&gt; require(quantmod)</span><br><span class="line">&gt; x&lt;-require(quantmod)</span><br><span class="line">&gt; x</span><br><span class="line">[1] TRUE</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>避免記憶體吃緊或避免不同套件的同名函數彼此衝突，簡單來說就是「卸載」</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; detach(套件名稱)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>想知道怎麼查詢函數的定義</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; ??norm</span><br><span class="line">&gt; help(norm)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>demo 示範功能</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; demo(graphics)</span><br><span class="line"></span><br><span class="line">結果：說明文件裡面顯示範例程式</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>網站文件遠端搜尋：RSiteSearch 可以查詢遠端網站的文件 <a target="_blank" rel="noopener" href="http://search.r-project.org/cgi-bin/namazu.cgi?query=anova&max=20&result=normal&sort=score&idxname=functions&idxname=vignettes&idxname=views">search anova document</a></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; RSiteSearch(&quot;anova&quot;)</span><br><span class="line"></span><br><span class="line">結果：就會開啟網頁到 R Site Search 上面查詢你所下的關鍵字</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>source 函數執行外部檔案</li>
+</ul>
+<p>若你有一支自訂函數的檔案為 test.R，那麼你就可以透過以下指令來呼叫使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; source(&quot;/user/code/test.R&quot;)</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
+<li>R Studio <a target="_blank" rel="noopener" href="https://www.rstudio.com/">https://www.rstudio.com/</a></li>
+<li>R Project <a target="_blank" rel="noopener" href="https://www.r-project.org/">https://www.r-project.org/</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>作者： </strong>Helen
+  </li>
+  <li class="post-copyright-link">
+      <strong>文章連結：</strong>
+      <a href="https://weijutu.github.io/2017/10/20/r/r-02-intro/" title="R 學習日誌#2 - 資料類型與套件工具函數">https://weijutu.github.io/2017/10/20/r/r-02-intro/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/R/" rel="tag"># R</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/10/20/r/r-01-start/" rel="prev" title="R 學習日誌#1 - R 語言簡介、執行環境安裝 RStudio">
+                  <i class="fa fa-chevron-left"></i> R 學習日誌#1 - R 語言簡介、執行環境安裝 RStudio
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/10/20/r/r-03-data-structure/" rel="next" title="R 學習日誌#3 - 資料結構 (向量 Vector、矩陣 Matrix、陣列 Array) 的區別與基本運算">
+                  R 學習日誌#3 - 資料結構 (向量 Vector、矩陣 Matrix、陣列 Array) 的區別與基本運算 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Helen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/cube_logo_v2.png">
+  <link rel="mask-icon" href="/images/cube_logo_v2.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/yellow/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"weijutu.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="學習內容大綱 gutenbergr (古騰堡電子書) 詞頻 (Word frequencies)  gutenbergr (古騰堡電子書)gutenbergr 套件是一個可以存取公領域的電子書。進入 古騰堡計畫網站，載入你感興趣的電子書籍，主要可以使用 gutenberg_download() 函數，參數則輸入 id 或者多部的電子書作品。 以下的例子，就從  古騰堡計畫網站 找個四本 H.G.">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (2)">
+<meta property="og:url" content="https://weijutu.github.io/2019/04/18/r/r-textmining-01-ch01-2/index.html">
+<meta property="og:site_name" content="丸匠筆記">
+<meta property="og:description" content="學習內容大綱 gutenbergr (古騰堡電子書) 詞頻 (Word frequencies)  gutenbergr (古騰堡電子書)gutenbergr 套件是一個可以存取公領域的電子書。進入 古騰堡計畫網站，載入你感興趣的電子書籍，主要可以使用 gutenberg_download() 函數，參數則輸入 id 或者多部的電子書作品。 以下的例子，就從  古騰堡計畫網站 找個四本 H.G.">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://www.tidytextmining.com/01-tidy-text_files/figure-html/plotcompare-1.png">
+<meta property="article:published_time" content="2019-04-18T15:34:00.000Z">
+<meta property="article:modified_time" content="2022-09-04T01:16:48.916Z">
+<meta property="article:author" content="Helen">
+<meta property="article:tag" content="R">
+<meta property="article:tag" content="文字探勘">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.tidytextmining.com/01-tidy-text_files/figure-html/plotcompare-1.png">
+
+
+<link rel="canonical" href="https://weijutu.github.io/2019/04/18/r/r-textmining-01-ch01-2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://weijutu.github.io/2019/04/18/r/r-textmining-01-ch01-2/","path":"2019/04/18/r/r-textmining-01-ch01-2/","title":"R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (2)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (2) | 丸匠筆記</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72890173-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-72890173-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">丸匠筆記</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">a > 1, a ^ n = ∞</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%B8%E7%BF%92%E5%85%A7%E5%AE%B9%E5%A4%A7%E7%B6%B1"><span class="nav-number">1.</span> <span class="nav-text">學習內容大綱</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gutenbergr-%E5%8F%A4%E9%A8%B0%E5%A0%A1%E9%9B%BB%E5%AD%90%E6%9B%B8"><span class="nav-number">2.</span> <span class="nav-text">gutenbergr (古騰堡電子書)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A9%9E%E9%A0%BB-Word-frequencies"><span class="nav-number">3.</span> <span class="nav-text">詞頻 (Word frequencies)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83"><span class="nav-number">4.</span> <span class="nav-text">參考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Helen"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">Helen</p>
+  <div class="site-description" itemprop="description">天天吃番茄，天天有進步</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/weijutu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;weijutu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2019/04/18/r/r-textmining-01-ch01-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="Helen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="丸匠筆記">
+      <meta itemprop="description" content="天天吃番茄，天天有進步">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (2) | 丸匠筆記">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        
+        <h1 class="post-title" itemprop="name headline">
+          R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (2)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2019-04-18 23:34:00" itemprop="dateCreated datePublished" datetime="2019-04-18T23:34:00+08:00">2019-04-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-09-04 09:16:48" itemprop="dateModified" datetime="2022-09-04T09:16:48+08:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/R/" itemprop="url" rel="index"><span itemprop="name">R</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+
+        
+
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="學習內容大綱"><a href="#學習內容大綱" class="headerlink" title="學習內容大綱"></a>學習內容大綱</h2><ol>
+<li>gutenbergr (古騰堡電子書)</li>
+<li>詞頻 (Word frequencies)</li>
+</ol>
+<h2 id="gutenbergr-古騰堡電子書"><a href="#gutenbergr-古騰堡電子書" class="headerlink" title="gutenbergr (古騰堡電子書)"></a>gutenbergr (古騰堡電子書)</h2><p><code>gutenbergr</code> 套件是一個可以存取公領域的電子書。進入 <a target="_blank" rel="noopener" href="https://www.gutenberg.org/">古騰堡計畫網站</a>，載入你感興趣的電子書籍，主要可以使用 <code>gutenberg_download()</code> 函數，參數則輸入 id 或者多部的電子書作品。</p>
+<p>以下的例子，就從  <a target="_blank" rel="noopener" href="https://www.gutenberg.org/">古騰堡計畫網站</a> 找個四本 H.G. Wells 寫的書做介紹，分別是</p>
+<ol>
+<li>The Time Machine</li>
+<li>The War of the Worlds</li>
+<li>The Invisible Man</li>
+<li>The Island of Doctor Moreau.</li>
+</ol>
+<span id="more"></span>
+
+<!-- 
+1. [長腿叔叔 Daddy-Long-Legs by Jean Webster](https://www.gutenberg.org/ebooks/157) (古騰堡 ID 為 157)
+2. [傲慢與偏見 Pride and Prejudice by Jane Austen](https://www.gutenberg.org/ebooks/1342) (古騰堡 ID 為 1342)
+3. [雙城記 A Tale of Two Cities by Charles Dickens](https://www.gutenberg.org/ebooks/98) (古騰堡 ID 為 98)
+4. [湯姆歷險記 The Adventures of Tom Sawyer](https://www.gutenberg.org/ebooks/74) (古騰堡 ID 為 74) -->
+
+<blockquote>
+<p>用 Top 100 頁面也可以找一些比較流行的電子書 <a target="_blank" rel="noopener" href="https://www.gutenberg.org/browse/scores/top">點選這裏查看</a></p>
+</blockquote>
+<h2 id="詞頻-Word-frequencies"><a href="#詞頻-Word-frequencies" class="headerlink" title="詞頻 (Word frequencies)"></a>詞頻 (Word frequencies)</h2><p>首先使用 <code>gutenbergr</code> 套件，並且再用 <code>gutenberg_download()</code> 下載四本電子書</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">install.packages<span class="punctuation">(</span><span class="string">&#x27;gutenbergr&#x27;</span><span class="punctuation">)</span>  </span><br><span class="line">library<span class="punctuation">(</span>gutenbergr<span class="punctuation">)</span></span><br><span class="line">  </span><br><span class="line">hgwells <span class="operator">&lt;-</span> gutenberg_download<span class="punctuation">(</span><span class="built_in">c</span><span class="punctuation">(</span><span class="number">35</span><span class="punctuation">,</span> <span class="number">36</span><span class="punctuation">,</span> <span class="number">5230</span><span class="punctuation">,</span> <span class="number">159</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line">  </span><br></pre></td></tr></table></figure>
+
+<p>下載完畢之後，我們第一件事情就是把詞作分詞，然後移除停用字 (<code>anti_join(stop_words)</code>)</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tidy_hgwells <span class="operator">&lt;-</span> hgwells <span class="operator">%&gt;%</span></span><br><span class="line">  unnest_tokens<span class="punctuation">(</span>word<span class="punctuation">,</span> text<span class="punctuation">)</span> <span class="operator">%&gt;%</span></span><br><span class="line">  anti_join<span class="punctuation">(</span>stop_words<span class="punctuation">)</span></span><br><span class="line"></span><br><span class="line">tidy_hgwells</span><br></pre></td></tr></table></figure>
+
+<p>此時，資料結果如下，包含了 <code>gutenberg_id</code> 與 <code>word</code> 欄位：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># A tibble: 66,734 x 2</span><br><span class="line">   gutenberg_id word      </span><br><span class="line">          &lt;int&gt; &lt;chr&gt;     </span><br><span class="line"> 1           35 time      </span><br><span class="line"> 2           35 machine   </span><br><span class="line"> 3           35 1898      </span><br><span class="line"> 4           35 time      </span><br><span class="line"> 5           35 traveller </span><br><span class="line"> 6           35 convenient</span><br><span class="line"> 7           35 speak     </span><br><span class="line"> ...</span><br></pre></td></tr></table></figure>
+
+<p>清除停用字之後，我們看看常用字的比例如何</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tidy_hgwells <span class="operator">%&gt;%</span></span><br><span class="line">  count<span class="punctuation">(</span>word<span class="punctuation">,</span> sort <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">)</span></span><br><span class="line"></span><br><span class="line">tidy_hgwells</span><br></pre></td></tr></table></figure>
+
+<p><code>H.G. Wells</code> 詞頻次數結果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># A tibble: 11,769 x 2</span><br><span class="line">   word       n</span><br><span class="line">   &lt;chr&gt;  &lt;int&gt;</span><br><span class="line"> 1 time     454</span><br><span class="line"> 2 people   302</span><br><span class="line"> 3 door     260</span><br><span class="line"> 4 heard    249</span><br><span class="line"> 5 black    232</span><br><span class="line"> 6 stood    229</span><br><span class="line"> 7 white    222</span><br></pre></td></tr></table></figure>
+
+<p>然後，我們在找另一個不同風格的作家 <code>Brontë sisters</code></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">bronte <span class="operator">&lt;-</span> gutenberg_download<span class="punctuation">(</span><span class="built_in">c</span><span class="punctuation">(</span><span class="number">1260</span><span class="punctuation">,</span> <span class="number">768</span><span class="punctuation">,</span> <span class="number">969</span><span class="punctuation">,</span> <span class="number">9182</span><span class="punctuation">,</span> <span class="number">767</span><span class="punctuation">)</span><span class="punctuation">)</span></span><br><span class="line"></span><br><span class="line">tidy_bronte <span class="operator">&lt;-</span> bronte <span class="operator">%&gt;%</span></span><br><span class="line">  unnest_tokens<span class="punctuation">(</span>word<span class="punctuation">,</span> text<span class="punctuation">)</span> <span class="operator">%&gt;%</span></span><br><span class="line">  anti_join<span class="punctuation">(</span>stop_words<span class="punctuation">)</span></span><br><span class="line"></span><br><span class="line">tidy_bronte <span class="operator">%&gt;%</span></span><br><span class="line">  count<span class="punctuation">(</span>word<span class="punctuation">,</span> sort <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">)</span></span><br><span class="line"></span><br><span class="line">tidy_bronte</span><br></pre></td></tr></table></figure>
+
+<p> <code>Brontë sisters</code> 詞頻次數結果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># A tibble: 23,050 x 2</span><br><span class="line">   word       n</span><br><span class="line">   &lt;chr&gt;  &lt;int&gt;</span><br><span class="line"> 1 time    1065</span><br><span class="line"> 2 miss     855</span><br><span class="line"> 3 day      827</span><br><span class="line"> 4 hand     768</span><br><span class="line"> 5 eyes     713</span><br><span class="line"> 6 night    647</span><br><span class="line"> 7 heart    638</span><br></pre></td></tr></table></figure>
+
+<p>可以看到詞頻次數，<code>time</code>, <code>eyes</code> 等經常使用的詞。那麼，透過 data frames 綁定一起計算每個單詞的頻率，繪製三套小說的結果。</p>
+<p>分別是三個變數：tidy_bronte、tidy_hgwells、tidy_books</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>tidyr<span class="punctuation">)</span></span><br><span class="line"></span><br><span class="line">frequency <span class="operator">&lt;-</span> bind_rows<span class="punctuation">(</span>mutate<span class="punctuation">(</span>tidy_bronte<span class="punctuation">,</span> author <span class="operator">=</span> <span class="string">&quot;Brontë Sisters&quot;</span><span class="punctuation">)</span><span class="punctuation">,</span></span><br><span class="line">                       mutate<span class="punctuation">(</span>tidy_hgwells<span class="punctuation">,</span> author <span class="operator">=</span> <span class="string">&quot;H.G. Wells&quot;</span><span class="punctuation">)</span><span class="punctuation">,</span> </span><br><span class="line">                       mutate<span class="punctuation">(</span>tidy_books<span class="punctuation">,</span> author <span class="operator">=</span> <span class="string">&quot;Jane Austen&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span> <span class="operator">%&gt;%</span> </span><br><span class="line">  mutate<span class="punctuation">(</span>word <span class="operator">=</span> str_extract<span class="punctuation">(</span>word<span class="punctuation">,</span> <span class="string">&quot;[a-z&#x27;]+&quot;</span><span class="punctuation">)</span><span class="punctuation">)</span> <span class="operator">%&gt;%</span></span><br><span class="line">  count<span class="punctuation">(</span>author<span class="punctuation">,</span> word<span class="punctuation">)</span> <span class="operator">%&gt;%</span></span><br><span class="line">  group_by<span class="punctuation">(</span>author<span class="punctuation">)</span> <span class="operator">%&gt;%</span></span><br><span class="line">  mutate<span class="punctuation">(</span>proportion <span class="operator">=</span> n <span class="operator">/</span> <span class="built_in">sum</span><span class="punctuation">(</span>n<span class="punctuation">)</span><span class="punctuation">)</span> <span class="operator">%&gt;%</span> </span><br><span class="line">  select<span class="punctuation">(</span><span class="operator">-</span>n<span class="punctuation">)</span> <span class="operator">%&gt;%</span> </span><br><span class="line">  spread<span class="punctuation">(</span>author<span class="punctuation">,</span> proportion<span class="punctuation">)</span> <span class="operator">%&gt;%</span> </span><br><span class="line">  gather<span class="punctuation">(</span>author<span class="punctuation">,</span> proportion<span class="punctuation">,</span> `Brontë Sisters`<span class="operator">:</span>`H.G. Wells`<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+
+<p>古騰堡計畫 UTF-8 編碼有一些是有下底線的單詞，而這個通常用來強調。</p>
+<!-- 接下來使用 `str_extract()`  -->
+
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>scales<span class="punctuation">)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># expect a warning about rows with missing values being removed</span></span><br><span class="line">ggplot<span class="punctuation">(</span>frequency<span class="punctuation">,</span> aes<span class="punctuation">(</span>x <span class="operator">=</span> proportion<span class="punctuation">,</span> y <span class="operator">=</span> `Jane Austen`<span class="punctuation">,</span> color <span class="operator">=</span> <span class="built_in">abs</span><span class="punctuation">(</span>`Jane Austen` <span class="operator">-</span> proportion<span class="punctuation">)</span><span class="punctuation">)</span><span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  geom_abline<span class="punctuation">(</span>color <span class="operator">=</span> <span class="string">&quot;gray40&quot;</span><span class="punctuation">,</span> lty <span class="operator">=</span> <span class="number">2</span><span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  geom_jitter<span class="punctuation">(</span>alpha <span class="operator">=</span> <span class="number">0.1</span><span class="punctuation">,</span> size <span class="operator">=</span> <span class="number">2.5</span><span class="punctuation">,</span> width <span class="operator">=</span> <span class="number">0.3</span><span class="punctuation">,</span> height <span class="operator">=</span> <span class="number">0.3</span><span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  geom_text<span class="punctuation">(</span>aes<span class="punctuation">(</span>label <span class="operator">=</span> word<span class="punctuation">)</span><span class="punctuation">,</span> check_overlap <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">,</span> vjust <span class="operator">=</span> <span class="number">1.5</span><span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  scale_x_log10<span class="punctuation">(</span>labels <span class="operator">=</span> percent_format<span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  scale_y_log10<span class="punctuation">(</span>labels <span class="operator">=</span> percent_format<span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  scale_color_gradient<span class="punctuation">(</span>limits <span class="operator">=</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="number">0</span><span class="punctuation">,</span> <span class="number">0.001</span><span class="punctuation">)</span><span class="punctuation">,</span> low <span class="operator">=</span> <span class="string">&quot;darkslategray4&quot;</span><span class="punctuation">,</span> high <span class="operator">=</span> <span class="string">&quot;gray75&quot;</span><span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  facet_wrap<span class="punctuation">(</span><span class="operator">~</span>author<span class="punctuation">,</span> ncol <span class="operator">=</span> <span class="number">2</span><span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  theme<span class="punctuation">(</span>legend.position<span class="operator">=</span><span class="string">&quot;none&quot;</span><span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  labs<span class="punctuation">(</span>y <span class="operator">=</span> <span class="string">&quot;Jane Austen&quot;</span><span class="punctuation">,</span> x <span class="operator">=</span> <span class="literal">NULL</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://www.tidytextmining.com/01-tidy-text_files/figure-html/plotcompare-1.png"></p>
+<p>此圖可以看得出來兩組文本裡面具有相似的頻率，比如 Jane Austen 和 Brontë 的文本裡面有 <code>miss</code>, <code>time</code>, <code>day</code> 以及 Jane Austen 和 Wells 文本裡面有 <code>time</code>, <code>day</code>, <code>brother</code> 頻率狀況</p>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://www.tidytextmining.com/tidytext.html">Text Mining with R</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>作者： </strong>Helen
+  </li>
+  <li class="post-copyright-link">
+      <strong>文章連結：</strong>
+      <a href="https://weijutu.github.io/2019/04/18/r/r-textmining-01-ch01-2/" title="R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (2)">https://weijutu.github.io/2019/04/18/r/r-textmining-01-ch01-2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/R/" rel="tag"># R</a>
+              <a href="/tags/%E6%96%87%E5%AD%97%E6%8E%A2%E5%8B%98/" rel="tag"># 文字探勘</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/04/17/r/r-textmining-01-ch01-1/" rel="prev" title="R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (1)">
+                  <i class="fa fa-chevron-left"></i> R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (1)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/04/19/r/r-textmining-02-ch02-1/" rel="next" title="R語言文字探勘好好玩 - Ch2_採 Tidy 資料做情感分析 (1)">
+                  R語言文字探勘好好玩 - Ch2_採 Tidy 資料做情感分析 (1) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Helen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

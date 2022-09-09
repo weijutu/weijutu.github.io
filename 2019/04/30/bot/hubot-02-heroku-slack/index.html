@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/cube_logo_v2.png">
+  <link rel="mask-icon" href="/images/cube_logo_v2.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/yellow/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"weijutu.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="在這篇文章內，開始介紹 heroku 上部署 hubot 專案並且連接 slack 聊天通訊軟體。 學習內容大綱 slack 的準備 hubot 的準備 部署到 Heroku 哈囉機器人來跟我對話吧 注意事項 參考">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="用 Hubot 打造聊天機器人#2 - hubot 專案部署到 heroku 連接 slack 聊天通訊軟體">
+<meta property="og:url" content="https://weijutu.github.io/2019/04/30/bot/hubot-02-heroku-slack/index.html">
+<meta property="og:site_name" content="丸匠筆記">
+<meta property="og:description" content="在這篇文章內，開始介紹 heroku 上部署 hubot 專案並且連接 slack 聊天通訊軟體。 學習內容大綱 slack 的準備 hubot 的準備 部署到 Heroku 哈囉機器人來跟我對話吧 注意事項 參考">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://weijutu.github.io/images/bot/1.png">
+<meta property="og:image" content="https://weijutu.github.io/images/bot/2.png">
+<meta property="og:image" content="https://weijutu.github.io/images/bot/4.png">
+<meta property="og:image" content="https://weijutu.github.io/images/bot/3.png">
+<meta property="og:image" content="https://weijutu.github.io/images/bot/5.png">
+<meta property="og:image" content="https://weijutu.github.io/images/bot/6.png">
+<meta property="article:published_time" content="2019-04-30T15:07:00.000Z">
+<meta property="article:modified_time" content="2022-09-04T01:16:48.809Z">
+<meta property="article:author" content="Helen">
+<meta property="article:tag" content="hubot">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://weijutu.github.io/images/bot/1.png">
+
+
+<link rel="canonical" href="https://weijutu.github.io/2019/04/30/bot/hubot-02-heroku-slack/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://weijutu.github.io/2019/04/30/bot/hubot-02-heroku-slack/","path":"2019/04/30/bot/hubot-02-heroku-slack/","title":"用 Hubot 打造聊天機器人#2 - hubot 專案部署到 heroku 連接 slack 聊天通訊軟體"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>用 Hubot 打造聊天機器人#2 - hubot 專案部署到 heroku 連接 slack 聊天通訊軟體 | 丸匠筆記</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72890173-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-72890173-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">丸匠筆記</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">a > 1, a ^ n = ∞</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%B8%E7%BF%92%E5%85%A7%E5%AE%B9%E5%A4%A7%E7%B6%B1"><span class="nav-number">1.</span> <span class="nav-text">學習內容大綱</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#slack-%E7%9A%84%E6%BA%96%E5%82%99"><span class="nav-number">2.</span> <span class="nav-text">slack 的準備</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BC%B8%E5%85%A5%E6%A9%9F%E5%99%A8%E4%BA%BA%E7%9A%84%E5%90%8D%E7%A8%B1"><span class="nav-number">2.1.</span> <span class="nav-text">輸入機器人的名稱</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B-slack-token-%E6%88%96%E8%87%AA%E8%A8%82%E5%9C%96%E6%A8%99"><span class="nav-number">2.2.</span> <span class="nav-text">查看 slack token 或自訂圖標</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E6%A9%9F%E7%AB%AF%E6%B8%AC%E8%A9%A6"><span class="nav-number">2.3.</span> <span class="nav-text">本機端測試</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E5%88%B0-Heroku"><span class="nav-number">3.</span> <span class="nav-text">部署到 Heroku</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%88%E5%9B%89%E6%A9%9F%E5%99%A8%E4%BA%BA%E4%BE%86%E8%B7%9F%E6%88%91%E5%B0%8D%E8%A9%B1%E5%90%A7"><span class="nav-number">4.</span> <span class="nav-text">哈囉機器人來跟我對話吧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85"><span class="nav-number">5.</span> <span class="nav-text">注意事項</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83"><span class="nav-number">6.</span> <span class="nav-text">參考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Helen"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">Helen</p>
+  <div class="site-description" itemprop="description">天天吃番茄，天天有進步</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/weijutu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;weijutu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2019/04/30/bot/hubot-02-heroku-slack/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="Helen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="丸匠筆記">
+      <meta itemprop="description" content="天天吃番茄，天天有進步">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="用 Hubot 打造聊天機器人#2 - hubot 專案部署到 heroku 連接 slack 聊天通訊軟體 | 丸匠筆記">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        
+        <h1 class="post-title" itemprop="name headline">
+          用 Hubot 打造聊天機器人#2 - hubot 專案部署到 heroku 連接 slack 聊天通訊軟體
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2019-04-30 23:07:00" itemprop="dateCreated datePublished" datetime="2019-04-30T23:07:00+08:00">2019-04-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-09-04 09:16:48" itemprop="dateModified" datetime="2022-09-04T09:16:48+08:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/hubot/" itemprop="url" rel="index"><span itemprop="name">hubot</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+
+        
+
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>在這篇文章內，開始介紹 heroku 上部署 hubot 專案並且連接 slack 聊天通訊軟體。</p>
+<h2 id="學習內容大綱"><a href="#學習內容大綱" class="headerlink" title="學習內容大綱"></a>學習內容大綱</h2><ol>
+<li>slack 的準備</li>
+<li>hubot 的準備</li>
+<li>部署到 Heroku</li>
+<li>哈囉機器人來跟我對話吧</li>
+<li>注意事項</li>
+<li>參考</li>
+</ol>
+<span id="more"></span>
+
+<h2 id="slack-的準備"><a href="#slack-的準備" class="headerlink" title="slack 的準備"></a>slack 的準備</h2><p>在這裡假設你已經有 slack 頻道，我們從 <a target="_blank" rel="noopener" href="https://my.slack.com/services/new/hubot">https://my.slack.com/services/new/hubot</a>  slack 網站內的指定頻道申請 hubot 註冊</p>
+<h3 id="輸入機器人的名稱"><a href="#輸入機器人的名稱" class="headerlink" title="輸入機器人的名稱"></a>輸入機器人的名稱</h3><p>在這個頁面將機器人的組態設定，Username 輸入：<code>cube-hubot</code>，當然你也可以自訂名稱，接著按下「Add Hubot Integration」按鈕</p>
+<p><img data-src="/images/bot/1.png"></p>
+<h3 id="查看-slack-token-或自訂圖標"><a href="#查看-slack-token-或自訂圖標" class="headerlink" title="查看 slack token 或自訂圖標"></a>查看 slack token 或自訂圖標</h3><p>在這一頁面，可以取得環境變數 <code>HUBOT_SLACK_TOKEN</code></p>
+<p><img data-src="/images/bot/2.png"></p>
+<p>確認之後，就可以儲存，但務必要將 <code>HUBOT_SLACK_TOKEN</code> 的值複製起來，方便之後在程式上的使用。</p>
+<!-- HUBOT_SLACK_TOKEN=xoxb-449059655973-621518662496-Ufvfi12DA31agVcphJLzFZL8 -->
+
+<h3 id="本機端測試"><a href="#本機端測試" class="headerlink" title="本機端測試"></a>本機端測試</h3><p>安裝 <code>hubot-slack</code> 套件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn add hubot-slack</span><br></pre></td></tr></table></figure>
+
+<p>然後我們再拿剛剛建立出來的 <code>HUBOT_SLACK_TOKEN</code> 令牌將這組 token 放在全域，啟動看看 hubot</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ export HUBOT_SLACK_TOKEN=xoxb-*********</span><br><span class="line">$ ./bin/hubot --adapter slack</span><br></pre></td></tr></table></figure>
+
+<p>輸入以下的指令，將 hubot 透過 adapter 串接起 slack 執行程序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ HUBOT_SLACK_TOKEN=xoxb-********* ./bin/hubot --adapter slack</span><br></pre></td></tr></table></figure>
+
+<p>然後可以打開 slack 的 hubot 對話看看，請輸入 <code>ping</code>，這時候機器人回你 <code>PONG</code> 時就代表成功了。</p>
+<p><img data-src="/images/bot/4.png"></p>
+<h2 id="部署到-Heroku"><a href="#部署到-Heroku" class="headerlink" title="部署到 Heroku"></a>部署到 Heroku</h2><p>我們完成了在本機端的成功測試，因為我們不太可能一直在本機端一直開著服務，在這個步驟則是將專案程式推送到 heroku 雲端服務器上，也比較方便使用，首先在 heroku 登入之後新增一個 app</p>
+<p><img data-src="/images/bot/3.png"></p>
+<p>使用 <code>heroku cli</code> 登入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">heroku login</span><br><span class="line"> ›   Warning: heroku update available from 7.22.4 to 7.24.1.</span><br><span class="line">heroku: Press any key to open up the browser to login or q to exit:</span><br><span class="line">Opening browser to https://cli-auth.heroku.com/auth/browser/4b02d9c9-2e5d-4b84-9b93-4bd8dc64eb46...</span><br><span class="line">Logging in... done</span><br><span class="line">Logged in as xxxxxxx@gmail.com</span><br></pre></td></tr></table></figure>
+
+<p>將程式推上 heroku</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ cd cube-hubot</span><br><span class="line">$ git init</span><br><span class="line">$ heroku git:remote -a cube-hubot</span><br><span class="line">$ git add .</span><br><span class="line">$ git commit -am &quot;hubot init&quot;</span><br><span class="line">$ git push heroku master</span><br></pre></td></tr></table></figure>
+
+<p>heroku 設定 HUBOT_SLACK_TOKEN 環境變數</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ heroku config:add HUBOT_SLACK_TOKEN=xoxb-*********</span><br><span class="line">$ heroku config:add HEROKU_URL=https://cube-hubot.herokuapp.com</span><br><span class="line">$ heroku config:set HUBOT_HEROKU_KEEPALIVE_URL=$(heroku apps:info -s | grep web_url | cut -d= -f2)</span><br><span class="line">$ heroku config</span><br></pre></td></tr></table></figure>
+
+<p>此時你就可以發現你的 slack 上的 hubot 已經上線了，那麼你就可以照著剛剛本機端測試一樣的方式看看。<br>打開 slack 的 hubot 對話輸入 <code>ping</code>，這時候機器人回你 <code>PONG</code> 時就代表成功了。</p>
+<p><img data-src="/images/bot/5.png"></p>
+<p>由於 <code>ping</code> 與 <code>PONG</code> 的一來一回的對話是預設的，不免俗的希望機器人有更多豐富的內容通知。</p>
+<p>所以，有了這麼棒的聊天機器人環境，我們就可以在專案上的 <code>scripts</code> 資料夾裡寫點程式讓機器人回應一下</p>
+<h2 id="哈囉機器人來跟我對話吧"><a href="#哈囉機器人來跟我對話吧" class="headerlink" title="哈囉機器人來跟我對話吧"></a>哈囉機器人來跟我對話吧</h2><p>由於 hubot 的預設程式是用 coffeescript 語法，而這個語言可以到 <a target="_blank" rel="noopener" href="https://coffeescript.org/">這裡學習Coffeescript</a>，相信你也可以學習很快。那麼接下來請在  <code>scripts</code>  資料夾新增一個 <code>hello.coffee</code> 檔案，內容輸入</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = (robot) -&gt;  </span><br><span class="line">  robot.<span class="property">respond</span> /hello/i, (msg) -&gt;  </span><br><span class="line">    msg.<span class="property">send</span> <span class="string">&quot;world!&quot;</span>  </span><br></pre></td></tr></table></figure>
+
+<p>這個意思是全域的讓 hubot 等待監聽用戶輸入 <code>hello</code>，確認跟文字相符之後，就回傳一個叫 <code>world!</code> 的字眼。將檔案存檔之後，請將它推上 heroku </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git add .</span><br><span class="line">$ git commit -am &quot;add hello file&quot;</span><br><span class="line">$ git push heroku master</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="/images/bot/6.png"></p>
+<p>輸入 <code>hello</code> 就會回傳 <code>world!</code>。</p>
+<p>good. 大功告成喔，如此一來，在這環境之下，可以撰寫一些希望機器人幫你做事的服務，比如查氣象、查股價、查youtube影片、查照片 等等，聽起來很美妙對吧！</p>
+<h2 id="注意事項"><a href="#注意事項" class="headerlink" title="注意事項"></a>注意事項</h2><ul>
+<li>如果在創建 hubot 沒有將 adapter 適配器裝上 slack 的話，請修改專案的 <code>Procfile</code> 檔案填入：<code>web: bin/hubot -a slack</code> ，這個更改之後在推到 heroku <code>git push heroku master</code></li>
+<li>heroku 的免費方案是每 24 小時就會停機 6 小時，我們可以使用 <code>hubot-heroku-keepalive</code> 套件讓他維持 keep alive 維持活著狀態。</li>
+</ul>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/hubotio/hubot">Hubot on github</a></li>
+<li><a target="_blank" rel="noopener" href="https://qiita.com/bouzuya/items/2a200c9e8a45e2478bc2">Hubot を Heroku で動かして Slack から話す</a></li>
+<li><a target="_blank" rel="noopener" href="https://monicagranbois.com/blog/bots/using-hubot-with-slack/">使用Hubot與鬆弛</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>作者： </strong>Helen
+  </li>
+  <li class="post-copyright-link">
+      <strong>文章連結：</strong>
+      <a href="https://weijutu.github.io/2019/04/30/bot/hubot-02-heroku-slack/" title="用 Hubot 打造聊天機器人#2 - hubot 專案部署到 heroku 連接 slack 聊天通訊軟體">https://weijutu.github.io/2019/04/30/bot/hubot-02-heroku-slack/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/hubot/" rel="tag"># hubot</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/04/29/bot/hubot-01-install/" rel="prev" title="用 Hubot 打造聊天機器人#1 - 基礎介紹與安裝">
+                  <i class="fa fa-chevron-left"></i> 用 Hubot 打造聊天機器人#1 - 基礎介紹與安裝
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/01/26/docker/docker-01-start/" rel="next" title="Docker#1 - 初識 Docker">
+                  Docker#1 - 初識 Docker <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Helen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

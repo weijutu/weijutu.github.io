@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/cube_logo_v2.png">
+  <link rel="mask-icon" href="/images/cube_logo_v2.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/yellow/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"weijutu.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="在上幾篇完成了 mysql  的 CRUD 的四大操作，本篇就來個輕鬆一點的應用，在這篇介紹使用 nodemailer 套件透過  gmail 來發送電子信箱，在安裝跟實作上也相當容易，我們透過 https:&#x2F;&#x2F;github.com&#x2F;andris9&#x2F;Nodemailer 來講解，在運用上也無需再重新打造輪子，學習如何使用即可。 在這邊先建立一個目錄夾 nodejs-nodemailer ，接著再指">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Node.js 系列學習日誌#12 - 使用 nodemailer 套件透過 gmail 發送電子信箱">
+<meta property="og:url" content="https://weijutu.github.io/2017/07/24/nodejs/nodejs-12-nodemailer/index.html">
+<meta property="og:site_name" content="丸匠筆記">
+<meta property="og:description" content="在上幾篇完成了 mysql  的 CRUD 的四大操作，本篇就來個輕鬆一點的應用，在這篇介紹使用 nodemailer 套件透過  gmail 來發送電子信箱，在安裝跟實作上也相當容易，我們透過 https:&#x2F;&#x2F;github.com&#x2F;andris9&#x2F;Nodemailer 來講解，在運用上也無需再重新打造輪子，學習如何使用即可。 在這邊先建立一個目錄夾 nodejs-nodemailer ，接著再指">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/52.png">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/53.png">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/54.png">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/55.png">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/56.png">
+<meta property="article:published_time" content="2017-07-23T16:12:00.000Z">
+<meta property="article:modified_time" content="2022-09-04T01:16:48.895Z">
+<meta property="article:author" content="Helen">
+<meta property="article:tag" content="Node.js">
+<meta property="article:tag" content="鐵人賽">
+<meta property="article:tag" content="nodemailer">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://weijutu.github.io/images/nodejs/52.png">
+
+
+<link rel="canonical" href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-12-nodemailer/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://weijutu.github.io/2017/07/24/nodejs/nodejs-12-nodemailer/","path":"2017/07/24/nodejs/nodejs-12-nodemailer/","title":"Node.js 系列學習日誌#12 - 使用 nodemailer 套件透過 gmail 發送電子信箱"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Node.js 系列學習日誌#12 - 使用 nodemailer 套件透過 gmail 發送電子信箱 | 丸匠筆記</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72890173-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-72890173-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">丸匠筆記</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">a > 1, a ^ n = ∞</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">參考資料：</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Helen"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">Helen</p>
+  <div class="site-description" itemprop="description">天天吃番茄，天天有進步</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/weijutu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;weijutu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-12-nodemailer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="Helen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="丸匠筆記">
+      <meta itemprop="description" content="天天吃番茄，天天有進步">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Node.js 系列學習日誌#12 - 使用 nodemailer 套件透過 gmail 發送電子信箱 | 丸匠筆記">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        
+        <h1 class="post-title" itemprop="name headline">
+          Node.js 系列學習日誌#12 - 使用 nodemailer 套件透過 gmail 發送電子信箱
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2017-07-24 00:12:00" itemprop="dateCreated datePublished" datetime="2017-07-24T00:12:00+08:00">2017-07-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-09-04 09:16:48" itemprop="dateModified" datetime="2022-09-04T09:16:48+08:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Node-js/" itemprop="url" rel="index"><span itemprop="name">Node.js</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+
+        
+
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>在上幾篇完成了 mysql  的 CRUD 的四大操作，本篇就來個輕鬆一點的應用，在這篇介紹使用 nodemailer 套件透過  gmail 來發送電子信箱，在安裝跟實作上也相當容易，我們透過 <a target="_blank" rel="noopener" href="https://github.com/andris9/Nodemailer">https://github.com/andris9/Nodemailer</a> 來講解，在運用上也無需再重新打造輪子，學習如何使用即可。</p>
+<p>在這邊先建立一個目錄夾 nodejs-nodemailer ，接著再指令將 package.json 建立起來 （本篇不著重在如何建立 package.json ，如需安裝操作請見 <a target="_blank" rel="noopener" href="http://ithelp.ithome.com.tw/ironman7/app/article/all/recent/10158140">http://ithelp.ithome.com.tw/ironman7/app/article/all/recent/10158140</a> ）。由於我們要安裝 nodemailer 套件，因此下指令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$npm</span> install —save node mailer</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="/images/nodejs/52.png"></p>
+<p>其中 —save 會將 nodemailer 相依套件新增到 package.json 檔案裡的 dependencies 項目裡， 如下圖所示：</p>
+<p><img data-src="/images/nodejs/53.png"></p>
+<p>安裝完成之後，我們就可以來寫程式的部分了，可以看到上圖寫的 “start”: “node email” ，在這邊我預定起始點是用 email.js ，因此請在根目錄下建立 email.js 檔案。我們初步的思考是這樣：</p>
+<ul>
+<li>引入 nodemailer 套件</li>
+<li>宣告發信的物件 （服務採用 gmail）</li>
+<li>基本參數設定 (包含內文)</li>
+<li>送出發信事件</li>
+</ul>
+<p>我們直接看一下程式的部分：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//引用 nodemailer</span></span><br><span class="line"><span class="keyword">var</span> nodemailer = <span class="built_in">require</span>(<span class="string">&#x27;nodemailer&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//宣告發信物件</span></span><br><span class="line"><span class="keyword">var</span> transporter = nodemailer.<span class="title function_">createTransport</span>(&#123;</span><br><span class="line">    <span class="attr">service</span>: <span class="string">&#x27;Gmail&#x27;</span>,</span><br><span class="line">    <span class="attr">auth</span>: &#123;</span><br><span class="line">        <span class="attr">user</span>: ‘account@gmail.<span class="property">com</span><span class="string">&#x27;,</span></span><br><span class="line"><span class="string">        pass: ‘yourpassword&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> options = &#123;</span><br><span class="line">    <span class="comment">//寄件者</span></span><br><span class="line">    <span class="attr">from</span>: <span class="string">&#x27;account1@gmail.com &#x27;</span>,</span><br><span class="line">    <span class="comment">//收件者</span></span><br><span class="line">    <span class="attr">to</span>: <span class="string">&#x27;account2@gmail.com&#x27;</span>,</span><br><span class="line">    <span class="comment">//副本</span></span><br><span class="line">    <span class="attr">cc</span>: <span class="string">&#x27;account3@gmail.com&#x27;</span>,</span><br><span class="line">    <span class="comment">//密件副本</span></span><br><span class="line">    <span class="attr">bcc</span>: <span class="string">&#x27;account4@gmail.com&#x27;</span>,</span><br><span class="line">    <span class="comment">//主旨</span></span><br><span class="line">    <span class="attr">subject</span>: <span class="string">&#x27;這是 node.js 發送的測試信件&#x27;</span>, <span class="comment">// Subject line</span></span><br><span class="line">    <span class="comment">//純文字</span></span><br><span class="line">    <span class="attr">text</span>: <span class="string">&#x27;Hello world2&#x27;</span>, <span class="comment">// plaintext body</span></span><br><span class="line">    <span class="comment">//嵌入 html 的內文</span></span><br><span class="line">    <span class="attr">html</span>: <span class="string">&#x27;&lt;h2&gt;Why and How&lt;/h2&gt; &lt;p&gt;The &lt;a href=&quot;http://en.wikipedia.org/wiki/Lorem_ipsum&quot; title=&quot;Lorem ipsum - Wikipedia, the free encyclopedia&quot;&gt;Lorem ipsum&lt;/a&gt; text is typically composed of pseudo-Latin words. It is commonly used as placeholder text to examine or demonstrate the visual effects of various graphic design. Since the text itself is meaningless, the viewers are therefore able to focus on the overall layout without being attracted to the text.&lt;/p&gt;&#x27;</span>,</span><br><span class="line">    <span class="comment">//附件檔案</span></span><br><span class="line">    <span class="attr">attachments</span>: [ &#123;</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;text01.txt&#x27;</span>,</span><br><span class="line">        <span class="attr">content</span>: <span class="string">&#x27;聯候家上去工的調她者壓工，我笑它外有現，血有到同，民由快的重觀在保導然安作但。護見中城備長結現給都看面家銷先然非會生東一無中；內他的下來最書的從人聲觀說的用去生我，生節他活古視心放十壓心急我我們朋吃，毒素一要溫市歷很爾的房用聽調就層樹院少了紀苦客查標地主務所轉，職計急印形。團著先參那害沒造下至算活現興質美是為使！色社影；得良灣……克卻人過朋天點招？不族落過空出著樣家男，去細大如心發有出離問歡馬找事&#x27;</span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;unnamed.jpg&#x27;</span>,</span><br><span class="line">        <span class="attr">path</span>: <span class="string">&#x27;/Users/Weiju/Pictures/unnamed.jpg&#x27;</span></span><br><span class="line">    &#125;]</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//發送信件方法</span></span><br><span class="line">transporter.<span class="title function_">sendMail</span>(options, <span class="keyword">function</span>(<span class="params">error, info</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>(error)&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(error);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;訊息發送: &#x27;</span> + info.<span class="property">response</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>可以看到引入的 nodemailer 的是使用 nodemailer.createTransport 物件先建立好發信的服務 service 為 Gmail，並且透過 auth 建立 gmail 登入的帳號密碼，接著宣告一下收件者 （to）、副本（cc）、密件副本（bcc）、寄件者（from），當然還有主旨 (Subject)、內文(text, html)、附件檔案（attachments）</p>
+<p>最後發信結果，就如   package.json 上的 scripts.start 指令，下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$node email</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="/images/nodejs/54.png"></p>
+<p>此時，發送結果會如訊息所說，我們再看看信件收到的樣子，由於附件傳送了兩筆，可以看到  unnamed.jpg  及 text01.txt  已經接收到了</p>
+<p><img data-src="/images/nodejs/55.png"></p>
+<p>其中 text01.txt  是直接在程式上面輸入純文字，我們來看看是否有真的寫入：</p>
+<p><img data-src="/images/nodejs/56.png"></p>
+<p>更多應用，稍等回來～</p>
+<h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><p><a target="_blank" rel="noopener" href="http://www.richyli.com/tool/loremipsum/">http://www.richyli.com/tool/loremipsum/</a><br><a target="_blank" rel="noopener" href="https://github.com/andris9/Nodemailer">https://github.com/andris9/Nodemailer</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>作者： </strong>Helen
+  </li>
+  <li class="post-copyright-link">
+      <strong>文章連結：</strong>
+      <a href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-12-nodemailer/" title="Node.js 系列學習日誌#12 - 使用 nodemailer 套件透過 gmail 發送電子信箱">https://weijutu.github.io/2017/07/24/nodejs/nodejs-12-nodemailer/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Node-js/" rel="tag"># Node.js</a>
+              <a href="/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/" rel="tag"># 鐵人賽</a>
+              <a href="/tags/nodemailer/" rel="tag"># nodemailer</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/07/24/nodejs/nodejs-11-mysql-crud-update/" rel="prev" title="Node.js 系列學習日誌#11 - MySQL 操作: 更新">
+                  <i class="fa fa-chevron-left"></i> Node.js 系列學習日誌#11 - MySQL 操作: 更新
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/07/24/nodejs/nodejs-13-fs/" rel="next" title="Node.js 系列學習日誌#13 - 核心模組檔案系統 fs">
+                  Node.js 系列學習日誌#13 - 核心模組檔案系統 fs <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Helen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

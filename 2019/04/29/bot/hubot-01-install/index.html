@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/cube_logo_v2.png">
+  <link rel="mask-icon" href="/images/cube_logo_v2.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/yellow/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"weijutu.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="現在市面上超多種聊天機器人的工具，最近發現了這套 Hubot，Hubot 是 Github 所開發的，原本是用來自動化的管理公司各項任務項目的聊天機器人，比如部署網站、翻譯等等的，這套工具開源之後，我們可以基於它來開發各式各樣的超實用的機器人服務。官方網站 的文檔裡有詳細的步驟介紹，在本篇逐一的步驟是介紹說明。 學習內容大綱 安裝 hubot 建立 hubot 專案 運行 hubot">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="用 Hubot 打造聊天機器人#1 - 基礎介紹與安裝">
+<meta property="og:url" content="https://weijutu.github.io/2019/04/29/bot/hubot-01-install/index.html">
+<meta property="og:site_name" content="丸匠筆記">
+<meta property="og:description" content="現在市面上超多種聊天機器人的工具，最近發現了這套 Hubot，Hubot 是 Github 所開發的，原本是用來自動化的管理公司各項任務項目的聊天機器人，比如部署網站、翻譯等等的，這套工具開源之後，我們可以基於它來開發各式各樣的超實用的機器人服務。官方網站 的文檔裡有詳細的步驟介紹，在本篇逐一的步驟是介紹說明。 學習內容大綱 安裝 hubot 建立 hubot 專案 運行 hubot">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2019-04-29T15:07:00.000Z">
+<meta property="article:modified_time" content="2022-09-04T01:16:48.809Z">
+<meta property="article:author" content="Helen">
+<meta property="article:tag" content="hubot">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://weijutu.github.io/2019/04/29/bot/hubot-01-install/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://weijutu.github.io/2019/04/29/bot/hubot-01-install/","path":"2019/04/29/bot/hubot-01-install/","title":"用 Hubot 打造聊天機器人#1 - 基礎介紹與安裝"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>用 Hubot 打造聊天機器人#1 - 基礎介紹與安裝 | 丸匠筆記</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72890173-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-72890173-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">丸匠筆記</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">a > 1, a ^ n = ∞</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%B8%E7%BF%92%E5%85%A7%E5%AE%B9%E5%A4%A7%E7%B6%B1"><span class="nav-number">1.</span> <span class="nav-text">學習內容大綱</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BC%89%E5%AE%89%E8%A3%9D"><span class="nav-number">2.</span> <span class="nav-text">下載安裝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B-hubot-%E5%B0%88%E6%A1%88"><span class="nav-number">3.</span> <span class="nav-text">建立 hubot 專案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%81%8B%E8%A1%8C-hubot"><span class="nav-number">4.</span> <span class="nav-text">運行 hubot</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83"><span class="nav-number">5.</span> <span class="nav-text">參考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Helen"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">Helen</p>
+  <div class="site-description" itemprop="description">天天吃番茄，天天有進步</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/weijutu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;weijutu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2019/04/29/bot/hubot-01-install/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="Helen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="丸匠筆記">
+      <meta itemprop="description" content="天天吃番茄，天天有進步">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="用 Hubot 打造聊天機器人#1 - 基礎介紹與安裝 | 丸匠筆記">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        
+        <h1 class="post-title" itemprop="name headline">
+          用 Hubot 打造聊天機器人#1 - 基礎介紹與安裝
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2019-04-29 23:07:00" itemprop="dateCreated datePublished" datetime="2019-04-29T23:07:00+08:00">2019-04-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-09-04 09:16:48" itemprop="dateModified" datetime="2022-09-04T09:16:48+08:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/hubot/" itemprop="url" rel="index"><span itemprop="name">hubot</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+
+        
+
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>現在市面上超多種聊天機器人的工具，最近發現了這套 Hubot，Hubot 是 Github 所開發的，原本是用來自動化的管理公司各項任務項目的聊天機器人，比如部署網站、翻譯等等的，這套工具開源之後，我們可以基於它來開發各式各樣的超實用的機器人服務。<a target="_blank" rel="noopener" href="https://hubot.github.com/docs/">官方網站</a> 的文檔裡有詳細的步驟介紹，在本篇逐一的步驟是介紹說明。</p>
+<h2 id="學習內容大綱"><a href="#學習內容大綱" class="headerlink" title="學習內容大綱"></a>學習內容大綱</h2><ol>
+<li>安裝 hubot</li>
+<li>建立 hubot 專案</li>
+<li>運行 hubot</li>
+</ol>
+<span id="more"></span>
+
+<h2 id="下載安裝"><a href="#下載安裝" class="headerlink" title="下載安裝"></a>下載安裝</h2><p>首先 Hubot 的安裝需要必要套件</p>
+<ol>
+<li>node.js</li>
+<li>redis</li>
+<li>coffeescript</li>
+<li>yeoman</li>
+<li>generator-hubot</li>
+</ol>
+<p>進入命令提示字元輸入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo npm install -g yo generator-hubot</span><br></pre></td></tr></table></figure>
+
+<h2 id="建立-hubot-專案"><a href="#建立-hubot-專案" class="headerlink" title="建立 hubot 專案"></a>建立 hubot 專案</h2><p>建立資料夾</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir cube-hubot</span><br><span class="line">$ cd cube-hubot</span><br><span class="line">$ yo hubot --adapter=slack</span><br></pre></td></tr></table></figure>
+
+<p>使用了 <code>yo</code> 會開始初始化專案</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">? ==========================================================================</span><br><span class="line">We&#x27;re constantly looking for ways to make yo better!</span><br><span class="line">May we anonymously report usage statistics to improve the tool over time?</span><br><span class="line">More info: https://github.com/yeoman/insight &amp; http://yeoman.io</span><br><span class="line"> (Y/n)</span><br></pre></td></tr></table></figure>
+
+<p>輸入 <code>Y</code> 之後，就會繼續陸續詢問項目</p>
+<ul>
+<li>Owner: 名字</li>
+<li>Bot name: cube-hubot</li>
+<li>Description: 描述</li>
+<li>Bot adapter: 預設 compfire</li>
+</ul>
+<p>另外，hubot 是採用 <code>coffeescript</code> 做開發，所以務必也需要安裝 <code>coffee-script</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo npm install -g coffee-script</span><br></pre></td></tr></table></figure>
+
+<p>以上完成之後，就可以在資料夾獲得一些檔案，如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">total 32</span><br><span class="line">drwxr-xr-x 12 staff staff  384 Apr 29 23:38 .</span><br><span class="line">drwxr-xr-x 28 staff staff  896 Apr 29 23:35 ..</span><br><span class="line">-rw-r--r--  1 staff staff  197 May 20  2016 .editorconfig</span><br><span class="line">-rw-r--r--  1 staff staff   39 May 20  2016 .gitignore</span><br><span class="line">-rw-r--r--  1 staff staff   27 Apr 29 23:38 Procfile</span><br><span class="line">-rw-r--r--  1 staff staff 7880 Apr 29 23:38 README.md</span><br><span class="line">drwxr-xr-x  4 staff staff  128 Apr 29 23:38 bin</span><br><span class="line">-rw-r--r--  1 staff staff  213 Apr 29 23:38 external-scripts.json</span><br><span class="line">-rw-r--r--  1 staff staff    2 Apr 29 23:38 hubot-scripts.json</span><br><span class="line">drwxr-xr-x 87 staff staff 2784 Apr 29 23:38 node_modules</span><br><span class="line">-rw-r--r--  1 staff staff  599 Apr 29 23:38 package.json</span><br><span class="line">drwxr-xr-x  3 staff staff   96 Apr 29 23:38 scripts</span><br></pre></td></tr></table></figure>
+
+<p>資料夾結構：</p>
+<ul>
+<li>bin: 運行 hubot 腳本</li>
+<li>node_modules: 套件文件</li>
+<li>scripts: 自定義的腳本</li>
+<li>external_scripts.json: 外部應用的腳本</li>
+<li>hubot-scripts.json: 沒有在使用了</li>
+<li>package.json: 全域配置資訊</li>
+</ul>
+<!-- 在 local 端要啟動 hubot 之前，務必先將 redis-server 打開 -->
+
+<p>接著便可以輸入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bin/hubot</span><br></pre></td></tr></table></figure>
+
+<p>如果你有出現以下的問題時</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[Mon Apr 29 2019 23:48:00 GMT+0800 (CST)] ERROR ReplyError: MISCONF Redis is configured to save RDB snapshots, but is currently not able to persist on disk. Commands that may modify the data set are disabled. Please check Redis logs for details about the error.</span><br><span class="line">  at parseError (/cube-hubot/node_modules/redis-parser/lib/parser.js:193:12)</span><br><span class="line">  at parseType (/cube-hubot/node_modules/redis-parser/lib/parser.js:303:14)</span><br></pre></td></tr></table></figure>
+
+<p>請在另一個命令提示字元輸入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ redis-cli</span><br><span class="line"></span><br><span class="line">並輸入</span><br><span class="line"></span><br><span class="line">config set stop-writes-on-bgsave-error no</span><br></pre></td></tr></table></figure>
+
+<p>接著我們打開 <code>package.json</code> 檔案內看看，預設有一些套件可以安裝</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;cube-hubot&quot;,</span><br><span class="line">  &quot;version&quot;: &quot;0.0.0&quot;,</span><br><span class="line">  &quot;private&quot;: true,</span><br><span class="line">  &quot;author&quot;: &quot;xxxxxx&quot;,</span><br><span class="line">  &quot;description&quot;: &quot;A simple helpful robot for your Company&quot;,</span><br><span class="line">  &quot;dependencies&quot;: &#123;</span><br><span class="line">    &quot;hubot&quot;: &quot;^3.3.2&quot;,</span><br><span class="line">    &quot;hubot-diagnostics&quot;: &quot;^1.0.0&quot;,</span><br><span class="line">    &quot;hubot-google-images&quot;: &quot;^0.2.7&quot;,</span><br><span class="line">    &quot;hubot-google-translate&quot;: &quot;^0.2.1&quot;,</span><br><span class="line">    &quot;hubot-help&quot;: &quot;^1.0.1&quot;,</span><br><span class="line">    &quot;hubot-heroku-keepalive&quot;: &quot;^1.0.3&quot;,</span><br><span class="line">    &quot;hubot-maps&quot;: &quot;0.0.3&quot;,</span><br><span class="line">    &quot;hubot-pugme&quot;: &quot;^0.1.1&quot;,</span><br><span class="line">    &quot;hubot-redis-brain&quot;: &quot;^1.0.0&quot;,</span><br><span class="line">    &quot;hubot-rules&quot;: &quot;^1.0.0&quot;,</span><br><span class="line">    &quot;hubot-scripts&quot;: &quot;^2.17.2&quot;,</span><br><span class="line">    &quot;hubot-shipit&quot;: &quot;^0.2.1&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;engines&quot;: &#123;</span><br><span class="line">    &quot;node&quot;: &quot;0.10.x&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>輸入 <code>yarn install</code>  就可以將這些套件安裝起來</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn install</span><br></pre></td></tr></table></figure>
+
+<h2 id="運行-hubot"><a href="#運行-hubot" class="headerlink" title="運行 hubot"></a>運行 hubot</h2><p>安裝完畢之後，再檢查一下是不是可以運行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bin/hubot -h</span><br></pre></td></tr></table></figure>
+
+<p>如果可以出現以下的結果，就代表有成功囉</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Usage hubot [options]</span><br><span class="line"></span><br><span class="line">Available options:</span><br><span class="line">  -a, --adapter ADAPTER   The Adapter to use</span><br><span class="line">  -c, --create PATH       Create a deployable hubot</span><br><span class="line">  -d, --disable-httpd     Disable the HTTP server</span><br><span class="line">  -h, --help              Display the help information</span><br><span class="line">  -l, --alias ALIAS       Enable replacing the robot&#x27;s name with alias</span><br><span class="line">  -n, --name NAME         The name of the robot in chat</span><br><span class="line">  -r, --require PATH      Alternative scripts path</span><br><span class="line">  -t, --config-check      Test hubot&#x27;s config to make sure it won&#x27;t fail at startup</span><br><span class="line">  -v, --version           Displays the version of hubot installed</span><br></pre></td></tr></table></figure>
+
+<p>完成之後，下一篇介紹 [hubot 專案部署到 heroku 連接 slack 聊天通訊軟體]</p>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://hubot.github.com/docs/adapters/campfire/">Hubot Documentation</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>作者： </strong>Helen
+  </li>
+  <li class="post-copyright-link">
+      <strong>文章連結：</strong>
+      <a href="https://weijutu.github.io/2019/04/29/bot/hubot-01-install/" title="用 Hubot 打造聊天機器人#1 - 基礎介紹與安裝">https://weijutu.github.io/2019/04/29/bot/hubot-01-install/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/hubot/" rel="tag"># hubot</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/04/27/r/r-googlesheet/" rel="prev" title="R 學習日誌#6 - 如何使用 R 語言存取 Google Sheets">
+                  <i class="fa fa-chevron-left"></i> R 學習日誌#6 - 如何使用 R 語言存取 Google Sheets
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/04/30/bot/hubot-02-heroku-slack/" rel="next" title="用 Hubot 打造聊天機器人#2 - hubot 專案部署到 heroku 連接 slack 聊天通訊軟體">
+                  用 Hubot 打造聊天機器人#2 - hubot 專案部署到 heroku 連接 slack 聊天通訊軟體 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Helen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

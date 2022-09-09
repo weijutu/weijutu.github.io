@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/cube_logo_v2.png">
+  <link rel="mask-icon" href="/images/cube_logo_v2.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/yellow/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"weijutu.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="今天來介紹 express, ejs 實作讀取靜態 JSON 格式資料程式 本章節將會學習到：  使用 ejs 樣板引擎建立檢視頁面 建立 Json 檔案及資料，並採取 &#x2F;api&#x2F;posts 列出所有 json 資料 採取 &#x2F;post&#x2F;:id 取得某一筆資料首先我們先建立一個目錄叫 demo-express-json 的資料夾，然後使用指令進入到 demo-">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Node.js 系列學習日誌#17 - 使用 express, ejs 實作讀取靜態 JSON 格式資料">
+<meta property="og:url" content="https://weijutu.github.io/2017/07/24/nodejs/nodejs-17-ejs-json/index.html">
+<meta property="og:site_name" content="丸匠筆記">
+<meta property="og:description" content="今天來介紹 express, ejs 實作讀取靜態 JSON 格式資料程式 本章節將會學習到：  使用 ejs 樣板引擎建立檢視頁面 建立 Json 檔案及資料，並採取 &#x2F;api&#x2F;posts 列出所有 json 資料 採取 &#x2F;post&#x2F;:id 取得某一筆資料首先我們先建立一個目錄叫 demo-express-json 的資料夾，然後使用指令進入到 demo-">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/68.png">
+<meta property="article:published_time" content="2017-07-23T16:17:00.000Z">
+<meta property="article:modified_time" content="2022-09-04T01:16:48.896Z">
+<meta property="article:author" content="Helen">
+<meta property="article:tag" content="Node.js">
+<meta property="article:tag" content="鐵人賽">
+<meta property="article:tag" content="json">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://weijutu.github.io/images/nodejs/68.png">
+
+
+<link rel="canonical" href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-17-ejs-json/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://weijutu.github.io/2017/07/24/nodejs/nodejs-17-ejs-json/","path":"2017/07/24/nodejs/nodejs-17-ejs-json/","title":"Node.js 系列學習日誌#17 - 使用 express, ejs 實作讀取靜態 JSON 格式資料"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Node.js 系列學習日誌#17 - 使用 express, ejs 實作讀取靜態 JSON 格式資料 | 丸匠筆記</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72890173-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-72890173-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">丸匠筆記</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">a > 1, a ^ n = ∞</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B-josn-%E6%AA%94%E6%A1%88"><span class="nav-number">1.</span> <span class="nav-text">建立 josn 檔案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B-app-js"><span class="nav-number">2.</span> <span class="nav-text">建立 app.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E9%9D%9C%E6%85%8B%E8%B3%87%E6%96%99"><span class="nav-number">3.</span> <span class="nav-text">建立靜態資料</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%B7%E8%A1%8C"><span class="nav-number">4.</span> <span class="nav-text">執行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B5%90%E6%9E%9C"><span class="nav-number">5.</span> <span class="nav-text">結果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99"><span class="nav-number">6.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Helen"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">Helen</p>
+  <div class="site-description" itemprop="description">天天吃番茄，天天有進步</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/weijutu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;weijutu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-17-ejs-json/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="Helen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="丸匠筆記">
+      <meta itemprop="description" content="天天吃番茄，天天有進步">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Node.js 系列學習日誌#17 - 使用 express, ejs 實作讀取靜態 JSON 格式資料 | 丸匠筆記">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        
+        <h1 class="post-title" itemprop="name headline">
+          Node.js 系列學習日誌#17 - 使用 express, ejs 實作讀取靜態 JSON 格式資料
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2017-07-24 00:17:00" itemprop="dateCreated datePublished" datetime="2017-07-24T00:17:00+08:00">2017-07-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-09-04 09:16:48" itemprop="dateModified" datetime="2022-09-04T09:16:48+08:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Node-js/" itemprop="url" rel="index"><span itemprop="name">Node.js</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+
+        
+
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>今天來介紹 express, ejs 實作讀取靜態 JSON 格式資料程式</p>
+<p>本章節將會學習到：</p>
+<ul>
+<li>使用 ejs 樣板引擎建立檢視頁面</li>
+<li>建立 Json 檔案及資料，並採取 &#x2F;api&#x2F;posts 列出所有 json 資料</li>
+<li>採取 &#x2F;post&#x2F;:id 取得某一筆資料<br>首先我們先建立一個目錄叫 demo-express-json 的資料夾，然後使用指令進入到 demo-express-json 資料夾裡面，接著安裝 express 框架以及 ejs 的樣板引擎</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$npm</span> install —save express ejs</span><br></pre></td></tr></table></figure>
+
+<h3 id="建立-josn-檔案"><a href="#建立-josn-檔案" class="headerlink" title="建立 josn 檔案"></a>建立 josn 檔案</h3><p>建立完成之後，我們在 demo-express-json 會出現 node_module 資料夾，裡面則是有 express, ejs 套件相關檔案，接下來在根目錄下建立一個  posts.json 格式檔案，資料先假定設定為：</p>
+<p>（文字是用亂數假文產生器弄的，因此無需認真讀囉）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">     &#123;</span><br><span class="line">       &quot;title&quot;: &quot;會濟報好大必者政下二&quot;,</span><br><span class="line">       &quot;id&quot;: &quot;fdb61c16-4bba-11e4-9e35-164230d1df67&quot;,</span><br><span class="line">       &quot;content&quot;: &quot;容有那一氣持地來於結主了友如頭……院還地入。出乎機富事的著度同禮、時在科種力事再數總源式孩？&quot;</span><br><span class="line">     &#125;,</span><br><span class="line">     &#123;</span><br><span class="line">       &quot;title&quot;: &quot;主覺問我的食什期和&quot;,</span><br><span class="line">       &quot;id&quot;: &quot;0bc365ac-4bbb-11e4-9e35-164230d1df67&quot;,</span><br><span class="line">       &quot;content&quot;: &quot;生老了險實去供考權是車子氣長不別相且員高麼也工家看&quot;</span><br><span class="line">     &#125;,</span><br><span class="line">     &#123;</span><br><span class="line">       &quot;title&quot;: &quot;是實裡在園時傳&quot;,</span><br><span class="line">       &quot;id&quot;: &quot;0ff44786-4bbb-11e4-9e35-164230d1df67&quot;,</span><br><span class="line">       &quot;content&quot;: &quot;不半過何：為濟是在制們。裡得一方出，處師取是你賣而陽&quot;</span><br><span class="line">     &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>這個 json 檔每一筆資料以 title, id, content 參數為主</p>
+<h3 id="建立-app-js"><a href="#建立-app-js" class="headerlink" title="建立 app.js"></a>建立 app.js</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">// express web framework</span><br><span class="line">var express = require(&#x27;express&#x27;);</span><br><span class="line">//讀取 posts.json</span><br><span class="line">var fs = require(&#x27;fs&#x27;);</span><br><span class="line">var app = express();</span><br><span class="line"></span><br><span class="line">//放置靜態網頁</span><br><span class="line">app.use(&#x27;/public&#x27;, express.static(__dirname + &#x27;/public&#x27;));</span><br><span class="line"></span><br><span class="line">//定義網站標題</span><br><span class="line">app.locals.title=&quot;Get json data using express web framework&quot;;</span><br><span class="line"></span><br><span class="line">app.all(&#x27;*&#x27;, function(req, res, next)&#123;</span><br><span class="line">  fs.readFile(&#x27;posts.json&#x27;, function(err, data)&#123;</span><br><span class="line">    res.locals.posts = JSON.parse(data);</span><br><span class="line">    next();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">//網頁主進入點</span><br><span class="line">app.get(&#x27;/&#x27;, function(req, res)&#123;</span><br><span class="line">  //指定 /views/idex.ejs</span><br><span class="line">  res.render(&#x27;index.ejs&#x27;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">//顯示 posts.json 資料</span><br><span class="line">app.get(&#x27;/api/posts&#x27;, function(req, res)&#123;</span><br><span class="line">  res.json(res.locals.posts);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">//當 url 是 /post/:id 時, 取得某一筆資料</span><br><span class="line">app.get(&#x27;/post/:id&#x27;, function(req, res, next)&#123;</span><br><span class="line">  //取得 post.json 資料夾</span><br><span class="line">  res.locals.posts.forEach(function(post)&#123;</span><br><span class="line">    //從 url 取得 id 參數與 posts.json 裡的 id</span><br><span class="line">    if (req.params.id === post.id)&#123;</span><br><span class="line">      //顯示參數為  url 中 id 的 post.id, 那麼顯示部分資料</span><br><span class="line">      res.render(&#x27;post.ejs&#x27;, &#123; post: post &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(3000);</span><br><span class="line">console.log(&#x27;app is listening at localhost:3000...’);</span><br></pre></td></tr></table></figure>
+
+<p>再來是建立檢視資料夾 views，因為我們在 app.js 裡面設定樣板引擎是用 ejs，所以在 views 資料夾裡面新增三個檔案，分別是 header.ejs, index.ejs, footer.ejs</p>
+<p>header.ejs</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">&lt;!doctype html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">  &lt;title&gt;&lt;%= title %&gt;&lt;/title&gt;</span><br><span class="line">  &lt;link rel=&quot;stylesheet&quot; href=&quot;/public/styles.css&quot;&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;header&gt;</span><br><span class="line">  &lt;div class=&quot;container&quot;&gt;</span><br><span class="line">    &lt;h1&gt;&lt;a href=&quot;/&quot;&gt;&lt;%= title %&gt;&lt;/a&gt;&lt;/h1&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/header&gt;</span><br><span class="line"></span><br><span class="line">footer.ejs</span><br><span class="line"></span><br><span class="line">&lt;footer&gt;</span><br><span class="line">  &lt;div class=&quot;container&quot;&gt;</span><br><span class="line">    This is footer side.</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/footer&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br><span class="line">index.ejs</span><br><span class="line"></span><br><span class="line">&lt;% include header %&gt;</span><br><span class="line"></span><br><span class="line">&lt;main role=&quot;main&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;container&quot;&gt;</span><br><span class="line">    &lt;h3&gt;&lt;a href=&quot;/api/posts&quot;&gt;/api/posts&lt;/a&gt;&lt;/h3&gt;</span><br><span class="line">    &lt;% posts.forEach(function(post)&#123; %&gt;</span><br><span class="line">      &lt;h3&gt;</span><br><span class="line">        &lt;a href=&quot;/post/&lt;%= post.id %&gt;&quot;&gt;</span><br><span class="line">          &lt;%= post.title %&gt;</span><br><span class="line">        &lt;/a&gt;</span><br><span class="line">      &lt;/h3&gt;</span><br><span class="line">      &lt;div&gt;&lt;%= post.content %&gt;&lt;/div&gt;</span><br><span class="line">    &lt;% &#125;); %&gt;</span><br><span class="line">  &lt;/main&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;% include footer %&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="建立靜態資料"><a href="#建立靜態資料" class="headerlink" title="建立靜態資料"></a>建立靜態資料</h3><p>在 app.js 檔案裡有一行是</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.use(&#x27;/public&#x27;, express.static(__dirname + &#x27;/public&#x27;));</span><br></pre></td></tr></table></figure>
+
+<p>在做網站的過程，我們會建立 css,js 檔案，在根目錄下建立一個 public，並且在這個檔案增加一個 style.css，去定義一些樣式的方式，我這邊就不太多做 css 的解釋囉。</p>
+<h3 id="執行"><a href="#執行" class="headerlink" title="執行"></a>執行</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$node index.js</span><br></pre></td></tr></table></figure>
+
+<h3 id="結果"><a href="#結果" class="headerlink" title="結果"></a>結果</h3><p><img data-src="/images/nodejs/68.png"></p>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a target="_blank" rel="noopener" href="http://expressjs.com/">http://expressjs.com/</a><br><a target="_blank" rel="noopener" href="http://expressjs.com/4x/api.html#app.locals">http://expressjs.com/4x/api.html#app.locals</a><br><a target="_blank" rel="noopener" href="http://www.richyli.com/tool/loremipsum/">http://www.richyli.com/tool/loremipsum/</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>作者： </strong>Helen
+  </li>
+  <li class="post-copyright-link">
+      <strong>文章連結：</strong>
+      <a href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-17-ejs-json/" title="Node.js 系列學習日誌#17 - 使用 express, ejs 實作讀取靜態 JSON 格式資料">https://weijutu.github.io/2017/07/24/nodejs/nodejs-17-ejs-json/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Node-js/" rel="tag"># Node.js</a>
+              <a href="/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/" rel="tag"># 鐵人賽</a>
+              <a href="/tags/json/" rel="tag"># json</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/07/24/nodejs/nodejs-16-util-inherits/" rel="prev" title="Node.js 系列學習日誌#16 - 基礎工具核心模組 util.inherits 實現原型繼承">
+                  <i class="fa fa-chevron-left"></i> Node.js 系列學習日誌#16 - 基礎工具核心模組 util.inherits 實現原型繼承
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/07/24/nodejs/nodejs-18-express/" rel="next" title="Node.js 系列學習日誌#18 - 使用 Express 實作網頁開發框架">
+                  Node.js 系列學習日誌#18 - 使用 Express 實作網頁開發框架 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Helen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

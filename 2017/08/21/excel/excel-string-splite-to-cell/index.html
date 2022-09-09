@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/cube_logo_v2.png">
+  <link rel="mask-icon" href="/images/cube_logo_v2.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/yellow/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"weijutu.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="今天要介紹的是，如何將字串分割到不同的儲存格，也就是說當你今天遇到一個字串，但是字串裡面有兩個資訊想要各別放 比如以下字串： 1common.delete&#x3D;Delete  結果預計要像這樣  如果你有很多個像這樣的要把字串切割的話，這時候你還會用 Copy &amp; Paste 的做法去貼到不同的欄位嗎？ 以下用個簡單的資料當作例子，我想要將等於的左右兩邊，各別的放到不同的儲存格 1234567">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Excel - 字串分割到不同的儲存格">
+<meta property="og:url" content="https://weijutu.github.io/2017/08/21/excel/excel-string-splite-to-cell/index.html">
+<meta property="og:site_name" content="丸匠筆記">
+<meta property="og:description" content="今天要介紹的是，如何將字串分割到不同的儲存格，也就是說當你今天遇到一個字串，但是字串裡面有兩個資訊想要各別放 比如以下字串： 1common.delete&#x3D;Delete  結果預計要像這樣  如果你有很多個像這樣的要把字串切割的話，這時候你還會用 Copy &amp; Paste 的做法去貼到不同的欄位嗎？ 以下用個簡單的資料當作例子，我想要將等於的左右兩邊，各別的放到不同的儲存格 1234567">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://weijutu.github.io/images/excel/20140523-1.png">
+<meta property="og:image" content="https://weijutu.github.io/images/excel/20140523-2.png">
+<meta property="og:image" content="https://weijutu.github.io/images/excel/20140523-3.png">
+<meta property="og:image" content="https://weijutu.github.io/images/excel/20140523-4.png">
+<meta property="og:image" content="https://weijutu.github.io/images/excel/20140523-5.png">
+<meta property="og:image" content="https://weijutu.github.io/images/excel/20140523-6.png">
+<meta property="article:published_time" content="2017-08-21T01:50:05.000Z">
+<meta property="article:modified_time" content="2022-09-04T01:16:48.833Z">
+<meta property="article:author" content="Helen">
+<meta property="article:tag" content="excel">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://weijutu.github.io/images/excel/20140523-1.png">
+
+
+<link rel="canonical" href="https://weijutu.github.io/2017/08/21/excel/excel-string-splite-to-cell/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://weijutu.github.io/2017/08/21/excel/excel-string-splite-to-cell/","path":"2017/08/21/excel/excel-string-splite-to-cell/","title":"Excel - 字串分割到不同的儲存格"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Excel - 字串分割到不同的儲存格 | 丸匠筆記</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72890173-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-72890173-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">丸匠筆記</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">a > 1, a ^ n = ∞</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E5%AF%A6%E4%BD%9C%E6%96%B9%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">快速實作方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5-%E5%85%88%E5%B0%87%E6%AC%84%E4%BD%8D%E9%81%B8%E5%8F%96%E8%B5%B7%E4%BE%86"><span class="nav-number">1.1.</span> <span class="nav-text">第一步: 先將欄位選取起來</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5-%E6%8C%89%E4%B8%8B-%E8%B3%87%E6%96%99-gt-%E8%B3%87%E6%96%99%E5%89%96%E6%9E%90-%E5%95%9F%E5%8B%95-%E8%B3%87%E6%96%99%E5%89%96%E6%9E%90%E7%B2%BE%E9%9D%88"><span class="nav-number">1.2.</span> <span class="nav-text">第二步: 按下 [資料] &gt; [資料剖析] 啟動 [資料剖析精靈]</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Helen"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">Helen</p>
+  <div class="site-description" itemprop="description">天天吃番茄，天天有進步</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/weijutu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;weijutu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/08/21/excel/excel-string-splite-to-cell/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="Helen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="丸匠筆記">
+      <meta itemprop="description" content="天天吃番茄，天天有進步">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Excel - 字串分割到不同的儲存格 | 丸匠筆記">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        
+        <h1 class="post-title" itemprop="name headline">
+          Excel - 字串分割到不同的儲存格
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2017-08-21 09:50:05" itemprop="dateCreated datePublished" datetime="2017-08-21T09:50:05+08:00">2017-08-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-09-04 09:16:48" itemprop="dateModified" datetime="2022-09-04T09:16:48+08:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Excel/" itemprop="url" rel="index"><span itemprop="name">Excel</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+
+        
+
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>今天要介紹的是，如何將字串分割到不同的儲存格，也就是說當你今天遇到一個字串，但是字串裡面有兩個資訊想要各別放</p>
+<p>比如以下字串：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">common.delete=Delete</span><br></pre></td></tr></table></figure>
+
+<p>結果預計要像這樣</p>
+<p><img data-src="/images/excel/20140523-1.png"></p>
+<p>如果你有很多個像這樣的要把字串切割的話，這時候你還會用 Copy &amp; Paste 的做法去貼到不同的欄位嗎？</p>
+<p>以下用個簡單的資料當作例子，我想要將等於的左右兩邊，各別的放到不同的儲存格</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">common.delete=Delete</span><br><span class="line">common.add=Create</span><br><span class="line">common.modify=Edit</span><br><span class="line">common.name=Name</span><br><span class="line">common.change=Change</span><br><span class="line">common.manage=Management</span><br><span class="line">common.search=Search</span><br><span class="line">btn.cancel=Cancel</span><br><span class="line">btn.Submit=Submit</span><br></pre></td></tr></table></figure>
+
+<h3 id="快速實作方法"><a href="#快速實作方法" class="headerlink" title="快速實作方法"></a>快速實作方法</h3><h4 id="第一步-先將欄位選取起來"><a href="#第一步-先將欄位選取起來" class="headerlink" title="第一步: 先將欄位選取起來"></a>第一步: 先將欄位選取起來</h4><p>請先將資料擺在 A 欄位那邊，然後滑鼠將資料選取起來，如下圖所示：</p>
+<p><img data-src="/images/excel/20140523-2.png"></p>
+<h4 id="第二步-按下-資料-gt-資料剖析-啟動-資料剖析精靈"><a href="#第二步-按下-資料-gt-資料剖析-啟動-資料剖析精靈" class="headerlink" title="第二步: 按下 [資料] &gt; [資料剖析] 啟動 [資料剖析精靈]"></a>第二步: 按下 [資料] &gt; [資料剖析] 啟動 [資料剖析精靈]</h4><p>接著他就會開資料剖析精靈，超簡單，三個小步驟而已<br>(步驟 3 之 1)：我們的目標是要分隔，所以選第一個，如果直接按完成的話，事實上跟我們需求不符，因為他會利用預設的 tab 區分隔，所以請繼續按下一步</p>
+<p><img data-src="/images/excel/20140523-3.png"></p>
+<p>(步驟 3 之 2) ：這邊我們要確定資料分隔的符號是什麼</p>
+<p><img data-src="/images/excel/20140523-4.png"></p>
+<p>(步驟 3 之 3)：最後可以看看預覽分割的結果，確定之後就按完成按鈕</p>
+<p><img data-src="/images/excel/20140523-5.png"></p>
+<p>結果: 一秒完成 !</p>
+<p><img data-src="/images/excel/20140523-6.png"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>作者： </strong>Helen
+  </li>
+  <li class="post-copyright-link">
+      <strong>文章連結：</strong>
+      <a href="https://weijutu.github.io/2017/08/21/excel/excel-string-splite-to-cell/" title="Excel - 字串分割到不同的儲存格">https://weijutu.github.io/2017/08/21/excel/excel-string-splite-to-cell/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/excel/" rel="tag"># excel</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/07/26/nodejs/nodejs-30-kp-api/" rel="prev" title="Node.js 系列學習日誌#30 - 取得野生柯P相簿 API範例">
+                  <i class="fa fa-chevron-left"></i> Node.js 系列學習日誌#30 - 取得野生柯P相簿 API範例
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/08/21/excel/excel-get-value-by-fn/" rel="next" title="Excel - 使用函數取得不重複值並計算總計">
+                  Excel - 使用函數取得不重複值並計算總計 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Helen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

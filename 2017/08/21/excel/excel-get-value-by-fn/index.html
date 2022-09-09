@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/cube_logo_v2.png">
+  <link rel="mask-icon" href="/images/cube_logo_v2.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/yellow/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"weijutu.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="有沒有使用 Excel 輸入資料後，想要把某一列的資料做不重複的篩選？若您剛好有這個疑問，來到這裡算是走對地方了～ 我們有很簡單的例子一步一步的說明 前提不採取樞扭分析表，請利用函數實作 說明今天有一個資料表欄位有「類型」、「數量」、「名稱」，需要做一些統計，並且在一般資料區塊下方，當有輸入時，必須同時同步計算以下兩項區域  依照類型將名稱分類，表格呈現上方列為「類型」、左方為「名稱」 取得不重複">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Excel - 使用函數取得不重複值並計算總計">
+<meta property="og:url" content="https://weijutu.github.io/2017/08/21/excel/excel-get-value-by-fn/index.html">
+<meta property="og:site_name" content="丸匠筆記">
+<meta property="og:description" content="有沒有使用 Excel 輸入資料後，想要把某一列的資料做不重複的篩選？若您剛好有這個疑問，來到這裡算是走對地方了～ 我們有很簡單的例子一步一步的說明 前提不採取樞扭分析表，請利用函數實作 說明今天有一個資料表欄位有「類型」、「數量」、「名稱」，需要做一些統計，並且在一般資料區塊下方，當有輸入時，必須同時同步計算以下兩項區域  依照類型將名稱分類，表格呈現上方列為「類型」、左方為「名稱」 取得不重複">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://weijutu.github.io/images/excel/20140521-1.png">
+<meta property="og:image" content="https://weijutu.github.io/images/excel/20140521-2.png">
+<meta property="og:image" content="https://weijutu.github.io/images/excel/20140521-3.png">
+<meta property="article:published_time" content="2017-08-21T01:58:00.000Z">
+<meta property="article:modified_time" content="2022-09-04T01:16:48.833Z">
+<meta property="article:author" content="Helen">
+<meta property="article:tag" content="excel">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://weijutu.github.io/images/excel/20140521-1.png">
+
+
+<link rel="canonical" href="https://weijutu.github.io/2017/08/21/excel/excel-get-value-by-fn/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://weijutu.github.io/2017/08/21/excel/excel-get-value-by-fn/","path":"2017/08/21/excel/excel-get-value-by-fn/","title":"Excel - 使用函數取得不重複值並計算總計"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Excel - 使用函數取得不重複值並計算總計 | 丸匠筆記</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72890173-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-72890173-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">丸匠筆記</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">a > 1, a ^ n = ∞</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E6%8F%90"><span class="nav-number">1.</span> <span class="nav-text">前提</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AA%AA%E6%98%8E"><span class="nav-number">2.</span> <span class="nav-text">說明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%88%E5%AE%9A%E7%BE%A9%E5%AF%A6%E4%BD%9C%E7%9B%AE%E6%A8%99"><span class="nav-number">3.</span> <span class="nav-text">先定義實作目標</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B3%87%E6%96%99%E5%8D%80"><span class="nav-number">4.</span> <span class="nav-text">資料區</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E9%A1%9E%E5%8D%80"><span class="nav-number">5.</span> <span class="nav-text">分類區</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#E%EF%BC%9A%E3%80%8C%E5%90%8D%E7%A8%B1%E3%80%8D"><span class="nav-number">5.1.</span> <span class="nav-text">Ｅ：「名稱」</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#F-%E6%AC%84"><span class="nav-number">5.2.</span> <span class="nav-text">F 欄</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#G-%E6%AC%84"><span class="nav-number">5.3.</span> <span class="nav-text">G 欄</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#H-%E6%AC%84"><span class="nav-number">5.4.</span> <span class="nav-text">H 欄</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B5%B1%E8%A8%88%E6%95%B8%E9%87%8F%E5%8D%80"><span class="nav-number">6.</span> <span class="nav-text">統計數量區</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#J-%E6%AC%84"><span class="nav-number">6.1.</span> <span class="nav-text">J 欄</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#K-%E6%AC%84"><span class="nav-number">6.2.</span> <span class="nav-text">K 欄</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#L-%E6%AC%84"><span class="nav-number">6.3.</span> <span class="nav-text">L 欄</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#M-%E6%AC%84"><span class="nav-number">6.4.</span> <span class="nav-text">M 欄</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Helen"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">Helen</p>
+  <div class="site-description" itemprop="description">天天吃番茄，天天有進步</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/weijutu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;weijutu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/08/21/excel/excel-get-value-by-fn/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="Helen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="丸匠筆記">
+      <meta itemprop="description" content="天天吃番茄，天天有進步">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Excel - 使用函數取得不重複值並計算總計 | 丸匠筆記">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        
+        <h1 class="post-title" itemprop="name headline">
+          Excel - 使用函數取得不重複值並計算總計
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2017-08-21 09:58:00" itemprop="dateCreated datePublished" datetime="2017-08-21T09:58:00+08:00">2017-08-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-09-04 09:16:48" itemprop="dateModified" datetime="2022-09-04T09:16:48+08:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Excel/" itemprop="url" rel="index"><span itemprop="name">Excel</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+
+        
+
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>有沒有使用 Excel 輸入資料後，想要把某一列的資料做不重複的篩選？若您剛好有這個疑問，來到這裡算是走對地方了～ 我們有很簡單的例子一步一步的說明</p>
+<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>不採取樞扭分析表，請利用函數實作</p>
+<h3 id="說明"><a href="#說明" class="headerlink" title="說明"></a>說明</h3><p>今天有一個資料表欄位有「類型」、「數量」、「名稱」，需要做一些統計，並且在一般資料區塊下方，當有輸入時，必須同時同步計算以下兩項區域</p>
+<ol>
+<li>依照類型將名稱分類，表格呈現上方列為「類型」、左方為「名稱」</li>
+<li>取得不重複的「名稱」，計算各類型的名稱的總數</li>
+</ol>
+<span id="more"></span>
+
+<h3 id="先定義實作目標"><a href="#先定義實作目標" class="headerlink" title="先定義實作目標"></a>先定義實作目標</h3><p>看到這邊，我們先將把所需要的欄位先定義清楚，主要分為三個部分，分別是資料區（Ａ）、分類區（Ｂ）、統計數量區（Ｃ）</p>
+<h3 id="資料區"><a href="#資料區" class="headerlink" title="資料區"></a>資料區</h3><p>首先是資料區，這裡是一般的資料，也就是會一直在輸入的地方，也預備要讓其他Ｂ、Ｃ區做自動計算，欄位這麼放</p>
+<ul>
+<li>Ａ：輸入「名稱」</li>
+<li>Ｂ：輸入「數量」</li>
+<li>Ｃ：輸入「類型」</li>
+</ul>
+<p>就像這樣子。</p>
+<p><img data-src="/images/excel/20140521-1.png"></p>
+<h3 id="分類區"><a href="#分類區" class="headerlink" title="分類區"></a>分類區</h3><p>接下來是分類區，欄位這麼放</p>
+<p><img data-src="/images/excel/20140521-2.png"></p>
+<h4 id="E：「名稱」"><a href="#E：「名稱」" class="headerlink" title="Ｅ：「名稱」"></a>Ｅ：「名稱」</h4><p>特別注意的是名稱雖然都來自資料區，可是並不能利用一般複製貼上就貼過去，我們可以利用函數，讓他自動把值帶過來，請輸入以下函數：</p>
+<p><code>=IF(A1&gt;0,A1,&quot;&quot;)</code></p>
+<p>Ｆ、Ｇ、H：「類型」，函數分別是</p>
+<h4 id="F-欄"><a href="#F-欄" class="headerlink" title="F 欄"></a>F 欄</h4><p><code>=IF(C1=&quot;A&quot;,B1,&quot;&quot;)</code></p>
+<h4 id="G-欄"><a href="#G-欄" class="headerlink" title="G 欄"></a>G 欄</h4><p><code>=IF(C1=&quot;B&quot;,B1,&quot;&quot;)</code></p>
+<h4 id="H-欄"><a href="#H-欄" class="headerlink" title="H 欄"></a>H 欄</h4><p><code>=IF(C1=&quot;C&quot;,B1,&quot;&quot;)</code></p>
+<h3 id="統計數量區"><a href="#統計數量區" class="headerlink" title="統計數量區"></a>統計數量區</h3><p>然後，統計數量區，就是計算各種不同分類的不重複水果數量有多少，以下就是各欄位輸入的函數</p>
+<p><img data-src="/images/excel/20140521-3.png"></p>
+<h4 id="J-欄"><a href="#J-欄" class="headerlink" title="J 欄"></a>J 欄</h4><p>重點就是在這一段，我們要將資料區的資料，採取不重複的做法呈現，換句話說，當使用者輸入資料區的時候，有出現重複時也只能算是一筆</p>
+<p><code>=INDEX(A:A,SMALL(IF(MATCH($A$1:$A$5000&amp;&quot;&quot;,$A$1:$A$5000&amp;&quot;&quot;,0)=ROW($A$1:$A$5000),ROW($A$1:$A$5000),4^8),ROW(A1)))&amp;&quot;&quot;</code></p>
+<h4 id="K-欄"><a href="#K-欄" class="headerlink" title="K 欄"></a>K 欄</h4><p>這一欄就是要將A類的水果總計起來，我們還需要借用分類區的地方把資料提取出來</p>
+<p><code>=IF($J1&gt;0,SUMIF($E$1:$E$5000,$J1,$F$1:F$5000),&quot;&quot;)</code></p>
+<h4 id="L-欄"><a href="#L-欄" class="headerlink" title="L 欄"></a>L 欄</h4><p>這一欄就是要將B類的水果總計起來，我們還需要借用分類區的地方把資料提取出來</p>
+<p><code>=IF($J1&gt;0,SUMIF($E$1:$E$5000,$J1,$G$1:$H$5000),&quot;&quot;)</code></p>
+<h4 id="M-欄"><a href="#M-欄" class="headerlink" title="M 欄"></a>M 欄</h4><p>這一欄就是要將C類的水果總計起來，我們還需要借用分類區的地方把資料提取出來</p>
+<p><code>=IF($J1&gt;0,SUMIF($E$1:$E$5000,$J1,$H$1:$H$5000),&quot;&quot;)</code></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>作者： </strong>Helen
+  </li>
+  <li class="post-copyright-link">
+      <strong>文章連結：</strong>
+      <a href="https://weijutu.github.io/2017/08/21/excel/excel-get-value-by-fn/" title="Excel - 使用函數取得不重複值並計算總計">https://weijutu.github.io/2017/08/21/excel/excel-get-value-by-fn/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/excel/" rel="tag"># excel</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/08/21/excel/excel-string-splite-to-cell/" rel="prev" title="Excel - 字串分割到不同的儲存格">
+                  <i class="fa fa-chevron-left"></i> Excel - 字串分割到不同的儲存格
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/08/25/mongodb/mongodb-install-on-osx/" rel="next" title="Mongodb - 在 OS X 上透過手動安裝與設定">
+                  Mongodb - 在 OS X 上透過手動安裝與設定 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Helen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

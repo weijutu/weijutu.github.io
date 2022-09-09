@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/cube_logo_v2.png">
+  <link rel="mask-icon" href="/images/cube_logo_v2.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/yellow/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"weijutu.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="R 語言是 Ross Ihaka, Robert Gentleman 共同開發的程式語言，會取名為 R 是因為他們的名字都是 R 開頭，所以就把這程式語言取名為 R。R 是專門在處理資料處理以及統計分析，語言寫起來相當精簡，外傳說如果沒有學過程式語言的人，又想學習資料分析，那麼就直接學 R，許多複雜的分析任務只需要幾行程式就能夠完成了，如果已經有程式底子或是已經有物件導向的觀念的人 (比如之前有寫">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="R 學習日誌#1 - R 語言簡介、執行環境安裝 RStudio">
+<meta property="og:url" content="https://weijutu.github.io/2017/10/20/r/r-01-start/index.html">
+<meta property="og:site_name" content="丸匠筆記">
+<meta property="og:description" content="R 語言是 Ross Ihaka, Robert Gentleman 共同開發的程式語言，會取名為 R 是因為他們的名字都是 R 開頭，所以就把這程式語言取名為 R。R 是專門在處理資料處理以及統計分析，語言寫起來相當精簡，外傳說如果沒有學過程式語言的人，又想學習資料分析，那麼就直接學 R，許多複雜的分析任務只需要幾行程式就能夠完成了，如果已經有程式底子或是已經有物件導向的觀念的人 (比如之前有寫">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://weijutu.github.io/images/r/1.png">
+<meta property="og:image" content="https://weijutu.github.io/images/r/3.png">
+<meta property="og:image" content="https://weijutu.github.io/images/r/2.png">
+<meta property="og:image" content="https://weijutu.github.io/images/r/4.png">
+<meta property="og:image" content="https://weijutu.github.io/images/r/6.png">
+<meta property="og:image" content="https://weijutu.github.io/images/r/5.png">
+<meta property="og:image" content="https://weijutu.github.io/images/r/7.png">
+<meta property="article:published_time" content="2017-10-20T06:01:00.000Z">
+<meta property="article:modified_time" content="2022-09-04T01:16:48.914Z">
+<meta property="article:author" content="Helen">
+<meta property="article:tag" content="R">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://weijutu.github.io/images/r/1.png">
+
+
+<link rel="canonical" href="https://weijutu.github.io/2017/10/20/r/r-01-start/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://weijutu.github.io/2017/10/20/r/r-01-start/","path":"2017/10/20/r/r-01-start/","title":"R 學習日誌#1 - R 語言簡介、執行環境安裝 RStudio"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>R 學習日誌#1 - R 語言簡介、執行環境安裝 RStudio | 丸匠筆記</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72890173-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-72890173-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">丸匠筆記</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">a > 1, a ^ n = ∞</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#R-%E8%BB%9F%E9%AB%94%E7%9A%84%E7%89%B9%E8%89%B2"><span class="nav-number">1.</span> <span class="nav-text">R 軟體的特色</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D"><span class="nav-number">2.</span> <span class="nav-text">下載與安裝</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D-R-%E8%AA%9E%E8%A8%80%E7%9A%84%E7%92%B0%E5%A2%83"><span class="nav-number">2.1.</span> <span class="nav-text">安裝 R 語言的環境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D-RStudio-%E9%96%8B%E7%99%BC%E5%B7%A5%E5%85%B7"><span class="nav-number">2.2.</span> <span class="nav-text">安裝 RStudio 開發工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99"><span class="nav-number">3.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Helen"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">Helen</p>
+  <div class="site-description" itemprop="description">天天吃番茄，天天有進步</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/weijutu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;weijutu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/10/20/r/r-01-start/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="Helen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="丸匠筆記">
+      <meta itemprop="description" content="天天吃番茄，天天有進步">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="R 學習日誌#1 - R 語言簡介、執行環境安裝 RStudio | 丸匠筆記">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        
+        <h1 class="post-title" itemprop="name headline">
+          R 學習日誌#1 - R 語言簡介、執行環境安裝 RStudio
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2017-10-20 14:01:00" itemprop="dateCreated datePublished" datetime="2017-10-20T14:01:00+08:00">2017-10-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-09-04 09:16:48" itemprop="dateModified" datetime="2022-09-04T09:16:48+08:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/R/" itemprop="url" rel="index"><span itemprop="name">R</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+
+        
+
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>R 語言是 Ross Ihaka, Robert Gentleman 共同開發的程式語言，會取名為 R 是因為他們的名字都是 R 開頭，所以就把這程式語言取名為 R。R 是專門在處理資料處理以及統計分析，語言寫起來相當精簡，外傳說如果沒有學過程式語言的人，又想學習資料分析，那麼就直接學 R，許多複雜的分析任務只需要幾行程式就能夠完成了，如果已經有程式底子或是已經有物件導向的觀念的人 (比如之前有寫過 Java)，那可以學習 Python，但話說回來…這裡是 R 學習日誌，這是 R 語言的第一篇文章，會用一個淺白的文字來介紹喔。</p>
+<h2 id="R-軟體的特色"><a href="#R-軟體的特色" class="headerlink" title="R 軟體的特色"></a>R 軟體的特色</h2><ol>
+<li>基本核心是向量 (vector)、陣列 (array)：在其他程式都需要跑個迴圈才能做到元素的運算，而在 R 軟體裡面只需要幾行就能做到。</li>
+<li>計算模組是函數 (function)：可以善用貢獻者寫好的套件 (packages) 或者自己寫個套件也可以。</li>
+<li>繪圖功能：2D 還是 3D 或是直向圖都可以做到，而且就幾行的程式就能得到想要的結果。</li>
+<li>變數型態：有很多其他程式語言沒有的，包含 list, factor, ordered factor, data frame, ts，也可以自建資料型態</li>
+</ol>
+<span id="more"></span>
+
+<h2 id="下載與安裝"><a href="#下載與安裝" class="headerlink" title="下載與安裝"></a>下載與安裝</h2><p>安裝 R 就兩個重點</p>
+<ol>
+<li>安裝 R 語言的環境</li>
+<li>安裝 RStudio 開發工具</li>
+</ol>
+<h3 id="安裝-R-語言的環境"><a href="#安裝-R-語言的環境" class="headerlink" title="安裝 R 語言的環境"></a>安裝 R 語言的環境</h3><ul>
+<li><p>請先進入 <a target="_blank" rel="noopener" href="https://www.r-project.org/">R 網站</a>，就會像下方的頁面：</p>
+<p><img data-src="/images/r/1.png"></p>
+</li>
+<li><p>進入 <a target="_blank" rel="noopener" href="https://ftp.yzu.edu.tw/CRAN/index.html">Download CRAN 的 Taiwan 站點</a>，R 語言提供了 Windows, Linux, Mac 三個版本安裝程式，在這邊是用 Mac 版本進行介紹，如下方的頁面：</p>
+<p><img data-src="/images/r/3.png"></p>
+<p>選擇 <code>Download R for (Mac) OS X</code> 連結後，點選 <code>R-3.4.2.pkg</code> 就下載套件包</p>
+<p><img data-src="/images/r/2.png"></p>
+</li>
+<li><p>安裝完之後打開 RGui 介面，輸入 <code>123 + 456</code> 就可以得到 <code>579</code> 答案</p>
+<p><img data-src="/images/r/4.png"></p>
+</li>
+</ul>
+<h3 id="安裝-RStudio-開發工具"><a href="#安裝-RStudio-開發工具" class="headerlink" title="安裝 RStudio 開發工具"></a>安裝 RStudio 開發工具</h3><ul>
+<li><p>請進入 <a target="_blank" rel="noopener" href="https://www.rstudio.com/products/rstudio/download/">RStudio 網站</a></p>
+<p><img data-src="/images/r/6.png"></p>
+<p>點選 [RSutdio 下載(<a target="_blank" rel="noopener" href="https://www.rstudio.com/products/RStudio/">https://www.rstudio.com/products/RStudio/</a>) 選擇 <code>RStudio 1.1.383 - Mac OS X 10.6+ (64-bit)</code> ，將它安裝起來</p>
+<p><img data-src="/images/r/5.png"></p>
+</li>
+<li><p>安裝完畢後打開 RStudio 軟體，可以發現有四個區塊可以使用</p>
+<ol>
+<li>左上角：程式撰寫的位置</li>
+<li>左下角：控制 Console, 命令列 Terminal ，就跟 RGui 打開來的介面一樣，執行程式結果的位置</li>
+<li>右上角：環境 Environment, 歷史 History, 連線 Connections 可以觀察變數狀態，以及輸入過哪些指令的歷史紀錄</li>
+<li>右下角：檔案工作目錄 File, 圖形化 Plots, 套件 Packages, 查詢 Help, 預覽 Viewer</li>
+</ol>
+<p><img data-src="/images/r/7.png"></p>
+</li>
+</ul>
+<p>這樣子我們就把 R 語言的開發環境安裝完畢了。</p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/R%E8%AF%AD%E8%A8%80">R 語言維基百科</a></li>
+<li>R Studio <a target="_blank" rel="noopener" href="https://www.rstudio.com/">https://www.rstudio.com/</a></li>
+<li>R Project <a target="_blank" rel="noopener" href="https://www.r-project.org/">https://www.r-project.org/</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>作者： </strong>Helen
+  </li>
+  <li class="post-copyright-link">
+      <strong>文章連結：</strong>
+      <a href="https://weijutu.github.io/2017/10/20/r/r-01-start/" title="R 學習日誌#1 - R 語言簡介、執行環境安裝 RStudio">https://weijutu.github.io/2017/10/20/r/r-01-start/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/R/" rel="tag"># R</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/09/09/books/books-002-rich-dad-and-poor-dad/" rel="prev" title="丸閱讀#2 - 《富爸爸，有錢有理：神奇的現金流象限》讀後心得">
+                  <i class="fa fa-chevron-left"></i> 丸閱讀#2 - 《富爸爸，有錢有理：神奇的現金流象限》讀後心得
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/10/20/r/r-02-intro/" rel="next" title="R 學習日誌#2 - 資料類型與套件工具函數">
+                  R 學習日誌#2 - 資料類型與套件工具函數 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Helen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

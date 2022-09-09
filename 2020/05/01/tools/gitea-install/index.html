@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/cube_logo_v2.png">
+  <link rel="mask-icon" href="/images/cube_logo_v2.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/yellow/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"weijutu.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="簡介GitHub 與 Bitbucket 服務，對於開發者而言是可以將自己開發的應用程式存放的地方，但是它們是屬於其他公司營運的，也許會需要考慮運行自己的託管 git server。Gitea 是一套輕量級的託管解決方案，四大特色是易安裝、跨平台、輕量級、開源化，幾乎跟 github 方式很相似，若有實作過 github 時，那這套工具也會讓你滿意。 安裝Gitea 作為私有的 Git，如果是使用">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="gitea - 在 Mac 自己架設一套私有的版本控管伺服器 (Homebrew)">
+<meta property="og:url" content="https://weijutu.github.io/2020/05/01/tools/gitea-install/index.html">
+<meta property="og:site_name" content="丸匠筆記">
+<meta property="og:description" content="簡介GitHub 與 Bitbucket 服務，對於開發者而言是可以將自己開發的應用程式存放的地方，但是它們是屬於其他公司營運的，也許會需要考慮運行自己的託管 git server。Gitea 是一套輕量級的託管解決方案，四大特色是易安裝、跨平台、輕量級、開源化，幾乎跟 github 方式很相似，若有實作過 github 時，那這套工具也會讓你滿意。 安裝Gitea 作為私有的 Git，如果是使用">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://weijutu.github.io/images/tools/20200501-1.png">
+<meta property="og:image" content="https://weijutu.github.io/images/tools/20200501-2.png">
+<meta property="og:image" content="https://weijutu.github.io/images/tools/20200501-3.png">
+<meta property="og:image" content="https://weijutu.github.io/images/tools/20200501-7.png">
+<meta property="og:image" content="https://weijutu.github.io/images/tools/20200501-8.png">
+<meta property="og:image" content="https://weijutu.github.io/images/tools/20200501-10.png">
+<meta property="og:image" content="https://weijutu.github.io/images/tools/20200501-11.png">
+<meta property="article:published_time" content="2020-05-01T09:58:27.000Z">
+<meta property="article:modified_time" content="2022-09-04T01:16:48.942Z">
+<meta property="article:author" content="Helen">
+<meta property="article:tag" content="docker">
+<meta property="article:tag" content="gitea">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://weijutu.github.io/images/tools/20200501-1.png">
+
+
+<link rel="canonical" href="https://weijutu.github.io/2020/05/01/tools/gitea-install/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://weijutu.github.io/2020/05/01/tools/gitea-install/","path":"2020/05/01/tools/gitea-install/","title":"gitea - 在 Mac 自己架設一套私有的版本控管伺服器 (Homebrew)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>gitea - 在 Mac 自己架設一套私有的版本控管伺服器 (Homebrew) | 丸匠筆記</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72890173-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-72890173-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">丸匠筆記</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">a > 1, a ^ n = ∞</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B0%A1%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">簡介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D"><span class="nav-number">2.</span> <span class="nav-text">安裝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E4%B8%80%E7%B5%84-repo-%E5%84%B2%E5%AD%98%E5%BA%AB"><span class="nav-number">3.</span> <span class="nav-text">建立一組 repo 儲存庫</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Helen"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">Helen</p>
+  <div class="site-description" itemprop="description">天天吃番茄，天天有進步</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/weijutu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;weijutu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2020/05/01/tools/gitea-install/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="Helen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="丸匠筆記">
+      <meta itemprop="description" content="天天吃番茄，天天有進步">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="gitea - 在 Mac 自己架設一套私有的版本控管伺服器 (Homebrew) | 丸匠筆記">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        
+        <h1 class="post-title" itemprop="name headline">
+          gitea - 在 Mac 自己架設一套私有的版本控管伺服器 (Homebrew)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2020-05-01 17:58:27" itemprop="dateCreated datePublished" datetime="2020-05-01T17:58:27+08:00">2020-05-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-09-04 09:16:48" itemprop="dateModified" datetime="2022-09-04T09:16:48+08:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+
+        
+
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h2><p>GitHub 與 Bitbucket 服務，對於開發者而言是可以將自己開發的應用程式存放的地方，但是它們是屬於其他公司營運的，也許會需要考慮運行自己的託管 git server。Gitea 是一套輕量級的託管解決方案，四大特色是易安裝、跨平台、輕量級、開源化，幾乎跟 github 方式很相似，若有實作過 github 時，那這套工具也會讓你滿意。</p>
+<h2 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h2><p><a target="_blank" rel="noopener" href="https://gitea.io/zh-tw/">Gitea</a> 作為私有的 Git，如果是使用 Mac 而且有裝 Homebrew 時，就可以透過 Homebrew 來完成安裝。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ brew tap go-gitea/gitea</span><br><span class="line">$ brew install gitea</span><br></pre></td></tr></table></figure>
+
+<p>很快地就會完成安裝，那麼你可以輸入以下指令，確認哪些命令可以做執行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gitea -h </span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p>當你要使用 gitea 時，請輸入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gitea web</span><br></pre></td></tr></table></figure>
+
+<p>進行運行，那麼就開始啟動。它會告訴你訪問的服務器的 URL 是什麼，就可以透過瀏覽器訪問 <code>http://localhost:3000/</code></p>
+<p><img data-src="/images/tools/20200501-1.png"></p>
+<p>一開始都會初始設定，分為資料庫設定、一般設定、可選設定，資料庫需要先建立，也請使用 InnoDB 儲存引擎和 “utf8_general_ci” 字元集。</p>
+<p><img data-src="/images/tools/20200501-2.png"></p>
+<p>一切都裝好之後，再回到控制面板上，看到以下畫面就代表安裝完畢囉</p>
+<p><img data-src="/images/tools/20200501-3.png"></p>
+<h2 id="建立一組-repo-儲存庫"><a href="#建立一組-repo-儲存庫" class="headerlink" title="建立一組 repo 儲存庫"></a>建立一組 repo 儲存庫</h2><p>讓我們再次回到 <code>http://localhost:3000/</code> 控制面板，點選 儲存庫 旁的「+」，建立一組叫 <code>hello-world</code> 的儲存庫</p>
+<p><img data-src="/images/tools/20200501-7.png"> </p>
+<p>我們將這組儲存庫設定為私有</p>
+<p><img data-src="/images/tools/20200501-8.png"> </p>
+<p>好的，完成建立儲存庫了</p>
+<p>如果你是用 HTTP 方式 clone 儲存庫的時候，就會需要輸入帳密</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git clone http://localhost:3000/marukotu/hello-world.git</span><br><span class="line"></span><br><span class="line">Cloning into &#x27;hello-world&#x27;...</span><br><span class="line">Username for &#x27;http://localhost:3000&#x27;:</span><br></pre></td></tr></table></figure>
+
+
+<p>將儲存庫 <code>hello-world</code> clone 下來之後，進到這個資料夾建立一個新的文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ cd hello-world</span><br><span class="line">$ touch test.txt</span><br><span class="line">$ vi test.txt</span><br><span class="line"></span><br><span class="line">$ git add .</span><br><span class="line">$ git commit -am &quot;added a new file&quot;</span><br><span class="line"></span><br><span class="line">[master 07b6e46] added a new file</span><br><span class="line"> 1 file changed, 2 insertions(+)</span><br><span class="line"> create mode 100644 test.txt</span><br></pre></td></tr></table></figure>
+
+<p>最後再 <code>git push</code> 做推送。再回到我們的控制面板，也會顯示最後推上的檔案與版控資訊</p>
+<p><img data-src="/images/tools/20200501-10.png"> </p>
+<p>也可以看到提交的歷史紀錄</p>
+<p><img data-src="/images/tools/20200501-11.png"> </p>
+<p>看到這裡是不是躍躍欲試了呢？快來建立自己的版控世界吧 ：）</p>
+<!-- 
+因為我們已經有輸入金鑰了，我們試著用右方的 SSH URL clone 儲存庫，它不應該要求再提供帳密
+
+![](/images/tools/20200501-9.png) 
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git clone Weiju@localhost:marukotu/hello-world.git</span><br><span class="line">``` --&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- ## SSH-KEY 設定</span><br><span class="line"></span><br><span class="line">如果我們在操作時使用 HTTP 方式做 git push, git pull 等命令，那麼你就要輸入帳號與密碼，但是你也可以增加 SSH KEYS </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>$ cat ~&#x2F;.ssh&#x2F;id_rsa.pub</p>
+<p>ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAxej1JYFka61AZXx8ccxQI5TstBbhQ2+dMg&#x2F;lgUxXs&#x2F;2v5isq2NsZub08j+bVhmDANjBJY&#x2F;SZznPSpQQoMXXXXXXXekatvq0SH4vas7J8E+T3E2bmrfrohPWZ2r5gi1VxQlQE1aElOIP1BPSXw88LAKRw1uVFPjMGO137&#x2F;zilTT0TMyD5YsuCx+dtWWbgOXXfxco9eKfzwg2R5uKL+MnKXP3+mwMuB2RxjXslL2lXXXXXXXkKPuSgSZe9JWhclQR51tcLIqX&#x2F;&#x2F;ntnHSqE+6clGCxJGK5uwhz+KBPosbB&#x2F;IPFKDEYnPTTUW9NXZOyp5QkRdbQbpZop <a href="mailto:&#84;&#69;&#x53;&#x54;&#x40;&#103;&#109;&#97;&#x69;&#108;&#46;&#99;&#x6f;&#109;">&#84;&#69;&#x53;&#x54;&#x40;&#103;&#109;&#97;&#x69;&#108;&#46;&#99;&#x6f;&#109;</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">將你呈現的公鑰新增貼到 `SSH/GPG 金鑰` 內</span><br><span class="line"></span><br><span class="line">![](/images/tools/20200501-4.png) </span><br><span class="line"></span><br><span class="line">按下右上角的 `增加金鑰`，填上自定義的金鑰名稱、內容</span><br><span class="line"></span><br><span class="line">![](/images/tools/20200501-5.png) </span><br><span class="line"></span><br><span class="line">新增完畢後，就可以看到 key 已經被新增進去</span><br><span class="line"></span><br><span class="line">![](/images/tools/20200501-6.png) </span><br><span class="line"></span><br><span class="line">到時候使用 ssh key 方式時，就可以不需要再輸入帳號與密碼了 --&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;!-- </span><br><span class="line">進行運行，那麼就開始啟動。它會告訴你訪問的服務器的 URL 是什麼，就可以透過瀏覽器訪問</span><br><span class="line"></span><br><span class="line">預設的情況下，gitea 會放在 `/usr/local/bin` 當作主目錄，因此建議將 gitea 為 server 用戶調整位置</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>$ gitea web -config &#x2F;Users&#x2F;server&#x2F;gitea&#x2F;conf&#x2F;app.ini</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">最後一步是，希望每一次重新開機時就已經在運行，為此服務要新增一個啟動 plist 文件 `~/Library/LaunchAgents` </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>$ cd &#x2F;Users&#x2F;server&#x2F;<br>$ sudo mkdir Library<br>$ sudo mkdir LaunchAgents<br>$ sudo touch io.gitea.gitea.plist<br>$ sudo vi io.gitea.gitea.plist</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">填入以下內容</span><br><span class="line"></span><br><span class="line">```xml</span><br><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;</span><br><span class="line">&lt;plist version=&quot;1.0&quot;&gt;</span><br><span class="line">&lt;dict&gt;</span><br><span class="line">	&lt;key&gt;KeepAlive&lt;/key&gt;</span><br><span class="line">	&lt;true/&gt;</span><br><span class="line">	&lt;key&gt;WorkingDirectory&lt;/key&gt;</span><br><span class="line">	&lt;string&gt;/Users/server&lt;/string&gt;</span><br><span class="line">	&lt;key&gt;EnvironmentVariables&lt;/key&gt;</span><br><span class="line">	&lt;dict&gt;</span><br><span class="line">		&lt;key&gt;GITEA_WORK_DIR&lt;/key&gt;</span><br><span class="line">		&lt;string&gt;/Users/server/gitea&lt;/string&gt;</span><br><span class="line">		&lt;key&gt;GITEA_CUSTOM&lt;/key&gt;</span><br><span class="line">		&lt;string&gt;/Users/server/gitea/conf&lt;/string&gt;</span><br><span class="line">		&lt;key&gt;HOME&lt;/key&gt;</span><br><span class="line">		&lt;string&gt;/Users/server&lt;/string&gt;</span><br><span class="line">	&lt;/dict&gt;</span><br><span class="line">	&lt;key&gt;StandardOutPath&lt;/key&gt;</span><br><span class="line">	&lt;string&gt;/Users/server/Library/Logs/gitea/launchd.log&lt;/string&gt;</span><br><span class="line">	&lt;key&gt;StandardErrorPath&lt;/key&gt;</span><br><span class="line">	&lt;string&gt;/Users/server/Library/Logs/gitea/launchd_error.log&lt;/string&gt;</span><br><span class="line">	&lt;key&gt;ProgramArguments&lt;/key&gt;</span><br><span class="line">	&lt;array&gt;</span><br><span class="line">		&lt;string&gt;sh&lt;/string&gt;</span><br><span class="line">		&lt;string&gt;-c&lt;/string&gt;</span><br><span class="line">		&lt;string&gt;/usr/local/bin/gitea web -config /Users/server/gitea/conf/app.ini&lt;/string&gt;</span><br><span class="line">	&lt;/array&gt;</span><br><span class="line">	&lt;key&gt;UserName&lt;/key&gt;</span><br><span class="line">	&lt;string&gt;server&lt;/string&gt;</span><br><span class="line">	&lt;key&gt;RunAtLoad&lt;/key&gt;</span><br><span class="line">	&lt;true/&gt;</span><br><span class="line">	&lt;key&gt;Label&lt;/key&gt;</span><br><span class="line">	&lt;string&gt;io.gitea.gitea&lt;/string&gt;</span><br><span class="line">&lt;/dict&gt;</span><br><span class="line">&lt;/plist&gt;</span><br></pre></td></tr></table></figure>
+
+<p>請注意這個文件的路徑，要啟動服務運行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ launchctl load /Users/server/Library/LaunchAgents/io.gitea.gitea.plist</span><br></pre></td></tr></table></figure>
+<p> –&gt;</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>已寫入： </strong>[object Object]
+  </li>
+  <li class="post-copyright-link">
+      <strong>文章連結：</strong>
+      <a href="https://weijutu.github.io/2020/05/01/tools/gitea-install/" title="gitea - 在 Mac 自己架設一套私有的版本控管伺服器 (Homebrew)">https://weijutu.github.io/2020/05/01/tools/gitea-install/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/docker/" rel="tag"># docker</a>
+              <a href="/tags/gitea/" rel="tag"># gitea</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/04/13/javascript/calendar-line-notify/" rel="prev" title="Google 行事曆的行程用 Line Notify 通知">
+                  <i class="fa fa-chevron-left"></i> Google 行事曆的行程用 Line Notify 通知
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/09/01/tools/rent-vps/" rel="next" title="租用專屬自己的 Linode VPS 虛擬主機">
+                  租用專屬自己的 Linode VPS 虛擬主機 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Helen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

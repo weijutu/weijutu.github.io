@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/cube_logo_v2.png">
+  <link rel="mask-icon" href="/images/cube_logo_v2.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/yellow/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"weijutu.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="在本篇的介紹使用 Redmine 的好工具，部署到 Heroku 平台上面，屆時就能省去不少設定網路組態，推上 Heroku 後得到的網址便能直接透過瀏覽器開啟 Redmine 應用程式。 Redmin 介紹Redmine 是一套開源的專案管理追蹤系統，大部分都是用來做系統開發的進度追蹤、問題的管理，在很多專案上的問題追蹤、通知、管理和版本管控都非常方便，替你的工作流程幫助非常大。而這套平台的操作">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="部署 Redmine 專案管理追蹤系統到 Heroku 平台">
+<meta property="og:url" content="https://weijutu.github.io/2018/07/26/web/how-to-deply-redmine-to-heroku/index.html">
+<meta property="og:site_name" content="丸匠筆記">
+<meta property="og:description" content="在本篇的介紹使用 Redmine 的好工具，部署到 Heroku 平台上面，屆時就能省去不少設定網路組態，推上 Heroku 後得到的網址便能直接透過瀏覽器開啟 Redmine 應用程式。 Redmin 介紹Redmine 是一套開源的專案管理追蹤系統，大部分都是用來做系統開發的進度追蹤、問題的管理，在很多專案上的問題追蹤、通知、管理和版本管控都非常方便，替你的工作流程幫助非常大。而這套平台的操作">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://weijutu.github.io/images/web/20180727-1.png">
+<meta property="article:published_time" content="2018-07-26T14:07:51.000Z">
+<meta property="article:modified_time" content="2022-09-04T01:16:49.005Z">
+<meta property="article:author" content="Helen">
+<meta property="article:tag" content="Heroku">
+<meta property="article:tag" content="Redmine">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://weijutu.github.io/images/web/20180727-1.png">
+
+
+<link rel="canonical" href="https://weijutu.github.io/2018/07/26/web/how-to-deply-redmine-to-heroku/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://weijutu.github.io/2018/07/26/web/how-to-deply-redmine-to-heroku/","path":"2018/07/26/web/how-to-deply-redmine-to-heroku/","title":"部署 Redmine 專案管理追蹤系統到 Heroku 平台"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>部署 Redmine 專案管理追蹤系統到 Heroku 平台 | 丸匠筆記</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72890173-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-72890173-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">丸匠筆記</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">a > 1, a ^ n = ∞</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Redmin-%E4%BB%8B%E7%B4%B9"><span class="nav-number">1.</span> <span class="nav-text">Redmin 介紹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%9E-Github-%E8%A4%87%E8%A3%BD-Redmine-%E5%B0%88%E6%A1%88"><span class="nav-number">2.</span> <span class="nav-text">從 Github 複製 Redmine 專案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AA%BF%E6%95%B4-x2F-%E7%A7%BB%E9%99%A4%E9%A0%85%E7%9B%AE%E8%A8%AD%E5%AE%9A"><span class="nav-number">3.</span> <span class="nav-text">調整&#x2F;移除項目設定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D%E6%87%89%E7%94%A8%E7%A8%8B%E5%BC%8F%E6%89%80%E6%9C%89%E4%BE%9D%E5%AD%98%E7%9A%84%E5%A5%97%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">安裝應用程式所有依存的套件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A-config-application-rb"><span class="nav-number">5.</span> <span class="nav-text">設定 config&#x2F;application.rb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A-config-environment-rb"><span class="nav-number">6.</span> <span class="nav-text">設定 config&#x2F;environment.rb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%96%8B%E5%A7%8B%E5%BB%BA%E7%AB%8B%E9%83%A8%E7%BD%B2-Heroku"><span class="nav-number">7.</span> <span class="nav-text">開始建立部署 Heroku</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%8A%E7%A8%8B%E5%BC%8F%E6%8E%A8%E4%B8%8A-Heroku"><span class="nav-number">8.</span> <span class="nav-text">把程式推上 Heroku</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AB%8B%E5%88%BB%E7%9C%8B%E7%9C%8B-Redmine"><span class="nav-number">9.</span> <span class="nav-text">立刻看看 Redmine</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83"><span class="nav-number">10.</span> <span class="nav-text">參考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Helen"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">Helen</p>
+  <div class="site-description" itemprop="description">天天吃番茄，天天有進步</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/weijutu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;weijutu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2018/07/26/web/how-to-deply-redmine-to-heroku/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="Helen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="丸匠筆記">
+      <meta itemprop="description" content="天天吃番茄，天天有進步">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="部署 Redmine 專案管理追蹤系統到 Heroku 平台 | 丸匠筆記">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        
+        <h1 class="post-title" itemprop="name headline">
+          部署 Redmine 專案管理追蹤系統到 Heroku 平台
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2018-07-26 22:07:51" itemprop="dateCreated datePublished" datetime="2018-07-26T22:07:51+08:00">2018-07-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-09-04 09:16:49" itemprop="dateModified" datetime="2022-09-04T09:16:49+08:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%B6%B2%E7%AB%99/" itemprop="url" rel="index"><span itemprop="name">網站</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+
+        
+
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>在本篇的介紹使用 Redmine 的好工具，部署到 Heroku 平台上面，屆時就能省去不少設定網路組態，推上 Heroku 後得到的網址便能直接透過瀏覽器開啟 Redmine 應用程式。</p>
+<h2 id="Redmin-介紹"><a href="#Redmin-介紹" class="headerlink" title="Redmin 介紹"></a>Redmin 介紹</h2><p>Redmine 是一套開源的專案管理追蹤系統，大部分都是用來做系統開發的進度追蹤、問題的管理，在很多專案上的問題追蹤、通知、管理和版本管控都非常方便，替你的工作流程幫助非常大。而這套平台的操作也相當的靈活，甚至還可以設定開放 restful api 方式，可以用程式來呼叫使用，能讓使用這套平台的團隊建立一個良好的管理機制。</p>
+<span id="more"></span>
+
+
+<h2 id="從-Github-複製-Redmine-專案"><a href="#從-Github-複製-Redmine-專案" class="headerlink" title="從 Github 複製 Redmine 專案"></a>從 Github 複製 Redmine 專案</h2><p>找一個目錄執行以下的指令，將 redmine 複製一份下來，並且找個新的版本，這裡用的是 <code>3.4-stable</code> 版本，你也可以在 Github 找其他的 Redmine 版本 <a target="_blank" rel="noopener" href="https://github.com/redmine/redmine">GitHub</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/redmine/redmine.git -b 3.4-stable</span><br></pre></td></tr></table></figure>
+
+
+<p>複製完畢之後會多一個 <code>redmine</code> 資料夾，就直接進入資料夾內</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cd redmine</span><br></pre></td></tr></table></figure>
+
+<h2 id="調整-x2F-移除項目設定"><a href="#調整-x2F-移除項目設定" class="headerlink" title="調整&#x2F;移除項目設定"></a>調整&#x2F;移除項目設定</h2><p>我們需要移除幾個項目，首先是 <code>.gitignore</code> 檔案，將以下的檔案路徑項目都註解起來</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Gemfile.lock</span><br><span class="line">Gemfile.local</span><br><span class="line">public/plugin_assets </span><br><span class="line">config/initializers/session_store.rb </span><br><span class="line">config/initializers/secret_token.rb </span><br><span class="line">config/configuration.yml </span><br><span class="line">config/email.yml</span><br></pre></td></tr></table></figure>
+
+<p>再來是 <code>Gemfile</code> 檔案，也把以下這段註解起來</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">database_file = File.join(File.dirname(__FILE__), &quot;config/database.yml&quot;)</span><br><span class="line">if File.exist?(database_file)</span><br><span class="line">  database_config = YAML::load(ERB.new(IO.read(database_file)).result)</span><br><span class="line">  adapters = database_config.values.map &#123;|c| c[&#x27;adapter&#x27;]&#125;.compact.uniq</span><br><span class="line">  if adapters.any?</span><br><span class="line">    adapters.each do |adapter|</span><br><span class="line">      case adapter</span><br><span class="line">      when &#x27;mysql2&#x27;</span><br><span class="line">        gem &quot;mysql2&quot;, &quot;~&gt; 0.4.6&quot;, :platforms =&gt; [:mri, :mingw, :x64_mingw]</span><br><span class="line">      when /postgresql/</span><br><span class="line">        gem &quot;pg&quot;, &quot;~&gt; 0.18.1&quot;, :platforms =&gt; [:mri, :mingw, :x64_mingw]</span><br><span class="line">      when /sqlite3/</span><br><span class="line">        gem &quot;sqlite3&quot;, (RUBY_VERSION &lt; &quot;2.0&quot; &amp;&amp; RUBY_PLATFORM =~ /mingw/ ? &quot;1.3.12&quot; : &quot;~&gt;1.3.12&quot;),</span><br><span class="line">                       :platforms =&gt; [:mri, :mingw, :x64_mingw]</span><br><span class="line">      when /sqlserver/</span><br><span class="line">        gem &quot;tiny_tds&quot;, (RUBY_VERSION &gt;= &quot;2.0&quot; ? &quot;~&gt; 1.0.5&quot; : &quot;~&gt; 0.7.0&quot;), :platforms =&gt; [:mri, :mingw, :x64_mingw]</span><br><span class="line">        gem &quot;activerecord-sqlserver-adapter&quot;, :platforms =&gt; [:mri, :mingw, :x64_mingw]</span><br><span class="line">      else</span><br><span class="line">        warn(&quot;Unknown database adapter `#&#123;adapter&#125;` found in config/database.yml, use Gemfile.local to load your own database gems&quot;)</span><br><span class="line">      end</span><br><span class="line">    end</span><br><span class="line">  else</span><br><span class="line">    warn(&quot;No adapter found in config/database.yml, please configure it first&quot;)</span><br><span class="line">  end</span><br><span class="line">else</span><br><span class="line">  warn(&quot;Please configure your config/database.yml first&quot;)</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+
+<p>在同樣的 <code>Gemfile</code> 的文件底下 <code>新增</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">group :development, :test do</span><br><span class="line">  gem &#x27;sqlite3&#x27;, &#x27;1.3.8&#x27;</span><br><span class="line">  gem &#x27;rspec-rails&#x27;, &#x27;2.13.1&#x27;</span><br><span class="line"></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">group :production do</span><br><span class="line">  gem &#x27;pg&#x27;, &#x27;0.15.1&#x27;</span><br><span class="line">  gem &#x27;rails_12factor&#x27;</span><br><span class="line">  gem &#x27;thin&#x27; # change this if you want to use other rack web server</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+
+<p>Gemfile 的第一行的 <code>sourçe  https://www.rubygems.org</code> 改成 <code>source  http://www.rubygems.org</code></p>
+<h2 id="安裝應用程式所有依存的套件"><a href="#安裝應用程式所有依存的套件" class="headerlink" title="安裝應用程式所有依存的套件"></a>安裝應用程式所有依存的套件</h2><p>在上面的 redmine 文件的組態設定一切都改好之後，就能緊接著執行 <code>bundle install</code>，由於 Rails 用了一套 Bundler 工具可以檢查與安裝所有依存的套件，所以如果沒有 Bundler ，需要執行 <code>gem install bundler</code> 安裝。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bundle install --without production test</span><br></pre></td></tr></table></figure>
+
+<p>如果…. <code>bundle install</code> 過程中出現以下錯誤</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">The dependency tzinfo-data (&gt;= 0) will be unused by any of the platforms Bundler is installing for. Bundler is installing for ruby but the dependency is only for x86-mingw32, x64-mingw32, x86-mswin32. To add those platforms to the bundle, run `bundle lock --add-platform x86-mingw32 x64-mingw32 x86-mswin32`.</span><br><span class="line">Fetching source index from https://rubygems.org/</span><br><span class="line"></span><br><span class="line">Retrying fetcher due to error (2/4): Bundler::HTTPError Could not fetch specs from https://rubygems.org/</span><br><span class="line">Retrying fetcher due to error (3/4): Bundler::HTTPError Could not fetch specs from https://rubygems.org/</span><br><span class="line">Retrying fetcher due to error (4/4): Bundler::HTTPError Could not fetch specs from https://rubygems.org/</span><br><span class="line">Could not fetch specs from https://rubygems.org/</span><br></pre></td></tr></table></figure>
+
+<p>那麼可以照錯誤訊息指示的方式解決。以下是我遇到安裝過程中有誤的時候的操作步驟。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ bundle lock --add-platform x86-mingw32 x64-mingw32 x86-mswin32</span><br><span class="line">$ sudo gem install -n /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/bin/gem</span><br><span class="line">$ bundle install --path vendor/bundle</span><br><span class="line">$ bundle config build.nokogiri --use-system-libraries</span><br><span class="line">$ brew install sqlite3</span><br><span class="line">$ brew upgrade sqlite</span><br><span class="line">$ gem install sqlite3 -v &#x27;1.3.13&#x27; --source &#x27;http://rubygems.org/&#x27;</span><br></pre></td></tr></table></figure>
+
+<h2 id="設定-config-application-rb"><a href="#設定-config-application-rb" class="headerlink" title="設定 config/application.rb"></a>設定 <code>config/application.rb</code></h2><p>開啟 <code>config/application.rb</code> ，新增一行內容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">module RedmineApp</span><br><span class="line">  class Application &lt; Rails::Application</span><br><span class="line">    config.assets.initialize_on_precompile = false  # 新增這一行</span><br></pre></td></tr></table></figure>
+
+<h2 id="設定-config-environment-rb"><a href="#設定-config-environment-rb" class="headerlink" title="設定 config/environment.rb"></a>設定 <code>config/environment.rb</code></h2><p>開啟 <code>config/environment.rb</code> ，將 <code>exit 1</code> 註解起來</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># Load the Rails application</span><br><span class="line">require File.expand_path(&#x27;../application&#x27;, __FILE__)</span><br><span class="line"></span><br><span class="line"># Make sure there&#x27;s no plugin in vendor/plugin before starting</span><br><span class="line">vendor_plugins_dir = File.join(Rails.root, &quot;vendor&quot;, &quot;plugins&quot;)</span><br><span class="line">if Dir.glob(File.join(vendor_plugins_dir, &quot;*&quot;)).any?</span><br><span class="line">  $stderr.puts &quot;Plugins in vendor/plugins (#&#123;vendor_plugins_dir&#125;) are no longer allowed. &quot; +</span><br><span class="line">    &quot;Please, put your Redmine plugins in the `plugins` directory at the root of your &quot; +</span><br><span class="line">    &quot;Redmine directory (#&#123;File.join(Rails.root, &quot;plugins&quot;)&#125;)&quot;</span><br><span class="line">  # exit 1  &gt;&gt; 註解這一行</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line"># Initialize the Rails application</span><br><span class="line">Rails.application.initialize!</span><br></pre></td></tr></table></figure>
+
+<p>最後，在應用程式上面需要建立一個權杖</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rake generate_secret_token</span><br></pre></td></tr></table></figure>
+
+<h2 id="開始建立部署-Heroku"><a href="#開始建立部署-Heroku" class="headerlink" title="開始建立部署 Heroku"></a>開始建立部署 Heroku</h2><p>建立一個 heroku app 空的應用空間，在 heroku 新增 postgresql</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ heroku create &lt;&lt;YOUR_APP_NAME&gt;&gt;</span><br><span class="line">$ heroku addons:create heroku-postgresql</span><br><span class="line">$ heroku run rake db:migrate</span><br><span class="line">$ heroku run rake redmine:load_default_data</span><br></pre></td></tr></table></figure>
+
+<h2 id="把程式推上-Heroku"><a href="#把程式推上-Heroku" class="headerlink" title="把程式推上 Heroku"></a>把程式推上 Heroku</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git add --all</span><br><span class="line">$ git commit -am &quot;init&quot;</span><br><span class="line">$ git push heroku master</span><br></pre></td></tr></table></figure>
+
+<h2 id="立刻看看-Redmine"><a href="#立刻看看-Redmine" class="headerlink" title="立刻看看 Redmine"></a>立刻看看 Redmine</h2><p>用瀏覽器打開或是輸入 <code>heroku open</code> 的話，就會看到 Redmine 已經被裝好了。OH YA.<br>一開始的初始帳號與密碼是 </p>
+<p>帳號：<code>admin</code><br>密碼：<code>admin</code></p>
+<p><img data-src="/images/web/20180727-1.png"></p>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/Redmine">Redmine@Wiki</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.fatosmorina.com/deploy-redmine-heroku/">How to deploy Redmine to Heroku</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/29932409/bundle-command-not-found-mac">Bundle command not found mac</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.voidcn.com/article/p-rrxhjjhz-vn.html">Ruby on Rails入门——macOS 下搭建Ruby Rails Web开发环境</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/29932409/bundle-command-not-found-mac">Bundle command not found mac</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/38410185/bundle-install-is-not-working">Bundle install is not working</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/24755673/gemloaderror-specified-postgresql-for-database-adapter-but-the-gem-is-not">Gem::LoadError: Specified ‘postgresql’ for database adapter, but the gem is not loaded. Add <code>gem &#39;pg&#39;</code> to your Gemfile</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/41370565/ruby-sqlite3-installation-sqlite3-libversion-number-macos-sierra">Ruby Sqlite3 installation sqlite3_libversion_number() macOS Sierra</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.voidcn.com/article/p-rrxhjjhz-vn.html">Ruby on Rails入门——macOS 下搭建Ruby Rails Web开发环境</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>作者： </strong>Helen
+  </li>
+  <li class="post-copyright-link">
+      <strong>文章連結：</strong>
+      <a href="https://weijutu.github.io/2018/07/26/web/how-to-deply-redmine-to-heroku/" title="部署 Redmine 專案管理追蹤系統到 Heroku 平台">https://weijutu.github.io/2018/07/26/web/how-to-deply-redmine-to-heroku/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Heroku/" rel="tag"># Heroku</a>
+              <a href="/tags/Redmine/" rel="tag"># Redmine</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/07/20/vuejs/vuejs-parent-child-value/" rel="prev" title="Vue 父組件與子組件之間的資料傳值方法">
+                  <i class="fa fa-chevron-left"></i> Vue 父組件與子組件之間的資料傳值方法
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/08/02/tools/slate-api-document/" rel="next" title="Slate - 為你打造漂亮的 API 文件">
+                  Slate - 為你打造漂亮的 API 文件 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Helen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

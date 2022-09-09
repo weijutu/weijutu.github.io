@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/cube_logo_v2.png">
+  <link rel="mask-icon" href="/images/cube_logo_v2.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/yellow/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"weijutu.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="在這邊做一個紀錄，避免每次部署的時候還要找谷歌大神。 Apache Web 網站伺服器是一個相當主流的網站部署方式，它把配置很清楚的獨立開來，接下來這篇會引導你如何在 Ubuntu 設置 Apache2 網站伺服器部署。在 Apache2 部署，主要目錄會使用 apache 的 sites-available 與  sites-enable。 網站編譯後打包首先到網站進入根目錄 &#x2F;my_web_s">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="靜態網站如何在 Ubuntu 設置 Apache2 網站伺服器">
+<meta property="og:url" content="https://weijutu.github.io/2018/06/28/web/ubuntu-apache-web/index.html">
+<meta property="og:site_name" content="丸匠筆記">
+<meta property="og:description" content="在這邊做一個紀錄，避免每次部署的時候還要找谷歌大神。 Apache Web 網站伺服器是一個相當主流的網站部署方式，它把配置很清楚的獨立開來，接下來這篇會引導你如何在 Ubuntu 設置 Apache2 網站伺服器部署。在 Apache2 部署，主要目錄會使用 apache 的 sites-available 與  sites-enable。 網站編譯後打包首先到網站進入根目錄 &#x2F;my_web_s">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2018-06-28T10:07:51.000Z">
+<meta property="article:modified_time" content="2022-09-04T01:16:49.005Z">
+<meta property="article:author" content="Helen">
+<meta property="article:tag" content="Apache">
+<meta property="article:tag" content="Ubuntu">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://weijutu.github.io/2018/06/28/web/ubuntu-apache-web/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://weijutu.github.io/2018/06/28/web/ubuntu-apache-web/","path":"2018/06/28/web/ubuntu-apache-web/","title":"靜態網站如何在 Ubuntu 設置 Apache2 網站伺服器"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>靜態網站如何在 Ubuntu 設置 Apache2 網站伺服器 | 丸匠筆記</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72890173-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-72890173-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">丸匠筆記</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">a > 1, a ^ n = ∞</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B6%B2%E7%AB%99%E7%B7%A8%E8%AD%AF%E5%BE%8C%E6%89%93%E5%8C%85"><span class="nav-number">1.</span> <span class="nav-text">網站編譯後打包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B7%A8%E8%BC%AF-%E2%80%9Csites-available%E2%80%9D-%E5%85%A7%E7%9A%84%E8%A8%AD%E5%AE%9A%E6%AA%94"><span class="nav-number">2.</span> <span class="nav-text">編輯 “sites-available” 內的設定檔</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%9E-%E2%80%9Csites-enabled%E2%80%9D-%E5%BB%BA%E7%AB%8B%E9%80%A3%E7%B5%90"><span class="nav-number">3.</span> <span class="nav-text">從 “sites-enabled” 建立連結</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E6%96%B0%E5%95%9F%E5%8B%95-Apache2"><span class="nav-number">4.</span> <span class="nav-text">重新啟動 Apache2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%AC%E8%A9%A6%E4%BD%A0%E7%9A%84%E7%B5%90%E6%9E%9C"><span class="nav-number">5.</span> <span class="nav-text">測試你的結果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83"><span class="nav-number">6.</span> <span class="nav-text">參考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Helen"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">Helen</p>
+  <div class="site-description" itemprop="description">天天吃番茄，天天有進步</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/weijutu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;weijutu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2018/06/28/web/ubuntu-apache-web/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="Helen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="丸匠筆記">
+      <meta itemprop="description" content="天天吃番茄，天天有進步">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="靜態網站如何在 Ubuntu 設置 Apache2 網站伺服器 | 丸匠筆記">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        
+        <h1 class="post-title" itemprop="name headline">
+          靜態網站如何在 Ubuntu 設置 Apache2 網站伺服器
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2018-06-28 18:07:51" itemprop="dateCreated datePublished" datetime="2018-06-28T18:07:51+08:00">2018-06-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-09-04 09:16:49" itemprop="dateModified" datetime="2022-09-04T09:16:49+08:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%B6%B2%E7%AB%99/" itemprop="url" rel="index"><span itemprop="name">網站</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+
+        
+
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>在這邊做一個紀錄，避免每次部署的時候還要找谷歌大神。</p>
+<p>Apache Web 網站伺服器是一個相當主流的網站部署方式，它把配置很清楚的獨立開來，接下來這篇會引導你如何在 Ubuntu 設置 Apache2 網站伺服器部署。在 Apache2 部署，主要目錄會使用 apache 的 <code>sites-available</code> 與  <code>sites-enable</code>。</p>
+<h2 id="網站編譯後打包"><a href="#網站編譯後打包" class="headerlink" title="網站編譯後打包"></a>網站編譯後打包</h2><p>首先到網站進入根目錄 <code>/my_web_site</code> 之後執行以下的指令，進行打包的操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm run build</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+
+<p>這時候會產生 <code>dist</code> 資料夾之後，利用 <code>pwd</code>  找到這個資料夾， 顯示路徑是 <code>/home/cube/my_web_site/dist</code> </p>
+<h2 id="編輯-“sites-available”-內的設定檔"><a href="#編輯-“sites-available”-內的設定檔" class="headerlink" title="編輯 “sites-available” 內的設定檔"></a>編輯 “sites-available” 內的設定檔</h2><p>在 <code>/etc/apache2/sites-available</code>  在可用的組態檔案資料夾裡面先複製一份範本，命名為另一個檔案 <code>my_web_site.conf</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo cp 000-default.conf my_web_site.conf</span><br></pre></td></tr></table></figure>
+
+<p>多了一份設定檔之後，編輯設定檔案 <code>my_web_site.conf</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vi my_web_site.conf</span><br></pre></td></tr></table></figure>
+
+<p>修改檔案如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;VirtualHost *:8001&gt;</span><br><span class="line">        ServerAdmin webmaster@localhost</span><br><span class="line">        DocumentRoot DocumentRoot /home/cube/my_web_site/dist</span><br><span class="line">        ErrorLog $&#123;APACHE_LOG_DIR&#125;/error.log</span><br><span class="line">        CustomLog $&#123;APACHE_LOG_DIR&#125;/access.log combined</span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>改 VirtualHost 的 port，比如我改成 <code>:8001</code></li>
+<li>找到 DocumentRoot 改剛剛編譯出來的檔案路徑  <code>/home/cube/my_web_site/dist</code></li>
+</ul>
+<p>其他項目不需要改，完成之後就把這個 conf 檔案存下來</p>
+<h2 id="從-“sites-enabled”-建立連結"><a href="#從-“sites-enabled”-建立連結" class="headerlink" title="從 “sites-enabled” 建立連結"></a>從 “sites-enabled” 建立連結</h2><p>接著到 <code>/etc/apach2/sites-enable</code>  加入快速連結，讓這份設定檔做啟用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ln -s /etc/apache2/sites-available/my_web_site.conf /etc/apache2/sites-enabled/my_web_site.conf</span><br></pre></td></tr></table></figure>
+
+<h2 id="重新啟動-Apache2"><a href="#重新啟動-Apache2" class="headerlink" title="重新啟動 Apache2"></a>重新啟動 Apache2</h2><p>最後改好的設定，要將網站伺服器做重啟！<br>找到在路徑底下的 <code>/etc/init.d</code> ，確定有 <code>apache2</code>  服務<br>在完成修改之後，請務必要重新啟動 Apache，那麼這樣才會把變更的組態檔案載入系統裡。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sudo service apache2 restart</span><br></pre></td></tr></table></figure>
+
+<p>接著會得到類似的訊息，寫了一個 [OK] ，那麼這樣設置就完成了喔。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">* Restarting web server apache2                                                             AH00558: apache2: Could not reliably determine the server&#x27;s fully qualified domain name, using 127.0.0.1. Set the &#x27;ServerName&#x27; directive globally to suppress this message</span><br><span class="line">                                                                                     [ OK ]</span><br></pre></td></tr></table></figure>
+
+<h2 id="測試你的結果"><a href="#測試你的結果" class="headerlink" title="測試你的結果"></a>測試你的結果</h2><p>最後剛剛網站指定端口為 8001 ，連結網址是 http:&#x2F;&#x2F;&lt;domain.name.com&gt;:8001&#x2F;，就會出現你的靜態網站囉。</p>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-hosts-on-ubuntu-14-04-lts">How To Set Up Apache Virtual Hosts on Ubuntu 14.04 LTS | DigitalOcean</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>作者： </strong>Helen
+  </li>
+  <li class="post-copyright-link">
+      <strong>文章連結：</strong>
+      <a href="https://weijutu.github.io/2018/06/28/web/ubuntu-apache-web/" title="靜態網站如何在 Ubuntu 設置 Apache2 網站伺服器">https://weijutu.github.io/2018/06/28/web/ubuntu-apache-web/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Apache/" rel="tag"># Apache</a>
+              <a href="/tags/Ubuntu/" rel="tag"># Ubuntu</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/05/04/r/r-05-foreach/" rel="prev" title="R 學習日誌#5 - 程式的邏輯與迴圈結構">
+                  <i class="fa fa-chevron-left"></i> R 學習日誌#5 - 程式的邏輯與迴圈結構
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/07/05/vuejs/vuejs-deploy-on-apache/" rel="next" title="在 Mac 上 Apache 部署 Vue 網站">
+                  在 Mac 上 Apache 部署 Vue 網站 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Helen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/cube_logo_v2.png">
+  <link rel="mask-icon" href="/images/cube_logo_v2.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/yellow/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"weijutu.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="繼上一篇 （http:&#x2F;&#x2F;ithelp.ithome.com.tw&#x2F;ironman7&#x2F;app&#x2F;article&#x2F;dev&#x2F;recent&#x2F;10157760）上集介紹了 標籤、條件、迴圈、語法，本章節繼續介紹 Jade 的用法分別是  comments mixins case 使用 Jade 撰寫註冊表單  繼續使用 http:&#x2F;&#x2F;codepen.io&#x2F; 作為線上編輯做以下實作的測試編輯器  commen">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Node.js 系列學習日誌#26 - 介紹 Jade  Template Engine 模板引擎 (下)">
+<meta property="og:url" content="https://weijutu.github.io/2017/07/26/nodejs/nodejs-26-jade-2/index.html">
+<meta property="og:site_name" content="丸匠筆記">
+<meta property="og:description" content="繼上一篇 （http:&#x2F;&#x2F;ithelp.ithome.com.tw&#x2F;ironman7&#x2F;app&#x2F;article&#x2F;dev&#x2F;recent&#x2F;10157760）上集介紹了 標籤、條件、迴圈、語法，本章節繼續介紹 Jade 的用法分別是  comments mixins case 使用 Jade 撰寫註冊表單  繼續使用 http:&#x2F;&#x2F;codepen.io&#x2F; 作為線上編輯做以下實作的測試編輯器  commen">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/113.png">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/114.png">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/115.png">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/116.png">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/117.png">
+<meta property="article:published_time" content="2017-07-25T16:26:00.000Z">
+<meta property="article:modified_time" content="2022-09-04T01:16:48.898Z">
+<meta property="article:author" content="Helen">
+<meta property="article:tag" content="Node.js">
+<meta property="article:tag" content="鐵人賽">
+<meta property="article:tag" content="jade">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://weijutu.github.io/images/nodejs/113.png">
+
+
+<link rel="canonical" href="https://weijutu.github.io/2017/07/26/nodejs/nodejs-26-jade-2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://weijutu.github.io/2017/07/26/nodejs/nodejs-26-jade-2/","path":"2017/07/26/nodejs/nodejs-26-jade-2/","title":"Node.js 系列學習日誌#26 - 介紹 Jade  Template Engine 模板引擎 (下)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Node.js 系列學習日誌#26 - 介紹 Jade  Template Engine 模板引擎 (下) | 丸匠筆記</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72890173-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-72890173-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">丸匠筆記</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">a > 1, a ^ n = ∞</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#comments-%E8%A8%BB%E8%A7%A3"><span class="nav-number">1.</span> <span class="nav-text">comments 註解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mixins"><span class="nav-number">2.</span> <span class="nav-text">mixins</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#case-%E6%A2%9D%E4%BB%B6%E5%BC%8F%E5%88%A4%E6%96%B7"><span class="nav-number">3.</span> <span class="nav-text">case 條件式判斷</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-Jade-%E6%92%B0%E5%AF%AB%E8%A8%BB%E5%86%8A%E8%A1%A8%E5%96%AE"><span class="nav-number">4.</span> <span class="nav-text">使用 Jade 撰寫註冊表單</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99"><span class="nav-number">5.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Helen"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">Helen</p>
+  <div class="site-description" itemprop="description">天天吃番茄，天天有進步</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/weijutu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;weijutu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/07/26/nodejs/nodejs-26-jade-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="Helen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="丸匠筆記">
+      <meta itemprop="description" content="天天吃番茄，天天有進步">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Node.js 系列學習日誌#26 - 介紹 Jade  Template Engine 模板引擎 (下) | 丸匠筆記">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        
+        <h1 class="post-title" itemprop="name headline">
+          Node.js 系列學習日誌#26 - 介紹 Jade  Template Engine 模板引擎 (下)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2017-07-26 00:26:00" itemprop="dateCreated datePublished" datetime="2017-07-26T00:26:00+08:00">2017-07-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-09-04 09:16:48" itemprop="dateModified" datetime="2022-09-04T09:16:48+08:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Node-js/" itemprop="url" rel="index"><span itemprop="name">Node.js</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+
+        
+
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>繼上一篇 （<a target="_blank" rel="noopener" href="http://ithelp.ithome.com.tw/ironman7/app/article/dev/recent/10157760%EF%BC%89%E4%B8%8A%E9%9B%86%E4%BB%8B%E7%B4%B9%E4%BA%86">http://ithelp.ithome.com.tw/ironman7/app/article/dev/recent/10157760）上集介紹了</a> 標籤、條件、迴圈、語法，本章節繼續介紹 Jade 的用法<br>分別是</p>
+<ul>
+<li>comments</li>
+<li>mixins</li>
+<li>case</li>
+<li>使用 Jade 撰寫註冊表單</li>
+</ul>
+<p>繼續使用 <a target="_blank" rel="noopener" href="http://codepen.io/">http://codepen.io/</a> 作為線上編輯做以下實作的測試編輯器</p>
+<p><img data-src="/images/nodejs/113.png"></p>
+<h3 id="comments-註解"><a href="#comments-註解" class="headerlink" title="comments 註解"></a>comments 註解</h3><p>這是註解的寫法，註解的寫法就像 javascript 的方式一樣兩個斜線。若你想要把註解寫的方式不想要呈現在原始碼的話，那麼可以試著用  &#x2F;&#x2F;- 的方式撰寫，這是滿好的手法之一。以下是單行註解跟多行註解的示範：</p>
+<p><img data-src="/images/nodejs/114.png"></p>
+<h3 id="mixins"><a href="#mixins" class="headerlink" title="mixins"></a>mixins</h3><p>mixin 的用途是用在當某一段程式重複性高的時候，可以將它抽出來做  mixins，作為重複使用的區塊，mixin 可以將她當作 javascript 的 function 的概念</p>
+<p>寫法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mixin 方法名稱(參數)</span><br><span class="line">     呈現資料</span><br></pre></td></tr></table></figure>
+
+<p>下圖的範例，我們將ul li 的 li 部分做 mixin，在第一行的地方，我們假定 li 裡面的內容要擺放 name &#x3D; &gt; price ，這就代表需要將參數放到方法的括弧裡面，因此，就如果有參數的話，就在方法名稱括號內，並以逗號分隔的方式擺參數，最後在 li 的地方就將參數值以 #{參數名} 帶入。在第五、第六行得地方呼叫的方式就用  + 號，後面接方法名稱，就像 js 呼叫的方式相同，寫為 +book(“name”, “price”)</p>
+<p><img data-src="/images/nodejs/115.png"></p>
+<h3 id="case-條件式判斷"><a href="#case-條件式判斷" class="headerlink" title="case 條件式判斷"></a>case 條件式判斷</h3><p>case 是一種類似 if else 的判斷方式，從下圖的語法來看，一開始建立一個變數為 book ，然後使用 case 後面再接變數，再第二行取到變數值之後，程式就會開始與 when 所設定的字串做比對，如果有符合，那麼就進行以下的陳述句，如果都沒有符合，那麼就會跑預設值  default，然而 default 可以不一定需要，這點可以省去</p>
+<p><img data-src="/images/nodejs/116.png"></p>
+<h3 id="使用-Jade-撰寫註冊表單"><a href="#使用-Jade-撰寫註冊表單" class="headerlink" title="使用 Jade 撰寫註冊表單"></a>使用 Jade 撰寫註冊表單</h3><p>從上一篇也是 jade 的學習到本篇的延續，大致上的語言都簡略的描述過一遍，接著我們需要來做個實際點的應用，我這邊使用的範例是經常網頁開發會使用到的註冊表單。簡單寫一些表單，那就用帳號、密碼、再加一個註冊的按鈕，如下圖所示：</p>
+<p><img data-src="/images/nodejs/117.png"></p>
+<p>Jade 課程就到這裡</p>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ol>
+<li><a target="_blank" rel="noopener" href="http://jade-lang.com/">http://jade-lang.com/</a></li>
+<li><a target="_blank" rel="noopener" href="http://naltatis.github.io/jade-syntax-docs/">http://naltatis.github.io/jade-syntax-docs/</a></li>
+<li><a target="_blank" rel="noopener" href="http://naltatis.github.io/jade-syntax-docs/#basics">http://naltatis.github.io/jade-syntax-docs/#basics</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.kerash.tw/2013/04/nodejs-jade-template-engine/">http://blog.kerash.tw/2013/04/nodejs-jade-template-engine/</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>作者： </strong>Helen
+  </li>
+  <li class="post-copyright-link">
+      <strong>文章連結：</strong>
+      <a href="https://weijutu.github.io/2017/07/26/nodejs/nodejs-26-jade-2/" title="Node.js 系列學習日誌#26 - 介紹 Jade  Template Engine 模板引擎 (下)">https://weijutu.github.io/2017/07/26/nodejs/nodejs-26-jade-2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Node-js/" rel="tag"># Node.js</a>
+              <a href="/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/" rel="tag"># 鐵人賽</a>
+              <a href="/tags/jade/" rel="tag"># jade</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/07/25/nodejs/nodejs-25-jade-1/" rel="prev" title="Node.js 系列學習日誌#25 - 介紹 Jade  Template Engine 模板引擎 (上)">
+                  <i class="fa fa-chevron-left"></i> Node.js 系列學習日誌#25 - 介紹 Jade  Template Engine 模板引擎 (上)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/07/26/nodejs/nodejs-28-rest/" rel="next" title="Node.js 系列學習日誌#28 - REST 路由規則">
+                  Node.js 系列學習日誌#28 - REST 路由規則 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Helen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

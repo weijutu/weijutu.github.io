@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/cube_logo_v2.png">
+  <link rel="mask-icon" href="/images/cube_logo_v2.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/yellow/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"weijutu.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Text Mining with R 書本導讀介紹  使用 R 語言也可以實作文字探勘，接下來的系列文章就用 Text Mining with R 電子書 來跟大家介紹與導讀。 學習內容大綱 tidy 文本格式1.1 tidy 文本與其他資料結構的對比1.2 unnest_tokens 函數 用 tidy 處理資料">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (1)">
+<meta property="og:url" content="https://weijutu.github.io/2019/04/17/r/r-textmining-01-ch01-1/index.html">
+<meta property="og:site_name" content="丸匠筆記">
+<meta property="og:description" content="Text Mining with R 書本導讀介紹  使用 R 語言也可以實作文字探勘，接下來的系列文章就用 Text Mining with R 電子書 來跟大家介紹與導讀。 學習內容大綱 tidy 文本格式1.1 tidy 文本與其他資料結構的對比1.2 unnest_tokens 函數 用 tidy 處理資料">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://d33wubrfki0l68.cloudfront.net/6cfc89fa7fab9672687275261d34431fe4abaeed/2d010/images/cover.png">
+<meta property="og:image" content="https://d33wubrfki0l68.cloudfront.net/4a5d841661f1785d1f421d457145117f7bd59ed6/d63b9/images/tidyflow-ch-1.png">
+<meta property="og:image" content="https://d33wubrfki0l68.cloudfront.net/56eca2e782eede4a0da6a1ff9103909162d6b05c/8f4d9/tidy-text-mining-zh_files/figure-html/plotcount-1.png">
+<meta property="article:published_time" content="2019-04-17T15:34:00.000Z">
+<meta property="article:modified_time" content="2022-09-04T01:16:48.915Z">
+<meta property="article:author" content="Helen">
+<meta property="article:tag" content="R">
+<meta property="article:tag" content="文字探勘">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://d33wubrfki0l68.cloudfront.net/6cfc89fa7fab9672687275261d34431fe4abaeed/2d010/images/cover.png">
+
+
+<link rel="canonical" href="https://weijutu.github.io/2019/04/17/r/r-textmining-01-ch01-1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://weijutu.github.io/2019/04/17/r/r-textmining-01-ch01-1/","path":"2019/04/17/r/r-textmining-01-ch01-1/","title":"R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (1)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (1) | 丸匠筆記</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72890173-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-72890173-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">丸匠筆記</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">a > 1, a ^ n = ∞</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Text-Mining-with-R-%E6%9B%B8%E6%9C%AC%E5%B0%8E%E8%AE%80%E4%BB%8B%E7%B4%B9"><span class="nav-number">1.</span> <span class="nav-text">Text Mining with R 書本導讀介紹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%B8%E7%BF%92%E5%85%A7%E5%AE%B9%E5%A4%A7%E7%B6%B1"><span class="nav-number">2.</span> <span class="nav-text">學習內容大綱</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tidy-%E6%96%87%E6%9C%AC%E6%A0%BC%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">tidy 文本格式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tidy-data-%E6%98%AF%E4%BB%80%E9%BA%BC%E5%91%A2%EF%BC%9F"><span class="nav-number">3.1.</span> <span class="nav-text">tidy data 是什麼呢？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tidy-%E6%96%87%E6%9C%AC%E8%88%87%E5%85%B6%E4%BB%96%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B%E7%9A%84%E5%B0%8D%E6%AF%94"><span class="nav-number">3.2.</span> <span class="nav-text">tidy 文本與其他資料結構的對比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#unnest-tokens-%E5%87%BD%E6%95%B8"><span class="nav-number">3.3.</span> <span class="nav-text">unnest_tokens 函數</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8-tidy-%E8%99%95%E7%90%86%E8%B3%87%E6%96%99"><span class="nav-number">4.</span> <span class="nav-text">用 tidy 處理資料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83"><span class="nav-number">5.</span> <span class="nav-text">參考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Helen"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">Helen</p>
+  <div class="site-description" itemprop="description">天天吃番茄，天天有進步</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/weijutu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;weijutu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2019/04/17/r/r-textmining-01-ch01-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="Helen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="丸匠筆記">
+      <meta itemprop="description" content="天天吃番茄，天天有進步">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (1) | 丸匠筆記">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        
+        <h1 class="post-title" itemprop="name headline">
+          R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (1)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2019-04-17 23:34:00" itemprop="dateCreated datePublished" datetime="2019-04-17T23:34:00+08:00">2019-04-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-09-04 09:16:48" itemprop="dateModified" datetime="2022-09-04T09:16:48+08:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/R/" itemprop="url" rel="index"><span itemprop="name">R</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+
+        
+
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="Text-Mining-with-R-書本導讀介紹"><a href="#Text-Mining-with-R-書本導讀介紹" class="headerlink" title="Text Mining with R 書本導讀介紹"></a>Text Mining with R 書本導讀介紹</h2><img data-src="//d33wubrfki0l68.cloudfront.net/6cfc89fa7fab9672687275261d34431fe4abaeed/2d010/images/cover.png" height="50%" width="50%">
+
+<p>使用 R 語言也可以實作文字探勘，接下來的系列文章就用 <a target="_blank" rel="noopener" href="https://www.tidytextmining.com/">Text Mining with R 電子書</a> 來跟大家介紹與導讀。</p>
+<h2 id="學習內容大綱"><a href="#學習內容大綱" class="headerlink" title="學習內容大綱"></a>學習內容大綱</h2><ol>
+<li>tidy 文本格式<br>1.1 tidy 文本與其他資料結構的對比<br>1.2 <code>unnest_tokens</code> 函數</li>
+<li>用 tidy 處理資料</li>
+</ol>
+<span id="more"></span>
+
+<h2 id="tidy-文本格式"><a href="#tidy-文本格式" class="headerlink" title="tidy 文本格式"></a>tidy 文本格式</h2><h3 id="tidy-data-是什麼呢？"><a href="#tidy-data-是什麼呢？" class="headerlink" title="tidy data 是什麼呢？"></a>tidy data 是什麼呢？</h3><p>tidy data 是有特定結構的意義:</p>
+<ol>
+<li>一個欄位裡都只會有一個數值</li>
+<li>不同觀察值 (observation) 要在不同行</li>
+<li>每一張表格裡都是所有要分析的觀察值資料</li>
+</ol>
+<p>一個符號 (token) 是文本當中有意義的單元，也就是我們經常使用的 <code>詞</code>，tidy 文本探勘的時候，每一行的符號通常是單個詞，但也可以是 n-gram、句子或是段落。</p>
+<h3 id="tidy-文本與其他資料結構的對比"><a href="#tidy-文本與其他資料結構的對比" class="headerlink" title="tidy 文本與其他資料結構的對比"></a>tidy 文本與其他資料結構的對比</h3><ol>
+<li>字串 String：文本當然可以用字串向量。</li>
+<li>語料 Corpus：主要包含了原本字串，並且帶有額外的 metadata 以及一些資訊。</li>
+<li>文檔與術語矩陣 Document-term matrix：這是一個稀疏矩陣，說明了文檔的集合、每個文檔中的每一列。</li>
+</ol>
+<h3 id="unnest-tokens-函數"><a href="#unnest-tokens-函數" class="headerlink" title="unnest_tokens 函數"></a><code>unnest_tokens</code> 函數</h3><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">&gt;</span> text <span class="operator">&lt;-</span> <span class="built_in">c</span><span class="punctuation">(</span><span class="string">&quot;人生就是不斷的在後悔&quot;</span><span class="punctuation">,</span> </span><br><span class="line"><span class="operator">+</span>           <span class="string">&quot;成功的道路是很遙遠的&quot;</span><span class="punctuation">,</span> </span><br><span class="line"><span class="operator">+</span>           <span class="string">&quot;懂我的人一定能明白我的魅力所在&quot;</span><span class="punctuation">,</span></span><br><span class="line"><span class="operator">+</span>           <span class="string">&quot;念書這種事情　就讓那些喜歡念書的人去做好了&quot;</span><span class="punctuation">)</span></span><br><span class="line"><span class="operator">&gt;</span> text</span><br><span class="line"><span class="punctuation">[</span><span class="number">1</span><span class="punctuation">]</span> <span class="string">&quot;人生就是不斷的在後悔&quot;</span></span><br><span class="line"><span class="punctuation">[</span><span class="number">2</span><span class="punctuation">]</span> <span class="string">&quot;成功的道路是很遙遠的&quot;</span></span><br><span class="line"><span class="punctuation">[</span><span class="number">3</span><span class="punctuation">]</span> <span class="string">&quot;懂我的人一定能明白我的魅力所在&quot;</span></span><br><span class="line"><span class="punctuation">[</span><span class="number">4</span><span class="punctuation">]</span> <span class="string">&quot;念書這種事情　就讓那些喜歡念書的人去做好了&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>這些字串向量是我們要分析的字串集，為了要轉換整齊的文本資料集，我們利用 <code>dplyr</code> 套件的 <code>tibble</code> 將它放在數據框內</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>dplyr<span class="punctuation">)</span></span><br><span class="line">text_df <span class="operator">&lt;-</span> tibble<span class="punctuation">(</span>line <span class="operator">=</span> <span class="number">1</span><span class="operator">:</span><span class="number">4</span><span class="punctuation">,</span> text <span class="operator">=</span> text<span class="punctuation">)</span></span><br><span class="line"></span><br><span class="line">text_df</span><br></pre></td></tr></table></figure>
+
+<p>結果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># A tibble: 4 x 2</span><br><span class="line">   line text                                      </span><br><span class="line">  &lt;int&gt; &lt;chr&gt;                                     </span><br><span class="line">1     1 人生就是不斷的在後悔                      </span><br><span class="line">2     2 成功的道路是很遙遠的                      </span><br><span class="line">3     3 懂我的人一定能明白我的魅力所在            </span><br><span class="line">4     4 念書這種事情　就讓那些喜歡念書的人去做好了</span><br></pre></td></tr></table></figure>
+
+<p>在這裏有用到一個 tibble 方法，這個是在 <code>dplyr</code> 套件，可以將文字用一個整齊的工具整理。接下來進一步我們將這些的文檔拆解為單個標記，並且再將轉換有數據的結構。因此我們使用 tidytext 的 <code>unnest_tokens()</code> 函數。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>tidytext<span class="punctuation">)</span></span><br><span class="line"></span><br><span class="line">text_df <span class="operator">%&gt;%</span></span><br><span class="line">  unnest_tokens<span class="punctuation">(</span>word<span class="punctuation">,</span> text<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+
+<p>結果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># A tibble: 32 x 2</span><br><span class="line">    line word </span><br><span class="line">   &lt;int&gt; &lt;chr&gt;</span><br><span class="line"> 1     1 人生 </span><br><span class="line"> 2     1 就是 </span><br><span class="line"> 3     1 不斷 </span><br><span class="line"> 4     1 的   </span><br><span class="line"> 5     1 在   </span><br><span class="line"> 6     1 後悔 </span><br><span class="line"> 7     2 成功 </span><br><span class="line"> 8     2 的   </span><br><span class="line"> 9     2 道路 </span><br><span class="line">10     2 是   </span><br><span class="line"># … with 22 more rows</span><br></pre></td></tr></table></figure>
+
+<p><code>unnest_tokens()</code> 函數需要填入兩個參數，<code>word</code> 是只要輸出的列 (row) 名稱，以及 <code>text</code> 就是來源的輸入列，另外就是這組函數：</p>
+<ol>
+<li>保留其他列</li>
+<li>標點符號會被刪除</li>
+<li>預設情況下，會轉換為 <code>小寫</code>，讓它們比較容易跟其他的數據集做比較或組合。(不過如果使用 <code>to_lower=FALSE</code> 的話，就會關閉小寫的行為)</li>
+</ol>
+<p>如此一來有這個格式的資料，我們就可以使用 tidy 相關的套件做操作、處理、視覺化。(<code>dplyr</code>, <code>tidyr</code>, <code>ggplot2</code>)，以下是 tidy 處理資料時進行文本分析的流程圖。</p>
+<p><img data-src="https://d33wubrfki0l68.cloudfront.net/4a5d841661f1785d1f421d457145117f7bd59ed6/d63b9/images/tidyflow-ch-1.png"></p>
+<h2 id="用-tidy-處理資料"><a href="#用-tidy-處理資料" class="headerlink" title="用 tidy 處理資料"></a>用 tidy 處理資料</h2><p>以下是使用 <code>janeaustenr</code> 套件引入 Jane Austen 的六部完整的小說文本，然後再轉換成 tidy 格式。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>janeaustenr<span class="punctuation">)</span></span><br><span class="line">library<span class="punctuation">(</span>dplyr<span class="punctuation">)</span></span><br><span class="line">library<span class="punctuation">(</span>stringr<span class="punctuation">)</span></span><br><span class="line"></span><br><span class="line">original_books <span class="operator">&lt;-</span> austen_books<span class="punctuation">(</span><span class="punctuation">)</span> <span class="operator">%&gt;%</span></span><br><span class="line">  group_by<span class="punctuation">(</span>book<span class="punctuation">)</span> <span class="operator">%&gt;%</span></span><br><span class="line">  <span class="comment"># 新增 linenumber, chapter 欄位, linenumber 是增加紀錄原始格式的行數</span></span><br><span class="line">  <span class="comment"># chapter 是使用正規表達式 Regex 就能找到章節的位置</span></span><br><span class="line">  mutate<span class="punctuation">(</span>linenumber <span class="operator">=</span> row_number<span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">,</span></span><br><span class="line">         chapter <span class="operator">=</span> <span class="built_in">cumsum</span><span class="punctuation">(</span>str_detect<span class="punctuation">(</span>text<span class="punctuation">,</span> regex<span class="punctuation">(</span><span class="string">&quot;^chapter [\\divxlc]&quot;</span><span class="punctuation">,</span></span><br><span class="line">                                                 ignore_case <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">)</span><span class="punctuation">)</span><span class="punctuation">)</span><span class="punctuation">)</span> <span class="operator">%&gt;%</span></span><br><span class="line">  ungroup<span class="punctuation">(</span><span class="punctuation">)</span></span><br><span class="line">original_books</span><br></pre></td></tr></table></figure>
+
+<p>這樣就多兩個欄位 <code>linenumber</code> 與 <code>chapter</code>，結果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># A tibble: 73,422 x 4</span><br><span class="line">   text                  book                linenumber chapter</span><br><span class="line">   &lt;chr&gt;                 &lt;fct&gt;                    &lt;int&gt;   &lt;int&gt;</span><br><span class="line"> 1 SENSE AND SENSIBILITY Sense &amp; Sensibility          1       0</span><br><span class="line"> 2 &quot;&quot;                    Sense &amp; Sensibility          2       0</span><br><span class="line"> 3 by Jane Austen        Sense &amp; Sensibility          3       0</span><br><span class="line"> 4 &quot;&quot;                    Sense &amp; Sensibility          4       0</span><br><span class="line"> 5 (1811)                Sense &amp; Sensibility          5       0</span><br><span class="line"> 6 &quot;&quot;                    Sense &amp; Sensibility          6       0</span><br><span class="line"> 7 &quot;&quot;                    Sense &amp; Sensibility          7       0</span><br><span class="line"> 8 &quot;&quot;                    Sense &amp; Sensibility          8       0</span><br><span class="line"> 9 &quot;&quot;                    Sense &amp; Sensibility          9       0</span><br><span class="line">10 CHAPTER 1             Sense &amp; Sensibility         10       1</span><br><span class="line"># … with 73,412 more rows</span><br></pre></td></tr></table></figure>
+
+<p>要把這個當作 tidy 資料集，需要重構每行一個符號的格式，可以使用 <code>unnest_tokens()</code> 函數，也如同前面所提到的，一些標記或標點符號都會拿掉。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tidy_books <span class="operator">&lt;-</span> original_books <span class="operator">%&gt;%</span></span><br><span class="line">  unnest_tokens<span class="punctuation">(</span>word<span class="punctuation">,</span> text<span class="punctuation">)</span></span><br><span class="line">tidy_books</span><br></pre></td></tr></table></figure>
+
+<p>結果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># A tibble: 725,055 x 4</span><br><span class="line">   book                linenumber chapter word       </span><br><span class="line">   &lt;fct&gt;                    &lt;int&gt;   &lt;int&gt; &lt;chr&gt;      </span><br><span class="line"> 1 Sense &amp; Sensibility          1       0 sense      </span><br><span class="line"> 2 Sense &amp; Sensibility          1       0 and        </span><br><span class="line"> 3 Sense &amp; Sensibility          1       0 sensibility</span><br><span class="line"> 4 Sense &amp; Sensibility          3       0 by         </span><br><span class="line"> 5 Sense &amp; Sensibility          3       0 jane       </span><br><span class="line"> 6 Sense &amp; Sensibility          3       0 austen     </span><br><span class="line"> 7 Sense &amp; Sensibility          5       0 1811       </span><br><span class="line"> 8 Sense &amp; Sensibility         10       1 chapter    </span><br><span class="line"> 9 Sense &amp; Sensibility         10       1 1          </span><br><span class="line">10 Sense &amp; Sensibility         13       1 the        </span><br><span class="line"># … with 725,045 more rows</span><br></pre></td></tr></table></figure>
+
+<p>在這個結果可以看到每一行的值，有一些沒有意義的詞，比如 <code>the</code>, <code>of</code>, <code>to</code>, <code>by</code> 這種字詞，在 tidytext 數據集裡有 <code>stop_words</code> 存有停用詞，就可以使用 <code>anti_join()</code> 將停用詞移除</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data<span class="punctuation">(</span>stop_words<span class="punctuation">)</span></span><br><span class="line"></span><br><span class="line">tidy_books <span class="operator">&lt;-</span> tidy_books <span class="operator">%&gt;%</span></span><br><span class="line">  anti_join<span class="punctuation">(</span>stop_words<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+
+<p>可以使用 dplyr 的 <code>count()</code> 找出所有書最常見的詞</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tidy_books <span class="operator">%&gt;%</span></span><br><span class="line">  count<span class="punctuation">(</span>word<span class="punctuation">,</span> sort <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">)</span> </span><br></pre></td></tr></table></figure>
+
+<p>結果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># A tibble: 13,914 x 2</span><br><span class="line">   word       n</span><br><span class="line">   &lt;chr&gt;  &lt;int&gt;</span><br><span class="line"> 1 miss    1855</span><br><span class="line"> 2 time    1337</span><br><span class="line"> 3 fanny    862</span><br><span class="line"> 4 dear     822</span><br><span class="line"> 5 lady     817</span><br><span class="line"> 6 sir      806</span><br><span class="line"> 7 day      797</span><br><span class="line"> 8 emma     787</span><br><span class="line"> 9 sister   727</span><br><span class="line">10 house    699</span><br><span class="line"># … with 13,904 more rows</span><br></pre></td></tr></table></figure>
+
+<p>另外我們還可以轉成視覺化的圖</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">install.packages<span class="punctuation">(</span><span class="string">&#x27;ggplot2&#x27;</span><span class="punctuation">)</span>  </span><br><span class="line">library<span class="punctuation">(</span>ggplot2<span class="punctuation">)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 從上述的常見詞頻次數來看, 用數字是很難看出明顯的差距, 可以用圖片的方式呈現更能夠表達</span></span><br><span class="line">tidy_books <span class="operator">%&gt;%</span></span><br><span class="line">  <span class="comment"># 由於要製作柱狀圖, 我們把上述詞頻 word 做個數量</span></span><br><span class="line">  count<span class="punctuation">(</span>word<span class="punctuation">,</span> sort <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">)</span> <span class="operator">%&gt;%</span></span><br><span class="line">  <span class="comment"># 篩選 n 欄位大於 600 次數的, 600 以下因為太少則忽略</span></span><br><span class="line">  filter<span class="punctuation">(</span>n <span class="operator">&gt;</span> <span class="number">600</span><span class="punctuation">)</span> <span class="operator">%&gt;%</span></span><br><span class="line">  mutate<span class="punctuation">(</span>word <span class="operator">=</span> reorder<span class="punctuation">(</span>word<span class="punctuation">,</span> n<span class="punctuation">)</span><span class="punctuation">)</span> <span class="operator">%&gt;%</span></span><br><span class="line">  <span class="comment"># 在 ggplot 定義 x, y 軸，分別是 word 與 n</span></span><br><span class="line">  ggplot<span class="punctuation">(</span>aes<span class="punctuation">(</span>word<span class="punctuation">,</span> n<span class="punctuation">)</span><span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  geom_col<span class="punctuation">(</span><span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  xlab<span class="punctuation">(</span><span class="literal">NULL</span><span class="punctuation">)</span> <span class="operator">+</span></span><br><span class="line">  coord_flip<span class="punctuation">(</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+
+<p>結果如下：</p>
+<p><img data-src="https://d33wubrfki0l68.cloudfront.net/56eca2e782eede4a0da6a1ff9103909162d6b05c/8f4d9/tidy-text-mining-zh_files/figure-html/plotcount-1.png"></p>
+<p>那麼 tidy 本文格式就先介紹到這裡，接著下一篇介紹實作電子書的詞頻說明，下回待續囉。</p>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://www.tidytextmining.com/tidytext.html">Text Mining with R</a></li>
+<li><a target="_blank" rel="noopener" href="https://yjtseng.info/file/01basicranddataimport#/56">R語言基礎+資料載入與前處理</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>作者： </strong>Helen
+  </li>
+  <li class="post-copyright-link">
+      <strong>文章連結：</strong>
+      <a href="https://weijutu.github.io/2019/04/17/r/r-textmining-01-ch01-1/" title="R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (1)">https://weijutu.github.io/2019/04/17/r/r-textmining-01-ch01-1/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/R/" rel="tag"># R</a>
+              <a href="/tags/%E6%96%87%E5%AD%97%E6%8E%A2%E5%8B%98/" rel="tag"># 文字探勘</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/03/14/vuejs/vuejs-google-analysis/" rel="prev" title="在 Vue 使用 vue-analytics 套件設定 Google Analytics (GA) 追蹤診斷工具">
+                  <i class="fa fa-chevron-left"></i> 在 Vue 使用 vue-analytics 套件設定 Google Analytics (GA) 追蹤診斷工具
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/04/18/r/r-textmining-01-ch01-2/" rel="next" title="R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (2)">
+                  R語言文字探勘好好玩 - Ch1_Tidy Text 格式 (2) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Helen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

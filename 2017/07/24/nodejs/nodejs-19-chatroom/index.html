@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/cube_logo_v2.png">
+  <link rel="mask-icon" href="/images/cube_logo_v2.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/yellow/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"weijutu.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="寫過網頁的大家們，大致上都了解 http 是一種無狀態的形式，假設頁面登進來的使用者，為了保存它的登入資訊，通常會使用 session 的觀念作為存放的物件，否則 server 端就不知道 client 端登進來的人是誰，不過今天不講session  的部分，而是我們要透過 socket.io 做雙向溝通，只要一旦建立了連線之後，就可以立即傳訊息出去，Client 的部分也立即接收到，相互取得訊息">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Node.js 系列學習日誌#19 - 運用 express, socket.io, boostrap 建立一個簡單的聊天室功能">
+<meta property="og:url" content="https://weijutu.github.io/2017/07/24/nodejs/nodejs-19-chatroom/index.html">
+<meta property="og:site_name" content="丸匠筆記">
+<meta property="og:description" content="寫過網頁的大家們，大致上都了解 http 是一種無狀態的形式，假設頁面登進來的使用者，為了保存它的登入資訊，通常會使用 session 的觀念作為存放的物件，否則 server 端就不知道 client 端登進來的人是誰，不過今天不講session  的部分，而是我們要透過 socket.io 做雙向溝通，只要一旦建立了連線之後，就可以立即傳訊息出去，Client 的部分也立即接收到，相互取得訊息">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/74.png">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/75.png">
+<meta property="article:published_time" content="2017-07-23T16:19:00.000Z">
+<meta property="article:modified_time" content="2022-09-04T01:16:48.896Z">
+<meta property="article:author" content="Helen">
+<meta property="article:tag" content="Node.js">
+<meta property="article:tag" content="鐵人賽">
+<meta property="article:tag" content="socket.io">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://weijutu.github.io/images/nodejs/74.png">
+
+
+<link rel="canonical" href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-19-chatroom/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://weijutu.github.io/2017/07/24/nodejs/nodejs-19-chatroom/","path":"2017/07/24/nodejs/nodejs-19-chatroom/","title":"Node.js 系列學習日誌#19 - 運用 express, socket.io, boostrap 建立一個簡單的聊天室功能"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Node.js 系列學習日誌#19 - 運用 express, socket.io, boostrap 建立一個簡單的聊天室功能 | 丸匠筆記</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72890173-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-72890173-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">丸匠筆記</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">a > 1, a ^ n = ∞</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#client-%E7%AB%AF"><span class="nav-number">1.</span> <span class="nav-text">client 端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#javascript-%E9%83%A8%E5%88%86"><span class="nav-number">2.</span> <span class="nav-text">javascript 部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#server-%E7%AB%AF%EF%BC%9A-app-js"><span class="nav-number">3.</span> <span class="nav-text">server 端：(app.js)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B5%90%E6%9E%9C"><span class="nav-number">4.</span> <span class="nav-text">結果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99"><span class="nav-number">5.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Helen"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">Helen</p>
+  <div class="site-description" itemprop="description">天天吃番茄，天天有進步</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/weijutu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;weijutu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-19-chatroom/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="Helen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="丸匠筆記">
+      <meta itemprop="description" content="天天吃番茄，天天有進步">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Node.js 系列學習日誌#19 - 運用 express, socket.io, boostrap 建立一個簡單的聊天室功能 | 丸匠筆記">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        
+        <h1 class="post-title" itemprop="name headline">
+          Node.js 系列學習日誌#19 - 運用 express, socket.io, boostrap 建立一個簡單的聊天室功能
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2017-07-24 00:19:00" itemprop="dateCreated datePublished" datetime="2017-07-24T00:19:00+08:00">2017-07-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-09-04 09:16:48" itemprop="dateModified" datetime="2022-09-04T09:16:48+08:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Node-js/" itemprop="url" rel="index"><span itemprop="name">Node.js</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+
+        
+
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>寫過網頁的大家們，大致上都了解 http 是一種無狀態的形式，假設頁面登進來的使用者，為了保存它的登入資訊，通常會使用 session 的觀念作為存放的物件，否則 server 端就不知道 client 端登進來的人是誰，不過今天不講session  的部分，而是我們要透過 socket.io 做雙向溝通，只要一旦建立了連線之後，就可以立即傳訊息出去，Client 的部分也立即接收到，相互取得訊息。</p>
+<p>今天要來透過介紹的是簡單的聊天室功能，讓大家了解 node.js 在 socket.io 運作的方式，以下是本章節會學習到的部分：</p>
+<ul>
+<li>使用 Bootstrap 規劃製作前端頁面框架</li>
+<li>使用 express 套功能</li>
+<li>使用 socket.io 套件</li>
+<li>開發聊天室功能</li>
+</ul>
+<p>本章節程式同步放置於 ：<a target="_blank" rel="noopener" href="https://github.com/weijutu/nodejs-simple-chatroom">https://github.com/weijutu/nodejs-simple-chatroom</a></p>
+<p>首先我們先定義好需要的動向有：</p>
+<ol>
+<li>進入聊天室之前需要先輸入姓名</li>
+<li>進入聊天室頁面之後，左邊區域負責聊天的顯示部分，右邊區域負責登入的名單</li>
+<li>聊天功能會有個按鈕，當使用者輸入訊息後，按下按鈕送出</li>
+<li>瀏覽器關閉時，也等於退出聊天功能</li>
+</ol>
+<p>首先建立一個 nodejs-simple-chatroom 資料夾，安裝 express, socket.io 相依套件，package.json 檔案內容為：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">     &quot;name&quot;: &quot;nodejs-simple-chatroom&quot;,</span><br><span class="line">     &quot;version&quot;: &quot;0.0.1&quot;,</span><br><span class="line">     &quot;private&quot;: true,</span><br><span class="line">     &quot;dependencies&quot;: &#123;</span><br><span class="line">          &quot;socket.io&quot;: &quot;1.0.3&quot;,</span><br><span class="line">          &quot;express&quot;: &quot;4.4.0&quot;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>(安裝相依套件方式請詳情：<a target="_blank" rel="noopener" href="http://ithelp.ithome.com.tw/ironman7/app/article/dev/recent/10158140">http://ithelp.ithome.com.tw/ironman7/app/article/dev/recent/10158140</a>)<br>建立 package.json 完成之後，先將畫面基礎規劃完成</p>
+<h3 id="client-端"><a href="#client-端" class="headerlink" title="client 端"></a>client 端</h3><p>當多開幾個瀏覽器，可以輸入進入聊天的姓名，以下是在聊天之前先輸入的欄位：</p>
+<p><img data-src="/images/nodejs/74.png"></p>
+<p>在這邊使用了 bootstrap 前端框架來美化一下聊天室外觀</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">          &lt;div id=&quot;nickWrap&quot;&gt;</span><br><span class="line">               &lt;form id=&quot;setNick&quot; role=&quot;form&quot;&gt;</span><br><span class="line">                    &lt;h2 class=&quot;form-signin-heading&quot;&gt;請輸入您的名字:&lt;/h2&gt;</span><br><span class="line">                    &lt;p id=&quot;nickError&quot;&gt;&lt;/p&gt;</span><br><span class="line">                    &lt;div style=&quot;margin:20px;&quot;&gt;</span><br><span class="line">                         &lt;input size=&quot;35&quot; id=&quot;txtNickname&quot; required=&quot;&quot; /&gt;</span><br><span class="line">                    &lt;/div&gt;</span><br><span class="line">                    &lt;input type=&quot;Submit&quot; class=&quot;btn btn-lg btn-primary&quot;&gt;</span><br><span class="line">               &lt;/form&gt;</span><br><span class="line">          &lt;/div&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">          &lt;div id=&quot;contentWrap&quot;&gt;</span><br><span class="line">               &lt;div id=&quot;chatWrap&quot; class=&quot;panel panel-default&quot; &gt;</span><br><span class="line">                      &lt;div class=&quot;panel-heading&quot;&gt;即時聊天&lt;/div&gt;</span><br><span class="line">                      &lt;div class=&quot;panel-body&quot;&gt;</span><br><span class="line">                           &lt;div class=&quot;row&quot;&gt;</span><br><span class="line">                                &lt;div class=&quot;col-md-9&quot;&gt;</span><br><span class="line">                                     &lt;div id=&quot;chat&quot;&gt;&lt;/div&gt;</span><br><span class="line">                                  &lt;form id=&quot;send-message&quot;&gt;</span><br><span class="line">                                    &lt;div class=&quot;input-group&quot;&gt;</span><br><span class="line">                                      &lt;input type=&quot;text&quot; class=&quot;form-control&quot; placeholder=&quot;請輸入聊天訊息...&quot; id=&quot;message&quot;&gt;</span><br><span class="line">                                      &lt;span class=&quot;input-group-btn&quot;&gt;</span><br><span class="line">                                        &lt;button type=&quot;submit&quot; class=&quot;btn btn-default&quot;&gt;送出留言&lt;/button&gt;</span><br><span class="line">                                      &lt;/span&gt;</span><br><span class="line">                                    &lt;/div&gt;</span><br><span class="line">                                  &lt;/form&gt;</span><br><span class="line">                              &lt;/div&gt;</span><br><span class="line">                              &lt;div class=&quot;col-md-3&quot;&gt;</span><br><span class="line">                                    線上名單：</span><br><span class="line">                                   &lt;div id=&quot;users&quot;&gt;&lt;/div&gt;</span><br><span class="line">                              &lt;/div&gt;</span><br><span class="line">                         &lt;/div&gt;</span><br><span class="line">                      &lt;/div&gt;</span><br><span class="line">               &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">          &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">          &lt;script type=&quot;text/javascript&quot; src=&quot;//code.jquery.com/jquery-latest.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">          &lt;script type=&quot;text/javascript&quot; src=&quot;/socket.io/socket.io.js&quot;&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">     &lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="javascript-部分"><a href="#javascript-部分" class="headerlink" title="javascript 部分"></a>javascript 部分</h3><p>這部分寫在 client 裏面，作為控制像的事件觸發操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">          $(function()&#123;</span><br><span class="line">               var socket = io.connect();</span><br><span class="line">               var $frmMessage = $(&#x27;#send-message&#x27;);</span><br><span class="line">               var $frmNick = $(&#x27;#setNick&#x27;);</span><br><span class="line">               var $nickError = $(&#x27;#nickError&#x27;);</span><br><span class="line">               var $nickBox = $(&#x27;#txtNickname&#x27;);</span><br><span class="line">               var $boxMessage = $(&#x27;#message&#x27;);</span><br><span class="line">               var $chat = $(&#x27;#chat&#x27;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">               $frmNick.submit(function(e)&#123;</span><br><span class="line">                    console.log($nickBox.val());</span><br><span class="line">                    console.log(&#x27;hi, frmNick&#x27;);</span><br><span class="line">                    e.preventDefault();</span><br><span class="line"></span><br><span class="line">                    socket.emit(&#x27;new user&#x27;, $nickBox.val() );</span><br><span class="line"></span><br><span class="line">                    $nickBox.val(&#x27;&#x27;);</span><br><span class="line"></span><br><span class="line">                    $(&#x27;#nickWrap&#x27;).hide();</span><br><span class="line">                    $(&#x27;#contentWrap&#x27;).show();</span><br><span class="line"></span><br><span class="line">               &#125;);</span><br><span class="line"></span><br><span class="line">               $frmMessage.submit(function(e)&#123;</span><br><span class="line">                    e.preventDefault();</span><br><span class="line">                    socket.emit(&#x27;send message&#x27;, $boxMessage.val().trim());</span><br><span class="line">                    $boxMessage.val(&#x27;&#x27;);</span><br><span class="line">               &#125;);</span><br><span class="line"></span><br><span class="line">               socket.on(&#x27;usernames&#x27;, function(data)&#123;</span><br><span class="line">                    var sb = &#x27;&#x27;;</span><br><span class="line">                    for(var d = 0; d &lt; data.length; d++ ) &#123;</span><br><span class="line">                         console.log(data[d]);</span><br><span class="line">                         sb += data[d] + &quot;&lt;br /&gt;&quot;;</span><br><span class="line">                    &#125;</span><br><span class="line">                    $(&#x27;div#users&#x27;).html(sb);</span><br><span class="line"></span><br><span class="line">               &#125;);</span><br><span class="line"></span><br><span class="line">               socket.on(&#x27;chat&#x27;, function(server,msg)&#123;</span><br><span class="line"></span><br><span class="line">                    var now = new Date();</span><br><span class="line">                    var datetime = now.getFullYear()+&#x27;/&#x27;+(now.getMonth()+1)+&#x27;/&#x27;+now.getDate();</span><br><span class="line">                      datetime += &#x27; &#x27;+now.getHours()+&#x27;:&#x27;+now.getMinutes()+&#x27;:&#x27;+now.getSeconds();</span><br><span class="line"></span><br><span class="line">                    $chat.append(&quot;&lt;br /&gt;&lt;i&gt;系統訊息: &lt;b&gt;[ &quot; + msg + &quot; ]&lt;/b&gt; (&quot; +</span><br><span class="line">                         datetime + &quot;)&lt;/i&gt;&lt;br /&gt;&quot;);</span><br><span class="line">               &#125;);</span><br><span class="line"></span><br><span class="line">               socket.on(&#x27;new message&#x27;, function(data)&#123;</span><br><span class="line">                    var msg = data.msg;</span><br><span class="line">                    var name = data.nick;</span><br><span class="line"></span><br><span class="line">                    var now = new Date();</span><br><span class="line">                    var datetime = now.getFullYear()+&#x27;/&#x27;+(now.getMonth()+1)+&#x27;/&#x27;+now.getDate();</span><br><span class="line">                      datetime += &#x27; &#x27;+now.getHours()+&#x27;:&#x27;+now.getMinutes()+&#x27;:&#x27;+now.getSeconds();</span><br><span class="line"></span><br><span class="line">                    $chat.append(&quot;&lt;b&gt;&quot; + name + &quot; &lt;/b&gt;: &quot; + msg + &quot; (&lt;i&gt;&quot; + datetime + &quot;&lt;i&gt;)&lt;br /&gt;&quot;);</span><br><span class="line">               &#125;);</span><br><span class="line">          &#125;);</span><br><span class="line">          &lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="server-端：-app-js"><a href="#server-端：-app-js" class="headerlink" title="server 端：(app.js)"></a>server 端：(app.js)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">var express = require(&#x27;express&#x27;),</span><br><span class="line">     app = express(),</span><br><span class="line">     server = require(&#x27;http&#x27;).createServer(app),</span><br><span class="line">     io = require(&#x27;socket.io&#x27;).listen(server),</span><br><span class="line">     nicknames = [];</span><br><span class="line"></span><br><span class="line">server.listen(3000);</span><br><span class="line"></span><br><span class="line">app.get(&#x27;/&#x27;, function(req, res)&#123;</span><br><span class="line">     res.sendfile(__dirname + &#x27;/index.html&#x27;);</span><br><span class="line">&#125;);</span><br><span class="line">app.use(&#x27;/public&#x27;, express.static(__dirname + &#x27;/public&#x27;));</span><br><span class="line"></span><br><span class="line">io.sockets.on(&#x27;connection&#x27;, function(socket) &#123;</span><br><span class="line">     socket.on(&#x27;new user&#x27;, function(data)&#123;</span><br><span class="line">          console.log(data);</span><br><span class="line">          if (nicknames.indexOf(data) != -1) &#123;</span><br><span class="line"></span><br><span class="line">          &#125; else &#123;</span><br><span class="line">               socket.emit(&#x27;chat&#x27;, &#x27;SERVER&#x27;, &#x27;歡迎光臨 &#x27; + data);</span><br><span class="line"></span><br><span class="line">               socket.nickname = data;</span><br><span class="line">               nicknames.push(socket.nickname);</span><br><span class="line">               io.sockets.emit(&#x27;usernames&#x27;, nicknames);</span><br><span class="line">               updateNicknames();</span><br><span class="line">          &#125;</span><br><span class="line">     &#125;);</span><br><span class="line"></span><br><span class="line">     function updateNicknames()&#123;</span><br><span class="line">          io.sockets.emit(&#x27;usernames&#x27;, nicknames);</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     //</span><br><span class="line">     socket.on(&#x27;send message&#x27;, function(data)&#123;</span><br><span class="line">          io.sockets.emit(&#x27;new message&#x27;, &#123; msg: data, nick: socket.nickname &#125;);</span><br><span class="line">     &#125;);</span><br><span class="line"></span><br><span class="line">     socket.on(&#x27;disconnect&#x27;, function(data)&#123;</span><br><span class="line">          if (!socket.nickname) return;</span><br><span class="line">          io.sockets.emit(&#x27;chat&#x27;, &#x27;SERVER&#x27;, socket.nickname + &#x27; 離開了聊天室～&#x27;);</span><br><span class="line">          nicknames.splice(nicknames.indexOf(socket.nickname), 1);</span><br><span class="line">          updateNicknames();</span><br><span class="line">     &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="結果"><a href="#結果" class="headerlink" title="結果"></a>結果</h3><p><img data-src="/images/nodejs/75.png"></p>
+<p>已上圖來講，原本有三個聊天者，當某一個使用者關閉瀏覽器 離開聊天室時，將會把使用者從名單上移除。<br>本章節是個簡易的聊天室功能，當然也可以進階一點做一些顯示上的呈現，或者將這些的留言都使用資料庫（例如：mongodb）儲存這些訊息。</p>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a target="_blank" rel="noopener" href="http://getbootstrap.com/">http://getbootstrap.com/</a><br><a target="_blank" rel="noopener" href="http://expressjs.com/">http://expressjs.com</a><br><a target="_blank" rel="noopener" href="http://socket.io/">http://socket.io/</a><br><a target="_blank" rel="noopener" href="https://www.ptt.cc/bbs/joke/M.1412577767.A.0EB.html">https://www.ptt.cc/bbs/joke/M.1412577767.A.0EB.html</a><br><a target="_blank" rel="noopener" href="http://segmentfault.com/a/1190000000479518">http://segmentfault.com/a/1190000000479518</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>作者： </strong>Helen
+  </li>
+  <li class="post-copyright-link">
+      <strong>文章連結：</strong>
+      <a href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-19-chatroom/" title="Node.js 系列學習日誌#19 - 運用 express, socket.io, boostrap 建立一個簡單的聊天室功能">https://weijutu.github.io/2017/07/24/nodejs/nodejs-19-chatroom/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Node-js/" rel="tag"># Node.js</a>
+              <a href="/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/" rel="tag"># 鐵人賽</a>
+              <a href="/tags/socket-io/" rel="tag"># socket.io</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/07/24/nodejs/nodejs-18-express/" rel="prev" title="Node.js 系列學習日誌#18 - 使用 Express 實作網頁開發框架">
+                  <i class="fa fa-chevron-left"></i> Node.js 系列學習日誌#18 - 使用 Express 實作網頁開發框架
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/07/24/nodejs/nodejs-20-node-inspector/" rel="next" title="Node.js 系列學習日誌#20 - 調校 Debug 工具 node-inspector">
+                  Node.js 系列學習日誌#20 - 調校 Debug 工具 node-inspector <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Helen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

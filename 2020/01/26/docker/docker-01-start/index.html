@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/cube_logo_v2.png">
+  <link rel="mask-icon" href="/images/cube_logo_v2.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/yellow/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"weijutu.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="前言身為開發者經常要處理各種版本的環境部署。若你遇到每次到一個環境都要重新做安裝感到厭煩，那麼，學習 docker 絕對不會讓你失望，它可以讓我們在不同環境裡進行部署應用程式。Docker 是個輕量級的虛擬化技術，每一個 container 都是獨立的環境，有各自的根目錄、檔案系統、網路環境的等，也就是說某個專案執行 mysql 5.6 版，另一個專案執行 mysql 8.0 版，對於應用程式來說">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Docker#1 - 初識 Docker">
+<meta property="og:url" content="https://weijutu.github.io/2020/01/26/docker/docker-01-start/index.html">
+<meta property="og:site_name" content="丸匠筆記">
+<meta property="og:description" content="前言身為開發者經常要處理各種版本的環境部署。若你遇到每次到一個環境都要重新做安裝感到厭煩，那麼，學習 docker 絕對不會讓你失望，它可以讓我們在不同環境裡進行部署應用程式。Docker 是個輕量級的虛擬化技術，每一個 container 都是獨立的環境，有各自的根目錄、檔案系統、網路環境的等，也就是說某個專案執行 mysql 5.6 版，另一個專案執行 mysql 8.0 版，對於應用程式來說">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://weijutu.github.io/images/docker/1.png">
+<meta property="og:image" content="https://weijutu.github.io/images/docker/2.png">
+<meta property="og:image" content="https://weijutu.github.io/images/docker/3.png">
+<meta property="og:image" content="https://weijutu.github.io/images/docker/4.png">
+<meta property="og:image" content="https://weijutu.github.io/images/docker/5.png">
+<meta property="og:image" content="https://weijutu.github.io/images/docker/6.png">
+<meta property="og:image" content="https://weijutu.github.io/images/docker/7.png">
+<meta property="og:image" content="https://weijutu.github.io/images/docker/8.png">
+<meta property="article:published_time" content="2020-01-26T03:07:51.000Z">
+<meta property="article:modified_time" content="2022-09-04T01:16:48.822Z">
+<meta property="article:author" content="Helen">
+<meta property="article:tag" content="docker">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://weijutu.github.io/images/docker/1.png">
+
+
+<link rel="canonical" href="https://weijutu.github.io/2020/01/26/docker/docker-01-start/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://weijutu.github.io/2020/01/26/docker/docker-01-start/","path":"2020/01/26/docker/docker-01-start/","title":"Docker#1 - 初識 Docker"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Docker#1 - 初識 Docker | 丸匠筆記</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72890173-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-72890173-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">丸匠筆記</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">a > 1, a ^ n = ∞</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF-Docker"><span class="nav-number">2.</span> <span class="nav-text">什麼是  Docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%A0%E5%83%8F%E6%AA%94"><span class="nav-number">3.</span> <span class="nav-text">映像檔</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A6%8B%E7%9A%84%E6%8C%87%E4%BB%A4%E6%93%8D%E4%BD%9C"><span class="nav-number">3.1.</span> <span class="nav-text">常見的指令操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%93%E5%8F%96-Image"><span class="nav-number">3.2.</span> <span class="nav-text">抓取 Image</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E5%87%BA-Local-%E7%AB%AF%E7%9A%84%E6%98%A0%E5%83%8F%E6%AA%94"><span class="nav-number">3.3.</span> <span class="nav-text">列出 Local 端的映像檔</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%95%9F%E5%8B%95-start-Images-%E7%94%A2%E7%94%9F-Container"><span class="nav-number">3.4.</span> <span class="nav-text">啟動(start) Images 產生 Container</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9A%AB%E5%81%9C-stop-Images-%E7%94%A2%E7%94%9F-Container"><span class="nav-number">3.5.</span> <span class="nav-text">暫停(stop) Images 產生 Container</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%AA%E9%99%A4%E6%98%A0%E5%83%8F"><span class="nav-number">3.6.</span> <span class="nav-text">刪除映像</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8"><span class="nav-number">4.</span> <span class="nav-text">容器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E5%AE%B9%E5%99%A8"><span class="nav-number">4.1.</span> <span class="nav-text">建立容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B-Container-%E8%A8%8A%E6%81%AF"><span class="nav-number">4.2.</span> <span class="nav-text">查看 Container 訊息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%AA%E9%99%A4-Container"><span class="nav-number">4.3.</span> <span class="nav-text">刪除 Container</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%80%89%E5%BA%AB"><span class="nav-number">5.</span> <span class="nav-text">倉庫</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Public-%E5%85%AC%E9%96%8B%E5%80%89%E5%BA%AB"><span class="nav-number">5.1.</span> <span class="nav-text">Public  公開倉庫</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Private-%E7%A7%81%E6%9C%89%E5%80%89%E5%BA%AB"><span class="nav-number">5.2.</span> <span class="nav-text">Private 私有倉庫</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Helen"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">Helen</p>
+  <div class="site-description" itemprop="description">天天吃番茄，天天有進步</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/weijutu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;weijutu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2020/01/26/docker/docker-01-start/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="Helen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="丸匠筆記">
+      <meta itemprop="description" content="天天吃番茄，天天有進步">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Docker#1 - 初識 Docker | 丸匠筆記">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        
+        <h1 class="post-title" itemprop="name headline">
+          Docker#1 - 初識 Docker
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2020-01-26 11:07:51" itemprop="dateCreated datePublished" datetime="2020-01-26T11:07:51+08:00">2020-01-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-09-04 09:16:48" itemprop="dateModified" datetime="2022-09-04T09:16:48+08:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+
+        
+
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>身為開發者經常要處理各種版本的環境部署。若你遇到每次到一個環境都要重新做安裝感到厭煩，那麼，學習 docker 絕對不會讓你失望，它可以讓我們在不同環境裡進行部署應用程式。Docker 是個輕量級的虛擬化技術，每一個 container 都是獨立的環境，有各自的根目錄、檔案系統、網路環境的等，也就是說某個專案執行 mysql 5.6 版，另一個專案執行 mysql 8.0 版，對於應用程式來說是個獨立的系統上執行，並不會衝突到。</p>
+<h2 id="什麼是-Docker"><a href="#什麼是-Docker" class="headerlink" title="什麼是  Docker"></a>什麼是  Docker</h2><p>Docker 的基礎是 Linux 容器 (LXC)，在作業系統層面上實作虛擬化，直接使用本地端的作業系統資源。要了解 Dokcer 是什麼，就先從他的基本概念學起，其中它包含了三個概念</p>
+<ul>
+<li>映像檔 Images</li>
+<li>容器 Container</li>
+<li>倉庫 Repository</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="映像檔"><a href="#映像檔" class="headerlink" title="映像檔"></a>映像檔</h2><p>這個是 Docker 運行虛擬環境時的基礎，是包含應用程式與相關依賴庫的檔案，映像檔可以用來建立容器，會以唯讀的方式建立容器運行的基礎環境，可以把它當作持久化副本。</p>
+<p>映像檔名稱指主要分為三個部分，組好之後每一個映像都會有一個獨立的 Image ID</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker/ssh:latest</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Namespace：命名空間，主要是用來辨識建構的組織或個人名稱</li>
+<li>Repository：檔案名稱，通常用應用程式或服務名稱</li>
+<li>Tag：類似 git 的 Tag，通常用 Tag 來區分版本</li>
+</ul>
+<p>管理映像的方式有提供簡單的指令就能對映像做建構、管理、查詢的操作。</p>
+<h3 id="常見的指令操作"><a href="#常見的指令操作" class="headerlink" title="常見的指令操作"></a>常見的指令操作</h3><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>說明</th>
+<th>範例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>search</td>
+<td>搜尋</td>
+<td>docker search ubuntu</td>
+</tr>
+<tr>
+<td>pull</td>
+<td>下載</td>
+<td>docker pull ubuntu</td>
+</tr>
+<tr>
+<td>images</td>
+<td>列表</td>
+<td>docker images</td>
+</tr>
+<tr>
+<td>run</td>
+<td>執行</td>
+<td>docker run -it ubuntu &#x2F;bin&#x2F;bash</td>
+</tr>
+<tr>
+<td>rmi [Image ID]</td>
+<td>刪除</td>
+<td>docker rmi <abcdefgg></td>
+</tr>
+<tr>
+<td>build</td>
+<td>建立</td>
+<td>docker build -t member:1 .</td>
+</tr>
+<tr>
+<td>login</td>
+<td>登入</td>
+<td>docker login</td>
+</tr>
+<tr>
+<td>push</td>
+<td>上傳</td>
+<td>docker push</td>
+</tr>
+</tbody></table>
+<p>透過 search 可以先查找現有的映像檔，由於這裡我們沒有指定映像標籤，所以會自動的使用 <code>latest</code> 的預設標籤</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker search ubuntu</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="/images/docker/1.png"></p>
+<p>列出的訊息可以看到</p>
+<ul>
+<li>NAME 映像檔名稱</li>
+<li>DESCRIPTION 描述</li>
+<li>STARTS 星星數，越多的話代表越多人使用</li>
+<li>OFFICIAL 是否為官方的映像檔</li>
+<li>AUTOMATED 自動化</li>
+</ul>
+<p>如果你使用指定比較明確的版本，可以使用 ubuntu:16.04 映像檔來啟動一個容器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -t -i ubuntu:16.04 /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>如果後面沒有填上 <code>TAG</code> (是用來標記同一個倉庫不同的映像檔)</p>
+<h3 id="抓取-Image"><a href="#抓取-Image" class="headerlink" title="抓取 Image"></a>抓取 Image</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull ubuntu</span><br><span class="line">$ docker pull ubuntu:16.04 # 只會抓 Ubuntu 16.04</span><br></pre></td></tr></table></figure>
+
+<h3 id="列出-Local-端的映像檔"><a href="#列出-Local-端的映像檔" class="headerlink" title="列出 Local 端的映像檔"></a>列出 Local 端的映像檔</h3><p>一般在操作 Docker 的時候，會先確定本地端有哪些映像檔</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ docker images</span><br><span class="line"></span><br><span class="line">-- 如果映像檔比較多還可以使用 * 萬用字元來篩選符合條件</span><br><span class="line">$ docker images ph* </span><br></pre></td></tr></table></figure>
+
+<h3 id="啟動-start-Images-產生-Container"><a href="#啟動-start-Images-產生-Container" class="headerlink" title="啟動(start) Images 產生 Container"></a>啟動(start) Images 產生 Container</h3> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker start &lt;hash-id&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="暫停-stop-Images-產生-Container"><a href="#暫停-stop-Images-產生-Container" class="headerlink" title="暫停(stop) Images 產生 Container"></a>暫停(stop) Images 產生 Container</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker stop &lt;hash-id&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="刪除映像"><a href="#刪除映像" class="headerlink" title="刪除映像"></a>刪除映像</h3><p>後方直接帶上 images id </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker rmi 3tjdhdlw0</span><br></pre></td></tr></table></figure>
+
+<h2 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h2><p>Container 可以執行 run、 啟動 start、停止 stop、刪除 rm，每一個 container 都是分離的。</p>
+<h3 id="建立容器"><a href="#建立容器" class="headerlink" title="建立容器"></a>建立容器</h3><p>使用以下命令，就可以建立且運行一個終端交互的 Ubuntu 容器：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -i -t --name cube ubuntu bash</span><br></pre></td></tr></table></figure>
+
+<p>命令參數解釋：</p>
+<table>
+<thead>
+<tr>
+<th>參數</th>
+<th>值</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-i</td>
+<td>n&#x2F;a</td>
+<td>可以輸入進行交互</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>n&#x2F;a</td>
+<td>終端交互</td>
+</tr>
+<tr>
+<td>-name</td>
+<td>cube</td>
+<td>指定容器名稱 cube</td>
+</tr>
+<tr>
+<td>ubuntu</td>
+<td>n&#x2F;a</td>
+<td>指定使用映像檔</td>
+</tr>
+<tr>
+<td>bash</td>
+<td>n&#x2F;a</td>
+<td>指定容器啟用使用的應用</td>
+</tr>
+</tbody></table>
+<p>執行之後，就會立刻登入 ubuntu 容器的 bash 裡了。</p>
+<h3 id="查看-Container-訊息"><a href="#查看-Container-訊息" class="headerlink" title="查看 Container 訊息"></a>查看 Container 訊息</h3><p>一但已有建立 Container 之後，可以使用 <code>ps</code> 指令來查詢 container 資訊，會列出正在執行的容器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker ps</span><br></pre></td></tr></table></figure>
+
+<p>但如果想要查詢所有容器的狀態，後面補上  <code>-a</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker ps -a</span><br></pre></td></tr></table></figure>
+
+<p>執行結果會像下面這樣：</p>
+<p><img data-src="/images/docker/2.png"></p>
+<h3 id="刪除-Container"><a href="#刪除-Container" class="headerlink" title="刪除 Container"></a>刪除 Container</h3><p>刪除的方式有兩種</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ docker rm &lt;NAMES&gt;</span><br><span class="line">$ docker rm &lt;CONTAINER ID&gt;</span><br></pre></td></tr></table></figure>
+
+<p>假設我想刪除 <code>funny_ptolemy</code> 那麼，就輸入 <code>docker rm funny_ptolemy</code></p>
+<p>執行結果如下：</p>
+<p><img data-src="/images/docker/3.png"></p>
+<h2 id="倉庫"><a href="#倉庫" class="headerlink" title="倉庫"></a>倉庫</h2><p>顧名思義就是集中擺放 images 的地方。倉庫也分為 Public 和 Private 形式，公開的倉庫是 Docker Hub，裡頭放了許多映像檔讓使用者下載。這個有點像是 git 觀念一樣，也是一種託管服務。也就是說當使用者建立好自己的映像檔之後，就可以使用 push 命令上傳到倉庫，之後在另一台機器就可以使用映像檔使用 pull 命令下載下來。</p>
+<p>所以，映像管理系統就是提供類似程式庫刑事的映像存取和管理方式，如果是用遠端的方式要求登入與授權操作的話，需要透過 docker login 登入指定的倉庫伺服器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker login -u &lt;username&gt; -p &lt;password&gt; &lt;server&gt;</span><br></pre></td></tr></table></figure>
+
+<p>如果不加上 <server> ，預設就會是使用  docker hub</p>
+<h3 id="Public-公開倉庫"><a href="#Public-公開倉庫" class="headerlink" title="Public  公開倉庫"></a>Public  公開倉庫</h3><p>全球最大的映像倉庫就是官方提供的 <a target="_blank" rel="noopener" href="https://hub.docker.com/">https://hub.docker.com/</a> ，使用服務前先註冊一個 Docker Hub 帳號</p>
+<p><img data-src="/images/docker/4.png"></p>
+<p>註冊完登入後，就可以看到託管的 Docker Hub 映像，一般是以本地 docker login 到 Docker Hub 中，在使用 docker push  發布到 Hub 上</p>
+<p><img data-src="/images/docker/5.png"></p>
+<p>到右上角搜尋匡輸入 mysql 的話，就可以搜尋您想要的服務</p>
+<p><img data-src="/images/docker/6.png"></p>
+<p>在搜尋結果有顯示官方的 image 以及星星數，找到所需要的映像之後就可以用 docker pull 命令下載了</p>
+<p><img data-src="/images/docker/7.png"></p>
+<h3 id="Private-私有倉庫"><a href="#Private-私有倉庫" class="headerlink" title="Private 私有倉庫"></a>Private 私有倉庫</h3><p>除了用 Docker Hub 官方提供的倉庫之外，當然也可以自己建構私有的倉庫 (也有點像 gitlab)。其名稱用了一個映像分發工具 <code>Docker Registry</code> 目的是儲存與分發映像，也提供 HTTP API 模組操作。</p>
+<p>建立與執行映像檔倉庫</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d -p 5000:5000 registry</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="/images/docker/8.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d -p 5000:5000 -v &lt;上傳映像檔的目錄&gt;:/tmp/registry registry</span><br></pre></td></tr></table></figure>
+
+<p>之後就可以對這組 registry 做 push 與 pull</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>作者： </strong>Helen
+  </li>
+  <li class="post-copyright-link">
+      <strong>文章連結：</strong>
+      <a href="https://weijutu.github.io/2020/01/26/docker/docker-01-start/" title="Docker#1 - 初識 Docker">https://weijutu.github.io/2020/01/26/docker/docker-01-start/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/docker/" rel="tag"># docker</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/04/30/bot/hubot-02-heroku-slack/" rel="prev" title="用 Hubot 打造聊天機器人#2 - hubot 專案部署到 heroku 連接 slack 聊天通訊軟體">
+                  <i class="fa fa-chevron-left"></i> 用 Hubot 打造聊天機器人#2 - hubot 專案部署到 heroku 連接 slack 聊天通訊軟體
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/01/26/docker/docker-02-start-nginx/" rel="next" title="Docker#2 - 啟動 Nginx Web 伺服器">
+                  Docker#2 - 啟動 Nginx Web 伺服器 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Helen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

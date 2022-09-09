@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/cube_logo_v2.png">
+  <link rel="mask-icon" href="/images/cube_logo_v2.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/yellow/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"weijutu.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Node.js 是一套使用了 Google V8 虛擬機來解釋 Javascript 語法，允許在後端運行 Javascript 的語法，發生在把頁面發送給 browser 之前的服務器上，所以要實現後台運行的 Javascript 語法，那麼語法要先被編譯後才可以正確執行。 本章節會學習到  安裝 Node.js 驗證  Node.js 是否正確安裝 建立基本 Node.js 程式 啟動基本 N">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Node.js 系列學習日誌#2 - Node.js 安裝配置">
+<meta property="og:url" content="https://weijutu.github.io/2017/07/24/nodejs/nodejs-02-install/index.html">
+<meta property="og:site_name" content="丸匠筆記">
+<meta property="og:description" content="Node.js 是一套使用了 Google V8 虛擬機來解釋 Javascript 語法，允許在後端運行 Javascript 的語法，發生在把頁面發送給 browser 之前的服務器上，所以要實現後台運行的 Javascript 語法，那麼語法要先被編譯後才可以正確執行。 本章節會學習到  安裝 Node.js 驗證  Node.js 是否正確安裝 建立基本 Node.js 程式 啟動基本 N">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/2.png">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/3.png">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/4.png">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/5.png">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/6.png">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/7.png">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/8.png">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/9.png">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/10.png">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/11.png">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/12.png">
+<meta property="og:image" content="https://weijutu.github.io/images/nodejs/13.png">
+<meta property="article:published_time" content="2017-07-23T16:02:00.000Z">
+<meta property="article:modified_time" content="2022-09-04T01:16:48.892Z">
+<meta property="article:author" content="Helen">
+<meta property="article:tag" content="Node.js">
+<meta property="article:tag" content="鐵人賽">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://weijutu.github.io/images/nodejs/2.png">
+
+
+<link rel="canonical" href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-02-install/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://weijutu.github.io/2017/07/24/nodejs/nodejs-02-install/","path":"2017/07/24/nodejs/nodejs-02-install/","title":"Node.js 系列學習日誌#2 - Node.js 安裝配置"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Node.js 系列學習日誌#2 - Node.js 安裝配置 | 丸匠筆記</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72890173-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-72890173-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">丸匠筆記</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">a > 1, a ^ n = ∞</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D%E7%B3%BB%E7%B5%B1%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">安裝系統：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A9%97%E8%AD%89-Node-js-%E6%AD%A3%E7%A2%BA%E5%AE%89%E8%A3%9D"><span class="nav-number">2.</span> <span class="nav-text">驗證 Node.js 正確安裝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B-Hello-world-%E7%9A%84-Node-js-%E7%A8%8B%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">建立 Hello world 的 Node.js 程式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%96%8B%E5%A7%8B%E5%9F%B7%E8%A1%8C%E5%95%9F%E5%8B%95"><span class="nav-number">3.1.</span> <span class="nav-text">開始執行啟動</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E8%AD%A6%E7%A4%BA"><span class="nav-number">4.</span> <span class="nav-text">安全警示</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Helen"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">Helen</p>
+  <div class="site-description" itemprop="description">天天吃番茄，天天有進步</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/weijutu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;weijutu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-02-install/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="Helen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="丸匠筆記">
+      <meta itemprop="description" content="天天吃番茄，天天有進步">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Node.js 系列學習日誌#2 - Node.js 安裝配置 | 丸匠筆記">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        
+        <h1 class="post-title" itemprop="name headline">
+          Node.js 系列學習日誌#2 - Node.js 安裝配置
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2017-07-24 00:02:00" itemprop="dateCreated datePublished" datetime="2017-07-24T00:02:00+08:00">2017-07-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-09-04 09:16:48" itemprop="dateModified" datetime="2022-09-04T09:16:48+08:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Node-js/" itemprop="url" rel="index"><span itemprop="name">Node.js</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+
+        
+
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>Node.js 是一套使用了 Google V8 虛擬機來解釋 Javascript 語法，允許在後端運行 Javascript 的語法，發生在把頁面發送給 browser 之前的服務器上，所以要實現後台運行的 Javascript 語法，那麼語法要先被編譯後才可以正確執行。</p>
+<p>本章節會學習到</p>
+<ul>
+<li>安裝 Node.js</li>
+<li>驗證  Node.js 是否正確安裝</li>
+<li>建立基本 Node.js 程式</li>
+<li>啟動基本 Node.js 程式</li>
+<li>安全警示</li>
+<li>查看 npm 是否有安裝</li>
+</ul>
+<h2 id="安裝系統："><a href="#安裝系統：" class="headerlink" title="安裝系統："></a>安裝系統：</h2><p>首先，簡單的來安裝一下 Node.js ，在這裡示範的系統環境是 Windows XP 32bit，可以到 <a target="_blank" rel="noopener" href="http://nodejs.org/">http://nodejs.org/</a> 的首頁上下載安裝軟體</p>
+<ul>
+<li>進入 node.js 官方網站 <a target="_blank" rel="noopener" href="http://nodejs.org/">http://nodejs.org/</a> 點選 install 後, 會下載一個 node-v0.10.25-x86.msi 安裝檔案</li>
+</ul>
+<p><img data-src="/images/nodejs/2.png"></p>
+<ul>
+<li>點選安裝檔案後, 開始進行安裝</li>
+</ul>
+<p><img data-src="/images/nodejs/3.png"></p>
+<ul>
+<li>End-User License Agreement 的頁面, 勾選 “I accept the terms in the License Agreement” 核選方塊後, 點選 Next 進行下一步</li>
+</ul>
+<p><img data-src="/images/nodejs/4.png"></p>
+<ul>
+<li>可指定安裝路徑, 這裡就保持預設就行了, 確認後點選 Next (當然，要改變存放位置也是可以)</li>
+</ul>
+<p><img data-src="/images/nodejs/5.png"></p>
+<ul>
+<li>自訂安裝 Select the way you want features to be installed</li>
+</ul>
+<p><img data-src="/images/nodejs/6.png"></p>
+<ul>
+<li>安裝前的提醒</li>
+</ul>
+<p><img data-src="/images/nodejs/7.png"></p>
+<ul>
+<li>開始進行安裝 Node.js</li>
+</ul>
+<p><img data-src="/images/nodejs/8.png"></p>
+<ul>
+<li>完成安裝</li>
+</ul>
+<p><img data-src="/images/nodejs/9.png"></p>
+<h2 id="驗證-Node-js-正確安裝"><a href="#驗證-Node-js-正確安裝" class="headerlink" title="驗證 Node.js 正確安裝"></a>驗證 Node.js 正確安裝</h2><p>學習新的一套語言，就是要先學會將程式呈現一個簡單的文字顯示，因此不免俗的還是來一個萬年測試，先來看看安裝是否有成功。</p>
+<ul>
+<li>開啟命令提示字元，輸入 node</li>
+<li>輸入 12 + 34 ，檢查是否有回應 46 的答案，若有就代表成功囉。</li>
+</ul>
+<p><img data-src="/images/nodejs/10.png"></p>
+<h2 id="建立-Hello-world-的-Node-js-程式"><a href="#建立-Hello-world-的-Node-js-程式" class="headerlink" title="建立 Hello world 的 Node.js 程式"></a>建立 Hello world 的 Node.js 程式</h2><p>不管利用記事本或是會善用 IDE 做為開發的工具，建立一個 <code>my.js</code> 的檔案，輸入以下的語法</p>
+<pre><code class="javascript">var http = require(&#39;http&#39;);
+http.createServer(function(req, res)&#123;
+  res.writeHead(200, &#123; &#39;Content-Type&#39;: &#39;text/html&#39; &#125;);
+  res.write(&#39;&lt;h1&gt; Hello Helen, this is Node.js &lt;/h1&gt;&#39;);
+  res.end(&#39;Hello world&#39;);
+&#125;).listen(3232);
+
+console.log(&quot;HTTP Server is listening at port 3232&quot;);
+</code></pre>
+<h3 id="開始執行啟動"><a href="#開始執行啟動" class="headerlink" title="開始執行啟動"></a>開始執行啟動</h3><p>接著打開命令提示字元，輸入 <code>node my.js</code><br>之後就會看到 <code>Http Server is listening at port 3232</code>，這就代表有成功啟動</p>
+<p><img data-src="/images/nodejs/11.png"></p>
+<h2 id="安全警示"><a href="#安全警示" class="headerlink" title="安全警示"></a>安全警示</h2><p>由於 node.js 是利用 google chrome v8 引擎執行, 會出現以下安全性警示，按下解除封鎖按鈕</p>
+<p><img data-src="/images/nodejs/12.png"></p>
+<p>馬上開起 browser，有出現以下的呈現結果，就是正常運行服務端的 javascript 喔！</p>
+<p><img data-src="/images/nodejs/13.png"></p>
+<p>如果想停止這個服務的話，在命令提示字元按下 CTRL + C 就將這個 port 停止服務就好了。</p>
+<p>Good，這樣就完成簡單的示範，接下來就可以慢慢建立比較複雜的應用程序囉。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>作者： </strong>Helen
+  </li>
+  <li class="post-copyright-link">
+      <strong>文章連結：</strong>
+      <a href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-02-install/" title="Node.js 系列學習日誌#2 - Node.js 安裝配置">https://weijutu.github.io/2017/07/24/nodejs/nodejs-02-install/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Node-js/" rel="tag"># Node.js</a>
+              <a href="/tags/%E9%90%B5%E4%BA%BA%E8%B3%BD/" rel="tag"># 鐵人賽</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/07/24/nodejs/nodejs-01-start/" rel="prev" title="Node.js 系列學習日誌#1 - 開始的開始，Node.js 簡介">
+                  <i class="fa fa-chevron-left"></i> Node.js 系列學習日誌#1 - 開始的開始，Node.js 簡介
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/07/24/nodejs/nodejs-03-npm/" rel="next" title="Node.js 系列學習日誌#3 - npm 包管理器">
+                  Node.js 系列學習日誌#3 - npm 包管理器 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Helen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

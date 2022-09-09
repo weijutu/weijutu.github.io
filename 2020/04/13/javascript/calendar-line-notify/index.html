@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/cube_logo_v2.png">
+  <link rel="mask-icon" href="/images/cube_logo_v2.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/yellow/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"weijutu.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Google 行事曆是個讓自己有條理的走在行程上，定期使用 Google 日曆的朋友一定也對設置的事件通知相當熟悉，今天要來使用另一種透過 Line Notify 通知每天的活動來通知成員的方式，我們將使用 Apps Script 撰寫腳本方式進行連接，這樣我們每次在 Google Calendar 新增的時候，就用 Line 通知我們！讓我們開始吧！ 使用的工具 Line Notify Goog">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Google 行事曆的行程用 Line Notify 通知">
+<meta property="og:url" content="https://weijutu.github.io/2020/04/13/javascript/calendar-line-notify/index.html">
+<meta property="og:site_name" content="丸匠筆記">
+<meta property="og:description" content="Google 行事曆是個讓自己有條理的走在行程上，定期使用 Google 日曆的朋友一定也對設置的事件通知相當熟悉，今天要來使用另一種透過 Line Notify 通知每天的活動來通知成員的方式，我們將使用 Apps Script 撰寫腳本方式進行連接，這樣我們每次在 Google Calendar 新增的時候，就用 Line 通知我們！讓我們開始吧！ 使用的工具 Line Notify Goog">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://weijutu.github.io/images/linenotify/1.png">
+<meta property="og:image" content="https://weijutu.github.io/images/linenotify/2.png">
+<meta property="og:image" content="https://weijutu.github.io/images/linenotify/4.png">
+<meta property="og:image" content="https://weijutu.github.io/images/linenotify/5.png">
+<meta property="og:image" content="https://weijutu.github.io/images/linenotify/6.png">
+<meta property="og:image" content="https://weijutu.github.io/images/linenotify/7.png">
+<meta property="og:image" content="https://weijutu.github.io/images/linenotify/8.png">
+<meta property="og:image" content="https://weijutu.github.io/images/linenotify/9.png">
+<meta property="og:image" content="https://weijutu.github.io/images/linenotify/10.png">
+<meta property="og:image" content="https://weijutu.github.io/images/linenotify/11.png">
+<meta property="og:image" content="https://weijutu.github.io/images/linenotify/12.png">
+<meta property="og:image" content="https://weijutu.github.io/images/linenotify/13.png">
+<meta property="og:image" content="https://weijutu.github.io/images/linenotify/14.png">
+<meta property="og:image" content="https://weijutu.github.io/images/linenotify/15.png">
+<meta property="article:published_time" content="2020-04-13T13:29:00.000Z">
+<meta property="article:modified_time" content="2022-09-04T01:16:48.855Z">
+<meta property="article:author" content="Helen">
+<meta property="article:tag" content="Line Notify">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://weijutu.github.io/images/linenotify/1.png">
+
+
+<link rel="canonical" href="https://weijutu.github.io/2020/04/13/javascript/calendar-line-notify/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://weijutu.github.io/2020/04/13/javascript/calendar-line-notify/","path":"2020/04/13/javascript/calendar-line-notify/","title":"Google 行事曆的行程用 Line Notify 通知"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Google 行事曆的行程用 Line Notify 通知 | 丸匠筆記</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72890173-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-72890173-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">丸匠筆記</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">a > 1, a ^ n = ∞</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%9A%84%E5%B7%A5%E5%85%B7"><span class="nav-number">1.</span> <span class="nav-text">使用的工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Line-Notify-%E7%9A%84%E7%99%BC%E8%A1%8C%E6%AC%8A%E4%BB%97"><span class="nav-number">2.</span> <span class="nav-text">Line Notify 的發行權仗</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Google-Apps-Script-%E5%AF%AB%E8%85%B3%E6%9C%AC"><span class="nav-number">3.</span> <span class="nav-text">Google Apps Script 寫腳本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%A9%A2%E6%97%A5%E6%9B%86-ID"><span class="nav-number">4.</span> <span class="nav-text">查詢日曆 ID</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Line-Notify-%E9%80%9A%E7%9F%A5%E6%88%91%E4%BA%86%EF%BC%81"><span class="nav-number">5.</span> <span class="nav-text">Line Notify 通知我了！</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83"><span class="nav-number">6.</span> <span class="nav-text">參考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Helen"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">Helen</p>
+  <div class="site-description" itemprop="description">天天吃番茄，天天有進步</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/weijutu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;weijutu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2020/04/13/javascript/calendar-line-notify/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="Helen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="丸匠筆記">
+      <meta itemprop="description" content="天天吃番茄，天天有進步">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Google 行事曆的行程用 Line Notify 通知 | 丸匠筆記">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        
+        <h1 class="post-title" itemprop="name headline">
+          Google 行事曆的行程用 Line Notify 通知
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2020-04-13 21:29:00" itemprop="dateCreated datePublished" datetime="2020-04-13T21:29:00+08:00">2020-04-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-09-04 09:16:48" itemprop="dateModified" datetime="2022-09-04T09:16:48+08:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+
+        
+
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>Google 行事曆是個讓自己有條理的走在行程上，定期使用 Google 日曆的朋友一定也對設置的事件通知相當熟悉，今天要來使用另一種透過 Line Notify 通知每天的活動來通知成員的方式，我們將使用 Apps Script 撰寫腳本方式進行連接，這樣我們每次在 Google Calendar 新增的時候，就用 Line 通知我們！讓我們開始吧！</p>
+<h2 id="使用的工具"><a href="#使用的工具" class="headerlink" title="使用的工具"></a>使用的工具</h2><ul>
+<li>Line Notify</li>
+<li>Google Calendar</li>
+<li>Google Apps Script</li>
+</ul>
+<h2 id="Line-Notify-的發行權仗"><a href="#Line-Notify-的發行權仗" class="headerlink" title="Line Notify 的發行權仗"></a>Line Notify 的發行權仗</h2><p>Line Notify 只要取得一組權杖就可以發送訊息</p>
+<p>請先進入 Line Notify 的<a target="_blank" rel="noopener" href="https://notify-bot.line.me/zh_TW/">網站</a> ，點選右上角的「登入」</p>
+<p><img data-src="/images/linenotify/1.png" alt="1"></p>
+<p>輸入自己的 Line 登入的帳號密碼</p>
+<p><img data-src="/images/linenotify/2.png" alt="2"></p>
+<span id="more"></span>
+
+
+<p>登入之後點選「個人頁面」，滑到最下方有一個「發行存取權杖」的區塊，按下「發行權杖」，這時候就會彈出一個發行權仗小視窗</p>
+<p><img data-src="/images/linenotify/4.png" alt="4"></p>
+<p>在這裏要輸入權杖名稱，這個欄位可以自己自訂，如果只要提醒個人的話，那就選擇「透過 1對1 聊天接收 Line Notify 的通知」，就像下方</p>
+<p><img data-src="/images/linenotify/5.png" alt="5"></p>
+<p>選擇好之後，就按下「發行」，這時候就會看到，發行了一組權杖給你，這時候要按下複製按鈕將鑰匙存下來，關閉之後就不會再出現</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">YBK21nyX1reV2zRKBTF0xxxCQGSOMkkuSTWs</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="/images/linenotify/6.png" alt="6"></p>
+<h2 id="Google-Apps-Script-寫腳本"><a href="#Google-Apps-Script-寫腳本" class="headerlink" title="Google Apps Script 寫腳本"></a>Google Apps Script 寫腳本</h2><p>接著我們進入  Google App Scripts 頁面裡，點選 <a target="_blank" rel="noopener" href="https://www.google.com/script/start/">Google Apps Script</a> ，進到頁面之後，點選左上角的「新專案」</p>
+<p><img data-src="/images/linenotify/7.png" alt="7"></p>
+<p>一開始先填上專案的名稱「行事曆使用 Line Notify 通知」</p>
+<p><img data-src="/images/linenotify/8.png" alt="8"></p>
+<p>先修改時區的設定，請在「檔案」&gt; 「專案屬性」，改成台北時間，修訂完成後按下儲存</p>
+<p><img data-src="/images/linenotify/9.png" alt="9"></p>
+<p>接著我們將以下的程式碼，貼到程式碼輸入的區塊</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="title class_">GoogleCalendarID</span> = <span class="string">&quot;xxxxxxxxxxxxxx@gmail.com&quot;</span>; <span class="comment">// 日曆 ID</span></span><br><span class="line"><span class="keyword">var</span> <span class="title class_">LineNotifyEndPoint</span> = <span class="string">&quot;https://notify-api.line.me/api/notify&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> <span class="title class_">AccessToken</span> = <span class="string">&quot;YBK21nyX1reVxxxxxxxrCQGSOMkkuSTWs&quot;</span>; <span class="comment">// 發行的權杖</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Now</span> = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Start</span> = <span class="keyword">new</span> <span class="title class_">Date</span>(<span class="title class_">Now</span>.<span class="title function_">getFullYear</span>(), <span class="title class_">Now</span>.<span class="title function_">getMonth</span>(),<span class="title class_">Now</span>.<span class="title function_">getDate</span>(), <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">End</span> = <span class="keyword">new</span> <span class="title class_">Date</span>(<span class="title class_">Now</span>.<span class="title function_">getFullYear</span>(), <span class="title class_">Now</span>.<span class="title function_">getMonth</span>(), <span class="title class_">Now</span>.<span class="title function_">getDate</span>(), <span class="number">23</span>, <span class="number">59</span>, <span class="number">59</span>, <span class="number">999</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">GoogleCalendar</span> = <span class="title class_">CalendarApp</span>.<span class="title function_">getCalendarById</span>(<span class="title class_">GoogleCalendarID</span>).<span class="title function_">getEvents</span>(<span class="title class_">Start</span>, <span class="title class_">End</span>); </span><br><span class="line"></span><br><span class="line"><span class="comment">// 監聽觸發條件所設置的</span></span><br><span class="line"><span class="comment">// 彙整行事曆資訊</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">postMessage</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> message = <span class="string">&quot;&quot;</span>;    <span class="comment">//新增 NotifyContents 存取通知內容</span></span><br><span class="line">  <span class="title class_">GoogleCalendar</span>.<span class="title function_">forEach</span>(<span class="function"><span class="params">item</span>=&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (item.<span class="title function_">getStartTime</span>() &lt;= <span class="title class_">Now</span> &amp;&amp; item.<span class="title function_">getTag</span>(<span class="string">&quot;Confirmed&quot;</span>) != <span class="string">&quot;Yes&quot;</span>) &#123;</span><br><span class="line">        message += (item.<span class="title function_">getTitle</span>() != <span class="string">&quot;&quot;</span>) ? (<span class="string">&quot;\n\n&quot;</span> + item.<span class="title function_">getTitle</span>() + <span class="string">&quot;\n&quot;</span>) : (<span class="string">&quot;\n\n空標題\n&quot;</span>);</span><br><span class="line">        message += (item.<span class="title function_">getDescription</span>() != <span class="string">&quot;&quot;</span>) ? item.<span class="title function_">getDescription</span>() : <span class="string">&quot;&quot;</span>;</span><br><span class="line">        item.<span class="title function_">setTag</span>(<span class="string">&quot;Confirmed&quot;</span>, <span class="string">&quot;Yes&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  )</span><br><span class="line">  <span class="title function_">sendMessage</span>(message);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 發出訊息</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">sendMessage</span>(<span class="params">message</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> formData = &#123;</span><br><span class="line">    <span class="string">&quot;message&quot;</span>: message</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">var</span> options = &#123;</span><br><span class="line">    <span class="string">&quot;headers&quot;</span> : &#123;<span class="string">&quot;Authorization&quot;</span> : <span class="string">&quot;Bearer &quot;</span> + <span class="title class_">AccessToken</span>&#125;,</span><br><span class="line">    <span class="string">&quot;method&quot;</span> : <span class="string">&#x27;post&#x27;</span>,</span><br><span class="line">    <span class="string">&quot;payload&quot;</span> : formData</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> response = <span class="title class_">UrlFetchApp</span>.<span class="title function_">fetch</span>(<span class="title class_">LineNotifyEndPoint</span>, options);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">    <span class="title class_">Logger</span>.<span class="title function_">log</span>(error.<span class="property">name</span> + <span class="string">&quot;：&quot;</span> + error.<span class="property">message</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (response.<span class="title function_">getResponseCode</span>() !== <span class="number">200</span>) &#123;</span><br><span class="line">    <span class="title class_">Logger</span>.<span class="title function_">log</span>(<span class="string">&quot;送出失敗&quot;</span>);</span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>要記得修改一下兩個地方，「發行的權杖」、「日曆 ID」</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="title class_">GoogleCalendarID</span> = <span class="string">&quot;xxxxxxxxxxxxxx@gmail.com&quot;</span>; <span class="comment">// 日曆 ID</span></span><br><span class="line"><span class="keyword">var</span> <span class="title class_">AccessToken</span> = <span class="string">&quot;YBK21nyX1reVxxxxxxxrCQGSOMkkuSTWs&quot;</span>; <span class="comment">// 發行的權杖</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="查詢日曆-ID"><a href="#查詢日曆-ID" class="headerlink" title="查詢日曆 ID"></a>查詢日曆 ID</h2><p>至於日曆的 ID，就到你的<a target="_blank" rel="noopener" href="https://calendar.google.com/calendar">行事曆</a>裡頭，選擇你要觀察的哪一個行事曆，選擇「設定和共用」</p>
+<p><img data-src="/images/linenotify/10.png" alt="10"></p>
+<p>那麼你就可以在整合日曆內，看到你的日曆 ID</p>
+<p><img data-src="/images/linenotify/11.png" alt="11"></p>
+<p>複製之後，貼到程式碼的 <code>GoogleCalendarID</code> 這組變數值</p>
+<p>然後，一切就緒之後，先將 Script 存下來，在按下小時鐘</p>
+<p><img data-src="/images/linenotify/12.png" alt="12"></p>
+<p>之後會回到觸發條件畫面，點選右下角的「新增觸發條件」，然後你可以選擇你想到被通知的設定</p>
+<p><img data-src="/images/linenotify/13.png" alt="13"></p>
+<p>最後按下觸發條件的儲存，那麼之後有任何的行程都會通知了，在你按下確認之後， Google 會需要通過允許通知的權限，</p>
+<p><img data-src="/images/linenotify/14.png" alt="14"></p>
+<h2 id="Line-Notify-通知我了！"><a href="#Line-Notify-通知我了！" class="headerlink" title="Line Notify 通知我了！"></a>Line Notify 通知我了！</h2><p>我們在 Google 行事曆建立一個未來行程，假設是設定 21:01 分的「這是開發時間」的行程，那麼接下來就等待 Google Apps Scripts 觸發動作，過了幾秒鐘之後，就可以確認一下是否有接下來的 Google 行事曆行程在 Line Notify 通知你了</p>
+<p><img data-src="/images/linenotify/15.png" alt="15"></p>
+<p>快來試試看吧！</p>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://developers.google.com/apps-script/reference/calendar/">Google Calendar  Service</a> </li>
+<li><a target="_blank" rel="noopener" href="https://developers.google.com/apps-script/reference/calendar/">https://developers.google.com/apps-script/reference/calendar/</a></li>
+<li><a target="_blank" rel="noopener" href="https://developers.google.com/apps-script/reference/url-fetch/url-fetch-app">https://developers.google.com/apps-script/reference/url-fetch/url-fetch-app</a></li>
+<li><a target="_blank" rel="noopener" href="https://developers.google.com/apps-script/reference/url-fetch/http-response">https://developers.google.com/apps-script/reference/url-fetch/http-response</a></li>
+<li><a target="_blank" rel="noopener" href="https://developers.google.com/apps-script/reference/calendar/calendar-event">https://developers.google.com/apps-script/reference/calendar/calendar-event</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>作者： </strong>Helen
+  </li>
+  <li class="post-copyright-link">
+      <strong>文章連結：</strong>
+      <a href="https://weijutu.github.io/2020/04/13/javascript/calendar-line-notify/" title="Google 行事曆的行程用 Line Notify 通知">https://weijutu.github.io/2020/04/13/javascript/calendar-line-notify/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Line-Notify/" rel="tag"># Line Notify</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/03/21/web/ubuntu-docker-wordpress/" rel="prev" title="在 Ubuntu 16.04 使用 Docker 快速架設 Wordpress 的簡易指南">
+                  <i class="fa fa-chevron-left"></i> 在 Ubuntu 16.04 使用 Docker 快速架設 Wordpress 的簡易指南
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/05/01/tools/gitea-install/" rel="next" title="gitea - 在 Mac 自己架設一套私有的版本控管伺服器 (Homebrew)">
+                  gitea - 在 Mac 自己架設一套私有的版本控管伺服器 (Homebrew) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Helen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

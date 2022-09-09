@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/cube_logo_v2.png">
+  <link rel="mask-icon" href="/images/cube_logo_v2.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/yellow/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"weijutu.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Docker 是一種可以創建容器的工具，而 Wordpress 是一個免費且開源的 php 與 mysql 的內容管理系統以及部落格工具，非常多人用它來進行網站架設、電子商務等等，本篇將幫助你在 Ubuntu 系統使用 docker 方式進行在 nginx 網站伺服器安裝 wordpress。 使用 Docker 的好處一般來說，要進行安裝 Wordpress 系統，需要相關的服務 lamp (L">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="在 Ubuntu 16.04 使用 Docker 快速架設 Wordpress 的簡易指南">
+<meta property="og:url" content="https://weijutu.github.io/2020/03/21/web/ubuntu-docker-wordpress/index.html">
+<meta property="og:site_name" content="丸匠筆記">
+<meta property="og:description" content="Docker 是一種可以創建容器的工具，而 Wordpress 是一個免費且開源的 php 與 mysql 的內容管理系統以及部落格工具，非常多人用它來進行網站架設、電子商務等等，本篇將幫助你在 Ubuntu 系統使用 docker 方式進行在 nginx 網站伺服器安裝 wordpress。 使用 Docker 的好處一般來說，要進行安裝 Wordpress 系統，需要相關的服務 lamp (L">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://weijutu.github.io/images/web/20200321-2.png">
+<meta property="og:image" content="https://weijutu.github.io/images/web/20200321-3.png">
+<meta property="og:image" content="https://weijutu.github.io/images/web/20200321-4.png">
+<meta property="og:image" content="https://weijutu.github.io/images/web/20200321-5.png">
+<meta property="og:image" content="https://weijutu.github.io/images/web/20200321-6.png">
+<meta property="og:image" content="https://weijutu.github.io/images/web/20200321-7.png">
+<meta property="og:image" content="https://weijutu.github.io/images/web/20200321-8.png">
+<meta property="article:published_time" content="2020-03-21T13:10:00.000Z">
+<meta property="article:modified_time" content="2022-09-04T01:16:49.005Z">
+<meta property="article:author" content="Helen">
+<meta property="article:tag" content="Nginx">
+<meta property="article:tag" content="Ubuntu">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="wordpress">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://weijutu.github.io/images/web/20200321-2.png">
+
+
+<link rel="canonical" href="https://weijutu.github.io/2020/03/21/web/ubuntu-docker-wordpress/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://weijutu.github.io/2020/03/21/web/ubuntu-docker-wordpress/","path":"2020/03/21/web/ubuntu-docker-wordpress/","title":"在 Ubuntu 16.04 使用 Docker 快速架設 Wordpress 的簡易指南"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>在 Ubuntu 16.04 使用 Docker 快速架設 Wordpress 的簡易指南 | 丸匠筆記</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72890173-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-72890173-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">丸匠筆記</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">a > 1, a ^ n = ∞</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-Docker-%E7%9A%84%E5%A5%BD%E8%99%95"><span class="nav-number">1.</span> <span class="nav-text">使用 Docker 的好處</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D-Docker"><span class="nav-number">2.</span> <span class="nav-text">安裝 Docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D-Docker-Compose"><span class="nav-number">3.</span> <span class="nav-text">安裝 Docker-Compose</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D-Wordpress"><span class="nav-number">4.</span> <span class="nav-text">安裝 Wordpress</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B5%84%E6%85%8B%E8%A8%AD%E5%AE%9A-Docker-Compose"><span class="nav-number">5.</span> <span class="nav-text">組態設定 Docker-Compose</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%B7%E8%A1%8C-Docker-Compose"><span class="nav-number">6.</span> <span class="nav-text">執行 Docker-Compose</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%95%9F%E5%8B%95-Wordpress"><span class="nav-number">7.</span> <span class="nav-text">啟動 Wordpress</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AA%A2%E6%9F%A5-Docker-Container"><span class="nav-number">8.</span> <span class="nav-text">檢查 Docker Container</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Helen"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">Helen</p>
+  <div class="site-description" itemprop="description">天天吃番茄，天天有進步</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/weijutu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;weijutu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2020/03/21/web/ubuntu-docker-wordpress/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="Helen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="丸匠筆記">
+      <meta itemprop="description" content="天天吃番茄，天天有進步">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="在 Ubuntu 16.04 使用 Docker 快速架設 Wordpress 的簡易指南 | 丸匠筆記">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        
+        <h1 class="post-title" itemprop="name headline">
+          在 Ubuntu 16.04 使用 Docker 快速架設 Wordpress 的簡易指南
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2020-03-21 21:10:00" itemprop="dateCreated datePublished" datetime="2020-03-21T21:10:00+08:00">2020-03-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-09-04 09:16:49" itemprop="dateModified" datetime="2022-09-04T09:16:49+08:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%B6%B2%E7%AB%99/" itemprop="url" rel="index"><span itemprop="name">網站</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+
+        
+
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>Docker 是一種可以創建容器的工具，而 Wordpress 是一個免費且開源的 php 與 mysql 的內容管理系統以及部落格工具，非常多人用它來進行網站架設、電子商務等等，本篇將幫助你在 Ubuntu 系統使用 docker 方式進行在 nginx 網站伺服器安裝 wordpress。</p>
+<h2 id="使用-Docker-的好處"><a href="#使用-Docker-的好處" class="headerlink" title="使用 Docker 的好處"></a>使用 Docker 的好處</h2><p>一般來說，要進行安裝 Wordpress 系統，需要相關的服務 lamp (Linux, Apache, MySQL, PHP)，安裝所有的組件相當耗時，也沒有靈活的方式好好管理。而 Docker 正解決了這件事情，可以透過 compose 快速的架設想要安裝的服務，並且可以運行多個容器的應用程式。</p>
+<p>接下來讓我們開始吧。</p>
+<span id="more"></span>
+
+<p>必要條件</p>
+<ul>
+<li>Ubuntu 16.04</li>
+<li>Root Privileges</li>
+</ul>
+<h2 id="安裝-Docker"><a href="#安裝-Docker" class="headerlink" title="安裝 Docker"></a>安裝 Docker</h2><p>當你拿到一台全新的 Ubuntu 16.04 的虛擬主機時，我們將重頭開始安裝 Docker。在開始之前請先更新 Ubuntu 以及更新到最新。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：你在執行 <code>sudo apt-get update</code> 時，出現 <code>sudo: unable to resolve host localhost.localdomain</code> 錯誤時。</p>
+<p>請先編輯 &#x2F;etc&#x2F;hosts ，將<br><code>127.0.0.1 localhost</code><br>修改成<br><code>127.0.0.1  localhost.localdomain  localhost</code></p>
+</blockquote>
+<p>在預設的情況下，在 ubuntu 存儲庫 docker 可用的，安裝 docker 請執行以下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install -y docker.io</span><br></pre></td></tr></table></figure>
+
+<p>安裝完成後，啟動 docker 以及設定開機時要自動啟動 docker</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl start docker</span><br><span class="line">$ systemctl enable docker</span><br><span class="line"></span><br><span class="line">Synchronizing state of docker.service with SysV init with /lib/systemd/systemd-sysv-install...</span><br><span class="line">Executing /lib/systemd/systemd-sysv-install enable docker</span><br></pre></td></tr></table></figure>
+
+<p>那麼現在可以測試一下 docker 是否已在執行中，可以試著用 <code>hello-world</code> 確認一下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run hello-world</span><br></pre></td></tr></table></figure>
+
+<p>在執行之後，你可以看到你的 docker 已經啟動 hello-world 程序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ root@localhost:~# docker images</span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">hello-world         latest              fce289e99eb9        14 months ago       1.84kB</span><br></pre></td></tr></table></figure>
+
+<p>就可以看到有印象檔抓下來，代表 docker 有正常執行。</p>
+<h2 id="安裝-Docker-Compose"><a href="#安裝-Docker-Compose" class="headerlink" title="安裝 Docker-Compose"></a>安裝 Docker-Compose</h2><p>Docker-compose 是一個採用 python 的腳本撰寫的。我們需要先安裝 python, python-pip 套件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install -y python python-pip</span><br><span class="line">$ pip install --upgrade pip</span><br></pre></td></tr></table></figure>
+
+<p>接下一步是，要安裝 docker-compose </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip install docker-compose</span><br></pre></td></tr></table></figure>
+
+<p>接著就等待安裝結束，結束之後可以檢查安裝是否完成</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose -v</span><br></pre></td></tr></table></figure>
+
+<p>顯示</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@localhost:~# docker-compose -v</span><br><span class="line">docker-compose version 1.25.4, build unknown</span><br></pre></td></tr></table></figure>
+
+<h2 id="安裝-Wordpress"><a href="#安裝-Wordpress" class="headerlink" title="安裝 Wordpress"></a>安裝 Wordpress</h2><p>這樣子的話，已經將 docker 和 docker-compose 安裝到系統上了。在這步驟中，將進行 wordpress 建立以及  docker-compose 環境。在這裡我們透過 docker-compose 方式進行管理將 nginx 作為 web 部署的網站伺服器、MariaDB 作為 MySQL 資料庫，每一個服務都有自己的容器。</p>
+<ul>
+<li>Nginx: 使用最新版 <code>nginx: latest</code></li>
+<li>Wordpress: 在 odcker-hub 有提供了 docker 印象黨，我們要使用 wordpress 4.7 版本以及 php-fpm 7.0 版本</li>
+<li>MySQL: 使用 mariadb 官方的容器，使用最新版本</li>
+</ul>
+<p>我們需要 docker hub 註冊表設定上述三個 docker 印象檔。首先，我們不以 root 身份運行 docker 那麼要建立一個帳號，就使用一般的 liunx 帳號。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ useradd -m -s /bin/bash docadmin</span><br><span class="line">$ passwd docadmin</span><br></pre></td></tr></table></figure>
+
+<p>現在我們將使用者增加到 <code>docker</code> 群組，方便使用者可以使用 docker 指令，設定之後再重啟 docker 服務</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ usermod -a -G docker docadmin</span><br><span class="line">$ systemctl restart docker</span><br></pre></td></tr></table></figure>
+
+<p>如此一來就完成新增 <code>docadmin</code> 使用者，那麼就直接登入 <code>docadmin</code> 帳號並且進行 wordpress 建立</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ su - docadmin</span><br><span class="line">$ mkdir -p wordpress-compose</span><br><span class="line">$ cd wordpress-compose/</span><br></pre></td></tr></table></figure>
+
+<p>接下來，建立一個 <code>docker-compose.yml</code> 檔案，首先是先新增一個資料夾</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ touch docker-compose.yml</span><br><span class="line">$ mkdir -p nginx/</span><br><span class="line">$ mkdir -p db-data/</span><br><span class="line">$ mkdir -p logs/nginx/</span><br><span class="line">$ mkdir -p wordpress/</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>docker-compose.yml: 主要是用來配置文件，是啟動 docker-compose 需要的文件檔案</li>
+<li>nginx 資料夾: nginx 組態配置</li>
+<li>db-data 資料夾: mysql 資料庫目錄，<code>/var/lib/mysql</code> 會被掛載到 db-data 資料夾</li>
+<li>logs 資料夾: 應用程式資料夾，用來寫入 nginx, mariadb, php-fpm 日誌</li>
+<li>wordpress 資料夾: wordpress 的所有檔案</li>
+</ul>
+<p>在 nginx 資料夾，我們建立一個 wordpress.conf 組態配置資料夾</p>
+<p>建立一個新的 wordpress.conf</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim nginx/wordpress.conf</span><br></pre></td></tr></table></figure>
+
+<p>貼上以下的組態內容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name wp-hakase.co;</span><br><span class="line"> </span><br><span class="line">    root /var/www/html;</span><br><span class="line">    index index.php;</span><br><span class="line"> </span><br><span class="line">    access_log /var/log/nginx/hakase-access.log;</span><br><span class="line">    error_log /var/log/nginx/hakase-error.log;</span><br><span class="line"> </span><br><span class="line">    location / &#123;</span><br><span class="line">        try_files $uri $uri/ /index.php?$args;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    location ~ \.php$ &#123;</span><br><span class="line">        try_files $uri =404;</span><br><span class="line">        fastcgi_split_path_info ^(.+\.php)(/.+)$;</span><br><span class="line">        fastcgi_pass wordpress:9000;</span><br><span class="line">        fastcgi_index index.php;</span><br><span class="line">        include fastcgi_params;</span><br><span class="line">        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</span><br><span class="line">        fastcgi_param PATH_INFO $fastcgi_path_info;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>完成後，存檔。</p>
+<h2 id="組態設定-Docker-Compose"><a href="#組態設定-Docker-Compose" class="headerlink" title="組態設定 Docker-Compose"></a>組態設定 Docker-Compose</h2><p>在這個步驟裡，我們編輯 <code>docker-compose.yml</code> 文件。請編輯 nginx, mysql, wordpress</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim docker-compose.yml</span><br></pre></td></tr></table></figure>
+
+<p>貼上以下的組態內容:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">nginx:</span><br><span class="line">  image: nginx:latest</span><br><span class="line">  ports:</span><br><span class="line">      - &#x27;80:80&#x27;</span><br><span class="line">  volumes:</span><br><span class="line">      - ./nginx:/etc/nginx/conf.d</span><br><span class="line">      - ./logs/nginx:/var/log/nginx</span><br><span class="line">      - ./wordpress:/var/www/html</span><br><span class="line">  links:</span><br><span class="line">      - wordpress</span><br><span class="line">  restart: always</span><br><span class="line">mysql:</span><br><span class="line">  image: mariadb</span><br><span class="line">  ports:</span><br><span class="line">      - &#x27;3306:3306&#x27;</span><br><span class="line">  volumes:</span><br><span class="line">      - ./db-data:/var/lib/mysql</span><br><span class="line">  environment:</span><br><span class="line">      - MYSQL_ROOT_PASSWORD=yourpassword</span><br><span class="line">  restart: always</span><br><span class="line">wordpress:</span><br><span class="line">  image: wordpress:4.7.1-php7.0-fpm</span><br><span class="line">  ports:</span><br><span class="line">      - &#x27;9000:9000&#x27;</span><br><span class="line">  volumes:</span><br><span class="line">      - ./wordpress:/var/www/html</span><br><span class="line">  environment:</span><br><span class="line">      - WORDPRESS_DB_NAME=wpdb</span><br><span class="line">      - WORDPRESS_TABLE_PREFIX=wp_</span><br><span class="line">      - WORDPRESS_DB_HOST=mysql</span><br><span class="line">      - WORDPRESS_DB_PASSWORD=yourpassword</span><br><span class="line">  links:</span><br><span class="line">      - mysql</span><br><span class="line">  restart: always</span><br></pre></td></tr></table></figure>
+
+<p>那麼，docker-compose 組態設定就完成了。</p>
+<h2 id="執行-Docker-Compose"><a href="#執行-Docker-Compose" class="headerlink" title="執行 Docker-Compose"></a>執行 Docker-Compose</h2><p>在這一步驟要開始用 docker-compose 建立容器，請先到 <code>wordpress-compose</code> 資料夾</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~/wordpress-compose/</span><br><span class="line">$ docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<p>執行過程顯示</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">... (以下省略)</span><br><span class="line">Digest: sha256:2539d4344dd18e1df02be842ffc435f8e1f699cfc55516e2cf2cb16b7a9aea0b</span><br><span class="line">Status: Downloaded newer image for nginx:latest</span><br><span class="line">Creating wordpress-compose_mysql_1 ... done</span><br><span class="line">Creating wordpress-compose_wordpress_1 ... done</span><br><span class="line">Creating wordpress-compose_nginx_1     ... done</span><br></pre></td></tr></table></figure>
+
+<p>在執行的過程你可以陸陸續續看到創建了三個容器，可以使用 ps 檢查容器狀態</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose ps</span><br></pre></td></tr></table></figure>
+
+<p>顯示結果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docadmin@localhost:~/wordpress-compose$ docker-compose ps</span><br><span class="line">            Name                          Command              State           Ports         </span><br><span class="line">---------------------------------------------------------------------------------------------</span><br><span class="line">wordpress-compose_mysql_1       docker-entrypoint.sh mysqld    Up      0.0.0.0:3306-&gt;3306/tcp</span><br><span class="line">wordpress-compose_nginx_1       nginx -g daemon off;           Up      0.0.0.0:80-&gt;80/tcp    </span><br><span class="line">wordpress-compose_wordpress_1   docker-entrypoint.sh php-fpm   Up      0.0.0.0:9000-&gt;9000/tcp</span><br></pre></td></tr></table></figure>
+
+<p>你可以使用 <code>logs</code> 指令顯示出容器的執行結果。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose logs nginx</span><br><span class="line">$ docker-compose logs mysql</span><br><span class="line">$ docker-compose logs wordpress</span><br></pre></td></tr></table></figure>
+
+<h2 id="啟動-Wordpress"><a href="#啟動-Wordpress" class="headerlink" title="啟動 Wordpress"></a>啟動 Wordpress</h2><p>在這步驟之前，我們檢查系統上可用的端口是 80, 3306, 9000</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ netstat -plntu</span><br></pre></td></tr></table></figure>
+
+<p>顯示結果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">docadmin@localhost:~/wordpress-compose$ netstat -plntu</span><br><span class="line">(No info could be read for &quot;-p&quot;: geteuid()=1000 but you should be root.)</span><br><span class="line">Active Internet connections (only servers)</span><br><span class="line">Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name</span><br><span class="line">tcp        0      0 127.0.0.1:39989         0.0.0.0:*               LISTEN      -               </span><br><span class="line">tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      -               </span><br><span class="line">tcp6       0      0 :::9000                 :::*                    LISTEN      -               </span><br><span class="line">tcp6       0      0 :::3306                 :::*                    LISTEN      -               </span><br><span class="line">tcp6       0      0 :::80                   :::*                    LISTEN      -               </span><br><span class="line">tcp6       0      0 :::22                   :::*                    LISTEN      -               </span><br><span class="line">udp        0      0 0.0.0.0:68              0.0.0.0:*                           - </span><br></pre></td></tr></table></figure>
+
+<p>現在你可以打開瀏覽器輸入服務器的 ip 位置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://yourserverIP/</span><br></pre></td></tr></table></figure>
+
+<p>你可以看到 wordpress 安裝頁面。選擇你的語言，請點選繼續</p>
+<p><img data-src="/images/web/20200321-2.png"></p>
+<p>填入網站的詳細資訊，填寫完畢之後，就按下「安裝」</p>
+<p><img data-src="/images/web/20200321-3.png"></p>
+<p>安裝完畢後，就會被導向到 wordpress 控制台</p>
+<p><img data-src="/images/web/20200321-4.png"></p>
+<p>也可以造訪 wordpress 畫面，就完成安裝 wordpress 囉！</p>
+<p><img data-src="/images/web/20200321-5.png"></p>
+<h2 id="檢查-Docker-Container"><a href="#檢查-Docker-Container" class="headerlink" title="檢查 Docker Container"></a>檢查 Docker Container</h2><p>這個步驟是瞭解如何使用 docker-compose 容器的狀態</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose ps</span><br></pre></td></tr></table></figure>
+
+<p>我們知道我們建立了三個容器，可以試著登入某一個容器，比如 nginx</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose exec nginx bash</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>nginx: 屬於在 docker-compose.yml 的服務名稱</li>
+<li>bash: 執行 bash shell 命令</li>
+</ul>
+<p>此時你就進入到 nginx 容器裡了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docadmin@localhost:~/wordpress-compose$ docker-compose exec nginx bash</span><br><span class="line">root@4b31983ffd28:/# </span><br></pre></td></tr></table></figure>
+
+<p>現在我們檢查一下 wordpress 虛擬主機的配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat /etc/nginx/conf.d/wordpress.conf</span><br></pre></td></tr></table></figure>
+
+<p>顯示結果</p>
+<p><img data-src="/images/web/20200321-6.png"></p>
+<p>確認之後，結束時，輸入 <code>exit</code> 退出容器。</p>
+<p>那麼繼續登入 mysql 容器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose exec mysql bash</span><br><span class="line">$ mysql -u root -p</span><br></pre></td></tr></table></figure>
+
+<p>查詢資料庫列表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ show databases;</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="/images/web/20200321-7.png"></p>
+<p>最後在檢視 wordpress 容器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose exec wordpress bash</span><br><span class="line">$ ls -lah</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="/images/web/20200321-8.png"></p>
+<p>Done! </p>
+<p>參考資料：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://websiteforstudents.com/install-wordpress-on-ubuntu-16-04-lts-with-nginx-mariadb-and-php-7-1-support/">Install WordPress On Ubuntu 16.04 LTS With Nginx, MariaDB And PHP 7.1 Support</a></li>
+<li><a target="_blank" rel="noopener" href="https://nestify.io/blog/install-wordpress-with-docker/">The Easy Guide To Install WordPress With Docker</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>作者： </strong>Helen
+  </li>
+  <li class="post-copyright-link">
+      <strong>文章連結：</strong>
+      <a href="https://weijutu.github.io/2020/03/21/web/ubuntu-docker-wordpress/" title="在 Ubuntu 16.04 使用 Docker 快速架設 Wordpress 的簡易指南">https://weijutu.github.io/2020/03/21/web/ubuntu-docker-wordpress/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Nginx/" rel="tag"># Nginx</a>
+              <a href="/tags/Ubuntu/" rel="tag"># Ubuntu</a>
+              <a href="/tags/Docker/" rel="tag"># Docker</a>
+              <a href="/tags/wordpress/" rel="tag"># wordpress</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/01/26/docker/docker-04-data-volume/" rel="prev" title="Docker#4 - 資料卷">
+                  <i class="fa fa-chevron-left"></i> Docker#4 - 資料卷
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/04/13/javascript/calendar-line-notify/" rel="next" title="Google 行事曆的行程用 Line Notify 通知">
+                  Google 行事曆的行程用 Line Notify 通知 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Helen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

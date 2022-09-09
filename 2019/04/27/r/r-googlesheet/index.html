@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/cube_logo_v2.png">
+  <link rel="mask-icon" href="/images/cube_logo_v2.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/yellow/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"weijutu.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="通常想要將資料放在一個資料庫方便做存取，一般所知道的資料庫都是常見的 MySQL, MSSQL 或是非結構化的 mongodb 等等的資料庫應用程式。不過有些時候就只是不多的資料，其實也不需要特別去裝這些資料庫，只要使用 Google Sheets 也可以做得到輕量型資料的喔。 學習內容大綱 套件安裝 連接 Google 帳戶 查詢 Google Sheets 試算表 讀取 Google Shee">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="R 學習日誌#6 - 如何使用 R 語言存取 Google Sheets">
+<meta property="og:url" content="https://weijutu.github.io/2019/04/27/r/r-googlesheet/index.html">
+<meta property="og:site_name" content="丸匠筆記">
+<meta property="og:description" content="通常想要將資料放在一個資料庫方便做存取，一般所知道的資料庫都是常見的 MySQL, MSSQL 或是非結構化的 mongodb 等等的資料庫應用程式。不過有些時候就只是不多的資料，其實也不需要特別去裝這些資料庫，只要使用 Google Sheets 也可以做得到輕量型資料的喔。 學習內容大綱 套件安裝 連接 Google 帳戶 查詢 Google Sheets 試算表 讀取 Google Shee">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://weijutu.github.io/images/r/9.png">
+<meta property="og:image" content="https://weijutu.github.io/images/r/10.png">
+<meta property="og:image" content="https://weijutu.github.io/images/r/11.png">
+<meta property="og:image" content="https://weijutu.github.io/images/r/12.png">
+<meta property="article:published_time" content="2019-04-27T12:24:00.000Z">
+<meta property="article:modified_time" content="2022-09-04T01:16:48.915Z">
+<meta property="article:author" content="Helen">
+<meta property="article:tag" content="R">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://weijutu.github.io/images/r/9.png">
+
+
+<link rel="canonical" href="https://weijutu.github.io/2019/04/27/r/r-googlesheet/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://weijutu.github.io/2019/04/27/r/r-googlesheet/","path":"2019/04/27/r/r-googlesheet/","title":"R 學習日誌#6 - 如何使用 R 語言存取 Google Sheets"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>R 學習日誌#6 - 如何使用 R 語言存取 Google Sheets | 丸匠筆記</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72890173-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-72890173-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">丸匠筆記</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">a > 1, a ^ n = ∞</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%B8%E7%BF%92%E5%85%A7%E5%AE%B9%E5%A4%A7%E7%B6%B1"><span class="nav-number">1.</span> <span class="nav-text">學習內容大綱</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A5%97%E4%BB%B6%E5%AE%89%E8%A3%9D"><span class="nav-number">2.</span> <span class="nav-text">套件安裝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%A3%E6%8E%A5-Google-%E5%B8%B3%E6%88%B6"><span class="nav-number">3.</span> <span class="nav-text">連接 Google 帳戶</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%A9%A2-Google-Sheets-%E8%A9%A6%E7%AE%97%E8%A1%A8"><span class="nav-number">4.</span> <span class="nav-text">查詢 Google Sheets 試算表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%80%E5%8F%96-Google-Sheets-%E8%A9%A6%E7%AE%97%E8%A1%A8"><span class="nav-number">5.</span> <span class="nav-text">讀取 Google Sheets 試算表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83"><span class="nav-number">6.</span> <span class="nav-text">參考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Helen"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">Helen</p>
+  <div class="site-description" itemprop="description">天天吃番茄，天天有進步</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/weijutu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;weijutu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2019/04/27/r/r-googlesheet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="Helen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="丸匠筆記">
+      <meta itemprop="description" content="天天吃番茄，天天有進步">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="R 學習日誌#6 - 如何使用 R 語言存取 Google Sheets | 丸匠筆記">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        
+        <h1 class="post-title" itemprop="name headline">
+          R 學習日誌#6 - 如何使用 R 語言存取 Google Sheets
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2019-04-27 20:24:00" itemprop="dateCreated datePublished" datetime="2019-04-27T20:24:00+08:00">2019-04-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-09-04 09:16:48" itemprop="dateModified" datetime="2022-09-04T09:16:48+08:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/R/" itemprop="url" rel="index"><span itemprop="name">R</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+
+        
+
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>通常想要將資料放在一個資料庫方便做存取，一般所知道的資料庫都是常見的 MySQL, MSSQL 或是非結構化的 mongodb 等等的資料庫應用程式。不過有些時候就只是不多的資料，其實也不需要特別去裝這些資料庫，只要使用 Google Sheets 也可以做得到輕量型資料的喔。</p>
+<h2 id="學習內容大綱"><a href="#學習內容大綱" class="headerlink" title="學習內容大綱"></a>學習內容大綱</h2><ol>
+<li>套件安裝</li>
+<li>連接 Google 帳戶</li>
+<li>查詢 Google Sheets 試算表</li>
+<li>讀取 Google Sheets 試算表</li>
+</ol>
+<span id="more"></span>
+
+<h2 id="套件安裝"><a href="#套件安裝" class="headerlink" title="套件安裝"></a>套件安裝</h2><p>使用 <code>googlesheets</code> 套件可以在之後串接 Google 試算表。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">install.packages<span class="punctuation">(</span><span class="string">&#x27;googlesheets&#x27;</span><span class="punctuation">)</span></span><br><span class="line">library<span class="punctuation">(</span>googlesheets<span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="連接-Google-帳戶"><a href="#連接-Google-帳戶" class="headerlink" title="連接 Google 帳戶"></a>連接 Google 帳戶</h2><p>在安裝套件好之後，第一件事情就是要連接你的 google 帳戶，輸入以下的指令之後，就會開始與帳戶建立一個新的授權，讓你可以透過 R 語言的方式做新增、修改、刪除、查詢等操作。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gs_auth<span class="punctuation">(</span>new_user <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+
+<p>這個時候會彈出一個視窗開啟瀏覽器，你需要登入你的 google 帳號，以下這個畫面所彈出來的資訊，便是讓你選擇你要登入的帳號。</p>
+<p><img data-src="/images/r/9.png"></p>
+<p>選好某一個帳戶之後，此時會 google 會向你確認這組套件將會存取 google sheets 的查詢、編輯、建立、刪除所有的雲端應用檔案的授權，若沒什麼問題，就可以按下「允許」。</p>
+<p><img data-src="/images/r/10.png"></p>
+<p>允許之後，下一個畫面會出現一組授權碼</p>
+<p><img data-src="/images/r/11.png"></p>
+<p>登入成功之後，你就可以回到 R 語言的環境，這時有顯示一個 <code>Enter authorization code: </code> 要你輸入的驗證碼，就將 google 提供給你的授權碼貼到 R 環境這裏。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">&gt;</span> gs_auth<span class="punctuation">(</span>new_user <span class="operator">=</span> <span class="literal">TRUE</span><span class="punctuation">)</span></span><br><span class="line">Disabling .httr<span class="operator">-</span>oauth by renaming to .httr<span class="operator">-</span>oauth<span class="operator">-</span>SUSPENDED</span><br><span class="line">No token currently <span class="keyword">in</span> force.</span><br><span class="line">httpuv not installed<span class="punctuation">,</span> defaulting to out<span class="operator">-</span>of<span class="operator">-</span>band authentication</span><br><span class="line">Enter authorization code<span class="operator">:</span> </span><br></pre></td></tr></table></figure>
+
+<p>在你的目錄夾裡面，多了一個 <code>.httr-oauth</code> 檔案</p>
+<p>你可以使用 <code>gs_user()</code> 的函數，看看你登入的帳戶資訊</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gs_user<span class="punctuation">(</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+
+<p>登入的帳號資訊如下：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">&gt;</span> gs_user<span class="punctuation">(</span><span class="punctuation">)</span></span><br><span class="line">Auto<span class="operator">-</span>refreshing stale OAuth token.</span><br><span class="line">          displayName<span class="operator">:</span> xxxxxxx</span><br><span class="line">         emailAddress<span class="operator">:</span> xxxxxxx<span class="operator">@</span>gmail.com</span><br><span class="line">                 date<span class="operator">:</span> <span class="number">2019</span><span class="operator">-</span><span class="number">04</span><span class="operator">-</span><span class="number">27</span> <span class="number">15</span><span class="operator">:</span><span class="number">51</span><span class="operator">:</span><span class="number">28</span> GMT</span><br><span class="line">         permissionId<span class="operator">:</span> <span class="number">1344</span>xxxxxxxxx4887</span><br><span class="line">         rootFolderId<span class="operator">:</span> <span class="number">0</span>AHxxxxxxxxxx9PVA</span><br></pre></td></tr></table></figure>
+
+<p>確認資訊無誤之後，接著就可以做接下來的存取囉</p>
+<h2 id="查詢-Google-Sheets-試算表"><a href="#查詢-Google-Sheets-試算表" class="headerlink" title="查詢 Google Sheets 試算表"></a>查詢 Google Sheets 試算表</h2><p><code>gs_ls()</code> 使用這組函數可以查看帳號內可以使用的試算表</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">library<span class="punctuation">(</span>knitr<span class="punctuation">)</span></span><br><span class="line">kable<span class="punctuation">(</span>gs_ls<span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">[</span><span class="punctuation">,</span> <span class="number">1</span><span class="operator">:</span><span class="number">6</span><span class="punctuation">]</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+
+<p>顯示呈現如下：</p>
+<table>
+<thead>
+<tr>
+<th align="left">sheet_title</th>
+<th align="left">author</th>
+<th align="left">perm</th>
+<th align="left">version</th>
+<th align="left">updated</th>
+<th align="left">sheet_key</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Amazoncom Inc (AMZN) price history</td>
+<td align="left">xxxxxx</td>
+<td align="left">rw</td>
+<td align="left">new</td>
+<td align="left">2019-04-26 21:05:18</td>
+<td align="left">1Nx6Yflk-xxxxxxxx47VgbimS</td>
+</tr>
+<tr>
+<td align="left">Apple Inc (AAPL) price history</td>
+<td align="left">xxxxxx</td>
+<td align="left">rw</td>
+<td align="left">new</td>
+<td align="left">2019-04-26 21:01:33</td>
+<td align="left">1c-xxxxxxxx68HWrH9SPJ</td>
+</tr>
+</tbody></table>
+<h2 id="讀取-Google-Sheets-試算表"><a href="#讀取-Google-Sheets-試算表" class="headerlink" title="讀取 Google Sheets 試算表"></a>讀取 Google Sheets 試算表</h2><p>就讀取一個檔案來試試，在我們已知 sheet_title 這欄位之後，透過 <code>gs_title()</code> 函數來查詢</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gs <span class="operator">&lt;-</span> gs_title<span class="punctuation">(</span><span class="string">&#x27;Amazoncom Inc (AMZN) price history&#x27;</span><span class="punctuation">)</span></span><br><span class="line">aws_data <span class="operator">&lt;-</span> gs_read<span class="punctuation">(</span>ss<span class="operator">=</span>gs<span class="punctuation">,</span> ws <span class="operator">=</span> <span class="string">&quot;工作表1&quot;</span><span class="punctuation">,</span> skip<span class="operator">=</span><span class="number">0</span><span class="punctuation">)</span></span><br></pre></td></tr></table></figure>
+
+<p>結果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&gt; gs &lt;- gs_title(&#x27;Amazoncom Inc (AMZN) price history&#x27;)</span><br><span class="line">Sheet successfully identified: &quot;Amazoncom Inc (AMZN) price history&quot;</span><br><span class="line"></span><br><span class="line">&gt; aws_data &lt;- gs_read(ss=gs, ws = &quot;工作表1&quot;, skip=0)</span><br><span class="line">Accessing worksheet titled &#x27;工作表1&#x27;.</span><br><span class="line">Downloading: 470 B     Parsed with column specification:</span><br><span class="line">cols(</span><br><span class="line">  `2019-03-08` = col_date(format = &quot;&quot;),</span><br><span class="line">  `Amazoncom Inc` = col_character(),</span><br><span class="line">  AMZN = col_character(),</span><br><span class="line">  `1620.8` = col_double(),</span><br><span class="line">  `https://finance.yahoo.com/q?s=AMZN` = col_character(),</span><br><span class="line">  `2019-03-08_1` = col_date(format = &quot;&quot;)</span><br><span class="line">)</span><br><span class="line">Warning message:</span><br><span class="line">Duplicated column names deduplicated: &#x27;2019-03-08&#x27; =&gt; &#x27;2019-03-08_1&#x27; [6] </span><br></pre></td></tr></table></figure>
+
+<p><img data-src="/images/r/12.png"></p>
+<p>如此一來，就可以讀取到試算表的值了。</p>
+<!-- ## 讀取 Google Sheets 試算表 (網址)
+
+上述的方法都是要經過帳戶的授權認證，那～ 有沒有一種方法是可以直接開放讀取到的，而不用採取登入的方式呢？答案是有的，而另一種方式是，將你的 google sheets 試算表公開發佈出來，請點選左上角的「檔案」> 「發佈到網路」
+
+![](/images/r/13.png)
+
+我們可以把 `整份文件` 以網頁方式發布，或者你可以指定妳所設定的發布方式，都有選項可以選，在這裡我選擇以下方式：
+
+![](/images/r/14.png)
+
+發布完成之後，會再詢問一次是否真的要發佈項目？那麼就按下「確定」，此時，你就會得到一組連結，
+
+![](/images/r/15.png)
+
+將連結複製下來，
+
+```r
+
+``` -->
+
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p>想要了解更多關於 <code>googlesheets</code> 套件的函數方法，請上查詢 <a target="_blank" rel="noopener" href="https://cran.r-project.org/web/packages/googlesheets/index.html">googlesheets: Manage Google Spreadsheets from R</a> 說明文件</p>
+<!-- https://yichunsung.github.io/r_notebook/notebook_for_goolesheets#%E5%AF%AB%E5%9C%A8%E5%89%8D%E9%A0%AD -->
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>作者： </strong>Helen
+  </li>
+  <li class="post-copyright-link">
+      <strong>文章連結：</strong>
+      <a href="https://weijutu.github.io/2019/04/27/r/r-googlesheet/" title="R 學習日誌#6 - 如何使用 R 語言存取 Google Sheets">https://weijutu.github.io/2019/04/27/r/r-googlesheet/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/R/" rel="tag"># R</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/04/20/r/r-textmining-02-ch02-2/" rel="prev" title="R語言文字探勘好好玩 - Ch2_採 Tidy 資料做情感分析 (2)">
+                  <i class="fa fa-chevron-left"></i> R語言文字探勘好好玩 - Ch2_採 Tidy 資料做情感分析 (2)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/04/29/bot/hubot-01-install/" rel="next" title="用 Hubot 打造聊天機器人#1 - 基礎介紹與安裝">
+                  用 Hubot 打造聊天機器人#1 - 基礎介紹與安裝 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Helen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>
