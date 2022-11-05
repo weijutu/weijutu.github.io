@@ -135,7 +135,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-count">79</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -146,7 +146,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-count">53</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -183,6 +183,145 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/08/25/gitbook/gitbook-install/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="Helen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="丸匠筆記">
+      <meta itemprop="description" content="天天吃番茄，天天有進步">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 丸匠筆記">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/08/25/gitbook/gitbook-install/" class="post-title-link" itemprop="url">Gitbook - 用 Gitbook 寫一個教學的電子書</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2017-08-25 11:26:07" itemprop="dateCreated datePublished" datetime="2017-08-25T11:26:07+08:00">2017-08-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-09-04 09:16:48" itemprop="dateModified" datetime="2022-09-04T09:16:48+08:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Gitbook/" itemprop="url" rel="index"><span itemprop="name">Gitbook</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+
+        
+
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>今天介紹這套GitBook 是用 node.js 的 npm 管理工具搭建的一種建立電子書的套件，藉由這篇文章可以清楚的瞭解如何建立電子書</p>
+<h3 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h3><p>首先是安裝的部分，安裝之前請先確定 npm 這個管理工具有被安裝起來</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sudo npm install -g gitbook</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="/images/gitbook/2.png"></p>
+<p>接著，先在某一個目錄夾裏建立一個電子書的檔案庫</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$gitbook serve ./repository</span><br></pre></td></tr></table></figure>
+
+<p>像這樣子</p>
+<p><img data-src="/images/gitbook/3.png"></p>
+<p>在製作這個電子書，特別要注意的是請先建立 <code>README.md</code> 和 <code>SUMMARY.md</code> 這兩個文件，因為這兩個文件代表著電子書的架構導覽</p>
+<ul>
+<li>README.md   &gt;&gt;&gt; 代表這本電子書的簡介</li>
+</ul>
+<p><img data-src="/images/gitbook/4.png"></p>
+<ul>
+<li>SUMMARY.md  &gt;&gt;&gt; 定義這本電子書的章節結構</li>
+</ul>
+<p><img data-src="/images/gitbook/5.png"></p>
+<h3 id="實作該怎麼做"><a href="#實作該怎麼做" class="headerlink" title="實作該怎麼做"></a>實作該怎麼做</h3><p>在我們定義好 readme.md, summary.md 之後呢，可以看到我在 SUMMARY.md 檔案，建立了四個連結，分別是：</p>
+<ul>
+<li>source&#x2F;intro&#x2F;first.md</li>
+<li>source&#x2F;install&#x2F;secode.md</li>
+<li>source&#x2F;install&#x2F;2-1.md</li>
+<li>source&#x2F;install&#x2F;2-2.md</li>
+</ul>
+<p>我們可以利用以下的指令，讓 gitbook 找到 <code>summary.md</code> 所定義的章節結構去自動地去產生對應的檔案</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$gitbook init</span><br></pre></td></tr></table></figure>
+
+<p>到建立 gitbook 的資料夾看，就可以看到自動建立 source 資料夾之外，在source 下層也建立 intro 及 install 這兩個資料夾，然後再進去看某個資料夾下後，可以發現 markdown 的空白檔案也已經自動建立起來，在這邊就可以隨心所欲去建置屬於自己的章節內容。</p>
+<p><img data-src="/images/gitbook/6.png"></p>
+<p>喔！等等，別忘了看看結果<br>內容寫好之後，建立一個靜態頁面，預設會開 port 4000 的網址</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$gitbook serve</span><br></pre></td></tr></table></figure>
+
+<p>可依照指令指示，開啓 <a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000</a></p>
+<p><img data-src="/images/gitbook/7.png"></p>
+<h3 id="看看樣子"><a href="#看看樣子" class="headerlink" title="看看樣子"></a>看看樣子</h3><p>這是首頁的樣子，呈現的首頁就能閱覽我們在 README.md 所寫的內容</p>
+<p><img data-src="/images/gitbook/8.png"></p>
+<p>自定義的第一章節，在頁面上有個左右兩邊的箭頭，可以點選後翻到下一個章節</p>
+<p><img data-src="/images/gitbook/9.png"></p>
+<p>自定義的第二章節</p>
+<p><img data-src="/images/gitbook/10.png"></p>
+<h3 id="BTW"><a href="#BTW" class="headerlink" title="BTW,"></a>BTW,</h3><p>Gitbook 支援多種檔案格式：</p>
+<ul>
+<li>靜態網頁：這個是 Gitbook 預設的輸入格式</li>
+<li>PDF : 需要安裝 gitbook-pdf 套件</li>
+<li>eBook: 需要安裝 ebook-convert</li>
+<li>單一 HTML 網頁，支援將內容輸出成一個單頁的 html (但我沒用過，不知道＠＠)</li>
+<li>JSON: 用在資料取得</li>
+</ul>
+<p>ps. 在編寫 markdown 文件時，再存檔的時候會有 live reload 效果，即時更新頁面喔！酷耶～</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1155,187 +1294,6 @@
 <h3 id="使用-Jade-撰寫註冊表單"><a href="#使用-Jade-撰寫註冊表單" class="headerlink" title="使用 Jade 撰寫註冊表單"></a>使用 Jade 撰寫註冊表單</h3><p>從上一篇也是 jade 的學習到本篇的延續，大致上的語言都簡略的描述過一遍，接著我們需要來做個實際點的應用，我這邊使用的範例是經常網頁開發會使用到的註冊表單。簡單寫一些表單，那就用帳號、密碼、再加一個註冊的按鈕，如下圖所示：</p>
 <p><img data-src="/images/nodejs/117.png"></p>
 <p>Jade 課程就到這裡</p>
-<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ol>
-<li><a target="_blank" rel="noopener" href="http://jade-lang.com/">http://jade-lang.com/</a></li>
-<li><a target="_blank" rel="noopener" href="http://naltatis.github.io/jade-syntax-docs/">http://naltatis.github.io/jade-syntax-docs/</a></li>
-<li><a target="_blank" rel="noopener" href="http://naltatis.github.io/jade-syntax-docs/#basics">http://naltatis.github.io/jade-syntax-docs/#basics</a></li>
-<li><a target="_blank" rel="noopener" href="http://blog.kerash.tw/2013/04/nodejs-jade-template-engine/">http://blog.kerash.tw/2013/04/nodejs-jade-template-engine/</a></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/07/25/nodejs/nodejs-25-jade-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.png">
-      <meta itemprop="name" content="Helen">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="丸匠筆記">
-      <meta itemprop="description" content="天天吃番茄，天天有進步">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 丸匠筆記">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/07/25/nodejs/nodejs-25-jade-1/" class="post-title-link" itemprop="url">Node.js 系列學習日誌#25 - 介紹 Jade  Template Engine 模板引擎 (上)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2017-07-25 00:25:00" itemprop="dateCreated datePublished" datetime="2017-07-25T00:25:00+08:00">2017-07-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2022-09-04 09:16:48" itemprop="dateModified" datetime="2022-09-04T09:16:48+08:00">2022-09-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Node-js/" itemprop="url" rel="index"><span itemprop="name">Node.js</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-
-        
-
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img data-src="/images/nodejs/107.png"></p>
-<p>Node.js 開發網頁它有許多的樣板引擎可以使用，例如常見的 Jade, EJS。樣板引擎也可以稱為樣板處理器 （Template Processor）或者叫過濾器 （Filter）。其他的語言也有個別使用的樣板引擎，像是 PHP 的 Smarty、 Ruby 的 ERB，本章節會以 jade 作為基礎的介紹如何透過樣板引擎實作 Node.js 網頁。</p>
-<p>官方網站：<a target="_blank" rel="noopener" href="http://jade-lang.com/">http://jade-lang.com/</a></p>
-<p>今天會介紹的內容有</p>
-<ul>
-<li>Jade 特點</li>
-<li>Jade 語法<ul>
-<li>屬性</li>
-</ul>
-</li>
-<li>Jade 輸出資料<ul>
-<li>迴圈</li>
-<li>條件</li>
-</ul>
-</li>
-</ul>
-<p>接下來您可以使用：<a target="_blank" rel="noopener" href="http://codepen.io/">http://codepen.io/</a> 作為線上編輯做以下實作的測試編輯器</p>
-<p><img data-src="/images/nodejs/108.png"></p>
-<p>首先，我們先來比較一下 HTML  跟 Jade 的表示方式</p>
-<p>&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; HTML &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;wrap&quot;&gt;</span><br><span class="line">  &lt;h1&gt;Lorem Ipsum&lt;/h1&gt;</span><br><span class="line">  &lt;p&gt;Contrary to popular belief, Lorem Ipsum is not simply random text. &lt;/p&gt;</span><br><span class="line"> &lt;a href=“http://www.google.com&quot;&gt;Google&lt;/a&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-
-<p>&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; Jade &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.wrap</span><br><span class="line">  h1 Lorem Ipsum</span><br><span class="line">  p Contrary to popular belief, Lorem Ipsum is not simply random text.</span><br><span class="line">  a(href=&#x27;http://www.google.com&#x27;) Google</span><br></pre></td></tr></table></figure>
-
-<h3 id="Jade-特點"><a href="#Jade-特點" class="headerlink" title="Jade 特點"></a>Jade 特點</h3><ul>
-<li>Jade 用縮排來定義 HTML 的階層結構</li>
-<li>Jade  比 HTML 寫起來更簡潔</li>
-<li>Jade 在編譯後，會將 HTML  的補上結束標籤</li>
-<li>Jade 不需要寫小於大於的符號</li>
-</ul>
-<h3 id="Jade-語法"><a href="#Jade-語法" class="headerlink" title="Jade 語法"></a>Jade 語法</h3><p>因為 Jade 是利用縮排的方式來定義 HTML 的階層結構，也就是說，下一行的縮排的話，就是上一行的子節點。</p>
-<p>撰寫</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">html</span><br></pre></td></tr></table></figure>
-
-<p>編譯後</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p>撰寫</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">div#wrap</span><br></pre></td></tr></table></figure>
-
-<p>編譯後</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;wrap&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p>撰寫</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p.article.a1.a2.a3</span><br></pre></td></tr></table></figure>
-
-<p>編譯後</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p class=&quot;article a1 a2 a3&quot;&gt;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p>撰寫</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p</span><br><span class="line">     span</span><br></pre></td></tr></table></figure>
-
-<p>編譯後</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;&lt;span&gt;&lt;/span&gt;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p>撰寫</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">p</span><br><span class="line">     | Contrary to popular belief</span><br><span class="line">     | Lorem Ipsum is simply dummy text of the printing</span><br><span class="line">     | It has survived not only five centuries  </span><br></pre></td></tr></table></figure>
-
-<p>編譯後</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;Contrary to popular belief Lorem Ipsum is simply dummy text of the printing It has survived not only five centuries &lt;/p&gt;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p>標籤屬性：屬性部分就用括號的方式括弧起來，有多個屬性時就用逗點分隔或者段行來分隔</p>
-<p>方法一</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">input(type=&quot;text&quot;, placeholder=&quot;hello&quot;)</span><br></pre></td></tr></table></figure>
-
-<p>方法二</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">input(</span><br><span class="line">     type=&#x27;text&#x27;</span><br><span class="line">     name=&#x27;age&#x27;</span><br><span class="line">     placeholder=&#x27;typing your age&#x27;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-
-<p>方法三：也可以用 javascript 的判斷控制屬性資料</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- var isFemale = true</span><br><span class="line">input(type=&#x27;text&#x27; value=isFemale ? &#x27;Female&#x27; : &#x27;Male&#x27;)</span><br></pre></td></tr></table></figure>
-
-<h3 id="Jade-輸出資料"><a href="#Jade-輸出資料" class="headerlink" title="Jade 輸出資料"></a>Jade 輸出資料</h3><h4 id="迴圈"><a href="#迴圈" class="headerlink" title="迴圈"></a>迴圈</h4><p>試著寫迴圈</p>
-<p><img data-src="/images/nodejs/109.png"></p>
-<p>輸出結果</p>
-<p><img data-src="/images/nodejs/110.png"></p>
-<h4 id="條件"><a href="#條件" class="headerlink" title="條件"></a>條件</h4><p>條件是指當判斷為真或否時，各別出現不同的結果，什麼意思呢？直接看範例好了</p>
-<p><img data-src="/images/nodejs/111.png"></p>
-<p>結果</p>
-<p><img data-src="/images/nodejs/112.png"></p>
-<p>Jade 就先寫到這裡，下集待續..</p>
 <h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ol>
 <li><a target="_blank" rel="noopener" href="http://jade-lang.com/">http://jade-lang.com/</a></li>
 <li><a target="_blank" rel="noopener" href="http://naltatis.github.io/jade-syntax-docs/">http://naltatis.github.io/jade-syntax-docs/</a></li>

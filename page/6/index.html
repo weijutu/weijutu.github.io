@@ -135,7 +135,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-count">79</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -146,7 +146,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-count">53</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -183,6 +183,187 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/07/25/nodejs/nodejs-25-jade-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="Helen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="丸匠筆記">
+      <meta itemprop="description" content="天天吃番茄，天天有進步">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 丸匠筆記">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/07/25/nodejs/nodejs-25-jade-1/" class="post-title-link" itemprop="url">Node.js 系列學習日誌#25 - 介紹 Jade  Template Engine 模板引擎 (上)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2017-07-25 00:25:00" itemprop="dateCreated datePublished" datetime="2017-07-25T00:25:00+08:00">2017-07-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-09-04 09:16:48" itemprop="dateModified" datetime="2022-09-04T09:16:48+08:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Node-js/" itemprop="url" rel="index"><span itemprop="name">Node.js</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+
+        
+
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><img data-src="/images/nodejs/107.png"></p>
+<p>Node.js 開發網頁它有許多的樣板引擎可以使用，例如常見的 Jade, EJS。樣板引擎也可以稱為樣板處理器 （Template Processor）或者叫過濾器 （Filter）。其他的語言也有個別使用的樣板引擎，像是 PHP 的 Smarty、 Ruby 的 ERB，本章節會以 jade 作為基礎的介紹如何透過樣板引擎實作 Node.js 網頁。</p>
+<p>官方網站：<a target="_blank" rel="noopener" href="http://jade-lang.com/">http://jade-lang.com/</a></p>
+<p>今天會介紹的內容有</p>
+<ul>
+<li>Jade 特點</li>
+<li>Jade 語法<ul>
+<li>屬性</li>
+</ul>
+</li>
+<li>Jade 輸出資料<ul>
+<li>迴圈</li>
+<li>條件</li>
+</ul>
+</li>
+</ul>
+<p>接下來您可以使用：<a target="_blank" rel="noopener" href="http://codepen.io/">http://codepen.io/</a> 作為線上編輯做以下實作的測試編輯器</p>
+<p><img data-src="/images/nodejs/108.png"></p>
+<p>首先，我們先來比較一下 HTML  跟 Jade 的表示方式</p>
+<p>&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; HTML &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;wrap&quot;&gt;</span><br><span class="line">  &lt;h1&gt;Lorem Ipsum&lt;/h1&gt;</span><br><span class="line">  &lt;p&gt;Contrary to popular belief, Lorem Ipsum is not simply random text. &lt;/p&gt;</span><br><span class="line"> &lt;a href=“http://www.google.com&quot;&gt;Google&lt;/a&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; Jade &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.wrap</span><br><span class="line">  h1 Lorem Ipsum</span><br><span class="line">  p Contrary to popular belief, Lorem Ipsum is not simply random text.</span><br><span class="line">  a(href=&#x27;http://www.google.com&#x27;) Google</span><br></pre></td></tr></table></figure>
+
+<h3 id="Jade-特點"><a href="#Jade-特點" class="headerlink" title="Jade 特點"></a>Jade 特點</h3><ul>
+<li>Jade 用縮排來定義 HTML 的階層結構</li>
+<li>Jade  比 HTML 寫起來更簡潔</li>
+<li>Jade 在編譯後，會將 HTML  的補上結束標籤</li>
+<li>Jade 不需要寫小於大於的符號</li>
+</ul>
+<h3 id="Jade-語法"><a href="#Jade-語法" class="headerlink" title="Jade 語法"></a>Jade 語法</h3><p>因為 Jade 是利用縮排的方式來定義 HTML 的階層結構，也就是說，下一行的縮排的話，就是上一行的子節點。</p>
+<p>撰寫</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">html</span><br></pre></td></tr></table></figure>
+
+<p>編譯後</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>撰寫</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">div#wrap</span><br></pre></td></tr></table></figure>
+
+<p>編譯後</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;wrap&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>撰寫</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p.article.a1.a2.a3</span><br></pre></td></tr></table></figure>
+
+<p>編譯後</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p class=&quot;article a1 a2 a3&quot;&gt;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>撰寫</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p</span><br><span class="line">     span</span><br></pre></td></tr></table></figure>
+
+<p>編譯後</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;&lt;span&gt;&lt;/span&gt;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>撰寫</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">p</span><br><span class="line">     | Contrary to popular belief</span><br><span class="line">     | Lorem Ipsum is simply dummy text of the printing</span><br><span class="line">     | It has survived not only five centuries  </span><br></pre></td></tr></table></figure>
+
+<p>編譯後</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;Contrary to popular belief Lorem Ipsum is simply dummy text of the printing It has survived not only five centuries &lt;/p&gt;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>標籤屬性：屬性部分就用括號的方式括弧起來，有多個屬性時就用逗點分隔或者段行來分隔</p>
+<p>方法一</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">input(type=&quot;text&quot;, placeholder=&quot;hello&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>方法二</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">input(</span><br><span class="line">     type=&#x27;text&#x27;</span><br><span class="line">     name=&#x27;age&#x27;</span><br><span class="line">     placeholder=&#x27;typing your age&#x27;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+
+<p>方法三：也可以用 javascript 的判斷控制屬性資料</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- var isFemale = true</span><br><span class="line">input(type=&#x27;text&#x27; value=isFemale ? &#x27;Female&#x27; : &#x27;Male&#x27;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Jade-輸出資料"><a href="#Jade-輸出資料" class="headerlink" title="Jade 輸出資料"></a>Jade 輸出資料</h3><h4 id="迴圈"><a href="#迴圈" class="headerlink" title="迴圈"></a>迴圈</h4><p>試著寫迴圈</p>
+<p><img data-src="/images/nodejs/109.png"></p>
+<p>輸出結果</p>
+<p><img data-src="/images/nodejs/110.png"></p>
+<h4 id="條件"><a href="#條件" class="headerlink" title="條件"></a>條件</h4><p>條件是指當判斷為真或否時，各別出現不同的結果，什麼意思呢？直接看範例好了</p>
+<p><img data-src="/images/nodejs/111.png"></p>
+<p>結果</p>
+<p><img data-src="/images/nodejs/112.png"></p>
+<p>Jade 就先寫到這裡，下集待續..</p>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ol>
+<li><a target="_blank" rel="noopener" href="http://jade-lang.com/">http://jade-lang.com/</a></li>
+<li><a target="_blank" rel="noopener" href="http://naltatis.github.io/jade-syntax-docs/">http://naltatis.github.io/jade-syntax-docs/</a></li>
+<li><a target="_blank" rel="noopener" href="http://naltatis.github.io/jade-syntax-docs/#basics">http://naltatis.github.io/jade-syntax-docs/#basics</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.kerash.tw/2013/04/nodejs-jade-template-engine/">http://blog.kerash.tw/2013/04/nodejs-jade-template-engine/</a></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1207,120 +1388,6 @@
 <p><img data-src="/images/nodejs/66.png"></p>
 <p>原因是因為 Book  只會繼承 fnBase 在原型 prototype 的函數，其建立的屬性與 getBookName 並不會被 Book 繼承。因此在繼承上的觀念則要特別注意了</p>
 <p>參考資料：<br><a target="_blank" rel="noopener" href="http://nodejs.org/api/util.html">http://nodejs.org/api/util.html</a><br><a target="_blank" rel="noopener" href="http://www.w3schools.com/js/js_object_prototypes.asp">http://www.w3schools.com/js/js_object_prototypes.asp</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-15-markdown/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.png">
-      <meta itemprop="name" content="Helen">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="丸匠筆記">
-      <meta itemprop="description" content="天天吃番茄，天天有進步">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 丸匠筆記">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/07/24/nodejs/nodejs-15-markdown/" class="post-title-link" itemprop="url">Node.js 系列學習日誌#15 - 讀取 markdown 檔案內容顯示在頁面上</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2017-07-24 00:15:00" itemprop="dateCreated datePublished" datetime="2017-07-24T00:15:00+08:00">2017-07-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2022-09-04 09:16:48" itemprop="dateModified" datetime="2022-09-04T09:16:48+08:00">2022-09-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Node-js/" itemprop="url" rel="index"><span itemprop="name">Node.js</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-
-        
-
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>繼上一篇完成讀取檔案的操作之後，本篇將介紹讀取  markdown 檔案內容顯示在頁面上面。</p>
-<h1 id="話說前頭，什麼是-markdown"><a href="#話說前頭，什麼是-markdown" class="headerlink" title="話說前頭，什麼是 markdown?"></a>話說前頭，什麼是 markdown?</h1><p>從 wiki 網站所說的，它是一種輕量級的標記語言，允許使用容易讀也容易寫的純文字的格式，最後轉換 xhtml, html 檔案，就有點像是一般電子郵件純文本的特性。可以從這個網址來 <a target="_blank" rel="noopener" href="http://markdown.tw/">http://markdown.tw/</a> 學習每個元素的寫法。</p>
-<h1 id="node-markdown-實作"><a href="#node-markdown-實作" class="headerlink" title="node-markdown 實作"></a>node-markdown 實作</h1><p>首先我們建立一個 express web framework 的專案，在這邊的樣板引擎是用 ejs ，因此下的指令是</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$express -e nodejs-fs-markdown</span><br></pre></td></tr></table></figure>
-
-<p>在根目錄底下建立一個 markdown 檔案，名為 book.md 的檔案，開啓 book.md 檔案後，我們任意打一些 markdown 的格式預備要來轉換  html 格式</p>
-<p><img data-src="/images/nodejs/61.png"></p>
-<p>接著重要我們要採用  node-markdown 的套件來安裝，詳見 <a target="_blank" rel="noopener" href="https://www.npmjs.org/package/node-markdown">https://www.npmjs.org/package/node-markdown</a> ，安裝方式可使用</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$npm</span> install node-markdown</span><br></pre></td></tr></table></figure>
-
-<p>其檔案結構會是：</p>
-<p><img data-src="/images/nodejs/62.png"></p>
-<p>請打開 app.js 檔案，我們要將 node-markdown 引入，因此宣告方式為：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> md = <span class="built_in">require</span>(<span class="string">&quot;node-markdown&quot;</span>).<span class="property">Markdown</span>;</span><br></pre></td></tr></table></figure>
-
-<p>並且在 app.js 檔案裡面安插以下這段</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">app.<span class="title function_">get</span>(<span class="string">&#x27;/markdown&#x27;</span>, <span class="keyword">function</span>(<span class="params">req, res</span>)&#123;</span><br><span class="line">    fs.<span class="title function_">readFile</span>(<span class="string">&quot;./book.md&quot;</span>, <span class="keyword">function</span> (<span class="params">err, data</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (err) &#123;</span><br><span class="line">            <span class="keyword">throw</span> err;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">       <span class="comment">//使用  md 方法將檔案內容轉行為 html 格式</span></span><br><span class="line">        str = <span class="title function_">md</span>(data.<span class="title function_">toString</span>());</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(str);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//回應結果顯示在頁面上</span></span><br><span class="line">        res.<span class="title function_">send</span>(str)</span><br><span class="line">        res.<span class="title function_">end</span>();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>在這邊使用了 &#x2F;markdown 作為進入的網址，而這個網址主要是去解析 markdown 的檔案，在這個 function 下，我們還需要利用  fs 核心模組來讀取 book.md 檔案，請務必在宣告的地方加入  var fs &#x3D; require(“fs”);</p>
-<p>讀取的方式就使用  fs.readFile 方法，接著更重要的是再使用 md 方法將檔案內容轉換成  html 格式，最後，看一下結果如下，將會依照 markdown 的格式轉換</p>
-<p><img data-src="/images/nodejs/63.png"></p>
-<p>學習了這個工具，之後再撰寫 html 的檔案時，可以利用 markdown 的格式來寫，寫起來又輕鬆又好懂喔！<br>下集待續…</p>
-<h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><ul>
-<li><a target="_blank" rel="noopener" href="http://markdown.tw/">http://markdown.tw/</a></li>
-<li><a target="_blank" rel="noopener" href="http://www.wikiwand.com/zh-tw/Markdown">http://www.wikiwand.com/zh-tw/Markdown </a></li>
-</ul>
 
       
     </div>

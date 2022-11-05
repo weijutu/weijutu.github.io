@@ -135,7 +135,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-count">79</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -146,7 +146,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-count">53</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -183,6 +183,141 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-05-bower/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="Helen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="丸匠筆記">
+      <meta itemprop="description" content="天天吃番茄，天天有進步">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 丸匠筆記">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/07/24/nodejs/nodejs-05-bower/" class="post-title-link" itemprop="url">Node.js 系列學習日誌#5 - bower 管理相依套件工具</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2017-07-24 00:05:00" itemprop="dateCreated datePublished" datetime="2017-07-24T00:05:00+08:00">2017-07-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-09-04 09:16:48" itemprop="dateModified" datetime="2022-09-04T09:16:48+08:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Node-js/" itemprop="url" rel="index"><span itemprop="name">Node.js</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+
+        
+
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><img data-src="/images/nodejs/23.png"></p>
+<p>『A package manager for the web』瀏覽器套件管理工具</p>
+<p>一般在寫網頁時，多半會引入套件來使用，而 bower 就是用來管理相依套件工具，bower 是 twitter 研發，透過這樣的管理工具下載安裝 css, js 套件，讓開發者跟隨著這樣的工具，讓 web 套件 (例如： bootstrap, jquery… etc) 方面更好管理，更簡單的方式更新最新版本的套件。</p>
+<p>當沒有管理的時候，你也許是…</p>
+<ol>
+<li>直接去官方網站抓檔案，還需要記得要下載 dev 版跟 min  壓縮過的版本 (例如：<a target="_blank" rel="noopener" href="https://code.jquery.com/jquery/">https://code.jquery.com/jquery/</a>)</li>
+<li>找 cdn 檔案 (例如：<a target="_blank" rel="noopener" href="https://developers.google.com/speed/libraries/devguide?hl=zh-tw">https://developers.google.com/speed/libraries/devguide?hl=zh-tw</a>)</li>
+<li>乾脆用現有的 (舊版本繼續沿用)</li>
+</ol>
+<p>以上的行為，多半會花一些時間一直找，而這套工具就是解決這樣的問題，只要用指令操作，效率高多囉！</p>
+<p>本章節將學習到：</p>
+<ul>
+<li>安裝 bower</li>
+<li>使用方法</li>
+<li>使用 express, bower 建立 bootstrap 套件的前端頁面</li>
+</ul>
+<h1 id="安裝-bower"><a href="#安裝-bower" class="headerlink" title="安裝 bower"></a>安裝 bower</h1><p>(安裝之前務必要有 node.js, npm, 建議儲存在 global)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$npm</span> install bower -g</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="/images/nodejs/24.png"></p>
+<p>可以利用 Search Bower packages 頁面搜尋需要的套件：<a target="_blank" rel="noopener" href="http://bower.io/search/">http://bower.io/search/</a> ，或者用指令搜尋</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$bower</span> search bootstrap</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="/images/nodejs/25.png"></p>
+<p>使用方法：</p>
+<p>請先安裝 express 作為網頁框架，然後安裝套件的方式，在這邊安裝一下 bootstrap</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$bower</span> install bootstrap</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="/images/nodejs/26.png"></p>
+<p>指令安裝之後就會看到 bootstrap 出現在 bower_components&#x2F;bootstrap&#x2F;<em>.</em> , bower_components&#x2F;jquery&#x2F;<em>.</em></p>
+<p>透過 bower init 指令，安裝 bower.json，您可以在 dependencies 的部分輸入套件名稱與版本號</p>
+<p><img data-src="/images/nodejs/27.png"></p>
+<p>我們在建立好的 express 框架下的  app.js ，把剛才建立好的  bower_components  資料夾，綁進去基本靜態套件的路徑</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.use(express.static(path.join(__dirname, <span class="string">&#x27;bower_components/bootstrap/dist/&#x27;</span>)));</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="/images/nodejs/28.png"></p>
+<p>接著用引入檔案的方法，請打開 .&#x2F;views&#x2F;layout.jade ，在 head 的子節點的地方新增</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">link(rel=&#x27;stylesheet&#x27;, href=&#x27;/css/bootstrap.min.css&#x27;)</span><br><span class="line">script(src=&#x27;/js/bootstrap.min.js&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="/images/nodejs/29.png"></p>
+<p>引入成功之後，就可以建立一個 bootstrap 的頁面，下圖是用透過 bower 匯入 bootstrap 套件建立一個簡單前端頁面：</p>
+<p><img data-src="/images/nodejs/30.png"></p>
+<h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><ul>
+<li><a target="_blank" rel="noopener" href="http://bower.io/">http://bower.io/</a></li>
+<li><a target="_blank" rel="noopener" href="http://jade-lang.com/tutorial/">http://jade-lang.com/tutorial/</a></li>
+<li><a target="_blank" rel="noopener" href="http://getbootstrap.com/">http://getbootstrap.com/</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
