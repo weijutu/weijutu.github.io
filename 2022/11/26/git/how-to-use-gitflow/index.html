@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/cube_logo_v2.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/cube_logo_v2.png">
+  <link rel="mask-icon" href="/images/cube_logo_v2.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/yellow/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"weijutu.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="通常你都是怎麼管理開發的分支以及版號的呢？隨著開發的功能越來越多，協作的開發人員也增加，漸漸的發現 git 在管理上多出越來越多隻 branch，經常要 merge 檔案，衝突到的程式碼段又要一個一個整理&amp;解開…。不希望在亂亂的分支搞不清楚現在開發到哪裡了，無不希望自己的專案上的 git 可以有效率的在同一個概念下管理所有的分支，直到某天看到了這個 gitflow 的特性跟介紹，到底能省">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Gitflow 工作流介紹與使用">
+<meta property="og:url" content="https://weijutu.github.io/2022/11/26/git/how-to-use-gitflow/index.html">
+<meta property="og:site_name" content="丸匠筆記">
+<meta property="og:description" content="通常你都是怎麼管理開發的分支以及版號的呢？隨著開發的功能越來越多，協作的開發人員也增加，漸漸的發現 git 在管理上多出越來越多隻 branch，經常要 merge 檔案，衝突到的程式碼段又要一個一個整理&amp;解開…。不希望在亂亂的分支搞不清楚現在開發到哪裡了，無不希望自己的專案上的 git 可以有效率的在同一個概念下管理所有的分支，直到某天看到了這個 gitflow 的特性跟介紹，到底能省">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://weijutu.github.io/images/git/image.png">
+<meta property="article:published_time" content="2022-11-26T07:38:00.000Z">
+<meta property="article:modified_time" content="2022-11-26T07:42:46.147Z">
+<meta property="article:author" content="Helen">
+<meta property="article:tag" content="git">
+<meta property="article:tag" content="gitflow">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://weijutu.github.io/images/git/image.png">
+
+
+<link rel="canonical" href="https://weijutu.github.io/2022/11/26/git/how-to-use-gitflow/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://weijutu.github.io/2022/11/26/git/how-to-use-gitflow/","path":"2022/11/26/git/how-to-use-gitflow/","title":"Gitflow 工作流介紹與使用"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Gitflow 工作流介紹與使用 | 丸匠筆記</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72890173-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-72890173-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">丸匠筆記</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">a > 1, a ^ n = ∞</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF-gitflow"><span class="nav-number">1.</span> <span class="nav-text">什麼是 gitflow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Master-%E5%88%86%E6%94%AF"><span class="nav-number">2.</span> <span class="nav-text">| Master 分支 |</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Develop-%E5%88%86%E6%94%AF"><span class="nav-number">3.</span> <span class="nav-text">| Develop 分支  |</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Feature-%E5%88%86%E6%94%AF"><span class="nav-number">4.</span> <span class="nav-text">| Feature 分支 |</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B-feature-%E5%88%86%E6%94%AF"><span class="nav-number">4.1.</span> <span class="nav-text">建立 feature 分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%8C%E6%88%90-feature-%E5%88%86%E6%94%AF"><span class="nav-number">4.2.</span> <span class="nav-text">完成 feature 分支</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Release-%E5%88%86%E6%94%AF"><span class="nav-number">5.</span> <span class="nav-text">| Release 分支  |</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hotfix-%E5%88%86%E6%94%AF"><span class="nav-number">6.</span> <span class="nav-text">| Hotfix 分支  |</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B-hotfix"><span class="nav-number">6.1.</span> <span class="nav-text">建立 hotfix</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%8C%E6%88%90-hotfix"><span class="nav-number">6.2.</span> <span class="nav-text">完成 hotfix</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A9%A6%E8%A9%A6%E5%A6%82%E4%BD%95%E6%93%8D%E4%BD%9C%E5%AF%A6%E7%8F%BE-gitflow-%E5%B7%A5%E4%BD%9C%E6%B5%81%E6%96%B9%E6%B3%95%EF%BC%9F"><span class="nav-number">7.</span> <span class="nav-text">試試如何操作實現 gitflow 工作流方法？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99"><span class="nav-number">8.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Helen"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">Helen</p>
+  <div class="site-description" itemprop="description">天天吃番茄，天天有進步</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/weijutu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;weijutu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2022/11/26/git/how-to-use-gitflow/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="Helen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="丸匠筆記">
+      <meta itemprop="description" content="天天吃番茄，天天有進步">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Gitflow 工作流介紹與使用 | 丸匠筆記">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        
+        <h1 class="post-title" itemprop="name headline">
+          Gitflow 工作流介紹與使用
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+      
+
+      <time title="創建時間：2022-11-26 15:38:00 / 修改時間：15:42:46" itemprop="dateCreated datePublished" datetime="2022-11-26T15:38:00+08:00">2022-11-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+
+        
+
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <blockquote>
+<p>通常你都是怎麼管理開發的分支以及版號的呢？隨著開發的功能越來越多，協作的開發人員也增加，漸漸的發現 git 在管理上多出越來越多隻 branch，經常要 merge 檔案，衝突到的程式碼段又要一個一個整理&amp;解開…。不希望在亂亂的分支搞不清楚現在開發到哪裡了，無不希望自己的專案上的 git 可以有效率的在同一個概念下管理所有的分支，直到某天看到了這個 gitflow 的特性跟介紹，到底能省下我們多少工作流程與時間，於是就研究看看…</p>
+</blockquote>
+<p>看到這裡，是不是已經覺得深有同感，千萬別錯過這篇文章的介紹，下面具體介紹 gitflow 工作流：</p>
+<h2 id="什麼是-gitflow"><a href="#什麼是-gitflow" class="headerlink" title="什麼是 gitflow"></a>什麼是 gitflow</h2><p>Gitflow 是一個 Git 分支的模型，通常包含 master, develop, feature, release, hotfix，各自負責不同功能，其中 master 與 develop 是遠端的分支，而 feature, release, hotfix 是本地分支，任務結束就會被刪除。可以看到一張 gitflow 流程圖：</p>
+<p><img data-src="/images/git/image.png"></p>
+<span id="more"></span>
+
+
+<h2 id="Master-分支"><a href="#Master-分支" class="headerlink" title="| Master 分支 |"></a>| Master 分支 |</h2><p>主要作為唯一正式對外發布的分支，只能從別的分支合併。當版本發佈之後，通常會為這個 master 分支補上版本號的標籤。</p>
+<h2 id="Develop-分支"><a href="#Develop-分支" class="headerlink" title="| Develop 分支  |"></a>| Develop 分支  |</h2><p>作為所有開發的主分支，永遠是功能最新的分支，是根據 master 分支建立出來，算是集中開發完成的特性，通常也有很多詳細跟完整的提交敘述，當 feature 功能開發完成，會合併到 develop ，然而也刪除 feature 分支。</p>
+<h2 id="Feature-分支"><a href="#Feature-分支" class="headerlink" title="| Feature 分支 |"></a>| Feature 分支 |</h2><p>是從 develop 分支建立的，除了開發人員的 local 本地之外，也可以推送到遠端的 git repo 位置，可以當作工作備份，或是讓其他開發者使用。完成之後會再合併回 develop 分支。</p>
+<h3 id="建立-feature-分支"><a href="#建立-feature-分支" class="headerlink" title="建立 feature 分支"></a>建立 feature 分支</h3><p>在一般原本作法的情況，當你不使用 gitflow 時，是不是都從 master 先 checkout 一支 develop branch，再從 develop 切一隻 feature_notify 來開發功能。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout develop</span><br><span class="line">$ git checkout -b feature_notify</span><br></pre></td></tr></table></figure>
+
+<p>但，當你使用 gitflow 工具，只要輸入以下這方式，就可以自動的在 develop 分支一條 feature_notify 分支</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git flow feature start feature_notify</span><br></pre></td></tr></table></figure>
+
+<h3 id="完成-feature-分支"><a href="#完成-feature-分支" class="headerlink" title="完成 feature 分支"></a>完成 feature 分支</h3><p>好的，你總是會在 feature_notify 分支開發，當你開發完畢之後，下一個動作就是再到 develop 合併 feature_notify 分支</p>
+<p>當你不使用 gitflow 時</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout develop</span><br><span class="line">$ git merge feature_notify</span><br></pre></td></tr></table></figure>
+
+<p>但，當你使用 gitflow 工具，只要輸入以下這方式，此時就會完成的功能，合併到 develop 之中，並且刪除做好的 feature</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git flow feature finish feature_notify</span><br></pre></td></tr></table></figure>
+
+<h2 id="Release-分支"><a href="#Release-分支" class="headerlink" title="| Release 分支  |"></a>| Release 分支  |</h2><p>如果你覺得 develop 分支已經足以發佈釋出時，就可以把它合併到 release 分支，也當作上線之前的最後測試。</p>
+<p>當你不使用 gitflow 時</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout develop</span><br><span class="line">$ git checkout -b release/0.1.0</span><br></pre></td></tr></table></figure>
+
+<p>但，當你使用 gitflow 時，這時就會合併到 master, develop 當中了。原本發布的這隻 release 也會被刪除。在這個 release start 階段，是你已經差不多確認上線前的測試</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git flow release start 0.1.0</span><br><span class="line">Switched to a new branch <span class="string">&#x27;release/0.1.0&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>確定好準備發佈之後，就用 release finish 來完成</p>
+<p>當你不使用 gitflow 時，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout master</span><br><span class="line">$ git merge release finish <span class="string">&#x27;0.1.0&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>但，當你使用 gitflow：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git flow release finish <span class="string">&#x27;0.1.0&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Hotfix-分支"><a href="#Hotfix-分支" class="headerlink" title="| Hotfix 分支  |"></a>| Hotfix 分支  |</h2><p>是直接從 master 分支建立，為了快速的修補 bug 已經上線的版本，當修好功能之後，可以合併到 master 和 develop 以及 release 分支，並在 master 打上標籤</p>
+<h3 id="建立-hotfix"><a href="#建立-hotfix" class="headerlink" title="建立 hotfix"></a>建立 hotfix</h3><p>當你不使用 gitflow 時，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout master</span><br><span class="line">$ git checkout -b hotfix_notify</span><br></pre></td></tr></table></figure>
+
+<p>但，當你使用 gitflow：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git flow hotfix start hotfix_notify</span><br></pre></td></tr></table></figure>
+
+<h3 id="完成-hotfix"><a href="#完成-hotfix" class="headerlink" title="完成 hotfix"></a>完成 hotfix</h3><p>當你不使用 gitflow 時，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout master</span><br><span class="line">$ git merge hotfix_notify</span><br><span class="line">$ git checkout develop</span><br><span class="line">$ git merge hotfix_notify</span><br><span class="line">$ git branch -D hotfix_notify</span><br></pre></td></tr></table></figure>
+
+<p>但，當你使用 gitflow：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git flow hotfix finish hotfix_notify</span><br></pre></td></tr></table></figure>
+
+<p>看起來 gitflow 指令簡單又俐落，觀念理解指令自然容易操作</p>
+<h2 id="試試如何操作實現-gitflow-工作流方法？"><a href="#試試如何操作實現-gitflow-工作流方法？" class="headerlink" title="試試如何操作實現 gitflow 工作流方法？"></a>試試如何操作實現 gitflow 工作流方法？</h2><p>上述大致上介紹之後，接下來我們就利用這個工具實際操作整個 gitflow 工作流的方法。如果你在 ubuntu 環境，就在命令提示字元輸入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ apt-get update</span><br><span class="line">$ apt-get install git-flow</span><br></pre></td></tr></table></figure>
+
+<p>步驟一：在 gitlab 新增一個遠端的 repo 位置、並且 clone 到本地</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> http://192.168.12.11/test/test-gitflow.git</span><br></pre></td></tr></table></figure>
+
+<p>步驟二：新增一個檔案並且開始提交</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">touch</span> README</span><br><span class="line">$ git add README</span><br><span class="line">$ git commit -am <span class="string">&#x27;init&#x27;</span></span><br><span class="line"></span><br><span class="line">[master (根提交) 67bdda0] init</span><br><span class="line"> 1 file changed, 0 insertions(+), 0 deletions(-)</span><br><span class="line"> create mode 100644 README</span><br></pre></td></tr></table></figure>
+
+<p>將提交推到遠端</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ git push</span><br><span class="line"></span><br><span class="line">枚舉物件: 3, 完成.</span><br><span class="line">物件計數中: 100% (3/3), 完成.</span><br><span class="line">寫入物件中: 100% (3/3), 200 位元組 | 200.00 KiB/s, 完成.</span><br><span class="line">總共 3 (差異 0)，復用 0 (差異 0)，重用包 0</span><br><span class="line">To http://192.168.12.11/test/test-gitflow.git</span><br><span class="line"> * [new branch]      master -&gt; master</span><br></pre></td></tr></table></figure>
+
+<p>接著我們就用這個當前的工作目錄開始 gitflow</p>
+<p>步驟三：在本地端的工作目錄執行 <code>git flow init</code> ，開始初始化 gitflow ，初始化的過程會詢問一些問答，大致上都可以維持預設配置，這時候命令完成之後，就可以看到出現兩個 master 以及 develop 分支。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ git flow init</span><br><span class="line"></span><br><span class="line">Which branch should be used <span class="keyword">for</span> bringing forth production releases?</span><br><span class="line">   - master</span><br><span class="line">Branch name <span class="keyword">for</span> production releases: [master]</span><br><span class="line">Branch name <span class="keyword">for</span> <span class="string">&quot;next release&quot;</span> development: [develop]</span><br><span class="line"></span><br><span class="line">How to name your supporting branch prefixes?</span><br><span class="line">Feature branches? [feature/]</span><br><span class="line">Bugfix branches? [bugfix/]</span><br><span class="line">Release branches? [release/]</span><br><span class="line">Hotfix branches? [hotfix/]</span><br><span class="line">Support branches? [support/]</span><br><span class="line">Version tag prefix? []</span><br><span class="line">Hooks and filters directory? [~/Workspaces/projects/test-gitflow/.git/hooks]</span><br></pre></td></tr></table></figure>
+
+<p>這時候會呈現把原本在 master 的分支，切到 develop 分支 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git branch</span><br><span class="line"></span><br><span class="line">* develop</span><br><span class="line">  master</span><br><span class="line">(END)</span><br></pre></td></tr></table></figure>
+
+<p>步驟四：試想著，接下來要開發一個新產品功能，那麼執行 git flow feature start 的指令，這個會自動的從 develop 建立一個 feature&#x2F;products 分支，這時候就切到新的分支</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ git flow feature start products</span><br><span class="line"></span><br><span class="line">切換到一個新分支 <span class="string">&#x27;feature/products&#x27;</span></span><br><span class="line"></span><br><span class="line">Summary of actions:</span><br><span class="line">- A new branch <span class="string">&#x27;feature/products&#x27;</span> was created, based on <span class="string">&#x27;develop&#x27;</span></span><br><span class="line">- You are now on branch <span class="string">&#x27;feature/products&#x27;</span></span><br><span class="line"></span><br><span class="line">Now, start committing on your feature. When <span class="keyword">done</span>, use:</span><br><span class="line"></span><br><span class="line">     git flow feature finish products</span><br></pre></td></tr></table></figure>
+
+<p>那麼，我們在這個分支在 README 檔案增加一點敘述</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ vi README</span><br><span class="line">$ <span class="built_in">cat</span> README</span><br><span class="line">this is my new product feature.</span><br><span class="line"></span><br><span class="line">$ git commit -am <span class="string">&quot;new feature on product branch&quot;</span></span><br><span class="line">[feature/products 88b2783] new feature on product branch</span><br><span class="line"> 1 file changed, 1 insertion(+)</span><br></pre></td></tr></table></figure>
+
+<p>這個 feature 分支，可以推到遠端讓其他人可以 pull 來使用。試著推上去</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ git push origin feature/products</span><br><span class="line"></span><br><span class="line">枚舉物件: 5, 完成.</span><br><span class="line">物件計數中: 100% (5/5), 完成.</span><br><span class="line">寫入物件中: 100% (3/3), 276 位元組 | 276.00 KiB/s, 完成.</span><br><span class="line">總共 3 (差異 0)，復用 0 (差異 0)，重用包 0</span><br><span class="line">To http://192.168.12.11/test/test-gitflow.git</span><br><span class="line"> * [new branch]      feature/products -&gt; feature/products</span><br></pre></td></tr></table></figure>
+
+<p>步驟五：某一位開發者需要緊急修復訂單的 bug ，他也 clone 這個 repo 到本地端。需要立刻執行 git flow hotfix start 指令，這時候就會立刻從 master 新建一個 hotfix&#x2F;order 分支出來，然後當前的分支就是 hotfix&#x2F;order</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ git flow hotfix start order</span><br><span class="line"></span><br><span class="line">切換到一個新分支 <span class="string">&#x27;hotfix/order&#x27;</span></span><br><span class="line"></span><br><span class="line">Summary of actions:</span><br><span class="line">- A new branch <span class="string">&#x27;hotfix/order&#x27;</span> was created, based on <span class="string">&#x27;master&#x27;</span></span><br><span class="line">- You are now on branch <span class="string">&#x27;hotfix/order&#x27;</span></span><br><span class="line"></span><br><span class="line">Follow-up actions:</span><br><span class="line">- Start committing your hot fixes</span><br><span class="line">- Bump the version number now!</span><br><span class="line">- When <span class="keyword">done</span>, run:</span><br><span class="line"></span><br><span class="line">     git flow hotfix finish <span class="string">&#x27;order&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>那麼就假設新增一個 order.txt 檔案做緊急修復的功能檔案</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">touch</span> order.txt</span><br><span class="line">$ git add order.txt</span><br><span class="line">$ git commit -am <span class="string">&quot;add order.txt&quot;</span></span><br><span class="line"></span><br><span class="line">[hotfix/order 67376b3] add order.txt</span><br><span class="line"> 1 file changed, 0 insertions(+), 0 deletions(-)</span><br><span class="line"> create mode 100644 order.txt</span><br></pre></td></tr></table></figure>
+
+<p>在 hotfix 是可以推送到遠端，也可以讓其他的開發者 pull 使用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ git push origin hotfix/order</span><br><span class="line"></span><br><span class="line">枚舉物件: 3, 完成.</span><br><span class="line">物件計數中: 100% (3/3), 完成.</span><br><span class="line">使用 8 個執行緒進行壓縮</span><br><span class="line">壓縮物件中: 100% (2/2), 完成.</span><br><span class="line">寫入物件中: 100% (2/2), 240 位元組 | 240.00 KiB/s, 完成.</span><br><span class="line">總共 2 (差異 0)，復用 0 (差異 0)，重用包 0</span><br><span class="line">To http://192.168.12.11/test/test-gitflow.git</span><br><span class="line"> * [new branch]      hotfix/order -&gt; hotfix/order</span><br></pre></td></tr></table></figure>
+
+<p>當你確定修復都沒問題的話，那麼再執行 git flow hotfix finish 指令，在這裡就會開始詢問一些資訊，合併的解釋</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">$ git flow hotfix finish order</span><br><span class="line"></span><br><span class="line">切換到分支 <span class="string">&#x27;master&#x27;</span></span><br><span class="line">您的分支與上游分支 <span class="string">&#x27;origin/master&#x27;</span> 一致。</span><br><span class="line">Merge made by the <span class="string">&#x27;ort&#x27;</span> strategy.</span><br><span class="line"> order.txt | 0</span><br><span class="line"> 1 file changed, 0 insertions(+), 0 deletions(-)</span><br><span class="line"> create mode 100644 order.txt</span><br><span class="line"></span><br><span class="line">切換到分支 <span class="string">&#x27;develop&#x27;</span></span><br><span class="line">Merge made by the <span class="string">&#x27;ort&#x27;</span> strategy.</span><br><span class="line"> order.txt | 0</span><br><span class="line"> 1 file changed, 0 insertions(+), 0 deletions(-)</span><br><span class="line"> create mode 100644 order.txt</span><br><span class="line"></span><br><span class="line">To http://192.168.12.11/test/test-gitflow.git</span><br><span class="line"> - [deleted]         hotfix/order</span><br><span class="line">已刪除分支 hotfix/order（曾為 67376b3）。</span><br><span class="line"></span><br><span class="line">Summary of actions:</span><br><span class="line">- Hotfix branch <span class="string">&#x27;hotfix/order&#x27;</span> has been merged into <span class="string">&#x27;master&#x27;</span></span><br><span class="line">- The hotfix was tagged <span class="string">&#x27;order&#x27;</span></span><br><span class="line">- Hotfix tag <span class="string">&#x27;order&#x27;</span> has been back-merged into <span class="string">&#x27;develop&#x27;</span></span><br><span class="line">- Hotfix branch <span class="string">&#x27;hotfix/order&#x27;</span> has been locally deleted; it has been remotely deleted from <span class="string">&#x27;origin&#x27;</span></span><br><span class="line">- You are now on branch <span class="string">&#x27;develop&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>這時候會把 hotfix&#x2F;order 分支的工作合併到 master 以及 develop 分支，然後在 master 加上 hotfix 標籤，再把原本的本地端跟遠端刪掉，最後你看到的工作位置會在 develop</p>
+<p>還記得前面 feature&#x2F;products 分支嗎？這時候開發完畢了，那麼就執行 git flow feature finish 指令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ git flow feature finish products</span><br><span class="line"></span><br><span class="line">已經位於 <span class="string">&#x27;develop&#x27;</span></span><br><span class="line">Merge made by the <span class="string">&#x27;ort&#x27;</span> strategy.</span><br><span class="line"> README | 1 +</span><br><span class="line"> 1 file changed, 1 insertion(+)</span><br><span class="line"></span><br><span class="line">To http://192.168.12.11/test/test-gitflow.git</span><br><span class="line"> - [deleted]         feature/products</span><br><span class="line">已刪除分支 feature/products（曾為 88b2783）。</span><br><span class="line"></span><br><span class="line">Summary of actions:</span><br><span class="line">- The feature branch <span class="string">&#x27;feature/products&#x27;</span> was merged into <span class="string">&#x27;develop&#x27;</span></span><br><span class="line">- Feature branch <span class="string">&#x27;feature/products&#x27;</span> has been locally deleted; it has been remotely deleted from <span class="string">&#x27;origin&#x27;</span></span><br><span class="line">- You are now on branch <span class="string">&#x27;develop</span></span><br></pre></td></tr></table></figure>
+
+<p>這裡會把 products 分支合併到 develop 分支，再把原本的本地端跟遠端刪掉，最後你看到的工作位置會在 develop</p>
+<p>步驟六：products 分支終於可以發布功能了，執行 git flow release start 會把 develop 的分支建立一個 0.1.0 版本的分支，這個主要是用來預備發佈使用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ git flow release start 0.1.0</span><br><span class="line"></span><br><span class="line">切換到一個新分支 <span class="string">&#x27;release/0.1.0&#x27;</span></span><br><span class="line"></span><br><span class="line">Summary of actions:</span><br><span class="line">- A new branch <span class="string">&#x27;release/0.1.0&#x27;</span> was created, based on <span class="string">&#x27;develop&#x27;</span></span><br><span class="line">- You are now on branch <span class="string">&#x27;release/0.1.0&#x27;</span></span><br><span class="line"></span><br><span class="line">Follow-up actions:</span><br><span class="line">- Bump the version number now!</span><br><span class="line">- Start committing last-minute fixes <span class="keyword">in</span> preparing your release</span><br><span class="line">- When <span class="keyword">done</span>, run:</span><br><span class="line"></span><br><span class="line">     git flow release finish <span class="string">&#x27;0.1.0&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>會自動新增一個 release&#x2F;0.1.0 的分支，這個位置是不能再增加功能的，但可以修改 bug、也可以遠端</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ vi README</span><br><span class="line">$ git commit -am <span class="string">&quot;update on release/0.1.0&quot;</span></span><br><span class="line"></span><br><span class="line">[release/0.1.0 784ac1d] update on release/0.1.0</span><br><span class="line"> 1 file changed, 2 insertions(+)</span><br><span class="line"></span><br><span class="line">$ git push origin release/0.1.0</span><br><span class="line"></span><br><span class="line">枚舉物件: 14, 完成.</span><br><span class="line">物件計數中: 100% (14/14), 完成.</span><br><span class="line">使用 8 個執行緒進行壓縮</span><br><span class="line">壓縮物件中: 100% (10/10), 完成.</span><br><span class="line">寫入物件中: 100% (12/12), 1.34 KiB | 1.34 MiB/s, 完成.</span><br><span class="line">總共 12 (差異 2)，復用 0 (差異 0)，重用包 0</span><br><span class="line">To http://192.168.12.11/test/test-gitflow.git</span><br><span class="line"> * [new branch]      release/0.1.0 -&gt; release/0.1.0</span><br></pre></td></tr></table></figure>
+
+<p>差不多修好了嗎？那麼我們繼續執行 git flow release finish 指令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">$ git flow release finish 0.1.0</span><br><span class="line"></span><br><span class="line">Branches <span class="string">&#x27;master&#x27;</span> and <span class="string">&#x27;origin/master&#x27;</span> have diverged.</span><br><span class="line">And <span class="built_in">local</span> branch <span class="string">&#x27;master&#x27;</span> is ahead of <span class="string">&#x27;origin/master&#x27;</span>.</span><br><span class="line">切換到分支 <span class="string">&#x27;master&#x27;</span></span><br><span class="line">您的分支領先 <span class="string">&#x27;origin/master&#x27;</span> 共 2 個提交。</span><br><span class="line">  （使用 <span class="string">&quot;git push&quot;</span> 來發布您的本機提交）</span><br><span class="line">Merge made by the <span class="string">&#x27;ort&#x27;</span> strategy.</span><br><span class="line"> README | 3 +++</span><br><span class="line"> 1 file changed, 3 insertions(+)</span><br><span class="line">已經位於 <span class="string">&#x27;master&#x27;</span></span><br><span class="line">您的分支領先 <span class="string">&#x27;origin/master&#x27;</span> 共 7 個提交。</span><br><span class="line">  （使用 <span class="string">&quot;git push&quot;</span> 來發布您的本機提交）</span><br><span class="line">切換到分支 <span class="string">&#x27;develop&#x27;</span></span><br><span class="line">Merge made by the <span class="string">&#x27;ort&#x27;</span> strategy.</span><br><span class="line"> README | 2 ++</span><br><span class="line"> 1 file changed, 2 insertions(+)</span><br><span class="line"></span><br><span class="line">To http://192.168.12.11/test/test-gitflow.git</span><br><span class="line"> - [deleted]         release/0.1.0</span><br><span class="line">已刪除分支 release/0.1.0（曾為 784ac1d）。</span><br><span class="line"></span><br><span class="line">Summary of actions:</span><br><span class="line">- Release branch <span class="string">&#x27;release/0.1.0&#x27;</span> has been merged into <span class="string">&#x27;master&#x27;</span></span><br><span class="line">- The release was tagged <span class="string">&#x27;0.1.0&#x27;</span></span><br><span class="line">- Release tag <span class="string">&#x27;0.1.0&#x27;</span> has been back-merged into <span class="string">&#x27;develop&#x27;</span></span><br><span class="line">- Release branch <span class="string">&#x27;release/0.1.0&#x27;</span> has been locally deleted; it has been remotely deleted from <span class="string">&#x27;origin&#x27;</span></span><br><span class="line">- You are now on branch <span class="string">&#x27;develop&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>這個方式會把 release&#x2F;0.1.0 分支合併到 master, develop，也會把本地端跟遠端的刪除。最後，也是會切到 develop 分支。如此一來就完成了開發 cycle 的流程囉。有了這個標準套用在你的所有 git 流程工作上，相信你後透過簡單的流程解決複雜的工作問題。</p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><p><a target="_blank" rel="noopener" href="https://morningspace.github.io/tech/git-workflow-4/">Git工作流面面观——Gitflow工作流</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>作者： </strong>Helen
+  </li>
+  <li class="post-copyright-link">
+      <strong>文章連結：</strong>
+      <a href="https://weijutu.github.io/2022/11/26/git/how-to-use-gitflow/" title="Gitflow 工作流介紹與使用">https://weijutu.github.io/2022/11/26/git/how-to-use-gitflow/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/git/" rel="tag"># git</a>
+              <a href="/tags/gitflow/" rel="tag"># gitflow</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/11/05/vuejs/vue-vite-tailwind/" rel="prev" title="如何建立 Tailwind + Vue + Vite 專案">
+                  <i class="fa fa-chevron-left"></i> 如何建立 Tailwind + Vue + Vite 專案
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Helen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+
+
+
+
+
+</body>
+</html>

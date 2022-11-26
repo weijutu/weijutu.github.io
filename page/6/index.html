@@ -135,7 +135,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-count">80</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -146,7 +146,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-count">55</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -183,6 +183,122 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/07/26/nodejs/nodejs-26-jade-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="Helen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="丸匠筆記">
+      <meta itemprop="description" content="天天吃番茄，天天有進步">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 丸匠筆記">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/07/26/nodejs/nodejs-26-jade-2/" class="post-title-link" itemprop="url">Node.js 系列學習日誌#26 - 介紹 Jade  Template Engine 模板引擎 (下)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2017-07-26 00:26:00" itemprop="dateCreated datePublished" datetime="2017-07-26T00:26:00+08:00">2017-07-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-09-04 09:16:48" itemprop="dateModified" datetime="2022-09-04T09:16:48+08:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Node-js/" itemprop="url" rel="index"><span itemprop="name">Node.js</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+
+        
+
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>繼上一篇 （<a target="_blank" rel="noopener" href="http://ithelp.ithome.com.tw/ironman7/app/article/dev/recent/10157760%EF%BC%89%E4%B8%8A%E9%9B%86%E4%BB%8B%E7%B4%B9%E4%BA%86">http://ithelp.ithome.com.tw/ironman7/app/article/dev/recent/10157760）上集介紹了</a> 標籤、條件、迴圈、語法，本章節繼續介紹 Jade 的用法<br>分別是</p>
+<ul>
+<li>comments</li>
+<li>mixins</li>
+<li>case</li>
+<li>使用 Jade 撰寫註冊表單</li>
+</ul>
+<p>繼續使用 <a target="_blank" rel="noopener" href="http://codepen.io/">http://codepen.io/</a> 作為線上編輯做以下實作的測試編輯器</p>
+<p><img data-src="/images/nodejs/113.png"></p>
+<h3 id="comments-註解"><a href="#comments-註解" class="headerlink" title="comments 註解"></a>comments 註解</h3><p>這是註解的寫法，註解的寫法就像 javascript 的方式一樣兩個斜線。若你想要把註解寫的方式不想要呈現在原始碼的話，那麼可以試著用  &#x2F;&#x2F;- 的方式撰寫，這是滿好的手法之一。以下是單行註解跟多行註解的示範：</p>
+<p><img data-src="/images/nodejs/114.png"></p>
+<h3 id="mixins"><a href="#mixins" class="headerlink" title="mixins"></a>mixins</h3><p>mixin 的用途是用在當某一段程式重複性高的時候，可以將它抽出來做  mixins，作為重複使用的區塊，mixin 可以將她當作 javascript 的 function 的概念</p>
+<p>寫法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mixin 方法名稱(參數)</span><br><span class="line">     呈現資料</span><br></pre></td></tr></table></figure>
+
+<p>下圖的範例，我們將ul li 的 li 部分做 mixin，在第一行的地方，我們假定 li 裡面的內容要擺放 name &#x3D; &gt; price ，這就代表需要將參數放到方法的括弧裡面，因此，就如果有參數的話，就在方法名稱括號內，並以逗號分隔的方式擺參數，最後在 li 的地方就將參數值以 #{參數名} 帶入。在第五、第六行得地方呼叫的方式就用  + 號，後面接方法名稱，就像 js 呼叫的方式相同，寫為 +book(“name”, “price”)</p>
+<p><img data-src="/images/nodejs/115.png"></p>
+<h3 id="case-條件式判斷"><a href="#case-條件式判斷" class="headerlink" title="case 條件式判斷"></a>case 條件式判斷</h3><p>case 是一種類似 if else 的判斷方式，從下圖的語法來看，一開始建立一個變數為 book ，然後使用 case 後面再接變數，再第二行取到變數值之後，程式就會開始與 when 所設定的字串做比對，如果有符合，那麼就進行以下的陳述句，如果都沒有符合，那麼就會跑預設值  default，然而 default 可以不一定需要，這點可以省去</p>
+<p><img data-src="/images/nodejs/116.png"></p>
+<h3 id="使用-Jade-撰寫註冊表單"><a href="#使用-Jade-撰寫註冊表單" class="headerlink" title="使用 Jade 撰寫註冊表單"></a>使用 Jade 撰寫註冊表單</h3><p>從上一篇也是 jade 的學習到本篇的延續，大致上的語言都簡略的描述過一遍，接著我們需要來做個實際點的應用，我這邊使用的範例是經常網頁開發會使用到的註冊表單。簡單寫一些表單，那就用帳號、密碼、再加一個註冊的按鈕，如下圖所示：</p>
+<p><img data-src="/images/nodejs/117.png"></p>
+<p>Jade 課程就到這裡</p>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ol>
+<li><a target="_blank" rel="noopener" href="http://jade-lang.com/">http://jade-lang.com/</a></li>
+<li><a target="_blank" rel="noopener" href="http://naltatis.github.io/jade-syntax-docs/">http://naltatis.github.io/jade-syntax-docs/</a></li>
+<li><a target="_blank" rel="noopener" href="http://naltatis.github.io/jade-syntax-docs/#basics">http://naltatis.github.io/jade-syntax-docs/#basics</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.kerash.tw/2013/04/nodejs-jade-template-engine/">http://blog.kerash.tw/2013/04/nodejs-jade-template-engine/</a></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1278,116 +1394,6 @@
 
 <h3 id="結果"><a href="#結果" class="headerlink" title="結果"></a>結果</h3><p><img data-src="/images/nodejs/68.png"></p>
 <h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a target="_blank" rel="noopener" href="http://expressjs.com/">http://expressjs.com/</a><br><a target="_blank" rel="noopener" href="http://expressjs.com/4x/api.html#app.locals">http://expressjs.com/4x/api.html#app.locals</a><br><a target="_blank" rel="noopener" href="http://www.richyli.com/tool/loremipsum/">http://www.richyli.com/tool/loremipsum/</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-16-util-inherits/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.png">
-      <meta itemprop="name" content="Helen">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="丸匠筆記">
-      <meta itemprop="description" content="天天吃番茄，天天有進步">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 丸匠筆記">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/07/24/nodejs/nodejs-16-util-inherits/" class="post-title-link" itemprop="url">Node.js 系列學習日誌#16 - 基礎工具核心模組 util.inherits 實現原型繼承</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2017-07-24 00:16:00" itemprop="dateCreated datePublished" datetime="2017-07-24T00:16:00+08:00">2017-07-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2022-09-04 09:16:48" itemprop="dateModified" datetime="2022-09-04T09:16:48+08:00">2022-09-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Node-js/" itemprop="url" rel="index"><span itemprop="name">Node.js</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-
-        
-
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在 js 的內建功能裡面如果有些不適合或無法滿足需求的時候，多半都要動手刻程式然後做到自己要的模組來呼叫方法。而 Node.js 提供了一個函數的集合，能夠比 js 更多的一些基本的處理，我們可以看到以下官方網站所提供 util 可用的方法。在本章節將介紹比較重要關注的方法</p>
-<p><img data-src="/images/nodejs/64.png"></p>
-<h1 id="util-inherits-實現原型繼承"><a href="#util-inherits-實現原型繼承" class="headerlink" title="util.inherits 實現原型繼承"></a>util.inherits 實現原型繼承</h1><p>引用內建基礎工具  util，請在程式第一行寫 var util &#x3D; require(‘util’);  方可使用工具的方法。在這邊我們介紹繼承的功能，也就是  util.inherits(constructor, superConstructor)，在參數的第一個作為建構子，而第二參數為父建構子，直接來看程式的部分</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fnBase</span>(<span class="params"></span>) &#123;</span><br><span class="line">     <span class="variable language_">this</span>.<span class="property">name</span> = <span class="string">&#x27;java&#x27;</span>;</span><br><span class="line">     <span class="variable language_">this</span>.<span class="property">price</span> = <span class="number">250</span>;</span><br><span class="line"></span><br><span class="line">     <span class="variable language_">this</span>.<span class="property">getBookName</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">          <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;getBookName: the book name is &quot;</span> + <span class="variable language_">this</span>.<span class="property">name</span>);</span><br><span class="line">     &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fnBase.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">showName</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;showName: &quot;</span> + <span class="variable language_">this</span>.<span class="property">name</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">fnBase.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">showPrice</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;showPrice: &quot;</span> + <span class="variable language_">this</span>.<span class="property">price</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>在這邊開始先建立了一個 fnBase 的物件，包含 name, price 屬性並且給予初始化值以及 getBookName 方法，而這個取得 book 的名稱。另外再多兩個 prototype 的原型方法，一個是 showName 以及 showPrice 方法，接著我們在建立一個物件</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Book</span>(<span class="params"></span>) &#123;</span><br><span class="line">     <span class="variable language_">this</span>.<span class="property">name</span> = <span class="string">&quot;nodejs&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>我們定義好基礎對象為 fnBase 之後，以及繼承 fnBook  的 Book 建構子的屬性 name 為 nodejs，我們在透過以下方法來塑造繼承關係</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">util.<span class="title function_">inherits</span>(<span class="title class_">Book</span>, fnBase);</span><br></pre></td></tr></table></figure>
-
-<p>接下來呼叫一下看看會有什麼變化，首先我們先建立 fnBase  的物件，在呼叫內部包含的方法，showName 及 getBookName</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="title function_">fnBase</span>();</span><br><span class="line">obj.<span class="title function_">showName</span>();</span><br><span class="line">obj.<span class="title function_">getBookName</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj);</span><br></pre></td></tr></table></figure>
-
-<p>其結果如下，可以看到呼叫的兩個方法皆有顯示答案</p>
-<p><img data-src="/images/nodejs/65.png"></p>
-<p>最後將 new fnBase() 換成  new Book() 看看，程式如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> book = <span class="keyword">new</span> <span class="title class_">Book</span>();</span><br><span class="line">book.<span class="title function_">showName</span>();</span><br><span class="line">book.<span class="title function_">getBookName</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(book);</span><br></pre></td></tr></table></figure>
-<p>Oops! 為什麼會出錯？結果居然只呼叫得到 showName, 卻無法取得  getBookName.</p>
-<p><img data-src="/images/nodejs/66.png"></p>
-<p>原因是因為 Book  只會繼承 fnBase 在原型 prototype 的函數，其建立的屬性與 getBookName 並不會被 Book 繼承。因此在繼承上的觀念則要特別注意了</p>
-<p>參考資料：<br><a target="_blank" rel="noopener" href="http://nodejs.org/api/util.html">http://nodejs.org/api/util.html</a><br><a target="_blank" rel="noopener" href="http://www.w3schools.com/js/js_object_prototypes.asp">http://www.w3schools.com/js/js_object_prototypes.asp</a></p>
 
       
     </div>

@@ -135,7 +135,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-count">80</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -146,7 +146,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-count">55</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -183,6 +183,116 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-16-util-inherits/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="Helen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="丸匠筆記">
+      <meta itemprop="description" content="天天吃番茄，天天有進步">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 丸匠筆記">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/07/24/nodejs/nodejs-16-util-inherits/" class="post-title-link" itemprop="url">Node.js 系列學習日誌#16 - 基礎工具核心模組 util.inherits 實現原型繼承</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2017-07-24 00:16:00" itemprop="dateCreated datePublished" datetime="2017-07-24T00:16:00+08:00">2017-07-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-09-04 09:16:48" itemprop="dateModified" datetime="2022-09-04T09:16:48+08:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Node-js/" itemprop="url" rel="index"><span itemprop="name">Node.js</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+
+        
+
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>在 js 的內建功能裡面如果有些不適合或無法滿足需求的時候，多半都要動手刻程式然後做到自己要的模組來呼叫方法。而 Node.js 提供了一個函數的集合，能夠比 js 更多的一些基本的處理，我們可以看到以下官方網站所提供 util 可用的方法。在本章節將介紹比較重要關注的方法</p>
+<p><img data-src="/images/nodejs/64.png"></p>
+<h1 id="util-inherits-實現原型繼承"><a href="#util-inherits-實現原型繼承" class="headerlink" title="util.inherits 實現原型繼承"></a>util.inherits 實現原型繼承</h1><p>引用內建基礎工具  util，請在程式第一行寫 var util &#x3D; require(‘util’);  方可使用工具的方法。在這邊我們介紹繼承的功能，也就是  util.inherits(constructor, superConstructor)，在參數的第一個作為建構子，而第二參數為父建構子，直接來看程式的部分</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fnBase</span>(<span class="params"></span>) &#123;</span><br><span class="line">     <span class="variable language_">this</span>.<span class="property">name</span> = <span class="string">&#x27;java&#x27;</span>;</span><br><span class="line">     <span class="variable language_">this</span>.<span class="property">price</span> = <span class="number">250</span>;</span><br><span class="line"></span><br><span class="line">     <span class="variable language_">this</span>.<span class="property">getBookName</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">          <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;getBookName: the book name is &quot;</span> + <span class="variable language_">this</span>.<span class="property">name</span>);</span><br><span class="line">     &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fnBase.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">showName</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;showName: &quot;</span> + <span class="variable language_">this</span>.<span class="property">name</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">fnBase.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">showPrice</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;showPrice: &quot;</span> + <span class="variable language_">this</span>.<span class="property">price</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>在這邊開始先建立了一個 fnBase 的物件，包含 name, price 屬性並且給予初始化值以及 getBookName 方法，而這個取得 book 的名稱。另外再多兩個 prototype 的原型方法，一個是 showName 以及 showPrice 方法，接著我們在建立一個物件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Book</span>(<span class="params"></span>) &#123;</span><br><span class="line">     <span class="variable language_">this</span>.<span class="property">name</span> = <span class="string">&quot;nodejs&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我們定義好基礎對象為 fnBase 之後，以及繼承 fnBook  的 Book 建構子的屬性 name 為 nodejs，我們在透過以下方法來塑造繼承關係</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">util.<span class="title function_">inherits</span>(<span class="title class_">Book</span>, fnBase);</span><br></pre></td></tr></table></figure>
+
+<p>接下來呼叫一下看看會有什麼變化，首先我們先建立 fnBase  的物件，在呼叫內部包含的方法，showName 及 getBookName</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="title function_">fnBase</span>();</span><br><span class="line">obj.<span class="title function_">showName</span>();</span><br><span class="line">obj.<span class="title function_">getBookName</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj);</span><br></pre></td></tr></table></figure>
+
+<p>其結果如下，可以看到呼叫的兩個方法皆有顯示答案</p>
+<p><img data-src="/images/nodejs/65.png"></p>
+<p>最後將 new fnBase() 換成  new Book() 看看，程式如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> book = <span class="keyword">new</span> <span class="title class_">Book</span>();</span><br><span class="line">book.<span class="title function_">showName</span>();</span><br><span class="line">book.<span class="title function_">getBookName</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(book);</span><br></pre></td></tr></table></figure>
+<p>Oops! 為什麼會出錯？結果居然只呼叫得到 showName, 卻無法取得  getBookName.</p>
+<p><img data-src="/images/nodejs/66.png"></p>
+<p>原因是因為 Book  只會繼承 fnBase 在原型 prototype 的函數，其建立的屬性與 getBookName 並不會被 Book 繼承。因此在繼承上的觀念則要特別注意了</p>
+<p>參考資料：<br><a target="_blank" rel="noopener" href="http://nodejs.org/api/util.html">http://nodejs.org/api/util.html</a><br><a target="_blank" rel="noopener" href="http://www.w3schools.com/js/js_object_prototypes.asp">http://www.w3schools.com/js/js_object_prototypes.asp</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1210,152 +1320,6 @@
 <h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><ul>
 <li><a target="_blank" rel="noopener" href="http://expressjs.com/">http://expressjs.com/</a></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/redblaze/node-mysql">https://github.com/redblaze/node-mysql</a></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/07/24/nodejs/nodejs-06-style-guide/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.png">
-      <meta itemprop="name" content="Helen">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="丸匠筆記">
-      <meta itemprop="description" content="天天吃番茄，天天有進步">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 丸匠筆記">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/07/24/nodejs/nodejs-06-style-guide/" class="post-title-link" itemprop="url">Node.js 系列學習日誌#6 - 撰寫程式的風格指南 (Style Guide)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2017-07-24 00:06:00" itemprop="dateCreated datePublished" datetime="2017-07-24T00:06:00+08:00">2017-07-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2022-09-04 09:16:48" itemprop="dateModified" datetime="2022-09-04T09:16:48+08:00">2022-09-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Node-js/" itemprop="url" rel="index"><span itemprop="name">Node.js</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-
-        
-
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>由於 node.js 是 javascript 作為開發的語言，開發的過程遵照程式碼規範撰寫讓整個程式風格達到一致。不過當然許多的 js 寫法都會有不同的風格存在，若您找不到要照什麼規則編寫程式，那麼可以參考這篇簡易的風格指南作為開發上的基本基礎。</p>
-<p>本章節將介紹  node.js 幾個常用的撰寫手法來做介紹：</p>
-<ul>
-<li>字串引號</li>
-<li>區塊括號</li>
-<li>變數宣告</li>
-<li>變數命名</li>
-<li>函數命名</li>
-<li>物件與陣列</li>
-<li>相等的運算符號</li>
-<li>條件判斷</li>
-<li>嵌套閉包</li>
-</ul>
-<h1 id="字串引號"><a href="#字串引號" class="headerlink" title="字串引號"></a>字串引號</h1><p>使用單引號，若物件是 json 格式，那麼就使用雙引號來定義 key, value</p>
-<h3 id="錯誤示範"><a href="#錯誤示範" class="headerlink" title="錯誤示範"></a>錯誤示範</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name =“test01”;</span><br></pre></td></tr></table></figure>
-
-<h3 id="正確寫法"><a href="#正確寫法" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = ’test01’;</span><br></pre></td></tr></table></figure>
-
-<h1 id="區塊括號"><a href="#區塊括號" class="headerlink" title="區塊括號"></a>區塊括號</h1><h3 id="錯誤示範-1"><a href="#錯誤示範-1" class="headerlink" title="錯誤示範"></a>錯誤示範</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>)</span><br><span class="line">&#123;</span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(“<span class="variable language_">this</span> is a book.”);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="正確寫法-1"><a href="#正確寫法-1" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(“<span class="variable language_">this</span> is a book.”);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="變數宣告"><a href="#變數宣告" class="headerlink" title="變數宣告"></a>變數宣告</h1><p>使用一種對每一個變數做一個 var 宣告。</p>
-<h3 id="錯誤示範-2"><a href="#錯誤示範-2" class="headerlink" title="錯誤示範"></a>錯誤示範</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ary = [<span class="string">&quot;apple&quot;</span>, <span class="string">&quot;orange&quot;</span>],</span><br><span class="line">     price = [<span class="number">150</span>, <span class="number">125</span>],</span><br><span class="line">     obj = &#123;&#125;;</span><br></pre></td></tr></table></figure>
-
-<h3 id="正確寫法-2"><a href="#正確寫法-2" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ary = [<span class="string">&quot;apple&quot;</span>, <span class="string">&quot;orange&quot;</span>];</span><br><span class="line"><span class="keyword">var</span> price = [<span class="number">150</span>, <span class="number">125</span>];</span><br><span class="line"><span class="keyword">var</span> obj = &#123;&#125;;</span><br></pre></td></tr></table></figure>
-
-<h1 id="變數命名"><a href="#變數命名" class="headerlink" title="變數命名"></a>變數命名</h1><h3 id="錯誤示範-3"><a href="#錯誤示範-3" class="headerlink" title="錯誤示範"></a>錯誤示範</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str_user = <span class="string">&quot;test01&quot;</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="正確寫法-3"><a href="#正確寫法-3" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> strUser = <span class="string">&quot;test01&quot;</span>;</span><br></pre></td></tr></table></figure>
-
-<h1 id="函數命名"><a href="#函數命名" class="headerlink" title="函數命名"></a>函數命名</h1><h3 id="錯誤示範-4"><a href="#錯誤示範-4" class="headerlink" title="錯誤示範"></a>錯誤示範</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">get_Users</span>(<span class="params"></span>) &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="正確寫法-4"><a href="#正確寫法-4" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">GetUser</span>(<span class="params"></span>)&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="物件與陣列"><a href="#物件與陣列" class="headerlink" title="物件與陣列"></a>物件與陣列</h1><p>如果只有很小的資料為陣列的話，請將它寫在同一行，而當您的物件是包含 key, value 的形式時，則排列整齊讓閱讀起來更加容易</p>
-<h3 id="錯誤寫法"><a href="#錯誤寫法" class="headerlink" title="錯誤寫法"></a>錯誤寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ary = [</span><br><span class="line">     <span class="string">&quot;apple&quot;</span>, <span class="string">&quot;orange&quot;</span></span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = &#123; <span class="string">&quot;name&quot;</span>, <span class="string">&quot;test01&quot;</span></span><br><span class="line">               , <span class="string">&quot;id&quot;</span>: <span class="string">&quot;abcd1234&quot;</span> &#125;;</span><br></pre></td></tr></table></figure>
-
-<h3 id="正確寫法-5"><a href="#正確寫法-5" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ary = [ <span class="string">&quot;apple&quot;</span>, <span class="string">&quot;orange&quot;</span> ];</span><br><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">     <span class="string">&quot;name&quot;</span>, <span class="string">&quot;test01&quot;</span>,</span><br><span class="line">     <span class="string">&quot;id&quot;</span>: <span class="string">&quot;abcd1234&quot;</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h1 id="相等的運算符號"><a href="#相等的運算符號" class="headerlink" title="相等的運算符號"></a>相等的運算符號</h1><h3 id="錯誤寫法-1"><a href="#錯誤寫法-1" class="headerlink" title="錯誤寫法"></a>錯誤寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> index = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span> (index == <span class="string">&#x27;&#x27;</span>) &#123;</span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;nothing&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="正確寫法-6"><a href="#正確寫法-6" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> index = <span class="number">0</span></span><br><span class="line"><span class="keyword">if</span> (index === <span class="string">&#x27;&#x27;</span>) &#123;</span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;nothing&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="條件判斷"><a href="#條件判斷" class="headerlink" title="條件判斷"></a>條件判斷</h1><p>儘量不要將過多的判斷都塞在 if 裡面，請先將判斷部分在前面以變數方式先驗證，再將結果的 true, false 的答案擺在 if 裡面</p>
-<h3 id="錯誤寫法-2"><a href="#錯誤寫法-2" class="headerlink" title="錯誤寫法"></a>錯誤寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (task.<span class="title function_">isPrivate</span>() || task.<span class="title function_">isEnabled</span>()) &#123;</span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;the task are private and enabled type&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="正確寫法-7"><a href="#正確寫法-7" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> isValid = (task.<span class="title function_">isPrivate</span>() || task.<span class="title function_">isEnabled</span>());</span><br><span class="line"><span class="keyword">if</span> (isValid) &#123;</span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;the task are private and enabled type&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="嵌套閉包"><a href="#嵌套閉包" class="headerlink" title="嵌套閉包"></a>嵌套閉包</h1><p>在使用閉包的做法是，不要一直無限嵌套，因為這樣會使得程式過度雜亂</p>
-<h3 id="錯誤寫法-3"><a href="#錯誤寫法-3" class="headerlink" title="錯誤寫法"></a>錯誤寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">      obj.<span class="title function_">click</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">           <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;click...&quot;</span>);</span><br><span class="line">      &#125;)</span><br><span class="line">&#125;, <span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
-
-<h3 id="正確寫法-8"><a href="#正確寫法-8" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">     obj.<span class="title function_">click</span>(fnObjClick);</span><br><span class="line">&#125;,<span class="number">3000</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">fnObjClick</span>(<span class="params"></span>) &#123;</span><br><span class="line">     <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;click...&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h1><ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/felixge/node-style-guide">https://github.com/felixge/node-style-guide</a></li>
-<li><a target="_blank" rel="noopener" href="http://nodeguide.com/style.html">http://nodeguide.com/style.html</a></li>
 </ul>
 
       

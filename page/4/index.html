@@ -135,7 +135,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-count">80</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -146,7 +146,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-count">55</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -183,6 +183,134 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2018/04/28/nodejs/nodejs-31-ubuntu-install-nodejs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="Helen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="丸匠筆記">
+      <meta itemprop="description" content="天天吃番茄，天天有進步">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 丸匠筆記">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/04/28/nodejs/nodejs-31-ubuntu-install-nodejs/" class="post-title-link" itemprop="url">Node.js 系列學習日誌#31 - 如何 Ubuntu 16.04 安裝 Node.js / n 管理 Nodejs 版本 / yarn 包管理套件</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2018-04-28 15:15:00" itemprop="dateCreated datePublished" datetime="2018-04-28T15:15:00+08:00">2018-04-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-09-04 09:16:48" itemprop="dateModified" datetime="2022-09-04T09:16:48+08:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Node-js/" itemprop="url" rel="index"><span itemprop="name">Node.js</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+
+        
+
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>在 Ubuntu 16.04 作業系統版本下，我們需要使用  <code>apt</code> 包管理器，在安裝 Node.js 之前先安裝 <code>npm</code> ，也就是 Node.js 包管理器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get install nodejs</span><br><span class="line">$ sudo apt-get install npm</span><br></pre></td></tr></table></figure>
+
+<p>接著使用 <code>n</code> 來管理 nodejs 版本 <a target="_blank" rel="noopener" href="https://github.com/tj/n">https://github.com/tj/n</a> ，既然有了 <code>node</code> 最簡單的安裝 n 的方式是 <code>npm</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g n</span><br></pre></td></tr></table></figure>
+
+<p>如果安裝出現了以下的錯誤</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g n</span><br><span class="line">npm http GET https://registry.npmjs.org/n</span><br><span class="line">npm http GET https://registry.npmjs.org/n</span><br><span class="line">npm http GET https://registry.npmjs.org/n</span><br><span class="line">npm ERR! Error: CERT_UNTRUSTED</span><br><span class="line">npm ERR!     at SecurePair.&lt;anonymous&gt; (tls.js:1370:32)</span><br><span class="line">npm ERR!     at SecurePair.EventEmitter.emit (events.js:92:17)</span><br><span class="line">npm ERR!     at SecurePair.maybeInitFinished (tls.js:982:10)</span><br><span class="line">npm ERR!     at CleartextStream.read [as _read] (tls.js:469:13)</span><br><span class="line">npm ERR!     at CleartextStream.Readable.read (_stream_readable.js:320:10)</span><br><span class="line">npm ERR!     at EncryptedStream.write [as _write] (tls.js:366:25)</span><br><span class="line">npm ERR!     at doWrite (_stream_writable.js:223:10)</span><br><span class="line">npm ERR!     at writeOrBuffer (_stream_writable.js:213:5)</span><br><span class="line">npm ERR!     at EncryptedStream.Writable.write (_stream_writable.js:180:11)</span><br><span class="line">npm ERR!     at write (_stream_readable.js:583:24)</span><br></pre></td></tr></table></figure>
+
+<p>那麼可以用以下命令繞過 <code>https</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm config set strict-ssl false</span><br></pre></td></tr></table></figure>
+
+<p>接著在重新安裝一次 <code>n</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo npm cache clean -f</span><br><span class="line">$ sudo npm install -g n</span><br><span class="line">$ sudo n stable</span><br></pre></td></tr></table></figure>
+
+<p>安裝完畢之後，輸入以下命令以確定安裝的版本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">## 查看 n 版本</span><br><span class="line">$ n -V</span><br><span class="line"></span><br><span class="line">## Output</span><br><span class="line">2.1.7</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">## 查看 node 版本</span><br><span class="line">$ node -v</span><br><span class="line"></span><br><span class="line">## Output</span><br><span class="line">v10.0.0</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">## 查看 npm 版本</span><br><span class="line">$ npm -v</span><br><span class="line"></span><br><span class="line">## Output</span><br><span class="line">1.3.10</span><br></pre></td></tr></table></figure>
+
+<p>接著，也需要安裝 Yarn 來管理套件，它是一套 Javascript 套件管理工具，到這邊想說不是已經有 <code>npm</code>，為何還需要 <code>yarn</code> ?， 這是因為使用 <code>npm</code> 最困擾的地方就是安裝速度比較慢，Yarn 則是快速、可靠又安全的依賴管理。（用過都說讚…），那麼底下就輸入命令安裝 Yarn</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -</span><br><span class="line">$ sudo apt-get update &amp;&amp; sudo apt-get install yarn</span><br></pre></td></tr></table></figure>
+
+<p>測試 Yarn 安裝狀況</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn --version</span><br></pre></td></tr></table></figure>
+
+<p>但是如果出現錯誤訊息寫 <code>The program &#39;yarn&#39; is currently not installed. To run &#39;yarn&#39; please ask your administrator to install the package &#39;cmdtest&#39;</code> 代表著需要安裝 <code>cmdtest</code> 套件</p>
+<p>輸入並且安裝 cmdtest</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install cmdtest</span><br></pre></td></tr></table></figure>
+
+<p>再做一次 <code>$ yarn --version</code> 確認後，就成功出現版本號碼</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">## Output:</span><br><span class="line">0.10</span><br></pre></td></tr></table></figure>
+
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-16-04">How To Install Node.js on Ubuntu16.04</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/21855035/ssl-error-cert-untrusted-while-using-npm-command">SSL Error: CERT_UNTRUSTED while using npm command@stackoverflow</a></li>
+<li><a target="_blank" rel="noopener" href="https://yarnpkg.com/zh-Hans/">Yarn 官方</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1123,117 +1251,6 @@
 <li>gulp.src(glob) this returns a readable stream. takes a file system glob(like grunt) and starts emitting files that match</li>
 <li>gulp.dest(folder) this returns a writable stream, file objects piped to this are saved to the file system</li>
 </ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://weijutu.github.io/2017/08/25/achieve/achieve-google-material-design/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.png">
-      <meta itemprop="name" content="Helen">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="丸匠筆記">
-      <meta itemprop="description" content="天天吃番茄，天天有進步">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 丸匠筆記">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/08/25/achieve/achieve-google-material-design/" class="post-title-link" itemprop="url">Google Material Design 非官方正體中文版電子書</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2017-08-25 11:37:25" itemprop="dateCreated datePublished" datetime="2017-08-25T11:37:25+08:00">2017-08-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2022-09-04 09:16:48" itemprop="dateModified" datetime="2022-09-04T09:16:48+08:00">2022-09-04</time>
-    </span>
-
-  
-</div>
-
-        </div>
-
-        
-
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img data-src="/images/achieve/1.png"></p>
-<p>Google I&#x2F;O  2014 開發者大會公佈了最新的設計理念出了一份指南手冊，只單純看圖片就已經感受到強烈的設計風格，後來同事提出了一個想法，想要把指南手冊翻成非官方版的繁體中文版，由於海倫是參與翻譯的一員，在這邊也分享給大家做參考喔！</p>
-<p>就這樣我跟同事還有同事的朋友，踏上了 <code>不歸路</code> 翻譯這條路，就開始協同翻譯了幾篇，我主要都是在 components 的部分，其他就順便整理英文格式的備份檔。</p>
-<p>請看翻譯的電子書：</p>
-<p><a target="_blank" rel="noopener" href="http://wcc723.gitbooks.io/google_design_translate/">http://wcc723.gitbooks.io/google_design_translate&#x2F;</a></p>
-<h3 id="團結力量大"><a href="#團結力量大" class="headerlink" title="團結力量大"></a>團結力量大</h3><p>這電子書的出爐，拜大家努力翻譯所賜，小妹我也給予鞠躬致意，翻譯人員如下：</p>
-<ul>
-<li>Casper</li>
-<li>Charlene</li>
-<li>Frances</li>
-<li>Helen</li>
-<li>Mkdodos</li>
-<li>Tillonter Hsu</li>
-<li>Peter</li>
-<li>Xuan</li>
-<li>Xunyi</li>
-<li>陳聖博</li>
-</ul>
-<h3 id="翻譯時還要一些工具的幫忙"><a href="#翻譯時還要一些工具的幫忙" class="headerlink" title="翻譯時還要一些工具的幫忙"></a>翻譯時還要一些工具的幫忙</h3><p>我們看一下我翻譯這篇 Google Material Design 非官方正體中文電子書 時需要會哪些技能：</p>
-<ul>
-<li>使用 git 提交、更新、分支</li>
-<li>使用 github 提交總有個目的，放在託管空間能一目了然看編寫情形</li>
-<li>使用 gitbook 在本地端查看轉譯後的電子書</li>
-<li>使用 hackpad 追蹤翻譯進度</li>
-<li>使用 markdown 編寫翻譯</li>
-</ul>
-<p>你可能想說，翻個譯要搞這麼多？哈～對！翻譯電子書可是用了不少技能於一身技術而成的，由於翻譯不是一個人完成，因此需要有更多的工具搭配管理來掌控，正好我也想說自己因為對上述的操作不太熟，透過這樣的邊做邊練，還可以增加自己的實戰經驗咧。</p>
-<h3 id="Material-Design-是什麼？"><a href="#Material-Design-是什麼？" class="headerlink" title="Material Design 是什麼？"></a>Material Design 是什麼？</h3><p>老實講，為了加速翻譯件數都只專注在翻譯有沒有順暢，雖然翻譯過程加減看自己翻譯的章節在講些什麼，不過還是無法全面理解每個細節，翻譯完成之後我才真正完整閱讀每個設計理念的觀念是什麼。Material Design 是一種設計語言，就像學習程式就是學習一套語言一樣，每個程式都有它的規範去撰寫，設計從這次的 Google material design 的釋出，展現了一個設計風格。</p>
-<p>雖然我自己不是做視覺端的設計師，但是透過這樣的翻譯，理解設計的原理與理念，在自己開發觀念或是在開發網頁的頁面呈現上，有一些些的想法與心得，還不賴呢！</p>
-<h3 id="還真頗有成就感-der"><a href="#還真頗有成就感-der" class="headerlink" title="還真頗有成就感 der"></a>還真頗有成就感 der</h3><p>隨著翻譯篇數越來越完整的時候，真覺得許多翻譯的夥伴都好有熱誠在努力這件事情上，尤其是發起者  <a target="_blank" rel="noopener" href="https://wcc723.github.io/">Casper</a> ，假日也不得閒，繼續翻譯為了讓廣大的設計同好得到更有親切感的電子書。</p>
-<p>真是該給翻譯的大夥們一個大力的掌聲鼓勵。</p>
-<p>謝謝各位<br>這個翻譯完成了，繼續邁向下一個目標… Go~</p>
 
       
     </div>
