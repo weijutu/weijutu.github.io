@@ -25,14 +25,14 @@
 
     <meta name="description" content="通常你都是怎麼管理開發的分支以及版號的呢？隨著開發的功能越來越多，協作的開發人員也增加，漸漸的發現 git 在管理上多出越來越多隻 branch，經常要 merge 檔案，衝突到的程式碼段又要一個一個整理&amp;解開…。不希望在亂亂的分支搞不清楚現在開發到哪裡了，無不希望自己的專案上的 git 可以有效率的在同一個概念下管理所有的分支，直到某天看到了這個 gitflow 的特性跟介紹，到底能省">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="Gitflow 工作流介紹與使用">
+<meta property="og:title" content="使用 Gitflow 工具讓你的開發專案控制工作流程">
 <meta property="og:url" content="https://weijutu.github.io/2022/11/26/git/how-to-use-gitflow/index.html">
 <meta property="og:site_name" content="丸匠筆記">
 <meta property="og:description" content="通常你都是怎麼管理開發的分支以及版號的呢？隨著開發的功能越來越多，協作的開發人員也增加，漸漸的發現 git 在管理上多出越來越多隻 branch，經常要 merge 檔案，衝突到的程式碼段又要一個一個整理&amp;解開…。不希望在亂亂的分支搞不清楚現在開發到哪裡了，無不希望自己的專案上的 git 可以有效率的在同一個概念下管理所有的分支，直到某天看到了這個 gitflow 的特性跟介紹，到底能省">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://weijutu.github.io/images/git/image.png">
 <meta property="article:published_time" content="2022-11-26T07:38:00.000Z">
-<meta property="article:modified_time" content="2022-11-26T07:42:46.147Z">
+<meta property="article:modified_time" content="2022-11-26T07:54:39.434Z">
 <meta property="article:author" content="Helen">
 <meta property="article:tag" content="git">
 <meta property="article:tag" content="gitflow">
@@ -44,10 +44,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://weijutu.github.io/2022/11/26/git/how-to-use-gitflow/","path":"2022/11/26/git/how-to-use-gitflow/","title":"Gitflow 工作流介紹與使用"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://weijutu.github.io/2022/11/26/git/how-to-use-gitflow/","path":"2022/11/26/git/how-to-use-gitflow/","title":"使用 Gitflow 工具讓你的開發專案控制工作流程"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Gitflow 工作流介紹與使用 | 丸匠筆記</title>
+<title>使用 Gitflow 工具讓你的開發專案控制工作流程 | 丸匠筆記</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72890173-1"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-72890173-1","only_pageview":false}</script>
@@ -213,13 +213,13 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Gitflow 工作流介紹與使用 | 丸匠筆記">
+      <meta itemprop="name" content="使用 Gitflow 工具讓你的開發專案控制工作流程 | 丸匠筆記">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         
         <h1 class="post-title" itemprop="name headline">
-          Gitflow 工作流介紹與使用
+          使用 Gitflow 工具讓你的開發專案控制工作流程
         </h1>
 
         <div class="post-meta-container">
@@ -231,7 +231,7 @@
       <span class="post-meta-item-text">發表於</span>
       
 
-      <time title="創建時間：2022-11-26 15:38:00 / 修改時間：15:42:46" itemprop="dateCreated datePublished" datetime="2022-11-26T15:38:00+08:00">2022-11-26</time>
+      <time title="創建時間：2022-11-26 15:38:00 / 修改時間：15:54:39" itemprop="dateCreated datePublished" datetime="2022-11-26T15:38:00+08:00">2022-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -259,7 +259,7 @@
         <blockquote>
 <p>通常你都是怎麼管理開發的分支以及版號的呢？隨著開發的功能越來越多，協作的開發人員也增加，漸漸的發現 git 在管理上多出越來越多隻 branch，經常要 merge 檔案，衝突到的程式碼段又要一個一個整理&amp;解開…。不希望在亂亂的分支搞不清楚現在開發到哪裡了，無不希望自己的專案上的 git 可以有效率的在同一個概念下管理所有的分支，直到某天看到了這個 gitflow 的特性跟介紹，到底能省下我們多少工作流程與時間，於是就研究看看…</p>
 </blockquote>
-<p>看到這裡，是不是已經覺得深有同感，千萬別錯過這篇文章的介紹，下面具體介紹 gitflow 工作流：</p>
+<p>看到這裡，是不是已經覺得深有同感，下面具體介紹 gitflow 工作流：</p>
 <h2 id="什麼是-gitflow"><a href="#什麼是-gitflow" class="headerlink" title="什麼是 gitflow"></a>什麼是 gitflow</h2><p>Gitflow 是一個 Git 分支的模型，通常包含 master, develop, feature, release, hotfix，各自負責不同功能，其中 master 與 develop 是遠端的分支，而 feature, release, hotfix 是本地分支，任務結束就會被刪除。可以看到一張 gitflow 流程圖：</p>
 <p><img data-src="/images/git/image.png"></p>
 <span id="more"></span>
@@ -382,7 +382,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>文章連結：</strong>
-      <a href="https://weijutu.github.io/2022/11/26/git/how-to-use-gitflow/" title="Gitflow 工作流介紹與使用">https://weijutu.github.io/2022/11/26/git/how-to-use-gitflow/</a>
+      <a href="https://weijutu.github.io/2022/11/26/git/how-to-use-gitflow/" title="使用 Gitflow 工具讓你的開發專案控制工作流程">https://weijutu.github.io/2022/11/26/git/how-to-use-gitflow/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！
